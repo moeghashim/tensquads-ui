@@ -36,10 +36,11 @@ function entriesFrom(source, resolve = false) {
 							{ light: String(tokenValue), dark: String(tokenValue) },
 						]);
 					}
-					if (style.family) {
+					const family = style.family ?? styleGroup.family;
+					if (family) {
 						entries.push([
 							`${style.name}.font-family`,
-							{ light: value.families[style.family], dark: value.families[style.family] },
+							{ light: value.families[family], dark: value.families[family] },
 						]);
 					}
 				}
@@ -80,7 +81,7 @@ export function generateTypes(source) {
 				`\t${JSON.stringify(name)}: {\n\t\tlight: ${JSON.stringify(values.light)},\n\t\tdark: ${JSON.stringify(values.dark)},\n\t},`,
 		)
 		.join("\n");
-	return `/** Generated from design/tokens.json. Do not edit by hand. */\nexport const tokens = {\n${serialized}\n} as const;\n\nexport type TokenName = keyof typeof tokens;\nexport type TokenTheme = "light" | "dark";\nexport type TokenValue<Name extends TokenName> = (typeof tokens)[Name][TokenTheme];\n\nexport function getToken<Name extends TokenName>(name: Name, theme: TokenTheme = "light"): TokenValue<Name> {\n  return tokens[name][theme] as TokenValue<Name>;\n}\n`;
+	return `/** Generated from design/tokens.json. Do not edit by hand. */\nexport const tokens = {\n${serialized}\n} as const;\n\nexport type TokenName = keyof typeof tokens;\nexport type TokenTheme = "light" | "dark";\nexport type TokenValue<Name extends TokenName> = (typeof tokens)[Name][TokenTheme];\n`;
 }
 
 export async function buildTokens({ check = false } = {}) {
