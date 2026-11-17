@@ -1,0 +1,194 @@
+$ npm run design:sync -- 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:sync
+> node scripts/sync-design.mjs 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f
+
+Synced 183 files from 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f.
+Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.
+exit=0
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Design reference is clean (183 files).
+exit=0
+$ git clone --no-checkout https://github.com/moeghashim/tensquads-design-system.git /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream [cwd=.]
+Cloning into '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream'...
+exit=0
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream checkout --detach 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f [cwd=.]
+HEAD is now at 644fd15 Add the round-table logo
+exit=0
+PINNED BYTE CONTRACT: all 183 required output files, attribution, committed output and SHA-256 entries match independent upstream checkout; inventory is exact and contains no omitted asset categories.
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Hash mismatch: tokens.json
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unexpected file: extra.txt
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Missing file: tokens.json
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: extra-file
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: extra-directory
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: dangling
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: tokens.json
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: MANIFEST.json
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: named-pipe
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Design reference is clean (183 files).
+exit=0
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream add agent-ui/tokens.json preview.html [cwd=.]
+
+exit=0
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream -c user.name=Disposable Test -c user.email=test@example.invalid -c commit.gpgsign=false commit -m disposable future design update [cwd=.]
+[detached HEAD 9162061] disposable future design update
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+ create mode 100644 preview.html
+exit=0
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream rev-parse HEAD [cwd=.]
+9162061ec831e12aee090850b75a8917ce7ba47c
+exit=0
+$ npm run design:sync -- 9162061ec831e12aee090850b75a8917ce7ba47c [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:sync
+> node scripts/sync-design.mjs 9162061ec831e12aee090850b75a8917ce7ba47c
+
+Synced 183 files from 9162061ec831e12aee090850b75a8917ce7ba47c.
+Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.
+exit=0
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Design reference is clean (183 files).
+exit=0
+FUTURE COMMIT: modified upstream token bytes and new commit SHA propagated; preview remained excluded.
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream add -u [cwd=.]
+
+exit=0
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream -c user.name=Disposable Test -c user.email=test@example.invalid -c commit.gpgsign=false commit -m disposable incomplete source [cwd=.]
+[detached HEAD e7dc279] disposable incomplete source
+ 1 file changed, 56 deletions(-)
+ delete mode 100644 agent-ui/README.md
+exit=0
+$ git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/upstream rev-parse HEAD [cwd=.]
+e7dc279f752ec0d9625fc1ed14ba908ff2d432e0
+exit=0
+$ npm run design:sync -- e7dc279f752ec0d9625fc1ed14ba908ff2d432e0 [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:sync
+> node scripts/sync-design.mjs e7dc279f752ec0d9625fc1ed14ba908ff2d432e0
+
+node:internal/fs/promises:1345
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout with spaces/.design-sync-X9rF2x/source/agent-ui/README.md'
+    at async open (node:internal/fs/promises:1345:25)
+    at async readFile (node:internal/fs/promises:1996:14)
+    at async file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout%20with%20spaces/scripts/sync-design.mjs:56:20 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout with spaces/.design-sync-X9rF2x/source/agent-ui/README.md'
+}
+
+Node.js v24.21.0
+exit=1
+$ npm run design:check [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Design reference is clean (183 files).
+exit=0
+FAILED STAGING: required README missing after token copy; every existing design byte retained, checker still clean, staging removed.
+$ npm run design:sync -- not-a-commit [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:sync
+> node scripts/sync-design.mjs not-a-commit
+
+file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout%20with%20spaces/scripts/sync-design.mjs:12
+if (!/^[0-9a-f]{40}$/i.test(commit)) throw new Error("Pass a full 40-character commit SHA.");
+                                           ^
+
+Error: Pass a full 40-character commit SHA.
+    at file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout%20with%20spaces/scripts/sync-design.mjs:12:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.21.0
+exit=1
+$ npm run design:sync -- 0000000000000000000000000000000000000000 [cwd=.local-validation/checkout with spaces]
+> @tensquads/ui@0.1.0 design:sync
+> node scripts/sync-design.mjs 0000000000000000000000000000000000000000
+
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout with spaces/.design-sync-9jwozt/source checkout --detach 0000000000000000000000000000000000000000
+fatal: unable to read tree (0000000000000000000000000000000000000000)
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:514:28)
+    at maybeClose (node:internal/child_process:1141:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+  code: 128,
+  killed: false,
+  signal: null,
+  cmd: 'git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.local-validation/checkout with spaces/.design-sync-9jwozt/source checkout --detach 0000000000000000000000000000000000000000',
+  stdout: '',
+  stderr: 'fatal: unable to read tree (0000000000000000000000000000000000000000)\n'
+}
+
+Node.js v24.21.0
+exit=1
+INVALID INPUT / UNAVAILABLE COMMIT: nonzero exit, existing output preserved and temporary staging cleaned.
+$ npm run design:check [cwd=.]
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Design reference is clean (183 files).
+exit=0
+All live CLI scenarios passed.
