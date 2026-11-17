@@ -4,7 +4,8 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 
 ## Commands
 
-- `npm run check` — Run Biome, type checking, design integrity and generated-token staleness checks, tests, and the package check.
+- `npm run check` — Run Biome, type checking, design integrity, generated-token staleness and CSS color-token checks, unit tests, and the package check.
+- `npm run verify` — Run `check`, `preview:install`, `check:preview`, and `e2e`, in that order.
 - `npm run build` — Build the package into `packages/ui/dist`.
 - `npm run preview:install` — Install the preview app's dependencies from its own lockfile.
 - `npm run dev` — Start the preview development server.
@@ -14,6 +15,8 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 - `npm run tokens` — Regenerate CSS custom properties and typed TypeScript tokens from the synced `design/tokens.json`.
 - `npm run tokens:check` — Fail for missing or stale generated token files without writing them.
 - `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files, and verify exported entry points.
+- `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GITHUB_SHA` (commit to install); CI supplies these for the PR head or pushed commit.
+- `npm run check:css-tokens` — Reject raw color literals in CSS under `packages/ui/src/styles`; use color tokens instead.
 - `npm run design:sync -- <commit>` — Sync design references and regenerate the SHA-256 manifest; pass a full 40-character commit SHA after the npm run separator (`--`), or omit it to use the script's default commit. Design files are never edited by hand.
 - `npm run design:check` — Check design files against the manifest, failing for changed, extra, or missing files and unsupported filesystem entries, including symlinks.
 
@@ -24,6 +27,12 @@ Run `npm run preview:install`, then `npm run dev` from the repository root. The 
 The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. `/components/example` is a placeholder for future component previews.
 
 Vite aliases and TypeScript paths resolve `@tensquads/ui/*` directly to `packages/ui/src`; the app has no npm dependency on the UI package and needs no package build before previewing source changes.
+
+## Browser verification
+
+After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Playwright starts the preview through its `webServer` at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings. The smoke test covers English/LTR and Arabic/RTL in light and dark themes, screenshots at 1440 and 390 px widths, mobile overflow, axe accessibility, and the focus ring.
+
+Run `npm run e2e:update` to regenerate the committed baselines in `e2e/__screenshots__`, then review the image changes. Use the Linux environment and fonts configured in [CI](.github/workflows/ci.yml) when updating baselines to avoid platform font differences. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts). Failed CI runs upload the Playwright HTML report.
 
 ## Design tokens
 
