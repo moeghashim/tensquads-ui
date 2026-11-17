@@ -1,7 +1,9 @@
-import { readFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import source from "../../../../design/tokens.json";
-import { generateCss, generateTypes } from "../../../../scripts/build-tokens.mjs";
+import { buildTokens, generateCss, generateTypes } from "../../../../scripts/build-tokens.mjs";
 import { tokens } from "./index";
 
 const root = process.cwd();
@@ -30,12 +32,31 @@ describe("design tokens", () => {
 		}
 	});
 
+	it("fails when generated output is stale and passes after rebuilding", async () => {
+		const root = await mkdtemp(join(tmpdir(), "tensquads-tokens-"));
+		const tokenDirectory = join(root, "packages/ui/src/tokens");
+		try {
+			await mkdir(join(root, "design"), { recursive: true });
+			await mkdir(tokenDirectory, { recursive: true });
+			await writeFile(
+				join(root, "design/tokens.json"),
+				JSON.stringify({ color: { tokens: [{ name: "sample", value: { light: "#fff", dark: "#000" } }] } }),
+			);
+			await writeFile(join(tokenDirectory, "tokens.css"), "stale");
+			await writeFile(join(tokenDirectory, "tokens.ts"), "stale");
+			expect(await buildTokens({ check: true, root })).toBe(true);
+			expect(await buildTokens({ root })).toBe(false);
+			expect(await buildTokens({ check: true, root })).toBe(false);
+		} finally {
+			await rm(root, { recursive: true, force: true });
+		}
+	});
+
 	it("generates deterministic CSS and types that match the source", async () => {
 		const css = generateCss(source);
 		const types = generateTypes(source);
 		expect(generateCss(source)).toBe(css);
 		expect(generateTypes(source)).toBe(types);
-		expect(css).toContain("--ts-canvas: var(--ts-gray-75);");
 		expect(css).toContain("--ts-canvas: var(--ts-gray-75);");
 		expect(await readFile(`${root}/packages/ui/src/tokens/tokens.css`, "utf8")).toBe(css);
 		expect(await readFile(`${root}/packages/ui/src/tokens/tokens.ts`, "utf8")).toBe(types);

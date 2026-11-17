@@ -84,11 +84,11 @@ export function generateTypes(source) {
 	return `/** Generated from design/tokens.json. Do not edit by hand. */\nexport const tokens = {\n${serialized}\n} as const;\n\nexport type TokenName = keyof typeof tokens;\nexport type TokenTheme = "light" | "dark";\nexport type TokenValue<Name extends TokenName> = (typeof tokens)[Name][TokenTheme];\n`;
 }
 
-export async function buildTokens({ check = false } = {}) {
-	const root = fileURLToPath(new URL("../", import.meta.url));
-	const sourcePath = `${root}design/tokens.json`;
-	const cssPath = `${root}packages/ui/src/tokens/tokens.css`;
-	const tsPath = `${root}packages/ui/src/tokens/tokens.ts`;
+export async function buildTokens({ check = false, root = fileURLToPath(new URL("../", import.meta.url)) } = {}) {
+	const base = root.endsWith("/") ? root : `${root}/`;
+	const sourcePath = `${base}design/tokens.json`;
+	const cssPath = `${base}packages/ui/src/tokens/tokens.css`;
+	const tsPath = `${base}packages/ui/src/tokens/tokens.ts`;
 	const source = JSON.parse(await readFile(sourcePath, "utf8"));
 	const outputs = [
 		[cssPath, generateCss(source)],
@@ -104,16 +104,16 @@ export async function buildTokens({ check = false } = {}) {
 				/* Missing output is stale. */
 			}
 			if (current !== contents) {
-				console.error(`${path.slice(root.length)} is stale. Run npm run tokens.`);
+				console.error(`${path.slice(base.length)} is stale. Run npm run tokens.`);
 				stale = true;
 			}
 		} else {
 			await writeFile(path, contents);
 		}
 	}
-	if (stale) process.exitCode = 1;
+	return stale;
 }
 
 if (process.argv[1]?.endsWith("/scripts/build-tokens.mjs")) {
-	await buildTokens({ check: process.argv.includes("--check") });
+	if (await buildTokens({ check: process.argv.includes("--check") })) process.exitCode = 1;
 }
