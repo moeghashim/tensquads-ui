@@ -109,15 +109,11 @@ const { join } = require("node:path");
 `,
 			{ mode: 0o755 },
 		);
-		const result = spawnSync(
-			process.execPath,
-			[resolve("scripts/sync-design.mjs")],
-			{
-				cwd: directory,
-				env: { ...process.env, PATH: `${bin}${delimiter}${process.env.PATH}` },
-				encoding: "utf8",
-			},
-		);
+		const result = spawnSync(process.execPath, [resolve("scripts/sync-design.mjs")], {
+			cwd: directory,
+			env: { ...process.env, PATH: `${bin}${delimiter}${process.env.PATH}` },
+			encoding: "utf8",
+		});
 		expect(result.status).toBe(1);
 		expect(result.stderr).toContain("README.md");
 		expect(await checkDesign(design)).toBe(1);
