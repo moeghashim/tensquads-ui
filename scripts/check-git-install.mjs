@@ -28,7 +28,9 @@ try {
 		const entry = typeof target === "string" ? target : (target.import ?? target.default);
 		const path = join(fixture, "node_modules/@tensquads/ui", entry);
 		await stat(path);
-		if (!entry.endsWith(".css")) await import(moduleSpecifier);
+		if (!entry.endsWith(".css")) {
+			run(process.execPath, ["--input-type=module", "-e", `await import(${JSON.stringify(moduleSpecifier)});`]);
+		}
 	}
 	console.log("Git dependency install built dist and resolved every public subpath.");
 } finally {
