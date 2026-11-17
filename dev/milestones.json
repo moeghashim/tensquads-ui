@@ -9,6 +9,7 @@
         "003-build-design-tokens",
         "004-preview-app",
         "005-verify-harness-and-ci",
+        "019-ui-sdk-upstream-tracking",
         "006-openui-foundation",
         "007-agents-md",
         "008-squadmate-component",

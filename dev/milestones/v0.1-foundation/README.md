@@ -9,6 +9,7 @@ The milestone is done when the v0.1 scope in PLAN.md §9 is complete:
 - The OpenUI bridge has a lazy library, locale-aware system prompt, renderer, bounded server helpers, and an Anthropic provider as the only vendor SDK import.
 - `AGENTS.md`, the tensquads-ui skill, component guides, and `llms.txt` explain the public APIs and agent workflows.
 - CI runs `npm run verify`.
+- UI SDK is on its newest release, a daily job opens a verified update PR for each new release, and `check-ui-sdk-usage` passes (D14).
 
 For every component, the evidence includes:
 
@@ -31,6 +32,7 @@ Revised by Opus on 2026-11-17. The harness and the OpenUI foundation come before
 | 003 | Build tokens | Components style only from tokens |
 | 004 | Preview app | Screenshot and axe target |
 | 005 | Verify harness and CI | Each later PR runs `npm run verify` in CI |
+| 019 | UI SDK upstream tracking (D14) | Pins the newest UI SDK and adds the usage check before any component imports it |
 | 006 | OpenUI foundation and `llms.txt` generator | Each component PR adds its definition, fixtures and doc |
 | 007 | AGENTS.md | Builders of 008 onward follow it |
 | 008–016 | Squadmate, Button, Badge, Chip, Input + Field, Switch + SegmentedControl, Menu, Dialog, Tooltip | Simple to complex; popups last |

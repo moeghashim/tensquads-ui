@@ -12,6 +12,7 @@ files: ["AGENTS.md"]
 - [ ] State the source-of-truth order, module boundaries, design sync rules, and no-clobber rules from PLAN.md.
 - [ ] Set receipt-first, one-task-per-branch, Conventional Commit, DCO, and review conventions for this repository.
 - [ ] Require Simplified Technical English and evidence for completion.
+- [ ] Include the UI SDK upgrade playbook from PLAN.md §14 and the "wrap, do not fork" rule from §7 (D14).
 - [ ] Do not copy unrelated app-specific screen rules from the tensquads repository.
 
 ## Suggested approach
