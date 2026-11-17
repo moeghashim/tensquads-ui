@@ -1,7 +1,6 @@
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { cp, mkdir, mkdtemp, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { cp, mkdir, mkdtemp, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 
@@ -12,8 +11,9 @@ const root = resolve("design");
 const commit = process.argv[2] ?? defaultCommit;
 if (!/^[0-9a-f]{40}$/i.test(commit)) throw new Error("Pass a full 40-character commit SHA.");
 
-const temporary = await mkdtemp(join(tmpdir(), "tensquads-design-sync-"));
+const temporary = await mkdtemp(resolve(".design-sync-"));
 const checkout = join(temporary, "source");
+const staging = join(temporary, "design");
 try {
 	await exec("git", ["clone", "--filter=blob:none", "--no-checkout", repository, checkout]);
 	await exec("git", ["-C", checkout, "checkout", "--detach", commit]);
@@ -49,15 +49,14 @@ try {
 			"logo.svg",
 		].map((name) => [`logo/${name}`, `logo/${name}`]),
 	];
-	await rm(root, { recursive: true, force: true });
 	const hashes = {};
 	for (const [sourcePath, outputPath] of files) {
 		const source = join(checkout, sourcePath);
-		const output = join(root, outputPath);
+		const output = join(staging, outputPath);
 		const contents = await readFile(source);
 		await mkdir(join(output, ".."), { recursive: true });
 		await cp(source, output);
-		hashes[outputPath.split(sep).join("/")] = createHash("sha256").update(contents).digest("hex");
+		hashes[outputPath] = createHash("sha256").update(contents).digest("hex");
 	}
 	const manifest = {
 		source: repository,
@@ -65,7 +64,9 @@ try {
 		syncedAt: new Date().toISOString().slice(0, 10),
 		files: Object.fromEntries(Object.entries(hashes).sort(([a], [b]) => a.localeCompare(b))),
 	};
-	await writeFile(join(root, "MANIFEST.json"), `${JSON.stringify(manifest, null, 2)}\n`);
+	await writeFile(join(staging, "MANIFEST.json"), `${JSON.stringify(manifest, null, 2)}\n`);
+	await rm(root, { recursive: true, force: true });
+	await rename(staging, root);
 	console.log(`Synced ${Object.keys(hashes).length} files from ${commit}.`);
 	console.log("Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.");
 } finally {
