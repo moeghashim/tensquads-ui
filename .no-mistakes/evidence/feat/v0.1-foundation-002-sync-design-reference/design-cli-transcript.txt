@@ -1,6 +1,8 @@
 $ git checkout --detach 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f
+
 HEAD is now at 644fd15 Add the round-table logo
-[exit 0]
+
+exit=0
 
 $ npm run design:sync -- 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f
 
@@ -9,7 +11,10 @@ $ npm run design:sync -- 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f
 
 Synced 183 files from 644fd15aa8c18dbb0ec5c83181426a7719a5dc4f.
 Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.
-[exit 0]
+
+exit=0
+
+PINNED CONTRACT: 183 files byte-identical to upstream and checked-in reference; SHA-256 verified independently; exact inventory includes attribution and excludes previews/bundles/screens/avatar rasters/lineups/cards.
 
 $ npm run design:check
 
@@ -17,102 +22,107 @@ $ npm run design:check
 > node scripts/design-check.mjs
 
 Design reference is clean (183 files).
-[exit 0]
 
-Independent byte comparison: all 183 generated and committed reference files equal pinned upstream source; manifest SHA-256 values match; attribution equals upstream README; excluded assets absent.
+exit=0
 
-Scenario: reject changed
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
 Hash mismatch: tokens.json
-[exit 1]
 
-Scenario: reject extra
+exit=1
+
+ADVERSARIAL changed bytes in path with spaces: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
-Unexpected file: extra
-[exit 1]
+Unexpected file: unexpected.txt
 
-Scenario: reject missing
+exit=1
+
+ADVERSARIAL extra file: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
 Missing file: tokens.json
-[exit 1]
 
-Scenario: reject file symlink
+exit=1
+
+ADVERSARIAL missing file: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
-Unsupported filesystem entry: extra
-[exit 1]
+Unsupported filesystem entry: unexpected.txt
 
-Scenario: reject directory symlink
+exit=1
+
+ADVERSARIAL file symlink: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
-Unsupported filesystem entry: extra
-[exit 1]
+Unsupported filesystem entry: unexpected.txt
 
-Scenario: reject dangling symlink
+exit=1
+
+ADVERSARIAL directory symlink: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
-Unsupported filesystem entry: extra
-[exit 1]
+Unsupported filesystem entry: unexpected.txt
 
-Scenario: reject manifest symlink
+exit=1
+
+ADVERSARIAL dangling symlink: rejected as expected
+
+$ npm run design:check
+
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Unsupported filesystem entry: tokens.json
+
+exit=1
+
+ADVERSARIAL replacement symlink tokens.json: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
 Unsupported filesystem entry: MANIFEST.json
-[exit 1]
 
-Scenario: reject fifo
+exit=1
+
+ADVERSARIAL replacement symlink MANIFEST.json: rejected as expected
+
 $ npm run design:check
 
 > @tensquads/ui@0.1.0 design:check
 > node scripts/design-check.mjs
 
-Unsupported filesystem entry: extra
-[exit 1]
+Unsupported filesystem entry: unexpected.txt
 
-$ git add agent-ui/tokens.json
-[exit 0]
+exit=1
 
-$ git -c user.name=Disposable Tester -c user.email=test@example.invalid commit -m Disposable future design revision
-[detached HEAD e1f447b] Disposable future design revision
- 1 file changed, 1 insertion(+), 1 deletion(-)
-[exit 0]
-
-$ git rev-parse HEAD
-e1f447b00a0d98982a3d76ea33b484f5aa1307c4
-[exit 0]
-
-$ npm run design:sync -- e1f447b00a0d98982a3d76ea33b484f5aa1307c4
-
-> @tensquads/ui@0.1.0 design:sync
-> node scripts/sync-design.mjs e1f447b00a0d98982a3d76ea33b484f5aa1307c4
-
-Synced 183 files from e1f447b00a0d98982a3d76ea33b484f5aa1307c4.
-Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.
-[exit 0]
+ADVERSARIAL FIFO: rejected as expected
 
 $ npm run design:check
 
@@ -120,25 +130,67 @@ $ npm run design:check
 > node scripts/design-check.mjs
 
 Design reference is clean (183 files).
-[exit 0]
 
-$ npm run design:sync -- invalid
+exit=0
+
+SPACE-PATH CONTRACT: clean CLI executes; changed, extra, missing, file/directory/dangling/replacement symlinks and FIFO all fail with specific diagnostics.
+
+$ git add agent-ui/tokens.json
+
+exit=0
+
+$ git -c user.name=Disposable Test -c user.email=test@example.invalid commit -m Disposable future design update
+
+[detached HEAD 1ae6e04] Disposable future design update
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+exit=0
+
+$ git rev-parse HEAD
+
+1ae6e04b0debeeac8d1ed483bee8a5f35fdecb33
+
+exit=0
+
+$ npm run design:sync -- 1ae6e04b0debeeac8d1ed483bee8a5f35fdecb33
 
 > @tensquads/ui@0.1.0 design:sync
-> node scripts/sync-design.mjs invalid
+> node scripts/sync-design.mjs 1ae6e04b0debeeac8d1ed483bee8a5f35fdecb33
 
-file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout%20with%20spaces/scripts/sync-design.mjs:12
+Synced 183 files from 1ae6e04b0debeeac8d1ed483bee8a5f35fdecb33.
+Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.
+
+exit=0
+
+$ npm run design:check
+
+> @tensquads/ui@0.1.0 design:check
+> node scripts/design-check.mjs
+
+Design reference is clean (183 files).
+
+exit=0
+
+FUTURE UPDATE CONTRACT: real CLI cloned disposable Git commit, replaced design bytes, recorded new commit/hash, and checker accepted it.
+
+$ npm run design:sync -- bad-sha
+
+> @tensquads/ui@0.1.0 design:sync
+> node scripts/sync-design.mjs bad-sha
+
+file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project%20with%20spaces/scripts/sync-design.mjs:12
 if (!/^[0-9a-f]{40}$/i.test(commit)) throw new Error("Pass a full 40-character commit SHA.");
                                            ^
 
 Error: Pass a full 40-character commit SHA.
-    at file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout%20with%20spaces/scripts/sync-design.mjs:12:44
+    at file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project%20with%20spaces/scripts/sync-design.mjs:12:44
     at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
     at async node:internal/modules/esm/loader:647:26
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
 
 Node.js v24.21.0
-[exit 1]
+
+exit=1
 
 $ npm run design:sync -- 0000000000000000000000000000000000000000
 
@@ -149,7 +201,7 @@ node:internal/errors:986
   const err = new Error(message);
               ^
 
-Error: Command failed: git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout with spaces/.design-sync-6NI2ZJ/source checkout --detach 0000000000000000000000000000000000000000
+Error: Command failed: git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project with spaces/.design-sync-DpwsZ2/source checkout --detach 0000000000000000000000000000000000000000
 fatal: unable to read tree (0000000000000000000000000000000000000000)
 
     at genericNodeError (node:internal/errors:986:15)
@@ -161,49 +213,57 @@ fatal: unable to read tree (0000000000000000000000000000000000000000)
   code: 128,
   killed: false,
   signal: null,
-  cmd: 'git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout with spaces/.design-sync-6NI2ZJ/source checkout --detach 0000000000000000000000000000000000000000',
+  cmd: 'git -C /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project with spaces/.design-sync-DpwsZ2/source checkout --detach 0000000000000000000000000000000000000000',
   stdout: '',
   stderr: 'fatal: unable to read tree (0000000000000000000000000000000000000000)\n'
 }
 
 Node.js v24.21.0
-[exit 1]
+
+exit=1
 
 $ git rm logo/logo.svg
-rm 'logo/logo.svg'
-[exit 0]
 
-$ git -c user.name=Disposable Tester -c user.email=test@example.invalid commit -m Disposable incomplete source
-[detached HEAD 3046b2a] Disposable incomplete source
+rm 'logo/logo.svg'
+
+exit=0
+
+$ git -c user.name=Disposable Test -c user.email=test@example.invalid commit -m Disposable incomplete design source
+
+[detached HEAD 340464d] Disposable incomplete design source
  1 file changed, 2 deletions(-)
  delete mode 100644 logo/logo.svg
-[exit 0]
+
+exit=0
 
 $ git rev-parse HEAD
-3046b2a70c8f0a772edc026f4f118eb7b5b96855
-[exit 0]
 
-$ npm run design:sync -- 3046b2a70c8f0a772edc026f4f118eb7b5b96855
+340464db5296f8ce08ed9112a7353b919ccf1ee7
+
+exit=0
+
+$ npm run design:sync -- 340464db5296f8ce08ed9112a7353b919ccf1ee7
 
 > @tensquads/ui@0.1.0 design:sync
-> node scripts/sync-design.mjs 3046b2a70c8f0a772edc026f4f118eb7b5b96855
+> node scripts/sync-design.mjs 340464db5296f8ce08ed9112a7353b919ccf1ee7
 
 node:internal/fs/promises:1345
   return new FileHandle(await PromisePrototypeThen(
                         ^
 
-Error: ENOENT: no such file or directory, open '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout with spaces/.design-sync-CIKiUV/source/logo/logo.svg'
+Error: ENOENT: no such file or directory, open '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project with spaces/.design-sync-IPHSAE/source/logo/logo.svg'
     at async open (node:internal/fs/promises:1345:25)
     at async readFile (node:internal/fs/promises:1996:14)
-    at async file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout%20with%20spaces/scripts/sync-design.mjs:56:20 {
+    at async file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project%20with%20spaces/scripts/sync-design.mjs:56:20 {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.live-design-validation/checkout with spaces/.design-sync-CIKiUV/source/logo/logo.svg'
+  path: '/Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NGBWGPJK97K5VNAEXMYSJ1/.validation/project with spaces/.design-sync-IPHSAE/source/logo/logo.svg'
 }
 
 Node.js v24.21.0
-[exit 1]
+
+exit=1
 
 $ npm run design:check
 
@@ -211,6 +271,9 @@ $ npm run design:check
 > node scripts/design-check.mjs
 
 Design reference is clean (183 files).
-[exit 0]
 
-Invalid SHA, checkout failure and missing required source asset each preserve every existing output byte; staging directories cleaned. All live scenarios passed.
+exit=0
+
+PRESERVATION CONTRACT: invalid SHA, checkout failure, and late staging failure leave every existing design byte intact; temporary sync directories removed.
+
+ALL LIVE CLI SCENARIOS PASSED
