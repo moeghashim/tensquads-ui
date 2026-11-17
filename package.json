@@ -6,6 +6,11 @@
 	"type": "module",
 	"files": ["packages/ui/dist/**"],
 	"workspaces": ["packages/*", "apps/*"],
+	"engines": {
+		"node": "24.x",
+		"npm": "11.x"
+	},
+	"packageManager": "npm@11.19.0",
 	"exports": {
 		"./tokens": {
 			"types": "./packages/ui/dist/tokens/index.d.ts",
