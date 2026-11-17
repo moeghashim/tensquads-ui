@@ -27,9 +27,13 @@ function Document({ children }: { readonly children: ReactNode }) {
 	const attributes = getPreviewAttributes(search);
 	return (
 		<html lang={attributes.lang} dir={attributes.dir} data-theme={attributes["data-theme"]}>
-			<head><HeadContent /></head>
-			<body>{children}<Scripts /></body>
+			<head>
+				<HeadContent />
+			</head>
+			<body>
+				{children}
+				<Scripts />
+			</body>
 		</html>
 	);
 }
-

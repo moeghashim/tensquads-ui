@@ -27,6 +27,11 @@
 		"includes": [
 			"packages/*/src/**/*.ts",
 			"packages/*/src/**/*.tsx",
+			"apps/preview/src/**/*.ts",
+			"apps/preview/src/**/*.tsx",
+			"!apps/preview/src/routeTree.gen.ts",
+			"e2e/**/*.ts",
+			"playwright.config.ts",
 			"scripts/**/*.mjs",
 			"vitest.config.ts",
 			"!packages/ui/src/tokens/tokens.ts",
