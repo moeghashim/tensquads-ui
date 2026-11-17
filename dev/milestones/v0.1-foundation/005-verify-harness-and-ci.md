@@ -13,6 +13,7 @@ files: [".github/workflows/**", "package.json", "playwright.config.*", "e2e/**",
 - [ ] `scripts/check-css-tokens.mjs` fails on raw colour literals (hex, `rgb()`, `hsl()`, named colours) in `packages/ui/src/styles/**`. It allows `var(--…)` only. `npm run check` runs it.
 - [ ] `npm run verify` runs `check` then `e2e`.
 - [ ] GitHub Actions runs `npm run verify` on every pull request and on `main`. Playwright installs Chromium in CI.
+- [ ] CI installs the PR head as a git dependency (`npm install git+file://…#<sha>` in a temporary fixture, so `prepare` runs) and imports every subpath. `check-pack` covers the tarball; this covers the real consumer path (D13).
 - [ ] A smoke e2e test opens the preview app home in both directions and passes.
 - [ ] Report the local `npm run verify` command and its exit code in the PR.
 
