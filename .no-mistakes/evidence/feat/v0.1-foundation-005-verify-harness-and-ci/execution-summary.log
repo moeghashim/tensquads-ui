@@ -1,0 +1,12 @@
+Runtime: Node v24.21.0, npm 11.19.0, macOS host Chromium.
+npm ci: exit 0 (prepare built UI package).
+npm --prefix apps/preview ci: exit 0.
+npx playwright install chromium: exit 0.
+node .local-validation/colors.mjs: exit 0; exported directory checker executed on isolated consumer CSS. See css-consumer.log.
+npx vitest run packages/ui/src/check-css-tokens.test.ts packages/ui/src/tokens/tokens.test.ts: exit 0. Supporting behavior tests, not live evidence.
+CI=1 npx playwright test e2e/preview.spec.ts: exit 0. Real browser compared all eight committed screenshots and exercised accessibility, mobile overflow and theme focus rings.
+CI=1 npx playwright test e2e/local-validation.spec.ts: exit 0. Temporary browser driver captured eight screenshots, observed zero ordinary-preview font faces/requests, and loaded all eight pinned font faces. See font-runtime.json.
+npm pack --ignore-scripts --json --pack-destination .local-validation: exit 0. Tarball manifest verified no fonts, e2e assets, or preview app. See package-contents.json.
+Docker server query: exit 1, EOF. No Linux browser execution occurred.
+Temporary drivers, tarball, synthetic CSS, and generated build outputs removed. Dependencies retained. Product source unchanged. Browser/server children finished. Initial stalled Docker query and its metadata child explicitly stopped.
+No full-suite, lint, static analysis, push, PR, or CI phase executed.

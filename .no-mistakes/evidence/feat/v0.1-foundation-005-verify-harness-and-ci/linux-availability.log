@@ -1,0 +1,8 @@
+docker context show: desktop-linux
+docker version --format {{.Server.Os}}
+exit status: 1
+stdout: 
+
+stderr: EOF
+
+Linux baseline execution unavailable: Docker server does not answer successfully. Starting/reconfiguring the shared Docker application would modify host state outside the worktree. GitHub Actions execution belongs to the outer CI phase.

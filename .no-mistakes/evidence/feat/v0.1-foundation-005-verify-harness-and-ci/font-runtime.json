@@ -1,0 +1,192 @@
+[
+  {
+    "ordinaryPreview": {
+      "fontRequests": [],
+      "fontFaces": []
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "faces": [
+      {
+        "family": "Inter",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "700",
+        "status": "loaded"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "faces": [
+      {
+        "family": "Inter",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "700",
+        "status": "loaded"
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "faces": [
+      {
+        "family": "Inter",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "700",
+        "status": "loaded"
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "faces": [
+      {
+        "family": "Inter",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "700",
+        "status": "loaded"
+      }
+    ]
+  }
+]

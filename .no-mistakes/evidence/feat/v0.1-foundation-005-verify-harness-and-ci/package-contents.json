@@ -1,0 +1,24 @@
+{
+  "filename": "tensquads-ui-0.1.0.tgz",
+  "files": [
+    "README.md",
+    "package.json",
+    "packages/ui/dist/openui/index.d.ts",
+    "packages/ui/dist/openui/index.js",
+    "packages/ui/dist/openui/server/index.d.ts",
+    "packages/ui/dist/openui/server/index.js",
+    "packages/ui/dist/react/index.d.ts",
+    "packages/ui/dist/react/index.js",
+    "packages/ui/dist/schemas/index.d.ts",
+    "packages/ui/dist/schemas/index.js",
+    "packages/ui/dist/squadmates/index.d.ts",
+    "packages/ui/dist/squadmates/index.js",
+    "packages/ui/dist/styles/styles.css",
+    "packages/ui/dist/tokens/index.d.ts",
+    "packages/ui/dist/tokens/index.js",
+    "packages/ui/dist/tokens/tokens.css",
+    "packages/ui/dist/tokens/tokens.d.ts",
+    "packages/ui/dist/tokens/tokens.js"
+  ],
+  "result": "Published tarball contains no fonts, e2e assets, or preview app"
+}

@@ -1,0 +1,8 @@
+Consumer CSS accepted: transparent, currentColor, inherit, initial, unset, revert, revert-layer, var(--ts-red-500), var(--ts-canvas)
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: #fff
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: #11223344
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: red
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: rgb(1 2 3)
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: hsl(10 20% 30%)
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: oklch(50% 0.2 30)
+Consumer CSS rejected: .local-validation/css-consumer/consumer.css: color: var(--ts-color, red)
