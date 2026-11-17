@@ -1,0 +1,210 @@
+# tensquads-ui — Plan
+
+Status: **Phase 1 locked, 2026-11-17.** The Decisions log at the end of this file is the source of truth. When anything downstream disagrees with it, the Decisions log wins. To change a decision, edit its row and say so in the PR.
+
+## 1. Brief
+
+tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arabic). It gives agents one set of components that they can use in two places:
+
+- **Frontend:** coding agents import `@tensquads/ui` to build screens in the tensquads app (`moeghashim/tensquads`), the website (`moeghashim/tensquad-website`) and the agent repos.
+- **Backend:** live agents (Petra and the squad) stream UI from the server as OpenUI Lang. The browser renders that stream with the same React components.
+
+A component is defined once. It has a React implementation and an OpenUI definition (a zod props schema plus a description), so generated UI cannot drift from hand-built UI.
+
+Behaviors (keyboard, focus, popups, selection, dismissal, ARIA) come from UI SDK (`vercel-labs/ui`). The look comes from the Agent-UI tokens in `moeghashim/tensquads-design-system`. Every component works left to right and right to left, and is tested in both directions.
+
+## 2. References
+
+| From | tensquads-ui treatment |
+|---|---|
+| `moeghashim/tensquads-design-system` @ `644fd15` | Source of truth for the look. Consumed: `agent-ui/tokens.json`, `agent-ui/README.md`, `agent-ui/data-display.md`, the component guides under `agent-ui/components/*/README.md`, `mascots/` (svg, states, `mascots.json`) and `logo/`. Synced at a pinned commit and never edited here. |
+| `vercel-labs/ui` (UI SDK), `@ui-sdk/core` + `@ui-sdk/react` `0.1.0-beta.6` | The behavior layer under every interactive component. Its rules apply (§7). Its `ui-sdk` skill is installed for coding agents. MIT. |
+| `thesysdev/openui`, `@openuidev/react-lang` + `@openuidev/lang-core` `1.1.1` | The runtime generative-UI format. Server agents emit OpenUI Lang; the browser renders it with our library. Already proven in the website's Petra interview. MIT. |
+| `moeghashim/tensquads` `packages/squadmates` @ `0a1d7f9` | Moved here: the mascot drawing (`mascots.ts`), the roster (`roster.ts`) and the Agent loop state drawing (`draw.ts`). The app switches to `@tensquads/ui/squadmates` and retires its package in a later PR in that repo. |
+| `moeghashim/tensquad-website` `src/components/interview/openui-library.tsx`, `src/lib/petra.ts` | Prior art for the OpenUI bridge: lazy library creation (Workers forbid random IDs at module load), prompt building, request caps and scripted fallback. Patterns are reused, code is rewritten against our components. |
+| `moeghashim/tensquads` `AGENTS.md` | Process conventions copied: Simplified Technical English, receipt-first sessions, done checklist with evidence, DCO sign-off, `git push no-mistakes`. |
+
+The website's marketing sections (round-table hero, pricing, nav) are **not** in scope. They stay in the website repo (decision D7).
+
+## 3. Tech stack
+
+| Layer | Choice | Why |
+|---|---|---|
+| Language | TypeScript 7.0.2, strict | Matches the tensquads app |
+| Runtime | Node 24.x | Matches the app and website |
+| Package manager | npm 11 workspaces | Matches the app; the consumer installs a git dependency with npm |
+| UI | React 19 | Both consumers use React 19 |
+| Behaviors | `@ui-sdk/react`, `@ui-sdk/core` (pinned exact beta) | Decision D4. Renders no styles, so no library defaults show through (app AGENTS.md rule) |
+| Styling | Plain CSS on Agent-UI custom properties, `@layer ui-sdk, tensquads;` | Decision D11. Styled from `data-slot` and state attributes |
+| Generative UI | `@openuidev/react-lang`, `@openuidev/lang-core` (pinned exact) | Decision D1 |
+| Schemas | zod 4 | OpenUI definitions and shared frontend/backend contracts |
+| Lint/format | Biome 2.6.4 | Matches the app |
+| Unit/behavior tests | Vitest + Testing Library (jsdom) | UI SDK testing reference uses them |
+| Visual/a11y tests | Playwright 1.64 + `@axe-core/playwright` | Matches the app |
+| Preview app | TanStack Start 1.169 on Cloudflare Workers (`@cloudflare/vite-plugin`) | Same hosting as every tensquads surface; it is the screenshot target |
+
+## 4. Repo layout
+
+```
+tensquads-ui/
+├── PLAN.md                     this file (contract; never overwritten by tools)
+├── AGENTS.md                   rules for every agent; read first
+├── README.md                   human overview and install
+├── llms.txt                    index for agents: one line per component doc
+├── design/                     synced from tensquads-design-system; never edited by hand
+│   ├── MANIFEST.json           source repo, pinned commit, SHA-256 of every synced file
+│   ├── tokens.json
+│   ├── agent-ui/               README.md, data-display.md, components/*/README.md (reference only)
+│   ├── mascots/                svg/, states/, mascots.json
+│   └── logo/
+├── packages/
+│   └── ui/                     @tensquads/ui
+│       ├── package.json        exports: ./tokens ./tokens.css ./styles.css ./react ./squadmates ./openui ./openui/server ./schemas
+│       └── src/
+│           ├── tokens/         generated from design/tokens.json: tokens.css + tokens.ts
+│           ├── styles/         base.css, one CSS file per component
+│           ├── react/          one folder per component: Component.tsx, Component.openui.ts, Component.test.tsx, Component.md
+│           ├── squadmates/     moved from tensquads packages/squadmates; <Squadmate> component
+│           ├── openui/         createTensquadsLibrary() (lazy), <TensquadsRenderer>
+│           │   └── server/     buildSystemPrompt(), stream helpers; providers/anthropic.ts is the only vendor import
+│           └── schemas/        zod contracts shared by frontend and backend (AgentSlug, AgentState, Locale, …)
+├── apps/
+│   └── preview/                TanStack Start gallery: every component × {en/ltr, ar/rtl} × {light, dark}
+├── e2e/                        Playwright: screenshots 1440/390, axe, RTL pass, OpenUI round trip
+├── scripts/
+│   ├── sync-design.mjs         pull design files at the pinned commit, write MANIFEST.json
+│   ├── design-check.mjs        fail on any hash drift
+│   ├── build-tokens.mjs        tokens.json → tokens.css + tokens.ts
+│   └── build-llms.mjs          component docs → llms.txt
+├── .agents/skills/
+│   ├── tensquads-ui/SKILL.md   how to use this library (frontend and backend), layered on ui-sdk
+│   └── ui-sdk/                 installed from vercel-labs/ui
+├── .claude/skills → .agents/skills
+└── dev/milestones/             task files written by the implementer (Phase 2)
+```
+
+## 5. Commands
+
+Headline:
+
+| Command | Does |
+|---|---|
+| `npm run dev` | Preview app on localhost |
+| `npm run check` | Biome, typecheck, `design:check`, unit tests |
+| `npm run e2e` | Playwright screenshots, axe, RTL, OpenUI round trip |
+| `npm run verify` | `check` then `e2e`. Exit 0 is the only definition of done |
+
+Auxiliary:
+
+| Command | Does |
+|---|---|
+| `npm run design:sync -- <commit>` | Re-pull design files at a new commit. Its own PR only |
+| `npm run design:check` | Hash check against `design/MANIFEST.json` |
+| `npm run tokens` | Rebuild `src/tokens/` from `design/tokens.json` |
+| `npm run docs` | Rebuild `llms.txt` |
+| `npm run deploy:preview` | Build and deploy the preview Worker |
+
+## 6. Consumer onboarding
+
+1. Add the dependency, pinned to one commit:
+   `"@tensquads/ui": "github:moeghashim/tensquads-ui#<sha>"` (package lives in `packages/ui`; the root `package.json` re-exports it or the build publishes a `dist` branch — the implementer decides in v0.1 task 1 and records it here).
+2. In the global stylesheet: `@layer ui-sdk, tensquads;` then `@import "@tensquads/ui/tokens.css"; @import "@tensquads/ui/styles.css";`.
+3. Set `lang` and `dir` on `<html>`. Set `data-theme` or leave it to follow the system.
+4. Frontend: `import { Button } from "@tensquads/ui/react"`.
+5. Backend (Worker route): `import { buildSystemPrompt } from "@tensquads/ui/openui/server"`; stream the model output to the client.
+6. Client: `<TensquadsRenderer stream={…} />` from `@tensquads/ui/openui`.
+7. Install the skills: `npx skills@latest add moeghashim/tensquads-ui --skill tensquads-ui`.
+
+## 7. Library conventions
+
+From the UI SDK skill, applied to every component:
+
+- Import UI SDK from per-component entries (`@ui-sdk/react/select`). Never from `internal/*`.
+- One shape: a root and its parts. Change a part's element with `render`, never `as`.
+- `defaultValue` or `value` + `onValueChange(value, details)`.
+- Every control has a name: a label part or `aria-label`.
+- Style only from `data-slot`, state attributes and CSS variables. No inline styles for state. No generated IDs in CSS.
+- Text contrast 4.5:1; control edges, focus rings and state fills 3:1. Focus ring 2px `#0169cc`, offset 2px.
+- Lists are keyed by value or ID, never by index.
+- RTL needs no provider. Use logical CSS properties only (`inline-start`, never `left`).
+- No hand-rolled `role=` for anything UI SDK ships.
+- Comments are rare.
+
+tensquads additions:
+
+- Only Agent-UI tokens. No other colour, font, radius or shadow. A missing token is a question, not a guess.
+- Every component folder holds four files: `X.tsx`, `X.openui.ts`, `X.test.tsx`, `X.md`. A component without an OpenUI definition says why in `X.md`.
+- No module-scope randomness or timers (Workers forbid them at startup). The OpenUI library is created lazily.
+- No emoji, no exclamation marks; sentence case (Agent-UI content rules).
+- Docs, comments, commits and PRs use Simplified Technical English.
+
+## 8. OpenUI bridge (backend)
+
+- `X.openui.ts` exports `defineComponent({ name, description, props: zodSchema, component: X })`.
+- `createTensquadsLibrary(locale)` assembles every definition. It is lazy and memoized.
+- `buildSystemPrompt({ library, locale, persona?, extra? })` returns the prompt text: the component catalogue, the rules, and examples in the requested locale. Arabic prompts have Arabic examples (fixes the website's English-only gap).
+- `providers/anthropic.ts` is the only file that imports `@anthropic-ai/sdk`. Default model `claude-haiku-5-5`. Other providers get their own file.
+- Server helpers enforce caps (body size, turns) and return a typed error that the client turns into its scripted fallback.
+- Round-trip test: a fixture stream per component renders without error in both locales.
+
+## 9. Roadmap
+
+| Version | Scope |
+|---|---|
+| v0.1 | Repo scaffold, design sync + check, tokens build, preview app, AGENTS.md + skill + llms.txt, Squadmate (moved), Button, Badge, Chip, Input + Field, Switch, SegmentedControl, Menu, Dialog, Tooltip, OpenUI bridge (library, prompt builder, renderer, Anthropic provider), CI with `verify` |
+| v0.2 | Chat (composer, step rows), Card, PageHeader, StatTile, Sparkline, Bars, BarChart, Distribution, DataTable, EmptyState, CommandPalette, ThemeToggle, Toolbar. First adoption PR in the tensquads app (squadmates switch) |
+| v0.3 | Workflow-builder set (Canvas, Node, BranchNode, MiniMap, Palette, Inspector, WorkflowCard), UI SDK `createAgent` + WebMCP so Petra can operate screens |
+
+## 10. Confirmed defaults
+
+1. **Stack**: React 19, `@ui-sdk/react` + `@ui-sdk/core`, TS 7, Node 24, npm workspaces, Biome. Matches the app.
+2. **Layout**: one package `@tensquads/ui` with subpath entries `/tokens`, `/react`, `/squadmates`, `/openui`, `/schemas`. One install, clear seams.
+3. **Token sync**: `scripts/sync-design.mjs` pulls from tensquads-design-system at a pinned commit; hashes in `design/MANIFEST.json`; `design:check` fails on drift. Keeps the design repo authoritative.
+4. **Styling**: plain CSS on tokens, from `data-slot` and state attributes; no Tailwind. No foreign defaults.
+5. **One component, two uses**: React + OpenUI definition in the same folder. No drift.
+6. **Backend helper**: `buildSystemPrompt` + stream helpers; vendor SDK in one provider file; default `claude-haiku-5-5`. Same as the website.
+7. **Preview app**: TanStack Start gallery on Workers, EN/AR × light/dark. The screenshot target.
+8. **Tests**: Vitest + Testing Library; Playwright 1440/390 px screenshots, axe, RTL; OpenUI round trip. Evidence, not opinion.
+9. **Agent docs**: `AGENTS.md`, `.agents/skills/tensquads-ui/SKILL.md` over the ui-sdk skill, `llms.txt` + one Markdown page per component. Agents find the API without reading source.
+10. **Process**: one task, one branch, one PR; Conventional Commits; DCO sign-off; push via `no-mistakes`; Opus reviews, Moe merges.
+11. **Roadmap**: as §9.
+
+All eleven locked by Moe on 2026-11-17.
+
+## 11. Agents and roles
+
+| Role | Who | Does | Does not |
+|---|---|---|---|
+| Orchestrator / reviewer | Claude Opus 5.5 (`claude-opus-5-5`) | Owns PLAN.md, writes handoffs, reviews every PR against this plan and the done checklist, signs off | Write implementation code |
+| Implementer | GPT-6 Luna (`gpt-6-luna`, Codex, reasoning effort medium) | Writes task files under `dev/milestones/`, builds one task per branch, opens PRs | Change PLAN.md, invent decisions, design states the design does not show |
+| Merger | Moe | Merges after sign-off | — |
+
+## 12. Done checklist (per component)
+
+- [ ] `X.tsx`, `X.openui.ts`, `X.test.tsx`, `X.md` exist.
+- [ ] Behavior tests cover keyboard, focus and every documented state. All pass.
+- [ ] Preview page shows it in en/ltr and ar/rtl, light and dark.
+- [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
+- [ ] axe reports no violations. Every control has a name. Focus ring is 2px `#0169cc`, offset 2px.
+- [ ] Only Agent-UI tokens in its CSS (a lint script checks for raw colour literals).
+- [ ] OpenUI round-trip fixture renders in both locales.
+- [ ] `llms.txt` lists it.
+- [ ] `npm run verify` exits 0 in CI.
+
+## 13. Decisions log
+
+| # | Decision | Value | Source |
+|---|---|---|---|
+| D1 | Audience | Both: coding agents (frontend and backend code) and live server agents streaming OpenUI | Locked by user |
+| D2 | Design source | tensquads-design-system stays the source of truth; this repo consumes it at a pinned commit with hash checks | Locked by user |
+| D3 | Delivery | Pinned npm git dependency, like tensquads-agent-kit (tensquads decision 35) | Locked by user |
+| D4 | UI SDK use in v0.1 | Behaviors under every interactive component. createAgent/WebMCP deferred to v0.3. Coding-agent skill comes via default 9 | Locked by user |
+| D5 | v0.1 scope | App chrome + squad; workflow-builder components wait for v0.3 | Locked by user |
+| D6 | Squadmates | Move from tensquads `packages/squadmates` into `@tensquads/ui/squadmates` | Locked by user |
+| D7 | Website marketing pieces | Out of scope; shared base only (tokens, mascots, logos, controls) | Locked by user |
+| D8 | RTL | Required and tested for every component; OpenUI prompts in both languages | Locked by user |
+| D9 | Orchestrator | Claude Opus 5.5 | Locked by user |
+| D10 | Implementer | GPT-6 Luna via Codex, reasoning effort medium ("GPT 6.1 Luna" is not in the catalog; user chose GPT-6 Luna) | Locked by user |
+| D11 | Defaults 1–11 | As §10 | Locked by user |
+| D12 | Brand names | English `tensquads` (always lowercase); Arabic `بنّاء`. No free-trial wording anywhere | Carried from website thread |
+| D13 | Distribution shape of the git dependency | Open: root re-export vs built `dist` branch. Implementer proposes in v0.1 task 1; Opus signs off; this row is updated | Deferred to v0.1 task 1 |
