@@ -1,0 +1,22 @@
+commands:
+  test: "npm run check"
+  lint: "npm run check"
+
+commit:
+  trailers:
+    - "Signed-off-by: Moe Ghashim <mohanadgh@gmail.com>"
+
+ignore_patterns:
+  - PLAN.md
+  - AGENTS.md
+  - dev/**
+
+protected_paths:
+  - PLAN.md
+  - AGENTS.md
+  - dev/**
+
+document:
+  instructions: |
+    Do not edit PLAN.md, AGENTS.md, or any file under dev/.
+    These files define approved scope and task boundaries. Report a gap instead of changing them.
