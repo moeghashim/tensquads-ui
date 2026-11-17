@@ -14,6 +14,8 @@ files: [".github/workflows/**", "package.json", "playwright.config.*", "e2e/**",
 - [ ] `npm run verify` runs `check` then `e2e`.
 - [ ] GitHub Actions runs `npm run verify` on every pull request and on `main`. Playwright installs Chromium in CI.
 - [ ] CI installs the PR head as a git dependency (`npm install git+file://…#<sha>` in a temporary fixture, so `prepare` runs) and imports every subpath. `check-pack` covers the tarball; this covers the real consumer path (D13).
+- [ ] CI runs `npm run preview:install` and `npm run check:preview` (D16), and Biome also checks `apps/preview/src/**` (today Biome only covers packages/ and scripts/).
+- [ ] Follow-ups from the PR #4 review: `apps/preview/src/routes/index.tsx` reuses `getPreviewState` from `state.ts` instead of repeating the locale, direction and theme parsing; the preview dev server binds to localhost by default (drop `--host 0.0.0.0`; Playwright uses localhost).
 - [ ] A smoke e2e test opens the preview app home in both directions and passes.
 - [ ] Report the local `npm run verify` command and its exit code in the PR.
 
