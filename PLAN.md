@@ -125,7 +125,7 @@ From the UI SDK skill, applied to every component:
 - `defaultValue` or `value` + `onValueChange(value, details)`.
 - Every control has a name: a label part or `aria-label`.
 - Style only from `data-slot`, state attributes and CSS variables. No inline styles for state. No generated IDs in CSS.
-- Text contrast 4.5:1; control edges, focus rings and state fills 3:1. Focus ring 2px `#0169cc`, offset 2px.
+- Text contrast 4.5:1; control edges, focus rings and state fills 3:1. Focus ring 2px in the `ring` token (`#0169cc` light, `#0285ff` dark), offset 2px.
 - Lists are keyed by value or ID, never by index.
 - RTL needs no provider. Use logical CSS properties only (`inline-start`, never `left`).
 - No hand-rolled `role=` for anything UI SDK ships.
@@ -188,7 +188,7 @@ All eleven locked by Moe on 2026-11-17.
 - [ ] Behavior tests cover keyboard, focus and every documented state. All pass.
 - [ ] Preview page shows it in en/ltr and ar/rtl, light and dark.
 - [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
-- [ ] axe reports no violations. Every control has a name. Focus ring is 2px `#0169cc`, offset 2px.
+- [ ] axe reports no violations. Every control has a name. Focus ring is 2px in the `ring` token colour of each theme, offset 2px.
 - [ ] Only Agent-UI tokens in its CSS (a lint script checks for raw colour literals).
 - [ ] OpenUI round-trip fixture renders in both locales.
 - [ ] `llms.txt` lists it.

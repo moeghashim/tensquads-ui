@@ -12,7 +12,7 @@ files: ["packages/ui/src/react/Badge/**", "packages/ui/src/styles/badge.css", "a
 - [ ] Behavior tests cover keyboard, focus, and every documented state. All pass.
 - [ ] Preview page shows it in `en/ltr` and `ar/rtl`, light and dark.
 - [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
-- [ ] axe reports no violations. Every control has a name. Focus ring is 2px `#0169cc`, offset 2px.
+- [ ] axe reports no violations. Every control has a name. Focus ring is 2px in the `ring` token colour (`#0169cc` light, `#0285ff` dark), offset 2px.
 - [ ] Only Agent-UI tokens in its CSS; a lint script checks for raw color literals.
 - [ ] OpenUI round-trip fixture renders in both locales.
 - [ ] `llms.txt` lists it.

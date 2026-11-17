@@ -16,7 +16,7 @@ For every component, the evidence includes:
 - Unit and behavior tests for keyboard, focus, and documented states.
 - Preview coverage in `en/ltr` and `ar/rtl`, in light and dark.
 - Playwright screenshots at 1440 px and 390 px in both directions, with no horizontal scroll at 390 px.
-- No axe violations, a name for every control, and a 2 px `#0169cc` focus ring with 2 px offset.
+- No axe violations, a name for every control, and a 2 px focus ring in the `ring` token colour of each theme, with 2 px offset.
 - Agent-UI tokens only in component CSS, checked for raw color literals.
 - OpenUI round-trip fixtures in both locales and an `llms.txt` entry.
 - `npm run verify` exits 0 in CI.

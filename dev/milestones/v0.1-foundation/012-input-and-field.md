@@ -14,7 +14,7 @@ files: ["packages/ui/src/react/Input/**", "packages/ui/src/react/Field/**", "pac
 - [ ] Field behavior tests cover keyboard, focus, and every documented state. All pass.
 - [ ] Both preview pages show `en/ltr` and `ar/rtl`, light and dark.
 - [ ] Playwright screenshots for both at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
-- [ ] axe reports no violations. Every control has a name. Focus ring is 2px `#0169cc`, offset 2px.
+- [ ] axe reports no violations. Every control has a name. Focus ring is 2px in the `ring` token colour (`#0169cc` light, `#0285ff` dark), offset 2px.
 - [ ] Only Agent-UI tokens in their CSS; a lint script checks for raw color literals.
 - [ ] OpenUI round-trip fixtures render in both locales.
 - [ ] `llms.txt` lists both components.

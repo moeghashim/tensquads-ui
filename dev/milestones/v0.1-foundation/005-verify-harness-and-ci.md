@@ -9,7 +9,7 @@ files: [".github/workflows/**", "package.json", "playwright.config.*", "e2e/**",
 
 ## Acceptance criteria
 - [ ] `npm run check` runs Biome, typecheck, `design:check` and the unit tests.
-- [ ] `npm run e2e` runs Playwright against the preview app. It has reusable helpers that later component tasks call: screenshot at 1440 px and 390 px in en/ltr and ar/rtl, light and dark; assert no horizontal scroll at 390 px; run axe; assert the focus ring is 2px `#0169cc` with a 2px offset.
+- [ ] `npm run e2e` runs Playwright against the preview app. It has reusable helpers that later component tasks call: screenshot at 1440 px and 390 px in en/ltr and ar/rtl, light and dark; assert no horizontal scroll at 390 px; run axe; assert the focus ring is 2px in the `--ts-ring` colour of the active theme (`#0169cc` light, `#0285ff` dark) with a 2px offset.
 - [ ] `scripts/check-css-tokens.mjs` fails on raw colour literals (hex, `rgb()`, `hsl()`, named colours) in `packages/ui/src/styles/**`. It allows `var(--…)` only. `npm run check` runs it.
 - [ ] `npm run verify` runs `check` then `e2e`.
 - [ ] GitHub Actions runs `npm run verify` on every pull request and on `main`. Playwright installs Chromium in CI.

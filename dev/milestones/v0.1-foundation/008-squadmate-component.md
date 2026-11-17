@@ -14,7 +14,7 @@ files: ["packages/ui/src/squadmates/**", "packages/ui/src/react/Squadmate/**", "
 - [ ] Add a preview for `en/ltr` and `ar/rtl`, light and dark.
 - [ ] Behavior tests cover keyboard, focus, and every documented state. All pass.
 - [ ] Playwright screenshots cover 1440 px and 390 px in both directions; there is no horizontal scroll at 390 px.
-- [ ] axe reports no violations. Every control has a name. Focus ring is 2px `#0169cc`, offset 2px.
+- [ ] axe reports no violations. Every control has a name. Focus ring is 2px in the `ring` token colour (`#0169cc` light, `#0285ff` dark), offset 2px.
 - [ ] Only Agent-UI tokens appear in component CSS; a lint script checks for raw color literals.
 - [ ] OpenUI round-trip fixture renders in both locales.
 - [ ] `llms.txt` lists Squadmate. `npm run verify` exits 0 in CI.
