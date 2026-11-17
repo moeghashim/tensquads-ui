@@ -1,0 +1,27 @@
+{
+  "milestones": [
+    {
+      "id": "v0.1-foundation",
+      "status": "planned",
+      "tasks": [
+        "001-scaffold-and-package-shape",
+        "002-sync-design-reference",
+        "003-build-design-tokens",
+        "004-preview-app",
+        "005-squadmate-component",
+        "006-button",
+        "007-badge",
+        "008-chip",
+        "009-input-and-field",
+        "010-switch-and-segmented-control",
+        "011-menu",
+        "012-dialog",
+        "013-tooltip",
+        "014-openui-bridge",
+        "015-agents-md",
+        "016-agent-skill-and-docs",
+        "017-ci-verify"
+      ]
+    }
+  ]
+}
