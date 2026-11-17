@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { getPreviewAttributes, type Direction, type Locale, type Theme } from "../state";
+import type { Direction, Locale, Theme } from "../state";
 
 export const Route = createFileRoute("/")({ component: GalleryPage });
 
@@ -9,7 +9,6 @@ function GalleryPage() {
 	const locale: Locale = search.locale === "ar" ? "ar" : "en";
 	const direction: Direction = search.dir === "rtl" || search.dir === "ltr" ? search.dir : locale === "ar" ? "rtl" : "ltr";
 	const theme: Theme = search.theme === "dark" || search.theme === "light" ? search.theme : "system";
-	const attributes = getPreviewAttributes({ locale, direction, theme });
 	const update = (key: string, value: string) => navigate({ to: ".", search: { ...search, [key]: value } as never });
 
 	return (
@@ -45,7 +44,6 @@ function GalleryPage() {
 				<div className="section-heading"><h2 id="components-title">{locale === "ar" ? "المكوّنات" : "Components"}</h2><span>0</span></div>
 				<p className="empty-state">{locale === "ar" ? "ستظهر المعاينات هنا عند إضافة المكوّنات." : "Component previews will appear here as they are added."}</p>
 				<Link className="route-example" to="/components/$name" params={{ name: "example" }} search={{ locale, dir: direction, theme } as never}>Component preview route</Link>
-				<output className="state-output" aria-label="Current preview attributes">{`${attributes.lang} / ${attributes.dir} / ${theme}`}</output>
 			</section>
 		</main>
 	);
