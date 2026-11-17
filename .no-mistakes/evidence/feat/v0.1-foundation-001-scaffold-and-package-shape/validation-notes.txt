@@ -1,0 +1,8 @@
+Environment: Node v24.21.0; npm 11.19.0
+Baseline: npm run prepare completed successfully.
+Targeted check: TMPDIR="$PWD/.test-validation/tmp" npm run check:pack completed successfully, including real npm pack, fixture install, all JavaScript imports and CSS reads.
+Targeted smoke: npm exec -- vitest run packages/ui/src/entrypoints.test.ts completed successfully.
+Git ignore consumer: git check-ignore packages/ui/dist/react/index.js returned packages/ui/dist/react/index.js.
+The first evidence harness merged npm lifecycle stderr into JSON stdout and could not parse it; the tarball itself was generated successfully and subsequently installed and exercised. No product failure occurred.
+No UI exists in this scaffold; CLI consumer transcript is the product evidence.
+Disposable consumer, temporary directories and generated packages/ui/dist were removed; pre-existing node_modules retained.
