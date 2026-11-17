@@ -24,6 +24,12 @@
 		"lineWidth": 120
 	},
 	"files": {
-		"includes": ["packages/*/src/**/*.ts", "packages/*/src/**/*.tsx", "scripts/**/*.mjs", "vitest.config.ts"]
+		"includes": [
+			"packages/*/src/**/*.ts",
+			"packages/*/src/**/*.tsx",
+			"scripts/**/*.mjs",
+			"vitest.config.ts",
+			"!design"
+		]
 	}
 }
