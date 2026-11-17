@@ -17,4 +17,5 @@
   1. `@tensquads/ui` ships `fonts.css` with self-hosted Inter, JetBrains Mono and one Arabic UI face (for example IBM Plex Sans Arabic or Noto Sans Arabic, both OFL), and consumers import it.
   2. Each consumer loads fonts itself; the package documents the families the tokens expect.
 **Recommendation**: Option 1, so every surface renders the same and RTL screenshots match production.
-**Status**: open — needs Moe's choice of Arabic face before task 008.
+**Status**: answered
+**Resolution** (Opus, 2026-11-17): Option 1 with IBM Plex Sans Arabic, the face the tensquads website already loads next to Inter and JetBrains Mono. Recorded as PLAN.md D17; task 020 adds `fonts.css`.

@@ -33,6 +33,7 @@ Revised by Opus on 2026-11-17. The harness and the OpenUI foundation come before
 | 004 | Preview app | Screenshot and axe target |
 | 005 | Verify harness and CI | Each later PR runs `npm run verify` in CI |
 | 019 | UI SDK upstream tracking (D14) | Pins the newest UI SDK and adds the usage check before any component imports it |
+| 020 | Fonts (D17) | Screenshots and components render in the product faces from the start |
 | 006 | OpenUI foundation and `llms.txt` generator | Each component PR adds its definition, fixtures and doc |
 | 007 | AGENTS.md | Builders of 008 onward follow it |
 | 008–016 | Squadmate, Button, Badge, Chip, Input + Field, Switch + SegmentedControl, Menu, Dialog, Tooltip | Simple to complex; popups last |
