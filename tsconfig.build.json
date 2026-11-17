@@ -1,0 +1,14 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"noEmit": false,
+		"declaration": true,
+		"declarationMap": false,
+		"sourceMap": false,
+		"rootDir": "packages/ui/src",
+		"outDir": "packages/ui/dist",
+		"types": ["react", "react-dom"]
+	},
+	"include": ["packages/ui/src/**/*.ts", "packages/ui/src/**/*.tsx"],
+	"exclude": ["packages/ui/src/**/*.test.ts", "packages/ui/src/**/*.test.tsx", "packages/ui/src/test-setup.ts"]
+}
