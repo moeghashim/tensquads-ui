@@ -48,6 +48,7 @@ The website's marketing sections (round-table hero, pricing, nav) are **not** in
 ```
 tensquads-ui/
 ├── PLAN.md                     this file (contract; never overwritten by tools)
+├── package.json                the installable package @tensquads/ui: exports map, deps, scripts (D13)
 ├── AGENTS.md                   rules for every agent; read first
 ├── README.md                   human overview and install
 ├── llms.txt                    index for agents: one line per component doc
@@ -58,8 +59,8 @@ tensquads-ui/
 │   ├── mascots/                svg/, states/, mascots.json
 │   └── logo/
 ├── packages/
-│   └── ui/                     @tensquads/ui
-│       ├── package.json        exports: ./tokens ./tokens.css ./styles.css ./react ./squadmates ./openui ./openui/server ./schemas
+│   └── ui/                     source of @tensquads/ui; build output in packages/ui/dist
+│       ├── package.json        private workspace `@tensquads/ui-source`; the public exports (./tokens ./tokens.css ./styles.css ./react ./squadmates ./openui ./openui/server ./schemas) live in the root package.json
 │       └── src/
 │           ├── tokens/         generated from design/tokens.json: tokens.css + tokens.ts
 │           ├── styles/         base.css, one CSS file per component
