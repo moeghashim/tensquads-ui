@@ -10,6 +10,9 @@ export default defineConfig({
 		browserName: "chromium",
 		locale: "en-US",
 		colorScheme: "light",
+		launchOptions: {
+			args: ["--disable-lcd-text", "--font-render-hinting=none"],
+		},
 	},
 	snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
 	webServer: {
