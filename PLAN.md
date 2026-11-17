@@ -70,7 +70,7 @@ tensquads-ui/
 │           │   └── server/     buildSystemPrompt(), stream helpers; providers/anthropic.ts is the only vendor import
 │           └── schemas/        zod contracts shared by frontend and backend (AgentSlug, AgentState, Locale, …)
 ├── apps/
-│   └── preview/                TanStack Start gallery: every component × {en/ltr, ar/rtl} × {light, dark}
+│   └── preview/                TanStack Start gallery: every component × {en/ltr, ar/rtl} × {light, dark}; its own npm project, not a root workspace (D16)
 ├── e2e/                        Playwright: screenshots 1440/390, axe, RTL pass, OpenUI round trip
 ├── scripts/
 │   ├── sync-design.mjs         pull design files at the pinned commit, write MANIFEST.json
@@ -212,6 +212,7 @@ All eleven locked by Moe on 2026-11-17.
 | D12 | Brand names | English `tensquads` (always lowercase); Arabic `بنّاء`. No free-trial wording anywhere | Carried from website thread |
 | D13 | Distribution shape of the git dependency | Root `package.json` is the package `@tensquads/ui`; `exports` point at `packages/ui/dist`; `prepare` builds it on git install; `dist/` git-ignored; a pack-and-install check proves every subpath. No `dist` branch | Proposed by implementer (Q1), signed off by Opus 2026-11-17 |
 | D15 | Merge authority | Opus merges (squash) after its sign-off and green checks, without asking Moe. This includes the daily UI SDK update PRs that pass verify. A red update PR is fixed first, never merged red | Locked by user 2026-11-17 |
+| D16 | Preview app install | `apps/preview` is not in the root `workspaces`. It has its own lockfile and reads `packages/ui/src` through a Vite alias. A consumer's git install (prepare) never installs the preview app's dependencies. Root scripts call it with `npm --prefix apps/preview` | Opus, task 004 escalation, 2026-11-17 |
 | D14 | UI SDK compatibility | Track every UI SDK release: exact same-version pins of `@ui-sdk/core` + `@ui-sdk/react` on the newest release (`beta` tag until 1.0, then `latest`); daily update job opens a verified PR with release notes and a refreshed ui-sdk skill; wrap, do not fork; public-entry usage check; upgrade playbook in AGENTS.md (§14). Task 019, run right after task 005 | Locked by user 2026-11-17 ("always up to date") |
 
 ## 14. Staying current with UI SDK
