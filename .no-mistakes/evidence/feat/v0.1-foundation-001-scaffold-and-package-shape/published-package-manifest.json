@@ -1,0 +1,91 @@
+[
+  {
+    "id": "@tensquads/ui@0.1.0",
+    "name": "@tensquads/ui",
+    "version": "0.1.0",
+    "size": 1077,
+    "unpackedSize": 2256,
+    "shasum": "c507c7aca0feb29b2331adeed32469e96bbcbed9",
+    "integrity": "sha512-JQJF/7YzN0kAm84Z4RVfmSJxzAWiIb1lEj0duNyr5X8eRBcc8QVdu5FQCfIr1GfAE6x2mNVqMMBxSihVSOG0oQ==",
+    "filename": "tensquads-ui-0.1.0.tgz",
+    "files": [
+      {
+        "path": "package.json",
+        "size": 2122,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/styles/styles.css",
+        "size": 1,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/tokens.css",
+        "size": 1,
+        "mode": 420
+      }
+    ],
+    "entryCount": 15,
+    "bundled": []
+  }
+]

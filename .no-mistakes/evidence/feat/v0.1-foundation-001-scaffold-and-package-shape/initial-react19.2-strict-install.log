@@ -1,0 +1,164 @@
+Runtime: v24.21.0
+
+$ npm run check:pack
+
+> @tensquads/ui@0.1.0 check:pack
+> node scripts/check-pack.mjs
+
+
+added 13 packages in 3s
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+npm notice
+npm notice New major version of npm available! 11.19.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+
+exit=0
+
+$ npm pack --json --pack-destination /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase
+[
+  {
+    "id": "@tensquads/ui@0.1.0",
+    "name": "@tensquads/ui",
+    "version": "0.1.0",
+    "size": 1077,
+    "unpackedSize": 2256,
+    "shasum": "c507c7aca0feb29b2331adeed32469e96bbcbed9",
+    "integrity": "sha512-JQJF/7YzN0kAm84Z4RVfmSJxzAWiIb1lEj0duNyr5X8eRBcc8QVdu5FQCfIr1GfAE6x2mNVqMMBxSihVSOG0oQ==",
+    "filename": "tensquads-ui-0.1.0.tgz",
+    "files": [
+      {
+        "path": "package.json",
+        "size": 2122,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/styles/styles.css",
+        "size": 1,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/tokens.css",
+        "size": 1,
+        "mode": 420
+      }
+    ],
+    "entryCount": 15,
+    "bundled": []
+  }
+]
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+
+exit=0
+
+$ npm install --ignore-scripts --strict-peer-deps /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/tensquads-ui-0.1.0.tgz react@19.2.3 react-dom@19.2.3
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: @tensquads/ui@0.1.0
+npm error Found: react@19.2.3
+npm error node_modules/react
+npm error   react@"19.2.3" from the root project
+npm error   peer react@">=19.0.0 <20" from @tensquads/ui@0.1.0
+npm error   node_modules/@tensquads/ui
+npm error     @tensquads/ui@"file:../tensquads-ui-0.1.0.tgz" from the root project
+npm error   1 more (react-dom)
+npm error
+npm error Could not resolve dependency:
+npm error @openuidev/react-lang@"1.1.1" from @tensquads/ui@0.1.0
+npm error node_modules/@tensquads/ui
+npm error   @tensquads/ui@"file:../tensquads-ui-0.1.0.tgz" from the root project
+npm error
+npm error Conflicting peer dependency: react@19.3.1
+npm error node_modules/react
+npm error   peer react@"^19.3.0" from react-native@0.88.1
+npm error   node_modules/react-native
+npm error     peerOptional react-native@"*" from @openuidev/react-lang@1.1.1
+npm error     node_modules/@openuidev/react-lang
+npm error       @openuidev/react-lang@"1.1.1" from @tensquads/ui@0.1.0
+npm error       node_modules/@tensquads/ui
+npm error         @tensquads/ui@"file:../tensquads-ui-0.1.0.tgz" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --no-strict-peer-deps, --force, or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/cache/_logs/2026-11-17T19_32_55_283Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/cache/_logs/2026-11-17T19_32_55_283Z-debug-0.log
+
+exit=1

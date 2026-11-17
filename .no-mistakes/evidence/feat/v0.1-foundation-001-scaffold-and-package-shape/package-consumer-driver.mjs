@@ -1,71 +1,47 @@
-import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-
-const root = process.cwd();
-const fixture = resolve('.phase-test');
-const evidence = '/Users/moeghashim/.no-mistakes/evidence/01M7NCVARYQ7SV0Z8K35GMZB7Y';
-let transcript = `Node ${process.version}; npm ${execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim()}\n`;
-function run(cmd, args, cwd = root) {
-  transcript += `\n$ ${cmd} ${args.join(' ')}\n`;
-  try {
-    const output = execFileSync(cmd, args, { cwd, encoding: 'utf8', env: { ...process.env, TMPDIR: fixture }, stdio: ['ignore', 'pipe', 'pipe'] });
-    transcript += output;
-    return output;
-  } catch (error) {
-    transcript += `${error.stdout || ''}${error.stderr || ''}`;
-    throw error;
-  }
-}
-const consumerScript = `
+import { execFileSync, spawnSync } from 'node:child_process';
+import { mkdirSync, writeFileSync, readFileSync, cpSync, symlinkSync } from 'node:fs';
+import path from 'node:path';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-for (const subpath of ['tokens', 'react', 'squadmates', 'openui', 'openui/server', 'schemas']) {
-  const specifier = '@tensquads/ui/' + subpath;
-  const value = await import(specifier);
-  assert.equal(typeof value, 'object');
-  console.log('IMPORTED', specifier, 'exports:', Object.keys(value));
+const root=process.cwd();
+const phase=path.join(root,'.test-phase');
+const evidence='/Users/moeghashim/.no-mistakes/evidence/01M7NFV05NTXBSQWWQ74YTPX2N';
+const env={...process.env,TMPDIR:path.join(phase,'tmp'),npm_config_userconfig:path.join(phase,'npmrc'),npm_config_cache:path.join(phase,'cache'),npm_config_audit:'false',npm_config_fund:'false'};
+writeFileSync(env.npm_config_userconfig,'');
+let log=`Runtime: ${process.version}\n`;
+function run(cmd,args,cwd=root,expected=0){
+ const result=spawnSync(cmd,args,{cwd,env,encoding:'utf8'});
+ log+=`\n$ ${cmd} ${args.join(' ')}\n${result.stdout??''}${result.stderr??''}\nexit=${result.status}\n`;
+ writeFileSync(path.join(evidence,'package-consumer-transcript.log'),log);
+ assert.equal(result.status,expected,`Unexpected status for ${cmd} ${args.join(' ')}`);
+ return result.stdout;
 }
-for (const subpath of ['tokens.css', 'styles.css']) {
-  const url = import.meta.resolve('@tensquads/ui/' + subpath);
-  const css = readFileSync(new URL(url), 'utf8');
-  assert.ok(css.length > 0);
-  console.log('CSS ASSET', subpath, JSON.stringify(css));
-}
-for (const specifier of ['@tensquads/ui', '@tensquads/ui/packages/ui/src/react/index.ts', '@tensquads/ui/package.json']) {
-  await assert.rejects(import(specifier), { code: 'ERR_PACKAGE_PATH_NOT_EXPORTED' });
-  console.log('PRIVATE PATH BLOCKED', specifier, 'ERR_PACKAGE_PATH_NOT_EXPORTED');
-}
-`;
-try {
-  run('npm', ['run', 'check:pack']);
-  const pack = JSON.parse(run('npm', ['pack', '--json', '--pack-destination', fixture]));
-  console.log('Packed public package');
-  const tarball = resolve(fixture, pack[0].filename);
-  transcript += '\nPacked files:\n' + pack[0].files.map(f => f.path).join('\n') + '\n';
-  for (const kind of ['tarball', 'git']) {
-    const cwd = resolve(fixture, kind + '-consumer');
-    mkdirSync(cwd);
-    writeFileSync(resolve(cwd, 'package.json'), JSON.stringify({ name: kind + '-consumer', version: '1.0.0', private: true, type: 'module' }));
-    let dependency = tarball;
-    if (kind === 'git') {
-      const repo = resolve(fixture, 'source');
-      mkdirSync(repo);
-      const archive = execFileSync('git', ['archive', 'HEAD'], { cwd: root });
-      execFileSync('tar', ['-x', '-C', repo], { input: archive });
-      run('git', ['init', '-q'], repo);
-      run('git', ['add', '.'], repo);
-      run('git', ['-c', 'user.name=Disposable Test', '-c', 'user.email=test@example.invalid', '-c', 'commit.gpgsign=false', 'commit', '-qm', 'Isolated target snapshot'], repo);
-      const sha = run('git', ['rev-parse', 'HEAD'], repo).trim();
-      dependency = 'git+file://' + repo + '#' + sha;
-      transcript += '\nGit fixture is a clean committed target snapshot with no dist or node_modules.\n';
-    }
-    run('npm', ['install', '--no-audit', '--no-fund', dependency], cwd);
-    writeFileSync(resolve(cwd, 'consumer.mjs'), consumerScript);
-    run('node', ['consumer.mjs'], cwd);
-  }
-  transcript += '\nAll live package consumer checks passed.\n';
-} finally {
-  writeFileSync(resolve(evidence, 'package-consumers.log'), transcript);
-  console.log(transcript);
-}
+run('npm',['run','check:pack']);
+const pack=JSON.parse(run('npm',['pack','--json','--pack-destination',phase]));
+writeFileSync(path.join(evidence,'published-package-manifest.json'),JSON.stringify(pack,null,2));
+const names=pack[0].files.map(x=>x.path);
+assert(!names.some(x=>/(?:test|spec)/i.test(x)), 'No test artifacts in published tarball');
+const tarball=path.join(phase,pack[0].filename);
+const consumer=path.join(phase,'consumer');mkdirSync(consumer);
+writeFileSync(path.join(consumer,'package.json'),JSON.stringify({name:'isolated-ui-consumer',version:'1.0.0',private:true,type:'module'}));
+run('npm',['install','--ignore-scripts','--strict-peer-deps',tarball,'react@19.3.1','react-dom@19.3.1'],consumer);
+run('node',['--input-type=module','-e',`import {readFileSync} from 'node:fs';
+for(const p of ['tokens','react','squadmates','openui','openui/server','schemas']){await import('@tensquads/ui/'+p);console.log('Imported @tensquads/ui/'+p)}
+for(const p of ['tokens.css','styles.css']){const url=import.meta.resolve('@tensquads/ui/'+p);readFileSync(new URL(url));console.log('Resolved and read '+p)}
+try{await import('@tensquads/ui');throw Error('Root import unexpectedly exposed')}catch(e){if(e.code!=='ERR_PACKAGE_PATH_NOT_EXPORTED')throw e;console.log('Root import stays private')}
+`],consumer);
+run('npm',['ls','react','react-dom','@ui-sdk/react'],consumer);
+const incompatible=path.join(phase,'incompatible');mkdirSync(incompatible);
+writeFileSync(path.join(incompatible,'package.json'),JSON.stringify({name:'incompatible-consumer',version:'1.0.0',private:true}));
+const rejected=run('npm',['install','--ignore-scripts','--strict-peer-deps',tarball,'react@19.3.1','react-dom@18.3.1'],incompatible,1);
+run('npm',['ls','@types/node','@openuidev/lang-core','@openuidev/react-lang','@ui-sdk/core','@ui-sdk/react','zod']);
+const version=JSON.parse(readFileSync('node_modules/@types/node/package.json','utf8')).version;
+assert.equal(version,'24.19.2');
+const contaminated=path.join(phase,'contaminated');mkdirSync(contaminated);
+for(const p of ['package.json','tsconfig.json','tsconfig.build.json','scripts','packages/ui/src']){const dest=path.join(contaminated,p);mkdirSync(path.dirname(dest),{recursive:true});cpSync(p,dest,{recursive:true});}
+symlinkSync(path.join(root,'node_modules'),path.join(contaminated,'node_modules'),'dir');
+const configPath=path.join(contaminated,'tsconfig.build.json');
+const config=JSON.parse(readFileSync(configPath));config.exclude=config.exclude.filter(x=>!x.endsWith('/test-setup.ts'));writeFileSync(configPath,JSON.stringify(config));
+run('npm',['run','check:pack'],contaminated,1);
+log+='\nVerified all expected outcomes: clean published files; six JS exports and two CSS exports; private root; React DOM 19 install; React DOM 18 rejected; Node 24 type package resolved; actual contaminated tarball rejected.\n';
+writeFileSync(path.join(evidence,'package-consumer-transcript.log'),log);
+console.log(log);

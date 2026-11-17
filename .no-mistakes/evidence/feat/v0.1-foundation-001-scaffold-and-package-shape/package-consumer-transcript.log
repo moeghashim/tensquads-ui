@@ -1,0 +1,239 @@
+Runtime: v24.21.0
+
+$ npm run check:pack
+
+> @tensquads/ui@0.1.0 check:pack
+> node scripts/check-pack.mjs
+
+
+added 13 packages in 1s
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+
+exit=0
+
+$ npm pack --json --pack-destination /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase
+[
+  {
+    "id": "@tensquads/ui@0.1.0",
+    "name": "@tensquads/ui",
+    "version": "0.1.0",
+    "size": 1077,
+    "unpackedSize": 2256,
+    "shasum": "c507c7aca0feb29b2331adeed32469e96bbcbed9",
+    "integrity": "sha512-JQJF/7YzN0kAm84Z4RVfmSJxzAWiIb1lEj0duNyr5X8eRBcc8QVdu5FQCfIr1GfAE6x2mNVqMMBxSihVSOG0oQ==",
+    "filename": "tensquads-ui-0.1.0.tgz",
+    "files": [
+      {
+        "path": "package.json",
+        "size": 2122,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/styles/styles.css",
+        "size": 1,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/tokens.css",
+        "size": 1,
+        "mode": 420
+      }
+    ],
+    "entryCount": 15,
+    "bundled": []
+  }
+]
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+
+exit=0
+
+$ npm install --ignore-scripts --strict-peer-deps /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/tensquads-ui-0.1.0.tgz react@19.3.1 react-dom@19.3.1
+
+added 13 packages in 985ms
+
+exit=0
+
+$ node --input-type=module -e import {readFileSync} from 'node:fs';
+for(const p of ['tokens','react','squadmates','openui','openui/server','schemas']){await import('@tensquads/ui/'+p);console.log('Imported @tensquads/ui/'+p)}
+for(const p of ['tokens.css','styles.css']){const url=import.meta.resolve('@tensquads/ui/'+p);readFileSync(new URL(url));console.log('Resolved and read '+p)}
+try{await import('@tensquads/ui');throw Error('Root import unexpectedly exposed')}catch(e){if(e.code!=='ERR_PACKAGE_PATH_NOT_EXPORTED')throw e;console.log('Root import stays private')}
+
+Imported @tensquads/ui/tokens
+Imported @tensquads/ui/react
+Imported @tensquads/ui/squadmates
+Imported @tensquads/ui/openui
+Imported @tensquads/ui/openui/server
+Imported @tensquads/ui/schemas
+Resolved and read tokens.css
+Resolved and read styles.css
+Root import stays private
+
+exit=0
+
+$ npm ls react react-dom @ui-sdk/react
+isolated-ui-consumer@1.0.0 /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/consumer
+├─┬ @tensquads/ui@0.1.0
+│ ├─┬ @openuidev/react-lang@1.1.1
+│ │ ├─┬ @openuidev/devtools@0.3.1
+│ │ │ ├─┬ lucide-react@0.575.0
+│ │ │ │ └── react@19.3.1 deduped
+│ │ │ ├── react-dom@19.3.1 deduped
+│ │ │ └── react@19.3.1 deduped
+│ │ ├── react-dom@19.3.1 deduped
+│ │ └── react@19.3.1 deduped
+│ ├─┬ @ui-sdk/react@0.1.0-beta.7
+│ │ ├── react-dom@19.3.1 deduped
+│ │ └── react@19.3.1 deduped
+│ ├── react-dom@19.3.1 deduped
+│ └── react@19.3.1 deduped
+├─┬ react-dom@19.3.1
+│ └── react@19.3.1 deduped
+└── react@19.3.1
+
+
+exit=0
+
+$ npm install --ignore-scripts --strict-peer-deps /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/tensquads-ui-0.1.0.tgz react@19.3.1 react-dom@18.3.1
+npm error code ERESOLVE
+npm error ERESOLVE unable to resolve dependency tree
+npm error
+npm error While resolving: incompatible-consumer@1.0.0
+npm error Found: react@19.3.1
+npm error node_modules/react
+npm error   react@"19.3.1" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error peer react@"^18.3.1" from react-dom@18.3.1
+npm error node_modules/react-dom
+npm error   react-dom@"18.3.1" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --no-strict-peer-deps, --force, or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/cache/_logs/2026-11-17T19_33_19_863Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/cache/_logs/2026-11-17T19_33_19_863Z-debug-0.log
+
+exit=1
+
+$ npm ls @types/node @openuidev/lang-core @openuidev/react-lang @ui-sdk/core @ui-sdk/react zod
+@tensquads/ui@0.1.0 /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N
+├─┬ @openuidev/lang-core@1.1.1
+│ └── zod@4.6.7 deduped
+├─┬ @openuidev/react-lang@1.1.1
+│ ├─┬ @openuidev/devtools@0.3.1
+│ │ └── @openuidev/react-lang@1.1.1 deduped
+│ ├── @openuidev/lang-core@1.1.1 deduped
+│ └── zod@4.6.7 deduped
+├── @types/node@24.19.2
+├── @ui-sdk/core@0.1.0-beta.7
+├─┬ @ui-sdk/react@0.1.0-beta.7
+│ └── @ui-sdk/core@0.1.0-beta.7 deduped
+├─┬ vitest@5.1.0
+│ ├── @types/node@24.19.2 deduped
+│ └─┬ vite@8.3.8
+│   └── @types/node@24.19.2 deduped
+└── zod@4.6.7
+
+
+exit=0
+
+$ npm run check:pack
+
+> @tensquads/ui@0.1.0 check:pack
+> node scripts/check-pack.mjs
+
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/contaminated/scripts/check-pack.mjs:19
+		throw new Error(`Package tarball includes test files: ${testFiles.join(", ")}`);
+		      ^
+
+Error: Package tarball includes test files: packages/ui/dist/test-setup.js
+    at file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NFV05NTXBSQWWQ74YTPX2N/.test-phase/contaminated/scripts/check-pack.mjs:19:9
+
+Node.js v24.21.0
+
+exit=1
+
+Verified all expected outcomes: clean published files; six JS exports and two CSS exports; private root; React DOM 19 install; React DOM 18 rejected; Node 24 type package resolved; actual contaminated tarball rejected.
