@@ -96,8 +96,8 @@ describe("design reference check", () => {
 		await writeFile(
 			join(bin, "git"),
 			`#!${process.execPath}
-const { mkdir, writeFile } = require("node:fs/promises");
-const { join } = require("node:path");
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 (async () => {
   if (process.argv[2] !== "clone") return;
   const checkout = process.argv.at(-1);
