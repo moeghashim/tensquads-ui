@@ -1,5 +1,17 @@
+import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, type TestInfo } from "@playwright/test";
+
+// Supply the token's first font family in tests so OS fallbacks cannot change layout.
+const screenshotFonts = [
+	["DejaVuSans.ttf", 400],
+	["DejaVuSans-Bold.ttf", 700],
+]
+	.map(([file, weight]) => {
+		const data = readFileSync(new URL(`../fonts/${file}`, import.meta.url)).toString("base64");
+		return `@font-face { font-family: Inter; font-weight: ${weight}; src: url(data:font/ttf;base64,${data}) format("truetype"); }`;
+	})
+	.join("\n");
 
 export type PreviewDirection = "ltr" | "rtl";
 export type PreviewLocale = "en" | "ar";
@@ -13,6 +25,8 @@ export type PreviewState = {
 export async function openPreview(page: Page, state: PreviewState, route = "/") {
 	const query = new URLSearchParams({ locale: state.locale, dir: state.direction, theme: state.theme });
 	await page.goto(`${route}?${query.toString()}`);
+	await page.addStyleTag({ content: screenshotFonts });
+	await page.evaluate(() => document.fonts.ready);
 	await expect(page.locator("html")).toHaveAttribute("lang", state.locale);
 	await expect(page.locator("html")).toHaveAttribute("dir", state.direction);
 	await expect(page.locator("html")).toHaveAttribute("data-theme", state.theme);

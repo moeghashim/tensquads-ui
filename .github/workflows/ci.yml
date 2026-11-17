@@ -25,11 +25,6 @@ jobs:
             apps/preview/package-lock.json
       - name: Use npm 11
         run: npm install --global npm@11.19.0
-      - name: Install fixed screenshot fonts
-        run: |
-          sudo apt-get update
-          sudo apt-get install --yes fonts-liberation
-          fc-cache --force
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run verify
