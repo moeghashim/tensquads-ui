@@ -169,7 +169,7 @@ tensquads additions:
 7. **Preview app**: TanStack Start gallery on Workers, EN/AR × light/dark. The screenshot target.
 8. **Tests**: Vitest + Testing Library; Playwright 1440/390 px screenshots, axe, RTL; OpenUI round trip. Evidence, not opinion.
 9. **Agent docs**: `AGENTS.md`, `.agents/skills/tensquads-ui/SKILL.md` over the ui-sdk skill, `llms.txt` + one Markdown page per component. Agents find the API without reading source.
-10. **Process**: one task, one branch, one PR; Conventional Commits; DCO sign-off; push via `no-mistakes`; Opus reviews, Moe merges.
+10. **Process**: one task, one branch, one PR; Conventional Commits; DCO sign-off; push via `no-mistakes`; Opus reviews and merges (D15).
 11. **Roadmap**: as §9.
 
 All eleven locked by Moe on 2026-11-17.
@@ -180,7 +180,7 @@ All eleven locked by Moe on 2026-11-17.
 |---|---|---|---|
 | Orchestrator / reviewer | Claude Opus 5.5 (`claude-opus-5-5`) | Owns PLAN.md, writes handoffs, reviews every PR against this plan and the done checklist, signs off | Write implementation code |
 | Implementer | GPT-6 Luna (`gpt-6-luna`, Codex, reasoning effort medium) | Writes task files under `dev/milestones/`, builds one task per branch, opens PRs | Change PLAN.md, invent decisions, design states the design does not show |
-| Merger | Moe | Merges after sign-off | — |
+| Merger | Claude Opus 5.5 (D15) | Squash-merges a PR after its own sign-off and green checks, without asking Moe | Merge a PR with failing checks or open requested changes |
 
 ## 12. Done checklist (per component)
 
@@ -211,6 +211,7 @@ All eleven locked by Moe on 2026-11-17.
 | D11 | Defaults 1–11 | As §10 | Locked by user |
 | D12 | Brand names | English `tensquads` (always lowercase); Arabic `بنّاء`. No free-trial wording anywhere | Carried from website thread |
 | D13 | Distribution shape of the git dependency | Root `package.json` is the package `@tensquads/ui`; `exports` point at `packages/ui/dist`; `prepare` builds it on git install; `dist/` git-ignored; a pack-and-install check proves every subpath. No `dist` branch | Proposed by implementer (Q1), signed off by Opus 2026-11-17 |
+| D15 | Merge authority | Opus merges (squash) after its sign-off and green checks, without asking Moe. This includes the daily UI SDK update PRs that pass verify. A red update PR is fixed first, never merged red | Locked by user 2026-11-17 |
 | D14 | UI SDK compatibility | Track every UI SDK release: exact same-version pins of `@ui-sdk/core` + `@ui-sdk/react` on the newest release (`beta` tag until 1.0, then `latest`); daily update job opens a verified PR with release notes and a refreshed ui-sdk skill; wrap, do not fork; public-entry usage check; upgrade playbook in AGENTS.md (§14). Task 019, run right after task 005 | Locked by user 2026-11-17 ("always up to date") |
 
 ## 14. Staying current with UI SDK
@@ -218,7 +219,7 @@ All eleven locked by Moe on 2026-11-17.
 UI SDK is in beta and releases often (seven betas from 12 to 17 November 2026). All `@ui-sdk/*` packages share one version (changesets `fixed`). tensquads-ui follows every release.
 
 - **Version policy.** `@ui-sdk/core` and `@ui-sdk/react` are pinned exactly, always to the same version, as regular dependencies of `@tensquads/ui`. While UI SDK is in pre-release we track the `beta` dist-tag (its newest release). When 1.0 ships we track `latest`. Consumers get UI SDK through `@tensquads/ui`; a consumer that imports `@ui-sdk/*` directly uses the same version. `check` fails if the two packages differ or if the pack fixture installs two copies.
-- **Daily update job.** A scheduled GitHub Action (`.github/workflows/ui-sdk-update.yml`) checks npm once a day. On a new release it: bumps both packages; refreshes `.agents/skills/ui-sdk/` from the matching `vercel-labs/ui` tag; runs `npm run verify`; opens one PR titled `chore(deps): ui-sdk <version>` with the upstream release notes for `@ui-sdk/core` and `@ui-sdk/react` and the list of public entries added or removed. A green PR is ready for review. A red PR is labelled `ui-sdk-break` and keeps the failing output. Moe merges either way; nothing auto-merges. This bot PR is the one exception to "push through no-mistakes": CI is its gate.
+- **Daily update job.** A scheduled GitHub Action (`.github/workflows/ui-sdk-update.yml`) checks npm once a day. On a new release it: bumps both packages; refreshes `.agents/skills/ui-sdk/` from the matching `vercel-labs/ui` tag; runs `npm run verify`; opens one PR titled `chore(deps): ui-sdk <version>` with the upstream release notes for `@ui-sdk/core` and `@ui-sdk/react` and the list of public entries added or removed. A green PR is ready for review. A red PR is labelled `ui-sdk-break` and keeps the failing output. Opus reviews and merges a green PR (D15); a red PR is fixed first. Nothing merges without a review. This bot PR is the one exception to "push through no-mistakes": CI is its gate.
 - **Compatibility contract.** `scripts/check-ui-sdk-usage.mjs` lists every `@ui-sdk/*` import in `packages/ui/src` and fails if one is an `internal` path or is not a public entry in the installed `node_modules/@ui-sdk/react/docs/llms.txt` (or `@ui-sdk/core` docs). Each wrapped component has a test that the UI SDK props it forwards still type-check and still render the upstream `data-slot` parts.
 - **Upgrade playbook** (in `AGENTS.md`): read the release notes; fix breaks in the smallest change; never pin back without an open question; regenerate screenshots only when the diff is explained in the PR; when UI SDK starts shipping a component we built from `@ui-sdk/core`, open a task to move to theirs.
 - **Early warning.** Because we track the newest beta, there is no separate canary job. If upstream breaks us, the daily PR shows it within a day.
