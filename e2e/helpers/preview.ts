@@ -21,7 +21,7 @@ const screenshotStyles =
 			return `@font-face { font-family: "${family}"; font-weight: ${weight}; font-style: normal; font-display: block; src: url(data:font/woff2;base64,${data}) format("woff2"); }`;
 		})
 		.join("\n") +
-	// Put the Arabic face after Inter so missing Arabic glyphs use the production fallback.
+	// Put the Arabic face after Inter to supply missing Arabic glyphs in screenshots.
 	'\n:root, :root *:not(code):not(pre):not(kbd):not(samp) { font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif !important; }' +
 	// Native select arrows reserve different widths on macOS and Linux.
 	"\nselect { appearance: none; padding-inline-end: calc(var(--ts-space-3) + 16px); }";
