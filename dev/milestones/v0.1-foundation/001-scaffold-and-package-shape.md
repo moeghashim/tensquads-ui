@@ -8,7 +8,8 @@ files: ["package.json", "package-lock.json", "tsconfig.json", "biome.json", "pac
 ---
 
 ## Acceptance criteria
-- [ ] Resolve D13 with Opus before implementing the package entry point. Record the approved value in PLAN.md §13.
+- [ ] Implement D13 as signed off (PLAN.md §13, Q1 resolution): root `package.json` is `@tensquads/ui`, exports point at `packages/ui/dist`, `prepare` builds it, `dist/` is git-ignored.
+- [ ] Add `scripts/check-pack.mjs`: `npm pack`, install the tarball into a temporary fixture, import every subpath export. Wire it into `npm run check`.
 - [ ] Create the npm 11 workspace and `@tensquads/ui` package with the exports listed in PLAN.md §4.
 - [ ] Add the strict TypeScript, Biome, Vitest, Testing Library, and build configuration required by PLAN.md §§3–5.
 - [ ] Add a smoke test for the workspace and package entry points.
@@ -16,4 +17,4 @@ files: ["package.json", "package-lock.json", "tsconfig.json", "biome.json", "pac
 - [ ] Confirm no randomness or timers run at module scope.
 
 ## Suggested approach
-Use Q1's recommendation as the proposal. The root package entry should preserve a single source commit and consumer install path. Treat D13 as unresolved until Opus approves it; do not ship either shape before that approval. Keep package subpath exports aligned with PLAN.md §4.
+D13 is resolved (Q1). Subpaths with no code yet export an empty module so the pack check covers them from the start. Keep package subpath exports aligned with PLAN.md §4.

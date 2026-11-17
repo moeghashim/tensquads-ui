@@ -1,14 +1,14 @@
 ---
-id: 006
-title: Add the Button component
+id: 015
+title: Add the Dialog component
 milestone: v0.1-foundation
 category: component
 priority: high
-files: ["packages/ui/src/react/Button/**", "packages/ui/src/styles/button.css", "apps/preview/**"]
+files: ["packages/ui/src/react/Dialog/**", "packages/ui/src/styles/dialog.css", "apps/preview/**"]
 ---
 
 ## Acceptance criteria
-- [ ] Add `Button.tsx`, `Button.openui.ts`, `Button.test.tsx`, and `Button.md`.
+- [ ] Add `Dialog.tsx`, `Dialog.openui.ts`, `Dialog.test.tsx`, and `Dialog.md`.
 - [ ] Behavior tests cover keyboard, focus, and every documented state. All pass.
 - [ ] Preview page shows it in `en/ltr` and `ar/rtl`, light and dark.
 - [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
@@ -19,4 +19,4 @@ files: ["packages/ui/src/react/Button/**", "packages/ui/src/styles/button.css", 
 - [ ] `npm run verify` exits 0 in CI.
 
 ## Suggested approach
-Follow the pinned Button guide and UI SDK button behavior docs. Keep API props within PLAN.md conventions and use only token-defined variants and states.
+No Dialog component guide exists in the pinned design source. Use the UI SDK Dialog behavior docs and only documented Agent-UI tokens for the surface, radius, and shadow. If a required visual value is missing, add an open question before implementation.

@@ -107,7 +107,7 @@ Auxiliary:
 ## 6. Consumer onboarding
 
 1. Add the dependency, pinned to one commit:
-   `"@tensquads/ui": "github:moeghashim/tensquads-ui#<sha>"` (package lives in `packages/ui`; the root `package.json` re-exports it or the build publishes a `dist` branch — the implementer decides in v0.1 task 1 and records it here).
+   `"@tensquads/ui": "github:moeghashim/tensquads-ui#<sha>"` (the root `package.json` is the package; `prepare` builds `packages/ui/dist` on install — D13).
 2. In the global stylesheet: `@layer ui-sdk, tensquads;` then `@import "@tensquads/ui/tokens.css"; @import "@tensquads/ui/styles.css";`.
 3. Set `lang` and `dir` on `<html>`. Set `data-theme` or leave it to follow the system.
 4. Frontend: `import { Button } from "@tensquads/ui/react"`.
@@ -207,4 +207,4 @@ All eleven locked by Moe on 2026-11-17.
 | D10 | Implementer | GPT-6 Luna via Codex, reasoning effort medium ("GPT 6.1 Luna" is not in the catalog; user chose GPT-6 Luna) | Locked by user |
 | D11 | Defaults 1–11 | As §10 | Locked by user |
 | D12 | Brand names | English `tensquads` (always lowercase); Arabic `بنّاء`. No free-trial wording anywhere | Carried from website thread |
-| D13 | Distribution shape of the git dependency | Open: root re-export vs built `dist` branch. Implementer proposes in v0.1 task 1; Opus signs off; this row is updated | Deferred to v0.1 task 1 |
+| D13 | Distribution shape of the git dependency | Root `package.json` is the package `@tensquads/ui`; `exports` point at `packages/ui/dist`; `prepare` builds it on git install; `dist/` git-ignored; a pack-and-install check proves every subpath. No `dist` branch | Proposed by implementer (Q1), signed off by Opus 2026-11-17 |

@@ -1,5 +1,5 @@
 ---
-id: 015
+id: 007
 title: Add repository agent instructions
 milestone: v0.1-foundation
 category: docs

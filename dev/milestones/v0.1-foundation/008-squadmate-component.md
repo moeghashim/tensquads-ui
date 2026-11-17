@@ -1,5 +1,5 @@
 ---
-id: 005
+id: 008
 title: Move Squadmate into the shared UI package
 milestone: v0.1-foundation
 category: squadmates

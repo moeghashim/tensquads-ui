@@ -1,14 +1,14 @@
 ---
-id: 013
-title: Add the Tooltip component
+id: 014
+title: Add the Menu component
 milestone: v0.1-foundation
 category: component
-priority: medium
-files: ["packages/ui/src/react/Tooltip/**", "packages/ui/src/styles/tooltip.css", "apps/preview/**"]
+priority: high
+files: ["packages/ui/src/react/Menu/**", "packages/ui/src/styles/menu.css", "apps/preview/**"]
 ---
 
 ## Acceptance criteria
-- [ ] Add `Tooltip.tsx`, `Tooltip.openui.ts`, `Tooltip.test.tsx`, and `Tooltip.md`.
+- [ ] Add `Menu.tsx`, `Menu.openui.ts`, `Menu.test.tsx`, and `Menu.md`.
 - [ ] Behavior tests cover keyboard, focus, and every documented state. All pass.
 - [ ] Preview page shows it in `en/ltr` and `ar/rtl`, light and dark.
 - [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
@@ -19,4 +19,4 @@ files: ["packages/ui/src/react/Tooltip/**", "packages/ui/src/styles/tooltip.css"
 - [ ] `npm run verify` exits 0 in CI.
 
 ## Suggested approach
-No Tooltip component guide exists in the pinned design source. Use the UI SDK Tooltip behavior docs and the documented `shadow-overlay` and `shadow-hairline` tokens. If a required visual value is missing, add an open question before implementation.
+Follow the pinned Menu guide and UI SDK menu behavior docs. Preserve Escape and outside-click dismissal, logical placement, item limits, and destructive-item ordering.

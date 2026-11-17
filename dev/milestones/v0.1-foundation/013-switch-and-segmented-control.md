@@ -1,5 +1,5 @@
 ---
-id: 010
+id: 013
 title: Add Switch and SegmentedControl components
 milestone: v0.1-foundation
 category: component

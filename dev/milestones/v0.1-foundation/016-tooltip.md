@@ -1,14 +1,14 @@
 ---
-id: 008
-title: Add the Chip component
+id: 016
+title: Add the Tooltip component
 milestone: v0.1-foundation
 category: component
-priority: high
-files: ["packages/ui/src/react/Chip/**", "packages/ui/src/styles/chip.css", "apps/preview/**"]
+priority: medium
+files: ["packages/ui/src/react/Tooltip/**", "packages/ui/src/styles/tooltip.css", "apps/preview/**"]
 ---
 
 ## Acceptance criteria
-- [ ] Add `Chip.tsx`, `Chip.openui.ts`, `Chip.test.tsx`, and `Chip.md`.
+- [ ] Add `Tooltip.tsx`, `Tooltip.openui.ts`, `Tooltip.test.tsx`, and `Tooltip.md`.
 - [ ] Behavior tests cover keyboard, focus, and every documented state. All pass.
 - [ ] Preview page shows it in `en/ltr` and `ar/rtl`, light and dark.
 - [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
@@ -19,4 +19,4 @@ files: ["packages/ui/src/react/Chip/**", "packages/ui/src/styles/chip.css", "app
 - [ ] `npm run verify` exits 0 in CI.
 
 ## Suggested approach
-Follow the pinned Chip guide. Preserve its object-attachment meaning and wrap long identifiers rather than truncating below the documented limit.
+No Tooltip component guide exists in the pinned design source. Use the UI SDK Tooltip behavior docs and the documented `shadow-overlay` and `shadow-hairline` tokens. If a required visual value is missing, add an open question before implementation.

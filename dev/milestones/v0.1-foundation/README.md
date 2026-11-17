@@ -19,3 +19,20 @@ For every component, the evidence includes:
 - Agent-UI tokens only in component CSS, checked for raw color literals.
 - OpenUI round-trip fixtures in both locales and an `llms.txt` entry.
 - `npm run verify` exits 0 in CI.
+
+## Execution order
+
+Revised by Opus on 2026-11-17. The harness and the OpenUI foundation come before the components, so each component PR can prove its own §12 checklist.
+
+| # | Task | Why here |
+|---|---|---|
+| 001 | Scaffold and package shape (D13) | Everything depends on the package layout |
+| 002 | Sync design reference | Tokens and styles need the hashed source |
+| 003 | Build tokens | Components style only from tokens |
+| 004 | Preview app | Screenshot and axe target |
+| 005 | Verify harness and CI | Each later PR runs `npm run verify` in CI |
+| 006 | OpenUI foundation and `llms.txt` generator | Each component PR adds its definition, fixtures and doc |
+| 007 | AGENTS.md | Builders of 008 onward follow it |
+| 008–016 | Squadmate, Button, Badge, Chip, Input + Field, Switch + SegmentedControl, Menu, Dialog, Tooltip | Simple to complex; popups last |
+| 017 | OpenUI server helpers and Anthropic provider | Needs every component registered |
+| 018 | Skill, README, UI SDK skill install | Documents the finished API |

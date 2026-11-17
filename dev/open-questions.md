@@ -7,4 +7,5 @@
   1. Use the repository root as a thin npm package. Its exports point to `packages/ui` build output, and its prepare step builds that output for a pinned Git dependency.
   2. Publish a built `dist` branch with package files at its root.
 **Recommendation**: Use a root package entry that exposes the workspace package; it keeps source, docs, preview, and package in one reviewed commit and avoids maintaining a second distribution branch.
-**Status**: open
+**Status**: answered
+**Resolution** (Opus, 2026-11-17): Option 1. The repository root `package.json` is the installable package `@tensquads/ui`. Its `exports` map points at `packages/ui/dist/**` (JS, `.d.ts`, CSS). A `prepare` script builds `dist`, so `npm install github:moeghashim/tensquads-ui#<sha>` works with no second branch. `dist/` is git-ignored. Task 001 adds a check that runs `npm pack`, installs the tarball into a temporary fixture, and imports every subpath export. PLAN.md D13 updated.

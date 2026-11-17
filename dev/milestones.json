@@ -8,19 +8,20 @@
         "002-sync-design-reference",
         "003-build-design-tokens",
         "004-preview-app",
-        "005-squadmate-component",
-        "006-button",
-        "007-badge",
-        "008-chip",
-        "009-input-and-field",
-        "010-switch-and-segmented-control",
-        "011-menu",
-        "012-dialog",
-        "013-tooltip",
-        "014-openui-bridge",
-        "015-agents-md",
-        "016-agent-skill-and-docs",
-        "017-ci-verify"
+        "005-verify-harness-and-ci",
+        "006-openui-foundation",
+        "007-agents-md",
+        "008-squadmate-component",
+        "009-button",
+        "010-badge",
+        "011-chip",
+        "012-input-and-field",
+        "013-switch-and-segmented-control",
+        "014-menu",
+        "015-dialog",
+        "016-tooltip",
+        "017-openui-server",
+        "018-agent-skill-and-docs"
       ]
     }
   ]

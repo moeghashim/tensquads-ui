@@ -1,5 +1,5 @@
 ---
-id: 007
+id: 010
 title: Add the Badge component
 milestone: v0.1-foundation
 category: component
