@@ -1,0 +1,12 @@
+Public package runtime exports only tokens; all 506 token names and both resolved theme values match the synced source.
+Browser OS light, explicit none: all 506 computed custom properties match light values.
+Browser OS light, explicit light: all 506 computed custom properties match light values.
+Browser OS light, explicit dark: all 506 computed custom properties match dark values.
+Browser OS dark, explicit none: all 506 computed custom properties match dark values.
+Browser OS dark, explicit light: all 506 computed custom properties match light values.
+Browser OS dark, explicit dark: all 506 computed custom properties match dark values.
+Missing outputs rejected (exit 1): packages/ui/src/tokens/tokens.css is stale. Run npm run tokens.
+packages/ui/src/tokens/tokens.ts is stale. Run npm run tokens.
+Stale CSS rejected without rewriting (exit 1): packages/ui/src/tokens/tokens.css is stale. Run npm run tokens.
+Stale TypeScript rejected (exit 1): packages/ui/src/tokens/tokens.ts is stale. Run npm run tokens.
+Repeated CLI generation is byte-identical; rebuild repairs stale outputs and check exits 0.
