@@ -29,6 +29,7 @@
 			"packages/*/src/**/*.tsx",
 			"scripts/**/*.mjs",
 			"vitest.config.ts",
+			"!packages/ui/src/tokens/tokens.ts",
 			"!design"
 		]
 	}

@@ -2,6 +2,7 @@ commands:
   test: "npm run check"
   lint: "npm run check"
 
+# no-mistakes appends these trailers to commits made by its agent steps.
 commit:
   trailers:
     - "Signed-off-by: Moe Ghashim <mohanadgh@gmail.com>"

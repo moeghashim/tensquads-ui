@@ -52,7 +52,9 @@
 		"check:pack": "node scripts/check-pack.mjs",
 		"design:check": "node scripts/design-check.mjs",
 		"design:sync": "node scripts/sync-design.mjs",
-		"check": "biome check . && npm run typecheck && npm run design:check && npm run test && npm run check:pack"
+		"check": "biome check . && npm run typecheck && npm run design:check && npm run tokens:check && npm run test && npm run check:pack",
+		"tokens": "node scripts/build-tokens.mjs",
+		"tokens:check": "node scripts/build-tokens.mjs --check"
 	},
 	"dependencies": {
 		"@openuidev/lang-core": "1.1.1",
