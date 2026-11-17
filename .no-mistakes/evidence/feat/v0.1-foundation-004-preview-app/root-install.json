@@ -1,0 +1,11 @@
+{
+  "scenario": "root npm ci and prepare with preview dependencies removed",
+  "previewDependenciesAbsent": true,
+  "uiDistExists": true,
+  "command": "npm ci --no-audit --no-fund",
+  "exitStatus": 0,
+  "observedLifecycle": [
+    "prepare: npm run build",
+    "build: node scripts/build.mjs"
+  ]
+}

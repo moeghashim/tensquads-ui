@@ -1,0 +1,147 @@
+[
+  {
+    "url": "http://localhost:5173/",
+    "lang": "en",
+    "dir": "ltr",
+    "theme": null,
+    "background": "rgb(243, 243, 243)",
+    "overflow": false
+  },
+  {
+    "scenario": "default gallery",
+    "result": "pass"
+  },
+  {
+    "url": "http://localhost:5173/?locale=ar&dir=rtl",
+    "lang": "ar",
+    "dir": "rtl",
+    "theme": null,
+    "background": "rgb(243, 243, 243)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=ar&dir=rtl&theme=dark",
+    "lang": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=ar&dir=ltr&theme=dark",
+    "lang": "ar",
+    "dir": "ltr",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=ar&dir=ltr&theme=dark",
+    "lang": "ar",
+    "dir": "ltr",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=en&dir=ltr&theme=dark",
+    "lang": "en",
+    "dir": "ltr",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=en&dir=rtl&theme=dark",
+    "lang": "en",
+    "dir": "rtl",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=en&dir=rtl&theme=light",
+    "lang": "en",
+    "dir": "rtl",
+    "theme": "light",
+    "background": "rgb(243, 243, 243)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=en&dir=rtl&theme=system",
+    "lang": "en",
+    "dir": "rtl",
+    "theme": null,
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=bogus&dir=up&theme=neon",
+    "lang": "en",
+    "dir": "ltr",
+    "theme": null,
+    "background": "rgb(243, 243, 243)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=ar&dir=rtl&theme=dark",
+    "lang": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "scenario": "controls, explicit overrides, reload, invalid values, system theme and mobile RTL; no external font/network requests",
+    "result": "pass"
+  },
+  {
+    "url": "http://localhost:5173/components/example?locale=ar&dir=rtl&theme=dark",
+    "lang": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:5173/?locale=ar&dir=rtl&theme=dark",
+    "lang": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "scenario": "placeholder route and back retain settings across reload",
+    "result": "pass"
+  },
+  {
+    "url": "http://localhost:4174/?locale=ar&dir=ltr&theme=dark",
+    "lang": "ar",
+    "dir": "ltr",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:4174/?locale=en&dir=ltr&theme=dark",
+    "lang": "en",
+    "dir": "ltr",
+    "theme": "dark",
+    "background": "rgb(22, 22, 22)",
+    "overflow": false
+  },
+  {
+    "url": "http://localhost:4174/components/button?locale=en&dir=rtl&theme=light",
+    "lang": "en",
+    "dir": "rtl",
+    "theme": "light",
+    "background": "rgb(243, 243, 243)",
+    "overflow": false
+  },
+  {
+    "scenario": "built Worker local emulator hydration, controls, navigation and direct dynamic route",
+    "result": "pass",
+    "pageErrors": []
+  }
+]
