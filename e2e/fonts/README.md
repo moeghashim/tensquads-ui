@@ -1,4 +1,4 @@
-+Inter 4.1
+Inter 4.1
 - Source: https://github.com/rsms/inter/releases/tag/v4.1
 - Included files: regular 400, medium 500, semi-bold 600, bold 700
 - License: LICENSE-Inter.txt (SIL Open Font License 1.1)
