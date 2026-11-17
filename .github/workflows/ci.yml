@@ -10,30 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  refresh_linux_snapshots:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feat/v0.1-foundation-005-verify-harness-and-ci'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            apps/preview/package-lock.json
-      - name: Use npm 11
-        run: npm install --global npm@11.19.0
-      - run: npm ci
-      - run: npm run preview:install
-      - run: npx playwright install --with-deps chromium
-      - run: npm run e2e:update
-      - uses: actions/upload-artifact@v4
-        with:
-          name: linux-playwright-snapshots
-          path: e2e/__screenshots__/preview.spec.ts/
-          retention-days: 7
-
   verify:
     runs-on: ubuntu-24.04
     steps:
