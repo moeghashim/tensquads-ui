@@ -2,6 +2,10 @@ commands:
   test: "npm run check"
   lint: "npm run check"
 
+commit:
+  trailers:
+    - "Signed-off-by: Moe Ghashim <mohanadgh@gmail.com>"
+
 ignore_patterns:
   - PLAN.md
   - AGENTS.md
