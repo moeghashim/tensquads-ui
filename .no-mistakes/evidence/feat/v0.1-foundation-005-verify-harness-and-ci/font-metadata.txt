@@ -1,0 +1,8 @@
+e2e/fonts/IBMPlexSansArabic-Bold.woff2: IBM Plex Sans Arabic, Bold, Version 1.005, None
+e2e/fonts/IBMPlexSansArabic-Medium.woff2: IBM Plex Sans Arabic Medm, Regular, Version 1.005, IBM Plex Sans Arabic
+e2e/fonts/IBMPlexSansArabic-Regular.woff2: IBM Plex Sans Arabic, Regular, Version 1.005, None
+e2e/fonts/IBMPlexSansArabic-SemiBold.woff2: IBM Plex Sans Arabic SmBld, Regular, Version 1.005, IBM Plex Sans Arabic
+e2e/fonts/Inter-Bold.woff2: Inter, Bold, Version 4.001;git-9221beed3, None
+e2e/fonts/Inter-Medium.woff2: Inter Medium, Regular, Version 4.001;git-9221beed3, Inter
+e2e/fonts/Inter-Regular.woff2: Inter, Regular, Version 4.001;git-9221beed3, None
+e2e/fonts/Inter-SemiBold.woff2: Inter SemiBold, Regular, Version 4.001;git-9221beed3, Inter

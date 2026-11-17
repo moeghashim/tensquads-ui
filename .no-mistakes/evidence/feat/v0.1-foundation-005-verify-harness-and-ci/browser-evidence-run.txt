@@ -1,0 +1,16 @@
+[WebServer] (node:46086) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] Default inspector port 9229 not available, using 9230 instead
+[WebServer] 
+
+Running 1 test using 1 worker
+
+(node:46130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"locale":"en","theme":"light","fonts":[{"familyName":"Inter SemiBold","postScriptName":"Inter-SemiBold","isCustomFont":true,"glyphCount":17}]}
+{"locale":"en","theme":"dark","fonts":[{"familyName":"Inter SemiBold","postScriptName":"Inter-SemiBold","isCustomFont":true,"glyphCount":17}]}
+{"locale":"ar","theme":"light","fonts":[{"familyName":"IBM Plex Sans Arabic SmBld","postScriptName":"IBMPlexSansArabic-SmBld","isCustomFont":true,"glyphCount":13},{"familyName":"Inter SemiBold","postScriptName":"Inter-SemiBold","isCustomFont":true,"glyphCount":1}]}
+{"locale":"ar","theme":"dark","fonts":[{"familyName":"IBM Plex Sans Arabic SmBld","postScriptName":"IBMPlexSansArabic-SmBld","isCustomFont":true,"glyphCount":13},{"familyName":"Inter SemiBold","postScriptName":"Inter-SemiBold","isCustomFont":true,"glyphCount":1}]}
+  ✓  1 e2e/phase-evidence.spec.ts:5:1 › capture live preview fonts and unchanged baselines (2.3s)
+
+  1 passed (4.8s)

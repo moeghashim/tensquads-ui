@@ -1,0 +1,66 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "heading": "Component gallery",
+    "fonts": [
+      {
+        "familyName": "Inter SemiBold",
+        "postScriptName": "Inter-SemiBold",
+        "isCustomFont": true,
+        "glyphCount": 17
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "heading": "Component gallery",
+    "fonts": [
+      {
+        "familyName": "Inter SemiBold",
+        "postScriptName": "Inter-SemiBold",
+        "isCustomFont": true,
+        "glyphCount": 17
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "heading": "معرض المكوّنات",
+    "fonts": [
+      {
+        "familyName": "IBM Plex Sans Arabic SmBld",
+        "postScriptName": "IBMPlexSansArabic-SmBld",
+        "isCustomFont": true,
+        "glyphCount": 13
+      },
+      {
+        "familyName": "Inter SemiBold",
+        "postScriptName": "Inter-SemiBold",
+        "isCustomFont": true,
+        "glyphCount": 1
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "heading": "معرض المكوّنات",
+    "fonts": [
+      {
+        "familyName": "IBM Plex Sans Arabic SmBld",
+        "postScriptName": "IBMPlexSansArabic-SmBld",
+        "isCustomFont": true,
+        "glyphCount": 13
+      },
+      {
+        "familyName": "Inter SemiBold",
+        "postScriptName": "Inter-SemiBold",
+        "isCustomFont": true,
+        "glyphCount": 1
+      }
+    ]
+  }
+]

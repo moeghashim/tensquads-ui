@@ -1,0 +1,24 @@
+Real CSS checker CLI, isolated synthetic style directory. Oracle: author requires tokens/transparent/currentColor accepted; raw literals and fallbacks rejected.
+
+allowed keywords and tokens
+Input: .sample {color: var(--ts-red-500); background: transparent; border-color: currentColor; outline-color: var(--ts-blue);}
+Exit: 0
+UI styles use no raw color literals.
+
+raw named color fallback
+Input: .sample {color: var(--ts-brand, red);}
+Exit: 1
+Raw color literals found in UI styles. Use Agent-UI color tokens instead:
+- {run-worktree}/.test-phase/fixture/packages/ui/src/styles/nested/example.css: color: var(--ts-brand, red)
+
+raw hex color
+Input: .sample {border: 1px solid #abcdef;}
+Exit: 1
+Raw color literals found in UI styles. Use Agent-UI color tokens instead:
+- {run-worktree}/.test-phase/fixture/packages/ui/src/styles/nested/example.css: border: 1px solid #abcdef
+
+raw functional color
+Input: .sample {background: oklch(50% 0.2 30);}
+Exit: 1
+Raw color literals found in UI styles. Use Agent-UI color tokens instead:
+- {run-worktree}/.test-phase/fixture/packages/ui/src/styles/nested/example.css: background: oklch(50% 0.2 30)
