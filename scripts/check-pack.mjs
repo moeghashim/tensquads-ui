@@ -12,7 +12,12 @@ try {
 		cwd: root,
 		encoding: "utf8",
 	});
-	const [{ filename }] = JSON.parse(output);
+	const [{ filename, files }] = JSON.parse(output);
+	const testFilePattern = /(?:^|\/)(?:__tests__|tests?)(?:\/|$)|(?:\.test|\.spec|test-setup)\.[cm]?[jt]sx?$/i;
+	const testFiles = files.map(({ path }) => path).filter((path) => testFilePattern.test(path));
+	if (testFiles.length > 0) {
+		throw new Error(`Package tarball includes test files: ${testFiles.join(", ")}`);
+	}
 	const tarball = join(fixture, filename);
 	await readFile(tarball);
 	execFileSync("npm", ["init", "-y"], { cwd: fixture, stdio: "ignore" });
