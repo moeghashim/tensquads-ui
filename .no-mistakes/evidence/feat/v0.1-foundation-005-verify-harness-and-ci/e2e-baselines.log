@@ -1,0 +1,19 @@
+
+> @tensquads/ui@0.1.0 e2e
+> playwright test --reporter=line
+
+[WebServer] (node:99577) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] Default inspector port 9229 not available, using 9230 instead
+[WebServer] 
+
+
+Running 1 test using 1 worker
+
+(node:99642) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] e2e/preview.spec.ts:18:1 › preview home works in both directions and themes
+  1 passed (10.2s)

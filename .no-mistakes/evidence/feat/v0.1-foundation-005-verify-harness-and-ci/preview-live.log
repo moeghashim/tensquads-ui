@@ -1,0 +1,50 @@
+[WebServer] (node:936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] Default inspector port 9229 not available, using 9230 instead
+[WebServer] 
+
+
+Running 2 tests using 2 workers
+
+(node:971) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:970) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] e2e/phase-validation.spec.ts:5:1 › capture live preview states and layout
+[2/2] e2e/phase-validation.spec.ts:21:1 › preview controls and invalid query values remain consistent
+  1) e2e/phase-validation.spec.ts:21:1 › preview controls and invalid query values remain consistent 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('html')
+    Expected: "ar"
+    Received: "en"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('html') with timeout 5000ms
+      - waiting for locator('html')
+        14 × locator resolved to <html lang="en" dir="ltr">…</html>
+           - unexpected value "en"
+
+
+      29 |  await expect(controls.nth(2)).toHaveValue('system');
+      30 |  await controls.nth(0).selectOption('ar');
+    > 31 |  await expect(page.locator('html')).toHaveAttribute('lang','ar');
+         |                                     ^
+      32 |  await expect(page.locator('html')).toHaveAttribute('dir','rtl');
+      33 |  await controls.nth(1).selectOption('ltr');
+      34 |  await expect(page.locator('html')).toHaveAttribute('dir','ltr');
+        at {run-worktree}/e2e/phase-validation.spec.ts:31:37
+
+    Error Context: test-results/phase-validation-preview-c-dd70f-ry-values-remain-consistent/error-context.md
+
+
+  1 failed
+    e2e/phase-validation.spec.ts:21:1 › preview controls and invalid query values remain consistent 
+  1 passed (9.2s)

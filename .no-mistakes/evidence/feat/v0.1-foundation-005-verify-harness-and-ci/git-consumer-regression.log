@@ -1,0 +1,88 @@
+
+before fix: expected 0, actual 0
+Wrote to {run-worktree}/.test-runtime/tmp/tensquads-ui-git-install-yFDYjH/package.json:
+
+{
+  "name": "tensquads-ui-git-install-yfdyjh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+added 13 packages, and audited 14 packages in 7s
+
+2 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Injected a missing transitive import into the disposable consumer installation.
+Git dependency install built dist and resolved every public subpath.
+
+npm warn install-scripts 2 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   @tensquads/ui@0.1.0 (prepare: npm run build)
+npm warn install-scripts   @openuidev/lang-core@1.1.1 (postinstall: node ./postinstall.cjs)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+
+
+after fix: expected 1, actual 1
+Wrote to {run-worktree}/.test-runtime/tmp/tensquads-ui-git-install-ksTpCW/package.json:
+
+{
+  "name": "tensquads-ui-git-install-kstpcw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+added 13 packages, and audited 14 packages in 4s
+
+2 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Injected a missing transitive import into the disposable consumer installation.
+
+npm warn install-scripts 2 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   @tensquads/ui@0.1.0 (prepare: npm run build)
+npm warn install-scripts   @openuidev/lang-core@1.1.1 (postinstall: node ./postinstall.cjs)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+node:internal/modules/package_json_reader:331
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'missing-consumer-dependency-for-validation' imported from {run-worktree}/.test-runtime/tmp/tensquads-ui-git-install-ksTpCW/node_modules/@tensquads/ui/packages/ui/dist/tokens/index.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:331:9)
+    at packageResolve (node:internal/modules/esm/resolve:784:25)
+    at moduleResolve (node:internal/modules/esm/resolve:873:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1006:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:705:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:725:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:763:56)
+    at #resolve (node:internal/modules/esm/loader:687:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:607:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:276:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.21.0
+

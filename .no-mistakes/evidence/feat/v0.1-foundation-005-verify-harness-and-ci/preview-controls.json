@@ -1,0 +1,10 @@
+{
+  "invalidQuery": "en/ltr/system",
+  "localeChange": "ar/rtl",
+  "explicitDirection": "ar/ltr",
+  "routeRoundtrip": "ar/ltr/dark",
+  "systemBackground": {
+    "dark": "rgb(22, 22, 22)",
+    "light": "rgb(243, 243, 243)"
+  }
+}

@@ -1,0 +1,6 @@
+{"name":"token values","expected":0,"exit":0,"output":"UI styles use no raw color literals.\n"}
+{"name":"comments and strings","expected":0,"exit":0,"output":"UI styles use no raw color literals.\n"}
+{"name":"hex literal","expected":1,"exit":1,"output":"Raw color literals found in UI styles. Use Agent-UI color tokens instead:\n- {run-worktree}/.test-runtime/css-fixture/packages/ui/src/styles/nested/input.css: color: #ff00ff\n"}
+{"name":"rgb literal","expected":1,"exit":1,"output":"Raw color literals found in UI styles. Use Agent-UI color tokens instead:\n- {run-worktree}/.test-runtime/css-fixture/packages/ui/src/styles/nested/input.css: border: 1px solid rgb(255,0,0)\n"}
+{"name":"hsl literal","expected":1,"exit":1,"output":"Raw color literals found in UI styles. Use Agent-UI color tokens instead:\n- {run-worktree}/.test-runtime/css-fixture/packages/ui/src/styles/nested/input.css: background: hsl(0,100%,50%)\n"}
+{"name":"named literal","expected":1,"exit":1,"output":"Raw color literals found in UI styles. Use Agent-UI color tokens instead:\n- {run-worktree}/.test-runtime/css-fixture/packages/ui/src/styles/nested/input.css: box-shadow: 0 0 2px rebeccapurple\n"}

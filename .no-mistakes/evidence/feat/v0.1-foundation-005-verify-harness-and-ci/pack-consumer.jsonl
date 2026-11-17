@@ -1,0 +1,9 @@
+{"specifier":"@tensquads/ui/tokens","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/tokens/index.js","exports":["tokens"]}
+{"specifier":"@tensquads/ui/tokens.css","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/tokens/tokens.css","bytes":59093}
+{"specifier":"@tensquads/ui/styles.css","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/styles/styles.css","bytes":1}
+{"specifier":"@tensquads/ui/react","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/react/index.js","exports":[]}
+{"specifier":"@tensquads/ui/squadmates","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/squadmates/index.js","exports":[]}
+{"specifier":"@tensquads/ui/openui","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/openui/index.js","exports":[]}
+{"specifier":"@tensquads/ui/openui/server","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/openui/server/index.js","exports":[]}
+{"specifier":"@tensquads/ui/schemas","url":"file://{run-worktree}/.test-runtime/pack-consumer/node_modules/@tensquads/ui/packages/ui/dist/schemas/index.js","exports":[]}
+
