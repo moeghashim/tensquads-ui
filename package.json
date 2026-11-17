@@ -8,8 +8,7 @@
 		"packages/ui/dist/**"
 	],
 	"workspaces": [
-		"packages/*",
-		"apps/*"
+		"packages/*"
 	],
 	"engines": {
 		"node": "24.x",
@@ -45,6 +44,11 @@
 		}
 	},
 	"scripts": {
+		"preview:install": "npm --prefix apps/preview ci",
+		"dev": "npm --prefix apps/preview run dev",
+		"build:preview": "npm --prefix apps/preview run build",
+		"deploy:preview": "npm --prefix apps/preview run deploy",
+		"check:preview": "npm --prefix apps/preview run check",
 		"build": "node scripts/build.mjs",
 		"prepare": "npm run build",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
