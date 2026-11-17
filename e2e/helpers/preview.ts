@@ -2,17 +2,27 @@ import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, type TestInfo } from "@playwright/test";
 
-// Supply the token's first font family in tests so OS fallbacks cannot change layout.
+// This font loading is for tests only; the product font choice remains open.
+const testFonts = [
+	["Inter-Regular.woff2", "Inter", 400],
+	["Inter-Medium.woff2", "Inter", 500],
+	["Inter-SemiBold.woff2", "Inter", 600],
+	["Inter-Bold.woff2", "Inter", 700],
+	["IBMPlexSansArabic-Regular.woff2", "IBM Plex Sans Arabic", 400],
+	["IBMPlexSansArabic-Medium.woff2", "IBM Plex Sans Arabic", 500],
+	["IBMPlexSansArabic-SemiBold.woff2", "IBM Plex Sans Arabic", 600],
+	["IBMPlexSansArabic-Bold.woff2", "IBM Plex Sans Arabic", 700],
+] as const;
+
 const screenshotStyles =
-	[
-		["DejaVuSans.ttf", 400],
-		["DejaVuSans-Bold.ttf", 700],
-	]
-		.map(([file, weight]) => {
+	testFonts
+		.map(([file, family, weight]) => {
 			const data = readFileSync(new URL(`../fonts/${file}`, import.meta.url)).toString("base64");
-			return `@font-face { font-family: Inter; font-weight: ${weight}; src: url(data:font/ttf;base64,${data}) format("truetype"); }`;
+			return `@font-face { font-family: "${family}"; font-weight: ${weight}; font-style: normal; font-display: block; src: url(data:font/woff2;base64,${data}) format("woff2"); }`;
 		})
 		.join("\n") +
+	// Put the Arabic face after Inter so missing Arabic glyphs use the production fallback.
+	'\n:root, :root *:not(code):not(pre):not(kbd):not(samp) { font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif !important; }' +
 	// Native select arrows reserve different widths on macOS and Linux.
 	"\nselect { appearance: none; padding-inline-end: calc(var(--ts-space-3) + 16px); }";
 
