@@ -1,0 +1,19 @@
+
+> @tensquads/ui@0.1.0 check:pack
+> node scripts/check-pack.mjs
+
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+
+added 13 packages, and audited 14 packages in 999ms
+
+2 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities

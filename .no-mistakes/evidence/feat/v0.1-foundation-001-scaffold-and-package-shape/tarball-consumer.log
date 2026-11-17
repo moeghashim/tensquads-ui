@@ -1,0 +1,122 @@
+$ npm pack --json --pack-destination <disposable workspace>
+[
+  {
+    "id": "@tensquads/ui@0.1.0",
+    "name": "@tensquads/ui",
+    "version": "0.1.0",
+    "size": 1133,
+    "unpackedSize": 2298,
+    "shasum": "b406bff1c425e863f0978e5c2a81490b7dd6bf31",
+    "integrity": "sha512-EjuPDBRfj7uZhyGG8j0kDcCJmvtdlrrSF+R+jFCwV069YEGuL/Qqljl27ZDfamyjEBBLXDsKDB6cEkibbecMrg==",
+    "filename": "tensquads-ui-0.1.0.tgz",
+    "files": [
+      {
+        "path": "package.json",
+        "size": 2078,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/styles/styles.css",
+        "size": 1,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/test-setup.d.ts",
+        "size": 43,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/test-setup.js",
+        "size": 43,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/tokens.css",
+        "size": 1,
+        "mode": 420
+      }
+    ],
+    "entryCount": 17,
+    "bundled": []
+  }
+]
+
+Packed declarations and CSS are present; development sources, scripts, and task documents are excluded.
+$ npm install --ignore-scripts --no-audit --no-fund /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NEEF3TT5B0PR9BQ759QGF6/.phase-test/tensquads-ui-0.1.0.tgz
+
+added 13 packages in 2s
+Exit code: 0
+$ node exercise.mjs
+Imported empty scaffold entrypoint without startup randomness/timers: @tensquads/ui/tokens
+Imported empty scaffold entrypoint without startup randomness/timers: @tensquads/ui/react
+Imported empty scaffold entrypoint without startup randomness/timers: @tensquads/ui/squadmates
+Imported empty scaffold entrypoint without startup randomness/timers: @tensquads/ui/openui
+Imported empty scaffold entrypoint without startup randomness/timers: @tensquads/ui/openui/server
+Imported empty scaffold entrypoint without startup randomness/timers: @tensquads/ui/schemas
+Resolved and read published CSS asset: @tensquads/ui/tokens.css (1 bytes)
+Resolved and read published CSS asset: @tensquads/ui/styles.css (1 bytes)
+Rejected non-public package entrypoint: @tensquads/ui
+Rejected non-public package entrypoint: @tensquads/ui/packages/ui/src/react/index.ts
+Rejected non-public package entrypoint: @tensquads/ui/package.json
+Rejected non-public package entrypoint: @tensquads/ui/unknown
+Exit code: 0
