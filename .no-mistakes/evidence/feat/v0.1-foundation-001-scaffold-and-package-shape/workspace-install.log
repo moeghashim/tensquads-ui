@@ -1,0 +1,9 @@
+$ npm ci --no-audit --no-fund
+Node v24.21.0; npm 11.19.0
+prepare -> npm run build -> node scripts/build.mjs
+Install and prepare exited 0.
+
+$ npm exec --workspace=@tensquads/ui-source -- node (assert workspace identity and private flag)
+NPM WORKSPACE ROUTED @tensquads/ui-source private: true
+
+An additional attempted import of the root package name from inside the differently named private source workspace returned ERR_MODULE_NOT_FOUND. This self-reference is outside the public consumer contract; tarball and Git consumers resolve all public imports successfully (package-consumers.log).

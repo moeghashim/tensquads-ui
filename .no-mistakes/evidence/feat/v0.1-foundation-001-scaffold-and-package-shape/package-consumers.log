@@ -1,0 +1,183 @@
+Node v24.21.0; npm 11.19.0
+
+$ npm run check:pack
+
+> @tensquads/ui@0.1.0 check:pack
+> node scripts/check-pack.mjs
+
+
+added 13 packages, and audited 14 packages in 2s
+
+2 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+$ npm pack --json --pack-destination /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NCVARYQ7SV0Z8K35GMZB7Y/.phase-test
+[
+  {
+    "id": "@tensquads/ui@0.1.0",
+    "name": "@tensquads/ui",
+    "version": "0.1.0",
+    "size": 1092,
+    "unpackedSize": 2212,
+    "shasum": "aabfd577e1a3fd5c87aef83ef2d889a372edef9a",
+    "integrity": "sha512-S/n6KoE3bmU+TlBu1zbUrLi/P9T+dPa/VdDaxda5X/3yts5J+GMAR+ba7GiDtNoEN2T/JV17XelQWmRjtsBLcQ==",
+    "filename": "tensquads-ui-0.1.0.tgz",
+    "files": [
+      {
+        "path": "package.json",
+        "size": 1992,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/openui/server/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/react/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/schemas/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/squadmates/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/styles/styles.css",
+        "size": 1,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/test-setup.d.ts",
+        "size": 43,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/test-setup.js",
+        "size": 43,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.d.ts",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "packages/ui/dist/tokens/tokens.css",
+        "size": 1,
+        "mode": 420
+      }
+    ],
+    "entryCount": 17,
+    "bundled": []
+  }
+]
+
+Packed files:
+package.json
+packages/ui/dist/openui/index.d.ts
+packages/ui/dist/openui/index.js
+packages/ui/dist/openui/server/index.d.ts
+packages/ui/dist/openui/server/index.js
+packages/ui/dist/react/index.d.ts
+packages/ui/dist/react/index.js
+packages/ui/dist/schemas/index.d.ts
+packages/ui/dist/schemas/index.js
+packages/ui/dist/squadmates/index.d.ts
+packages/ui/dist/squadmates/index.js
+packages/ui/dist/styles/styles.css
+packages/ui/dist/test-setup.d.ts
+packages/ui/dist/test-setup.js
+packages/ui/dist/tokens/index.d.ts
+packages/ui/dist/tokens/index.js
+packages/ui/dist/tokens/tokens.css
+
+$ npm install --no-audit --no-fund /Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NCVARYQ7SV0Z8K35GMZB7Y/.phase-test/tensquads-ui-0.1.0.tgz
+
+added 13 packages in 1s
+
+$ node consumer.mjs
+IMPORTED @tensquads/ui/tokens exports: []
+IMPORTED @tensquads/ui/react exports: []
+IMPORTED @tensquads/ui/squadmates exports: []
+IMPORTED @tensquads/ui/openui exports: []
+IMPORTED @tensquads/ui/openui/server exports: []
+IMPORTED @tensquads/ui/schemas exports: []
+CSS ASSET tokens.css "\n"
+CSS ASSET styles.css "\n"
+PRIVATE PATH BLOCKED @tensquads/ui ERR_PACKAGE_PATH_NOT_EXPORTED
+PRIVATE PATH BLOCKED @tensquads/ui/packages/ui/src/react/index.ts ERR_PACKAGE_PATH_NOT_EXPORTED
+PRIVATE PATH BLOCKED @tensquads/ui/package.json ERR_PACKAGE_PATH_NOT_EXPORTED
+
+$ git init -q
+
+$ git add .
+
+$ git -c user.name=Disposable Test -c user.email=test@example.invalid -c commit.gpgsign=false commit -qm Isolated target snapshot
+
+$ git rev-parse HEAD
+57c3c5005125606f21ae2b9bd3701ff4f152ea44
+
+Git fixture is a clean committed target snapshot with no dist or node_modules.
+
+$ npm install --no-audit --no-fund git+file:///Users/moeghashim/.no-mistakes/worktrees/383d5bb0a3fa/01M7NCVARYQ7SV0Z8K35GMZB7Y/.phase-test/source#57c3c5005125606f21ae2b9bd3701ff4f152ea44
+
+added 13 packages in 5s
+
+$ node consumer.mjs
+IMPORTED @tensquads/ui/tokens exports: []
+IMPORTED @tensquads/ui/react exports: []
+IMPORTED @tensquads/ui/squadmates exports: []
+IMPORTED @tensquads/ui/openui exports: []
+IMPORTED @tensquads/ui/openui/server exports: []
+IMPORTED @tensquads/ui/schemas exports: []
+CSS ASSET tokens.css "\n"
+CSS ASSET styles.css "\n"
+PRIVATE PATH BLOCKED @tensquads/ui ERR_PACKAGE_PATH_NOT_EXPORTED
+PRIVATE PATH BLOCKED @tensquads/ui/packages/ui/src/react/index.ts ERR_PACKAGE_PATH_NOT_EXPORTED
+PRIVATE PATH BLOCKED @tensquads/ui/package.json ERR_PACKAGE_PATH_NOT_EXPORTED
+
+All live package consumer checks passed.
