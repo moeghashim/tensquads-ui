@@ -27,15 +27,6 @@ jobs:
         run: npm install --global npm@11.19.0
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Regenerate Linux screenshot baselines for review
-        run: npm run e2e:update
-      - name: Upload Linux screenshot baselines for review
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-playwright-snapshots
-          path: e2e/__screenshots__/preview.spec.ts/
-          retention-days: 7
       - run: npm run verify
       - name: Check git dependency install
         run: npm run check:git-install
