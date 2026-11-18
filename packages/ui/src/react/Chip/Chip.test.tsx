@@ -47,12 +47,23 @@ describe("Chip", () => {
 				"utf8",
 			);
 			const { getByRole } = render(<TensquadsRenderer stream={fixture} locale={locale} />);
-			const chip = getByRole("button", { name: "response_schema" });
+			const chip = getByRole("link", { name: "response_schema" });
 			expect(chip).toBeInTheDocument();
-			expect(chip.textContent).toBe("response_schema");
+			expect(chip.querySelector(".ts-chip__name")).toHaveTextContent("response_schema");
+			expect(chip.querySelector(".ts-chip__icon")).toHaveTextContent("◇");
+			expect(chip).toHaveAttribute("href", "#response_schema");
 			cleanup();
 		}
 		expect(createTensquadsLibrary("en")).toBe(createTensquadsLibrary("en"));
 		expect(getRegisteredComponents().map(({ name }) => name)).toContain("Chip");
+	});
+
+	it("renders the consumer's OpenUI object icon and destination", () => {
+		const { getByRole } = render(
+			<TensquadsRenderer stream={'root = Chip("customer_schema", "⌕", "#customer_schema")'} />,
+		);
+		const chip = getByRole("link", { name: "customer_schema" });
+		expect(chip.querySelector(".ts-chip__icon")).toHaveTextContent("⌕");
+		expect(chip).toHaveAttribute("href", "#customer_schema");
 	});
 });

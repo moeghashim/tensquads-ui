@@ -15,6 +15,21 @@ const states: PreviewState[] = [
 	{ locale: "ar", direction: "rtl", theme: "dark" },
 ];
 
+test("OpenUI Chip fixtures show the supplied icon and open their object", async ({ page }) => {
+	for (const state of states) {
+		await openPreview(page, state, "/components/Chip");
+		const chip = page.locator(".component-list").getByRole("link", { name: "response_schema" });
+		await expect(chip.locator(".ts-chip__icon")).toHaveText("◇");
+		await expect(chip).toHaveAttribute("href", "#response_schema");
+		await chip.click();
+		await expect(page).toHaveURL(/#response_schema$/);
+		await page.evaluate(() => history.replaceState(null, "", location.pathname + location.search));
+		await chip.focus();
+		await page.keyboard.press("Enter");
+		await expect(page).toHaveURL(/#response_schema$/);
+	}
+});
+
 test("Chip previews icon, no icon, disabled, and long identifier states", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Chip");

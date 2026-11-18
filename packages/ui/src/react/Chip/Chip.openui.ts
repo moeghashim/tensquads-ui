@@ -9,8 +9,11 @@ export const ChipOpenUI = defineComponent({
 	description: "A pill that opens an attached object such as an output schema or tool.",
 	props: z.object({
 		name: z.string().min(1).describe("Object identifier"),
+		icon: z.string().min(1).describe("Consumer-provided icon glyph"),
+		href: z.string().min(1).describe("Object destination URL"),
 	}),
-	component: ({ props }) => createElement(Chip, { ...props, icon: null }),
+	component: ({ props: { name, icon, href } }) =>
+		createElement(Chip, { name, icon, render: createElement("a", { href }) }),
 });
 
 registerComponent(ChipOpenUI);
