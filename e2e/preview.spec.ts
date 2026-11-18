@@ -169,6 +169,17 @@ test("demo copy follows its own locale in both directions", async ({ page }) => 
 	}
 });
 
+test("homepage stream demo keeps its size while streaming", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" });
+	await page.setViewportSize({ width: 1440, height: 900 });
+	await page.getByRole("button", { name: "Replay" }).click();
+	const demo = page.locator(".stream-demo");
+	const startHeight = (await demo.boundingBox())?.height ?? 0;
+	await expect(page.locator(".stream-code__footer")).toContainText("7/7");
+	const endHeight = (await demo.boundingBox())?.height ?? 0;
+	expect(Math.abs(endHeight - startHeight), "Stream demo height changed while streaming").toBeLessThanOrEqual(1);
+});
+
 test("homepage presents streamed messages and keeps previews readable", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" });
 	await page.setViewportSize({ width: 1440, height: 900 });
