@@ -24,6 +24,28 @@ export {
 } from "./Field/Field.js";
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
+export type {
+	MenuContentProps,
+	MenuGroupLabelProps,
+	MenuGroupProps,
+	MenuItemIconProps,
+	MenuItemProps,
+	MenuProps,
+	MenuSeparatorProps,
+	MenuShortcutProps,
+	MenuTriggerProps,
+} from "./Menu/Menu.js";
+export {
+	Menu,
+	MenuContent,
+	MenuGroup,
+	MenuGroupLabel,
+	MenuItem,
+	MenuItemIcon,
+	MenuSeparator,
+	MenuShortcut,
+	MenuTrigger,
+} from "./Menu/Menu.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
 export {
 	Squadmate,
