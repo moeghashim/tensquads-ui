@@ -1,0 +1,67 @@
+Generate component index: exit 0
+Wrote llms.txt (1 component docs).
+
+Current output accepted: exit 0
+llms.txt is current (1 component docs).
+
+Stale output rejected: exit 1
+file://{run-worktree}/.phase-test/docs-sandbox/scripts/build-llms.mjs:49
+	if (current !== generated) throw new Error("llms.txt is stale. Run npm run docs.");
+	                                 ^
+
+Error: llms.txt is stale. Run npm run docs.
+    at file://{run-worktree}/.phase-test/docs-sandbox/scripts/build-llms.mjs:49:35
+
+Node.js v24.21.0
+
+Regenerate stale output: exit 0
+Wrote llms.txt (1 component docs).
+
+Regenerated output accepted: exit 0
+llms.txt is current (1 component docs).
+
+Missing component documentation rejected: exit 1
+file://{run-worktree}/.phase-test/docs-sandbox/scripts/build-llms.mjs:18
+		throw new Error(`Registered component ${name} has no ${name}.md`);
+		      ^
+
+Error: Registered component Example has no Example.md
+    at file://{run-worktree}/.phase-test/docs-sandbox/scripts/build-llms.mjs:18:9
+
+Node.js v24.21.0
+
+Contributor fixture harness rejects missing Arabic fixture: exit 1
+
+ RUN  v5.1.0 {run-worktree}
+
+ ❯ packages/ui/src/react/Example/Example.test.tsx (4 tests | 1 failed | 3 skipped) 4ms
+   ❯ OpenUI round trips (4)
+     × has English and Arabic fixtures for every registered component 3ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 skipped (4)
+   Start at  20:18:34
+   Duration  533ms (environment 73%, import 13%, setup 10%, transform 2%, tests 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ui/src/react/Example/Example.test.tsx > OpenUI round trips > has English and Arabic fixtures for every registered component
+AssertionError: Example needs a ar fixture: expected [Function] to not throw an error but 'Error: ENOENT: no such file or direct…' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: ENOENT: no such file or directory, open '{run-worktree}/packages/ui/src/react/Example/Example.fixture.ar.txt'"
+
+ ❯ packages/ui/src/react/Example/Example.test.tsx:23:87
+     21|    for (const locale of ["en", "ar"]) {
+     22|     const path = join(process.cwd(), "packages/ui/src/react", name, `$…
+     23|     expect(() => readFileSync(path, "utf8"), `${name} needs a ${locale…
+       |                                                                                       ^
+     24|    }
+     25|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

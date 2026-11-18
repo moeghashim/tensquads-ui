@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><title>OpenUI renderer validation</title></head><body><h1>OpenUI renderer validation</h1><div id="root"></div><script type="module">
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {TensquadsRenderer} from '@tensquads/ui/openui';
+const root=createRoot(document.getElementById('root'));
+window.renderStream=(stream,locale='en')=>root.render(React.createElement(TensquadsRenderer,{stream,locale,onError:errors=>{window.reportedErrors=errors}}));
+window.renderStream(null);
+</script></body></html>

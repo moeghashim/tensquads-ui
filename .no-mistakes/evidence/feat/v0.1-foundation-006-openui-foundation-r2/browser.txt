@@ -1,0 +1,4 @@
+en: gallery Example link navigated to http://localhost:5173/components/Example?locale=en&dir=ltr&theme=light; localized fixture visible with ltr document direction.
+ar: gallery Example link navigated to http://localhost:5173/components/Example?locale=ar&dir=rtl&theme=light; localized fixture visible with rtl document direction.
+Unknown component route renders the Arabic-locale missing-fixture message without a crash.
+No uncaught browser page errors.

@@ -1,0 +1,7 @@
+Public @tensquads/ui/openui imported with Math.random and crypto.getRandomValues forbidden.
+English and Arabic libraries are independently cached; registry exposes Example.
+Generated library parses a valid Example and reports excess-args for malformed input.
+LocaleSchema: accepted contract values and rejected unsupported/case-mismatched/wrong-type inputs.
+DirectionSchema: accepted contract values and rejected unsupported/case-mismatched/wrong-type inputs.
+AgentSlugSchema: accepted contract values and rejected unsupported/case-mismatched/wrong-type inputs.
+AgentStateSchema: accepted contract values and rejected unsupported/case-mismatched/wrong-type inputs.

@@ -1,0 +1,5 @@
+Null stream renders an empty surface.
+Incomplete OpenUI stream displays partial message.
+Updated complete stream replaces partial text.
+Malformed excess argument stream still displays hello and onError reports excess-args.
+Subsequent Arabic stream renders successfully and clears errors.
