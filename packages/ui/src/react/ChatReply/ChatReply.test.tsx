@@ -108,6 +108,44 @@ describe("ChatReply", () => {
 		expect(lists[1]?.querySelectorAll(":scope > li")).toHaveLength(2);
 	});
 
+	it.each(["en", "ar"] as const)("keeps loose ordered siblings in one list in %s", (locale) => {
+		const { container } = render(<ChatReply locale={locale} reply={"1. First\n\n1. Second\n\n3. Third"} />);
+		const lists = container.querySelectorAll("ol");
+		expect(lists).toHaveLength(1);
+		expect(lists[0]).toHaveAttribute("start", "1");
+		expect(lists[0]?.querySelectorAll(":scope > li")).toHaveLength(3);
+		expect(screen.getAllByRole("listitem").map((item) => item.textContent)).toEqual(["First", "Second", "Third"]);
+	});
+
+	it.each(["en", "ar"] as const)("preserves loose nested lists and continuation paragraphs in %s", (locale) => {
+		const reply = [
+			"3. Parent", "", " Continued **details**", "", " - Child", "", "  7. Grandchild", "",
+			"  1. Next grandchild", "", " - Next child", "", "4. Sibling", "", "Outside", "", "8. Separate",
+		].join("\n");
+		const { container } = render(<ChatReply locale={locale} reply={reply} />);
+		const roots = container.querySelectorAll(".ts-chat-reply__markdown > ol");
+		expect(roots).toHaveLength(2);
+		expect(roots[0]).toHaveAttribute("start", "3");
+		expect(roots[0]?.querySelectorAll(":scope > li")).toHaveLength(2);
+		const parent = screen.getByText("Parent", { exact: true });
+		expect(parent.querySelector("p > strong")).toHaveTextContent("details");
+		expect(parent.querySelectorAll(":scope > ul > li")).toHaveLength(2);
+		const grandchildren = parent.querySelector("ul > li > ol");
+		expect(grandchildren).toHaveAttribute("start", "7");
+		expect(grandchildren?.querySelectorAll(":scope > li")).toHaveLength(2);
+		expect(roots[1]).toHaveAttribute("start", "8");
+		expect(screen.getByText("Outside").parentElement).toHaveClass("ts-chat-reply__markdown");
+	});
+
+	it("keeps unordered parents and ordered children connected across blank lines", () => {
+		const { container } = render(<ChatReply reply={"- Parent\n\n 3. Child\n\n 1. Next child\n\n- Sibling"} />);
+		const root = container.querySelector(".ts-chat-reply__markdown > ul");
+		expect(root?.querySelectorAll(":scope > li")).toHaveLength(2);
+		const nested = root?.querySelector("li > ol");
+		expect(nested).toHaveAttribute("start", "3");
+		expect(nested?.querySelectorAll(":scope > li")).toHaveLength(2);
+	});
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);

@@ -81,15 +81,19 @@ function splitReply(source: string): ReplyPart[] {
 	return parts;
 }
 
+function lineIndent(line: string): number {
+	return line.match(/^[ \t]*/)?.[0].replace(/\t/g, "    ").length ?? 0;
+}
+
 function listItem(line: string) {
-	const match = line.match(/^(\s*)([-*+]|\d+\.)[ \t]+(.*)$/);
+	const match = line.match(/^[ \t]*([-*+]|\d+\.)[ \t]+(.*)$/);
 	if (!match) return undefined;
-	const marker = match[2] ?? "";
+	const marker = match[1] ?? "";
 	return {
-		indent: (match[1] ?? "").replace(/\t/g, "    ").length,
+		indent: lineIndent(line),
 		ordered: /^\d/.test(marker),
 		start: Number.parseInt(marker, 10),
-		text: match[3] ?? "",
+		text: match[2] ?? "",
 	};
 }
 
@@ -107,10 +111,25 @@ function MarkdownBlock({ source }: { source: string }) {
 			const itemKey = `item-${index}`;
 			const children: ReactNode[] = [];
 			index += 1;
-			let child = listItem(lineAt(index));
-			while (child && child.indent > first.indent) {
-				children.push(readList(child));
-				child = listItem(lineAt(index));
+			while (index < lines.length) {
+				let next = index;
+				while (next < lines.length && !lineAt(next).trim()) next += 1;
+				const child = listItem(lineAt(next));
+				if (child) {
+					index = next;
+					if (child.indent <= first.indent) break;
+					children.push(readList(child));
+					continue;
+				}
+				if (!lineAt(next).trim() || lineIndent(lineAt(next)) <= first.indent) break;
+				index = next;
+				const paragraphKey = `continuation-${index}`;
+				const paragraph: string[] = [];
+				while (index < lines.length && lineAt(index).trim() && !listItem(lineAt(index))) {
+					if (lineIndent(lineAt(index)) <= first.indent) break;
+					paragraph.push(lineAt(index++).trim());
+				}
+				children.push(<p key={paragraphKey}>{inline(paragraph.join(" "))}</p>);
 			}
 			items.push(
 				<li key={itemKey}>
