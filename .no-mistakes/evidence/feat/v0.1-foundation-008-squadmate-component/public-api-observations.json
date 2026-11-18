@@ -1,0 +1,80 @@
+{
+  "importedEntry": "@tensquads/ui/squadmates",
+  "roleSlugPairs": [
+    [
+      "master",
+      "petra"
+    ],
+    [
+      "orders",
+      "pisa"
+    ],
+    [
+      "support",
+      "kyoto"
+    ],
+    [
+      "marketing",
+      "rio"
+    ],
+    [
+      "finance",
+      "zurich"
+    ],
+    [
+      "inventory",
+      "giza"
+    ],
+    [
+      "market",
+      "machu"
+    ],
+    [
+      "website",
+      "angkor"
+    ],
+    [
+      "analytics",
+      "delphi"
+    ],
+    [
+      "hr",
+      "sydney"
+    ],
+    [
+      "places",
+      "greenwich"
+    ],
+    [
+      "catalog",
+      "alexandria"
+    ],
+    [
+      "channels",
+      "venice"
+    ]
+  ],
+  "approvedGoldenOutputsMatched": 130,
+  "invalidRolesRejected": [
+    "missing",
+    "__proto__",
+    "constructor",
+    "petra"
+  ],
+  "invalidStatesRejected": [
+    "asleep",
+    "",
+    "__proto__"
+  ],
+  "unknownReactAgentRejected": true,
+  "unknownNameReturnsNull": true,
+  "masterTagHidden": true,
+  "sizesRendered": [
+    16,
+    24,
+    48,
+    63,
+    64,
+    96
+  ]
+}

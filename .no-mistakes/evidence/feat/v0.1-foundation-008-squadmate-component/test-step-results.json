@@ -1,0 +1,30 @@
+{
+  "commands": [
+    {
+      "command": "npm run build",
+      "exit": 0
+    },
+    {
+      "command": "npx vitest run packages/ui/src/react/Squadmate/Squadmate.test.tsx packages/ui/src/react/Example/Example.test.tsx packages/ui/src/schemas/schemas.test.ts",
+      "exit": 0
+    },
+    {
+      "command": "npx playwright test e2e/squadmate.spec.ts e2e/preview.spec.ts --reporter=line --output=<evidence>/playwright-results",
+      "exit": 0
+    },
+    {
+      "command": "npx playwright test e2e/phase-squadmate.spec.ts --reporter=line --output=<evidence>/consumer-results",
+      "exit": 0
+    },
+    {
+      "command": "Node public package consumer and Chromium image decode/dimension verification",
+      "exit": 0
+    }
+  ],
+  "cleanup": {
+    "temporaryHarnessRemoved": true,
+    "previewServerClosed": true,
+    "browserClosed": true
+  },
+  "limits": "Full check, lint, remote CI, push and PR phases excluded by assigned test-phase instructions."
+}

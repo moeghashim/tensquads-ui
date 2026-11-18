@@ -1,0 +1,86 @@
+[
+  {
+    "surface": "gallery",
+    "locale": "en",
+    "theme": "light",
+    "images": 130,
+    "allNamesAndLabels": true,
+    "allImagesDecoded": true,
+    "mobileOverflow": false,
+    "axeViolations": 0
+  },
+  {
+    "surface": "home",
+    "locale": "en",
+    "theme": "light",
+    "squadmateLinkOpensGallery": true
+  },
+  {
+    "surface": "gallery",
+    "locale": "en",
+    "theme": "dark",
+    "images": 130,
+    "allNamesAndLabels": true,
+    "allImagesDecoded": true,
+    "mobileOverflow": false,
+    "axeViolations": 0
+  },
+  {
+    "surface": "home",
+    "locale": "en",
+    "theme": "dark",
+    "squadmateLinkOpensGallery": true
+  },
+  {
+    "surface": "gallery",
+    "locale": "ar",
+    "theme": "light",
+    "images": 130,
+    "allNamesAndLabels": true,
+    "allImagesDecoded": true,
+    "mobileOverflow": false,
+    "axeViolations": 0
+  },
+  {
+    "surface": "home",
+    "locale": "ar",
+    "theme": "light",
+    "squadmateLinkOpensGallery": true
+  },
+  {
+    "surface": "gallery",
+    "locale": "ar",
+    "theme": "dark",
+    "images": 130,
+    "allNamesAndLabels": true,
+    "allImagesDecoded": true,
+    "mobileOverflow": false,
+    "axeViolations": 0
+  },
+  {
+    "surface": "home",
+    "locale": "ar",
+    "theme": "dark",
+    "squadmateLinkOpensGallery": true
+  },
+  {
+    "surface": "OpenUI fixture consumer",
+    "locale": "en",
+    "name": "Petra, Planning",
+    "dimensions": "64x64",
+    "imageDecoded": true,
+    "tabSkipsImageBothDirections": true,
+    "rendererErrors": [],
+    "axeViolations": 0
+  },
+  {
+    "surface": "OpenUI fixture consumer",
+    "locale": "ar",
+    "name": "بترا، تخطيط",
+    "dimensions": "64x64",
+    "imageDecoded": true,
+    "tabSkipsImageBothDirections": true,
+    "rendererErrors": [],
+    "axeViolations": 0
+  }
+]
