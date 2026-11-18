@@ -52,7 +52,7 @@ const en = {
 		title: "Give your agent the UI contract",
 		intro: "Install the shared components, add their styles, and give your coding agent the project skills and component index.",
 		installTitle: "Install from a pinned commit",
-		installLead: "Pin the dependency to a Git commit so installs resolve to the same library version.",
+		installLead: "Pin the dependency to a commit on main so installs resolve to the same library version. Replace <commit-sha> with that commit.",
 		installCodeLabel: "Install command",
 		installNote:
 			"React and React DOM 19 are peer dependencies. The package builds its distribution during installation.",

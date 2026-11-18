@@ -4,8 +4,7 @@ import { useState } from "react";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
-const milestoneCommit = "4cc65085ba91b5dde2741e6136a5642bdd336327";
-const installExample = `npm install github:moeghashim/tensquads-ui#${milestoneCommit}`;
+const installExample = "npm install github:moeghashim/tensquads-ui#<commit-sha>";
 const styleExample = `@layer ui-sdk, tensquads;\n@import "@tensquads/ui/fonts.css";\n@import "@tensquads/ui/tokens.css";\n@import "@tensquads/ui/styles.css";`;
 const skillInstallExample = `npx skills@latest add moeghashim/tensquads-ui --skill tensquads-ui\nnpx skills@latest add vercel-labs/ui --skill ui-sdk`;
 const reactExample = `import { Button, Field, FieldLabel, Input } from "@tensquads/ui/react";\n\nexport function ProfileForm() {\n  return (\n    <form>\n      <Field name="displayName">\n        <FieldLabel>Display name</FieldLabel>\n        <Input placeholder="Your name" />\n      </Field>\n      <Button type="submit">Save profile</Button>\n    </form>\n  );\n}`;
