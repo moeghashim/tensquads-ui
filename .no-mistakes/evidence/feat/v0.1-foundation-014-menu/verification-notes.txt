@@ -1,0 +1,8 @@
+Task 014 Menu live validation
+Production preview: npm run build:preview (exit 0), Cloudflare Worker via Wrangler localhost:5173.
+Disposable real React consumer: Vite localhost:5174, imports the worktree public React/OpenUI interfaces.
+Focused command: node_modules/.bin/playwright test --config .menu-live.config.ts --ignore-snapshots (final exit 0).
+Existing Menu browser tests plus disposable consumer scenarios ran in Chromium. Snapshot comparisons deliberately disabled; eight fresh preview screenshots captured for visual evidence.
+Initial exploratory failures were driver assumptions: use keyboard activation while another gallery menu is open; SDK onAction details contract is { event }; invalid OpenUI input reports onError instead of a visible alert. Corrected assertions passed on rerun. No product changes.
+Coverage: EN/AR fixture selection emits {value:open}; light/dark 1440/390 preview, axe and overflow; Enter/Space/ArrowDown and logical start placement; Escape focus return; controlled custom render icon trigger retains Arabic name and content; disabled action blocks selection, typeahead, outside dismissal; directional submenu keys; checkbox/radio indicators and callback values; pointer and keyboard context menu with MenuItems; async pending blocks repetition and closes after resolve; valid 1/6 action limits and destructive ordering; invalid empty trigger/items/labels/values, 7 actions, and 2 destructive actions report errors without exposing actions.
+No npm run check, lint, static analysis, broad suite, push, PR or CI phases were run.

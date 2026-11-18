@@ -1,0 +1,3 @@
+import {defineConfig} from '@playwright/test';
+import base from './playwright.config';
+export default defineConfig({...base,testMatch:['menu.spec.ts','menu-live.spec.ts'],workers:1,reporter:[['list'],['json',{outputFile:'~/.no-mistakes/evidence/01M7PYF8X62X6R5ZZRMJJ89R3M/results.json'}]],outputDir:'~/.no-mistakes/evidence/01M7PYF8X62X6R5ZZRMJJ89R3M/playwright',webServer:[{command:'npm --prefix apps/preview run preview',url:'http://localhost:5173',timeout:60000},{command:'node apps/preview/node_modules/vite/bin/vite.js --config .menu-live/vite.config.mjs',url:'http://127.0.0.1:5174',timeout:60000}]});
