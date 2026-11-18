@@ -17,14 +17,20 @@ test("every component fixture parses and renders", async ({ page }) => {
 				`/components/${component.name}?locale=${locale}&dir=${locale === "ar" ? "rtl" : "ltr"}&theme=light`,
 			);
 			await expect(page.getByRole("heading", { name: component.name })).toBeVisible();
+			const fixtureRegion = page.getByRole("region", {
+				name: locale === "en" ? "OpenUI fixture" : "عينة OpenUI",
+			});
 			if (component.name === "Button") {
 				await expect(
-					page.getByRole("button", { name: locale === "en" ? "Continue" : "متابعة" }).first(),
+					fixtureRegion.getByRole("button", { name: locale === "en" ? "Continue" : "متابعة" }),
 				).toBeVisible();
 			} else {
-				await expect(
-					page.getByRole("img", { name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط" }),
-				).toBeVisible();
+				const image = fixtureRegion.getByRole("img", {
+					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
+				});
+				await expect(image).toBeVisible();
+				await expect(image).toHaveCSS("width", "64px");
+				await expect(image).toHaveCSS("height", "64px");
 			}
 		}
 	}

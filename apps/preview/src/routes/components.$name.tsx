@@ -50,6 +50,9 @@ function ComponentPage() {
 						</div>
 					))}
 				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
 			</main>
 		);
 	}
@@ -100,7 +103,7 @@ function ComponentPage() {
 			</Link>
 			<p className="eyebrow">Component preview</p>
 			<h1>{name}</h1>
-			<section className="component-list">
+			<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
 				{stream ? (
 					<TensquadsRenderer stream={stream} locale={locale} />
 				) : (
