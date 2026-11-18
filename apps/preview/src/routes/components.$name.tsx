@@ -1,8 +1,8 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
-import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
 import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import {

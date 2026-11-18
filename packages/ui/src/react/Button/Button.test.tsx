@@ -133,7 +133,10 @@ describe("OpenUI round trips", () => {
 				} else if (component.name === "Badge") {
 					expect(result.getByText(locale === "en" ? "Ready" : "جاهز")).toHaveAttribute("data-slot", "badge");
 				} else if (component.name === "Chip") {
-					expect(result.getByRole("button", { name: "response_schema" })).toBeInTheDocument();
+					expect(result.getByRole("link", { name: "response_schema" })).toHaveAttribute(
+						"href",
+						"#response_schema",
+					);
 				} else if (component.name === "Squadmate") {
 					expect(
 						result.getByRole("img", { name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط" }),
