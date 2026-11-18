@@ -31,7 +31,7 @@ The website's marketing sections (round-table hero, pricing, nav) are **not** in
 | Layer | Choice | Why |
 |---|---|---|
 | Language | TypeScript 7.0.2, strict | Matches the tensquads app |
-| Runtime | Node 24.x | Matches the app and website |
+| Runtime | Node 26.x (26.13.1 LTS, npm 11.20.0), pinned per repo with mise | D19; the app and website move to 26 as well |
 | Package manager | npm 11 workspaces | Matches the app; the consumer installs a git dependency with npm |
 | UI | React 19 | Both consumers use React 19 |
 | Behaviors | `@ui-sdk/react`, `@ui-sdk/core`, exact pin on the newest release, moved forward automatically (§14) | Decisions D4, D14. Renders no styles, so no library defaults show through (app AGENTS.md rule) |
@@ -215,6 +215,7 @@ All eleven locked by Moe on 2026-11-17.
 | D16 | Preview app install | `apps/preview` is not in the root `workspaces`. It has its own lockfile and reads `packages/ui/src` through a Vite alias. A consumer's git install (prepare) never installs the preview app's dependencies. Root scripts call it with `npm --prefix apps/preview` | Opus, task 004 escalation, 2026-11-17 |
 | D17 | Fonts | `@tensquads/ui/fonts.css` self-hosts Inter (Latin UI), IBM Plex Sans Arabic (Arabic UI) and JetBrains Mono (code), all SIL OFL 1.1, the same faces the website loads. The `sans` stack is Inter, then IBM Plex Sans Arabic, then system fallbacks. Consumers import `fonts.css` before `tokens.css`. Task 020 | Opus, Q2, 2026-11-17 (matches the website) |
 | D18 | Arabic agent-state labels | Gender-neutral nouns for all 13 agents: waiting بانتظارك، planning تخطيط، running قيد العمل، checking قيد التحقق، done تم، sentback إعادة للتعديل، blocked معلّق، escalated بانتظار قرارك، dropped أُلغي، idle في استراحة | Locked by user 2026-11-18 |
+| D19 | Node version | Node 26 LTS (26.13.1, npm 11.20.0) for tensquads-ui, pinned with `mise.toml`; engines `26.x`. The tensquads app and website switch too, in their own repos. Task 021 | Locked by user 2026-11-18 |
 | D14 | UI SDK compatibility | Track every UI SDK release: exact same-version pins of `@ui-sdk/core` + `@ui-sdk/react` on the newest release (`beta` tag until 1.0, then `latest`); daily update job opens a verified PR with release notes and a refreshed ui-sdk skill; wrap, do not fork; public-entry usage check; upgrade playbook in AGENTS.md (§14). Task 019, run right after task 005 | Locked by user 2026-11-17 ("always up to date") |
 
 ## 14. Staying current with UI SDK

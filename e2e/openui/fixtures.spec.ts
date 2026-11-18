@@ -33,6 +33,13 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(chip).toBeVisible();
 				await expect(chip.locator(".ts-chip__icon")).toHaveText("◇");
 				await expect(chip).toHaveAttribute("href", "#response_schema");
+			} else if (component.name === "Menu") {
+				const trigger = fixtureRegion.getByRole("button", { name: locale === "en" ? "Actions" : "الإجراءات" });
+				await expect(trigger).toBeVisible();
+				await trigger.press("Enter");
+				await expect(
+					fixtureRegion.getByRole("menuitem", { name: locale === "en" ? "Open project" : "فتح المشروع" }),
+				).toBeVisible();
 			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
