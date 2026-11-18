@@ -1,220 +1,117 @@
-[
-  {
-    "scenario": "Replay reserves layout and hidden controls are inaccessible",
-    "stable": true,
-    "locale": "en",
-    "width": 1440,
-    "steps": [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "frames": 32,
-    "ranges": {
-      "demo.x": 0,
-      "demo.y": 0,
-      "demo.w": 0,
-      "demo.h": 0,
-      "screen.x": 0,
-      "screen.y": 0,
-      "screen.w": 0,
-      "screen.h": 0,
-      "next.x": 0,
-      "next.y": 0,
-      "next.w": 0,
-      "next.h": 0,
-      "field.x": 0,
-      "field.y": 0,
-      "field.w": 0,
-      "field.h": 0,
-      "settings.x": 0,
-      "settings.y": 0,
-      "settings.w": 0,
-      "settings.h": 0,
-      "actions.x": 0,
-      "actions.y": 0,
-      "actions.w": 0,
-      "actions.h": 0
+{
+  "surface": "production Vite build served by local Wrangler at localhost:5173; shipped synthetic home-demo fixtures",
+  "results": [
+    {
+      "name": "Edited demo controls reset on demo and site language changes in both directions",
+      "result": "pass",
+      "detail": "Field, notifications and cadence reset to the target fixture; demo toggle preserves site locale and header toggle updates it."
     },
-    "overflow": 0,
-    "hiddenFocusRejected": true,
-    "errors": []
-  },
-  {
-    "scenario": "Edited controls reset after interrupted Replay",
-    "locale": "en",
-    "width": 1440,
-    "result": "pass"
-  },
-  {
-    "scenario": "Replay reserves layout and hidden controls are inaccessible",
-    "stable": true,
-    "locale": "ar",
-    "width": 1440,
-    "steps": [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "frames": 29,
-    "ranges": {
-      "demo.x": 0,
-      "demo.y": 0,
-      "demo.w": 0,
-      "demo.h": 0,
-      "screen.x": 0,
-      "screen.y": 0,
-      "screen.w": 0,
-      "screen.h": 0,
-      "next.x": 0,
-      "next.y": 0,
-      "next.w": 0,
-      "next.h": 0,
-      "field.x": 0,
-      "field.y": 0,
-      "field.w": 0,
-      "field.h": 0,
-      "settings.x": 0,
-      "settings.y": 0,
-      "settings.w": 0,
-      "settings.h": 0,
-      "actions.x": 0,
-      "actions.y": 0,
-      "actions.w": 0,
-      "actions.h": 0
+    {
+      "name": "Replay clears visitor edits in English and Arabic, including repeated restarts",
+      "result": "pass",
+      "detail": "Replay restored store name, enabled notifications and Weekly after edits and three overlapping playback restarts in each locale."
     },
-    "overflow": 0,
-    "hiddenFocusRejected": true,
-    "errors": []
-  },
-  {
-    "scenario": "Edited controls reset after interrupted Replay",
-    "locale": "ar",
-    "width": 1440,
-    "result": "pass"
-  },
-  {
-    "scenario": "Replay reserves layout and hidden controls are inaccessible",
-    "stable": true,
-    "locale": "en",
-    "width": 390,
-    "steps": [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "frames": 49,
-    "ranges": {
-      "demo.x": 0,
-      "demo.y": 0,
-      "demo.w": 0,
-      "demo.h": 0,
-      "screen.x": 0,
-      "screen.y": 0,
-      "screen.w": 0,
-      "screen.h": 0,
-      "next.x": 0,
-      "next.y": 0,
-      "next.w": 0,
-      "next.h": 0,
-      "field.x": 0,
-      "field.y": 0,
-      "field.w": 0,
-      "field.h": 0,
-      "settings.x": 0,
-      "settings.y": 0,
-      "settings.w": 0,
-      "settings.h": 0,
-      "actions.x": 0,
-      "actions.y": 0,
-      "actions.w": 0,
-      "actions.h": 0
+    {
+      "name": "Playback reserves page geometry at desktop and mobile sizes and hidden controls cannot receive focus",
+      "result": "pass",
+      "detail": [
+        {
+          "locale": "en",
+          "theme": "light",
+          "width": 1440,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 34,
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "en",
+          "theme": "light",
+          "width": 390,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 27,
+          "viewport": 390,
+          "content": 390
+        },
+        {
+          "locale": "en",
+          "theme": "dark",
+          "width": 1440,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 28,
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "en",
+          "theme": "dark",
+          "width": 390,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 42,
+          "viewport": 390,
+          "content": 390
+        },
+        {
+          "locale": "ar",
+          "theme": "light",
+          "width": 1440,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 27,
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "ar",
+          "theme": "light",
+          "width": 390,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 56,
+          "viewport": 390,
+          "content": 390
+        },
+        {
+          "locale": "ar",
+          "theme": "dark",
+          "width": 1440,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 44,
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "ar",
+          "theme": "dark",
+          "width": 390,
+          "heightRange": 0,
+          "nextRange": 0,
+          "frames": 43,
+          "viewport": 390,
+          "content": 390
+        }
+      ]
     },
-    "overflow": 0,
-    "hiddenFocusRejected": true,
-    "errors": []
-  },
-  {
-    "scenario": "Edited controls reset after interrupted Replay",
-    "locale": "en",
-    "width": 390,
-    "result": "pass"
-  },
-  {
-    "scenario": "Replay reserves layout and hidden controls are inaccessible",
-    "stable": true,
-    "locale": "ar",
-    "width": 390,
-    "steps": [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "frames": 41,
-    "ranges": {
-      "demo.x": 0,
-      "demo.y": 0,
-      "demo.w": 0,
-      "demo.h": 0,
-      "screen.x": 0,
-      "screen.y": 0,
-      "screen.w": 0,
-      "screen.h": 0,
-      "next.x": 0,
-      "next.y": 0,
-      "next.w": 0,
-      "next.h": 0,
-      "field.x": 0,
-      "field.y": 0,
-      "field.w": 0,
-      "field.h": 0,
-      "settings.x": 0,
-      "settings.y": 0,
-      "settings.w": 0,
-      "settings.h": 0,
-      "actions.x": 0,
-      "actions.y": 0,
-      "actions.w": 0,
-      "actions.h": 0
-    },
-    "overflow": 0,
-    "hiddenFocusRejected": true,
-    "errors": []
-  },
-  {
-    "scenario": "Edited controls reset after interrupted Replay",
-    "locale": "ar",
-    "width": 390,
-    "result": "pass"
-  },
-  {
-    "scenario": "Reduced motion displays complete stream immediately and Replay remains complete",
-    "locale": "en",
-    "result": "pass"
-  },
-  {
-    "scenario": "Reduced motion displays complete stream immediately and Replay remains complete",
-    "locale": "ar",
-    "result": "pass"
-  }
-]
+    {
+      "name": "Reduced-motion visitors see final controls immediately and locale/replay still reset edits",
+      "result": "pass",
+      "detail": {
+        "transitions": [
+          "0s",
+          "0s",
+          "0s",
+          "0s",
+          "0s",
+          "0s",
+          "0s"
+        ]
+      }
+    }
+  ],
+  "pageErrors": []
+}
