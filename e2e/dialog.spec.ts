@@ -10,7 +10,9 @@ const states: PreviewState[] = [
 ];
 
 for (const state of states) {
-	test(`Dialog screenshots cover closed and open states in ${state.locale} ${state.theme}`, async ({ page }, testInfo) => {
+	test(`Dialog screenshots cover closed and open states in ${state.locale} ${state.theme}`, async ({
+		page,
+	}, testInfo) => {
 		await openPreview(page, state, "/components/Dialog");
 		const copy =
 			state.locale === "en"
