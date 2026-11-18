@@ -15,6 +15,9 @@
 	button { font: inherit; letter-spacing: inherit; }
 	:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.site-shell { min-block-size: 100vh; }
+	.chat-preview { min-block-size: 30rem; max-inline-size: 42rem; margin-inline: auto; }
+	.chat-preview__surface { block-size: 30rem; overflow: hidden; border: 1px solid var(--ts-border-subtle); border-radius: var(--ts-radius-2xl); }
+	.chat-preview .ts-chat__header { color: var(--ts-text-emphasis); font-weight: 500; }
 	.site-header {
 		box-sizing: border-box;
 		min-block-size: 4rem;

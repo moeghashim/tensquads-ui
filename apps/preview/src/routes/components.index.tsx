@@ -11,6 +11,8 @@ const fixtures = import.meta.glob<string>("../../../../packages/ui/src/react/*/*
 const components = getRegisteredComponents()
 	.map(({ name }) => name)
 	.sort();
+if (!components.includes("Chat")) components.push("Chat");
+components.sort();
 
 export const Route = createFileRoute("/components/")({ component: ComponentsPage });
 
