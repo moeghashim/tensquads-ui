@@ -14,7 +14,6 @@ export default defineConfig({
 			args: ["--disable-lcd-text", "--font-render-hinting=none"],
 		},
 	},
-	snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
 	webServer: {
 		command: "npm run build:preview && npm --prefix apps/preview run preview",
 		url: "http://localhost:5173",

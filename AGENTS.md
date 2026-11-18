@@ -65,18 +65,17 @@ Do not edit `PLAN.md`, `AGENTS.md`, `dev/**`, or `design/**` as part of routine 
 
 ## UI SDK updates
 
-Follow PLAN.md §14. Keep `@ui-sdk/core` and `@ui-sdk/react` on the same exact newest version: use the `beta` tag before 1.0 and `latest` after 1.0. The daily update job refreshes both packages and the installed UI SDK skill, runs `npm run verify`, and opens a PR with release notes and public-entry changes. Review upstream release notes, fix breaks in the smallest change, and never pin back without an open question. Regenerate screenshots only when the visual change is explained in the PR. If UI SDK adds a component we built from core primitives, open a task to replace the local implementation. The bot's CI gate is the exception to pushing through `no-mistakes`.
+Follow PLAN.md §14. Keep `@ui-sdk/core` and `@ui-sdk/react` on the same exact newest version: use the `beta` tag before 1.0 and `latest` after 1.0. The daily update job refreshes both packages and the installed UI SDK skill, runs `npm run verify`, and opens a PR with release notes and public-entry changes. Review upstream release notes, fix breaks in the smallest change, and never pin back without an open question. If UI SDK adds a component we built from core primitives, open a task to replace the local implementation. The bot's CI gate is the exception to pushing through `no-mistakes`.
 
 ## Component completion
 
-Use the checklist in PLAN.md §12. Each component has four files: `X.tsx`, `X.openui.ts`, `X.test.tsx`, and `X.md`. If it has no OpenUI definition, explain why in `X.md`. Add English and Arabic fixture files (`X.fixture.en.txt` and `X.fixture.ar.txt`) and a registry line. Check keyboard and focus behavior, documented states, preview coverage in both directions and themes, screenshots, mobile overflow, accessibility, token-only styles, round-trip fixtures, and `llms.txt`. `npm run verify` must pass in CI.
+Use the checklist in PLAN.md §12. Each component has four files: `X.tsx`, `X.openui.ts`, `X.test.tsx`, and `X.md`. If it has no OpenUI definition, explain why in `X.md`. Add English and Arabic fixture files (`X.fixture.en.txt` and `X.fixture.ar.txt`) and a registry line. Check keyboard and focus behavior, documented states, preview coverage in both directions and themes, screenshots attached to CI for review (no baselines, PLAN.md D20), mobile overflow, accessibility, token-only styles, round-trip fixtures, and `llms.txt`. `npm run verify` must pass in CI.
 
 ## Commands
 
 - `npm run check` runs Biome, type checking, design and generated-file checks, unit tests, and package checks.
 - `npm run verify` runs `check`, preview installation and checks, then end-to-end tests.
-- `npm run e2e` runs Playwright screenshots, accessibility, RTL, and OpenUI round-trip checks.
-- `npm run e2e:update` regenerates screenshot baselines. Review every image change.
+- `npm run e2e` runs Playwright behavior, accessibility, focus-ring, overflow, RTL and OpenUI round-trip checks. It also takes full-page screenshots and attaches them to the run; CI uploads them as the `screenshots` artifact. There are no pixel comparisons and no committed baselines (PLAN.md D20). Never add `toHaveScreenshot`.
 - `npm run docs` rebuilds `llms.txt` from component docs.
 - `npm run tokens` rebuilds token CSS and TypeScript from `design/tokens.json`.
 - `npm run design:check` verifies synced design files against their manifest.
