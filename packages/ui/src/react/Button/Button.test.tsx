@@ -110,8 +110,18 @@ describe("Button", () => {
 describe("OpenUI round trips", () => {
 	it("has English and Arabic fixtures for every registered component", () => {
 		const registered = getRegisteredComponents().map((component) => component.name);
-		expect(registered).toContain("Button");
-		expect(registered).toContain("Squadmate");
+		expect(registered).toEqual(
+			expect.arrayContaining([
+				"Button",
+				"Badge",
+				"Squadmate",
+				"Input",
+				"Field",
+				"Menu",
+				"Switch",
+				"SegmentedControl",
+			]),
+		);
 		for (const name of registered) {
 			for (const locale of ["en", "ar"]) {
 				const path = join(process.cwd(), "packages/ui/src/react", name, `${name}.fixture.${locale}.txt`);
@@ -129,9 +139,28 @@ describe("OpenUI round trips", () => {
 				);
 				const onError = vi.fn();
 				const result = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
-				if (component.name === "Button")
+				if (component.name === "Button") {
 					expect(result.getByRole("button", { name: expectedLabels[locale] })).toBeInTheDocument();
-				if (component.name === "Squadmate") expect(result.getByRole("img")).toBeInTheDocument();
+				} else if (component.name === "Badge") {
+					expect(result.getByText(locale === "en" ? "Ready" : "جاهز")).toHaveAttribute("data-slot", "badge");
+				} else if (component.name === "Menu") {
+					expect(result.getByRole("button", { name: locale === "en" ? "Actions" : "الإجراءات" })).toHaveAttribute(
+						"data-slot",
+						"menu-trigger",
+					);
+				} else if (component.name === "Squadmate") {
+					expect(
+						result.getByRole("img", { name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط" }),
+					).toHaveAttribute("width", "64");
+				} else if (component.name === "Input") {
+					expect(
+						result.getByRole("textbox", { name: locale === "en" ? "Search projects" : "ابحث عن المشاريع" }),
+					).toBeInTheDocument();
+				} else if (component.name === "Field") {
+					expect(
+						result.getByRole("textbox", { name: locale === "en" ? "Project name" : "اسم المشروع" }),
+					).toBeInTheDocument();
+				}
 				if (component.name === "Switch") expect(result.getByRole("switch")).toBeInTheDocument();
 				if (component.name === "SegmentedControl") expect(result.getByRole("radiogroup")).toBeInTheDocument();
 				expect(onError).toHaveBeenCalledWith([]);

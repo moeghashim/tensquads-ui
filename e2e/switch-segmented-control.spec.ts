@@ -26,6 +26,9 @@ test("Switch previews on, off, disabled, keyboard and focus states", async ({ pa
 		await expect(switches.nth(1)).toHaveAttribute("data-unchecked");
 		await expect(switches.nth(2)).toHaveAttribute("data-disabled");
 		await switches.nth(1).focus();
+		await expect(switches.nth(1)).toBeFocused();
+		await page.keyboard.press("Enter");
+		await expect(switches.nth(1)).toHaveAttribute("data-unchecked");
 		await page.keyboard.press("Space");
 		await expect(switches.nth(1)).toHaveAttribute("data-checked");
 		await capturePreviewScreenshots(page, testInfo, `switch-${state.locale}-${state.direction}-${state.theme}`);
@@ -58,5 +61,33 @@ test("SegmentedControl follows UI SDK arrow navigation in both directions", asyn
 		await expectAccessible(page);
 		await group.getByRole("radio", { name: state.locale === "ar" ? "شبكة" : "Grid" }).focus();
 		await expectThemeFocusRing(page, state.theme);
+	}
+});
+
+test("SegmentedControl Space selects and Enter submits its form", async ({ page }) => {
+	for (const state of [states[0], states[2]]) {
+		await openPreview(page, state, "/components/SegmentedControl");
+		const section = page.getByRole("region", { name: state.locale === "ar" ? "أوضاع العرض" : "View modes" });
+		const group = section.getByRole("radiogroup", { name: state.locale === "ar" ? "طريقة العرض" : "View" });
+		const list = group.getByRole("radio", { name: state.locale === "ar" ? "قائمة" : "List" });
+		await group.evaluate((element) => {
+			const form = document.createElement("form");
+			const submit = document.createElement("button");
+			submit.type = "submit";
+			submit.textContent = "Submit view";
+			form.addEventListener("submit", (event) => {
+				event.preventDefault();
+				form.dataset.submissions = String(Number(form.dataset.submissions ?? 0) + 1);
+			});
+			element.before(form);
+			form.append(element, submit);
+		});
+		await list.focus();
+		await expect(list).toBeFocused();
+		await page.keyboard.press("Space");
+		await expect(list).toHaveAttribute("aria-checked", "true");
+		await page.keyboard.press("Enter");
+		await expect(group.locator("..")).toHaveAttribute("data-submissions", "1");
+		await expect(list).toHaveAttribute("aria-checked", "true");
 	}
 });
