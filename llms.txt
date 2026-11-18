@@ -1,4 +1,6 @@
 # tensquads UI component index
 
 - [Button](packages/ui/src/react/Button/Button.md): Import `Button` and the `ButtonProps` type from `@tensquads/ui/react`. It wraps UI SDK's `Button` from `@ui-sdk/react/button` and keeps its native button behavior, `data-slot`, `render` prop, and forwarded props.
+- [SegmentedControl](packages/ui/src/react/SegmentedControl/SegmentedControl.md): Import `SegmentedControl`, `SegmentedControlItem` and `SegmentedControlIndicator` from `@tensquads/ui/react`. They wrap UI SDK's public segmented-control parts from `@ui-sdk/react/segmented-control` and preserve their slots, render props, value callbacks and forwarded props.
 - [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md): Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
+- [Switch](packages/ui/src/react/Switch/Switch.md): Import `Switch` and `SwitchThumb` from `@tensquads/ui/react`. They wrap the UI SDK switch parts from `@ui-sdk/react/switch` and preserve their slots, render props, checked state, callbacks and forwarded props.

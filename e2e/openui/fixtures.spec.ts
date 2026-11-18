@@ -24,13 +24,21 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("button", { name: locale === "en" ? "Continue" : "متابعة" }),
 				).toBeVisible();
-			} else {
+			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
 				});
 				await expect(image).toBeVisible();
 				await expect(image).toHaveCSS("width", "64px");
 				await expect(image).toHaveCSS("height", "64px");
+			} else if (component.name === "Switch") {
+				await expect(
+					fixtureRegion.getByRole("switch", { name: locale === "en" ? "Product updates" : "تحديثات المنتج" }),
+				).toBeVisible();
+			} else if (component.name === "SegmentedControl") {
+				await expect(
+					fixtureRegion.getByRole("radiogroup", { name: locale === "en" ? "View" : "العرض" }),
+				).toBeVisible();
 			}
 		}
 	}
