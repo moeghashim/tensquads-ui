@@ -108,7 +108,7 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
     const locale = "en" as const;
     const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale });
     const provider = createAnthropicProvider(apiKey);
-    return await streamOpenUIResponse({ provider, system, turns });
+    return await streamOpenUIResponse({ provider, system, turns, signal: request.signal });
   } catch (error) {
     if (error instanceof OpenUIServerError) {
       return Response.json({ error: error.code }, { status: error.status });
