@@ -4,7 +4,7 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 
 ## Commands
 
-- `npm run check` — Run Biome, type checking, design integrity, generated-token staleness, CSS color-token and UI SDK import checks, unit tests, and the package check.
+- `npm run check` — Run Biome, type checking, design integrity, generated-token and component-index staleness, CSS color-token and UI SDK import checks, unit tests, and the package check.
 - `npm run verify` — Run `check`, `preview:install`, `check:preview`, and `e2e`, in that order.
 - `npm run build` — Build the package into `packages/ui/dist`.
 - `npm run preview:install` — Install the preview app's dependencies from its own lockfile.
@@ -14,6 +14,8 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 - `npm run deploy:preview` — Build and deploy the preview Worker using Wrangler.
 - `npm run tokens` — Regenerate CSS custom properties and typed TypeScript tokens from the synced `design/tokens.json`.
 - `npm run tokens:check` — Fail for missing or stale generated token files without writing them.
+- `npm run docs` — Regenerate [llms.txt](llms.txt) from component Markdown under `packages/ui/src/react`. Do not edit the generated index by hand.
+- `npm run docs:check` — Fail for a missing or stale component index or an OpenUI definition without its component Markdown file, without writing files.
 - `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, verify exported entry points, and check that URLs in exported CSS resolve to files inside the installed package.
 - `npm run check:ui-sdk-usage` — Check UI SDK imports in `packages/ui/src` against the installed SDK documentation and require matching core and React version pins. If a package's documentation cannot be read, use its package exports. Reject internal and unknown entries.
 - `npm run ui-sdk:update` — Check upstream releases and update both UI SDK pins, the root lockfile, and the upstream skill. See [UI SDK updates](#ui-sdk-updates) for options and the PR workflow.
@@ -34,7 +36,7 @@ The [UI SDK update workflow](.github/workflows/ui-sdk-update.yml) runs daily and
 
 Run `npm run preview:install`, then `npm run dev` from the repository root. The TanStack Start app in `apps/preview` is a separate npm project, outside the root `packages/*` workspaces. Root installation and `prepare` build only the UI package; `npm run check` covers the package independently of preview dependencies. Use `npm run check:preview` to check the app separately.
 
-The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. `/components/example` is a placeholder for future component previews.
+The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. The gallery discovers components from their fixture files and links to case-sensitive `/components/<Name>` routes. `/components/Example` renders the selected locale's OpenUI fixture; a missing fixture displays a fallback message.
 
 Vite aliases and TypeScript paths resolve `@tensquads/ui/*` directly to `packages/ui/src`; the app has no npm dependency on the UI package and needs no package build before previewing source changes.
 
@@ -50,6 +52,24 @@ Install `@tensquads/ui` from a pinned Git commit, then add these imports to the 
 ```
 
 See the [font inventory](packages/ui/src/fonts/README.md) for bundled families, pinned releases, weights, and licenses.
+
+## OpenUI
+
+Import `TensquadsRenderer` from `@tensquads/ui/openui` to render an OpenUI text stream:
+
+```tsx
+import { TensquadsRenderer } from "@tensquads/ui/openui";
+
+<TensquadsRenderer
+  stream={'root = Example("Hello")'}
+  locale="en"
+  onError={(errors) => console.log(errors)}
+/>;
+```
+
+`stream` accepts a string or `null`; `locale` defaults to `en`. The locale selects a lazily created, cached library, not a translation of the stream. Supply localized text in the stream itself. `onError` receives the upstream renderer's errors, including errors in streams that still render content.
+
+The same entry exports `defineComponent` for typed OpenUI definitions, `getRegisteredComponents` for the built-in definitions, and `createTensquadsLibrary(locale)` for direct library access. See the [component index](llms.txt) for component contracts. Shared Zod schemas and their inferred types are exported from `@tensquads/ui/schemas`; [the schema source](packages/ui/src/schemas/index.ts) defines their accepted values.
 
 ## Browser verification
 
