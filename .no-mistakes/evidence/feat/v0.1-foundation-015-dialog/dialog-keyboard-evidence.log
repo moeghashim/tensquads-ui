@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+(node:62591) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Form: Enter/Space open, textbox accepts synthetic text, Tab and Shift+Tab wrap, Save/Escape/backdrop dismiss and return focus.
+  ✓  1 e2e/phase-dialog.spec.ts:47:1 › Keyboard opening, bidirectional Tab containment, close, Escape, and backdrop dismissal restore focus (2.1s)
+
+  1 passed (4.6s)
