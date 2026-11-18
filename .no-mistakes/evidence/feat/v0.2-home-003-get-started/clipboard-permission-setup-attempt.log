@@ -1,0 +1,74 @@
+[WebServer] (node:51847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:51914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/.get-started-live.spec.ts:5:2 › real clipboard copies every en example and denied writes show recovery (6.3s)
+(node:52059) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/.get-started-live.spec.ts:5:2 › real clipboard copies every ar example and denied writes show recovery (7.4s)
+(node:52224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 e2e/.get-started-live.spec.ts:32:1 › copied Worker rejects empty and assistant-ended local synthetic histories with 400 (302ms)
+
+
+  1) e2e/.get-started-live.spec.ts:5:2 › real clipboard copies every en example and denied writes show recovery 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.get-started-code').first().getByRole('status')
+    Expected: "Copy failed. Select the code and copy it manually."
+    Received: "Copied"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.get-started-code').first().getByRole('status') with timeout 5000ms
+      - waiting for locator('.get-started-code').first().getByRole('status')
+        14 × locator resolved to <span role="status" class="get-started-code__status">Copied</span>
+           - unexpected value "Copied"
+
+
+      23 |   await blocks.first().getByRole('button').click();
+      24 |   const failure = locale === 'ar' ? 'تعذّر النسخ. حدّد الشيفرة وانسخها يدوياً.' : 'Copy failed. Select the code and copy it manually.';
+    > 25 |   await expect(blocks.first().getByRole('status')).toHaveText(failure);
+         |                                                    ^
+      26 |   await expect(blocks.first().getByRole('button')).toHaveText(locale === 'ar' ? 'نسخ' : 'Copy');
+      27 |   await blocks.first().scrollIntoViewIfNeeded();
+      28 |   await page.screenshot({ path: `${evidence}/clipboard-denied-${locale}.png`, fullPage: false });
+        at {run-worktree}/e2e/.get-started-live.spec.ts:25:52
+
+    Error Context: test-results/.get-started-live-real-cli-81c1c-denied-writes-show-recovery/error-context.md
+
+  2) e2e/.get-started-live.spec.ts:5:2 › real clipboard copies every ar example and denied writes show recovery 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.get-started-code').first().getByRole('status')
+    Expected: "تعذّر النسخ. حدّد الشيفرة وانسخها يدوياً."
+    Received: "تم النسخ"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.get-started-code').first().getByRole('status') with timeout 5000ms
+      - waiting for locator('.get-started-code').first().getByRole('status')
+        14 × locator resolved to <span role="status" class="get-started-code__status">تم النسخ</span>
+           - unexpected value "تم النسخ"
+
+
+      23 |   await blocks.first().getByRole('button').click();
+      24 |   const failure = locale === 'ar' ? 'تعذّر النسخ. حدّد الشيفرة وانسخها يدوياً.' : 'Copy failed. Select the code and copy it manually.';
+    > 25 |   await expect(blocks.first().getByRole('status')).toHaveText(failure);
+         |                                                    ^
+      26 |   await expect(blocks.first().getByRole('button')).toHaveText(locale === 'ar' ? 'نسخ' : 'Copy');
+      27 |   await blocks.first().scrollIntoViewIfNeeded();
+      28 |   await page.screenshot({ path: `${evidence}/clipboard-denied-${locale}.png`, fullPage: false });
+        at {run-worktree}/e2e/.get-started-live.spec.ts:25:52
+
+    Error Context: test-results/.get-started-live-real-cli-fcc1c-denied-writes-show-recovery/error-context.md
+
+  2 failed
+    e2e/.get-started-live.spec.ts:5:2 › real clipboard copies every en example and denied writes show recovery 
+    e2e/.get-started-live.spec.ts:5:2 › real clipboard copies every ar example and denied writes show recovery 
+  1 passed (17.7s)

@@ -1,0 +1,11 @@
+[WebServer] (node:50445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:50641) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/get-started.spec.ts:18:1 › getting started covers agent setup in both locales, directions, and themes (3.0s)
+  ✓  2 e2e/get-started.spec.ts:49:1 › getting started code blocks copy their content (251ms)
+
+  2 passed (8.7s)

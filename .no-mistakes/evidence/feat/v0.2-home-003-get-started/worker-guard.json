@@ -1,0 +1,66 @@
+[
+  {
+    "locale": "en",
+    "turns": [],
+    "status": 400,
+    "body": "A user turn is required."
+  },
+  {
+    "locale": "en",
+    "turns": [
+      {
+        "role": "assistant",
+        "content": "Done"
+      }
+    ],
+    "status": 400,
+    "body": "A user turn is required."
+  },
+  {
+    "locale": "en",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Done"
+      }
+    ],
+    "status": 400,
+    "body": "A user turn is required."
+  },
+  {
+    "locale": "ar",
+    "turns": [],
+    "status": 400,
+    "body": "A user turn is required."
+  },
+  {
+    "locale": "ar",
+    "turns": [
+      {
+        "role": "assistant",
+        "content": "Done"
+      }
+    ],
+    "status": 400,
+    "body": "A user turn is required."
+  },
+  {
+    "locale": "ar",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Done"
+      }
+    ],
+    "status": 400,
+    "body": "A user turn is required."
+  }
+]
