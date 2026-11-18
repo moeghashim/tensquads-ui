@@ -1,0 +1,7 @@
+Command: npx playwright test e2e/preview.spec.ts --reporter=list
+Host: macOS; real local preview http://localhost:5173; Chromium
+Exit status: 0
+✓ e2e/preview.spec.ts:18:1 › preview home works in both directions and themes (2.5s)
+1 passed (3.5s)
+Exercised en/ltr and ar/rtl, light/dark, screenshots at 1440 and 390 px with maxDiffPixelRatio 0.001, mobile overflow, accessibility, and focus ring.
+No Linux execution claimed: docker info did not respond, including a bounded retry terminated after 8 seconds. No host configuration changed.

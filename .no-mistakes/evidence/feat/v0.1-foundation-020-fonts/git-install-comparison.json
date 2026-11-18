@@ -1,0 +1,18 @@
+[
+  {
+    "name": "before",
+    "sha": "fef6a28",
+    "command": "npm init -y && npm install git+file://{run-worktree}#fef6a28 react@19 react-dom@19",
+    "seconds": 5.843791250000001,
+    "packageBytes": 177364,
+    "nodeModulesBytes": 63584463
+  },
+  {
+    "name": "after",
+    "sha": "20bb5bbbd434358d87281ae3f7082714fe3ee038",
+    "command": "npm init -y && npm install git+file://{run-worktree}#20bb5bbbd434358d87281ae3f7082714fe3ee038 react@19 react-dom@19",
+    "seconds": 4.383479417,
+    "packageBytes": 855547,
+    "nodeModulesBytes": 64262645
+  }
+]

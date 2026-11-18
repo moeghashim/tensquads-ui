@@ -1,0 +1,228 @@
+{
+  "platform": "darwin",
+  "preview": [
+    {
+      "locale": "en",
+      "route": "/",
+      "fonts": [
+        {
+          "familyName": "Inter SemiBold",
+          "postScriptName": "Inter-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 17
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "route": "/components/example",
+      "fonts": [
+        {
+          "familyName": "Inter SemiBold",
+          "postScriptName": "Inter-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 7
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "route": "/",
+      "fonts": [
+        {
+          "familyName": "IBM Plex Sans Arabic SmBld",
+          "postScriptName": "IBMPlexSansArabic-SmBld",
+          "isCustomFont": true,
+          "glyphCount": 13
+        },
+        {
+          "familyName": "Inter SemiBold",
+          "postScriptName": "Inter-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "route": "/components/example",
+      "fonts": [
+        {
+          "familyName": "Inter SemiBold",
+          "postScriptName": "Inter-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 7
+        }
+      ]
+    }
+  ],
+  "consumer": {
+    "fonts": {
+      "en400": [
+        {
+          "familyName": "Inter",
+          "postScriptName": "Inter-Regular",
+          "isCustomFont": true,
+          "glyphCount": 41
+        }
+      ],
+      "ar400": [
+        {
+          "familyName": "IBM Plex Sans Arabic",
+          "postScriptName": "IBMPlexSansArabic",
+          "isCustomFont": true,
+          "glyphCount": 22
+        },
+        {
+          "familyName": "Inter",
+          "postScriptName": "Inter-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ],
+      "en500": [
+        {
+          "familyName": "Inter Medium",
+          "postScriptName": "Inter-Medium",
+          "isCustomFont": true,
+          "glyphCount": 41
+        }
+      ],
+      "ar500": [
+        {
+          "familyName": "IBM Plex Sans Arabic Medm",
+          "postScriptName": "IBMPlexSansArabic-Medm",
+          "isCustomFont": true,
+          "glyphCount": 22
+        },
+        {
+          "familyName": "Inter Medium",
+          "postScriptName": "Inter-Medium",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ],
+      "en600": [
+        {
+          "familyName": "Inter SemiBold",
+          "postScriptName": "Inter-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 41
+        }
+      ],
+      "ar600": [
+        {
+          "familyName": "IBM Plex Sans Arabic SmBld",
+          "postScriptName": "IBMPlexSansArabic-SmBld",
+          "isCustomFont": true,
+          "glyphCount": 22
+        },
+        {
+          "familyName": "Inter SemiBold",
+          "postScriptName": "Inter-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ],
+      "mono": [
+        {
+          "familyName": "JetBrains Mono",
+          "postScriptName": "JetBrainsMono-Regular",
+          "isCustomFont": true,
+          "glyphCount": 47
+        }
+      ]
+    },
+    "loaded": [
+      {
+        "family": "Inter",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "500",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Sans Arabic",
+        "weight": "600",
+        "status": "loaded"
+      },
+      {
+        "family": "JetBrains Mono",
+        "weight": "400",
+        "status": "loaded"
+      }
+    ],
+    "requests": [
+      {
+        "path": "/fonts.css",
+        "status": 200,
+        "bytes": 1587
+      },
+      {
+        "path": "/tokens.css",
+        "status": 200,
+        "bytes": 61469
+      },
+      {
+        "path": "/styles.css",
+        "status": 200,
+        "bytes": 1
+      },
+      {
+        "path": "/fonts/inter/Inter-Regular.woff2",
+        "status": 200,
+        "bytes": 111268
+      },
+      {
+        "path": "/fonts/inter/Inter-SemiBold.woff2",
+        "status": 200,
+        "bytes": 114812
+      },
+      {
+        "path": "/fonts/inter/Inter-Medium.woff2",
+        "status": 200,
+        "bytes": 114348
+      },
+      {
+        "path": "/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2",
+        "status": 200,
+        "bytes": 92164
+      },
+      {
+        "path": "/fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-Regular.woff2",
+        "status": 200,
+        "bytes": 71904
+      },
+      {
+        "path": "/fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-Medium.woff2",
+        "status": 200,
+        "bytes": 75936
+      },
+      {
+        "path": "/fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-SemiBold.woff2",
+        "status": 200,
+        "bytes": 76408
+      }
+    ],
+    "sansStack": "Inter, \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif"
+  },
+  "result": "pass"
+}
