@@ -1,0 +1,28 @@
+{
+  "reports": {
+    "playwright-results.json": {
+      "startTime": "2026-11-18T11:49:53.450Z",
+      "duration": 15869.812,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "interaction-results.json": {
+      "startTime": "2026-11-18T11:51:25.179Z",
+      "duration": 15405.502,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "screenshots": 72,
+  "scenarios": [
+    "Independent four-side captures across locale/theme combinations",
+    "Physical placement remains correct in RTL and locale overrides",
+    "Mobile layout keeps hints visible without horizontal overflow",
+    "Keyboard, hover, Escape and localized OpenUI hints work"
+  ],
+  "setup": "mise trust supplied by process-only MISE_TRUSTED_CONFIG_PATHS; supplemental server moved to port 5186 and launched from preview directory after transient default-port and relative-path setup failures."
+}
