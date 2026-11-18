@@ -31,6 +31,12 @@ for (const state of states) {
 		const triggerName = state.locale === "en" ? "Add item" : "إضافة عنصر";
 		const hint = state.locale === "en" ? "Create a new item" : "أنشئ عنصراً جديداً";
 		const sides = ["top", "right", "bottom", "left"] as const;
+		const physicalSides = {
+			top: "top",
+			right: state.direction === "rtl" ? "left" : "right",
+			bottom: "bottom",
+			left: state.direction === "rtl" ? "right" : "left",
+		} as const;
 
 		for (const [index, side] of sides.entries()) {
 			const trigger = preview.getByRole("button", { name: triggerName }).nth(index);
@@ -39,14 +45,15 @@ for (const state of states) {
 			const tooltip = page.locator('[data-slot="tooltip-content"][data-open]');
 			await expect(tooltip).toHaveCount(1);
 			await expect(tooltip).toBeVisible();
-			await expect(tooltip).toHaveAttribute("data-side", side);
-			// The preview labels name physical sides, regardless of locale or direction.
+			const expectedSide = physicalSides[side];
+			await expect(tooltip).toHaveAttribute("data-side", expectedSide);
+			// UI SDK start/end placements mirror across the reading direction.
 			await expect
 				.poll(async () => {
 					const anchor = await trigger.boundingBox();
 					const content = await tooltip.boundingBox();
 					if (!anchor || !content) return false;
-					switch (side) {
+					switch (expectedSide) {
 						case "top":
 							return content.y + content.height <= anchor.y;
 						case "right":
@@ -69,7 +76,7 @@ for (const state of states) {
 			);
 			await expect(tooltip).toHaveCount(1);
 			await expect(tooltip).toBeVisible();
-			await expect(tooltip).toHaveAttribute("data-side", side);
+			await expect(tooltip).toHaveAttribute("data-side", expectedSide);
 		}
 		await expectNoHorizontalScroll(page);
 	});

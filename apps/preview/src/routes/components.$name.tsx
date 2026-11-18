@@ -491,7 +491,7 @@ function ComponentPage() {
 								<TooltipTrigger render={<Button iconOnly aria-label={labels.action} />}>
 									<span aria-hidden="true">+</span>
 								</TooltipTrigger>
-								<TooltipContent side={side}>
+								<TooltipContent side={side === "right" ? "end" : side === "left" ? "start" : side}>
 									{labels.hint}
 									<TooltipShortcut />
 									<TooltipArrow />
