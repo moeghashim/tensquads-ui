@@ -1,45 +1,30 @@
-{
-  "results": [
-    {
-      "name": "Switch public API: disabled/readOnly guards, required form submission, controlled state and callback details",
-      "result": "pass",
-      "live": true
-    },
-    {
-      "name": "SegmentedControl public API: arrows skip disabled items and wrap in LTR/RTL, one tab stop, Space/Enter, render and controlled updates",
-      "result": "pass",
-      "live": true
-    },
-    {
-      "name": "Streamed Switch: late initial checked state applies until user interaction takes precedence",
-      "result": "pass",
-      "live": true
-    },
-    {
-      "name": "Streamed SegmentedControl: late and partial initial values preserve focus; growing labels preserve user selection in LTR/RTL",
-      "result": "pass",
-      "live": true
-    },
-    {
-      "name": "Adversarial streamed duplicates: every growing option slot retains focus and exclusive selection through duplicate labels; invalid schema inputs are rejected",
-      "result": "pass",
-      "live": true
-    },
-    {
-      "name": "Built preview: bilingual fixtures, visual states and no mobile overflow in light/dark at 1440/390px",
-      "result": "pass",
-      "live": true
-    }
-  ],
-  "pageErrors": [],
-  "execution": {
-    "browser": "Chromium on macOS",
-    "preview": "Built Cloudflare Worker served locally on port 5173",
-    "harness": "Real source components and TensquadsRenderer served locally by Vite on port 5174",
-    "existing_browser_command": "npx playwright test e2e/switch-segmented-control.spec.ts --reporter=line --output=~/.no-mistakes/evidence/01M7PVW5QEA38D4RYKDFYE2EMA/playwright-results",
-    "existing_browser_exit": 0,
-    "targeted_unit_exit": 0,
-    "harness_exit": 0,
-    "cleanup": "Browser closed; both disposable servers stopped with exit 130 after successful checks."
+[
+  {
+    "name": "Switch readOnly, required validation, controlled state, render and callback API",
+    "result": "pass"
+  },
+  {
+    "name": "SegmentedControl controlled API and directional focus skips disabled options and wraps",
+    "result": "pass"
+  },
+  {
+    "name": "Streamed Switch applies late initial state and preserves subsequent user choices",
+    "result": "pass"
+  },
+  {
+    "name": "Segmented stream late and partial initial values preserve selection and focus",
+    "result": "pass"
+  },
+  {
+    "name": "Growing option identities and temporary duplicates preserve every selected slot in LTR and RTL",
+    "result": "pass"
+  },
+  {
+    "name": "Invalid OpenUI options reject duplicate and unknown schema values while streamed controls remain exclusive and usable",
+    "result": "pass"
+  },
+  {
+    "name": "Bilingual production previews render fixtures across themes and widths without overflow",
+    "result": "pass"
   }
-}
+]

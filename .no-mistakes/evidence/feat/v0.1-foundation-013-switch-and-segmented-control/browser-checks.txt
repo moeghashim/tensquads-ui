@@ -1,0 +1,8 @@
+Production preview: npm run build:preview completed successfully through Playwright webServer.
+node_modules/.bin/playwright test e2e/switch-segmented-control.spec.ts --workers=1 --reporter=line: exit 0.
+Switch previews on, off, disabled, keyboard and focus states: passed.
+SegmentedControl follows UI SDK arrow navigation in both directions: passed.
+SegmentedControl Space selects and Enter submits its form: passed.
+Consumer browser driver: node .local-test/drive.mjs: exit 0; see live-results.json and retained driver and consumer.
+Actual preview screenshots retained for both components x en/ar x light/dark x 390/1440.
+Servers stopped intentionally with SIGINT (exit 130); browser closed. Disposable files and preview build outputs removed. No product changes.
