@@ -1,0 +1,31 @@
+
+Running 19 tests using 2 workers
+
+(node:94245) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:94246) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/19] e2e/local-phase.spec.ts:5:2 › local layout en light
+[2/19] e2e/local-phase.spec.ts:5:2 › local layout en dark
+[3/19] e2e/local-phase.spec.ts:5:2 › local layout ar dark
+[4/19] e2e/local-phase.spec.ts:5:2 › local layout ar light
+[5/19] e2e/local-phase.spec.ts:18:1 › local real clipboard, replay, live inputs, reduced motion and navigation
+[6/19] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in en light
+[7/19] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in en light
+[8/19] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in en dark
+[9/19] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in en dark
+[10/19] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in ar light
+[11/19] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in ar light
+[12/19] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in ar dark
+[13/19] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in ar dark
+[14/19] e2e/preview.spec.ts:88:1 › site routes render in English and Arabic
+[15/19] e2e/preview.spec.ts:99:1 › locale and theme controls update the URL state
+[16/19] e2e/preview.spec.ts:111:1 › stream demo replays localized OpenUI fixtures
+[17/19] e2e/preview.spec.ts:123:1 › fixture cards allow input independently of navigation
+[18/19] e2e/preview.spec.ts:150:1 › demo copy follows its own locale in both directions
+[19/19] e2e/preview.spec.ts:172:1 › squad cards link to Squadmate with URL state
+  19 passed (35.9s)

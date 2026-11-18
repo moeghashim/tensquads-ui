@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "scenario": "Actual browser clipboard receives the pinned install command",
+      "clipboard": "npm install github:moeghashim/tensquads-ui#<commit-sha>"
+    },
+    {
+      "scenario": "Replay advances from zero to seven fixture lines; rendered form controls work; demo actions retain local page",
+      "externalRequests": []
+    },
+    {
+      "scenario": "Reduced-motion load and replay show complete fixture immediately"
+    },
+    {
+      "scenario": "System theme follows OS and primary navigation retains settings",
+      "dark": "rgb(22, 22, 22)",
+      "light": "rgb(243, 243, 243)"
+    }
+  ],
+  "errors": []
+}
