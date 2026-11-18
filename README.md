@@ -4,7 +4,7 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 
 ## Commands
 
-- `npm run check` — Run Biome, type checking, design integrity, generated-token staleness and CSS color-token checks, unit tests, and the package check.
+- `npm run check` — Run Biome, type checking, design integrity, generated-token staleness, CSS color-token and UI SDK import checks, unit tests, and the package check.
 - `npm run verify` — Run `check`, `preview:install`, `check:preview`, and `e2e`, in that order.
 - `npm run build` — Build the package into `packages/ui/dist`.
 - `npm run preview:install` — Install the preview app's dependencies from its own lockfile.
@@ -14,11 +14,21 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 - `npm run deploy:preview` — Build and deploy the preview Worker using Wrangler.
 - `npm run tokens` — Regenerate CSS custom properties and typed TypeScript tokens from the synced `design/tokens.json`.
 - `npm run tokens:check` — Fail for missing or stale generated token files without writing them.
-- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files, and verify exported entry points.
+- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, and verify exported entry points.
+- `npm run check:ui-sdk-usage` — Check UI SDK imports in `packages/ui/src` against the installed SDK documentation and require matching core and React version pins. If a package's documentation cannot be read, use its package exports. Reject internal and unknown entries.
+- `npm run ui-sdk:update` — Check upstream releases and update both UI SDK pins, the root lockfile, and the upstream skill. See [UI SDK updates](#ui-sdk-updates) for options and the PR workflow.
 - `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GITHUB_SHA` (commit to install); CI supplies these for the PR head or pushed commit.
 - `npm run check:css-tokens` — Reject raw color literals in CSS under `packages/ui/src/styles`, including variable fallbacks. Color token variables, `transparent`, `currentColor`, and CSS-wide keywords are allowed.
 - `npm run design:sync -- <commit>` — Sync design references and regenerate the SHA-256 manifest; pass a full 40-character commit SHA after the npm run separator (`--`), or omit it to use the script's default commit. Design files are never edited by hand.
 - `npm run design:check` — Check design files against the manifest, failing for changed, extra, or missing files and unsupported filesystem entries, including symlinks.
+
+## UI SDK updates
+
+Run `npm run ui-sdk:update -- --dry-run` to read the current npm tags and GitHub release notes without changing files. The updater uses the `beta` tag until `latest` is a stable release of at least `1.0.0`. Both packages must select the same version. If the selected version is not newer than the current React pin, the updater makes no changes.
+
+Run the command without `--dry-run` to apply the update. It also replaces `.agents/skills/ui-sdk` with the skill from the matching upstream React release tag and writes release notes and public export changes to `ui-sdk-update-body.md`. Run `npm ci` to install the updated dependencies before checking them. For an offline preview with recorded data, run `npm run ui-sdk:update -- --fixtures scripts/fixtures/ui-sdk-update-beta8.json --dry-run`.
+
+The [UI SDK update workflow](.github/workflows/ui-sdk-update.yml) runs daily and supports manual dispatch. For this foundation branch, set the manual `base` input to `feat/v0.1-foundation`; the default is `main`. When an update changes files, the workflow installs the updated dependencies and Chromium, runs `npm run verify`, and opens or updates one PR on `bot/ui-sdk-update`. It publishes `ui-sdk-verify` on the PR head. Failed verification adds `ui-sdk-break` and includes the log tail in the PR body; successful verification removes that label. Update commits include a DCO sign-off. The workflow never merges the PR.
 
 ## Preview app
 
