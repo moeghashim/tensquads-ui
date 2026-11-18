@@ -159,7 +159,7 @@ test("demo copy follows its own locale in both directions", async ({ page }) => 
 				selected === "ar" ? "إعداد المتجر مع بترا" : "Petra is setting up your store",
 			);
 			await expect(pane.locator(".stream-screen__agent-copy span")).toHaveText(
-				selected === "ar" ? "Master · قيد العمل" : "Master · Running skill",
+				selected === "ar" ? "قيد العمل" : "Running skill",
 			);
 			await expect(
 				pane.getByRole("button", { name: selected === "ar" ? "اعتماد الخطة" : "Approve plan" }),
