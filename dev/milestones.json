@@ -30,9 +30,11 @@
     },
     {
       "id": "v0.2-home",
-      "status": "planned",
+      "status": "in-progress",
       "tasks": [
-        "001-home-site"
+        "001-site-shell-and-home",
+        "002-component-pages",
+        "003-get-started-for-agents"
       ]
     }
   ]
