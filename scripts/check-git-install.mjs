@@ -4,9 +4,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const workspace = process.env.GITHUB_WORKSPACE;
-const commit = process.env.GITHUB_SHA;
+const commit = process.env.GIT_INSTALL_SHA;
 if (!workspace || !commit) {
-	console.error("Set GITHUB_WORKSPACE and GITHUB_SHA to check the git install fixture.");
+	console.error("Set GITHUB_WORKSPACE and GIT_INSTALL_SHA to check the git install fixture.");
 	process.exit(1);
 }
 

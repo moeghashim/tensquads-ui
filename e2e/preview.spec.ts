@@ -19,6 +19,14 @@ test("preview home works in both directions and themes", async ({ page }, testIn
 	for (const state of states) {
 		await openPreview(page, state);
 		await expect(page.getByRole("main")).toBeVisible();
+		const componentList = page.getByRole("region", {
+			name: state.locale === "ar" ? "المكوّنات" : "Components",
+		});
+		expect(await componentList.getByRole("link").count()).toBeGreaterThan(0);
+		const componentNames = await componentList.getByRole("link").allTextContents();
+		expect(componentNames).toEqual(
+			expect.arrayContaining(["Badge", "Button", "Field", "Input", "Menu", "Squadmate"]),
+		);
 		await capturePreviewScreenshots(page, testInfo, `${state.locale}-${state.direction}-${state.theme}`);
 		await expectNoHorizontalScroll(page);
 		await expectAccessible(page);

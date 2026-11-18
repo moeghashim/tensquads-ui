@@ -24,6 +24,7 @@
         "016-tooltip",
         "017-openui-server",
         "021-node-26",
+        "022-linux-baselines",
         "018-agent-skill-and-docs"
       ]
     }
