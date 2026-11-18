@@ -1,0 +1,7 @@
+{
+  "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD\" mise exec -- npx playwright test e2e/preview.spec.ts e2e/openui/fixtures.spec.ts --workers=2 --reporter=line --output=~/.no-mistakes/evidence/01M7QWYPYNKJZ2J3E6AHZ84B59/playwright-results",
+  "exit_code": 0,
+  "result": "17 passed (34.1s)",
+  "product": "Production Vite build served by Wrangler local Worker on port 5173",
+  "baseline": "Supplied mise exec -- npm run verify failed with exit 1. Plain mise invocation here failed because worktree mise.toml was not trusted; command-scoped MISE_TRUSTED_CONFIG_PATHS allowed targeted run without changing user configuration. Full verify was not rerun per test-phase scope."
+}

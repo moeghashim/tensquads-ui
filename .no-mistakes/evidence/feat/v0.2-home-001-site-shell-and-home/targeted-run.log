@@ -1,0 +1,25 @@
+
+Running 16 tests using 2 workers
+
+(node:39513) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in en light (2.5s)
+  ✓   2 e2e/openui/fixtures.spec.ts:6:1 › every component fixture parses and renders (4.5s)
+  ✓   4 e2e/openui/fixtures.spec.ts:92:1 › home demo fixture lines parse in both locales (6ms)
+  ✓   3 e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in en light (2.2s)
+  ✓   5 e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in en dark (2.4s)
+  ✓   6 e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in en dark (2.2s)
+  ✓   7 e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in ar light (2.3s)
+  ✓   8 e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in ar light (2.2s)
+  ✓   9 e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in ar dark (2.2s)
+  ✓  10 e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in ar dark (2.4s)
+  ✓  11 e2e/preview.spec.ts:88:1 › site routes render in English and Arabic (354ms)
+  ✓  12 e2e/preview.spec.ts:99:1 › locale and theme controls update the URL state (466ms)
+  ✓  13 e2e/preview.spec.ts:111:1 › stream demo replays localized OpenUI fixtures (4.9s)
+  ✓  14 e2e/preview.spec.ts:123:1 › fixture cards allow input independently of navigation (3.0s)
+  ✓  15 e2e/preview.spec.ts:150:1 › demo copy follows its own locale in both directions (9.8s)
+  ✓  16 e2e/preview.spec.ts:172:1 › squad cards link to Squadmate with URL state (553ms)
+
+  16 passed (38.3s)

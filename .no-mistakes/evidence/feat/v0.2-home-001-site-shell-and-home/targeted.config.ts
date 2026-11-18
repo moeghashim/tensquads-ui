@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./e2e',testMatch:['preview.spec.ts','openui/fixtures.spec.ts'],outputDir:'~/.no-mistakes/evidence/01M7QWYPYNKJZ2J3E6AHZ84B59/results',reporter:[['list'],['json',{outputFile:'~/.no-mistakes/evidence/01M7QWYPYNKJZ2J3E6AHZ84B59/targeted-results.json'}]],workers:2,use:{baseURL:'http://localhost:5173',browserName:'chromium',locale:'en-US',colorScheme:'light'}});

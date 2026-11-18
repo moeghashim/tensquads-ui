@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Responsive home and shell: EN/AR, light/dark, 1440/390; accessible routes and keyboard focus",
+    "result": "pass"
+  },
+  {
+    "name": "Replay streams fixture lines locally and rendered controls accept input; reduced motion renders immediately",
+    "result": "pass"
+  },
+  {
+    "name": "Install command copies to browser clipboard and CSS setup is visible",
+    "result": "pass"
+  },
+  {
+    "name": "Keyboard navigation preserves Arabic, direction and system theme; system follows OS preference",
+    "result": "pass"
+  }
+]

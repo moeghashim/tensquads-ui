@@ -1,0 +1,26 @@
+[
+  {
+    "scenario": "Replay clears and rebuilds seven fixture lines; rendered input, switch and interval selector work",
+    "result": "pass"
+  },
+  {
+    "scenario": "Copy writes the documented pinned-install template to the real browser clipboard",
+    "result": "pass"
+  },
+  {
+    "scenario": "Reduced-motion replay displays all seven lines immediately",
+    "result": "pass"
+  },
+  {
+    "scenario": "System theme follows emulated OS preference; keyboard navigation and reload retain Arabic RTL/system URL state",
+    "result": "pass"
+  },
+  {
+    "scenario": "Gallery and Get started have no mobile overflow or axe violations in English/Arabic and light/dark",
+    "result": "pass"
+  },
+  {
+    "scenario": "Home replay and controls run without model requests or external requests",
+    "result": "pass"
+  }
+]
