@@ -1,0 +1,54 @@
+[
+  {
+    "name": "streaming",
+    "result": "pass",
+    "detail": {
+      "frames": 519,
+      "unclosedBlock": "Progressive badge visible before closing fence",
+      "exceptions": []
+    }
+  },
+  {
+    "name": "markdown-safety",
+    "result": "pass",
+    "detail": {
+      "links": [
+        "http",
+        "https",
+        "mail"
+      ],
+      "literalHTML": true,
+      "code": "    const x = 1;"
+    }
+  },
+  {
+    "name": "list-fence-regressions",
+    "result": "pass",
+    "detail": {
+      "cases": 9,
+      "looseList": "one list with two siblings, UI and continuation stay in first item",
+      "fenceCoordinates": "literal markers preserved; following live block outside list"
+    }
+  },
+  {
+    "name": "long-list",
+    "result": "pass",
+    "detail": {
+      "items": 1001,
+      "elapsedIncludingBrowserRoundTripsMs": 161,
+      "lastItem": "Final command"
+    }
+  },
+  {
+    "name": "emitted-prompts",
+    "result": "pass",
+    "detail": {
+      "defaultEqualsExplicitUI": true,
+      "chatExamplesRendered": [
+        "Ready",
+        "جاهز"
+      ],
+      "contract": "emitted prompt output only; model interpretation not evaluated"
+    }
+  }
+]
