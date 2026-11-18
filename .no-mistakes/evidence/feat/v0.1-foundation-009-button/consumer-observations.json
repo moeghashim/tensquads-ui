@@ -1,0 +1,21 @@
+[
+  {
+    "element": "button",
+    "readySavingReady": true,
+    "duplicateCallsBlocked": true,
+    "retainedFocus": true
+  },
+  {
+    "element": "link",
+    "readySavingReady": true,
+    "duplicateCallsBlocked": true,
+    "retainedFocus": true
+  },
+  {
+    "focusableDisabled": "retains focus; Enter and Space do not invoke handler",
+    "distributedDangerColors": {
+      "text": "rgb(255, 255, 255)",
+      "background": "rgb(224, 46, 42)"
+    }
+  }
+]

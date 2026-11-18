@@ -1,0 +1,8 @@
+Command: npx playwright test e2e/button.spec.ts e2e/squadmate.spec.ts e2e/openui/fixtures.spec.ts --workers=1 --reporter=line
+Exit: 1
+Surface: production Vite build, served by local Wrangler at localhost:5173; Chromium on macOS.
+Button visual assertion failed: chromium-button-ar-rtl-light-390.png; 453 differing pixels; maxDiffPixelRatio 0.001 unchanged.
+Other executed checks passed: danger computed text color in light, explicit dark, system dark; both-locale OpenUI fixture rendering; all Squadmate theme/locale screenshots, overflow, accessibility and focus checks.
+Diff visually inspected: changes cluster around text glyph edges. This suggests platform rasterization but does not prove Linux passes.
+Linux route attempted: docker info; timed out after 8 seconds. No baseline regenerated and no tolerance changed.
+Supplemental live driver exit: 0. All five enabled danger buttons computed rgb(255, 255, 255) in four theme/system combinations. All 130 Arabic captions and accessible image names match PLAN.md D18 in light and dark; all mascot images load; mobile no-overflow checks pass.

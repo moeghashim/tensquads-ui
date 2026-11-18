@@ -1,0 +1,68 @@
+[WebServer] (node:84469) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 5 tests using 1 worker
+
+(node:84544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/5] e2e/button.spec.ts:18:1 › Button previews variants, sizes, and interaction states
+  1) e2e/button.spec.ts:18:1 › Button previews variants, sizes, and interaction states ─────────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      453 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: chromium-button-ar-rtl-light-390.png
+
+    Call log:
+      - Expect "toHaveScreenshot(chromium-button-ar-rtl-light-390.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 453 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 453 pixels (ratio 0.01 of all image pixels) are different.
+
+
+       at helpers/preview.ts:30
+
+      28 | 	for (const width of [1440, 390]) {
+      29 | 		await page.setViewportSize({ width, height: 900 });
+    > 30 | 		await expect(page).toHaveScreenshot(`${testInfo.project.name || "chromium"}-${name}-${width}.png`, {
+         | 		                   ^
+      31 | 			animations: "disabled",
+      32 | 			caret: "hide",
+      33 | 			fullPage: true,
+        at capturePreviewScreenshots ({run-worktree}/e2e/helpers/preview.ts:30:22)
+        at {run-worktree}/e2e/button.spec.ts:47:3
+
+    attachment #1: chromium-button-ar-rtl-light-390 (image/png) ────────────────────────────────────
+    Expected: e2e/__screenshots__/button.spec.ts/chromium-button-ar-rtl-light-390.png
+    Received: ../../../evidence/01M7PRG7NK22K1E5MT11WVRXH0/playwright-results/button-Button-previews-variants-sizes-and-interaction-states/chromium-button-ar-rtl-light-390-actual.png
+    Diff:     ../../../evidence/01M7PRG7NK22K1E5MT11WVRXH0/playwright-results/button-Button-previews-variants-sizes-and-interaction-states/chromium-button-ar-rtl-light-390-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../evidence/01M7PRG7NK22K1E5MT11WVRXH0/playwright-results/button-Button-previews-variants-sizes-and-interaction-states/error-context.md
+
+
+(node:84589) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/5] e2e/button.spec.ts:55:1 › danger button text stays white in light, explicit dark, and system dark themes
+[3/5] e2e/openui/fixtures.spec.ts:6:1 › every component fixture parses and renders
+[4/5] e2e/preview.spec.ts:18:1 › preview home works in both directions and themes
+[5/5] e2e/squadmate.spec.ts:18:1 › Squadmate previews every character and state in both locales and themes
+  1 failed
+    e2e/button.spec.ts:18:1 › Button previews variants, sizes, and interaction states ──────────────
+  4 passed (13.2s)

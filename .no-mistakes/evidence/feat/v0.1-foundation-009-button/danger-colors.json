@@ -1,0 +1,56 @@
+[
+  {
+    "theme": "light",
+    "os": "light",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(224, 46, 42)",
+    "property": "#fff",
+    "gray0": "#fff",
+    "gray1000": "#0d0d0d"
+  },
+  {
+    "theme": "dark",
+    "os": "light",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(224, 46, 42)",
+    "property": "#fff",
+    "gray0": "#0d0d0d",
+    "gray1000": "#fff"
+  },
+  {
+    "theme": "system",
+    "os": "dark",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(224, 46, 42)",
+    "property": "#fff",
+    "gray0": "#0d0d0d",
+    "gray1000": "#fff"
+  },
+  {
+    "theme": "light",
+    "os": "dark",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(224, 46, 42)",
+    "property": "#fff",
+    "gray0": "#fff",
+    "gray1000": "#0d0d0d"
+  },
+  {
+    "theme": "dark",
+    "os": "dark",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(224, 46, 42)",
+    "property": "#fff",
+    "gray0": "#0d0d0d",
+    "gray1000": "#fff"
+  },
+  {
+    "theme": "system",
+    "os": "light",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(224, 46, 42)",
+    "property": "#fff",
+    "gray0": "#fff",
+    "gray1000": "#0d0d0d"
+  }
+]

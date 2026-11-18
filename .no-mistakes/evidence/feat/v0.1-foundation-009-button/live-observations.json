@@ -1,0 +1,1306 @@
+[
+  {
+    "theme": "light",
+    "system": "light",
+    "computed": [
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Pill",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "+",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "system": "light",
+    "computed": [
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Pill",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "+",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      }
+    ]
+  },
+  {
+    "theme": "system",
+    "system": "dark",
+    "computed": [
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Pill",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "+",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "system": "dark",
+    "computed": [
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Continue",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "Pill",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      },
+      {
+        "text": "+",
+        "color": "rgb(255, 255, 255)",
+        "componentProperty": "#fff"
+      }
+    ]
+  },
+  {
+    "arabicLabels": "light",
+    "agents": [
+      {
+        "name": "بترا",
+        "images": [
+          {
+            "alt": "بترا، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، تم",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "بيزا",
+        "images": [
+          {
+            "alt": "بيزا، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، تم",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "كيوتو",
+        "images": [
+          {
+            "alt": "كيوتو، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، تم",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "ريو",
+        "images": [
+          {
+            "alt": "ريو، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، تم",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "زيورخ",
+        "images": [
+          {
+            "alt": "زيورخ، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، تم",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "الجيزة",
+        "images": [
+          {
+            "alt": "الجيزة، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، تم",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "ماتشو",
+        "images": [
+          {
+            "alt": "ماتشو، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، تم",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "أنغكور",
+        "images": [
+          {
+            "alt": "أنغكور، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، تم",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "دلفي",
+        "images": [
+          {
+            "alt": "دلفي، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، تم",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "سيدني",
+        "images": [
+          {
+            "alt": "سيدني، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، تم",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "غرينتش",
+        "images": [
+          {
+            "alt": "غرينتش، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، تم",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "الإسكندرية",
+        "images": [
+          {
+            "alt": "الإسكندرية، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، تم",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "البندقية",
+        "images": [
+          {
+            "alt": "البندقية، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، تم",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، أُلغي",
+            "loaded": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "arabicLabels": "dark",
+    "agents": [
+      {
+        "name": "بترا",
+        "images": [
+          {
+            "alt": "بترا، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، تم",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "بترا، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "بيزا",
+        "images": [
+          {
+            "alt": "بيزا، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، تم",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "بيزا، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "كيوتو",
+        "images": [
+          {
+            "alt": "كيوتو، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، تم",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "كيوتو، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "ريو",
+        "images": [
+          {
+            "alt": "ريو، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، تم",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "ريو، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "زيورخ",
+        "images": [
+          {
+            "alt": "زيورخ، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، تم",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "زيورخ، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "الجيزة",
+        "images": [
+          {
+            "alt": "الجيزة، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، تم",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "الجيزة، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "ماتشو",
+        "images": [
+          {
+            "alt": "ماتشو، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، تم",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "ماتشو، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "أنغكور",
+        "images": [
+          {
+            "alt": "أنغكور، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، تم",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "أنغكور، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "دلفي",
+        "images": [
+          {
+            "alt": "دلفي، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، تم",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "دلفي، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "سيدني",
+        "images": [
+          {
+            "alt": "سيدني، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، تم",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "سيدني، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "غرينتش",
+        "images": [
+          {
+            "alt": "غرينتش، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، تم",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "غرينتش، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "الإسكندرية",
+        "images": [
+          {
+            "alt": "الإسكندرية، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، تم",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "الإسكندرية، أُلغي",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "name": "البندقية",
+        "images": [
+          {
+            "alt": "البندقية، في استراحة",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، بانتظارك",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، تخطيط",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، قيد العمل",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، قيد التحقق",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، تم",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، إعادة للتعديل",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، معلّق",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، بانتظار قرارك",
+            "loaded": true
+          },
+          {
+            "alt": "البندقية، أُلغي",
+            "loaded": true
+          }
+        ]
+      }
+    ]
+  }
+]

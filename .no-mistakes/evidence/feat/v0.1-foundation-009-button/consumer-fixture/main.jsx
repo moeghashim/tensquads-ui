@@ -1,0 +1,10 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {Button} from '../packages/ui/dist/react/index.js';
+import '../packages/ui/dist/tokens/tokens.css';
+import '../packages/ui/dist/fonts.css';
+import '../packages/ui/dist/styles/styles.css';
+window.phaseCalls={button:0,link:0,disabled:0};
+window.phaseFinish={};
+const pending=(key)=>{window.phaseCalls[key]++;return new Promise(resolve=>{window.phaseFinish[key]=resolve})};
+createRoot(document.getElementById('root')).render(<main><h1>Isolated package consumer</h1><Button variant="danger" className={({pending})=>pending?'saving':'ready'} onClick={()=>pending('button')}>Save</Button><Button variant="soft" render={<a href="#next"/>} className={({pending})=>pending?'saving':'ready'} onClick={()=>pending('link')}>Next</Button><Button disabled focusableWhenDisabled onClick={()=>window.phaseCalls.disabled++}>Unavailable</Button></main>);

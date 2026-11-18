@@ -1,0 +1,25 @@
+{
+  "existingTargetedPlaywright": {
+    "exit": 1,
+    "passed": [
+      "danger computed colors in three themes",
+      "OpenUI fixtures",
+      "preview home contracts",
+      "Squadmate contracts"
+    ],
+    "failed": {
+      "snapshot": "chromium-button-ar-rtl-light-390.png",
+      "differingPixels": 453,
+      "host": "macOS"
+    }
+  },
+  "supplementalProductionPlaywright": {
+    "exit": 0,
+    "checks": [
+      "all D18 labels and accessible names for 13 agents in light/dark",
+      "danger component color property and computed white in six theme/OS combinations"
+    ]
+  },
+  "linuxAttempt": "docker info timed out after 8 seconds",
+  "cleanup": "Disposable spec and preview build outputs removed; Playwright browser and server children exited."
+}
