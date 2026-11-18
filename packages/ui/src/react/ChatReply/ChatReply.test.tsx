@@ -255,6 +255,36 @@ describe("ChatReply", () => {
 		expect(container.querySelector("li pre code")?.textContent).toBe(payload);
 	});
 
+	it.each([
+		["ordered", '1. Check\n\n ```openui\nroot = Badge("Ready", "success")\n ```\n\n Continue\n\n1. Finish'],
+		["unordered", '- Check\n\n ```openui\nroot = Badge("Ready", "success")\n ```\n\n Continue\n\n- Finish'],
+		["nested", '- Parent\n\n  3. Check\n\n     ```openui\nroot = Badge("Ready", "success")\n     ```\n\n     Continue\n\n  1. Finish\n\n- Sibling'],
+	] as const)("keeps OpenUI inside the %s list throughout streaming", (name, reply) => {
+		const locale = name === "unordered" ? "ar" : "en";
+		const { container, rerender } = render(<ChatReply reply="" locale={locale} />);
+		for (let length = 1; length <= reply.length; length += 1) {
+			rerender(<ChatReply reply={reply.slice(0, length)} locale={locale} />);
+			const ui = container.querySelector(".ts-chat-reply__openui");
+			if (ui) expect(ui.closest("li")).not.toBeNull();
+			expect(container.textContent).not.toContain("```");
+		}
+		const ui = container.querySelector(".ts-chat-reply__openui")!;
+		const item = screen.getByText("Check").closest("li")!;
+		expect(ui.closest("li")).toBe(item);
+		expect(screen.getByText("Continue").closest("li")).toBe(item);
+		expect(within(item).getByText("Ready", { exact: true })).toBeInTheDocument();
+		const list = item.parentElement!;
+		expect(list.querySelectorAll(":scope > li")).toHaveLength(2);
+		expect(screen.getByText("Finish").closest("li")?.parentElement).toBe(list);
+		if (name !== "unordered") {
+			expect(list.tagName).toBe("OL");
+			expect(list).toHaveAttribute("start", name === "nested" ? "3" : "1");
+			expect(container.querySelectorAll("ol")).toHaveLength(1);
+		}
+		if (name === "nested") expect(list.closest("li")).toBe(screen.getByText("Parent").closest("li"));
+		expect(item.textContent).toBe("CheckReadyContinue");
+	});
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);
