@@ -1,0 +1,31 @@
+vite v8.3.8 building ssr environment for production...
+transforming...
+✓ 437 modules transformed.
+rendering chunks...
+[33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use client" in "node_modules/@openuidev/react-lang/node_modules/@openuidev/devtools/dist/index.mjs" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m node_modules/@openuidev/react-lang/node_modules/@openuidev/devtools/dist/index.mjs:1:1 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m1 │[0m "use client";
+ [38;5;240m  │[0m ──────┬──────  
+ [38;5;240m  │[0m       ╰──────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+✓ built in 77ms
+{"name":"public server consumer bundle","reactDOMModules":[],"sdkImporters":[{"source":"@anthropic-ai/sdk","importer":"{run-worktree}/packages/ui/dist/openui/server/providers/anthropic.js"}]}
+{"name":"locale prompt and rendered emitted example","locale":"en","components":["Example","Squadmate"],"accessibleName":"Petra, Planning"}
+{"name":"locale prompt and rendered emitted example","locale":"ar","components":["Example","Squadmate"],"accessibleName":"بترا، تخطيط"}
+{"name":"request rejected","case":"malformed","status":400,"error":{"name":"OpenUIServerError","code":"invalid_json"}}
+{"name":"request rejected","case":"missing turns","status":400,"error":{"name":"OpenUIServerError","code":"invalid_request"}}
+{"name":"request rejected","case":"forbidden role","status":400,"error":{"name":"OpenUIServerError","code":"invalid_request"}}
+{"name":"request rejected","case":"non-string content","status":400,"error":{"name":"OpenUIServerError","code":"invalid_request"}}
+{"name":"request rejected","case":"13 turns","status":400,"error":{"name":"OpenUIServerError","code":"too_many_turns"}}
+{"name":"request rejected","case":"oversize UTF-8","status":413,"error":{"name":"OpenUIServerError","code":"body_too_large"}}
+{"name":"chunked body cap","status":413,"error":{"name":"OpenUIServerError","code":"body_too_large"}}
+{"name":"bounded valid requests and real SDK streamed response","exactBytes":16384,"turns":12,"status":200,"headers":{"cache-control":"no-store, no-transform","connection":"keep-alive","content-type":"text/plain; charset=utf-8","date":"Wed, 18 Nov 2026 07:48:02 GMT","keep-alive":"timeout=5","transfer-encoding":"chunked","x-accel-buffering":"no"},"chunks":["root = Example(\"","مرحباً\")"],"model":"claude-haiku-5-5","messages":[{"role":"user","content":"turn 0"},{"role":"assistant","content":"turn 1"},{"role":"user","content":"turn 2"},{"role":"assistant","content":"turn 3"},{"role":"user","content":"turn 4"},{"role":"assistant","content":"turn 5"},{"role":"user","content":"turn 6"},{"role":"assistant","content":"turn 7"},{"role":"user","content":"turn 8"},{"role":"assistant","content":"turn 9"},{"role":"user","content":"turn 10"},{"role":"assistant","content":"turn 11"}]}
+{"name":"provider rejects before first text","status":502,"error":{"name":"BadRequestError","code":"provider_failure"}}
+{"name":"provider fails after first text","observed":"Response body rejects with local stream failure"}
+{"name":"cancel real SDK response","upstreamConnectionClosed":true}
+{"name":"request signal aborts real SDK stream","observed":"Pending response read rejects with abort error"}
+{"name":"async generator input cancellation","finallyCalls":1}

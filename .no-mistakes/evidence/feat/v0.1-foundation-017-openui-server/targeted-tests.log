@@ -1,0 +1,12 @@
+
+ RUN  v5.1.0 {run-worktree}
+
+transforming...
+✓ 427 modules transformed.
+rendering chunks...
+
+ Test Files  2 passed (2)
+      Tests  12 passed (12)
+   Start at  01:47:45
+   Duration  807ms (environment 60%, import 16%, setup 10%, tests 10%, transform 4%)
+

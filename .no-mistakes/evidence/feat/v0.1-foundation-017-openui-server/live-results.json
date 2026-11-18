@@ -1,0 +1,189 @@
+{
+  "surface": "Built public server bundle, localhost Worker-style HTTP route, real Anthropic SDK against localhost synthetic SSE emulator",
+  "results": [
+    {
+      "name": "public server consumer bundle",
+      "reactDOMModules": [],
+      "sdkImporters": [
+        {
+          "source": "@anthropic-ai/sdk",
+          "importer": "{run-worktree}/packages/ui/dist/openui/server/providers/anthropic.js"
+        }
+      ]
+    },
+    {
+      "name": "locale prompt and rendered emitted example",
+      "locale": "en",
+      "components": [
+        "Example",
+        "Squadmate"
+      ],
+      "accessibleName": "Petra, Planning"
+    },
+    {
+      "name": "locale prompt and rendered emitted example",
+      "locale": "ar",
+      "components": [
+        "Example",
+        "Squadmate"
+      ],
+      "accessibleName": "بترا، تخطيط"
+    },
+    {
+      "name": "request rejected",
+      "case": "malformed",
+      "status": 400,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "invalid_json"
+      }
+    },
+    {
+      "name": "request rejected",
+      "case": "missing turns",
+      "status": 400,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "request rejected",
+      "case": "forbidden role",
+      "status": 400,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "request rejected",
+      "case": "non-string content",
+      "status": 400,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "request rejected",
+      "case": "13 turns",
+      "status": 400,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "too_many_turns"
+      }
+    },
+    {
+      "name": "request rejected",
+      "case": "oversize UTF-8",
+      "status": 413,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "body_too_large"
+      }
+    },
+    {
+      "name": "chunked body cap",
+      "status": 413,
+      "error": {
+        "name": "OpenUIServerError",
+        "code": "body_too_large"
+      }
+    },
+    {
+      "name": "bounded valid requests and real SDK streamed response",
+      "exactBytes": 16384,
+      "turns": 12,
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store, no-transform",
+        "connection": "keep-alive",
+        "content-type": "text/plain; charset=utf-8",
+        "date": "Wed, 18 Nov 2026 07:48:02 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked",
+        "x-accel-buffering": "no"
+      },
+      "chunks": [
+        "root = Example(\"",
+        "مرحباً\")"
+      ],
+      "model": "claude-haiku-5-5",
+      "messages": [
+        {
+          "role": "user",
+          "content": "turn 0"
+        },
+        {
+          "role": "assistant",
+          "content": "turn 1"
+        },
+        {
+          "role": "user",
+          "content": "turn 2"
+        },
+        {
+          "role": "assistant",
+          "content": "turn 3"
+        },
+        {
+          "role": "user",
+          "content": "turn 4"
+        },
+        {
+          "role": "assistant",
+          "content": "turn 5"
+        },
+        {
+          "role": "user",
+          "content": "turn 6"
+        },
+        {
+          "role": "assistant",
+          "content": "turn 7"
+        },
+        {
+          "role": "user",
+          "content": "turn 8"
+        },
+        {
+          "role": "assistant",
+          "content": "turn 9"
+        },
+        {
+          "role": "user",
+          "content": "turn 10"
+        },
+        {
+          "role": "assistant",
+          "content": "turn 11"
+        }
+      ]
+    },
+    {
+      "name": "provider rejects before first text",
+      "status": 502,
+      "error": {
+        "name": "BadRequestError",
+        "code": "provider_failure"
+      }
+    },
+    {
+      "name": "provider fails after first text",
+      "observed": "Response body rejects with local stream failure"
+    },
+    {
+      "name": "cancel real SDK response",
+      "upstreamConnectionClosed": true
+    },
+    {
+      "name": "request signal aborts real SDK stream",
+      "observed": "Pending response read rejects with abort error"
+    },
+    {
+      "name": "async generator input cancellation",
+      "finallyCalls": 1
+    }
+  ]
+}
