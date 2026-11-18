@@ -214,9 +214,18 @@ function ComponentExample() {
 							</DialogContent>
 						</Dialog>
 						<ExampleCodeBlock
-							code={
-								"<Dialog>\n  <DialogTrigger>Open dialog</DialogTrigger>\n  <DialogContent>\n    <DialogTitle>Review request</DialogTitle>\n    <DialogDescription>A new member asked to join.</DialogDescription>\n  </DialogContent>\n</Dialog>"
-							}
+							code={`<Dialog>
+  <DialogTrigger render={<Button variant="outline" />}>${copy.open}</DialogTrigger>
+  <DialogBackdrop />
+  <DialogContent>
+    <DialogTitle>${copy.simpleTitle}</DialogTitle>
+    <DialogDescription>${copy.simpleDescription}</DialogDescription>
+    <p data-slot="dialog-body">${copy.body}</p>
+    <div data-slot="dialog-actions">
+      <DialogClose render={<Button variant="solid" />}>${copy.close}</DialogClose>
+    </div>
+  </DialogContent>
+</Dialog>`}
 						/>
 					</div>
 					<div className="dialog-preview__item">
@@ -244,9 +253,28 @@ function ComponentExample() {
 							</DialogContent>
 						</Dialog>
 						<ExampleCodeBlock
-							code={
-								'<Dialog>\n  <DialogTrigger>Edit project</DialogTrigger>\n  <DialogContent>\n    <DialogTitle>Edit project</DialogTitle>\n    <Field name="project-name">\n      <FieldLabel>Project name</FieldLabel>\n      <Input defaultValue="Northstar" />\n    </Field>\n  </DialogContent>\n</Dialog>'
-							}
+							code={`<Dialog>
+  <DialogTrigger render={<Button variant="outline" />}>${copy.formOpen}</DialogTrigger>
+  <DialogBackdrop />
+  <DialogContent>
+    <DialogTitle>${copy.formTitle}</DialogTitle>
+    <DialogDescription>${copy.formDescription}</DialogDescription>
+    <form data-slot="dialog-form" onSubmit={(event) => event.preventDefault()}>
+      <Field name="project-name">
+        <FieldLabel>${copy.name}</FieldLabel>
+        <Input defaultValue="${copy.nameValue}" />
+      </Field>
+      <div data-slot="dialog-actions">
+        <DialogClose value="cancel" render={<Button variant="outline" />}>
+          ${copy.cancel}
+        </DialogClose>
+        <DialogClose value="save" render={<Button variant="solid" />}>
+          ${copy.save}
+        </DialogClose>
+      </div>
+    </form>
+  </DialogContent>
+</Dialog>`}
 						/>
 					</div>
 					<div className="dialog-preview__item">
@@ -269,9 +297,23 @@ function ComponentExample() {
 							</DialogContent>
 						</Dialog>
 						<ExampleCodeBlock
-							code={
-								"<Dialog>\n  <DialogTrigger>Delete project</DialogTrigger>\n  <DialogContent>\n    <DialogTitle>Delete project?</DialogTitle>\n    <DialogDescription>This action cannot be undone.</DialogDescription>\n  </DialogContent>\n</Dialog>"
-							}
+							code={`<Dialog>
+  <DialogTrigger render={<Button variant="danger" />}>${copy.deleteOpen}</DialogTrigger>
+  <DialogBackdrop />
+  <DialogContent>
+    <DialogTitle>${copy.deleteTitle}</DialogTitle>
+    <DialogDescription>${copy.deleteDescription}</DialogDescription>
+    <p data-slot="dialog-body">${copy.deleteBody}</p>
+    <div data-slot="dialog-actions">
+      <DialogClose value="cancel" render={<Button variant="outline" />}>
+        ${copy.cancel}
+      </DialogClose>
+      <DialogClose value="delete" render={<Button variant="danger" />}>
+        ${copy.delete}
+      </DialogClose>
+    </div>
+  </DialogContent>
+</Dialog>`}
 						/>
 					</div>
 				</section>
@@ -394,9 +436,11 @@ function ComponentExample() {
 									<FieldDescription>{labels.helper}</FieldDescription>
 								</Field>
 								<ExampleCodeBlock
-									code={
-										'<Field name="project-name">\n  <FieldLabel>Project name</FieldLabel>\n  <Input defaultValue="Northstar" />\n  <FieldDescription>Use a name your team recognizes.</FieldDescription>\n</Field>'
-									}
+									code={`<Field name="description">
+  <FieldLabel>${labels.label}</FieldLabel>
+  <Input defaultValue="${ar ? "بنّاء" : "Northstar"}" />
+  <FieldDescription>${labels.helper}</FieldDescription>
+</Field>`}
 								/>
 							</div>
 							<div className="input-preview__item">
@@ -407,9 +451,11 @@ function ComponentExample() {
 									<FieldError match>{labels.invalid}</FieldError>
 								</Field>
 								<ExampleCodeBlock
-									code={
-										'<Field name="project-name" invalid>\n  <FieldLabel>Project name</FieldLabel>\n  <Input aria-invalid="true" />\n  <FieldError match>This field is required.</FieldError>\n</Field>'
-									}
+									code={`<Field name="error" invalid>
+  <FieldLabel>${labels.label}</FieldLabel>
+  <Input aria-invalid="true" />
+  <FieldError match>${labels.invalid}</FieldError>
+</Field>`}
 								/>
 							</div>
 						</>
@@ -441,7 +487,12 @@ function ComponentExample() {
 							</Switch>
 						</div>
 						<ExampleCodeBlock
-							code={'<Switch aria-label="Product updates" defaultChecked>\n  <SwitchThumb />\n</Switch>'}
+							code={`<div className="ts-switch-field">
+  <span>${label}</span>
+  <Switch aria-label="${label}" defaultChecked>
+    <SwitchThumb />
+  </Switch>
+</div>`}
 						/>
 					</div>
 					<div className="switch-preview__example">
@@ -451,7 +502,14 @@ function ComponentExample() {
 								<SwitchThumb />
 							</Switch>
 						</div>
-						<ExampleCodeBlock code={'<Switch aria-label="Notifications off">\n  <SwitchThumb />\n</Switch>'} />
+						<ExampleCodeBlock
+							code={`<div className="ts-switch-field">
+  <span>${locale === "ar" ? "الإشعارات" : "Notifications off"}</span>
+  <Switch aria-label="${locale === "ar" ? "الإشعارات" : "Notifications off"}">
+    <SwitchThumb />
+  </Switch>
+</div>`}
+						/>
 					</div>
 					<div className="switch-preview__example">
 						<div className="ts-switch-field">
@@ -461,7 +519,12 @@ function ComponentExample() {
 							</Switch>
 						</div>
 						<ExampleCodeBlock
-							code={'<Switch aria-label="Disabled" disabled defaultChecked>\n  <SwitchThumb />\n</Switch>'}
+							code={`<div className="ts-switch-field">
+  <span>${locale === "ar" ? "مُعطّل" : "Disabled"}</span>
+  <Switch aria-label="${locale === "ar" ? "مُعطّل" : "Disabled"}" disabled defaultChecked>
+    <SwitchThumb />
+  </Switch>
+</div>`}
 						/>
 					</div>
 				</section>
@@ -493,9 +556,10 @@ function ComponentExample() {
 						))}
 					</SegmentedControl>
 					<ExampleCodeBlock
-						code={
-							'<SegmentedControl aria-label="View" defaultValue="Grid">\n  <SegmentedControlIndicator />\n  <SegmentedControlItem value="List">List</SegmentedControlItem>\n  <SegmentedControlItem value="Grid">Grid</SegmentedControlItem>\n  <SegmentedControlItem value="Board">Board</SegmentedControlItem>\n</SegmentedControl>'
-						}
+						code={`<SegmentedControl aria-label="${locale === "ar" ? "طريقة العرض" : "View"}" defaultValue="${options[1]}">
+  <SegmentedControlIndicator />
+${options.map((option) => `  <SegmentedControlItem value="${option}">${option}</SegmentedControlItem>`).join("\n")}
+</SegmentedControl>`}
 					/>
 					<SegmentedControl aria-label={locale === "ar" ? "تخطيط" : "Layout"} defaultValue="preview">
 						<SegmentedControlIndicator />
@@ -507,9 +571,15 @@ function ComponentExample() {
 						</SegmentedControlItem>
 					</SegmentedControl>
 					<ExampleCodeBlock
-						code={
-							'<SegmentedControl aria-label="Layout" defaultValue="preview">\n  <SegmentedControlIndicator />\n  <SegmentedControlItem value="edit">Edit</SegmentedControlItem>\n  <SegmentedControlItem value="preview">Preview</SegmentedControlItem>\n</SegmentedControl>'
-						}
+						code={`<SegmentedControl aria-label="${locale === "ar" ? "تخطيط" : "Layout"}" defaultValue="preview">
+  <SegmentedControlIndicator />
+  <SegmentedControlItem value="edit" aria-label="${iconOptions[0]}">
+    <span aria-hidden="true">✎</span>
+  </SegmentedControlItem>
+  <SegmentedControlItem value="preview" aria-label="${iconOptions[1]}">
+    <span aria-hidden="true">◉</span>
+  </SegmentedControlItem>
+</SegmentedControl>`}
 					/>
 				</section>
 				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
@@ -607,22 +677,26 @@ function ComponentExample() {
 					<Chip name="tool_search" icon={<span aria-hidden="true">⌕</span>} onClick={() => undefined} />
 					<ExampleCodeBlock
 						code={
-							'<Chip name="response_schema" icon={<span aria-hidden="true">◇</span>} onClick={openSchema} />\n<Chip name="tool_search" icon={<span aria-hidden="true">⌕</span>} onClick={openSearch} />'
+							'<Chip name="response_schema" icon={<span aria-hidden="true">◇</span>} onClick={() => undefined} />\n<Chip name="tool_search" icon={<span aria-hidden="true">⌕</span>} onClick={() => undefined} />'
 						}
 					/>
 					<h2>{locale === "ar" ? "من دون أيقونة" : "Without icon"}</h2>
 					<Chip name="output_format" icon={null} onClick={() => undefined} />
-					<ExampleCodeBlock code={'<Chip name="output_format" icon={null} onClick={openOutputFormat} />'} />
+					<ExampleCodeBlock code={'<Chip name="output_format" icon={null} onClick={() => undefined} />'} />
 					<h2>{locale === "ar" ? "معطّل" : "Disabled"}</h2>
 					<Chip name="disabled_object" icon={<span aria-hidden="true">◇</span>} disabled />
-					<ExampleCodeBlock code={'<Chip name="disabled_object" icon={<ObjectIcon />} disabled />'} />
+					<ExampleCodeBlock
+						code={'<Chip name="disabled_object" icon={<span aria-hidden="true">◇</span>} disabled />'}
+					/>
 					<h2>{locale === "ar" ? "معرّف طويل" : "Long identifier"}</h2>
 					<Chip
 						name="this_is_a_long_object_identifier_that_stays_visible"
 						icon={<span aria-hidden="true">◇</span>}
 					/>
 					<ExampleCodeBlock
-						code={'<Chip name="this_is_a_long_object_identifier_that_stays_visible" icon={<ObjectIcon />} />'}
+						code={
+							'<Chip name="this_is_a_long_object_identifier_that_stays_visible" icon={<span aria-hidden="true">◇</span>} />'
+						}
 					/>
 				</section>
 				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
@@ -663,7 +737,16 @@ function ComponentExample() {
 								</TooltipContent>
 							</Tooltip>
 							<ExampleCodeBlock
-								code={`<Tooltip><TooltipTrigger>+</TooltipTrigger><TooltipContent side="${side}">${labels.hint}</TooltipContent></Tooltip>`}
+								code={`<Tooltip shortcut="k">
+  <TooltipTrigger render={<Button iconOnly aria-label="${labels.action}" />}>
+    <span aria-hidden="true">+</span>
+  </TooltipTrigger>
+  <TooltipContent side="${side}">
+    ${labels.hint}
+    <TooltipShortcut />
+    <TooltipArrow />
+  </TooltipContent>
+</Tooltip>`}
 							/>
 						</div>
 					))}
@@ -724,6 +807,23 @@ function ComponentExample() {
 				</svg>
 			);
 		};
+		const menuContentsCode = `<MenuItem value="open">
+  <MenuItemIcon><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 5.5h7l2 2h9v11H3z" /></svg></MenuItemIcon>
+  ${labels.open}
+</MenuItem>
+<MenuItem value="duplicate">
+  <MenuItemIcon><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="13" height="13" rx="2" /><path d="M5 17H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1" /></svg></MenuItemIcon>
+  ${labels.duplicate}
+</MenuItem>
+<MenuItem value="share" disabled>
+  <MenuItemIcon><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="2" /><circle cx="6" cy="12" r="2" /><circle cx="18" cy="19" r="2" /><path d="m8 11 8-5M8 13l8 5" /></svg></MenuItemIcon>
+  ${labels.disabled}
+</MenuItem>
+<MenuSeparator />
+<MenuItem value="delete" destructive>
+  <MenuItemIcon><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6" /></svg></MenuItemIcon>
+  ${labels.danger}
+</MenuItem>`;
 		const menuContents = (
 			<>
 				<MenuItem value="open">
@@ -761,9 +861,12 @@ function ComponentExample() {
 							</MenuContent>
 						</Menu>
 						<ExampleCodeBlock
-							code={
-								'<Menu>\n  <MenuTrigger>Project actions</MenuTrigger>\n  <MenuContent side="bottom" align="start">\n    <MenuItem value="open">Open project</MenuItem>\n  </MenuContent>\n</Menu>'
-							}
+							code={`<Menu onAction={() => undefined}>
+  <MenuTrigger>${labels.trigger}</MenuTrigger>
+  <MenuContent side="bottom" align="start">
+${menuContentsCode}
+  </MenuContent>
+</Menu>`}
 						/>
 					</div>
 					<div>
@@ -775,9 +878,12 @@ function ComponentExample() {
 							</MenuContent>
 						</Menu>
 						<ExampleCodeBlock
-							code={
-								'<Menu defaultOpen>\n  <MenuTrigger>Project actions</MenuTrigger>\n  <MenuContent side="bottom" align="start">\n    <MenuItem value="open">Open project</MenuItem>\n  </MenuContent>\n</Menu>'
-							}
+							code={`<Menu defaultOpen onAction={() => undefined}>
+  <MenuTrigger>${labels.trigger}</MenuTrigger>
+  <MenuContent side="bottom" align="start">
+${menuContentsCode}
+  </MenuContent>
+</Menu>`}
 						/>
 					</div>
 				</section>
