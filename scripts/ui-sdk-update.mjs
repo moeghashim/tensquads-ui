@@ -50,9 +50,11 @@ export function makeBody(version, priorEntries, nextEntries, releases) {
 }
 
 async function getJson(url) {
-	const response = await fetch(url, {
-		headers: { "User-Agent": "tensquads-ui-ui-sdk-update", Accept: "application/vnd.github+json" },
-	});
+	const headers = { "User-Agent": "tensquads-ui-ui-sdk-update", Accept: "application/vnd.github+json" };
+	// Unauthenticated GitHub API calls from shared runners hit the rate limit (403).
+	if (process.env.GITHUB_TOKEN && url.startsWith("https://api.github.com/"))
+		headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+	const response = await fetch(url, { headers });
 	if (!response.ok) throw new Error(`${url} returned ${response.status}`);
 	return response.json();
 }
