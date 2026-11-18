@@ -57,8 +57,6 @@ describe("OpenUI round trips", () => {
 			<TensquadsRenderer stream={'root = Example("hello", "unexpected")'} locale={locale} onError={onError} />,
 		);
 		expect(result.container.textContent).toBe("hello");
-		expect(onError).toHaveBeenCalledWith(
-			expect.arrayContaining([expect.objectContaining({ code: "excess-args" })]),
-		);
+		expect(onError).toHaveBeenCalledWith(expect.arrayContaining([expect.objectContaining({ code: "excess-args" })]));
 	});
 });
