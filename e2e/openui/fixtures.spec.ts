@@ -24,15 +24,32 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("button", { name: locale === "en" ? "Continue" : "متابعة" }),
 				).toBeVisible();
+			} else if (component.name === "Badge") {
+				const badge = fixtureRegion.getByText(locale === "en" ? "Ready" : "جاهز", { exact: true });
+				await expect(badge).toBeVisible();
+				await expect(badge).toHaveJSProperty("tagName", "SPAN");
 			} else if (component.name === "Chip") {
-				await expect(fixtureRegion.getByRole("button", { name: "response_schema" })).toBeVisible();
-			} else {
+				const chip = fixtureRegion.getByRole("link", { name: "response_schema" });
+				await expect(chip).toBeVisible();
+				await expect(chip.locator(".ts-chip__icon")).toHaveText("◇");
+				await expect(chip).toHaveAttribute("href", "#response_schema");
+			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
 				});
 				await expect(image).toBeVisible();
 				await expect(image).toHaveCSS("width", "64px");
 				await expect(image).toHaveCSS("height", "64px");
+			} else {
+				const label =
+					component.name === "Input"
+						? locale === "en"
+							? "Search projects"
+							: "ابحث عن المشاريع"
+						: locale === "en"
+							? "Project name"
+							: "اسم المشروع";
+				await expect(fixtureRegion.getByRole("textbox", { name: label })).toBeVisible();
 			}
 		}
 	}

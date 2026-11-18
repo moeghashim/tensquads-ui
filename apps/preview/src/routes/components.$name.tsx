@@ -1,7 +1,10 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
+import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
+import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
+import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import {
 	Squadmate,
 	squadmateCharacterName,
@@ -57,6 +60,90 @@ function ComponentPage() {
 			</main>
 		);
 	}
+	if (name === "Input" || name === "Field") {
+		const ar = locale === "ar";
+		const labels = ar
+			? {
+					title: "حالات الإدخال",
+					empty: "فارغ",
+					placeholder: "عنصر نائب",
+					filled: "معبأ",
+					description: "وصف",
+					error: "خطأ",
+					disabled: "معطّل",
+					readOnly: "للقراءة فقط",
+					label: "اسم المشروع",
+					helper: "استخدم اسماً يعرفه فريقك.",
+					invalid: "هذا الحقل مطلوب.",
+				}
+			: {
+					title: "Input states",
+					empty: "Empty",
+					placeholder: "Placeholder",
+					filled: "Filled",
+					description: "Description",
+					error: "Error",
+					disabled: "Disabled",
+					readOnly: "Read only",
+					label: "Project name",
+					helper: "Use a name your team recognizes.",
+					invalid: "This field is required.",
+				};
+		const examples = [
+			{ label: labels.empty, props: {} },
+			{ label: labels.placeholder, props: { placeholder: ar ? "أدخل اسماً" : "Enter a name" } },
+			{ label: labels.filled, props: { defaultValue: ar ? "بنّاء" : "Northstar" } },
+			{ label: labels.disabled, props: { disabled: true, defaultValue: ar ? "غير متاح" : "Unavailable" } },
+			{ label: labels.readOnly, props: { readOnly: true, defaultValue: ar ? "للقراءة" : "Read only" } },
+		];
+		return (
+			<main className="gallery input-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{ar ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{ar ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>{name}</h1>
+				<section className="input-preview__grid" aria-label={labels.title}>
+					{examples.map(({ label, props }) => (
+						<div className="input-preview__item" key={label}>
+							{name === "Input" && <h2>{label}</h2>}
+							{name === "Input" ? (
+								<Input aria-label={label} {...props} />
+							) : (
+								<Field name={label}>
+									<FieldLabel>{label}</FieldLabel>
+									<Input {...props} />
+								</Field>
+							)}
+						</div>
+					))}
+					{name === "Field" && (
+						<>
+							<div className="input-preview__item">
+								<h2>{labels.description}</h2>
+								<Field name="description">
+									<FieldLabel>{labels.label}</FieldLabel>
+									<Input defaultValue={ar ? "بنّاء" : "Northstar"} />
+									<FieldDescription>{labels.helper}</FieldDescription>
+								</Field>
+							</div>
+							<div className="input-preview__item">
+								<h2>{labels.error}</h2>
+								<Field name="error" invalid>
+									<FieldLabel>{labels.label}</FieldLabel>
+									<Input aria-invalid="true" />
+									<FieldError match>{labels.invalid}</FieldError>
+								</Field>
+							</div>
+						</>
+					)}
+				</section>
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
 	if (name === "Button") {
 		const variants = ["solid", "soft", "outline", "ghost", "danger"] as const;
 		const sizes = ["sm", "md", "lg"] as const;
@@ -89,6 +176,32 @@ function ComponentPage() {
 								{locale === "ar" ? "معطّل" : "Disabled"}
 							</Button>
 						</div>
+					))}
+				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
+	if (name === "Badge") {
+		const tones = ["default", "success", "warning", "danger", "info"] as const;
+		const labels =
+			locale === "ar"
+				? { default: "مسودة", success: "مكتمل", warning: "قيد الانتظار", danger: "فشل", info: "معلومات" }
+				: { default: "Draft", success: "Complete", warning: "Pending", danger: "Failed", info: "Information" };
+		return (
+			<main className="gallery badge-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>Badge</h1>
+				<section className="badge-preview__grid" aria-label={locale === "ar" ? "نغمات الشارة" : "Badge tones"}>
+					{tones.map((tone) => (
+						<Badge key={tone} tone={tone}>
+							{labels[tone]}
+						</Badge>
 					))}
 				</section>
 				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>

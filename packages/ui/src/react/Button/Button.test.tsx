@@ -110,7 +110,7 @@ describe("Button", () => {
 describe("OpenUI round trips", () => {
 	it("has English and Arabic fixtures for every registered component", () => {
 		const registered = getRegisteredComponents().map((component) => component.name);
-		expect(registered).toEqual(["Button", "Chip", "Squadmate"]);
+		expect(registered).toEqual(expect.arrayContaining(["Button", "Badge", "Chip", "Squadmate", "Input", "Field"]));
 		for (const name of registered) {
 			for (const locale of ["en", "ar"]) {
 				const path = join(process.cwd(), "packages/ui/src/react", name, `${name}.fixture.${locale}.txt`);
@@ -130,12 +130,25 @@ describe("OpenUI round trips", () => {
 				const result = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
 				if (component.name === "Button") {
 					expect(result.getByRole("button", { name: expectedLabels[locale] })).toBeInTheDocument();
+				} else if (component.name === "Badge") {
+					expect(result.getByText(locale === "en" ? "Ready" : "جاهز")).toHaveAttribute("data-slot", "badge");
 				} else if (component.name === "Chip") {
-					expect(result.getByRole("button", { name: "response_schema" })).toBeInTheDocument();
-				} else {
+					expect(result.getByRole("link", { name: "response_schema" })).toHaveAttribute(
+						"href",
+						"#response_schema",
+					);
+				} else if (component.name === "Squadmate") {
 					expect(
 						result.getByRole("img", { name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط" }),
 					).toHaveAttribute("width", "64");
+				} else if (component.name === "Input") {
+					expect(
+						result.getByRole("textbox", { name: locale === "en" ? "Search projects" : "ابحث عن المشاريع" }),
+					).toBeInTheDocument();
+				} else if (component.name === "Field") {
+					expect(
+						result.getByRole("textbox", { name: locale === "en" ? "Project name" : "اسم المشروع" }),
+					).toBeInTheDocument();
 				}
 				expect(onError).toHaveBeenCalledWith([]);
 				cleanup();
