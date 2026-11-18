@@ -1,0 +1,1518 @@
+[
+  {
+    "iteration": 0,
+    "delta": 0,
+    "samples": [
+      {
+        "time": 2658,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 2673.2000000476837,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 2731.2999999523163,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 2880.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 2884.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 3023.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 3073.7999999523163,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 3125,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 3173.7999999523163,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 3223.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 3273.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 3323.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 3373.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 3431.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 3567.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 3673.7000000476837,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 3725.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 3773.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 3823.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 3873.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 3931.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 4068.7000000476837,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 4174,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 4224.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 4230.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 4373.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 4424,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 4473.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 4482.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 4623.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 4681.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 4807.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 4859.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 4863.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5007,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5056.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "delta": 0,
+    "samples": [
+      {
+        "time": 5085.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5106.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5107.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5165,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5165.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 5291.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 5291.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 5348.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 5348.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 5473.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 5474.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 5525.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5525.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5530.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5530.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5673.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5674,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5723.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5723.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5773.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5774.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 5783.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 5783.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 5923.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 5923.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 5973.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 5973.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 6023.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 6024.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 6073.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 6073.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 6123.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6125.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6174.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6174.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6223.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6223.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6273.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6273.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6331.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6331.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 6465.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 6467.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 6590.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 6591.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 6648,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 6648.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 6774.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6776.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6824.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6824.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6873.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6873.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6923.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6923.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 6973.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 6975,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7024.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7024.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7073.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7074.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7124,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7124.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7173.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7173.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 7223.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7225.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7230.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7231.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7373.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7374,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7423.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7423.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7473.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7474.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "delta": 0,
+    "samples": [
+      {
+        "time": 7511.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7523.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7523.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7523.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7573.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7573.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7573.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 7624.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7624.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7624.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7673.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7674.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7674.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7707.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7708.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7708.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7756.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7757.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7757.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7806.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7807.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7807.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7857.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7857.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7857.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 0/7\nإعادة العرض"
+      },
+      {
+        "time": 7906.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 7910.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 7910.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 7916.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 7916.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 7916.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8023.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8023.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8024,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8081.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8081.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8081.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8207.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8207.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8207.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 1/7\nإعادة العرض"
+      },
+      {
+        "time": 8267.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8267.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8267.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8398.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8398.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8398.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8531.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8532.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8532.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 2/7\nإعادة العرض"
+      },
+      {
+        "time": 8659.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8659.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8659.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8707.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8707.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8707.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8756.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8757.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8757.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 3/7\nإعادة العرض"
+      },
+      {
+        "time": 8806.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8808.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8808.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8857.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8858.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8858.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8908.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8909.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8909.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8913.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8914.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 8914.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 9056.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 9056.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 9056.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 4/7\nإعادة العرض"
+      },
+      {
+        "time": 9107.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9107.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9107.200000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9164.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9164.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9164.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9290,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9290.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9290.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 5/7\nإعادة العرض"
+      },
+      {
+        "time": 9347.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9348.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9348.299999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9473.399999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9473.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9473.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9525.5,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9525.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9525.700000047684,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9556.799999952316,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9557.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9557.100000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9614.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9614.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9614.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 6/7\nإعادة العرض"
+      },
+      {
+        "time": 9748.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 9748.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 9748.899999976158,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 9873.600000023842,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 9874,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      },
+      {
+        "time": 9874,
+        "height": 939.90625,
+        "fonts": "loaded",
+        "code": 503.90625,
+        "footer": "ملف العرض: home-demo.fixture.ar.txt · 7/7\nإعادة العرض"
+      }
+    ]
+  }
+]

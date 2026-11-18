@@ -1,0 +1,59 @@
+[
+  {
+    "scenario": "Replay reserves layout and hidden controls are inaccessible",
+    "stable": true,
+    "locale": "ar",
+    "width": 390,
+    "steps": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "frames": 31,
+    "ranges": {
+      "demo.x": 0,
+      "demo.y": 0,
+      "demo.w": 0,
+      "demo.h": 0,
+      "screen.x": 0,
+      "screen.y": 0,
+      "screen.w": 0,
+      "screen.h": 0,
+      "next.x": 0,
+      "next.y": 0,
+      "next.w": 0,
+      "next.h": 0,
+      "field.x": 0,
+      "field.y": 0,
+      "field.w": 0,
+      "field.h": 0,
+      "settings.x": 0,
+      "settings.y": 0,
+      "settings.w": 0,
+      "settings.h": 0,
+      "actions.x": 0,
+      "actions.y": 0,
+      "actions.w": 0,
+      "actions.h": 0
+    },
+    "overflow": 0,
+    "hiddenFocusRejected": true,
+    "errors": []
+  },
+  {
+    "scenario": "Edited controls reset after interrupted Replay",
+    "locale": "ar",
+    "width": 390,
+    "result": "pass"
+  },
+  {
+    "scenario": "Reduced motion displays complete stream immediately and Replay remains complete",
+    "locale": "ar",
+    "result": "pass"
+  }
+]
