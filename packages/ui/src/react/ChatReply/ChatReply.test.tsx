@@ -231,6 +231,30 @@ describe("ChatReply", () => {
 		expect(container.querySelector("li pre code")?.textContent).toBe(payload);
 	});
 
+	it.each([
+		["unordered", "- Example:\n    Details\n\n  ```python\n", "  "],
+		["ordered", "3. Example:\n     Details\n\n   ```python\n", "   "],
+		["nested", "- Parent\n  - Example:\n      Details\n\n    ```python\n", "    "],
+		["nested ordered", "- Parent\n  3. Example:\n       Details\n\n     ```python\n", "     "],
+		["under-indented prose", "- Example:\n Details\n\n  ```python\n", "  "],
+		["offset fence", "- Example:\n    Details\n\n    ```python\n", "    "],
+	] as const)("preserves four code spaces after prose in %s lists", (_name, opening, indent) => {
+		const payload = "    print(1)";
+		const { container, rerender } = render(<ChatReply reply={opening} />);
+		for (let length = 0; length <= payload.length; length += 1) {
+			rerender(<ChatReply reply={opening + indent + payload.slice(0, length)} />);
+			expect(container.querySelector("li pre code")?.textContent).toBe(payload.slice(0, length));
+		}
+		const closing = "\n" + indent + "```";
+		for (let length = 1; length <= closing.length; length += 1) {
+			rerender(<ChatReply reply={opening + indent + payload + closing.slice(0, length)} />);
+			expect(container.querySelector("li pre code")?.textContent?.split("\n")[0]).toBe(payload);
+		}
+		expect(screen.getByText("Details")).toBeInTheDocument();
+		expect(container.querySelector("li pre")).toHaveAttribute("dir", "ltr");
+		expect(container.querySelector("li pre code")?.textContent).toBe(payload);
+	});
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);

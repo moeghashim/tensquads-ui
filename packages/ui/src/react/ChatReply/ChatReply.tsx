@@ -42,7 +42,12 @@ function closesFence(line: string, fence: Fence): boolean {
 function readFence(lines: string[], start: number, fence: Fence) {
 	let end = start + 1;
 	while (end < lines.length && !closesFence(lines[end] ?? "", fence)) end += 1;
-	return { value: lines.slice(start + 1, end).join("\n"), end: Math.min(end + 1, lines.length), open: end === lines.length };
+	const indentation = lineIndent(lines[start] ?? "");
+	return {
+		value: lines.slice(start + 1, end).map((line) => removeIndent(line, indentation)).join("\n"),
+		end: Math.min(end + 1, lines.length),
+		open: end === lines.length,
+	};
 }
 
 function replyFences(lines: string[], offset = 0): { fence: Fence; start: number; end: number; value: string; open: boolean }[] {
@@ -139,7 +144,9 @@ function readListBody(lines: string[], start: number, item: NonNullable<ReturnTy
 	}
 	const firstContinuation = continuation.find((line) => line.trim());
 	const indentation =
-		openingFence(item.text) || listItem(item.text) ? item.contentIndent : lineIndent(firstContinuation ?? "");
+		openingFence(item.text) || listItem(item.text)
+			? item.contentIndent
+			: Math.min(item.contentIndent, lineIndent(firstContinuation ?? ""));
 	return { lines: [item.text, ...continuation.map((line) => removeIndent(line, indentation))], end };
 }
 
@@ -188,7 +195,7 @@ function markdown(source: string): ReactNode[] {
 			);
 			continue;
 		}
-		const heading = line.match(/^(#{1,6})\s+(.+?)(?:[ \t]+#+)?[ \t]*$/);
+		const heading = line.match(/^ {0,3}(#{1,6})\s+(.+?)(?:[ \t]+#+)?[ \t]*$/);
 		if (heading) {
 			const Tag = `h${heading[1]?.length ?? 1}` as ElementType;
 			nodes.push(<Tag key={`heading-${index}`}>{inline(heading[2] ?? "")}</Tag>);
@@ -205,7 +212,7 @@ function markdown(source: string): ReactNode[] {
 		while (
 			index < lines.length &&
 			lineAt(index).trim() &&
-			!/^#{1,6}\s/.test(lineAt(index)) &&
+			!/^ {0,3}#{1,6}\s/.test(lineAt(index)) &&
 			!openingFence(lineAt(index)) &&
 			!listItem(lineAt(index))
 		) {
