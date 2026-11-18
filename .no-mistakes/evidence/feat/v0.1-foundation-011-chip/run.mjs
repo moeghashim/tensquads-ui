@@ -1,0 +1,31 @@
+import {createServer} from '../apps/preview/node_modules/vite/dist/node/index.js';
+import react from '../apps/preview/node_modules/@vitejs/plugin-react/dist/index.js';
+import {chromium,expect} from '@playwright/test';
+import {writeFile} from 'node:fs/promises';
+const evidence='~/.no-mistakes/evidence/01M7PVSP7RFJCWRM65H4X017SS';
+const server=await createServer({configFile:false,root:new URL('.',import.meta.url).pathname,plugins:[react()],server:{host:'127.0.0.1',port:19783,strictPort:true,fs:{allow:[process.cwd()]}},resolve:{dedupe:['react','react-dom']}});
+let browser;
+const results=[];
+try {
+ await server.listen(); browser=await chromium.launch();const page=await browser.newPage();
+ await page.goto('http://127.0.0.1:19783');
+ const chip=page.getByRole('button',{name:'customer_schema'});
+ await chip.click();await expect(page.getByRole('status',{name:'Open count'})).toHaveText('1');
+ await chip.focus();await page.keyboard.press('Enter');await expect(page.getByRole('status',{name:'Open count'})).toHaveText('2');
+ await page.keyboard.press('Space');await expect(page.getByRole('status',{name:'Open count'})).toHaveText('3');
+ await expect(page.getByRole('status',{name:'Opened object'})).toHaveText('customer_schema');
+ expect(await chip.getAttribute('aria-pressed')).toBeNull();
+ results.push('React Chip: mouse, Enter, and Space each invoke the consumer callback exactly once; opened object is customer_schema; no pressed state.');
+ const blocked=page.getByRole('button',{name:'blocked_schema'});await expect(blocked).toBeDisabled();
+ await blocked.click({force:true});await blocked.evaluate(el=>el.focus());expect(await blocked.evaluate(el=>document.activeElement===el)).toBe(false);
+ await page.keyboard.press('Enter');await expect(page.getByRole('status',{name:'Opened object'})).toHaveText('customer_schema');
+ await chip.focus();await page.keyboard.press('Tab');await expect(page.getByRole('link',{name:'invoice_schema'})).toBeFocused();
+ results.push('Disabled Chip ignores pointer activation, refuses focus, and is skipped by Tab.');
+ const link=page.getByRole('link',{name:'invoice_schema'});await expect(link.locator('.ts-chip__icon')).toHaveText('※');
+ await link.click();await expect(page).toHaveURL(/#invoice_schema$/);
+ await page.evaluate(()=>history.replaceState(null,'','/'));await link.focus();await page.keyboard.press('Enter');await expect(page).toHaveURL(/#invoice_schema$/);
+ await page.evaluate(()=>history.replaceState(null,'','/'));await link.focus();await page.keyboard.press('Space');await expect(page).toHaveURL('http://127.0.0.1:19783/');
+ results.push('Real TensquadsRenderer: synthetic invoice_schema displays supplied ※ glyph; mouse and Enter navigate to #invoice_schema; Space retains native link behavior.');
+ await page.screenshot({path:`${evidence}/chip-consumer-actions.png`,fullPage:true});
+ await writeFile(`${evidence}/chip-consumer-results.json`,JSON.stringify(results,null,2));console.log(results.join('\n'));
+}finally{await browser?.close();await server.close()}

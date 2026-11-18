@@ -1,0 +1,5 @@
+[
+  "React Chip: mouse, Enter, and Space each invoke the consumer callback exactly once; opened object is customer_schema; no pressed state.",
+  "Disabled Chip ignores pointer activation, refuses focus, and is skipped by Tab.",
+  "Real TensquadsRenderer: synthetic invoice_schema displays supplied ※ glyph; mouse and Enter navigate to #invoice_schema; Space retains native link behavior."
+]

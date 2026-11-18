@@ -1,0 +1,7 @@
+Target: d0ee5108933fb85b2b2b0a6075048b93f3b1c222
+Host: Darwin; installed Playwright Chromium.
+Existing Chip browser tests: exit 1. OpenUI mouse and Enter navigation passed all locale/theme states. Screenshot comparison failed at en/dark/390: 436 differing pixels concentrated around text. Actual, expected, and diff retained. Linux parity remains unconfirmed.
+Supplemental production-preview matrix: final exit 0; eight screenshots visually inspected. Both locales/themes and both widths passed axe, full long identifier visibility, mobile overflow, 28px short chip, required focus ring, and disabled Tab guard. Initial disposable test compared equivalent hex/RGB strings incorrectly; normalized oracle and re-ran all states.
+Disposable real React/OpenUI consumer: final exit 0; callback count and destination results in chip-consumer-results.json. Initial occupied port replaced with isolated 19783.
+Docker info did not respond; owned processes terminated, exit 143. No baseline or comparator changes.
+Builds and browsers completed; Vite server and browser closed. No full suite or static checks. Disposable harnesses and generated outputs removed.
