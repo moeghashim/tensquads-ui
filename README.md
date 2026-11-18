@@ -38,6 +38,8 @@ Run `npm run preview:install`, then `npm run dev` from the repository root. The 
 
 The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. The gallery discovers components from their fixture files and links to case-sensitive `/components/<Name>` routes. `/components/Example` renders the selected locale's OpenUI fixture; a missing fixture displays a fallback message.
 
+`/components/Squadmate` shows every character and state in the selected locale and theme. See the [Squadmate contract](packages/ui/src/react/Squadmate/Squadmate.md) for its component and drawing APIs.
+
 Vite aliases and TypeScript paths resolve `@tensquads/ui/*` directly to `packages/ui/src`; the app has no npm dependency on the UI package and needs no package build before previewing source changes.
 
 ## Consumer setup

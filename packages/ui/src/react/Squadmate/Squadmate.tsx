@@ -31,10 +31,7 @@ const ARABIC_STATES: Record<AgentState, string> = {
 	idle: "خامل",
 };
 
-const ENGLISH_STATES = Object.fromEntries([
-	...AGENT_LOOP_STATES.map(({ id, label }) => [id, label]),
-	["idle", "Idle"],
-]);
+const ENGLISH_STATES = Object.fromEntries([...AGENT_LOOP_STATES.map(({ id, label }) => [id, label]), ["idle", "Idle"]]);
 
 export function squadmateCharacterName(agent: AgentSlug, locale: Locale = "en"): string {
 	const mate = SQUADMATES.find((entry) => entry.name.toLowerCase() === agent);

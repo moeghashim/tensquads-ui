@@ -1,6 +1,10 @@
 # Squadmate
 
-Import `Squadmate` from `@tensquads/ui/react`. It renders a decorative agent image with a screen reader name. It accepts an `agent` slug, an `AgentState`, a square pixel `size`, and a `locale` for the accessible name. The image is not interactive and is not in the tab order. Roster and drawing APIs are in `@tensquads/ui/squadmates`.
+Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
+
+The component takes a character slug such as `petra`. The roster and drawing APIs in `@tensquads/ui/squadmates` use role IDs such as `master`. Use `AGENT_ROLE_TO_SLUG` and `AGENT_SLUG_TO_ROLE` from `@tensquads/ui/schemas` to convert between them. That entry also exports `AgentRoleSchema`, `AgentSlugSchema`, and `AgentStateSchema` with their inferred types.
+
+`SQUADMATES` contains the roster. `AGENT_LOOP_STATES` contains the loop states; `SquadmateDrawState` also includes `idle`. `squadmateMarkup(imageId, state, size)` returns SVG markup. It throws `UnknownSquadmateError` for an unknown role ID and `UnknownSquadmateStateError` for an unknown state. Sizes below 64 px show the upper body; sizes of 64 px or more show the whole mascot. `SQUADMATE_CSS` contains optional blink styles for inline markup and disables the animation for reduced motion. The React image does not include those styles.
 
 The image name contains the localized character name and state. For example, English `Petra, Planning` and Arabic `بترا، تخطيط`.
 
@@ -17,6 +21,6 @@ The website copy has no Arabic labels for checking, sent back, blocked, escalate
 | Dropped | متوقف |
 | Idle | خامل |
 
-Mascot artwork colours are source data in `packages/ui/src/squadmates/mascots.ts`. They are embedded in the SVG markup, not component CSS.
+Mascot palettes and artwork colours are drawing source data in `packages/ui/src/squadmates/mascots.ts`. State badge colours are in `packages/ui/src/squadmates/draw.ts`. These colours are embedded in SVG markup. Roster colour fields remain source metadata in `packages/ui/src/squadmates/roster.ts`. They are not component CSS tokens.
 
 OpenUI is useful when an agent needs to include an identified squadmate image in a generated response. The definition exposes the same props and validates them with shared schemas.
