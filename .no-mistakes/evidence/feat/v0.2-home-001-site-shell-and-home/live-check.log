@@ -1,0 +1,235 @@
+{
+  "results": [
+    {
+      "scenario": "Arabic desktop code remains LTR",
+      "theme": "light",
+      "code": [
+        {
+          "text": "npm install github:moeghashim/tensquads-ui#<commit-sha>",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "رسالة 1 من 7root = Squadmate(\"petra\", \"running\", 64, \"ar\")رسالة 2 من 7root = Badge(\"قيد التحقق\", \"info\")رسالة 3 من 7root = Field(\"اسم المتجر\", \"storeName\", \"\", \"متجر بنّاء\", \"\", \"\", false, false)رسالة 4 من 7root = Switch(\"أرسل إليّ إشعاراً عند الانتهاء\", true, false)رسالة 5 من 7root = SegmentedControl(\"وتيرة الفوترة\", [\"أسبوعي\", \"شهري\"], \"أسبوعي\")رسالة 6 من 7root = Button(\"إعادة للمراجعة\", \"soft\", \"md\", true, false)رسالة 7 من 7root = Button(\"اعتماد الخطة\", \"solid\", \"md\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Squadmate(\"petra\", \"running\", 64, \"ar\")",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Badge(\"قيد التحقق\", \"info\")",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Field(\"اسم المتجر\", \"storeName\", \"\", \"متجر بنّاء\", \"\", \"\", false, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Switch(\"أرسل إليّ إشعاراً عند الانتهاء\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = SegmentedControl(\"وتيرة الفوترة\", [\"أسبوعي\", \"شهري\"], \"أسبوعي\")",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Button(\"إعادة للمراجعة\", \"soft\", \"md\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Button(\"اعتماد الخطة\", \"solid\", \"md\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "import { Button } from \"@tensquads/ui/react\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "import { Button } from \"@tensquads/ui/react\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "streamOpenUIResponse({ provider, system, turns })",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "streamOpenUIResponse({ provider, system, turns })",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "@layer ui-sdk, tensquads;\n@import \"@tensquads/ui/fonts.css\";\n@import \"@tensquads/ui/tokens.css\";\n@import \"@tensquads/ui/styles.css\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "@layer ui-sdk, tensquads;\n@import \"@tensquads/ui/fonts.css\";\n@import \"@tensquads/ui/tokens.css\";\n@import \"@tensquads/ui/styles.css\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        }
+      ],
+      "glyphs": {
+        "npm": 81.140625,
+        "github": 165.609375
+      }
+    },
+    {
+      "scenario": "Arabic desktop code remains LTR",
+      "theme": "dark",
+      "code": [
+        {
+          "text": "npm install github:moeghashim/tensquads-ui#<commit-sha>",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "رسالة 1 من 7root = Squadmate(\"petra\", \"running\", 64, \"ar\")رسالة 2 من 7root = Badge(\"قيد التحقق\", \"info\")رسالة 3 من 7root = Field(\"اسم المتجر\", \"storeName\", \"\", \"متجر بنّاء\", \"\", \"\", false, false)رسالة 4 من 7root = Switch(\"أرسل إليّ إشعاراً عند الانتهاء\", true, false)رسالة 5 من 7root = SegmentedControl(\"وتيرة الفوترة\", [\"أسبوعي\", \"شهري\"], \"أسبوعي\")رسالة 6 من 7root = Button(\"إعادة للمراجعة\", \"soft\", \"md\", true, false)رسالة 7 من 7root = Button(\"اعتماد الخطة\", \"solid\", \"md\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Squadmate(\"petra\", \"running\", 64, \"ar\")",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Badge(\"قيد التحقق\", \"info\")",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Field(\"اسم المتجر\", \"storeName\", \"\", \"متجر بنّاء\", \"\", \"\", false, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Switch(\"أرسل إليّ إشعاراً عند الانتهاء\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = SegmentedControl(\"وتيرة الفوترة\", [\"أسبوعي\", \"شهري\"], \"أسبوعي\")",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Button(\"إعادة للمراجعة\", \"soft\", \"md\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "root = Button(\"اعتماد الخطة\", \"solid\", \"md\", true, false)",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "import { Button } from \"@tensquads/ui/react\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "import { Button } from \"@tensquads/ui/react\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "streamOpenUIResponse({ provider, system, turns })",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "streamOpenUIResponse({ provider, system, turns })",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "@layer ui-sdk, tensquads;\n@import \"@tensquads/ui/fonts.css\";\n@import \"@tensquads/ui/tokens.css\";\n@import \"@tensquads/ui/styles.css\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        },
+        {
+          "text": "@layer ui-sdk, tensquads;\n@import \"@tensquads/ui/fonts.css\";\n@import \"@tensquads/ui/tokens.css\";\n@import \"@tensquads/ui/styles.css\";",
+          "direction": "ltr",
+          "bidi": "isolate"
+        }
+      ],
+      "glyphs": {
+        "npm": 81.140625,
+        "github": 165.609375
+      }
+    },
+    {
+      "scenario": "Arabic mobile code stays LTR without document overflow",
+      "theme": "light",
+      "dims": {
+        "viewport": 390,
+        "content": 390
+      },
+      "scroll": {
+        "width": 332,
+        "content": 387
+      }
+    },
+    {
+      "scenario": "Arabic mobile code stays LTR without document overflow",
+      "theme": "dark",
+      "dims": {
+        "viewport": 390,
+        "content": 390
+      },
+      "scroll": {
+        "width": 332,
+        "content": 387
+      }
+    },
+    {
+      "scenario": "Demo locale switches show localized state without a role",
+      "pageLocale": "en",
+      "demoLocale": "ar",
+      "agent": "إعداد المتجر مع بترا\nقيد العمل"
+    },
+    {
+      "scenario": "Demo locale switches show localized state without a role",
+      "pageLocale": "en",
+      "demoLocale": "en",
+      "agent": "Petra is setting up your store\nRunning skill"
+    },
+    {
+      "scenario": "Demo locale switches show localized state without a role",
+      "pageLocale": "en",
+      "demoLocale": "ar",
+      "agent": "إعداد المتجر مع بترا\nقيد العمل"
+    },
+    {
+      "scenario": "Demo locale switches show localized state without a role",
+      "pageLocale": "ar",
+      "demoLocale": "ar",
+      "agent": "إعداد المتجر مع بترا\nقيد العمل"
+    },
+    {
+      "scenario": "Demo locale switches show localized state without a role",
+      "pageLocale": "ar",
+      "demoLocale": "en",
+      "agent": "Petra is setting up your store\nRunning skill"
+    },
+    {
+      "scenario": "Demo locale switches show localized state without a role",
+      "pageLocale": "ar",
+      "demoLocale": "ar",
+      "agent": "إعداد المتجر مع بترا\nقيد العمل"
+    }
+  ],
+  "errors": []
+}
