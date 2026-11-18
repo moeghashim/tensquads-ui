@@ -12,8 +12,32 @@ const states: PreviewState[] = [
 test("Dialog screenshots cover closed and open states in both directions and themes", async ({ page }) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Dialog");
-		const title = state.locale === "en" ? "Review request" : "مراجعة الطلب";
-		const trigger = page.getByRole("button", { name: state.locale === "en" ? "Open dialog" : "فتح الحوار" });
+		const copy =
+			state.locale === "en"
+				? {
+						simpleTrigger: "Open dialog",
+						simpleTitle: "Review request",
+						formTrigger: "Edit project",
+						formTitle: "Edit project",
+						field: "Project name",
+						deleteTrigger: "Delete project",
+						deleteTitle: "Delete project?",
+					}
+				: {
+						simpleTrigger: "فتح الحوار",
+						simpleTitle: "مراجعة الطلب",
+						formTrigger: "تعديل المشروع",
+						formTitle: "تعديل المشروع",
+						field: "اسم المشروع",
+						deleteTrigger: "حذف المشروع",
+						deleteTitle: "حذف المشروع؟",
+					};
+		const examples = [
+			{ id: "simple", trigger: copy.simpleTrigger, title: copy.simpleTitle },
+			{ id: "form", trigger: copy.formTrigger, title: copy.formTitle },
+			{ id: "destructive", trigger: copy.deleteTrigger, title: copy.deleteTitle },
+		];
+		const trigger = page.getByRole("button", { name: copy.simpleTrigger });
 		const fixtureTrigger = page
 			.getByRole("region", { name: state.locale === "en" ? "OpenUI fixture" : "عينة OpenUI" })
 			.getByRole("button", { name: state.locale === "en" ? "Review" : "مراجعة" });
@@ -29,35 +53,46 @@ test("Dialog screenshots cover closed and open states in both directions and the
 			});
 		}
 		await expectThemeFocusRing(page, state.theme);
-		await trigger.click();
-		const dialog = page.getByRole("dialog", { name: title });
-		await expect(dialog).toBeVisible();
-		await expect(dialog).not.toHaveAttribute("data-starting-style");
-		await expect(dialog).toHaveCSS("opacity", "1");
-		const axe = await new AxeBuilder({ page }).analyze();
-		expect(axe.violations).toEqual([]);
-		for (const width of [1440, 390]) {
-			await page.setViewportSize({ width, height: 900 });
-			const bounds = await dialog.boundingBox();
-			expect(bounds).not.toBeNull();
-			if (!bounds) throw new Error("Dialog has no visible bounds");
-			expect(bounds.x).toBeGreaterThanOrEqual(0);
-			expect(bounds.y).toBeGreaterThanOrEqual(0);
-			expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
-			expect(bounds.y + bounds.height).toBeLessThanOrEqual(900);
-			await expect(page).toHaveScreenshot(`dialog-${state.locale}-${state.theme}-open-${width}.png`, {
-				animations: "disabled",
-				fullPage: true,
-				maxDiffPixelRatio: 0.001,
-			});
-			const dimensions = await page.evaluate(() => ({
-				viewport: document.documentElement.clientWidth,
-				content: document.documentElement.scrollWidth,
-			}));
-			expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+		for (const example of examples) {
+			for (const width of [1440, 390]) {
+				await page.setViewportSize({ width, height: 900 });
+				await page.getByRole("button", { name: example.trigger, exact: true }).click();
+				const dialog = page.getByRole("dialog", { name: example.title, exact: true });
+				await expect(dialog).toBeVisible();
+				await expect(dialog).toHaveAttribute("data-open");
+				await expect(dialog).not.toHaveAttribute("data-starting-style");
+				await page.evaluate(() => document.fonts.ready);
+				await expect(dialog).toHaveCSS("opacity", "1");
+				if (example.id === "form") {
+					await expect(dialog.getByRole("textbox", { name: copy.field })).toBeVisible();
+				}
+				const axe = await new AxeBuilder({ page }).analyze();
+				expect(axe.violations).toEqual([]);
+				const bounds = await dialog.boundingBox();
+				expect(bounds).not.toBeNull();
+				if (!bounds) throw new Error("Dialog has no visible bounds");
+				expect(bounds.x).toBeGreaterThanOrEqual(0);
+				expect(bounds.y).toBeGreaterThanOrEqual(0);
+				expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+				expect(bounds.y + bounds.height).toBeLessThanOrEqual(900);
+				const screenshotName = example.id === "simple" ? "open" : `${example.id}-open`;
+				await expect(page).toHaveScreenshot(
+					`dialog-${state.locale}-${state.theme}-${screenshotName}-${width}.png`,
+					{
+						animations: "disabled",
+						fullPage: true,
+						maxDiffPixelRatio: 0.001,
+					},
+				);
+				const dimensions = await page.evaluate(() => ({
+					viewport: document.documentElement.clientWidth,
+					content: document.documentElement.scrollWidth,
+				}));
+				expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+				await page.keyboard.press("Escape");
+				await expect(dialog).toHaveCount(0);
+			}
 		}
-		await page.keyboard.press("Escape");
-		await expect(page.getByRole("dialog")).toHaveCount(0);
 	}
 });
 
