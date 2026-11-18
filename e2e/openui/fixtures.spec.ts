@@ -40,6 +40,10 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("menuitem", { name: locale === "en" ? "Open project" : "فتح المشروع" }),
 				).toBeVisible();
+			} else if (component.name === "Tooltip") {
+				const trigger = fixtureRegion.getByRole("button", { name: locale === "en" ? "Add item" : "إضافة عنصر" });
+				await expect(trigger).toBeVisible();
+				await expect(trigger).toHaveAttribute("aria-describedby", /.+/);
 			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
