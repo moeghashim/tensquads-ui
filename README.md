@@ -2,6 +2,8 @@
 
 `@tensquads/ui` is the shared React UI library for tensquads and بنّاء. It provides Agent-UI styled React components, Squadmate artwork, shared schemas, and an OpenUI Lang bridge for generated interfaces. Components support English and Arabic, including right-to-left layout.
 
+Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.mohanadgh.workers.dev)
+
 ## Requirements
 
 Use Node 26 and npm 11. The repository pins Node 26.13.1 and npm 11.20.0 in `mise.toml`. Install [mise](https://mise.jdx.dev/), then run `mise trust` and `mise install` in the repository root. Run npm commands with `mise exec -- npm …`.

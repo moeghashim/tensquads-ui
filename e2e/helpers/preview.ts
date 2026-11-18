@@ -3,9 +3,6 @@ import { join } from "node:path";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, type TestInfo } from "@playwright/test";
 
-// Native select arrows reserve different widths on macOS and Linux.
-const screenshotStyles = "select { appearance: none; padding-inline-end: calc(var(--ts-space-3) + 16px); }";
-
 export type PreviewDirection = "ltr" | "rtl";
 export type PreviewLocale = "en" | "ar";
 export type PreviewTheme = "light" | "dark";
@@ -18,7 +15,6 @@ export type PreviewState = {
 export async function openPreview(page: Page, state: PreviewState, route = "/") {
 	const query = new URLSearchParams({ locale: state.locale, dir: state.direction, theme: state.theme });
 	await page.goto(`${route}?${query.toString()}`);
-	await page.addStyleTag({ content: screenshotStyles });
 	await page.evaluate(() => document.fonts.ready);
 	await expect(page.locator("html")).toHaveAttribute("lang", state.locale);
 	await expect(page.locator("html")).toHaveAttribute("dir", state.direction);
