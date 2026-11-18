@@ -72,7 +72,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
-        run: gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label ui-sdk-break
+        run: |
+          has_failure_label=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json labels --jq 'any(.labels[]; .name == "ui-sdk-break")')
+          if [ "$has_failure_label" = true ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label ui-sdk-break
+          fi
       - name: Publish ui-sdk-verify status
         if: steps.diff.outputs.changed == 'true' && steps.pr.outputs.pull-request-head-sha != ''
         env:
