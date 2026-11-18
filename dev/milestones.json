@@ -30,7 +30,7 @@
     },
     {
       "id": "v0.2-home",
-      "status": "in-progress",
+      "status": "done",
       "tasks": [
         "001-site-shell-and-home",
         "002-component-pages",
