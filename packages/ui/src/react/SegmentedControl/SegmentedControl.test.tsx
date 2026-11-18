@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { SegmentedControl, SegmentedControlIndicator, SegmentedControlItem } from "./SegmentedControl.js";
 
@@ -38,13 +38,45 @@ describe("SegmentedControl", () => {
 		expect(onValueChange).toHaveBeenCalledWith("grid", expect.objectContaining({ reason: "item-press" }));
 	});
 
-	it.each(["ltr", "rtl"] as const)("moves to the next item with the direction-aware arrow key in %s", (dir) => {
+	it.each(["ltr", "rtl"] as const)("moves to the next item with the direction-aware arrow key in %s", async (dir) => {
 		const onValueChange = vi.fn();
 		const { getByRole } = render(<Example dir={dir} onValueChange={onValueChange} />);
 		const selected = getByRole("radio", { name: "List" });
 		selected.focus();
 		fireEvent.keyDown(selected, { key: dir === "ltr" ? "ArrowRight" : "ArrowLeft" });
 		expect(onValueChange).toHaveBeenCalledWith("grid", expect.objectContaining({ reason: "list-navigation" }));
+		const grid = getByRole("radio", { name: "Grid" });
+		await waitFor(() => expect(grid).toHaveFocus());
+		expect(grid).toHaveAttribute("aria-checked", "true");
+		expect(selected).toHaveAttribute("tabindex", "-1");
+		expect(grid).toHaveAttribute("tabindex", "0");
+		fireEvent.keyDown(grid, { key: dir === "ltr" ? "ArrowRight" : "ArrowLeft" });
+		await waitFor(() => expect(selected).toHaveFocus());
+		expect(selected).toHaveAttribute("aria-checked", "true");
+		fireEvent.keyDown(selected, { key: dir === "ltr" ? "ArrowLeft" : "ArrowRight" });
+		await waitFor(() => expect(grid).toHaveFocus());
+		expect(grid).toHaveAttribute("aria-checked", "true");
+		expect(getByRole("radio", { name: "Board" })).toHaveAttribute("aria-checked", "false");
+	});
+
+	it("selects the focused item with Space", () => {
+		const { getByRole } = render(
+			<SegmentedControl aria-label="View" defaultValue="list">
+				<SegmentedControlItem value="list" render={<div />}>
+					List
+				</SegmentedControlItem>
+				<SegmentedControlItem value="grid" render={<div />}>
+					Grid
+				</SegmentedControlItem>
+			</SegmentedControl>,
+		);
+		const grid = getByRole("radio", { name: "Grid" });
+		grid.focus();
+		expect(grid).toHaveFocus();
+		fireEvent.keyDown(grid, { key: " " });
+		fireEvent.keyUp(grid, { key: " " });
+		expect(grid).toHaveAttribute("aria-checked", "true");
+		expect(getByRole("radio", { name: "List" })).toHaveAttribute("aria-checked", "false");
 	});
 
 	it("supports value control and item render props", () => {
