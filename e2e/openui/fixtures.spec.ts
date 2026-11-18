@@ -24,6 +24,10 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("button", { name: locale === "en" ? "Continue" : "متابعة" }),
 				).toBeVisible();
+			} else if (component.name === "Badge") {
+				const badge = fixtureRegion.getByText(locale === "en" ? "Ready" : "جاهز", { exact: true });
+				await expect(badge).toBeVisible();
+				await expect(badge).toHaveJSProperty("tagName", "SPAN");
 			} else {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",

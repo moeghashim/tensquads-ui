@@ -1,4 +1,5 @@
 # tensquads UI component index
 
+- [Badge](packages/ui/src/react/Badge/Badge.md): Import `Badge` and the `BadgeProps` type from `@tensquads/ui/react`. Badge is a plain, non-interactive `<span>` because UI SDK does not ship a Badge component or behavior for this label. It has no hand-authored ARIA role and is not focusable.
 - [Button](packages/ui/src/react/Button/Button.md): Import `Button` and the `ButtonProps` type from `@tensquads/ui/react`. It wraps UI SDK's `Button` from `@ui-sdk/react/button` and keeps its native button behavior, `data-slot`, `render` prop, and forwarded props.
 - [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md): Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
