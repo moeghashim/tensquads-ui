@@ -1,0 +1,13 @@
+@layer tensquads {
+	[data-slot="field"].ts-field { display: grid; min-inline-size: 0; grid-template-columns: minmax(60px, max-content) minmax(0, 1fr); align-items: center; column-gap: var(--ts-space-3); row-gap: var(--ts-space-1-5); }
+	[data-slot="field-label"].ts-field__label { color: var(--ts-text); font-family: var(--ts-field-label-font-family); font-size: var(--ts-field-label-font-size); line-height: var(--ts-field-label-line-height); font-weight: var(--ts-field-label-font-weight); letter-spacing: var(--ts-field-label-letter-spacing); }
+	[data-slot="field-control"].ts-field__control { box-sizing: border-box; min-inline-size: 0; block-size: var(--ts-control-sm); padding-inline: var(--ts-space-2-5); border: 1px solid transparent; border-radius: var(--ts-radius-md); color: var(--ts-text); background: var(--ts-input-bg); font-family: var(--ts-field-value-font-family); font-size: var(--ts-field-value-font-size); line-height: var(--ts-field-value-line-height); font-weight: var(--ts-field-value-font-weight); letter-spacing: var(--ts-field-value-letter-spacing); }
+	[data-slot="field-control"].ts-field__control:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; border-color: var(--ts-input-border-focus); }
+	[data-slot="field-control"].ts-field__control::placeholder { color: var(--ts-text-tertiary); opacity: 1; }
+	[data-slot="field-description"].ts-field__description { grid-column: 2; margin: 0; color: var(--ts-text-secondary); font-family: var(--ts-text-sm-font-family); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); }
+	[data-slot="field-error"].ts-field__error { grid-column: 2; color: var(--ts-red-700); font-family: var(--ts-text-sm-font-family); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); }
+	[data-theme="dark"] [data-slot="field-error"].ts-field__error { color: var(--ts-red-200); }
+	@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) [data-slot="field-error"].ts-field__error { color: var(--ts-red-200); } }
+	[data-slot="field"][data-invalid] [data-slot="field-control"] { border-color: var(--ts-input-border-invalid); }
+	[data-slot="field"][data-disabled] [data-slot="field-control"] { color: var(--ts-text-disabled); background: var(--ts-alpha-05); cursor: not-allowed; }
+}

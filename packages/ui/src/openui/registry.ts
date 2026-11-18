@@ -1,5 +1,7 @@
 import "../react/Button/Button.openui.js";
 import "../react/Badge/Badge.openui.js";
+import "../react/Field/Field.openui.js";
+import "../react/Input/Input.openui.js";
 import "../react/Squadmate/Squadmate.openui.js";
 import type { DefinedComponent } from "@openuidev/react-lang";
 import { getRegisteredDefinitions } from "./registration-store.js";

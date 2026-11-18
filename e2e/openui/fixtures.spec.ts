@@ -28,13 +28,23 @@ test("every component fixture parses and renders", async ({ page }) => {
 				const badge = fixtureRegion.getByText(locale === "en" ? "Ready" : "جاهز", { exact: true });
 				await expect(badge).toBeVisible();
 				await expect(badge).toHaveJSProperty("tagName", "SPAN");
-			} else {
+			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
 				});
 				await expect(image).toBeVisible();
 				await expect(image).toHaveCSS("width", "64px");
 				await expect(image).toHaveCSS("height", "64px");
+			} else {
+				const label =
+					component.name === "Input"
+						? locale === "en"
+							? "Search projects"
+							: "ابحث عن المشاريع"
+						: locale === "en"
+							? "Project name"
+							: "اسم المشروع";
+				await expect(fixtureRegion.getByRole("textbox", { name: label })).toBeVisible();
 			}
 		}
 	}
