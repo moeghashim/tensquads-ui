@@ -119,7 +119,3 @@
 	.dialog-preview__item h2 { margin: 0; font: inherit; font-weight: var(--ts-text-md-font-weight); }
 	[data-slot="dialog-form"] { display: grid; gap: var(--ts-space-5); }
 }
-
-@layer tensquads {
-	.switch-preview, .segmented-preview { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-6); }
-}
