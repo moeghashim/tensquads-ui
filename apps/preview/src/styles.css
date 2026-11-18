@@ -40,6 +40,10 @@
 	.home-page, .content-page { box-sizing: border-box; inline-size: calc(100% - var(--ts-space-8)); max-inline-size: 84rem; margin-inline: auto; }
 	.home-page { padding-block: var(--ts-space-14) var(--ts-space-8); }
 	.hero { display: grid; grid-template-columns: minmax(0, 2fr) minmax(24rem, 1fr); align-items: end; gap: var(--ts-space-8); }
+	/* Streamed parts keep their space from the first frame, so the page never shifts while the demo plays. */
+	.stream-reveal { transition: opacity 220ms ease-out, translate 220ms ease-out; }
+	.stream-reveal[data-shown="false"] { opacity: 0; translate: 0 4px; visibility: hidden; }
+	@media (prefers-reduced-motion: reduce) { .stream-reveal { transition: none; translate: none; } }
 	/* Code is always left-to-right, also on Arabic pages. */
 	pre, code { direction: ltr; unicode-bidi: isolate; text-align: start; }
 	.hero__copy h1 { max-inline-size: 64rem; margin: 0; color: var(--ts-text-emphasis); font-size: clamp(2.5rem, 4.2vw, 3.75rem); line-height: 1.06; letter-spacing: -0.04em; white-space: pre-line; }

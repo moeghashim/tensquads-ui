@@ -14,7 +14,7 @@ import {
 	TooltipTrigger,
 } from "@tensquads/ui/react";
 import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
-import { useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
@@ -126,8 +126,13 @@ function HomePage() {
 						</span>
 					</div>
 					<pre aria-live="polite">
-						{playback.lines.slice(0, completedLines).map((line, index) => (
-							<span className="stream-code__line" key={`${demoLocale}-${line}`}>
+						{playback.lines.map((line, index) => (
+							<span
+								className="stream-code__line stream-reveal"
+								data-shown={completedLines > index}
+								aria-hidden={completedLines <= index}
+								key={`${demoLocale}-${line}`}
+							>
 								<span className="stream-code__message-label">
 									{copy.message} {index + 1} {copy.of} {playback.lines.length}
 								</span>
@@ -148,9 +153,13 @@ function HomePage() {
 				<div className="stream-screen" lang={demoLocale} dir={demoDir}>
 					<div className="stream-screen__agent">
 						<div className="stream-screen__avatar">
-							{completedLines >= 1 && (
-								<TensquadsRenderer stream={playback.lines[0] ?? null} locale={demoLocale} />
-							)}
+							<Reveal shown={completedLines >= 1}>
+								<TensquadsRenderer
+									key={`${demoLocale}-${playback.iteration}`}
+									stream={playback.lines[0] ?? null}
+									locale={demoLocale}
+								/>
+							</Reveal>
 						</div>
 						<div className="stream-screen__agent-copy">
 							<strong>
@@ -158,29 +167,55 @@ function HomePage() {
 							</strong>
 							<span>{squadmateStateLabel("running", demoLocale)}</span>
 						</div>
-						{completedLines >= 2 && <TensquadsRenderer stream={playback.lines[1] ?? null} locale={demoLocale} />}
+						<Reveal shown={completedLines >= 2}>
+							<TensquadsRenderer
+								key={`${demoLocale}-${playback.iteration}`}
+								stream={playback.lines[1] ?? null}
+								locale={demoLocale}
+							/>
+						</Reveal>
 					</div>
 					<div className="stream-screen__grid">
 						<div className="stream-screen__field">
-							{completedLines >= 3 && (
-								<TensquadsRenderer stream={playback.lines[2] ?? null} locale={demoLocale} />
-							)}
+							<Reveal shown={completedLines >= 3}>
+								<TensquadsRenderer
+									key={`${demoLocale}-${playback.iteration}`}
+									stream={playback.lines[2] ?? null}
+									locale={demoLocale}
+								/>
+							</Reveal>
 						</div>
 						<div className="stream-screen__settings">
-							{completedLines >= 4 && (
-								<TensquadsRenderer stream={playback.lines[3] ?? null} locale={demoLocale} />
-							)}
-							{completedLines >= 5 && (
-								<TensquadsRenderer stream={playback.lines[4] ?? null} locale={demoLocale} />
-							)}
+							<Reveal shown={completedLines >= 4}>
+								<TensquadsRenderer
+									key={`${demoLocale}-${playback.iteration}`}
+									stream={playback.lines[3] ?? null}
+									locale={demoLocale}
+								/>
+							</Reveal>
+							<Reveal shown={completedLines >= 5}>
+								<TensquadsRenderer
+									key={`${demoLocale}-${playback.iteration}`}
+									stream={playback.lines[4] ?? null}
+									locale={demoLocale}
+								/>
+							</Reveal>
 						</div>
 						<div className="stream-screen__actions">
-							{completedLines >= 6 && (
-								<TensquadsRenderer stream={playback.lines[5] ?? null} locale={demoLocale} />
-							)}
-							{completedLines >= 7 && (
-								<TensquadsRenderer stream={playback.lines[6] ?? null} locale={demoLocale} />
-							)}
+							<Reveal shown={completedLines >= 6}>
+								<TensquadsRenderer
+									key={`${demoLocale}-${playback.iteration}`}
+									stream={playback.lines[5] ?? null}
+									locale={demoLocale}
+								/>
+							</Reveal>
+							<Reveal shown={completedLines >= 7}>
+								<TensquadsRenderer
+									key={`${demoLocale}-${playback.iteration}`}
+									stream={playback.lines[6] ?? null}
+									locale={demoLocale}
+								/>
+							</Reveal>
 						</div>
 					</div>
 					<div className="stream-screen__locale">
@@ -305,5 +340,14 @@ function HomePage() {
 				</div>
 			</footer>
 		</main>
+	);
+}
+
+/** Keeps a streamed part in the layout from the start and fades it in when its message arrives. */
+function Reveal({ shown, children }: { shown: boolean; children: ReactNode }) {
+	return (
+		<div className="stream-reveal" data-shown={shown} aria-hidden={!shown} inert={!shown}>
+			{children}
+		</div>
 	);
 }

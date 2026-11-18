@@ -4,7 +4,7 @@
 
 Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.mohanadgh.workers.dev)
 
-The home page at `/` shows installation, CSS setup, and an OpenUI fixture replay. Use Copy to copy the install command. If clipboard access fails, the page asks you to select and copy the command manually. Use Replay to restart the demo or its language control to switch the rendered example between English and Arabic. The demo runs in the browser without a model request and shows its final state immediately when reduced motion is enabled.
+The home page at `/` shows installation, CSS setup, and an OpenUI fixture replay. Use Copy to copy the install command. If clipboard access fails, the page asks you to select and copy the command manually. Use Replay to restart the demo and reset edited controls to their fixture defaults. Use its language control to switch the rendered example between English and Arabic; changing the demo language restarts playback and resets edited controls to the selected language's fixture defaults. The demo reserves space for all messages and controls before revealing them, so playback does not shift the page layout. It runs in the browser without a model request and shows its final state immediately when reduced motion is enabled.
 
 Browse the component gallery at `/components` and select a component name to open `/components/$name`. Header controls select the site language and theme. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`); changing the site language also sets its direction. Use `/get-started` for the English and Arabic agent setup guide with copyable examples.
 
