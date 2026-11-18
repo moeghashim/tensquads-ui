@@ -1,0 +1,24 @@
+[
+  {
+    "scenario": "React consumer mouse, Enter, Space open invoice_schema",
+    "opened": "invoice_schema, invoice_schema, invoice_schema",
+    "icon": "▣",
+    "pressed": null
+  },
+  {
+    "scenario": "Disabled consumer blocks mouse and keyboard and is skipped by Tab",
+    "opened": "invoice_schema, invoice_schema, invoice_schema",
+    "disabled": true
+  },
+  {
+    "scenario": "Real TensquadsRenderer consumer mouse and Enter navigate to supplied customer_schema destination",
+    "url": "http://127.0.0.1:5188/#customer_schema",
+    "icon": "⌕",
+    "destination": "Customer schema opened"
+  },
+  {
+    "scenario": "OpenUI native link Space does not activate",
+    "url": "http://127.0.0.1:5188/",
+    "destination": "No destination opened"
+  }
+]

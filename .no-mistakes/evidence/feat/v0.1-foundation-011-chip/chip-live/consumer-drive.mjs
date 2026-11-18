@@ -1,0 +1,38 @@
+import { chromium, expect } from '@playwright/test';
+import {writeFile} from 'node:fs/promises';
+const evidence='~/.no-mistakes/evidence/01M7PVSP7RFJCWRM65H4X017SS/chip-live';
+const browser=await chromium.launch();
+const page=await browser.newPage({viewport:{width:900,height:650}});
+const results=[];
+try {
+ await page.goto('http://127.0.0.1:5188');
+ const chip=page.getByRole('button',{name:'invoice_schema',exact:true});
+ const opened=page.getByLabel('Opened objects');
+ await expect(chip).toBeVisible();
+ await expect(chip.locator('.ts-chip__icon')).toHaveText('▣');
+ await chip.click(); await expect(opened).toHaveText('invoice_schema');
+ await chip.focus(); await page.keyboard.press('Enter'); await page.keyboard.press('Space');
+ await expect(opened).toHaveText('invoice_schema, invoice_schema, invoice_schema');
+ await expect(chip).not.toHaveAttribute('aria-pressed');
+ results.push({scenario:'React consumer mouse, Enter, Space open invoice_schema',opened:await opened.textContent(),icon:await chip.locator('.ts-chip__icon').textContent(),pressed:await chip.getAttribute('aria-pressed')});
+ await page.keyboard.press('Tab'); await expect(page.locator('#next')).toBeFocused();
+ const disabled=page.getByRole('button',{name:'disabled_invoice'});
+ const box=await disabled.boundingBox();await page.mouse.click(box.x+box.width/2,box.y+box.height/2);
+ await page.locator('#next').focus();await disabled.evaluate(el=>el.focus());
+ await expect(page.locator('#next')).toBeFocused();await page.keyboard.press('Enter');await page.keyboard.press('Space');
+ await expect(opened).toHaveText('invoice_schema, invoice_schema, invoice_schema');
+ results.push({scenario:'Disabled consumer blocks mouse and keyboard and is skipped by Tab',opened:await opened.textContent(),disabled:await disabled.isDisabled()});
+ const link=page.getByRole('link',{name:'customer_schema'});
+ await expect(link.locator('.ts-chip__icon')).toHaveText('⌕');
+ await link.click();await expect(page.getByLabel('Destination')).toHaveText('Customer schema opened');
+ await page.screenshot({path:evidence+'/consumer-mouse-open.png',fullPage:true});
+ await page.goto('http://127.0.0.1:5188');await link.focus();await page.keyboard.press('Enter');
+ await expect(page.getByLabel('Destination')).toHaveText('Customer schema opened');
+ results.push({scenario:'Real TensquadsRenderer consumer mouse and Enter navigate to supplied customer_schema destination',url:page.url(),icon:await link.locator('.ts-chip__icon').textContent(),destination:await page.getByLabel('Destination').textContent()});
+ await page.screenshot({path:evidence+'/consumer-keyboard-open.png',fullPage:true});
+ await page.goto('http://127.0.0.1:5188');await link.focus();await page.keyboard.press('Space');
+ await expect(page.getByLabel('Destination')).toHaveText('No destination opened');
+ results.push({scenario:'OpenUI native link Space does not activate',url:page.url(),destination:await page.getByLabel('Destination').textContent()});
+ await writeFile(evidence+'/consumer-results.json',JSON.stringify(results,null,2));
+ console.log(JSON.stringify(results,null,2));
+} finally {await browser.close();}

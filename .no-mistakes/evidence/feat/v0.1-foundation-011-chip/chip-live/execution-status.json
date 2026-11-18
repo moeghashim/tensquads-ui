@@ -1,0 +1,21 @@
+{
+  "targetedPlaywright": {
+    "exit": 0,
+    "command": "npx playwright test --config=playwright.chip-live.config.ts e2e/chip.spec.ts e2e/preview.spec.ts",
+    "productionBuild": "npm run build:preview completed in Playwright webServer command"
+  },
+  "consumerDriver": {
+    "exit": 0,
+    "command": "node apps/preview/.chip-live/drive.mjs"
+  },
+  "visualDriver": {
+    "exit": 0,
+    "command": "node apps/preview/.chip-live/visual.mjs"
+  },
+  "disposableServers": {
+    "vite": 130,
+    "wrangler": 130,
+    "status": "stopped with SIGINT after completed browser checks"
+  },
+  "setup": "Default port 5173 occupied; isolated 5187 used. Initial alternate-port command issues corrected before successful run."
+}

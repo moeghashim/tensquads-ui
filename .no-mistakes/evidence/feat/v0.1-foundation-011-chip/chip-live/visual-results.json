@@ -1,0 +1,314 @@
+[
+  {
+    "locale": "en",
+    "dir": "ltr",
+    "theme": "light",
+    "width": 1440,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "primary": "#ededed"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 340,
+        "right": 713.21875,
+        "y": 479,
+        "bottom": 507,
+        "height": 28
+      },
+      "lines": [
+        {
+          "x": 377,
+          "right": 700.21875,
+          "y": 484,
+          "bottom": 501
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 1440,
+      "viewport": 1440
+    },
+    "screenshot": "chip-en-ltr-light-1440.png"
+  },
+  {
+    "locale": "en",
+    "dir": "ltr",
+    "theme": "light",
+    "width": 390,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "primary": "#ededed"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 16,
+        "right": 374,
+        "y": 479,
+        "bottom": 517,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 53,
+          "right": 356.234375,
+          "y": 482,
+          "bottom": 499
+        },
+        {
+          "x": 53,
+          "right": 73,
+          "y": 496,
+          "bottom": 513
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "screenshot": "chip-en-ltr-light-390.png"
+  },
+  {
+    "locale": "en",
+    "dir": "ltr",
+    "theme": "dark",
+    "width": 1440,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "height": 28,
+      "background": "rgb(48, 48, 48)",
+      "primary": "#303030"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 340,
+        "right": 713.21875,
+        "y": 479,
+        "bottom": 507,
+        "height": 28
+      },
+      "lines": [
+        {
+          "x": 377,
+          "right": 700.21875,
+          "y": 484,
+          "bottom": 501
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 1440,
+      "viewport": 1440
+    },
+    "screenshot": "chip-en-ltr-dark-1440.png"
+  },
+  {
+    "locale": "en",
+    "dir": "ltr",
+    "theme": "dark",
+    "width": 390,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "height": 28,
+      "background": "rgb(48, 48, 48)",
+      "primary": "#303030"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 16,
+        "right": 374,
+        "y": 479,
+        "bottom": 517,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 53,
+          "right": 356.234375,
+          "y": 482,
+          "bottom": 499
+        },
+        {
+          "x": 53,
+          "right": 73,
+          "y": 496,
+          "bottom": 513
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "screenshot": "chip-en-ltr-dark-390.png"
+  },
+  {
+    "locale": "ar",
+    "dir": "rtl",
+    "theme": "light",
+    "width": 1440,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "primary": "#ededed"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 726.78125,
+        "right": 1100,
+        "y": 479,
+        "bottom": 507,
+        "height": 28
+      },
+      "lines": [
+        {
+          "x": 739.78125,
+          "right": 1063,
+          "y": 484,
+          "bottom": 501
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 1440,
+      "viewport": 1440
+    },
+    "screenshot": "chip-ar-rtl-light-1440.png"
+  },
+  {
+    "locale": "ar",
+    "dir": "rtl",
+    "theme": "light",
+    "width": 390,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "primary": "#ededed"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 16,
+        "right": 374,
+        "y": 479,
+        "bottom": 517,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 33.765625,
+          "right": 337,
+          "y": 482,
+          "bottom": 499
+        },
+        {
+          "x": 317,
+          "right": 337,
+          "y": 496,
+          "bottom": 513
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "screenshot": "chip-ar-rtl-light-390.png"
+  },
+  {
+    "locale": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "width": 1440,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "height": 28,
+      "background": "rgb(48, 48, 48)",
+      "primary": "#303030"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 726.78125,
+        "right": 1100,
+        "y": 479,
+        "bottom": 507,
+        "height": 28
+      },
+      "lines": [
+        {
+          "x": 739.78125,
+          "right": 1063,
+          "y": 484,
+          "bottom": 501
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 1440,
+      "viewport": 1440
+    },
+    "screenshot": "chip-ar-rtl-dark-1440.png"
+  },
+  {
+    "locale": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "width": 390,
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "height": 28,
+      "background": "rgb(48, 48, 48)",
+      "primary": "#303030"
+    },
+    "longIdentifier": {
+      "name": "this_is_a_long_object_identifier_that_stays_visible",
+      "chip": {
+        "x": 16,
+        "right": 374,
+        "y": 479,
+        "bottom": 517,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 33.765625,
+          "right": 337,
+          "y": 482,
+          "bottom": 499
+        },
+        {
+          "x": 317,
+          "right": 337,
+          "y": 496,
+          "bottom": 513
+        }
+      ],
+      "ellipsis": "clip",
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "screenshot": "chip-ar-rtl-dark-390.png"
+  }
+]
