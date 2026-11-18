@@ -39,40 +39,53 @@ function closesFence(line: string, fence: Fence): boolean {
 	return !!match && match[1]?.[0] === fence.marker[0] && match[1].length >= fence.marker.length;
 }
 
+function readFence(lines: string[], start: number, fence: Fence) {
+	let end = start + 1;
+	while (end < lines.length && !closesFence(lines[end] ?? "", fence)) end += 1;
+	return { value: lines.slice(start + 1, end).join("\n"), end: Math.min(end + 1, lines.length), open: end === lines.length };
+}
+
+function replyFences(lines: string[], offset = 0): { fence: Fence; start: number; end: number; value: string; open: boolean }[] {
+	const fences: ReturnType<typeof replyFences> = [];
+	let index = 0;
+	while (index < lines.length) {
+		const line = lines[index] ?? "";
+		const fence = openingFence(line);
+		if (fence) {
+			const block = readFence(lines, index, fence);
+			fences.push({ ...block, fence, start: offset + index, end: offset + block.end });
+			index = block.end;
+			continue;
+		}
+		const item = listItem(line);
+		if (item) {
+			const body = readListBody(lines, index, item);
+			fences.push(...replyFences(body.lines, offset + index));
+			index = body.end;
+			continue;
+		}
+		index += 1;
+	}
+	return fences;
+}
+
 function splitReply(source: string): ReplyPart[] {
 	const reply = source.replace(/\r\n?/g, "\n");
+	const lines = reply.split("\n");
+	const offsets = [0];
+	for (const line of lines) offsets.push(Math.min((offsets.at(-1) ?? 0) + line.length + 1, reply.length));
+	const fences = replyFences(lines);
 	const parts: ReplyPart[] = [];
 	let cursor = 0;
-	let offset = 0;
-	let fence: Fence | undefined;
-	let openui = false;
-	for (const line of reply.split("\n")) {
-		const next = Math.min(offset + line.length + 1, reply.length);
-		if (fence) {
-			if (closesFence(line, fence)) {
-				if (openui) {
-					parts.push({ kind: "openui", value: reply.slice(cursor, offset) });
-					cursor = next;
-				}
-				fence = undefined;
-				openui = false;
-			}
-		} else {
-			fence = openingFence(line);
-			openui = !!fence && fence.info === "openui" && fence.marker[0] === "`";
-			if (openui) {
-				if (offset > cursor) parts.push({ kind: "markdown", value: reply.slice(cursor, offset) });
-				cursor = next;
-			}
-		}
-		offset = next;
-	}
-	if (openui) {
-		parts.push({ kind: "openui", value: reply.slice(cursor) });
-		return parts;
+	for (const block of fences) {
+		if (block.fence.info !== "openui" || block.fence.marker[0] !== "`") continue;
+		const start = offsets[block.start] ?? reply.length;
+		if (start > cursor) parts.push({ kind: "markdown", value: reply.slice(cursor, start) });
+		parts.push({ kind: "openui", value: block.value });
+		cursor = offsets[block.end] ?? reply.length;
 	}
 	let trailing = reply.slice(cursor);
-	if (!fence) {
+	if (!fences.at(-1)?.open) {
 		const lastLine = trailing.slice(trailing.lastIndexOf("\n") + 1);
 		const candidate = lastLine.replace(/^ {0,3}/, "");
 		if (candidate && "```openui".startsWith(candidate)) trailing = trailing.slice(0, -lastLine.length);
@@ -106,6 +119,27 @@ function listItem(line: string) {
 	};
 }
 
+function readListBody(lines: string[], start: number, item: NonNullable<ReturnType<typeof listItem>>) {
+	const lineAt = (index: number) => lines[index] ?? "";
+	const continuation: string[] = [];
+	let end = start + 1;
+	while (end < lines.length) {
+		let next = end;
+		while (next < lines.length && !lineAt(next).trim()) next += 1;
+		if (next === lines.length) break;
+		if (lineIndent(lineAt(next)) <= item.indent) {
+			if (listItem(lineAt(next))) end = next;
+			break;
+		}
+		while (end <= next) continuation.push(lineAt(end++));
+	}
+	const indentation = continuation.reduce(
+		(minimum, line) => line.trim() ? Math.min(minimum, lineIndent(line)) : minimum,
+		Number.POSITIVE_INFINITY,
+	);
+	return { lines: [item.text, ...continuation.map((line) => removeIndent(line, indentation))], end };
+}
+
 function MarkdownBlock({ source }: { source: string }) {
 	return <div className="ts-chat-reply__markdown">{markdown(source)}</div>;
 }
@@ -122,24 +156,9 @@ function markdown(source: string): ReactNode[] {
 			const item = listItem(lineAt(index));
 			if (!item || item.indent !== first.indent || item.ordered !== first.ordered) break;
 			const itemKey = `item-${index}`;
-			index += 1;
-			const continuation: string[] = [];
-			while (index < lines.length) {
-				let next = index;
-				while (next < lines.length && !lineAt(next).trim()) next += 1;
-				if (next === lines.length) break;
-				if (lineIndent(lineAt(next)) <= first.indent) {
-					if (listItem(lineAt(next))) index = next;
-					break;
-				}
-				while (index <= next) continuation.push(lineAt(index++));
-			}
-			const indentation = continuation.reduce(
-				(minimum, line) => line.trim() ? Math.min(minimum, lineIndent(line)) : minimum,
-				Number.POSITIVE_INFINITY,
-			);
-			const body = [item.text, ...continuation.map((line) => removeIndent(line, indentation))].join("\n");
-			items.push(<li key={itemKey}>{markdown(body)}</li>);
+			const body = readListBody(lines, index, item);
+			index = body.end;
+			items.push(<li key={itemKey}>{markdown(body.lines.join("\n"))}</li>);
 		}
 		return first.ordered ? (
 			<ol key={key} start={first.start}>
@@ -157,13 +176,11 @@ function markdown(source: string): ReactNode[] {
 		}
 		const fence = openingFence(line);
 		if (fence) {
-			const code: string[] = [];
-			index += 1;
-			while (index < lines.length && !closesFence(lineAt(index), fence)) code.push(lineAt(index++));
-			if (index < lines.length) index += 1;
+			const block = readFence(lines, index, fence);
+			index = block.end;
 			nodes.push(
 				<pre dir="ltr" key={`code-${index}`}>
-					<code>{code.join("\n")}</code>
+					<code>{block.value}</code>
 				</pre>,
 			);
 			continue;

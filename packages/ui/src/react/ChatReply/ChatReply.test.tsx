@@ -174,6 +174,37 @@ describe("ChatReply", () => {
 		expect(container.querySelector("li > pre > code")?.textContent).toBe("const x = 1;");
 	});
 
+	it.each([
+		["unordered", "- ", " "],
+		["ordered", "3. ", " "],
+		["nested", "- Parent\n - ", "  "],
+		["deep ordered", "- Parent\n    3. ", "        "],
+		["continuation", "- Example:\n\n ", " "],
+		["deep continuation", "- Parent\n    3. Example:\n\n        ", "        "],
+	] as const)("isolates literal OpenUI in %s list fences and renders later UI", (_name, prefix, indent) => {
+		const literal = '```openui\nroot = Badge("Literal", "success")';
+		const code = prefix + "```text\n" + literal.split("\n").map((line) => indent + line).join("\n") + "\n" + indent + "```";
+		const live = '```openui\nroot = Badge("Live", "success")\n```';
+		const { container, rerender } = render(<ChatReply reply="" />);
+		for (let length = 1; length <= code.length; length += 1) {
+			rerender(<ChatReply reply={code.slice(0, length)} />);
+			expect(container.querySelector(".ts-chat-reply__openui")).toBeNull();
+		}
+		rerender(<ChatReply reply={code + "\n\n" + live} />);
+		expect(container.querySelector("li pre code")?.textContent).toBe(literal);
+		expect(container.querySelectorAll(".ts-chat-reply__openui")).toHaveLength(1);
+		expect(screen.getByText("Live", { exact: true })).toBeInTheDocument();
+		expect(screen.queryByText("Literal", { exact: true })).toBeNull();
+	});
+
+	it.each(["-", "3."])("renders real OpenUI after an ordinary %s item code fence", (marker) => {
+		const reply = marker + ' ```js\n const x = 1;\n ```\n\n```openui\nroot = Badge("Ready", "success")\n```';
+		const { container } = render(<ChatReply reply={reply} />);
+		expect(container.querySelector("li pre code")?.textContent).toBe("const x = 1;");
+		expect(screen.getByText("Ready", { exact: true })).toBeInTheDocument();
+		expect(container.querySelectorAll(".ts-chat-reply__openui")).toHaveLength(1);
+	});
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);
