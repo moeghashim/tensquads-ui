@@ -1,0 +1,9 @@
+Product: production Vite build served by local Wrangler Worker at localhost:5173.
+Production build: npm run build:preview — exit 0.
+Targeted browser run: playwright test --config .phase-test.config.ts e2e/preview.spec.ts e2e/openui/fixtures.spec.ts --grep-invert 'home works in both directions and themes' — exit 0.
+Additional live browser driver: node .phase-live.mjs — exit 0. Screenshots, axe, overflow, keyboard focus, clipboard, replay, controls, navigation and reduced motion.
+System/clipboard visual driver: node .phase-final.mjs — exit 0 after correcting test probe from transparent body to canvas-bearing html. This was a driver setup error, not a product failure.
+Baseline supplied by outer executor: mise exec -- npm run verify — exit 1. Not rerun because this assigned phase forbids full-suite checks and static analysis.
+Local setup probe: mise exec -- npm ci — exit 1 because this worktree's mise.toml is untrusted.
+Workaround: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm ci — exit 0. npm --prefix apps/preview ci — exit 0. No global trust configuration was changed.
+No source changes were required. Temporary browser drivers/config and build outputs were removed; dependencies are retained for later configured phases.

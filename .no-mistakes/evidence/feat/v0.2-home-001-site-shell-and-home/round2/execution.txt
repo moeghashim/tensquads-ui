@@ -1,0 +1,9 @@
+Target: 3f5d1913a3abee160dd6af25381f1226c4f93291
+Supplied baseline: mise exec -- npm run verify — exit 1; not rerun because full-suite checks and static analysis are prohibited in this phase.
+Targeted run: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" WRANGLER_SEND_METRICS=false mise exec -- npm run e2e -- e2e/preview.spec.ts e2e/openui/fixtures.spec.ts --workers=2 --reporter=line — exit 0.
+Playwright built the production preview and served it via local Wrangler. Targeted tests completed for bilingual fixtures, home accessibility, focus rings, mobile overflow, clipboard failure recovery, fixture-card input, localized demo and squadmate navigation.
+Supplement: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- node <evidence>/round2/supplement.mjs — exit 0 after correcting a driver probe to inspect canvas-bearing html instead of transparent body. Initial probe exit 1 was a driver error, not a product failure.
+Supplement used real Chromium Clipboard API, real browser permission denial, replay and reduced motion, live controls, keyboard navigation, reload persistence, 390px route screenshots and OS color-scheme emulation. Observations: supplement-results.json.
+Visual review: en-ltr-light-1440.png and ar-rtl-dark-390.png.
+Standalone Wrangler stopped intentionally via SIGINT (exit 130). Both browser driver children exited; Playwright completed.
+No source changes. Generated preview dist, Wrangler state and test-results removed; existing dependencies retained.

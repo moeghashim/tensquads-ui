@@ -1,0 +1,17 @@
+[
+  {
+    "behavior": "Replay clears then restores all seven fixture lines; rendered field, switch keyboard toggle, and billing selection work without external requests",
+    "result": "pass",
+    "externalRequests": []
+  },
+  {
+    "behavior": "System follows browser light/dark preference; keyboard navigation and reload preserve Arabic RTL and system theme",
+    "result": "pass",
+    "light": "rgb(243, 243, 243)",
+    "dark": "rgb(22, 22, 22)"
+  },
+  {
+    "behavior": "Reduced motion shows complete English and Arabic demos immediately, including after Replay at mobile width",
+    "result": "pass"
+  }
+]

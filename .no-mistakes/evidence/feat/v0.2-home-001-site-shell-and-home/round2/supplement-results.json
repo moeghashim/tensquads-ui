@@ -1,0 +1,52 @@
+[
+  {
+    "check": "Real Chromium clipboard",
+    "locale": "en",
+    "copied": "npm install github:moeghashim/tensquads-ui#<commit-sha>"
+  },
+  {
+    "check": "Replay restarts and completes seven fixture lines; rendered input, switch and cadence work",
+    "locale": "en"
+  },
+  {
+    "check": "Reduced-motion load and replay immediately show complete fixture",
+    "locale": "en"
+  },
+  {
+    "check": "Keyboard nav reaches components and heading-only Get started; URL state survives reload",
+    "locale": "en",
+    "url": "http://localhost:5173/get-started?locale=en&dir=ltr&theme=dark"
+  },
+  {
+    "check": "Real Chromium clipboard",
+    "locale": "ar",
+    "copied": "npm install github:moeghashim/tensquads-ui#<commit-sha>"
+  },
+  {
+    "check": "Replay restarts and completes seven fixture lines; rendered input, switch and cadence work",
+    "locale": "ar"
+  },
+  {
+    "check": "Reduced-motion load and replay immediately show complete fixture",
+    "locale": "ar"
+  },
+  {
+    "check": "Keyboard nav reaches components and heading-only Get started; URL state survives reload",
+    "locale": "ar",
+    "url": "http://localhost:5173/get-started?locale=ar&dir=rtl&theme=dark"
+  },
+  {
+    "check": "System theme follows emulated OS preference without explicit theme attribute",
+    "colors": {
+      "light": "rgb(243, 243, 243)",
+      "dark": "rgb(22, 22, 22)"
+    }
+  },
+  {
+    "check": "Real browser clipboard permission denied yields visible manual-copy guidance"
+  },
+  {
+    "check": "No uncaught browser errors",
+    "errors": []
+  }
+]

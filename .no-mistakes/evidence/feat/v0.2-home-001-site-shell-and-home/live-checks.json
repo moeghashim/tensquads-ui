@@ -1,0 +1,20 @@
+{
+  "result": "pass",
+  "checks": [
+    "en/light/1440: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "en/light/390: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "en/dark/1440: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "en/dark/390: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "ar/light/1440: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "ar/light/390: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "ar/dark/1440: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "ar/dark/390: home renders 11 component cards, CSS setup, no horizontal overflow, axe clean, keyboard focus ring correct",
+    "Real browser clipboard received the exact pinned-commit install command",
+    "Replay resets 0/7 and completes 7/7; rendered Input, Switch and SegmentedControl accept user changes",
+    "en: header navigation preserves locale/direction/theme; System clears explicit theme",
+    "ar: header navigation preserves locale/direction/theme; System clears explicit theme",
+    "en: reduced motion displays final seven-line fixture on load and replay",
+    "ar: reduced motion displays final seven-line fixture on load and replay"
+  ],
+  "pageErrors": []
+}

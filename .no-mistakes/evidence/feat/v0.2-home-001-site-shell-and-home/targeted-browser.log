@@ -1,0 +1,32 @@
+[WebServer] (node:75821) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 17 tests using 2 workers
+
+(node:75902) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:75901) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/17] e2e/openui/fixtures.spec.ts:92:1 › home demo fixture lines parse in both locales
+[2/17] e2e/openui/fixtures.spec.ts:6:1 › every component fixture parses and renders
+[3/17] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in en light
+[4/17] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in en light
+[5/17] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in en dark
+[6/17] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in en dark
+[7/17] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in ar light
+[8/17] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in ar light
+[9/17] e2e/preview.spec.ts:20:3 › install copy handles denied clipboard in ar dark
+[10/17] e2e/preview.spec.ts:20:3 › install copy handles unavailable clipboard in ar dark
+[11/17] e2e/preview.spec.ts:69:1 › home works in both directions and themes
+[12/17] e2e/preview.spec.ts:88:1 › site routes render in English and Arabic
+[13/17] e2e/preview.spec.ts:99:1 › locale and theme controls update the URL state
+[14/17] e2e/preview.spec.ts:111:1 › stream demo replays localized OpenUI fixtures
+[15/17] e2e/preview.spec.ts:123:1 › fixture cards allow input independently of navigation
+[16/17] e2e/preview.spec.ts:150:1 › demo copy follows its own locale in both directions
+[17/17] e2e/preview.spec.ts:172:1 › squad cards link to Squadmate with URL state
+  17 passed (33.9s)

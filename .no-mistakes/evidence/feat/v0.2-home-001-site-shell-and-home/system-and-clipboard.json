@@ -1,0 +1,7 @@
+{
+  "systemTheme": {
+    "dark": "rgb(22, 22, 22)",
+    "light": "rgb(243, 243, 243)"
+  },
+  "clipboardDenied": "Manual-copy instructions visible; install command remains selectable"
+}
