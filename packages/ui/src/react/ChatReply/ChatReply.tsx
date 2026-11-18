@@ -84,49 +84,38 @@ function listItem(line: string) {
 	};
 }
 
-function listFence(line: string, indentation: number) {
-	let text = removeIndent(line, indentation);
-	let item = listItem(text);
-	while (item) {
-		indentation += item.contentIndent;
-		text = item.text;
-		item = listItem(text);
-	}
-	const fence = openingFence(text);
-	return fence ? { fence, indentation: indentation + lineIndent(text) } : undefined;
-}
-
 function readListBody(lines: string[], start: number, item: NonNullable<ReturnType<typeof listItem>>) {
-	const lineAt = (index: number) => lines[index] ?? "";
-	const continuation: string[] = [];
-	let end = start + 1;
-	let activeFence = listFence(lineAt(start), 0);
-	while (end < lines.length) {
-		if (activeFence) {
-			const line = lineAt(end++);
-			continuation.push(line);
-			if (closesFence(removeIndent(line, activeFence.indentation), activeFence.fence)) activeFence = undefined;
-			continue;
-		}
-		let next = end;
-		while (next < lines.length && !lineAt(next).trim()) next += 1;
-		if (next === lines.length) {
-			while (end < lines.length) continuation.push(lineAt(end++));
-			break;
-		}
-		if (lineIndent(lineAt(next)) <= item.indent) {
-			if (listItem(lineAt(next))) end = next;
-			break;
-		}
-		activeFence = listFence(lineAt(next), Math.min(item.contentIndent, lineIndent(lineAt(next))));
-		while (end <= next) continuation.push(lineAt(end++));
-	}
+	const continuation = lines.slice(start + 1);
 	const firstContinuation = continuation.find((line) => line.trim());
 	const indentation =
 		openingFence(item.text) || listItem(item.text)
 			? item.contentIndent
 			: Math.min(item.contentIndent, lineIndent(firstContinuation ?? ""));
-	return { lines: [item.text, ...continuation.map((line) => removeIndent(line, indentation))], end };
+	const body = [item.text, ...continuation.map((line) => removeIndent(line, indentation))];
+	function blockEnd(index: number): number {
+		const line = body[index] ?? "";
+		const fence = openingFence(line);
+		if (fence) return readFence(body, index, fence).end;
+		const nested = listItem(line);
+		if (nested) return readListBody(body, index, nested).end;
+		return index + 1;
+	}
+	let end = blockEnd(0);
+	while (end < body.length) {
+		let next = end;
+		while (next < body.length && !body[next]?.trim()) next += 1;
+		if (next === body.length) {
+			end = next;
+			break;
+		}
+		const original = lines[start + next] ?? "";
+		if (lineIndent(original) <= item.indent) {
+			if (listItem(original)) end = next;
+			break;
+		}
+		end = blockEnd(next);
+	}
+	return { lines: body.slice(0, end), end: start + end };
 }
 
 function renderBlocks(source: string, renderOpenUI: (stream: string, key: string) => ReactNode): ReplyBlock[] {

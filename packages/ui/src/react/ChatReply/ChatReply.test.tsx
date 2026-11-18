@@ -285,6 +285,33 @@ describe("ChatReply", () => {
 		expect(item.textContent).toBe("CheckReadyContinue");
 	});
 
+	it.each([
+		["unordered", "- Example:", 2],
+		["ordered", "3. Example:", 3],
+		["nested", "- Parent\n  - Example:", 4],
+		["nested ordered", "- Parent\n  3. Example:", 5],
+	] as const)("uses list-body fence coordinates in %s lists", (_name, prefix, indentation) => {
+		for (const marker of ["```", "~~~"]) {
+			const indent = " ".repeat(indentation);
+			const code = prefix + "\n" + indent + "  " + marker + "text\n" +
+				indent + "    " + marker + "\n" + indent + "- literal\n" + indent + marker;
+			const live = '\n\n```openui\nroot = Badge("Ready", "success")\n```';
+			const { container, rerender, unmount } = render(<ChatReply reply="" />);
+			for (let length = 1; length <= code.length; length += 1) {
+				rerender(<ChatReply reply={code.slice(0, length)} />);
+				expect(container.querySelector(".ts-chat-reply__openui")).toBeNull();
+			}
+			rerender(<ChatReply reply={code + live} />);
+			expect(container.querySelector("li pre code")?.textContent).toBe("  " + marker + "\n- literal");
+			const ui = container.querySelector(".ts-chat-reply__openui")!;
+			expect(ui).not.toBeNull();
+			expect(ui.closest("li")).toBeNull();
+			expect(within(ui as HTMLElement).getByText("Ready", { exact: true })).toBeInTheDocument();
+			expect(container.querySelectorAll("pre")).toHaveLength(1);
+			unmount();
+		}
+	});
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);
