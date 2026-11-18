@@ -13,8 +13,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
-  statuses: write
 
 jobs:
   update:
@@ -32,6 +30,8 @@ jobs:
       - run: npm ci
       - name: Update UI SDK
         id: update
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/ui-sdk-update.mjs
       - name: Check for changes
         id: diff
@@ -51,40 +51,40 @@ jobs:
           VERIFY_RESULT: ${{ steps.verify.outcome }}
         run: |
           { cat ui-sdk-update-body.md; printf '\n\nVerify: %s\n' "$VERIFY_RESULT"; if [ "$VERIFY_RESULT" = failure ]; then printf '\n<details><summary>Verify output</summary>\n\n```text\n'; tail -200 verify.log; printf '\n```\n</details>\n'; fi; } > pr-body.md
-      - name: Open or update the update PR
-        id: pr
+      # The repo does not let GitHub Actions open pull requests (Moe, 2026-11-18).
+      # The job pushes the update branch; Opus opens the PR from it.
+      - name: Push the update branch
         if: steps.diff.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
-        with:
-          branch: bot/ui-sdk-update
-          base: ${{ inputs.base || 'main' }}
-          title: "chore(deps): ui-sdk ${{ steps.update.outputs.version || '' }}"
-          body-path: pr-body.md
-          commit-message: "chore(deps): UI SDK update"
-          add-paths: |
-            package.json
-            package-lock.json
-            .agents/skills/ui-sdk/**
-          signoff: true
-          labels: ${{ steps.verify.outcome == 'failure' && 'ui-sdk-break' || '' }}
-      - name: Remove the failure label after verification passes
-        if: steps.diff.outputs.changed == 'true' && steps.verify.outcome == 'success' && steps.pr.outputs.pull-request-number != ''
         env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
+          VERSION: ${{ steps.update.outputs.version }}
+          VERIFY_RESULT: ${{ steps.verify.outcome }}
         run: |
-          has_failure_label=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json labels --jq 'any(.labels[]; .name == "ui-sdk-break")')
-          if [ "$has_failure_label" = true ]; then
-            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label ui-sdk-break
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          base_sha=$(git rev-parse HEAD)
+          paths="package.json package-lock.json .agents/skills/ui-sdk"
+          # Keep the reviewed head when the base and the update are unchanged.
+          remote_sha=""
+          if git fetch --quiet origin bot/ui-sdk-update 2>/dev/null; then remote_sha=$(git rev-parse FETCH_HEAD); fi
+          if [ -n "$remote_sha" ] \
+            && [ "$(git rev-parse "$remote_sha^")" = "$base_sha" ] \
+            && git diff --quiet "$remote_sha" -- $paths; then
+            echo "bot/ui-sdk-update already holds this update on the current base; nothing to push."
+            exit 0
           fi
-      - name: Publish ui-sdk-verify status
-        if: steps.diff.outputs.changed == 'true' && steps.pr.outputs.pull-request-head-sha != ''
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHA: ${{ steps.pr.outputs.pull-request-head-sha }}
-          STATE: ${{ steps.verify.outcome == 'success' && 'success' || 'failure' }}
-        run: |
-          gh api "repos/${GITHUB_REPOSITORY}/statuses/${SHA}" -f state="$STATE" -f context=ui-sdk-verify -f description="npm run verify: $STATE"
-      - name: Fail the job after publishing a red PR
+          git switch -c bot/ui-sdk-update
+          git add $paths
+          git commit -s -m "chore(deps): ui-sdk ${VERSION}"
+          # The bot owns this branch and regenerates it from the base when the base or the release changes.
+          git push --force-with-lease="bot/ui-sdk-update:${remote_sha}" origin bot/ui-sdk-update
+          {
+            echo "## UI SDK ${VERSION}"
+            echo
+            echo "Branch \`bot/ui-sdk-update\` is pushed. Verify: ${VERIFY_RESULT}."
+            echo "Open the PR by hand: \`gh pr create --head bot/ui-sdk-update --base main\` with pr-body.md."
+            echo
+            cat pr-body.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Fail the job when the update breaks verify
         if: steps.diff.outputs.changed == 'true' && steps.verify.outcome == 'failure'
         run: exit 1

@@ -66,7 +66,7 @@ Do not edit `PLAN.md`, `AGENTS.md`, `dev/**`, or `design/**` as part of routine 
 
 ## UI SDK updates
 
-Follow PLAN.md §14. Keep `@ui-sdk/core` and `@ui-sdk/react` on the same exact newest version: use the `beta` tag before 1.0 and `latest` after 1.0. The daily update job refreshes both packages and the installed UI SDK skill, runs `npm run verify`, and opens a PR with release notes and public-entry changes. Review upstream release notes, fix breaks in the smallest change, and never pin back without an open question. If UI SDK adds a component we built from core primitives, open a task to replace the local implementation. The bot's CI gate is the exception to pushing through `no-mistakes`.
+Follow PLAN.md §14. Keep `@ui-sdk/core` and `@ui-sdk/react` on the same exact newest version: use the `beta` tag before 1.0 and `latest` after 1.0. The daily update job refreshes both packages and the installed UI SDK skill, runs `npm run verify`, and pushes the branch `bot/ui-sdk-update` with the PR body in the run summary. GitHub Actions may not open PRs here; Opus opens the PR from that branch. Only the bot rewrites `bot/ui-sdk-update`: it regenerates the branch when the base or the release changes and leaves it alone otherwise. Review upstream release notes, fix breaks in the smallest change, and never pin back without an open question. If UI SDK adds a component we built from core primitives, open a task to replace the local implementation. The bot's CI gate is the exception to pushing through `no-mistakes`.
 
 ## Component completion
 
