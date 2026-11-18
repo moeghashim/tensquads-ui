@@ -6,11 +6,12 @@ import { AGENT_ROLE_TO_SLUG, AGENT_SLUG_TO_ROLE, AgentRoleSchema } from "../../s
 import {
 	AGENT_LOOP_STATES,
 	SQUADMATES,
+	Squadmate,
 	squadmateMarkup,
 	UnknownSquadmateError,
 	UnknownSquadmateStateError,
 } from "../../squadmates/index.js";
-import { Squadmate, squadmateAccessibleName } from "./Squadmate.js";
+import { squadmateAccessibleName } from "./Squadmate.js";
 
 const golden = JSON.parse(
 	readFileSync(join(process.cwd(), "packages/ui/src/squadmates/markup.golden.json"), "utf8"),
@@ -33,11 +34,10 @@ describe("squadmate source behavior", () => {
 		}
 	});
 
-	it("preserves errors, sizing, and deterministic output", () => {
+	it("preserves errors and sizing", () => {
 		expect(() => squadmateMarkup("missing", "idle", 64)).toThrow(UnknownSquadmateError);
 		expect(() => squadmateMarkup("orders", "asleep", 64)).toThrow(UnknownSquadmateStateError);
 		expect(squadmateMarkup("support", "idle", 24)).toContain('width="24" height="24"');
-		expect(squadmateMarkup("hr", "done", 48)).toBe(squadmateMarkup("hr", "done", 48));
 	});
 });
 
@@ -55,22 +55,22 @@ describe("Squadmate image", () => {
 		expect(screen.getByRole("img", { name: "بترا، تخطيط" })).toBeInTheDocument();
 	});
 
-	it("names every supported state in both locales", () => {
+	it("names every state using roster English, website Arabic, and documented pending proposals", () => {
 		const states = [
-			"blocked",
-			"checking",
-			"done",
-			"dropped",
-			"escalated",
-			"idle",
-			"planning",
-			"running",
-			"sentback",
-			"waiting",
+			["blocked", "Blocked", "محظور"],
+			["checking", "Checking", "يتحقق"],
+			["done", "Done", "تم"],
+			["dropped", "Dropped", "متوقف"],
+			["escalated", "Escalated", "مُصعّد"],
+			["idle", "Idle", "خامل"],
+			["planning", "Planning", "تخطيط"],
+			["running", "Running skill", "يعمل"],
+			["sentback", "Sent back", "أُعيد"],
+			["waiting", "Waiting", "بانتظارك"],
 		] as const;
-		for (const state of states) {
-			expect(squadmateAccessibleName("machu", state, "en")).toMatch(/^Machu, .+/);
-			expect(squadmateAccessibleName("machu", state, "ar")).toMatch(/^ماتشو، .+/);
+		for (const [state, english, arabic] of states) {
+			expect(squadmateAccessibleName("machu", state, "en")).toBe(`Machu, ${english}`);
+			expect(squadmateAccessibleName("machu", state, "ar")).toBe(`ماتشو، ${arabic}`);
 		}
 	});
 });

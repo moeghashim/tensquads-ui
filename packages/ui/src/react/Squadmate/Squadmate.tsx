@@ -1,6 +1,6 @@
 import type { AgentSlug, AgentState, Locale } from "../../schemas/index.js";
 import { squadmateMarkup } from "../../squadmates/draw.js";
-import { SQUADMATES } from "../../squadmates/roster.js";
+import { AGENT_LOOP_STATES, SQUADMATES } from "../../squadmates/roster.js";
 
 const ARABIC_NAMES: Record<AgentSlug, string> = {
 	petra: "بترا",
@@ -31,18 +31,10 @@ const ARABIC_STATES: Record<AgentState, string> = {
 	idle: "خامل",
 };
 
-const ENGLISH_STATES: Record<AgentState, string> = {
-	waiting: "Waiting",
-	planning: "Planning",
-	running: "Running skill",
-	checking: "Checking",
-	done: "Done",
-	sentback: "Sent back",
-	blocked: "Blocked",
-	escalated: "Escalated",
-	dropped: "Dropped",
-	idle: "Idle",
-};
+const ENGLISH_STATES = Object.fromEntries([
+	...AGENT_LOOP_STATES.map(({ id, label }) => [id, label]),
+	["idle", "Idle"],
+]);
 
 export function squadmateCharacterName(agent: AgentSlug, locale: Locale = "en"): string {
 	const mate = SQUADMATES.find((entry) => entry.name.toLowerCase() === agent);
