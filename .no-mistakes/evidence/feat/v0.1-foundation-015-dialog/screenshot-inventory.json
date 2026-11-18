@@ -1,0 +1,258 @@
+[
+  {
+    "file": "dialog-ar-dark-closed-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-closed-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-destructive-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-destructive-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-form-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-form-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-simple-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-dark-simple-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-closed-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-closed-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-destructive-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-destructive-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-form-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-form-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-simple-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-ar-light-simple-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-closed-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-closed-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-destructive-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-destructive-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-form-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-form-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-simple-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-dark-simple-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-closed-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-closed-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-destructive-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-destructive-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-form-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-form-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-simple-open-1440.png",
+    "dimensions": [
+      1440,
+      900
+    ],
+    "same_bytes_on_repeat": true
+  },
+  {
+    "file": "dialog-en-light-simple-open-390.png",
+    "dimensions": [
+      390,
+      945
+    ],
+    "same_bytes_on_repeat": true
+  }
+]

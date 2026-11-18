@@ -1,0 +1,17 @@
+[WebServer] (node:65661) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:65847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/dialog.spec.ts:12:1 › Dialog screenshots cover closed and open states in both directions and themes (40.9s)
+  ✓  2 e2e/dialog.spec.ts:89:1 › every Dialog example stays within the viewport (5.6s)
+  ✓  3 e2e/dialog.spec.ts:117:1 › Dialog traps Tab, opens from the keyboard, and returns focus after Escape (110ms)
+(node:67716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 e2e/dialog.spec.ts:12:1 › Dialog screenshots cover closed and open states in both directions and themes (34.1s)
+  ✓  5 e2e/dialog.spec.ts:89:1 › every Dialog example stays within the viewport (4.6s)
+  ✓  6 e2e/dialog.spec.ts:117:1 › Dialog traps Tab, opens from the keyboard, and returns focus after Escape (108ms)
+
+  6 passed (1.5m)

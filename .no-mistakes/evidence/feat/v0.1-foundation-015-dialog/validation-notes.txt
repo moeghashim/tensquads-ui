@@ -1,0 +1,10 @@
+Local surface: production-built TanStack preview served by Wrangler on localhost:5173, driven with Chromium.
+Command: CI=1 WRANGLER_SEND_METRICS=false npx playwright test e2e/dialog.spec.ts --workers=1 --repeat-each=2 --reporter=list,html --timeout=120000
+Exit: 0. All three focused browser tests passed twice.
+32 distinct full-page screenshots per run cover closed/simple/form/destructive x en/ar x light/dark x 1440/390. All 32 generated files were byte-identical across these two local runs; this is an artifact observation, not a committed pixel baseline.
+Visual review: both contact sheets inspected; dialogs and their controls remain visible, including RTL mobile.
+Keyboard: Enter opens, Tab wraps, Escape closes and returns focus.
+Open-state browser assertions: zero axe violations, visible named dialog, completed entrance state, opacity 1, viewport bounds, no document horizontal overflow. Form captures include a visible named textbox.
+D20 repository contract: git ls-files reported no committed __screenshots__ paths.
+No npm run check, lint, static analysis, full suite, gate commands, push, PR, or CI phase was run.
+The Playwright child exited 0; localhost:5173 had no listener after it finished. Generated build, Wrangler state, test-results, and report directories were removed after preserving evidence. Installed project dependencies remain available.
