@@ -27,6 +27,13 @@
         "022-linux-baselines",
         "018-agent-skill-and-docs"
       ]
+    },
+    {
+      "id": "v0.2-home",
+      "status": "planned",
+      "tasks": [
+        "001-home-site"
+      ]
     }
   ]
 }

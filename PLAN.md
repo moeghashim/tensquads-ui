@@ -155,7 +155,7 @@ tensquads additions:
 | Version | Scope |
 |---|---|
 | v0.1 | Repo scaffold, design sync + check, tokens build, preview app, AGENTS.md + skill + llms.txt, Squadmate (moved), Button, Badge, Chip, Input + Field, Switch, SegmentedControl, Menu, Dialog, Tooltip, OpenUI bridge (library, prompt builder, renderer, Anthropic provider), CI with `verify` |
-| v0.2 | Chat (composer, step rows), Card, PageHeader, StatTile, Sparkline, Bars, BarChart, Distribution, DataTable, EmptyState, CommandPalette, ThemeToggle, Toolbar. First adoption PR in the tensquads app (squadmates switch) |
+| v0.2 | Home site first (D21, `dev/milestones/v0.2-home/`), then Chat (composer, step rows), Card, PageHeader, StatTile, Sparkline, Bars, BarChart, Distribution, DataTable, EmptyState, CommandPalette, ThemeToggle, Toolbar. First adoption PR in the tensquads app (squadmates switch) |
 | v0.3 | Workflow-builder set (Canvas, Node, BranchNode, MiniMap, Palette, Inspector, WorkflowCard), UI SDK `createAgent` + WebMCP so Petra can operate screens |
 
 ## 10. Confirmed defaults
@@ -217,6 +217,7 @@ All eleven locked by Moe on 2026-11-17.
 | D18 | Arabic agent-state labels | Gender-neutral nouns for all 13 agents: waiting بانتظارك، planning تخطيط، running قيد العمل، checking قيد التحقق، done تم، sentback إعادة للتعديل، blocked معلّق، escalated بانتظار قرارك، dropped أُلغي، idle في استراحة | Locked by user 2026-11-18 |
 | D19 | Node version | Node 26 LTS (26.13.1, npm 11.20.0) for tensquads-ui, pinned with `mise.toml`; engines `26.x`. The website switched in its own repo (tensquad-website PR #1, merged 2026-11-18). The tensquads app is not built yet (Moe, 2026-11-18), so it has nothing to switch. Task 021 | Locked by user 2026-11-18 |
 | D20 | Screenshots | No pixel comparisons. e2e takes full-page screenshots (1440 and 390 px, en/ar, light/dark) as CI artifacts for review only; no baselines are committed. Behaviour, accessibility, focus ring, overflow, keyboard, ARIA and OpenUI round-trip assertions stay. CI runs once per PR update with cancel-in-progress; no-mistakes runs the full verify before pushing. Task 022 | Locked by user 2026-11-18 (option B) |
+| D21 | Project home | The preview gallery is deployed as the project's public home on Cloudflare Workers (now https://tensquads-ui-preview.mohanadgh.workers.dev) and grows into the home site in v0.2: component pages from X.md, getting started, OpenUI playground, deploy on merge, custom domain to be chosen | Locked by user 2026-11-18 (option 3) |
 | D14 | UI SDK compatibility | Track every UI SDK release: exact same-version pins of `@ui-sdk/core` + `@ui-sdk/react` on the newest release (`beta` tag until 1.0, then `latest`); daily update job opens a verified PR with release notes and a refreshed ui-sdk skill; wrap, do not fork; public-entry usage check; upgrade playbook in AGENTS.md (§14). Task 019, run right after task 005 | Locked by user 2026-11-17 ("always up to date") |
 
 ## 14. Staying current with UI SDK
