@@ -146,7 +146,7 @@ function MarkdownBlock({ source }: { source: string }) {
 			);
 			continue;
 		}
-		const heading = line.match(/^(#{1,6})\s+(.+?)\s*#*$/);
+		const heading = line.match(/^(#{1,6})\s+(.+?)(?:[ \t]+#+)?[ \t]*$/);
 		if (heading) {
 			const Tag = `h${heading[1]?.length ?? 1}` as ElementType;
 			nodes.push(<Tag key={`heading-${index}`}>{inline(heading[2] ?? "")}</Tag>);
@@ -176,13 +176,20 @@ function MarkdownBlock({ source }: { source: string }) {
 
 function inline(source: string): ReactNode[] {
 	const nodes: ReactNode[] = [];
-	const token = /(`[^`]+`|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*)/g;
+	const token = /(`[^`]+`|\[([^\]]+)\]\(|\*\*([^*]+)\*\*)/g;
 	let cursor = 0;
 	for (let match = token.exec(source); match; match = token.exec(source)) {
 		if (match.index > cursor) nodes.push(source.slice(cursor, match.index));
 		if (match[1]?.startsWith("`")) nodes.push(<code key={match.index}>{match[1].slice(1, -1)}</code>);
 		else if (match[2]) {
-			const href = safeHref(match[3] ?? "");
+			const destination = linkDestination(source, token.lastIndex);
+			if (!destination) {
+				nodes.push(match[0]);
+				cursor = token.lastIndex;
+				continue;
+			}
+			token.lastIndex = destination.end;
+			const href = safeHref(destination.value);
 			nodes.push(
 				href ? (
 					<a key={match.index} href={href}>
@@ -192,20 +199,33 @@ function inline(source: string): ReactNode[] {
 					match[2]
 				),
 			);
-		} else nodes.push(<strong key={match.index}>{match[4] ?? ""}</strong>);
+		} else nodes.push(<strong key={match.index}>{match[3] ?? ""}</strong>);
 		cursor = token.lastIndex;
 	}
 	if (cursor < source.length) nodes.push(source.slice(cursor));
 	return nodes;
 }
 
+function linkDestination(source: string, start: number): { value: string; end: number } | undefined {
+	let depth = 1;
+	for (let index = start; index < source.length; index += 1) {
+		const character = source[index];
+		if (character === "\\") index += 1;
+		else if (character === "(") depth += 1;
+		else if (character === ")") {
+			depth -= 1;
+			if (depth === 0) {
+				return { value: source.slice(start, index).replace(/\\([()\\])/g, "$1"), end: index + 1 };
+			}
+		}
+	}
+	return undefined;
+}
+
 function safeHref(value: string): string | undefined {
 	try {
-		const url = new URL(value, "https://invalid.local");
-		if (
-			["http:", "https:", "mailto:"].includes(url.protocol) &&
-			(value.startsWith("/") || /^[a-z][a-z\d+.-]*:/i.test(value))
-		) {
+		const url = new URL(value);
+		if (["http:", "https:", "mailto:"].includes(url.protocol)) {
 			return value;
 		}
 	} catch {

@@ -108,6 +108,57 @@ describe("ChatReply", () => {
 		expect(lists[1]?.querySelectorAll(":scope > li")).toHaveLength(2);
 	});
 
+	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
+		const marker = "#".repeat(level);
+		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);
+		expect(screen.getAllByRole("heading", { level, name: "Learn C#" })).toHaveLength(2);
+		expect(screen.getByRole("heading", { level, name: "تعلم C#" })).toBeInTheDocument();
+	});
+
+	it.each([
+		["paragraph", ""],
+		["heading", "# "],
+		["unordered item", "- "],
+		["ordered item", "3. "],
+		["nested item", "- Parent\n - "],
+	] as const)("preserves complete link destinations in a %s", (_name, prefix) => {
+		const reply =
+			prefix + String.raw`[balanced](https://example.com/topic_(detail_(more))) [escaped](https://example.com/topic_\(detail\)) [closing](https://example.com/end\))`;
+		const { container } = render(<ChatReply reply={reply} />);
+		expect(screen.getByRole("link", { name: "balanced" })).toHaveAttribute(
+			"href",
+			"https://example.com/topic_(detail_(more))",
+		);
+		expect(screen.getByRole("link", { name: "escaped" })).toHaveAttribute(
+			"href",
+			"https://example.com/topic_(detail)",
+		);
+		expect(screen.getByRole("link", { name: "closing" })).toHaveAttribute("href", "https://example.com/end)");
+		expect(container.textContent).toBe(
+			prefix.startsWith("- Parent") ? "Parentbalanced escaped closing" : "balanced escaped closing",
+		);
+	});
+
+	it("keeps incomplete links literal while preserving subsequent inline formatting", () => {
+		const { container } = render(<ChatReply reply={"[unfinished](https://example.com/(detail) **ready** `code`"} />);
+		expect(screen.queryByRole("link")).toBeNull();
+		expect(container.textContent).toBe("[unfinished](https://example.com/(detail) ready code");
+		expect(container.querySelector("strong")).toHaveTextContent("ready");
+		expect(container.querySelector("code")).toHaveTextContent("code");
+	});
+
+	it("accepts only explicit HTTP, HTTPS, and mailto link destinations", () => {
+		render(<ChatReply reply={"[http](http://example.com) [https](https://example.com) [mail](mailto:a@example.com) [root](/path) [network](//example.com) [relative](path) [script](javascript:alert(1)) [data](data:text/plain,test)"} />);
+		expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+			"http://example.com",
+			"https://example.com",
+			"mailto:a@example.com",
+		]);
+		for (const label of ["root", "network", "relative", "script", "data"]) {
+			expect(screen.queryByRole("link", { name: label })).toBeNull();
+		}
+	});
+
 	it("renders unsafe links as text and raw HTML without interpreting it", () => {
 		const { container } = render(
 			<ChatReply
