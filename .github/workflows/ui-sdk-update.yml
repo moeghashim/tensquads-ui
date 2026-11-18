@@ -1,0 +1,90 @@
+name: UI SDK update
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+    inputs:
+      base:
+        description: Pull request base branch
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: write
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ inputs.base || 'main' }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: npm
+      - name: Use npm 11
+        run: npm install --global npm@11.19.0
+      - run: npm ci
+      - name: Update UI SDK
+        id: update
+        run: node scripts/ui-sdk-update.mjs
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Verify update
+        id: verify
+        if: steps.diff.outputs.changed == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          { npm ci && npx playwright install --with-deps chromium && npm run verify; } 2>&1 | tee verify.log
+      - name: Compose PR body
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          BASE: ${{ inputs.base || 'main' }}
+          VERIFY_RESULT: ${{ steps.verify.outcome }}
+        run: |
+          { cat ui-sdk-update-body.md; printf '\n\nVerify: %s\n' "$VERIFY_RESULT"; if [ "$VERIFY_RESULT" = failure ]; then printf '\n<details><summary>Verify output</summary>\n\n```text\n'; tail -200 verify.log; printf '\n```\n</details>\n'; fi; } > pr-body.md
+      - name: Open or update the update PR
+        id: pr
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
+        with:
+          branch: bot/ui-sdk-update
+          base: ${{ inputs.base || 'main' }}
+          title: "chore(deps): ui-sdk ${{ steps.update.outputs.version || '' }}"
+          body-path: pr-body.md
+          commit-message: "chore(deps): UI SDK update"
+          add-paths: |
+            package.json
+            package-lock.json
+            .agents/skills/ui-sdk/**
+          signoff: true
+          labels: ${{ steps.verify.outcome == 'failure' && 'ui-sdk-break' || '' }}
+      - name: Remove the failure label after verification passes
+        if: steps.diff.outputs.changed == 'true' && steps.verify.outcome == 'success' && steps.pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
+        run: |
+          has_failure_label=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json labels --jq 'any(.labels[]; .name == "ui-sdk-break")')
+          if [ "$has_failure_label" = true ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label ui-sdk-break
+          fi
+      - name: Publish ui-sdk-verify status
+        if: steps.diff.outputs.changed == 'true' && steps.pr.outputs.pull-request-head-sha != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ steps.pr.outputs.pull-request-head-sha }}
+          STATE: ${{ steps.verify.outcome == 'success' && 'success' || 'failure' }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/statuses/${SHA}" -f state="$STATE" -f context=ui-sdk-verify -f description="npm run verify: $STATE"
+      - name: Fail the job after publishing a red PR
+        if: steps.diff.outputs.changed == 'true' && steps.verify.outcome == 'failure'
+        run: exit 1

@@ -56,10 +56,12 @@
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"test": "vitest run",
 		"check:pack": "node scripts/check-pack.mjs",
+		"ui-sdk:update": "node scripts/ui-sdk-update.mjs",
+		"check:ui-sdk-usage": "node scripts/check-ui-sdk-usage.mjs",
 		"check:git-install": "node scripts/check-git-install.mjs",
 		"design:check": "node scripts/design-check.mjs",
 		"design:sync": "node scripts/sync-design.mjs",
-		"check": "biome check . && npm run typecheck && npm run design:check && npm run tokens:check && npm run check:css-tokens && npm run test && npm run check:pack",
+		"check": "biome check . && npm run typecheck && npm run design:check && npm run tokens:check && npm run check:css-tokens && npm run check:ui-sdk-usage && npm run test && npm run check:pack",
 		"check:css-tokens": "node scripts/check-css-tokens.mjs",
 		"verify": "npm run check && npm run preview:install && npm run check:preview && npm run e2e",
 		"tokens": "node scripts/build-tokens.mjs",
@@ -68,8 +70,8 @@
 	"dependencies": {
 		"@openuidev/lang-core": "1.1.1",
 		"@openuidev/react-lang": "1.1.1",
-		"@ui-sdk/core": "0.1.0-beta.7",
-		"@ui-sdk/react": "0.1.0-beta.7",
+		"@ui-sdk/core": "0.1.0-beta.8",
+		"@ui-sdk/react": "0.1.0-beta.8",
 		"zod": "4.6.7"
 	},
 	"peerDependencies": {
