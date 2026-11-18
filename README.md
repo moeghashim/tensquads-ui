@@ -14,7 +14,7 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 - `npm run deploy:preview` — Build and deploy the preview Worker using Wrangler.
 - `npm run tokens` — Regenerate CSS custom properties and typed TypeScript tokens from the synced `design/tokens.json`.
 - `npm run tokens:check` — Fail for missing or stale generated token files without writing them.
-- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, and verify exported entry points.
+- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, verify exported entry points, and check that URLs in exported CSS resolve to files inside the installed package.
 - `npm run check:ui-sdk-usage` — Check UI SDK imports in `packages/ui/src` against the installed SDK documentation and require matching core and React version pins. If a package's documentation cannot be read, use its package exports. Reject internal and unknown entries.
 - `npm run ui-sdk:update` — Check upstream releases and update both UI SDK pins, the root lockfile, and the upstream skill. See [UI SDK updates](#ui-sdk-updates) for options and the PR workflow.
 - `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GITHUB_SHA` (commit to install); CI supplies these for the PR head or pushed commit.
@@ -49,7 +49,7 @@ Install `@tensquads/ui` from a pinned Git commit, then add these imports to the 
 @import "@tensquads/ui/styles.css";
 ```
 
-The package includes Inter, IBM Plex Sans Arabic, and JetBrains Mono under the SIL Open Font License 1.1. The license for each family is in its font directory.
+See the [font inventory](packages/ui/src/fonts/README.md) for bundled families, pinned releases, weights, and licenses.
 
 ## Browser verification
 
@@ -61,7 +61,7 @@ Run `npm run e2e:update` on Linux to regenerate the committed baselines in `e2e/
 
 After syncing design references, run `npm run tokens` and commit the generated `packages/ui/src/tokens/tokens.css` and `packages/ui/src/tokens/tokens.ts`. Do not edit these outputs by hand. Run `npm run build` to include them in the package; the package build copies and compiles the committed outputs rather than regenerating them.
 
-Import `@tensquads/ui/fonts.css` before `@tensquads/ui/tokens.css` to load the bundled Inter, IBM Plex Sans Arabic, and JetBrains Mono faces. Each family is covered by a SIL Open Font License 1.1 file in the package.
+Follow [Consumer setup](#consumer-setup) for stylesheet imports and font licensing references.
 
 Import `@tensquads/ui/tokens.css` to use the `--ts-` custom properties in the `tensquads` cascade layer. Token names retain their spelling with dots replaced by hyphens, so `text-md.font-size` becomes `--ts-text-md-font-size`. Set `data-theme="light"` or `data-theme="dark"` on `<html>` to select a theme. Without an explicit theme, the root uses light values and follows `prefers-color-scheme: dark` when requested by the OS.
 
