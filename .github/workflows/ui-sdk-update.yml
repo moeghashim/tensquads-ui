@@ -64,9 +64,11 @@ jobs:
           base_sha=$(git rev-parse HEAD)
           paths="package.json package-lock.json .agents/skills/ui-sdk"
           # Keep the reviewed head when the base and the update are unchanged.
-          if git fetch --quiet origin bot/ui-sdk-update 2>/dev/null \
-            && [ "$(git rev-parse FETCH_HEAD^)" = "$base_sha" ] \
-            && git diff --quiet FETCH_HEAD -- $paths; then
+          remote_sha=""
+          if git fetch --quiet origin bot/ui-sdk-update 2>/dev/null; then remote_sha=$(git rev-parse FETCH_HEAD); fi
+          if [ -n "$remote_sha" ] \
+            && [ "$(git rev-parse "$remote_sha^")" = "$base_sha" ] \
+            && git diff --quiet "$remote_sha" -- $paths; then
             echo "bot/ui-sdk-update already holds this update on the current base; nothing to push."
             exit 0
           fi
@@ -74,7 +76,7 @@ jobs:
           git add $paths
           git commit -s -m "chore(deps): ui-sdk ${VERSION}"
           # The bot owns this branch and regenerates it from the base when the base or the release changes.
-          git push --force-with-lease origin bot/ui-sdk-update
+          git push --force-with-lease="bot/ui-sdk-update:${remote_sha}" origin bot/ui-sdk-update
           {
             echo "## UI SDK ${VERSION}"
             echo
