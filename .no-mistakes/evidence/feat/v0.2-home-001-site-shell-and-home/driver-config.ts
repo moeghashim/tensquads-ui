@@ -1,0 +1,2 @@
+import { defineConfig } from '@playwright/test';
+export default defineConfig({testDir:'.',testMatch:'*.spec.ts',workers:1,reporter:[['list'],['json',{outputFile:'~/.no-mistakes/evidence/01M7QW37MXE52HS36S5Q7S9HDB/results.json'}]],outputDir:'~/.no-mistakes/evidence/01M7QW37MXE52HS36S5Q7S9HDB/browser-results',use:{baseURL:'http://localhost:5173',browserName:'chromium',trace:'retain-on-failure'},webServer:{cwd:process.cwd(),command:'npm run build:preview && npm --prefix apps/preview run preview',url:'http://localhost:5173',reuseExistingServer:false,timeout:120000}});

@@ -1,0 +1,6 @@
+Local production surface: Vite build then Wrangler/workerd on localhost:5173; Chromium Playwright.
+Existing e2e/preview.spec.ts executed unchanged except screenshot destination in copied helper. initial-results.json retains seven passing existing browser tests and passing replay/control/reduced-motion test. results.json retains passing install/navigation and system-theme re-drives.
+Initial driver failures: navigation needed Escape to dismiss existing Menu open example; transparent body background required measuring html for system theme. No source fixes.
+Root npm ci and preview npm ci exited 0. Production builds and browser runs awaited. Initial browser run exit 1 (two driver issues); focused re-drive exit 0.
+Configured baseline mise exec -- npm run verify supplied as exit 1. Read-only mise exec -- node --version reproduced untrusted mise.toml. Used Node 26.13.1/npm 11.20.0 directly without changing trust configuration. Full verify and static checks not rerun in this phase.
+Inspected en-ltr-light-1440.png and ar-rtl-dark-390.png visually. Eight home screenshots cover both locales/themes at 1440 and 390px; replay and get-started captures retained.
