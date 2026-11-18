@@ -1,5 +1,5 @@
 commands:
-  test: "npm run check"
+  test: "mise exec -- npm run verify"
   lint: "npm run check"
 
 # no-mistakes appends these trailers to commits made by its agent steps.

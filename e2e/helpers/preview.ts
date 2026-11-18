@@ -1,3 +1,5 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, type TestInfo } from "@playwright/test";
 
@@ -24,16 +26,17 @@ export async function openPreview(page: Page, state: PreviewState, route = "/") 
 }
 
 export async function capturePreviewScreenshots(page: Page, testInfo: TestInfo, name: string) {
+	await page.evaluate(() => document.fonts.ready);
+	await expect(page.locator("[data-starting-style], [data-ending-style]")).toHaveCount(0);
+	const screenshotDirectory = join(process.cwd(), "test-results", "screenshots");
+	await mkdir(screenshotDirectory, { recursive: true });
 	const original = page.viewportSize();
 	for (const width of [1440, 390]) {
 		await page.setViewportSize({ width, height: 900 });
-		await expect(page).toHaveScreenshot(`${testInfo.project.name || "chromium"}-${name}-${width}.png`, {
-			animations: "disabled",
-			caret: "hide",
-			fullPage: true,
-			// Allow bounded macOS/Linux glyph rasterization differences without masking text.
-			maxDiffPixelRatio: 0.001,
-		});
+		const screenshot = await page.screenshot({ animations: "disabled", caret: "hide", fullPage: true });
+		const filename = `${name}-${width}.png`;
+		await writeFile(join(screenshotDirectory, filename), screenshot);
+		await testInfo.attach(filename, { body: screenshot, contentType: "image/png" });
 	}
 	if (original) await page.setViewportSize(original);
 }

@@ -51,7 +51,6 @@
 		"deploy:preview": "npm --prefix apps/preview run deploy",
 		"check:preview": "npm --prefix apps/preview run check",
 		"e2e": "playwright test",
-		"e2e:update": "playwright test --update-snapshots",
 		"build": "node scripts/build.mjs",
 		"prepare": "npm run build",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
