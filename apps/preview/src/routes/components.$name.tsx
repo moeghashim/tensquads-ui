@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
+import { Button } from "../../../../packages/ui/src/react/Button/Button";
 import {
 	Squadmate,
 	squadmateCharacterName,
@@ -48,6 +49,46 @@ function ComponentPage() {
 							</div>
 						</div>
 					))}
+				</section>
+			</main>
+		);
+	}
+	if (name === "Button") {
+		const variants = ["solid", "soft", "outline", "ghost", "danger"] as const;
+		const sizes = ["sm", "md", "lg"] as const;
+		return (
+			<main className="gallery button-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>Button</h1>
+				<section
+					className="button-preview__grid"
+					aria-label={locale === "ar" ? "أنواع الأزرار" : "Button variants and sizes"}
+				>
+					{variants.map((variant) => (
+						<div className="button-preview__row" key={variant}>
+							<h2>{variant}</h2>
+							{sizes.map((size) => (
+								<Button key={size} variant={variant} size={size}>
+									{locale === "ar" ? "متابعة" : "Continue"}
+								</Button>
+							))}
+							<Button variant={variant} pill>
+								{locale === "ar" ? "دائري" : "Pill"}
+							</Button>
+							<Button variant={variant} iconOnly aria-label={locale === "ar" ? "إضافة" : "Add"}>
+								<span aria-hidden="true">+</span>
+							</Button>
+							<Button variant={variant} disabled>
+								{locale === "ar" ? "معطّل" : "Disabled"}
+							</Button>
+						</div>
+					))}
+				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
 				</section>
 			</main>
 		);
