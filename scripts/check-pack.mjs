@@ -24,6 +24,22 @@ try {
 	execFileSync("npm", ["install", "--ignore-scripts", tarball], { cwd: fixture, stdio: "inherit" });
 
 	const packageJson = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
+	for (const packageName of ["@ui-sdk/core", "@ui-sdk/react"]) {
+		await readFile(join(fixture, "node_modules", packageName, "package.json"), "utf8");
+		const npmTree = JSON.parse(
+			execFileSync("npm", ["ls", packageName, "--all", "--json"], { cwd: fixture, encoding: "utf8" }),
+		);
+		const versions = new Set();
+		const visit = (node) => {
+			for (const [name, dependency] of Object.entries(node.dependencies ?? {})) {
+				if (name === packageName) versions.add(dependency.version);
+				visit(dependency);
+			}
+		};
+		visit(npmTree);
+		if (versions.size !== 1)
+			throw new Error(`Expected one ${packageName} copy, found ${[...versions].join(", ") || "none"}`);
+	}
 	const imports = [];
 	for (const [path, target] of Object.entries(packageJson.exports)) {
 		if (path.endsWith(".css")) {
