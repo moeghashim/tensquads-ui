@@ -1,0 +1,29 @@
+{
+  "productionPreview": "Vite production build served with local Wrangler via Playwright webServer; exit 0",
+  "browserCommand": "MISE_TRUSTED_CONFIG_PATHS=$PWD mise exec -- npx playwright test e2e/switch-segmented-control.spec.ts --reporter=line",
+  "liveHarnessCommand": "MISE_TRUSTED_CONFIG_PATHS=$PWD mise exec -- node .live-test/drive.mjs",
+  "liveHarnessResult": "exit 0; actual React wrappers and TensquadsRenderer in Chromium against localhost Vite; synthetic inputs only",
+  "screenshots": [
+    "segmented-control-ar-rtl-dark-1440.png",
+    "segmented-control-ar-rtl-dark-390.png",
+    "segmented-control-ar-rtl-light-1440.png",
+    "segmented-control-ar-rtl-light-390.png",
+    "segmented-control-en-ltr-dark-1440.png",
+    "segmented-control-en-ltr-dark-390.png",
+    "segmented-control-en-ltr-light-1440.png",
+    "segmented-control-en-ltr-light-390.png",
+    "segmented-disabled-rtl-focus.png",
+    "streamed-fourth-slot-rtl.png",
+    "switch-ar-rtl-dark-1440.png",
+    "switch-ar-rtl-dark-390.png",
+    "switch-ar-rtl-light-1440.png",
+    "switch-ar-rtl-light-390.png",
+    "switch-en-ltr-dark-1440.png",
+    "switch-en-ltr-dark-390.png",
+    "switch-en-ltr-light-1440.png",
+    "switch-en-ltr-light-390.png",
+    "switch-guards-controlled.png"
+  ],
+  "checks": "Both preview pages: en/ltr and ar/rtl, light/dark, 1440/390 screenshots, axe, overflow, 2px theme focus rings; Switch Enter/Space; Segmented direction-aware arrows and Space/Enter form submit",
+  "cleanup": "Disposable Vite server stopped (130 after SIGINT); Playwright production server exited; harness and generated outputs removed; dependencies retained"
+}

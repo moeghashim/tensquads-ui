@@ -1,0 +1,610 @@
+{
+  "result": "pass",
+  "oracle": "Task 013 and component public contracts: documented keyboard, focus, exclusive selection, stream precedence, schema membership and uniqueness",
+  "observations": [
+    {
+      "name": "Switch: required rejects unchecked; controlled request does not mutate; parent update validates and submits yes; readOnly ignores pointer and Space; disabled ignores click and focus",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        }
+      ],
+      "switches": [
+        {
+          "label": "Consent",
+          "checked": "true",
+          "disabled": false
+        },
+        {
+          "label": "Read only",
+          "checked": "true",
+          "disabled": false
+        },
+        {
+          "label": "Disabled",
+          "checked": "true",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Segmented ltr: arrows skip Board, wrap both ways, transfer selection and focus; disabled pointer ignored; Tab leaves and Shift+Tab returns to sole tab stop",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": [
+        {
+          "label": "Consent",
+          "checked": "false",
+          "disabled": false
+        },
+        {
+          "label": "Read only",
+          "checked": "true",
+          "disabled": false
+        },
+        {
+          "label": "Disabled",
+          "checked": "true",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Segmented rtl: arrows skip Board, wrap both ways, transfer selection and focus; disabled pointer ignored; Tab leaves and Shift+Tab returns to sole tab stop",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": [
+        {
+          "label": "Consent",
+          "checked": "false",
+          "disabled": false
+        },
+        {
+          "label": "Read only",
+          "checked": "true",
+          "disabled": false
+        },
+        {
+          "label": "Disabled",
+          "checked": "true",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Streamed Switch: late true applies without focus loss; user false survives later true and disabled arrival",
+      "radios": [],
+      "switches": [
+        {
+          "label": "Updates",
+          "checked": "false",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Streamed Segmented ltr: incomplete initial G retains focus; completed Grid applies; user List overrides initial Grid",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr: user-selected Gr grows to Grid with focus and selection intact",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr slot 2: root = SegmentedControl(\"View\", [\"List\", \"List",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr slot 2: root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\")",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List view",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr slot 3: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr slot 3: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List view\"], \"List view\")",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List view",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr slot 4: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented ltr slot 4: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List view\"], \"List view\")",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List view",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl: incomplete initial G retains focus; completed Grid applies; user List overrides initial Grid",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl: user-selected Gr grows to Grid with focus and selection intact",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl slot 2: root = SegmentedControl(\"View\", [\"List\", \"List",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl slot 2: root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\")",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List view",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl slot 3: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl slot 3: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List view\"], \"List view\")",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List view",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl slot 4: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Streamed Segmented rtl slot 4: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List view\"], \"List view\")",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List view",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Invalid schema rejected and streamed UI remains exclusively selectable: {\"options\":[\"List\",\"List\",\"Grid\"],\"value\":\"List\"}",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": true,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Invalid schema rejected and streamed UI remains exclusively selectable: {\"options\":[\"List\",\"Grid\"],\"value\":\"Board\"}",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": true
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Real localized Switch OpenUI fixture renders in en",
+      "radios": [],
+      "switches": [
+        {
+          "label": "Product updates",
+          "checked": "true",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "name": "Real localized SegmentedControl OpenUI fixture renders in en",
+      "radios": [
+        {
+          "label": "List",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Grid",
+          "checked": "true",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "Board",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        }
+      ],
+      "switches": []
+    },
+    {
+      "name": "Real localized Switch OpenUI fixture renders in ar",
+      "radios": [],
+      "switches": [
+        {
+          "label": "تحديثات المنتج",
+          "checked": "true",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "name": "Real localized SegmentedControl OpenUI fixture renders in ar",
+      "radios": [
+        {
+          "label": "قائمة",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "شبكة",
+          "checked": "true",
+          "disabled": false,
+          "focused": false
+        },
+        {
+          "label": "لوحة",
+          "checked": "false",
+          "disabled": false,
+          "focused": false
+        }
+      ],
+      "switches": []
+    }
+  ],
+  "pageErrors": []
+}
