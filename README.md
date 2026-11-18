@@ -124,6 +124,8 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
 
 Switch and SegmentedControl screenshots capture their default preview states before keyboard interaction. See [e2e/switch-segmented-control.spec.ts](e2e/switch-segmented-control.spec.ts) for the state assertions and capture order.
 
+Tooltip artifacts use `tooltip-<locale>-<direction>-<theme>-<side>-<width>.png`. Each side opens and is captured separately. Coverage includes both directions for each locale and theme, with assertions for the [Tooltip placement contract](packages/ui/src/react/Tooltip/Tooltip.md).
+
 ## Commands
 
 - `mise exec -- npm ci` installs root dependencies and builds the package.

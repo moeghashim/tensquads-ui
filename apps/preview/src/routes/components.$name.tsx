@@ -33,6 +33,13 @@ import {
 	squadmateStateLabel,
 } from "../../../../packages/ui/src/react/Squadmate/Squadmate";
 import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
+import {
+	Tooltip,
+	TooltipArrow,
+	TooltipContent,
+	TooltipShortcut,
+	TooltipTrigger,
+} from "../../../../packages/ui/src/react/Tooltip/Tooltip";
 import { AGENT_ROLE_TO_SLUG, type AgentState } from "../../../../packages/ui/src/schemas";
 import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squadmates";
 import { getPreviewState } from "../state";
@@ -458,6 +465,42 @@ function ComponentPage() {
 					/>
 				</section>
 				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
+	if (name === "Tooltip") {
+		const ar = locale === "ar";
+		const sides = ["top", "right", "bottom", "left"] as const;
+		const labels = ar
+			? { title: "مواضع التلميح", action: "إضافة عنصر", hint: "أنشئ عنصراً جديداً" }
+			: { title: "Tooltip placements", action: "Add item", hint: "Create a new item" };
+		return (
+			<main className="gallery tooltip-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{ar ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{ar ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>Tooltip</h1>
+				<section className="tooltip-preview__grid" aria-label={labels.title}>
+					{sides.map((side) => (
+						<div className="tooltip-preview__item" key={side}>
+							<h2>{side}</h2>
+							<Tooltip shortcut="k">
+								<TooltipTrigger render={<Button iconOnly aria-label={labels.action} />}>
+									<span aria-hidden="true">+</span>
+								</TooltipTrigger>
+								<TooltipContent side={side === "right" ? "end" : side === "left" ? "start" : side}>
+									{labels.hint}
+									<TooltipShortcut />
+									<TooltipArrow />
+								</TooltipContent>
+							</Tooltip>
+						</div>
+					))}
+				</section>
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
 					<TensquadsRenderer stream={stream ?? null} locale={locale} />
 				</section>
 			</main>

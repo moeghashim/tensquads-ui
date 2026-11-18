@@ -103,3 +103,11 @@ export {
 } from "./Squadmate/Squadmate.js";
 export type { SwitchProps, SwitchThumbProps } from "./Switch/Switch.js";
 export { Switch, SwitchThumb } from "./Switch/Switch.js";
+export type {
+	TooltipArrowProps,
+	TooltipContentProps,
+	TooltipProps,
+	TooltipShortcutProps,
+	TooltipTriggerProps,
+} from "./Tooltip/Tooltip.js";
+export { Tooltip, TooltipArrow, TooltipContent, TooltipShortcut, TooltipTrigger } from "./Tooltip/Tooltip.js";

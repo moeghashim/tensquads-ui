@@ -1,0 +1,53 @@
+@layer tensquads {
+	[data-slot="tooltip-content"] {
+		position: relative;
+		z-index: 1;
+		box-sizing: border-box;
+		max-inline-size: min(var(--ts-content-width), calc(100vw - var(--ts-space-4)));
+		padding-block: var(--ts-space-1-5);
+		padding-inline: var(--ts-space-2-5);
+		border-radius: var(--ts-radius-md);
+		background: var(--ts-tooltip-compact-bg);
+		box-shadow: var(--ts-shadow-overlay), var(--ts-shadow-hairline);
+		color: var(--ts-gray-0);
+		font-family: var(--ts-text-sm-font-family);
+		font-size: var(--ts-text-sm-font-size);
+		line-height: var(--ts-text-sm-line-height);
+		transform-origin: var(--transform-origin);
+		transition: opacity var(--ts-duration-enter) var(--ts-ease-enter), scale var(--ts-duration-enter) var(--ts-ease-enter);
+	}
+
+	[data-slot="tooltip-content"][data-starting-style],
+	[data-slot="tooltip-content"][data-ending-style] { opacity: 0; scale: 0.96; }
+	[data-slot="tooltip-content"][data-open] { opacity: 1; scale: 1; }
+	[data-slot="tooltip-content"][data-instant] { transition: none; }
+	[data-slot="tooltip-content"][data-closed] { pointer-events: none; }
+
+	[data-slot="tooltip-arrow"] {
+		position: absolute;
+		inline-size: var(--ts-space-1-5);
+		block-size: var(--ts-space-1-5);
+		background: var(--ts-tooltip-compact-bg);
+		transform: rotate(45deg);
+	}
+
+	[data-slot="tooltip-arrow"][data-side="top"] { inset-block-end: calc(-1 * var(--ts-space-1)); inset-inline-start: calc(50% - var(--ts-space-0-5)); }
+	[data-slot="tooltip-arrow"][data-side="bottom"] { inset-block-start: calc(-1 * var(--ts-space-1)); inset-inline-start: calc(50% - var(--ts-space-0-5)); }
+	[data-slot="tooltip-arrow"][data-side="left"] { inset-inline-end: calc(-1 * var(--ts-space-1)); inset-block-start: calc(50% - var(--ts-space-0-5)); }
+	[data-slot="tooltip-arrow"][data-side="right"] { inset-inline-start: calc(-1 * var(--ts-space-1)); inset-block-start: calc(50% - var(--ts-space-0-5)); }
+	[dir="rtl"] [data-slot="tooltip-arrow"][data-side="left"] { inset-inline-end: auto; inset-inline-start: calc(-1 * var(--ts-space-1)); }
+	[dir="rtl"] [data-slot="tooltip-arrow"][data-side="right"] { inset-inline-start: auto; inset-inline-end: calc(-1 * var(--ts-space-1)); }
+
+	[data-slot="tooltip-shortcut"] {
+		margin-inline-start: var(--ts-space-3);
+		color: var(--ts-gray-0);
+		font-family: var(--ts-font-mono);
+		font-size: var(--ts-text-xs-font-size);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-slot="tooltip-content"] { transition-duration: 0ms; }
+		[data-slot="tooltip-content"][data-starting-style],
+		[data-slot="tooltip-content"][data-ending-style] { scale: 1; }
+	}
+}
