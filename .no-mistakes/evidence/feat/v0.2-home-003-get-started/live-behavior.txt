@@ -1,0 +1,18 @@
+en: code block 1 copied verbatim through the browser clipboard (83 characters).
+en: code block 2 copied verbatim through the browser clipboard (132 characters).
+en: code block 3 copied verbatim through the browser clipboard (118 characters).
+en: code block 4 copied verbatim through the browser clipboard (331 characters).
+en: code block 5 copied verbatim through the browser clipboard (1068 characters).
+en: executed displayed Worker example with [] => 400 A user turn is required. (No API key or provider call.)
+en: executed displayed Worker example with [{"role":"assistant","content":"Hello"}] => 400 A user turn is required. (No API key or provider call.)
+en: executed displayed Worker example with [{"role":"user","content":"Hello"},{"role":"assistant","content":"Done"}] => 400 A user turn is required. (No API key or provider call.)
+en: browser denied clipboard-write; localized manual-copy fallback displayed and success state cleared.
+ar: code block 1 copied verbatim through the browser clipboard (83 characters).
+ar: code block 2 copied verbatim through the browser clipboard (132 characters).
+ar: code block 3 copied verbatim through the browser clipboard (118 characters).
+ar: code block 4 copied verbatim through the browser clipboard (331 characters).
+ar: code block 5 copied verbatim through the browser clipboard (1068 characters).
+ar: executed displayed Worker example with [] => 400 A user turn is required. (No API key or provider call.)
+ar: executed displayed Worker example with [{"role":"assistant","content":"Hello"}] => 400 A user turn is required. (No API key or provider call.)
+ar: executed displayed Worker example with [{"role":"user","content":"Hello"},{"role":"assistant","content":"Done"}] => 400 A user turn is required. (No API key or provider call.)
+ar: browser denied clipboard-write; localized manual-copy fallback displayed and success state cleared.
