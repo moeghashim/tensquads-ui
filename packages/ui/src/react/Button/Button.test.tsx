@@ -110,7 +110,9 @@ describe("Button", () => {
 describe("OpenUI round trips", () => {
 	it("has English and Arabic fixtures for every registered component", () => {
 		const registered = getRegisteredComponents().map((component) => component.name);
-		expect(registered).toEqual(expect.arrayContaining(["Button", "Badge", "Squadmate", "Input", "Field", "Menu", "Switch", "SegmentedControl"]));
+		expect(registered).toEqual(
+			expect.arrayContaining(["Button", "Badge", "Squadmate", "Input", "Field", "Menu", "Switch", "SegmentedControl"]),
+		);
 		for (const name of registered) {
 			for (const locale of ["en", "ar"]) {
 				const path = join(process.cwd(), "packages/ui/src/react", name, `${name}.fixture.${locale}.txt`);
