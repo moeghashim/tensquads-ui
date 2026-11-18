@@ -473,6 +473,7 @@ function ComponentPage() {
 	if (name === "Tooltip") {
 		const ar = locale === "ar";
 		const sides = ["top", "right", "bottom", "left"] as const;
+		const rtlSides = { top: "top", right: "left", bottom: "bottom", left: "right" } as const;
 		const labels = ar
 			? { title: "مواضع التلميح", action: "إضافة عنصر", hint: "أنشئ عنصراً جديداً" }
 			: { title: "Tooltip placements", action: "Add item", hint: "Create a new item" };
@@ -487,11 +488,11 @@ function ComponentPage() {
 					{sides.map((side) => (
 						<div className="tooltip-preview__item" key={side}>
 							<h2>{side}</h2>
-							<Tooltip defaultOpen={side !== "top"} shortcut="k">
+							<Tooltip shortcut="k">
 								<TooltipTrigger render={<Button iconOnly aria-label={labels.action} />}>
 									<span aria-hidden="true">+</span>
 								</TooltipTrigger>
-								<TooltipContent side={side}>
+								<TooltipContent side={ar ? rtlSides[side] : side}>
 									{labels.hint}
 									<TooltipShortcut />
 									<TooltipArrow />

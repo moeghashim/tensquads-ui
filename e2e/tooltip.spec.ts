@@ -20,17 +20,38 @@ test("Tooltip preview works in both directions and themes", async ({ page }, tes
 		await openPreview(page, state, "/components/Tooltip");
 		await expect(page.getByRole("heading", { name: "Tooltip" })).toBeVisible();
 		await expectThemeFocusRing(page, state.theme);
-		await page.keyboard.press("Tab");
-		await expect(
-			page.getByRole("button", { name: state.locale === "en" ? "Add item" : "إضافة عنصر" }).first(),
-		).toBeFocused();
-		await expect(page.getByRole("tooltip").first()).toBeVisible();
-		await expect(page.getByRole("tooltip").first()).toContainText(
-			state.locale === "en" ? "Create a new item" : "أنشئ عنصراً جديداً",
-		);
-		await expect(page.locator('[data-slot="tooltip-shortcut"]').first()).toContainText("K");
 		await expectAccessible(page);
-		await capturePreviewScreenshots(page, testInfo, `tooltip-${state.locale}-${state.direction}-${state.theme}`);
+		const preview = page.getByRole("region", {
+			name: state.locale === "en" ? "Tooltip placements" : "مواضع التلميح",
+		});
+		const triggerName = state.locale === "en" ? "Add item" : "إضافة عنصر";
+		const hint = state.locale === "en" ? "Create a new item" : "أنشئ عنصراً جديداً";
+		const sides = ["top", "right", "bottom", "left"] as const;
+
+		for (const [index, side] of sides.entries()) {
+			const trigger = preview.getByRole("button", { name: triggerName }).nth(index);
+			await trigger.focus();
+			await expect(trigger).toBeFocused();
+			const tooltip = page.locator('[data-slot="tooltip-content"][data-open]');
+			const expectedSide =
+				state.direction === "rtl" && side === "right"
+					? "left"
+					: state.direction === "rtl" && side === "left"
+						? "right"
+						: side;
+			await expect(tooltip).toHaveCount(1);
+			await expect(tooltip).toBeVisible();
+			await expect(tooltip).toHaveAttribute("data-side", expectedSide);
+			await expect(tooltip).toContainText(hint);
+			await expect(trigger).toHaveAttribute("aria-describedby", /.+/);
+			await expect(tooltip.locator('[data-slot="tooltip-shortcut"]')).toContainText("K");
+			await expect(page.locator('[data-slot="tooltip-content"][data-open]')).toHaveCount(1);
+			await capturePreviewScreenshots(
+				page,
+				testInfo,
+				`tooltip-${state.locale}-${state.direction}-${state.theme}-${side}`,
+			);
+		}
 		await expectNoHorizontalScroll(page);
 	}
 });
