@@ -29,7 +29,10 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(badge).toBeVisible();
 				await expect(badge).toHaveJSProperty("tagName", "SPAN");
 			} else if (component.name === "Chip") {
-				await expect(fixtureRegion.getByRole("button", { name: "response_schema" })).toBeVisible();
+				const chip = fixtureRegion.getByRole("link", { name: "response_schema" });
+				await expect(chip).toBeVisible();
+				await expect(chip.locator(".ts-chip__icon")).toHaveText("◇");
+				await expect(chip).toHaveAttribute("href", "#response_schema");
 			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
