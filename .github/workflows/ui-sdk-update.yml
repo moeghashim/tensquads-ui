@@ -30,6 +30,8 @@ jobs:
       - run: npm ci
       - name: Update UI SDK
         id: update
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/ui-sdk-update.mjs
       - name: Check for changes
         id: diff
