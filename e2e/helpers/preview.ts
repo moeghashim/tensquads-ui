@@ -25,13 +25,18 @@ export async function openPreview(page: Page, state: PreviewState, route = "/") 
 	await expect(page.locator("html")).toHaveAttribute("data-theme", state.theme);
 }
 
-export async function capturePreviewScreenshots(page: Page, testInfo: TestInfo, name: string) {
+export async function capturePreviewScreenshots(
+	page: Page,
+	testInfo: TestInfo,
+	name: string,
+	widths: readonly number[] = [1440, 390],
+) {
 	await page.evaluate(() => document.fonts.ready);
 	await expect(page.locator("[data-starting-style], [data-ending-style]")).toHaveCount(0);
 	const screenshotDirectory = join(process.cwd(), "test-results", "screenshots");
 	await mkdir(screenshotDirectory, { recursive: true });
 	const original = page.viewportSize();
-	for (const width of [1440, 390]) {
+	for (const width of widths) {
 		await page.setViewportSize({ width, height: 900 });
 		const screenshot = await page.screenshot({ animations: "disabled", caret: "hide", fullPage: true });
 		const filename = `${name}-${width}.png`;

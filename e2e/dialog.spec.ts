@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { expectThemeFocusRing, openPreview, type PreviewState } from "./helpers/preview";
+import { capturePreviewScreenshots, expectThemeFocusRing, openPreview, type PreviewState } from "./helpers/preview";
 
 const states: PreviewState[] = [
 	{ locale: "en", direction: "ltr", theme: "light" },
@@ -9,7 +9,7 @@ const states: PreviewState[] = [
 	{ locale: "ar", direction: "rtl", theme: "dark" },
 ];
 
-test("Dialog screenshots cover closed and open states in both directions and themes", async ({ page }) => {
+test("Dialog screenshots cover closed and open states in both directions and themes", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Dialog");
 		const copy =
@@ -44,14 +44,7 @@ test("Dialog screenshots cover closed and open states in both directions and the
 		await expect(trigger).toBeVisible();
 		await expect(fixtureTrigger).toBeVisible();
 		await expect(page.getByRole("dialog")).toHaveCount(0);
-		for (const width of [1440, 390]) {
-			await page.setViewportSize({ width, height: 900 });
-			await expect(page).toHaveScreenshot(`dialog-${state.locale}-${state.theme}-closed-${width}.png`, {
-				animations: "disabled",
-				fullPage: true,
-				maxDiffPixelRatio: 0.001,
-			});
-		}
+		await capturePreviewScreenshots(page, testInfo, `dialog-${state.locale}-${state.theme}-closed`);
 		await expectThemeFocusRing(page, state.theme);
 		for (const example of examples) {
 			for (const width of [1440, 390]) {
@@ -75,14 +68,11 @@ test("Dialog screenshots cover closed and open states in both directions and the
 				expect(bounds.y).toBeGreaterThanOrEqual(0);
 				expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
 				expect(bounds.y + bounds.height).toBeLessThanOrEqual(900);
-				const screenshotName = example.id === "simple" ? "open" : `${example.id}-open`;
-				await expect(page).toHaveScreenshot(
-					`dialog-${state.locale}-${state.theme}-${screenshotName}-${width}.png`,
-					{
-						animations: "disabled",
-						fullPage: true,
-						maxDiffPixelRatio: 0.001,
-					},
+				await capturePreviewScreenshots(
+					page,
+					testInfo,
+					`dialog-${state.locale}-${state.theme}-${example.id}-open`,
+					[width],
 				);
 				const dimensions = await page.evaluate(() => ({
 					viewport: document.documentElement.clientWidth,
