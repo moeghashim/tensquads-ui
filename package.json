@@ -73,8 +73,8 @@
 		"@anthropic-ai/sdk": "1.10.0",
 		"@openuidev/lang-core": "1.1.1",
 		"@openuidev/react-lang": "1.1.1",
-		"@ui-sdk/core": "0.1.0-beta.8",
-		"@ui-sdk/react": "0.1.0-beta.8",
+		"@ui-sdk/core": "0.1.0-beta.10",
+		"@ui-sdk/react": "0.1.0-beta.10",
 		"zod": "4.6.7"
 	},
 	"peerDependencies": {
