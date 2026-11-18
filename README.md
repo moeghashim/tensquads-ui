@@ -90,10 +90,10 @@ The entry also exports `defineComponent`, `getRegisteredComponents`, and `create
 Use the server entry in a Worker route. It provides request validation and caps, locale-aware prompt construction, provider adapters, and streaming responses:
 
 ```ts
+import { createTensquadsLibrary } from "@tensquads/ui/openui";
 import {
   buildSystemPrompt,
   createAnthropicProvider,
-  createTensquadsLibrary,
   OpenUIServerError,
   readOpenUIRequest,
   streamOpenUIResponse,

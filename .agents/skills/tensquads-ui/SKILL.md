@@ -95,10 +95,10 @@ The entry also exports `defineComponent`, `getRegisteredComponents`, and `create
 Import backend helpers from `@tensquads/ui/openui/server`. Validate the request, build a prompt for the same locale as the client, then stream the provider response:
 
 ```ts
+import { createTensquadsLibrary } from "@tensquads/ui/openui";
 import {
   buildSystemPrompt,
   createAnthropicProvider,
-  createTensquadsLibrary,
   OpenUIServerError,
   readOpenUIRequest,
   streamOpenUIResponse,
