@@ -1,0 +1,210 @@
+
+--- 2026-11-18T11:04:57.733Z debug
+🪵  Writing logs to "~/.no-mistakes/evidence/01M7Q4FJXRV18TA1D3RVQESJY5/wrangler.log"
+---
+
+--- 2026-11-18T11:04:57.733Z debug
+local dev variables file not found at ".dev.vars". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:57.733Z debug
+.env file not found at "{run-worktree}/apps/preview/.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:57.733Z debug
+.env file not found at "{run-worktree}/apps/preview/.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:58.212Z debug
+🪵  Writing logs to "~/.no-mistakes/evidence/01M7Q4FJXRV18TA1D3RVQESJY5/wrangler.log"
+---
+
+--- 2026-11-18T11:04:58.212Z debug
+.env file not found at "{run-worktree}/apps/preview/.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:58.212Z debug
+.env file not found at "{run-worktree}/apps/preview/.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:58.215Z log
+
+ ⛅️ wrangler 4.163.0 (update available 4.164.0)
+───────────────────────────────────────────────
+---
+
+--- 2026-11-18T11:04:58.220Z debug
+setting config
+---
+
+--- 2026-11-18T11:04:58.220Z debug
+Updating config... undefined undefined
+---
+
+--- 2026-11-18T11:04:58.222Z debug
+Metrics dispatcher: Posting data {"deviceId":"578fb551-0540-440f-9761-dca5b041cf70","event":"wrangler command started","timestamp":1794999898222,"properties":{"amplitude_session_id":1794999898215,"amplitude_event_id":0,"wranglerVersion":"4.163.0","wranglerMajorVersion":4,"wranglerMinorVersion":163,"wranglerPatchVersion":0,"osPlatform":"Mac OS","osVersion":"Darwin Kernel Version 25.6.0: Fri Jul 31 19:11:03 PDT 2026; root:xnu-12377.161.14~5/RELEASE_ARM64_T8132","nodeVersion":26,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":"codex","argsUsed":["config","ip","port"],"argsCombination":"config, ip, port","sanitizedCommand":"dev","sanitizedArgs":{},"currentAgentSkillsInstalled":false}}
+---
+
+--- 2026-11-18T11:04:58.278Z debug
+local dev variables file not found at "dist/server/.dev.vars". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:58.278Z debug
+.env file not found at "{run-worktree}/apps/preview/dist/server/.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:58.278Z debug
+.env file not found at "{run-worktree}/apps/preview/dist/server/.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-11-18T11:04:58.307Z info
+Attaching additional modules:
+---
+
+--- 2026-11-18T11:04:58.312Z log
+┌─────────────────────────────────────────────────┬──────┬─────────────┐
+│ Name                                            │ Type │ Size        │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Badge.fixture.ar-BD5GzLn4.txt            │ text │ 0.04 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Badge.fixture.en-VK0a8LAu.txt            │ text │ 0.03 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Button.fixture.ar-Bq_5H9km.txt           │ text │ 0.06 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Button.fixture.en-QUObEgma.txt           │ text │ 0.05 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Dialog.fixture.ar-7WovUnqH.txt           │ text │ 0.24 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Dialog.fixture.en-OawEDoTt.txt           │ text │ 0.17 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Field.fixture.ar-DTUDucKy.txt            │ text │ 0.15 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Field.fixture.en-DAX6R2k9.txt            │ text │ 0.12 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Input.fixture.ar-PXlNEY_D.txt            │ text │ 0.11 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Input.fixture.en-DHcDTE0Q.txt            │ text │ 0.08 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Match-lLEmv2ux.js                        │ esm  │ 14.12 KiB   │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Menu.fixture.ar-CCo25gAb.txt             │ text │ 0.22 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Menu.fixture.en-DUWOAA64.txt             │ text │ 0.18 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/SegmentedControl.fixture.ar-CtWtmPAW.txt │ text │ 0.09 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/SegmentedControl.fixture.en-fkYIFlzD.txt │ text │ 0.07 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Squadmate.fixture.ar-DInk8FuN.txt        │ text │ 0.05 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Squadmate.fixture.en-Pwdv8Waj.txt        │ text │ 0.05 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Switch.fixture.ar-Dtw2LH1r.txt           │ text │ 0.06 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Switch.fixture.en-wdu3vNBo.txt           │ text │ 0.04 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/_tanstack-start-manifest_v-Be9p4VpX.js   │ esm  │ 1.11 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/announce-B61HbZrY.js                     │ esm  │ 1.31 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/components._name-D_FzW3Nr.js             │ esm  │ 11.44 KiB   │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/components._name-DcmGzwaH.js             │ esm  │ 772.81 KiB  │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/empty-plugin-adapters-CY9QlNpI.js        │ esm  │ 0.28 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/keyboard-OR6zWO4W.js                     │ esm  │ 8.88 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/react-dom-C2NweqMZ.js                    │ esm  │ 6.42 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/router-DrXJkvaK.js                       │ esm  │ 17.82 KiB   │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/routes-CLwcuUc9.js                       │ esm  │ 6.51 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/sheet-presentation-UIkgmQIC.js           │ esm  │ 71.83 KiB   │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/start-vwAn0cYj.js                        │ esm  │ 0.19 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/state-DXgeoc6U.js                        │ esm  │ 8.14 KiB    │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/useMatch-hIAO5F9z.js                     │ esm  │ 148.49 KiB  │
+├─────────────────────────────────────────────────┼──────┼─────────────┤
+│ Total (32 modules)                              │      │ 1071.13 KiB │
+└─────────────────────────────────────────────────┴──────┴─────────────┘
+---
+
+--- 2026-11-18T11:04:58.313Z debug
+RemoteRuntimeController teardown beginning...
+---
+
+--- 2026-11-18T11:04:58.313Z debug
+RemoteRuntimeController teardown complete
+---
+
+--- 2026-11-18T11:04:58.315Z log
+⎔ Starting local server...
+---
+
+--- 2026-11-18T11:04:58.476Z log
+Wrangler detected this dev session is running in an AI agent.
+The Local Explorer API is available at http://127.0.0.1:5173/cdn-cgi/local/explorer/api
+Useful routes:
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/workers - local Workers and bindings
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/scheduled?worker=<name> - invoke a Worker's scheduled handler; cron is required (see the OpenAPI schema for the full request)
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/storage/kv/namespaces - KV namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/d1/database - D1 databases
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/r2/buckets - R2 buckets
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workers/durable_objects/namespaces - Durable Object namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workflows - Workflows
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query - run a read-only SQL query (SELECT/WITH only) over captured request traces and console logs. Tables: spans, logs (read attributes via json(attributes)). Example:
+    curl -X POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query -H 'Content-Type: application/json' -d '{"sql":"SELECT service, name, outcome, duration_ms FROM spans WHERE parent_id IS NULL LIMIT 20"}'
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/clear - clear all captured traces and logs
+If the routes above don't cover what you need, fetch the full OpenAPI schema (large - use only as a last resort):
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api - OpenAPI schema
+---
+
+--- 2026-11-18T11:04:58.485Z debug
+[InspectorProxyWorker] handleProxyControllerIncomingMessage {"type":"reloadStart"}
+---
+
+--- 2026-11-18T11:04:58.545Z debug
+[InspectorProxyWorker] handleProxyControllerIncomingMessage {"type":"reloadComplete","proxyData":{"userWorkerUrl":{"protocol":"http:","hostname":"127.0.0.1","port":"64977"},"userWorkerInspectorUrl":{"protocol":"ws:","hostname":"127.0.0.1","port":"64978","pathname":"/core:user:tensquads-ui-preview"},"userWorkerInnerUrlOverrides":{"protocol":"http:"},"headers":{"MF-Proxy-Shared-Secret":"8cd17084-70d1-4fc8-8330-e14ec4079649"},"liveReload":false,"proxyLogsToController":false}}
+---
+
+--- 2026-11-18T11:04:58.545Z debug
+[InspectorProxyWorker] reconnectRuntimeWebSocket
+---
+
+--- 2026-11-18T11:04:58.545Z debug
+[InspectorProxyWorker] NEW RUNTIME WEBSOCKET http://127.0.0.1:64978/core:user:tensquads-ui-preview
+---
+
+--- 2026-11-18T11:04:58.546Z debug
+[InspectorProxyWorker] SEND TO DEVTOOLS {"method":"Runtime.executionContextsCleared"}
+---
+
+--- 2026-11-18T11:04:58.547Z debug
+[InspectorProxyWorker] RUNTIME WEBSOCKET OPENED
+---
+
+--- 2026-11-18T11:04:58.547Z debug
+[InspectorProxyWorker] SEND TO RUNTIME {"method":"Runtime.enable","id":100000001}
+---
+
+--- 2026-11-18T11:04:58.548Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE {
+  method: 'Runtime.executionContextCreated',
+  params: {
+    context: {
+      id: 151390433,
+      origin: '',
+      name: 'Worker',
+      uniqueId: '-2709601474516332721.-7781058799058330916'
+    }
+  }
+}
+---
+
+--- 2026-11-18T11:04:58.548Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE { id: 100000001, result: {} }
+---

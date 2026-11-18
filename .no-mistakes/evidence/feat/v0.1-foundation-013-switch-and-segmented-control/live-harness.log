@@ -1,0 +1,10 @@
+Switch: readOnly remains focusable and unchanged after Space/click; disabled resists click; required blocks invalid form; controlled Space/external updates change validity and submitted values.
+SegmentedControl ltr: one Tab stop, arrows skip disabled and wrap with focus and exclusive selection; disabled click ignored and controlled update selects Grid.
+SegmentedControl rtl: one Tab stop, arrows skip disabled and wrap with focus and exclusive selection; disabled click ignored and controlled update selects Grid.
+Streaming Switch: late checked value updates focused control, user choice survives later checked=true and disabled=true.
+Streaming SegmentedControl ltr: unfinished initial G preserves focus; final Grid applies; growing Gr to Grid retains focused user selection over later List initial value.
+Streaming duplicates ltr: selected second, third, and fourth slots survive Li → List → List view with focus, one enabled duplicate, and one checked radio; original List remains selectable afterward.
+Streaming SegmentedControl rtl: unfinished initial G preserves focus; final Grid applies; growing Gr to Grid retains focused user selection over later List initial value.
+Streaming duplicates rtl: selected second, third, and fourth slots survive Li → List → List view with focus, one enabled duplicate, and one checked radio; original List remains selectable afterward.
+Invalid streamed options: duplicate labels expose one enabled copy; unmatched Board initial value defers to List; both retain focus and allow exclusive Grid selection.
+All live harness assertions passed.

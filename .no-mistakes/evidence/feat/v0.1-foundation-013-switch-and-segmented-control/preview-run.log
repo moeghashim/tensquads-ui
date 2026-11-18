@@ -1,0 +1,23 @@
+
+> @tensquads/ui@0.1.0 e2e
+> playwright test e2e/switch-segmented-control.spec.ts e2e/preview.spec.ts --workers=2 --output=~/.no-mistakes/evidence/01M7Q4FJXRV18TA1D3RVQESJY5/browser-results
+
+[WebServer] (node:93354) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 4 tests using 2 workers
+
+(node:93422) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:93421) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] e2e/preview.spec.ts:18:1 › preview home works in both directions and themes
+[2/4] e2e/switch-segmented-control.spec.ts:18:1 › Switch previews on, off, disabled, keyboard and focus states
+[3/4] e2e/switch-segmented-control.spec.ts:42:1 › SegmentedControl follows UI SDK arrow navigation in both directions
+[4/4] e2e/switch-segmented-control.spec.ts:67:1 › SegmentedControl Space selects and Enter submits its form
+  4 passed (6.7s)
