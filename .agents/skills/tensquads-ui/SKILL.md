@@ -11,7 +11,7 @@ Use `@tensquads/ui` for shared tensquads and بنّاء interfaces. It provides 
 
 Read the installed [`ui-sdk` skill](../ui-sdk/SKILL.md). It explains UI SDK behaviors, composition, accessibility, testing, and how to build a missing behavior with `@ui-sdk/core`. This skill adds the tensquads library API and conventions; it does not replace the UI SDK guidance.
 
-Read the component contract in the repository's [llms.txt](https://github.com/moeghashim/tensquads-ui/blob/96b247ef01b0cdef984baaf6b7262a19d9a8e944/llms.txt), then follow its link to the relevant `X.md` page for props and composition. These links use the same repository revision and work when this skill is installed in another project.
+Read the component contract in the repository's [llms.txt](https://github.com/moeghashim/tensquads-ui/blob/main/llms.txt), then follow its link to the relevant `X.md` page for props and composition. The link points at `main`; for the API of the exact version you installed, read `llms.txt` in that commit.
 
 ## Install and style
 
