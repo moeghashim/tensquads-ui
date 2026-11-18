@@ -24,6 +24,8 @@ export {
 } from "./Field/Field.js";
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
+export type { ChipProps } from "./Chip/Chip.js";
+export { Chip } from "./Chip/Chip.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
 export {
 	Squadmate,

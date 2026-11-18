@@ -28,6 +28,8 @@ test("every component fixture parses and renders", async ({ page }) => {
 				const badge = fixtureRegion.getByText(locale === "en" ? "Ready" : "جاهز", { exact: true });
 				await expect(badge).toBeVisible();
 				await expect(badge).toHaveJSProperty("tagName", "SPAN");
+			} else if (component.name === "Chip") {
+				await expect(fixtureRegion.getByRole("button", { name: "response_schema" })).toBeVisible();
 			} else if (component.name === "Squadmate") {
 				const image = fixtureRegion.getByRole("img", {
 					name: locale === "en" ? "Petra, Planning" : "بترا، تخطيط",
