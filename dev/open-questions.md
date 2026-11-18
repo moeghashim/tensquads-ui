@@ -19,3 +19,12 @@
 **Recommendation**: Option 1, so every surface renders the same and RTL screenshots match production.
 **Status**: answered
 **Resolution** (Opus, 2026-11-17): Option 1 with IBM Plex Sans Arabic, the face the tensquads website already loads next to Inter and JetBrains Mono. Recorded as PLAN.md D17; task 020 adds `fonts.css`.
+
+## Q3 — Should consumers that only render UI install the Anthropic SDK?
+
+**Context**: PR #13 adds `@anthropic-ai/sdk` 1.10.0 as a regular dependency of `@tensquads/ui`, and `@tensquads/ui/openui/server` re-exports the Anthropic provider. Browser-only consumers install the SDK, and every server consumer loads it even with another provider. The adapter is tested only with a fake client.
+**Options**:
+  1. Move the provider to its own subpath `@tensquads/ui/openui/server/anthropic` and make the SDK an optional peer dependency.
+  2. Keep it as is.
+**Recommendation**: Option 1 in v0.2, plus one live smoke test against the API when the tensquads app adopts the server helpers.
+**Status**: open — v0.2
