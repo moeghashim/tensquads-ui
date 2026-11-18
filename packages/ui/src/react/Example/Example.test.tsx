@@ -5,6 +5,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { createTensquadsLibrary, getRegisteredComponents, TensquadsRenderer } from "../../openui";
 import type { Locale } from "../../schemas";
 
+const expectedSquadmateNames: Record<Locale, string> = {
+	en: "Petra, Planning",
+	ar: "بترا، تخطيط",
+};
+
 const expectedMessages: Record<string, Record<Locale, string>> = {
 	Example: {
 		en: "OpenUI fixture rendered in English",
@@ -35,11 +40,17 @@ describe("OpenUI round trips", () => {
 					`${component.name}.fixture.${locale}.txt`,
 				);
 				const fixture = readFileSync(path, "utf8");
-				const expected = expectedMessages[component.name]?.[locale];
-				expect(expected, `${component.name} needs a ${locale} output expectation`).toBeDefined();
 				const onError = vi.fn();
 				const result = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
-				expect(result.container.textContent).toBe(expected);
+				if (component.name === "Squadmate") {
+					const image = result.getByRole("img", { name: expectedSquadmateNames[locale] });
+					expect(image).toHaveAttribute("width", "64");
+					expect(image).toHaveAttribute("height", "64");
+				} else {
+					const expected = expectedMessages[component.name]?.[locale];
+					expect(expected, `${component.name} needs a ${locale} output expectation`).toBeDefined();
+					expect(result.container.textContent).toBe(expected);
+				}
 				expect(onError).toHaveBeenCalledWith([]);
 				for (const [errors] of onError.mock.calls) {
 					expect(errors).toEqual([]);

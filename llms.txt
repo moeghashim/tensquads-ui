@@ -1,3 +1,4 @@
 # tensquads UI component index
 
 - [Example](packages/ui/src/react/Example/Example.md): This is a placeholder component. Task 009 removes it when Button is added.
+- [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md): Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
