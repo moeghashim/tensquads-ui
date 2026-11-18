@@ -42,7 +42,7 @@ describe("Input", () => {
 
 describe("OpenUI streamed values", () => {
 	it.each(["en", "ar"] as const)("updates streamed text and preserves edits in %s", (locale) => {
-		const stream = (value: string) => `root = Input("Search", "Find", "${value}")`.replace("${value}", value);
+		const stream = (value: string) => `root = Input("Search", "Find", "${value}")`;
 		const { getByRole, rerender } = render(<TensquadsRenderer stream={stream("N").slice(0, -2)} locale={locale} />);
 		const input = getByRole("textbox", { name: "Search" });
 		expect(input).toHaveValue("N");
