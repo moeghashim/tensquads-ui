@@ -101,13 +101,7 @@ function InlineMarkdown({ text }: { text: string }) {
 	);
 }
 
-export function MarkdownDocument({
-	markdown,
-	labels,
-}: {
-	markdown: string;
-	labels: MarkdownLabels;
-}) {
+export function MarkdownDocument({ markdown, labels }: { markdown: string; labels: MarkdownLabels }) {
 	const blocks = parseMarkdown(markdown).filter((block) => !(block.type === "heading" && block.level === 1));
 	const descriptionIndex = blocks.findIndex((block) => block.type === "paragraph");
 	const description = descriptionIndex >= 0 ? blocks[descriptionIndex] : undefined;
