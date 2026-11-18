@@ -18,7 +18,7 @@ const states: PreviewState[] = [
 test("Menu shows open and closed states in both locales and themes", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Menu");
-		await expect(page.getByRole("heading", { name: "Menu" })).toBeVisible();
+		await expect(page.getByRole("heading", { name: "Menu", level: 1, exact: true })).toBeVisible();
 		await expect(page.locator('[data-slot="menu-trigger"]')).toHaveCount(3);
 		await expect(page.locator('[data-slot="menu-content"][data-open]')).toHaveCount(1);
 		await expect(page.locator('[data-slot="menu-item"][data-destructive]')).toHaveCount(1);

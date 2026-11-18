@@ -2,6 +2,15 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import {
+	Dialog,
+	DialogBackdrop,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogTitle,
+	DialogTrigger,
+} from "../../../../packages/ui/src/react/Dialog/Dialog";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
 import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import {
@@ -40,6 +49,132 @@ function ComponentPage() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Dialog") {
+		const ar = locale === "ar";
+		const copy = ar
+			? {
+					back: "العودة إلى المعرض",
+					eyebrow: "معاينة المكوّن",
+					simple: "حوار بسيط",
+					open: "فتح الحوار",
+					close: "إغلاق",
+					simpleTitle: "مراجعة الطلب",
+					simpleDescription: "طلب عضو جديد الانضمام إلى نورث ستار.",
+					body: "راجع ملفه الشخصي قبل إضافته إلى الفريق.",
+					form: "حوار مع نموذج",
+					formOpen: "تعديل المشروع",
+					formTitle: "تعديل المشروع",
+					formDescription: "حدّث اسم المشروع ووصفه.",
+					name: "اسم المشروع",
+					nameValue: "نورث ستار",
+					save: "حفظ التغييرات",
+					cancel: "إلغاء",
+					destructive: "إجراء تدميري",
+					deleteOpen: "حذف المشروع",
+					deleteTitle: "حذف المشروع؟",
+					deleteDescription: "سيؤدي هذا إلى إزالة المشروع نهائياً.",
+					deleteBody: "لا يمكن التراجع عن هذا الإجراء.",
+					delete: "حذف المشروع",
+				}
+			: {
+					back: "Back to gallery",
+					eyebrow: "Component preview",
+					simple: "Simple dialog",
+					open: "Open dialog",
+					close: "Close",
+					simpleTitle: "Review request",
+					simpleDescription: "A new member asked to join Northstar.",
+					body: "Review their profile before adding them to the squad.",
+					form: "Dialog with form",
+					formOpen: "Edit project",
+					formTitle: "Edit project",
+					formDescription: "Update the project name and description.",
+					name: "Project name",
+					nameValue: "Northstar",
+					save: "Save changes",
+					cancel: "Cancel",
+					destructive: "Destructive action",
+					deleteOpen: "Delete project",
+					deleteTitle: "Delete project?",
+					deleteDescription: "This will permanently remove the project.",
+					deleteBody: "This action cannot be undone.",
+					delete: "Delete project",
+				};
+		return (
+			<main className="gallery dialog-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{copy.back}
+				</Link>
+				<p className="eyebrow">{copy.eyebrow}</p>
+				<h1>Dialog</h1>
+				<section className="dialog-preview__grid" aria-label={ar ? "أمثلة الحوار" : "Dialog examples"}>
+					<div className="dialog-preview__item">
+						<h2>{copy.simple}</h2>
+						<Dialog>
+							<DialogTrigger render={<Button variant="outline" />}>{copy.open}</DialogTrigger>
+							<DialogBackdrop />
+							<DialogContent>
+								<DialogTitle>{copy.simpleTitle}</DialogTitle>
+								<DialogDescription>{copy.simpleDescription}</DialogDescription>
+								<p data-slot="dialog-body">{copy.body}</p>
+								<div data-slot="dialog-actions">
+									<DialogClose render={<Button variant="solid" />}>{copy.close}</DialogClose>
+								</div>
+							</DialogContent>
+						</Dialog>
+					</div>
+					<div className="dialog-preview__item">
+						<h2>{copy.form}</h2>
+						<Dialog>
+							<DialogTrigger render={<Button variant="outline" />}>{copy.formOpen}</DialogTrigger>
+							<DialogBackdrop />
+							<DialogContent>
+								<DialogTitle>{copy.formTitle}</DialogTitle>
+								<DialogDescription>{copy.formDescription}</DialogDescription>
+								<form data-slot="dialog-form" onSubmit={(event) => event.preventDefault()}>
+									<Field name="project-name">
+										<FieldLabel>{copy.name}</FieldLabel>
+										<Input defaultValue={copy.nameValue} />
+									</Field>
+									<div data-slot="dialog-actions">
+										<DialogClose value="cancel" render={<Button variant="outline" />}>
+											{copy.cancel}
+										</DialogClose>
+										<DialogClose value="save" render={<Button variant="solid" />}>
+											{copy.save}
+										</DialogClose>
+									</div>
+								</form>
+							</DialogContent>
+						</Dialog>
+					</div>
+					<div className="dialog-preview__item">
+						<h2>{copy.destructive}</h2>
+						<Dialog>
+							<DialogTrigger render={<Button variant="danger" />}>{copy.deleteOpen}</DialogTrigger>
+							<DialogBackdrop />
+							<DialogContent>
+								<DialogTitle>{copy.deleteTitle}</DialogTitle>
+								<DialogDescription>{copy.deleteDescription}</DialogDescription>
+								<p data-slot="dialog-body">{copy.deleteBody}</p>
+								<div data-slot="dialog-actions">
+									<DialogClose value="cancel" render={<Button variant="outline" />}>
+										{copy.cancel}
+									</DialogClose>
+									<DialogClose value="delete" render={<Button variant="danger" />}>
+										{copy.delete}
+									</DialogClose>
+								</div>
+							</DialogContent>
+						</Dialog>
+					</div>
+				</section>
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
 	if (name === "Squadmate") {
 		const states: AgentState[] = ["idle", ...AGENT_LOOP_STATES.map(({ id }) => id)];
 		return (
