@@ -1,0 +1,120 @@
+[WebServer] (node:65943) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 2 workers
+
+(node:65998) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65999) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: en/dark (2.0s)
+(node:66070) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: en/light (2.5s)
+(node:66075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: ar/dark (2.0s)
+  ✘  3 e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: ar/light (2.5s)
+
+
+  1) e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: en/light ────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "horizontal": -1,
+    +   "horizontal": 1,
+        "vertical": 1,
+      }
+
+      42 |       await writeFile(`${evidence}/nested-${locale}-${theme}.html`, await form.evaluate(node => node.outerHTML));
+      43 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+    > 44 |       expect.soft(rendered).toEqual({horizontal: opposite === 'rtl' ? -1 : 1, vertical: 1});
+         |                             ^
+      45 |       measurements.push({locale, theme, width:390, direction:opposite, rendered});
+      46 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+      47 |       await input.press('End');
+        at {run-worktree}/e2e/chat-arrow.local.spec.ts:44:29
+
+    Error Context: ../../../evidence/01M7REPJ215PXXEFRJFN6EF43V/arrow-results/chat-arrow.local-send-arrow-follows-direction-en-light/error-context.md
+
+  2) e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: en/dark ─────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "horizontal": -1,
+    +   "horizontal": 1,
+        "vertical": 1,
+      }
+
+      42 |       await writeFile(`${evidence}/nested-${locale}-${theme}.html`, await form.evaluate(node => node.outerHTML));
+      43 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+    > 44 |       expect.soft(rendered).toEqual({horizontal: opposite === 'rtl' ? -1 : 1, vertical: 1});
+         |                             ^
+      45 |       measurements.push({locale, theme, width:390, direction:opposite, rendered});
+      46 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+      47 |       await input.press('End');
+        at {run-worktree}/e2e/chat-arrow.local.spec.ts:44:29
+
+    Error Context: ../../../evidence/01M7REPJ215PXXEFRJFN6EF43V/arrow-results/chat-arrow.local-send-arrow-follows-direction-en-dark/error-context.md
+
+  3) e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: ar/light ────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "horizontal": 1,
+    +   "horizontal": -1,
+        "vertical": 1,
+      }
+
+      42 |       await writeFile(`${evidence}/nested-${locale}-${theme}.html`, await form.evaluate(node => node.outerHTML));
+      43 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+    > 44 |       expect.soft(rendered).toEqual({horizontal: opposite === 'rtl' ? -1 : 1, vertical: 1});
+         |                             ^
+      45 |       measurements.push({locale, theme, width:390, direction:opposite, rendered});
+      46 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+      47 |       await input.press('End');
+        at {run-worktree}/e2e/chat-arrow.local.spec.ts:44:29
+
+    Error Context: ../../../evidence/01M7REPJ215PXXEFRJFN6EF43V/arrow-results/chat-arrow.local-send-arrow-follows-direction-ar-light/error-context.md
+
+  4) e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: ar/dark ─────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "horizontal": 1,
+    +   "horizontal": -1,
+        "vertical": 1,
+      }
+
+      42 |       await writeFile(`${evidence}/nested-${locale}-${theme}.html`, await form.evaluate(node => node.outerHTML));
+      43 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+    > 44 |       expect.soft(rendered).toEqual({horizontal: opposite === 'rtl' ? -1 : 1, vertical: 1});
+         |                             ^
+      45 |       measurements.push({locale, theme, width:390, direction:opposite, rendered});
+      46 |       await form.screenshot({path: `${evidence}/arrow-${locale}-${theme}-nested-${opposite}.png`});
+      47 |       await input.press('End');
+        at {run-worktree}/e2e/chat-arrow.local.spec.ts:44:29
+
+    Error Context: ../../../evidence/01M7REPJ215PXXEFRJFN6EF43V/arrow-results/chat-arrow.local-send-arrow-follows-direction-ar-dark/error-context.md
+
+  4 failed
+    e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: en/light ─────────────────────
+    e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: en/dark ──────────────────────
+    e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: ar/light ─────────────────────
+    e2e/chat-arrow.local.spec.ts:10:5 › send arrow follows direction: ar/dark ──────────────────────
