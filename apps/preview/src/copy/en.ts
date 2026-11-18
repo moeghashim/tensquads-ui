@@ -47,6 +47,42 @@ const en = {
 	back: "Back to home",
 	galleryTitle: "Component gallery",
 	getStartedTitle: "Get started",
+	getStartedPage: {
+		eyebrow: "For coding agents",
+		title: "Give your agent the UI contract",
+		intro: "Install the shared components, add their styles, and give your coding agent the project skills and component index.",
+		installTitle: "Install from a pinned commit",
+		installLead: "Pin the dependency to a Git commit so installs resolve to the same library version.",
+		installCodeLabel: "Install command",
+		installNote:
+			"React and React DOM 19 are peer dependencies. The package builds its distribution during installation.",
+		stylesTitle: "Load the styles",
+		stylesLead: "Add this to the consumer app's global stylesheet. Import fonts before tokens and component styles.",
+		stylesCodeLabel: "Global stylesheet",
+		stylesNote:
+			"Set lang and dir on the html element. Set data-theme to light or dark, or omit it to follow the system preference.",
+		skillsTitle: "Install the agent skills",
+		skillsLead:
+			"The repository keeps both skills under .agents/skills. The tensquads-ui skill builds on the UI SDK skill.",
+		tensquadsSkill: "Library usage, component selection, and OpenUI guidance.",
+		uiSdkSkill: "UI SDK composition, behavior, accessibility, and testing guidance.",
+		skillInstallLabel: "Install the tensquads-ui skill",
+		skillsNote:
+			"Run these commands from your agent's supported skills setup. They install the repository's tensquads-ui skill and the UI SDK skill from vercel-labs/ui.",
+		llmsLink: "Read the component index in llms.txt",
+		reactTitle: "Use components in React",
+		reactLead: "Import components from the public React entry and compose them in your screen.",
+		reactCodeLabel: "ProfileForm.tsx",
+		serverTitle: "Stream UI from a Worker",
+		serverLead:
+			"A server agent can validate turns, build the locale-specific prompt, and stream OpenUI Lang as plain text.",
+		workerCodeLabel: "Worker entry",
+		serverNote:
+			"Store ANTHROPIC_API_KEY as a Worker secret and pass it from the server environment. Keep credentials out of browser code. The example does not expose a live endpoint.",
+		copy: "Copy",
+		copied: "Copied",
+		copyFailed: "Copy failed. Select the code and copy it manually.",
+	},
 } as const;
 
 export default en;

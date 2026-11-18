@@ -47,6 +47,38 @@ const ar = {
 	back: "العودة إلى الرئيسية",
 	galleryTitle: "معرض المكوّنات",
 	getStartedTitle: "البدء",
+	getStartedPage: {
+		eyebrow: "لوكلاء البرمجة",
+		title: "عقد الواجهة لوكلاء البرمجة",
+		intro: "يتطلب إعداد المكتبة تثبيت المكوّنات المشتركة وإضافة أنماطها وإتاحة مهارات المشروع وفهرس المكوّنات لوكيل البرمجة.",
+		installTitle: "التثبيت من إصدار محدد",
+		installLead: "يضمن تثبيت الاعتماد على معرّف إيداع في Git استخدام إصدار المكتبة نفسه في كل عملية تثبيت.",
+		installCodeLabel: "أمر التثبيت",
+		installNote: "React وReact DOM 19 من الاعتمادات النظيرة. تُبنى ملفات الحزمة أثناء التثبيت.",
+		stylesTitle: "تحميل الأنماط",
+		stylesLead: "تُضاف الشيفرة إلى ملف الأنماط العام في التطبيق، مع تحميل الخطوط قبل الرموز وأنماط المكوّنات.",
+		stylesCodeLabel: "ملف الأنماط العام",
+		stylesNote: "يُحدّد lang وdir على عنصر html. وتُضبط data-theme إلى light أو dark، أو تُترك لمتابعة سمة النظام.",
+		skillsTitle: "تثبيت مهارات الوكيل",
+		skillsLead: "توجد المهارتان في المستودع ضمن .agents/skills. وتبني مهارة tensquads-ui على مهارة UI SDK.",
+		tensquadsSkill: "إرشادات استخدام المكتبة واختيار المكوّنات وOpenUI.",
+		uiSdkSkill: "إرشادات تركيب UI SDK والسلوك وإمكانية الوصول والاختبار.",
+		skillInstallLabel: "تثبيت مهارة tensquads-ui",
+		skillsNote:
+			"يُنفّذ الأمران من إعداد المهارات الذي يدعمه الوكيل. يثبّتان مهارة tensquads-ui من المستودع ومهارة UI SDK من vercel-labs/ui.",
+		llmsLink: "قراءة فهرس المكوّنات في llms.txt",
+		reactTitle: "استخدام المكوّنات في React",
+		reactLead: "استورد المكوّنات من مدخل React العام وركّبها في الشاشة.",
+		reactCodeLabel: "ProfileForm.tsx",
+		serverTitle: "إرسال الواجهة من Worker",
+		serverLead: "يمكن لوكيل الخادم التحقق من الرسائل، وبناء تعليمات اللغة المطلوبة، وإرسال OpenUI Lang كنص عادي.",
+		workerCodeLabel: "مدخل Worker",
+		serverNote:
+			"يُخزّن ANTHROPIC_API_KEY كسرّ في Worker ويُمرّر من بيئة الخادم. تبقى بيانات الاعتماد خارج شيفرة المتصفح. المثال لا يوفّر نقطة اتصال مباشرة.",
+		copy: "نسخ",
+		copied: "تم النسخ",
+		copyFailed: "تعذّر النسخ. حدّد الشيفرة وانسخها يدوياً.",
+	},
 } as const;
 
 export default ar;
