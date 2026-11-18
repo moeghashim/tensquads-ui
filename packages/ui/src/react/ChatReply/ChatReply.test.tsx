@@ -98,9 +98,9 @@ describe("ChatReply", () => {
 		const lists = container.querySelectorAll(".ts-chat-reply__markdown > ol");
 		expect(lists[0]).toHaveAttribute("start", "3");
 		expect(lists[0]?.querySelectorAll(":scope > li")).toHaveLength(2);
-		const parent = screen.getByText("Parent", { exact: true });
+		const parent = screen.getByText("Parent", { exact: true }).closest("li")!;
 		expect(parent.tagName).toBe("LI");
-		expect(within(parent).getByText("Child", { exact: true }).tagName).toBe("LI");
+		expect(within(parent).getByText("Child", { exact: true }).closest("li")?.parentElement?.tagName).toBe("UL");
 		expect(parent.querySelector("ul > li > ol")).toHaveAttribute("start", "7");
 		expect(parent.parentElement?.querySelectorAll(":scope > li")).toHaveLength(2);
 		expect(lists[1]).toHaveAttribute("start", "5");
@@ -127,7 +127,7 @@ describe("ChatReply", () => {
 		expect(roots).toHaveLength(2);
 		expect(roots[0]).toHaveAttribute("start", "3");
 		expect(roots[0]?.querySelectorAll(":scope > li")).toHaveLength(2);
-		const parent = screen.getByText("Parent", { exact: true });
+		const parent = screen.getByText("Parent", { exact: true }).closest("li")!;
 		expect(parent.querySelector("p > strong")).toHaveTextContent("details");
 		expect(parent.querySelectorAll(":scope > ul > li")).toHaveLength(2);
 		const grandchildren = parent.querySelector("ul > li > ol");
@@ -144,6 +144,34 @@ describe("ChatReply", () => {
 		const nested = root?.querySelector("li > ol");
 		expect(nested).toHaveAttribute("start", "3");
 		expect(nested?.querySelectorAll(":scope > li")).toHaveLength(2);
+	});
+
+	it.each([
+		["unordered", "- Example:", "", " "],
+		["ordered", "3. Example:", "", " "],
+		["nested", "- Parent", "\n\n - Example:", "  "],
+	] as const)("parses fenced code and headings inside %s list continuations", (_name, first, nested, indent) => {
+		const code = "const x = 1;\n\n  const y = 2;\n- literal marker";
+		const reply = first + nested + "\n\n" + [
+			"```js", ...code.split("\n"), "```", "", "## Learn C#", "", "After code",
+		].map((line) => indent + line).join("\n");
+		const { container } = render(<ChatReply reply={reply} locale="ar" />);
+		const item = screen.getByText("Example:", { exact: true }).closest("li")!;
+		const pre = item.querySelector("pre");
+		expect(pre).toHaveAttribute("dir", "ltr");
+		expect(pre?.querySelector("code")?.textContent).toBe(code);
+		expect(within(item).getByRole("heading", { level: 2, name: "Learn C#" })).toBeInTheDocument();
+		expect(within(item).getByText("After code")).toBeInTheDocument();
+		expect(container.textContent).not.toContain("```");
+		expect(item.querySelectorAll("li")).toHaveLength(0);
+	});
+
+	it.each(["-", "3."])("parses block syntax on the initial %s item line", (marker) => {
+		const reply = marker + " ## Title\n\n" + marker + " ```js\n const x = 1;\n ```";
+		const { container } = render(<ChatReply reply={reply} />);
+		expect(screen.getByRole("heading", { level: 2, name: "Title" }).closest("li")).toBeInTheDocument();
+		expect(container.querySelector("li > pre")).toHaveAttribute("dir", "ltr");
+		expect(container.querySelector("li > pre > code")?.textContent).toBe("const x = 1;");
 	});
 
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {

@@ -85,6 +85,15 @@ function lineIndent(line: string): number {
 	return line.match(/^[ \t]*/)?.[0].replace(/\t/g, "    ").length ?? 0;
 }
 
+function removeIndent(line: string, amount: number): string {
+	let index = 0;
+	let removed = 0;
+	while (index < line.length && removed < amount && /[ \t]/.test(line[index] ?? "")) {
+		removed += line[index++] === "\t" ? 4 : 1;
+	}
+	return " ".repeat(Math.max(0, removed - amount)) + line.slice(index);
+}
+
 function listItem(line: string) {
 	const match = line.match(/^[ \t]*([-*+]|\d+\.)[ \t]+(.*)$/);
 	if (!match) return undefined;
@@ -98,6 +107,10 @@ function listItem(line: string) {
 }
 
 function MarkdownBlock({ source }: { source: string }) {
+	return <div className="ts-chat-reply__markdown">{markdown(source)}</div>;
+}
+
+function markdown(source: string): ReactNode[] {
 	const lines = source.split("\n");
 	const lineAt = (lineIndex: number) => lines[lineIndex] ?? "";
 	const nodes: ReactNode[] = [];
@@ -109,34 +122,24 @@ function MarkdownBlock({ source }: { source: string }) {
 			const item = listItem(lineAt(index));
 			if (!item || item.indent !== first.indent || item.ordered !== first.ordered) break;
 			const itemKey = `item-${index}`;
-			const children: ReactNode[] = [];
 			index += 1;
+			const continuation: string[] = [];
 			while (index < lines.length) {
 				let next = index;
 				while (next < lines.length && !lineAt(next).trim()) next += 1;
-				const child = listItem(lineAt(next));
-				if (child) {
-					index = next;
-					if (child.indent <= first.indent) break;
-					children.push(readList(child));
-					continue;
+				if (next === lines.length) break;
+				if (lineIndent(lineAt(next)) <= first.indent) {
+					if (listItem(lineAt(next))) index = next;
+					break;
 				}
-				if (!lineAt(next).trim() || lineIndent(lineAt(next)) <= first.indent) break;
-				index = next;
-				const paragraphKey = `continuation-${index}`;
-				const paragraph: string[] = [];
-				while (index < lines.length && lineAt(index).trim() && !listItem(lineAt(index))) {
-					if (lineIndent(lineAt(index)) <= first.indent) break;
-					paragraph.push(lineAt(index++).trim());
-				}
-				children.push(<p key={paragraphKey}>{inline(paragraph.join(" "))}</p>);
+				while (index <= next) continuation.push(lineAt(index++));
 			}
-			items.push(
-				<li key={itemKey}>
-					{inline(item.text)}
-					{children}
-				</li>,
+			const indentation = continuation.reduce(
+				(minimum, line) => line.trim() ? Math.min(minimum, lineIndent(line)) : minimum,
+				Number.POSITIVE_INFINITY,
 			);
+			const body = [item.text, ...continuation.map((line) => removeIndent(line, indentation))].join("\n");
+			items.push(<li key={itemKey}>{markdown(body)}</li>);
 		}
 		return first.ordered ? (
 			<ol key={key} start={first.start}>
@@ -190,7 +193,7 @@ function MarkdownBlock({ source }: { source: string }) {
 		}
 		nodes.push(<p key={`paragraph-${index}`}>{inline(paragraph.join(" "))}</p>);
 	}
-	return <div className="ts-chat-reply__markdown">{nodes}</div>;
+	return nodes;
 }
 
 function inline(source: string): ReactNode[] {
