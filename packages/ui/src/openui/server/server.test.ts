@@ -1,6 +1,7 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { isBuiltin } from "node:module";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { build } from "vite";
+import { describe, expect, it, vi } from "vitest";
 import { createTensquadsLibrary } from "../library.js";
 import { getRegisteredComponents } from "../registry.js";
 import {
@@ -69,24 +70,88 @@ describe("OpenUI server helpers", () => {
 		expect(receivedSystem).toBe("prompt");
 	});
 
-	it("keeps Anthropic SDK imports in the provider and out of React DOM server bundles", () => {
-		const sourceRoot = join(process.cwd(), "packages/ui/src");
-		const allFiles = sourceFiles(sourceRoot);
-		for (const file of allFiles) {
-			const contents = readFileSync(file, "utf8");
-			if (contents.includes(["@anthropic-ai/", "sdk"].join(""))) {
-				expect(file).toMatch(/openui\/server\/providers\/anthropic\.ts$/);
-			}
-		}
-		const entry = readFileSync(join(sourceRoot, "openui/server/index.ts"), "utf8");
-		expect(entry).not.toMatch(/TensquadsRenderer|react-dom/);
-		expect(entry).not.toMatch(/from ["']\.\.\/TensquadsRenderer/);
+	it("closes a generator cancelled during a pending read without an abort hook", async () => {
+		const pending = waitPoint();
+		const waiting = waitPoint();
+		const cleaned = vi.fn();
+		const provider = {
+			async *stream() {
+				try {
+					yield "first";
+					waiting.resolve();
+					await pending.promise;
+					yield "second";
+				} finally {
+					cleaned();
+				}
+			},
+		};
+		const response = await streamOpenUIResponse({ provider, system: "prompt", turns: [] });
+		const reader = response.body!.getReader();
+		expect(new TextDecoder().decode((await reader.read()).value)).toBe("first");
+		await waiting.promise;
+		const cancelled = reader.cancel();
+		pending.resolve();
+		await cancelled;
+		expect(cleaned).toHaveBeenCalledOnce();
+	});
+
+	it.each([true, false])("closes an iterator when a provider read fails (first: %s)", async (first) => {
+		const failure = new Error("provider failed");
+		const next = vi.fn();
+		if (!first) next.mockResolvedValueOnce({ done: false, value: "first" });
+		next.mockRejectedValue(failure);
+		const close = vi.fn().mockResolvedValue({ done: true });
+		const provider = { stream: () => ({ [Symbol.asyncIterator]: () => ({ next, return: close }) }) };
+		const response = streamOpenUIResponse({ provider, system: "prompt", turns: [] });
+		if (first) await expect(response).rejects.toBe(failure);
+		else await expect((await response).text()).rejects.toBe(failure);
+		expect(close).toHaveBeenCalledOnce();
+	});
+
+	it("bundles the server without React DOM and confines SDK imports to the adapter", async () => {
+		const sdkImporters = new Set<string>();
+		const result = await build({
+			configFile: false,
+			ssr: { noExternal: true },
+			plugins: [
+				{
+					name: "server-boundary",
+					resolveId(source, importer) {
+						if (source === "@anthropic-ai/sdk" && importer) sdkImporters.add(importer);
+						return null;
+					},
+				},
+			],
+			build: {
+				ssr: join(process.cwd(), "packages/ui/src/openui/server/index.ts"),
+				write: false,
+				minify: false,
+				rollupOptions: { external: isBuiltin },
+			},
+		});
+		expect([...sdkImporters]).toEqual([join(process.cwd(), "packages/ui/src/openui/server/providers/anthropic.ts")]);
+		const bundles = Array.isArray(result) ? result : [result];
+		const modules = bundles.flatMap((bundle) =>
+			"output" in bundle
+				? bundle.output.flatMap((output) =>
+						output.type === "chunk"
+							? Object.entries(output.modules)
+									.filter(([, module]) => module.renderedLength > 0)
+									.map(([id]) => id)
+							: [],
+					)
+				: [],
+		);
+		expect(modules.length).toBeGreaterThan(0);
+		expect(modules.filter((id) => /node_modules\/react-dom\//.test(id))).toEqual([]);
 	});
 });
 
-function sourceFiles(directory: string): string[] {
-	return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-		const path = join(directory, entry.name);
-		return entry.isDirectory() ? sourceFiles(path) : /\.[cm]?[jt]sx?$/.test(entry.name) ? [path] : [];
+function waitPoint() {
+	let resolve!: () => void;
+	const promise = new Promise<void>((done) => {
+		resolve = done;
 	});
+	return { promise, resolve };
 }

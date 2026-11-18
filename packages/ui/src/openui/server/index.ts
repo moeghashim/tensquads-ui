@@ -61,11 +61,20 @@ export function buildSystemPrompt({
 export async function streamOpenUIResponse({ provider, system, turns, signal }: OpenUIStreamInput): Promise<Response> {
 	const stream = provider.stream({ system, turns, signal });
 	const iterator = stream[Symbol.asyncIterator]();
+	let closing: Promise<void> | undefined;
+	const close = () =>
+		(closing ??= (async () => {
+			try {
+				stream.abort?.();
+			} finally {
+				await iterator.return?.();
+			}
+		})());
 	let first: IteratorResult<string>;
 	try {
 		first = await iterator.next();
 	} catch (error) {
-		stream.abort?.();
+		await close();
 		throw error;
 	}
 	const encoder = new TextEncoder();
@@ -81,13 +90,18 @@ export async function streamOpenUIResponse({ provider, system, turns, signal }: 
 				}
 				controller.close();
 			} catch (error) {
-				controller.error(error);
+				try {
+					await close();
+				} finally {
+					controller.error(error);
+				}
 			} finally {
 				signal?.removeEventListener("abort", abort);
 			}
 		},
 		cancel() {
-			stream.abort?.();
+			signal?.removeEventListener("abort", abort);
+			return close();
 		},
 	});
 	return new Response(body, {
