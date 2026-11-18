@@ -37,15 +37,27 @@ for (const state of states) {
 			await trigger.focus();
 			await expect(trigger).toBeFocused();
 			const tooltip = page.locator('[data-slot="tooltip-content"][data-open]');
-			const expectedSide =
-				state.direction === "rtl" && side === "right"
-					? "left"
-					: state.direction === "rtl" && side === "left"
-						? "right"
-						: side;
 			await expect(tooltip).toHaveCount(1);
 			await expect(tooltip).toBeVisible();
-			await expect(tooltip).toHaveAttribute("data-side", expectedSide);
+			await expect(tooltip).toHaveAttribute("data-side", side);
+			// The preview labels name physical sides, regardless of locale or direction.
+			await expect
+				.poll(async () => {
+					const anchor = await trigger.boundingBox();
+					const content = await tooltip.boundingBox();
+					if (!anchor || !content) return false;
+					switch (side) {
+						case "top":
+							return content.y + content.height <= anchor.y;
+						case "right":
+							return content.x >= anchor.x + anchor.width;
+						case "bottom":
+							return content.y >= anchor.y + anchor.height;
+						case "left":
+							return content.x + content.width <= anchor.x;
+					}
+				})
+				.toBe(true);
 			await expect(tooltip).toContainText(hint);
 			await expect(trigger).toHaveAttribute("aria-describedby", /.+/);
 			await expect(tooltip.locator('[data-slot="tooltip-shortcut"]')).toContainText("K");
@@ -57,7 +69,7 @@ for (const state of states) {
 			);
 			await expect(tooltip).toHaveCount(1);
 			await expect(tooltip).toBeVisible();
-			await expect(tooltip).toHaveAttribute("data-side", expectedSide);
+			await expect(tooltip).toHaveAttribute("data-side", side);
 		}
 		await expectNoHorizontalScroll(page);
 	});
