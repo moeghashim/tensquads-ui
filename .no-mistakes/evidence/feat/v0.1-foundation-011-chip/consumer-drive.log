@@ -1,0 +1,65 @@
+[
+  {
+    "scenario": "React mouse Enter Space",
+    "opened": "customer_schema",
+    "count": 3,
+    "style": {
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "outline": "2px",
+      "offset": "2px",
+      "icon": "◇"
+    }
+  },
+  {
+    "scenario": "Disabled blocks click focus tab",
+    "count": 3
+  },
+  {
+    "scenario": "Long identifier preserved and opens at 390px",
+    "text": "customer_schema_identifier_with_all_fields_preserved_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_abcdefghijklmnopqrstuvwxyz_",
+    "client": 276,
+    "scroll": 276,
+    "height": 122,
+    "overflow": "visible",
+    "textOverflow": "clip",
+    "document": 390,
+    "viewport": 390
+  },
+  {
+    "scenario": "OpenUI icon and opening action",
+    "icon": "",
+    "before": "4",
+    "after": "4",
+    "html": "<button class=\"ts-chip\" data-slot=\"button\" type=\"button\"><span class=\"ts-chip__icon\" aria-hidden=\"true\"></span><span class=\"ts-chip__name\">customer_schema</span></button>",
+    "result": "fail"
+  },
+  {
+    "scenario": "Localized fixture round trip",
+    "locale": "en",
+    "dir": "ltr",
+    "theme": "light",
+    "name": "response_schema"
+  },
+  {
+    "scenario": "Localized fixture round trip",
+    "locale": "en",
+    "dir": "ltr",
+    "theme": "dark",
+    "name": "response_schema"
+  },
+  {
+    "scenario": "Localized fixture round trip",
+    "locale": "ar",
+    "dir": "rtl",
+    "theme": "light",
+    "name": "response_schema"
+  },
+  {
+    "scenario": "Localized fixture round trip",
+    "locale": "ar",
+    "dir": "rtl",
+    "theme": "dark",
+    "name": "response_schema"
+  }
+]

@@ -1,0 +1,135 @@
+[
+  {
+    "surface": "production preview",
+    "locale": "en",
+    "direction": "ltr",
+    "theme": "light",
+    "visual": {
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "outline": "2px",
+      "outlineColor": "rgb(1, 105, 204)",
+      "outlineOffset": "2px",
+      "pressed": null
+    },
+    "longIdentifier": {
+      "text": "this_is_a_long_object_identifier_that_stays_visible",
+      "textOverflow": "clip",
+      "whiteSpace": "normal",
+      "overflowWrap": "anywhere",
+      "nameWidth": 308,
+      "nameScrollWidth": 308,
+      "nameHeight": 28,
+      "buttonHeight": 38,
+      "inside": true,
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "axeViolations": []
+  },
+  {
+    "surface": "production preview",
+    "locale": "en",
+    "direction": "ltr",
+    "theme": "dark",
+    "visual": {
+      "height": 28,
+      "background": "rgb(48, 48, 48)",
+      "outline": "2px",
+      "outlineColor": "rgb(2, 133, 255)",
+      "outlineOffset": "2px",
+      "pressed": null
+    },
+    "longIdentifier": {
+      "text": "this_is_a_long_object_identifier_that_stays_visible",
+      "textOverflow": "clip",
+      "whiteSpace": "normal",
+      "overflowWrap": "anywhere",
+      "nameWidth": 308,
+      "nameScrollWidth": 308,
+      "nameHeight": 28,
+      "buttonHeight": 38,
+      "inside": true,
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "axeViolations": []
+  },
+  {
+    "surface": "production preview",
+    "locale": "ar",
+    "direction": "rtl",
+    "theme": "light",
+    "visual": {
+      "height": 28,
+      "background": "rgb(237, 237, 237)",
+      "outline": "2px",
+      "outlineColor": "rgb(1, 105, 204)",
+      "outlineOffset": "2px",
+      "pressed": null
+    },
+    "longIdentifier": {
+      "text": "this_is_a_long_object_identifier_that_stays_visible",
+      "textOverflow": "clip",
+      "whiteSpace": "normal",
+      "overflowWrap": "anywhere",
+      "nameWidth": 308,
+      "nameScrollWidth": 308,
+      "nameHeight": 28,
+      "buttonHeight": 38,
+      "inside": true,
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "axeViolations": []
+  },
+  {
+    "surface": "production preview",
+    "locale": "ar",
+    "direction": "rtl",
+    "theme": "dark",
+    "visual": {
+      "height": 28,
+      "background": "rgb(48, 48, 48)",
+      "outline": "2px",
+      "outlineColor": "rgb(2, 133, 255)",
+      "outlineOffset": "2px",
+      "pressed": null
+    },
+    "longIdentifier": {
+      "text": "this_is_a_long_object_identifier_that_stays_visible",
+      "textOverflow": "clip",
+      "whiteSpace": "normal",
+      "overflowWrap": "anywhere",
+      "nameWidth": 308,
+      "nameScrollWidth": 308,
+      "nameHeight": 28,
+      "buttonHeight": 38,
+      "inside": true,
+      "documentWidth": 390,
+      "viewport": 390
+    },
+    "axeViolations": []
+  },
+  {
+    "surface": "real React Chip with synthetic customer_schema host",
+    "actions": [
+      "mouse",
+      "Enter",
+      "Space"
+    ],
+    "openings": "[\"customer_schema\",\"customer_schema\",\"customer_schema\"]",
+    "customIconVisible": true,
+    "disabledBlocksMouseProgrammaticClickAndFocus": true,
+    "tabSkipsDisabled": true,
+    "renderLinkNavigated": "http://127.0.0.1:5174/.chip-live/index.html#linked-object"
+  },
+  {
+    "surface": "real TensquadsRenderer stream root = Chip(\"customer_schema\")",
+    "rendered": true,
+    "iconChildren": 0,
+    "openingsAfter": "[\"customer_schema\",\"customer_schema\",\"customer_schema\"]",
+    "expected": "Consumer-provided icon and opening action",
+    "result": "fail"
+  }
+]

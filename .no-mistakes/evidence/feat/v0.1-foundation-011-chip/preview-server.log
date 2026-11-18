@@ -1,0 +1,134 @@
+
+> preview
+> wrangler dev --config dist/server/wrangler.json --ip 127.0.0.1 --port 5173
+
+
+ ⛅️ wrangler 4.163.0 (update available 4.164.0)
+───────────────────────────────────────────────
+Attaching additional modules:
+┌───────────────────────────────────────────────┬──────┬────────────┐
+│ Name                                          │ Type │ Size       │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Button.fixture.ar-Bq_5H9km.txt         │ text │ 0.06 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Button.fixture.en-QUObEgma.txt         │ text │ 0.05 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Chip.fixture.ar-D-_0YPUt.txt           │ text │ 0.03 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Match-lLEmv2ux.js                      │ esm  │ 14.12 KiB  │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Squadmate.fixture.ar-DInk8FuN.txt      │ text │ 0.05 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Squadmate.fixture.en-Pwdv8Waj.txt      │ text │ 0.05 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/_tanstack-start-manifest_v-CI7WYNgT.js │ esm  │ 0.96 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/announce-e8HKfvSx.js                   │ esm  │ 1.31 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/components._name-B03PTe4l.js           │ esm  │ 463.66 KiB │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/components._name-CEnlNHQO.js           │ esm  │ 11.44 KiB  │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/empty-plugin-adapters-pT5zLEOe.js      │ esm  │ 0.28 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/router-BJ0ynSt0.js                     │ esm  │ 17.82 KiB  │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/routes-BDAbYgg4.js                     │ esm  │ 5.09 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/start-Dtl0e55a.js                      │ esm  │ 0.19 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/state-DXgeoc6U.js                      │ esm  │ 8.14 KiB   │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ assets/useMatch-hIAO5F9z.js                   │ esm  │ 148.49 KiB │
+├───────────────────────────────────────────────┼──────┼────────────┤
+│ Total (16 modules)                            │      │ 671.73 KiB │
+└───────────────────────────────────────────────┴──────┴────────────┘
+⎔ Starting local server...
+Wrangler detected this dev session is running in an AI agent.
+The Local Explorer API is available at http://127.0.0.1:5173/cdn-cgi/local/explorer/api
+Useful routes:
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/workers - local Workers and bindings
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/scheduled?worker=<name> - invoke a Worker's scheduled handler; cron is required (see the OpenAPI schema for the full request)
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/storage/kv/namespaces - KV namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/d1/database - D1 databases
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/r2/buckets - R2 buckets
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workers/durable_objects/namespaces - Durable Object namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workflows - Workflows
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query - run a read-only SQL query (SELECT/WITH only) over captured request traces and console logs. Tables: spans, logs (read attributes via json(attributes)). Example:
+    curl -X POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query -H 'Content-Type: application/json' -d '{"sql":"SELECT service, name, outcome, duration_ms FROM spans WHERE parent_id IS NULL LIMIT 20"}'
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/clear - clear all captured traces and logs
+If the routes above don't cover what you need, fetch the full OpenAPI schema (large - use only as a last resort):
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api - OpenAPI schema
+[wrangler:info] Ready on http://127.0.0.1:5173
+[wrangler:info] GET /components/Chip 200 OK (77ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 200 OK (8ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 200 OK (14ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 200 OK (13ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 200 OK (12ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (4ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 200 OK (4ms)
+[wrangler:info] GET /components/Chip 200 OK (9ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/Chip 200 OK (4ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (4ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 200 OK (4ms)
+[wrangler:info] GET /components/Chip 200 OK (6ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (5ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 304 Not Modified (5ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/Chip 200 OK (5ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 200 OK (7ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 200 OK (6ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 200 OK (6ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (4ms)
+[wrangler:info] GET /components/Chip 200 OK (3ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/Chip 200 OK (4ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 200 OK (3ms)
+[wrangler:info] GET /components/Chip 200 OK (9ms)
+[wrangler:info] GET /assets/index-C9q4efGq.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-hGx-qGm0.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-Dqr1iMlS.js 304 Not Modified (5ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)

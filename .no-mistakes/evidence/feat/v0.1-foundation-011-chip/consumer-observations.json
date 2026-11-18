@@ -1,0 +1,99 @@
+[
+  {
+    "scenario": "React supplied icon/name opens object on click, Enter, and Space",
+    "opened": "[\"customer_schema\",\"customer_schema\",\"customer_schema\"]",
+    "pressed": null
+  },
+  {
+    "scenario": "Disabled prevents callback/focus; render link navigates",
+    "openedAfterDisabled": "[\"customer_schema\",\"customer_schema\",\"customer_schema\"]",
+    "href": "http://127.0.0.1:5174/#object-details"
+  },
+  {
+    "scenario": "390px ltr light focus and 307-character identifier",
+    "metrics": {
+      "height": 28,
+      "outline": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "background": "rgb(237, 237, 237)",
+      "iconWidth": 16
+    },
+    "layout": {
+      "text": "schema_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_",
+      "width": 308,
+      "scrollWidth": 308,
+      "height": 108,
+      "viewport": 390,
+      "content": 390,
+      "overflow": "clip"
+    }
+  },
+  {
+    "scenario": "390px rtl light focus and 307-character identifier",
+    "metrics": {
+      "height": 28,
+      "outline": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "background": "rgb(237, 237, 237)",
+      "iconWidth": 16
+    },
+    "layout": {
+      "text": "schema_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_",
+      "width": 308,
+      "scrollWidth": 308,
+      "height": 108,
+      "viewport": 390,
+      "content": 390,
+      "overflow": "clip"
+    }
+  },
+  {
+    "scenario": "390px ltr dark focus and 307-character identifier",
+    "metrics": {
+      "height": 28,
+      "outline": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "background": "rgb(48, 48, 48)",
+      "iconWidth": 16
+    },
+    "layout": {
+      "text": "schema_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_",
+      "width": 308,
+      "scrollWidth": 308,
+      "height": 108,
+      "viewport": 390,
+      "content": 390,
+      "overflow": "clip"
+    }
+  },
+  {
+    "scenario": "390px rtl dark focus and 307-character identifier",
+    "metrics": {
+      "height": 28,
+      "outline": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "background": "rgb(48, 48, 48)",
+      "iconWidth": 16
+    },
+    "layout": {
+      "text": "schema_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_long_identifier_",
+      "width": 308,
+      "scrollWidth": 308,
+      "height": 108,
+      "viewport": 390,
+      "content": 390,
+      "overflow": "clip"
+    }
+  },
+  {
+    "scenario": "OpenUI customer_schema activation",
+    "openedBefore": "[\"customer_schema\",\"customer_schema\",\"customer_schema\"]",
+    "openedAfter": "[\"customer_schema\",\"customer_schema\",\"customer_schema\"]",
+    "icon": "",
+    "url": "http://127.0.0.1:5174/#object-details"
+  }
+]

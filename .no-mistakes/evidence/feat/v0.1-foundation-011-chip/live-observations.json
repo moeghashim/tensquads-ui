@@ -1,0 +1,114 @@
+[
+  {
+    "scenario": "React consumer opens object on mouse, Enter and Space",
+    "result": "Opened 3 times; object details visible; no pressed state"
+  },
+  {
+    "scenario": "Disabled React Chip rejects click and keyboard attempts",
+    "result": "No extra opening; Tab skips disabled Chip"
+  },
+  {
+    "scenario": "Synthetic OpenUI customer_schema uses consumer glyph and destination",
+    "result": "⌕ rendered; click and Enter navigate to #customer-details; Space retains native link semantics"
+  },
+  {
+    "scenario": "Adversarial very long synthetic identifier at 390px",
+    "result": {
+      "width": 372,
+      "scroll": 372,
+      "height": 64,
+      "text": "customer_account_account_account_account_account_account_account_account_account_account_account_account_account_account_account_account_account_account_schema",
+      "clipped": false,
+      "overflow": "visible",
+      "textOverflow": "clip"
+    }
+  },
+  {
+    "scenario": "Production preview en light 1440px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(237, 237, 237)",
+      "outline": "rgb(1, 105, 204)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview en light 390px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(237, 237, 237)",
+      "outline": "rgb(1, 105, 204)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview en dark 1440px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(48, 48, 48)",
+      "outline": "rgb(2, 133, 255)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview en dark 390px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(48, 48, 48)",
+      "outline": "rgb(2, 133, 255)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview ar light 1440px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(237, 237, 237)",
+      "outline": "rgb(1, 105, 204)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview ar light 390px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(237, 237, 237)",
+      "outline": "rgb(1, 105, 204)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview ar dark 1440px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(48, 48, 48)",
+      "outline": "rgb(2, 133, 255)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  },
+  {
+    "scenario": "Production preview ar dark 390px",
+    "result": {
+      "height": 28,
+      "bg": "rgb(48, 48, 48)",
+      "outline": "rgb(2, 133, 255)",
+      "outlineWidth": "2px",
+      "outlineOffset": "2px",
+      "radius": "9999px"
+    }
+  }
+]

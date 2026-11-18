@@ -1,0 +1,54 @@
+import {chromium} from '@playwright/test';
+import {writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const out='~/.no-mistakes/evidence/01M7PVSP7RFJCWRM65H4X017SS';
+const browser=await chromium.launch({args:['--disable-lcd-text','--font-render-hinting=none']});
+const page=await browser.newPage({viewport:{width:390,height:844}});
+const observations=[];
+try {
+ await page.goto('http://127.0.0.1:5179');
+ await page.getByRole('button',{name:'customer_schema',exact:true}).waitFor();
+ const action=page.getByRole('button',{name:'customer_schema',exact:true});
+ await action.click();
+ await page.getByRole('region',{name:'Object details'}).waitFor();
+ assert.equal(await page.getByRole('status').textContent(),'Opened 1 times');
+ await action.focus();await page.keyboard.press('Enter');await page.keyboard.press('Space');
+ assert.equal(await page.getByRole('status').textContent(),'Opened 3 times');
+ assert.equal(await action.getAttribute('aria-pressed'),null);
+ observations.push({scenario:'React consumer opens object on mouse, Enter and Space',result:'Opened 3 times; object details visible; no pressed state'});
+ const disabled=page.getByRole('button',{name:'locked_schema'});
+ const box=await disabled.boundingBox();await page.mouse.click(box.x+box.width/2,box.y+box.height/2);
+ await action.focus();await page.keyboard.press('Tab');
+ assert.notEqual(await page.evaluate(()=>document.activeElement?.textContent),'◇locked_schema');
+ await disabled.evaluate(el=>el.focus());await page.keyboard.press('Enter');await page.keyboard.press('Space');
+ assert.equal(await page.getByRole('status').textContent(),'Opened 3 times');
+ observations.push({scenario:'Disabled React Chip rejects click and keyboard attempts',result:'No extra opening; Tab skips disabled Chip'});
+ const link=page.getByRole('link',{name:'customer_schema',exact:true});
+ assert.equal(await link.locator('.ts-chip__icon').textContent(),'⌕');
+ await link.click();assert.equal(new URL(page.url()).hash,'#customer-details');
+ await page.evaluate(()=>history.replaceState(null,'',location.pathname));
+ await link.focus();await page.keyboard.press('Enter');assert.equal(new URL(page.url()).hash,'#customer-details');
+ await page.evaluate(()=>history.replaceState(null,'',location.pathname));
+ await link.focus();await page.keyboard.press('Space');assert.equal(new URL(page.url()).hash,'');
+ observations.push({scenario:'Synthetic OpenUI customer_schema uses consumer glyph and destination',result:'⌕ rendered; click and Enter navigate to #customer-details; Space retains native link semantics'});
+ const long=page.getByRole('button',{name:'customer_'+ 'account_'.repeat(18)+'schema'});
+ const dims=await long.evaluate(el=>{const n=el.querySelector('.ts-chip__name');return {width:el.clientWidth,scroll:el.scrollWidth,height:el.clientHeight,text:n.textContent,clipped:n.scrollWidth>n.clientWidth,overflow:getComputedStyle(n).overflow,textOverflow:getComputedStyle(n).textOverflow}});
+ assert.equal(dims.clipped,false);assert.ok(dims.height>28);assert.equal(dims.textOverflow,'clip');
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=390));
+ await page.screenshot({path:out+'/consumer-mobile.png',fullPage:true});
+ observations.push({scenario:'Adversarial very long synthetic identifier at 390px',result:dims});
+ for(const locale of ['en','ar'])for(const theme of ['light','dark'])for(const width of [1440,390]){
+  await page.setViewportSize({width,height:900});
+  await page.goto(`http://localhost:5173/components/Chip?locale=${locale}&dir=${locale==='en'?'ltr':'rtl'}&theme=${theme}`);
+  await page.evaluate(()=>document.fonts.ready);
+  const first=page.locator('.chip-preview__grid').getByRole('button',{name:'response_schema',exact:true});
+  await first.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');
+  const style=await first.evaluate(el=>{const s=getComputedStyle(el);return {height:el.getBoundingClientRect().height,bg:s.backgroundColor,outline:s.outlineColor,outlineWidth:s.outlineWidth,outlineOffset:s.outlineOffset,radius:s.borderRadius}});
+  assert.equal(style.height,28);assert.equal(style.outlineWidth,'2px');assert.equal(style.outlineOffset,'2px');assert.equal(style.outline,theme==='light'?'rgb(1, 105, 204)':'rgb(2, 133, 255)');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
+  await page.screenshot({path:`${out}/chip-${locale}-${theme}-${width}.png`,fullPage:true});
+  observations.push({scenario:`Production preview ${locale} ${theme} ${width}px`,result:style});
+ }
+ await writeFile(out+'/live-observations.json',JSON.stringify(observations,null,2));
+ console.log(JSON.stringify(observations,null,2));
+} finally {await browser.close();}
