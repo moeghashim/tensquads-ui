@@ -10,6 +10,7 @@ const expectedMessages: Record<string, Record<Locale, string>> = {
 		en: "OpenUI fixture rendered in English",
 		ar: "تم عرض عينة OpenUI باللغة العربية",
 	},
+	Squadmate: { en: "", ar: "" },
 };
 
 afterEach(cleanup);
