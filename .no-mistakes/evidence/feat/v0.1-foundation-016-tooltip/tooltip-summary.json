@@ -1,0 +1,138 @@
+{
+  "captures": 64,
+  "physicalFailures": [
+    {
+      "key": "en-rtl-light",
+      "requested": "right",
+      "actual": "left"
+    },
+    {
+      "key": "en-rtl-light",
+      "requested": "left",
+      "actual": "right"
+    },
+    {
+      "key": "en-rtl-dark",
+      "requested": "right",
+      "actual": "left"
+    },
+    {
+      "key": "en-rtl-dark",
+      "requested": "left",
+      "actual": "right"
+    },
+    {
+      "key": "ar-rtl-light",
+      "requested": "right",
+      "actual": "left"
+    },
+    {
+      "key": "ar-rtl-light",
+      "requested": "left",
+      "actual": "right"
+    },
+    {
+      "key": "ar-rtl-dark",
+      "requested": "right",
+      "actual": "left"
+    },
+    {
+      "key": "ar-rtl-dark",
+      "requested": "left",
+      "actual": "right"
+    }
+  ],
+  "mobileFailures": [],
+  "interaction": [
+    {
+      "key": "en-ltr-light",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "en-ltr-dark",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "en-rtl-light",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "en-rtl-dark",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "ar-ltr-light",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "ar-ltr-dark",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "ar-rtl-light",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    },
+    {
+      "key": "ar-rtl-dark",
+      "focus": true,
+      "escape": true,
+      "hover": true,
+      "pass": true
+    }
+  ],
+  "accessibility": [
+    {
+      "key": "en-ltr-light",
+      "pass": true
+    },
+    {
+      "key": "en-ltr-dark",
+      "pass": true
+    },
+    {
+      "key": "en-rtl-light",
+      "pass": true
+    },
+    {
+      "key": "en-rtl-dark",
+      "pass": true
+    },
+    {
+      "key": "ar-ltr-light",
+      "pass": true
+    },
+    {
+      "key": "ar-ltr-dark",
+      "pass": true
+    },
+    {
+      "key": "ar-rtl-light",
+      "pass": true
+    },
+    {
+      "key": "ar-rtl-dark",
+      "pass": true
+    }
+  ]
+}

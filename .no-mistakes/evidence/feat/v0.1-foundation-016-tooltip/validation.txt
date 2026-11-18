@@ -1,0 +1,9 @@
+Validated commit 4775e9f0f33372f8c95ffac9c39591e63c2624de against a production-built preview Worker on localhost:5173 using Chromium.
+Setup: npm ci and npm --prefix apps/preview ci exited 0; root prepare built UI package.
+Existing targeted command: npx playwright test e2e/tooltip.spec.ts --workers=2 --reporter=list,html --output=<evidence>/results exited 0.
+Eight locale/direction/theme combinations; top/right/bottom/left opened independently; exactly one visible tooltip; actual bounding boxes matched physical sides; localized text, shortcut, and ARIA checked. Axe and theme focus checks passed. Full-page screenshots at 1440 and 390 px per side and state.
+Supplemental command: npx playwright test e2e/test-phase-tooltip.spec.ts --workers=1 --reporter=list,html --output=<evidence>/supplemental-results exited 0 after correcting driver input modality (initial attempts lacked keyboard modality). Retained driver: supplemental-driver.ts.
+Supplemental checks: all eight states at width 390; physical placement and horizontal containment; Escape retains focus; hover opens without focus transfer; localized OpenUI fixture opens, describes trigger, and dismisses.
+Independent oracle: user decision that preview labels name physical sides regardless of locale/direction, plus UI SDK documented focus/hover/Escape contract. Rejects RTL left/right inversion and concurrent tooltip captures.
+Visual inspection: English light desktop left; Arabic light mobile left; Arabic dark mobile right; Arabic dark OpenUI fixture.
+No source changes. Temporary driver and build/cache/results directories removed; installed dependencies retained. Owned browser/server children exited. No lint, static analysis, broad suite, push, PR, or CI phase run.
