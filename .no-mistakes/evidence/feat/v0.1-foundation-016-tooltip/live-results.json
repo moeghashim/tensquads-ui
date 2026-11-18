@@ -1,0 +1,490 @@
+[
+  {
+    "name": "Production preview: keyboard focus opens a named and described trigger; Escape closes without moving focus",
+    "result": "pass",
+    "observations": "Tab opened the hint with aria-describedby and aria-keyshortcuts; Escape hid it and retained trigger focus."
+  },
+  {
+    "name": "Production preview: four placements, arrow, shortcut, compact colors, and no overflow at 1440/390 in EN/AR and light/dark",
+    "result": "pass",
+    "observations": [
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "left",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(48, 48, 48)",
+          "fg": "rgb(255, 255, 255)",
+          "tokenBg": "#303030",
+          "tokenFg": "#fff",
+          "arrow": "rgb(48, 48, 48)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "top",
+        "side": "top",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "right",
+        "side": "right",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "bottom",
+        "side": "bottom",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "left",
+        "side": "left",
+        "colors": {
+          "bg": "rgb(175, 175, 175)",
+          "fg": "rgb(13, 13, 13)",
+          "tokenBg": "#afafaf",
+          "tokenFg": "#0d0d0d",
+          "arrow": "rgb(175, 175, 175)"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Production OpenUI fixtures: English and Arabic streams render named triggers and localized hover hints",
+    "result": "pass",
+    "observations": [
+      {
+        "locale": "en",
+        "trigger": "Add item",
+        "description": "Create a new item",
+        "focusUnchanged": true
+      },
+      {
+        "locale": "ar",
+        "trigger": "إضافة عنصر",
+        "description": "أنشئ عنصراً جديداً",
+        "focusUnchanged": true
+      }
+    ]
+  },
+  {
+    "name": "Disposable real Tooltip consumer: disabled guard, delayed hover cancellation, controlled callbacks, render props, toggle and edge flip",
+    "result": "pass",
+    "observations": {
+      "events": "true:trigger-focus,false:escape-key,false:outside-press",
+      "guards": "disabled stays closed; early pointer exit cancels 600ms hover; 300ms close delay honored",
+      "render": "button render function receives open state; content renders as aside",
+      "edge": "top request flips bottom at viewport edge",
+      "toggle": "press opens and closes"
+    }
+  }
+]
