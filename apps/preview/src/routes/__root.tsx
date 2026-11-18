@@ -1,0 +1,40 @@
+import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
+import type { ReactNode } from "react";
+import "../layers.css";
+import "@tensquads/ui/fonts.css";
+import "@tensquads/ui/tokens.css";
+import "@tensquads/ui/styles.css";
+import { getPreviewAttributes } from "../state";
+import "../styles.css";
+
+export const Route = createRootRoute({
+	head: () => ({
+		meta: [
+			{ charSet: "utf-8" },
+			{ name: "viewport", content: "width=device-width, initial-scale=1" },
+			{ title: "tensquads UI preview" },
+		],
+	}),
+	component: RootPage,
+	shellComponent: Document,
+});
+
+function RootPage() {
+	return <Outlet />;
+}
+
+function Document({ children }: { readonly children: ReactNode }) {
+	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
+	const attributes = getPreviewAttributes(search);
+	return (
+		<html lang={attributes.lang} dir={attributes.dir} data-theme={attributes["data-theme"]}>
+			<head>
+				<HeadContent />
+			</head>
+			<body>
+				{children}
+				<Scripts />
+			</body>
+		</html>
+	);
+}

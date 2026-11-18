@@ -1,0 +1,1 @@
+root = Menu("Actions", [{"label": "Open project", "value": "open"}, {"label": "Rename", "value": "rename", "disabled": true}, {"label": "Delete", "value": "delete", "danger": true}])
