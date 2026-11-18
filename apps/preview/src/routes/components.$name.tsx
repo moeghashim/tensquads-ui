@@ -487,7 +487,7 @@ function ComponentPage() {
 					{sides.map((side) => (
 						<div className="tooltip-preview__item" key={side}>
 							<h2>{side}</h2>
-							<Tooltip defaultOpen={side !== "top"} shortcut="mod+k">
+							<Tooltip defaultOpen={side !== "top"} shortcut="k">
 								<TooltipTrigger render={<Button iconOnly aria-label={labels.action} />}>
 									<span aria-hidden="true">+</span>
 								</TooltipTrigger>

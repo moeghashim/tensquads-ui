@@ -28,6 +28,7 @@ test("Tooltip preview works in both directions and themes", async ({ page }, tes
 		await expect(page.getByRole("tooltip").first()).toContainText(
 			state.locale === "en" ? "Create a new item" : "أنشئ عنصراً جديداً",
 		);
+		await expect(page.locator('[data-slot="tooltip-shortcut"]').first()).toContainText("K");
 		await expectAccessible(page);
 		await capturePreviewScreenshots(page, testInfo, `tooltip-${state.locale}-${state.direction}-${state.theme}`);
 		await expectNoHorizontalScroll(page);
