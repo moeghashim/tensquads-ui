@@ -8,18 +8,7 @@ The component takes a character slug such as `petra`. The roster and drawing API
 
 The image name contains the localized character name and state. For example, English `Petra, Planning` and Arabic `بترا، تخطيط`.
 
-Arabic names follow the website copy in `tensquads-website/src/components/home/copy.ar.ts`. English names follow its `copy.en.ts` entries and match the roster. Arabic state labels in that copy are used for waiting (`بانتظارك`), planning (`تخطيط`), running (`يعمل`), and done (`تم`).
-
-The website copy has no Arabic labels for checking, sent back, blocked, escalated, dropped, or idle. The component currently uses these proposed translations pending review:
-
-| State | Proposed Arabic label |
-|---|---|
-| Checking | يتحقق |
-| Sent back | أُعيد |
-| Blocked | محظور |
-| Escalated | مُصعّد |
-| Dropped | متوقف |
-| Idle | خامل |
+Arabic names follow the website copy in `tensquads-website/src/components/home/copy.ar.ts`. English names follow its `copy.en.ts` entries and match the roster. Arabic state labels follow PLAN.md D18.
 
 Mascot palettes and artwork colours are drawing source data in `packages/ui/src/squadmates/mascots.ts`. State badge colours are in `packages/ui/src/squadmates/draw.ts`. These colours are embedded in SVG markup. Roster colour fields remain source metadata in `packages/ui/src/squadmates/roster.ts`. They are not component CSS tokens.
 

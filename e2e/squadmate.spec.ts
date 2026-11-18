@@ -24,7 +24,7 @@ test("Squadmate previews every character and state in both locales and themes", 
 		});
 		await expect(gallery.getByRole("img")).toHaveCount(130);
 		await expect(
-			gallery.getByRole("img", { name: state.locale === "ar" ? "بترا، خامل" : "Petra, Idle" }),
+			gallery.getByRole("img", { name: state.locale === "ar" ? "بترا، في استراحة" : "Petra, Idle" }),
 		).toBeVisible();
 		const fixture = page.getByRole("region", {
 			name: state.locale === "ar" ? "عينة OpenUI" : "OpenUI fixture",
