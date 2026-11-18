@@ -29,7 +29,9 @@ export function ChatReply({ reply, locale = "en", onError, ...rendererProps }: C
 					<div className="ts-chat-reply__markdown" key={`markdown-${index}`}>
 						{group.values}
 					</div>
-				) : group.values,
+				) : (
+					group.values
+				),
 			)}
 		</div>
 	);
@@ -174,7 +176,11 @@ function renderBlocks(source: string, renderOpenUI: (stream: string, key: string
 			} else {
 				nodes.push({
 					kind: "markdown",
-					value: <pre dir="ltr" key={key}><code>{block.value}</code></pre>,
+					value: (
+						<pre dir="ltr" key={key}>
+							<code>{block.value}</code>
+						</pre>
+					),
 				});
 			}
 			continue;

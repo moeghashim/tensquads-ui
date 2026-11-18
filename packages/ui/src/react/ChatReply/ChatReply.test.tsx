@@ -77,8 +77,7 @@ describe("ChatReply", () => {
 		["~~~text", "~~~"],
 	])("keeps nested OpenUI literal inside %s fences", (opening, closing) => {
 		const literal = '```openui\nroot = Badge("Literal", "success")';
-		const reply = `${opening}\n${literal}\n${closing}\nAfter\n\n` +
-			'```openui\nroot = Badge("Live", "success")\n```';
+		const reply = `${opening}\n${literal}\n${closing}\nAfter\n\n\`\`\`openui\nroot = Badge("Live", "success")\n\`\`\``;
 		const { container, rerender } = render(<ChatReply reply="" />);
 		const prefix = `${opening}\n${literal}`;
 		for (let index = 1; index <= prefix.length; index += 1) {
@@ -95,7 +94,12 @@ describe("ChatReply", () => {
 
 	it.each(["en", "ar"] as const)("preserves list numbering and nesting in %s", (locale) => {
 		const { container } = render(
-			<ChatReply locale={locale} reply={"3. Resume\n4. Finish\n\n- Parent\n - Child\n  7. Nested step\n - Next child\n- Sibling\n\n5. Ordered parent\n - Mixed child\n6. Ordered sibling"} />,
+			<ChatReply
+				locale={locale}
+				reply={
+					"3. Resume\n4. Finish\n\n- Parent\n - Child\n  7. Nested step\n - Next child\n- Sibling\n\n5. Ordered parent\n - Mixed child\n6. Ordered sibling"
+				}
+			/>,
 		);
 		const lists = container.querySelectorAll(".ts-chat-reply__markdown > ol");
 		expect(lists[0]).toHaveAttribute("start", "3");
@@ -121,8 +125,23 @@ describe("ChatReply", () => {
 
 	it.each(["en", "ar"] as const)("preserves loose nested lists and continuation paragraphs in %s", (locale) => {
 		const reply = [
-			"3. Parent", "", " Continued **details**", "", " - Child", "", "  7. Grandchild", "",
-			"  1. Next grandchild", "", " - Next child", "", "4. Sibling", "", "Outside", "", "8. Separate",
+			"3. Parent",
+			"",
+			" Continued **details**",
+			"",
+			" - Child",
+			"",
+			"  7. Grandchild",
+			"",
+			"  1. Next grandchild",
+			"",
+			" - Next child",
+			"",
+			"4. Sibling",
+			"",
+			"Outside",
+			"",
+			"8. Separate",
 		].join("\n");
 		const { container } = render(<ChatReply locale={locale} reply={reply} />);
 		const roots = container.querySelectorAll(".ts-chat-reply__markdown > ol");
@@ -154,9 +173,9 @@ describe("ChatReply", () => {
 		["nested", "- Parent", "\n\n - Example:", "  "],
 	] as const)("parses fenced code and headings inside %s list continuations", (_name, first, nested, indent) => {
 		const code = "const x = 1;\n\n  const y = 2;\n- literal marker";
-		const reply = first + nested + "\n\n" + [
-			"```js", ...code.split("\n"), "```", "", "## Learn C#", "", "After code",
-		].map((line) => indent + line).join("\n");
+		const reply = `${first + nested}\n\n${["```js", ...code.split("\n"), "```", "", "## Learn C#", "", "After code"]
+			.map((line) => indent + line)
+			.join("\n")}`;
 		const { container } = render(<ChatReply reply={reply} locale="ar" />);
 		const item = screen.getByText("Example:", { exact: true }).closest("li")!;
 		const pre = item.querySelector("pre");
@@ -169,7 +188,7 @@ describe("ChatReply", () => {
 	});
 
 	it.each(["-", "3."])("parses block syntax on the initial %s item line", (marker) => {
-		const reply = marker + " ## Title\n\n" + marker + " ```js\n const x = 1;\n ```";
+		const reply = `${marker} ## Title\n\n${marker} \`\`\`js\n const x = 1;\n \`\`\``;
 		const { container } = render(<ChatReply reply={reply} />);
 		expect(screen.getByRole("heading", { level: 2, name: "Title" }).closest("li")).toBeInTheDocument();
 		expect(container.querySelector("li > pre")).toHaveAttribute("dir", "ltr");
@@ -185,14 +204,17 @@ describe("ChatReply", () => {
 		["deep continuation", "- Parent\n    3. Example:\n\n        ", "        "],
 	] as const)("isolates literal OpenUI in %s list fences and renders later UI", (_name, prefix, indent) => {
 		const literal = '```openui\nroot = Badge("Literal", "success")';
-		const code = prefix + "```text\n" + literal.split("\n").map((line) => indent + line).join("\n") + "\n" + indent + "```";
+		const code = `${prefix}\`\`\`text\n${literal
+			.split("\n")
+			.map((line) => indent + line)
+			.join("\n")}\n${indent}\`\`\``;
 		const live = '```openui\nroot = Badge("Live", "success")\n```';
 		const { container, rerender } = render(<ChatReply reply="" />);
 		for (let length = 1; length <= code.length; length += 1) {
 			rerender(<ChatReply reply={code.slice(0, length)} />);
 			expect(container.querySelector(".ts-chat-reply__openui")).toBeNull();
 		}
-		rerender(<ChatReply reply={code + "\n\n" + live} />);
+		rerender(<ChatReply reply={`${code}\n\n${live}`} />);
 		expect(container.querySelector("li pre code")?.textContent).toBe(literal);
 		expect(container.querySelectorAll(".ts-chat-reply__openui")).toHaveLength(1);
 		expect(screen.getByText("Live", { exact: true })).toBeInTheDocument();
@@ -200,7 +222,7 @@ describe("ChatReply", () => {
 	});
 
 	it.each(["-", "3."])("renders real OpenUI after an ordinary %s item code fence", (marker) => {
-		const reply = marker + ' ```js\n const x = 1;\n ```\n\n```openui\nroot = Badge("Ready", "success")\n```';
+		const reply = `${marker} \`\`\`js\n const x = 1;\n \`\`\`\n\n\`\`\`openui\nroot = Badge("Ready", "success")\n\`\`\``;
 		const { container } = render(<ChatReply reply={reply} />);
 		expect(container.querySelector("li pre code")?.textContent).toBe("const x = 1;");
 		expect(screen.getByText("Ready", { exact: true })).toBeInTheDocument();
@@ -223,7 +245,7 @@ describe("ChatReply", () => {
 			const code = container.querySelector("li pre code");
 			expect(code?.textContent).toBe(payload.slice(0, length));
 		}
-		const closing = "\n" + indent + "```";
+		const closing = `\n${indent}\`\`\``;
 		for (let length = 1; length <= closing.length; length += 1) {
 			rerender(<ChatReply reply={opening + indent + payload + closing.slice(0, length)} />);
 			const pre = container.querySelector("li pre");
@@ -247,7 +269,7 @@ describe("ChatReply", () => {
 			rerender(<ChatReply reply={opening + indent + payload.slice(0, length)} />);
 			expect(container.querySelector("li pre code")?.textContent).toBe(payload.slice(0, length));
 		}
-		const closing = "\n" + indent + "```";
+		const closing = `\n${indent}\`\`\``;
 		for (let length = 1; length <= closing.length; length += 1) {
 			rerender(<ChatReply reply={opening + indent + payload + closing.slice(0, length)} />);
 			expect(container.querySelector("li pre code")?.textContent?.split("\n")[0]).toBe(payload);
@@ -260,7 +282,10 @@ describe("ChatReply", () => {
 	it.each([
 		["ordered", '1. Check\n\n ```openui\nroot = Badge("Ready", "success")\n ```\n\n Continue\n\n1. Finish'],
 		["unordered", '- Check\n\n ```openui\nroot = Badge("Ready", "success")\n ```\n\n Continue\n\n- Finish'],
-		["nested", '- Parent\n\n  3. Check\n\n     ```openui\nroot = Badge("Ready", "success")\n     ```\n\n     Continue\n\n  1. Finish\n\n- Sibling'],
+		[
+			"nested",
+			'- Parent\n\n  3. Check\n\n     ```openui\nroot = Badge("Ready", "success")\n     ```\n\n     Continue\n\n  1. Finish\n\n- Sibling',
+		],
 	] as const)("keeps OpenUI inside the %s list throughout streaming", (name, reply) => {
 		const locale = name === "unordered" ? "ar" : "en";
 		const { container, rerender } = render(<ChatReply reply="" locale={locale} />);
@@ -295,8 +320,21 @@ describe("ChatReply", () => {
 	] as const)("uses list-body fence coordinates in %s lists", (_name, prefix, indentation) => {
 		for (const marker of ["```", "~~~"]) {
 			const indent = " ".repeat(indentation);
-			const code = prefix + "\n" + indent + "  " + marker + "text\n" +
-				indent + "    " + marker + "\n" + indent + "- literal\n" + indent + marker;
+			const code =
+				prefix +
+				"\n" +
+				indent +
+				"  " +
+				marker +
+				"text\n" +
+				indent +
+				"    " +
+				marker +
+				"\n" +
+				indent +
+				"- literal\n" +
+				indent +
+				marker;
 			const live = '\n\n```openui\nroot = Badge("Ready", "success")\n```';
 			const { container, rerender, unmount } = render(<ChatReply reply="" />);
 			for (let length = 1; length <= code.length; length += 1) {
@@ -304,7 +342,7 @@ describe("ChatReply", () => {
 				expect(container.querySelector(".ts-chat-reply__openui")).toBeNull();
 			}
 			rerender(<ChatReply reply={code + live} />);
-			expect(container.querySelector("li pre code")?.textContent).toBe("  " + marker + "\n- literal");
+			expect(container.querySelector("li pre code")?.textContent).toBe(`  ${marker}\n- literal`);
 			const ui = container.querySelector(".ts-chat-reply__openui")!;
 			expect(ui).not.toBeNull();
 			expect(ui.closest("li")).toBeNull();
@@ -321,7 +359,7 @@ describe("ChatReply", () => {
 		expect(container.querySelectorAll("ol")).toHaveLength(1);
 		expect(screen.getByText("Step 1")).toBeInTheDocument();
 		expect(screen.getByText("Step 1000")).toBeInTheDocument();
-		rerender(<ChatReply reply={items + "\n\n1. Final `command`"} />);
+		rerender(<ChatReply reply={`${items}\n\n1. Final \`command\``} />);
 		expect(screen.getAllByRole("listitem")).toHaveLength(1001);
 		expect(container.querySelectorAll("ol")).toHaveLength(1);
 		expect(container.querySelector("ol")).toHaveAttribute("start", "1");
@@ -343,7 +381,8 @@ describe("ChatReply", () => {
 		["nested item", "- Parent\n - "],
 	] as const)("preserves complete link destinations in a %s", (_name, prefix) => {
 		const reply =
-			prefix + String.raw`[balanced](https://example.com/topic_(detail_(more))) [escaped](https://example.com/topic_\(detail\)) [closing](https://example.com/end\))`;
+			prefix +
+			String.raw`[balanced](https://example.com/topic_(detail_(more))) [escaped](https://example.com/topic_\(detail\)) [closing](https://example.com/end\))`;
 		const { container } = render(<ChatReply reply={reply} />);
 		expect(screen.getByRole("link", { name: "balanced" })).toHaveAttribute(
 			"href",
@@ -368,7 +407,13 @@ describe("ChatReply", () => {
 	});
 
 	it("accepts only explicit HTTP, HTTPS, and mailto link destinations", () => {
-		render(<ChatReply reply={"[http](http://example.com) [https](https://example.com) [mail](mailto:a@example.com) [root](/path) [network](//example.com) [relative](path) [script](javascript:alert(1)) [data](data:text/plain,test)"} />);
+		render(
+			<ChatReply
+				reply={
+					"[http](http://example.com) [https](https://example.com) [mail](mailto:a@example.com) [root](/path) [network](//example.com) [relative](path) [script](javascript:alert(1)) [data](data:text/plain,test)"
+				}
+			/>,
+		);
 		expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
 			"http://example.com",
 			"https://example.com",
