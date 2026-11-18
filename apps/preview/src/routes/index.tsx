@@ -1,6 +1,15 @@
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getPreviewState, type Locale } from "../state";
 
+const fixtureFiles = import.meta.glob("../../../../packages/ui/src/react/*/*.fixture.*.txt");
+const components = [
+	...new Set(
+		Object.keys(fixtureFiles)
+			.map((path) => path.split("/").at(-2))
+			.filter((name): name is string => Boolean(name)),
+	),
+].sort();
+
 export const Route = createFileRoute("/")({ component: GalleryPage });
 
 function GalleryPage() {
@@ -58,21 +67,19 @@ function GalleryPage() {
 			<section className="component-list" aria-labelledby="components-title">
 				<div className="section-heading">
 					<h2 id="components-title">{locale === "ar" ? "المكوّنات" : "Components"}</h2>
-					<span>0</span>
+					<span>{components.length}</span>
 				</div>
-				<p className="empty-state">
-					{locale === "ar"
-						? "ستظهر المعاينات هنا عند إضافة المكوّنات."
-						: "Component previews will appear here as they are added."}
-				</p>
-				<Link
-					className="route-example"
-					to="/components/$name"
-					params={{ name: "example" }}
-					search={{ locale, dir: direction, theme } as never}
-				>
-					Component preview route
-				</Link>
+				{components.map((name) => (
+					<Link
+						className="route-example"
+						key={name}
+						to="/components/$name"
+						params={{ name }}
+						search={{ locale, dir: direction, theme } as never}
+					>
+						{name}
+					</Link>
+				))}
 			</section>
 		</main>
 	);

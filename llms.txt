@@ -1,0 +1,3 @@
+# tensquads UI component index
+
+- [Example](packages/ui/src/react/Example/Example.md): This is a placeholder component. Task 009 removes it when Button is added.
