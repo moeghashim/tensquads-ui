@@ -1,0 +1,336 @@
+{
+  "result": "pass",
+  "checks": [
+    {
+      "name": "Badge",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Button",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Chip",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Dialog",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Field",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 8
+    },
+    {
+      "name": "Input",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Menu",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "Squadmate",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 14
+    },
+    {
+      "name": "Switch",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Tooltip",
+      "locale": "en",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Badge",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Button",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Chip",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Dialog",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Field",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 8
+    },
+    {
+      "name": "Input",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Menu",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "Squadmate",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 14
+    },
+    {
+      "name": "Switch",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Tooltip",
+      "locale": "en",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Badge",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Button",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Chip",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Dialog",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Field",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 8
+    },
+    {
+      "name": "Input",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Menu",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "Squadmate",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 14
+    },
+    {
+      "name": "Switch",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Tooltip",
+      "locale": "ar",
+      "theme": "light",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Badge",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Button",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Chip",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "name": "Dialog",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Field",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 8
+    },
+    {
+      "name": "Input",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 6
+    },
+    {
+      "name": "Menu",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 3
+    },
+    {
+      "name": "Squadmate",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 14
+    },
+    {
+      "name": "Switch",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 4
+    },
+    {
+      "name": "Tooltip",
+      "locale": "ar",
+      "theme": "dark",
+      "description": "Reference paragraph, localized fixture output and source, every example copied with real clipboard, 1440/390 overflow",
+      "blocks": 5
+    },
+    {
+      "navigation": [
+        "Button",
+        "Badge",
+        "Dialog",
+        "Field",
+        "Input",
+        "Chip",
+        "Squadmate",
+        "Menu",
+        "Switch",
+        "SegmentedControl",
+        "Tooltip"
+      ],
+      "previousWorks": true,
+      "rtlArrow": "←",
+      "preserved": "locale=ar&dir=rtl&theme=dark"
+    },
+    {
+      "clipboardDenied": "Could not copy this code.",
+      "clipboardAPI": "native Chromium permission denied"
+    }
+  ],
+  "pageErrors": []
+}

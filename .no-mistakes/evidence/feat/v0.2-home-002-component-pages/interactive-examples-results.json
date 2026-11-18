@@ -1,0 +1,29 @@
+{
+  "result": "pass",
+  "checks": [
+    {
+      "locale": "en",
+      "dialog": "Simple close, editable form with save/cancel, destructive action, keyboard opening and Escape focus return"
+    },
+    {
+      "locale": "en",
+      "menu": "Keyboard opens, disabled and destructive actions retained, Escape returns focus"
+    },
+    {
+      "locale": "en",
+      "tooltip": "All four placements open by focus; horizontal logical placements mirror in RTL"
+    },
+    {
+      "locale": "ar",
+      "dialog": "Simple close, editable form with save/cancel, destructive action, keyboard opening and Escape focus return"
+    },
+    {
+      "locale": "ar",
+      "menu": "Keyboard opens, disabled and destructive actions retained, Escape returns focus"
+    },
+    {
+      "locale": "ar",
+      "tooltip": "All four placements open by focus; horizontal logical placements mirror in RTL"
+    }
+  ]
+}
