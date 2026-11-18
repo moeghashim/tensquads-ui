@@ -16,7 +16,7 @@ test("every component fixture parses and renders", async ({ page }) => {
 			await page.goto(
 				`/components/${component.name}?locale=${locale}&dir=${locale === "ar" ? "rtl" : "ltr"}&theme=light`,
 			);
-			await expect(page.getByRole("heading", { name: component.name })).toBeVisible();
+			await expect(page.getByRole("heading", { name: component.name, exact: true })).toBeVisible();
 			const fixtureRegion = page.getByRole("region", {
 				name: locale === "en" ? "OpenUI fixture" : "عينة OpenUI",
 			});
@@ -42,6 +42,21 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(image).toBeVisible();
 				await expect(image).toHaveCSS("width", "64px");
 				await expect(image).toHaveCSS("height", "64px");
+			} else if (component.name === "Dialog") {
+				const trigger = locale === "en" ? "Review" : "مراجعة";
+				await expect(fixtureRegion.getByRole("button", { name: trigger })).toBeVisible();
+				await fixtureRegion.getByRole("button", { name: trigger }).click();
+				const dialog = page.getByRole("dialog", {
+					name: locale === "en" ? "Review request" : "مراجعة الطلب",
+				});
+				await expect(dialog).toBeVisible();
+				await expect(dialog).not.toHaveAttribute("data-starting-style");
+				await expect(dialog).toHaveCSS("opacity", "1");
+				const action = dialog.getByRole("button", { name: locale === "en" ? "Add member" : "إضافة العضو" });
+				await action.focus();
+				await page.keyboard.press("Enter");
+				await expect(dialog).toHaveCount(0);
+				await expect(fixtureRegion.getByRole("button", { name: trigger })).toBeFocused();
 			} else {
 				const label =
 					component.name === "Input"

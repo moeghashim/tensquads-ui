@@ -1,0 +1,1 @@
+root = Dialog("Review", "Review request", "A new member asked to join Northstar.", "Check their profile before adding them to the squad.", "Cancel", "Add member", false)
