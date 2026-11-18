@@ -1,0 +1,1 @@
+root = SegmentedControl("View", ["List", "Grid", "Board"], "Grid")
