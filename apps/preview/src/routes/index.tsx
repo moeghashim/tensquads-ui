@@ -14,7 +14,6 @@ import {
 	TooltipTrigger,
 } from "@tensquads/ui/react";
 import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
-import { SQUADMATES } from "@tensquads/ui/squadmates";
 import { useEffect, useMemo, useState } from "react";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
@@ -33,7 +32,6 @@ const components = getRegisteredComponents()
 	.map(({ name }) => name)
 	.sort();
 const mates = Object.values(AGENT_ROLE_TO_SLUG);
-const petra = SQUADMATES.find((mate) => mate.name.toLowerCase() === "petra");
 
 export const Route = createFileRoute("/")({ component: HomePage });
 
@@ -170,11 +168,7 @@ function HomePage() {
 							<strong>
 								{siteCopy[demoLocale].petraTitle.replace("{name}", squadmateCharacterName("petra", demoLocale))}
 							</strong>
-							{petra && (
-								<span>
-									{petra.role} · {squadmateStateLabel("running", demoLocale)}
-								</span>
-							)}
+							<span>{squadmateStateLabel("running", demoLocale)}</span>
 						</div>
 						{completedLines >= 2 && <TensquadsRenderer stream={playback.lines[1] ?? null} locale={demoLocale} />}
 					</div>
