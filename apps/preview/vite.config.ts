@@ -8,6 +8,12 @@ const uiSource = fileURLToPath(new URL("../../packages/ui/src/", import.meta.url
 
 export default defineConfig({
 	plugins: [cloudflare({ viteEnvironment: { name: "ssr" } }), tanstackStart(), viteReact()],
+	css: {
+		lightningcss: {
+			// Features.DirSelector: language-based lowering breaks explicit dir overrides.
+			exclude: 4,
+		},
+	},
 	resolve: {
 		alias: [
 			{ find: "@tensquads/ui/fonts.css", replacement: `${uiSource}fonts.css` },
