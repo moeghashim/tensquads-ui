@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { ChatReply } from "./ChatReply.js";
 
@@ -61,6 +61,51 @@ describe("ChatReply", () => {
 		}
 		expect(screen.getAllByText("Ready").length).toBeGreaterThan(0);
 		expect(container.textContent).toContain("Done");
+	});
+
+	it.each(["Run `npm run deploy`", "تشغيل `npm run deploy`"])("preserves completed inline code in %s", (reply) => {
+		const { container } = render(<ChatReply reply={reply} />);
+		expect(container.querySelector("p > code")).toHaveTextContent("npm run deploy");
+		expect(container.textContent).not.toContain("`");
+	});
+
+	it.each([
+		["```text", "```"],
+		["````text", "````"],
+		["~~~text", "~~~"],
+	])("keeps nested OpenUI literal inside %s fences", (opening, closing) => {
+		const literal = '```openui\nroot = Badge("Literal", "success")';
+		const reply = `${opening}\n${literal}\n${closing}\nAfter\n\n` +
+			'```openui\nroot = Badge("Live", "success")\n```';
+		const { container, rerender } = render(<ChatReply reply="" />);
+		const prefix = `${opening}\n${literal}`;
+		for (let index = 1; index <= prefix.length; index += 1) {
+			rerender(<ChatReply reply={prefix.slice(0, index)} />);
+			expect(container.querySelector(".ts-chat-reply__openui")).toBeNull();
+		}
+		rerender(<ChatReply reply={reply} />);
+		expect(container.querySelector("pre")).toHaveAttribute("dir", "ltr");
+		expect(container.querySelector("pre > code")?.textContent).toBe(literal);
+		expect(screen.getByText("After")).toBeInTheDocument();
+		expect(screen.getByText("Live", { exact: true })).toBeInTheDocument();
+		expect(container.querySelectorAll(".ts-chat-reply__openui")).toHaveLength(1);
+	});
+
+	it.each(["en", "ar"] as const)("preserves list numbering and nesting in %s", (locale) => {
+		const { container } = render(
+			<ChatReply locale={locale} reply={"3. Resume\n4. Finish\n\n- Parent\n - Child\n  7. Nested step\n - Next child\n- Sibling\n\n5. Ordered parent\n - Mixed child\n6. Ordered sibling"} />,
+		);
+		const lists = container.querySelectorAll(".ts-chat-reply__markdown > ol");
+		expect(lists[0]).toHaveAttribute("start", "3");
+		expect(lists[0]?.querySelectorAll(":scope > li")).toHaveLength(2);
+		const parent = screen.getByText("Parent", { exact: true });
+		expect(parent.tagName).toBe("LI");
+		expect(within(parent).getByText("Child", { exact: true }).tagName).toBe("LI");
+		expect(parent.querySelector("ul > li > ol")).toHaveAttribute("start", "7");
+		expect(parent.parentElement?.querySelectorAll(":scope > li")).toHaveLength(2);
+		expect(lists[1]).toHaveAttribute("start", "5");
+		expect(lists[1]?.querySelector("li > ul > li")).toHaveTextContent("Mixed child");
+		expect(lists[1]?.querySelectorAll(":scope > li")).toHaveLength(2);
 	});
 
 	it("renders unsafe links as text and raw HTML without interpreting it", () => {

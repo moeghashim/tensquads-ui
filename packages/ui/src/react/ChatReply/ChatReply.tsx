@@ -2,7 +2,7 @@ import type { ElementType, ReactNode } from "react";
 import { TensquadsRenderer, type TensquadsRendererProps } from "../../openui/TensquadsRenderer.js";
 import type { Locale } from "../../schemas/index.js";
 
-type ReplyPart = { kind: "markdown" | "openui"; value: string; open?: boolean };
+type ReplyPart = { kind: "markdown" | "openui"; value: string };
 
 export type ChatReplyProps = {
 	reply: string;
@@ -26,57 +26,118 @@ export function ChatReply({ reply, locale = "en", onError, ...rendererProps }: C
 	);
 }
 
-function splitReply(reply: string): ReplyPart[] {
+type Fence = { marker: string; info: string };
+
+function openingFence(line: string): Fence | undefined {
+	const match = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+	if (!match || (match[1]?.startsWith("`") && match[2]?.includes("`"))) return undefined;
+	return { marker: match[1] ?? "", info: (match[2] ?? "").trim() };
+}
+
+function closesFence(line: string, fence: Fence): boolean {
+	const match = line.match(/^ {0,3}(`{3,}|~{3,})[ \t]*$/);
+	return !!match && match[1]?.[0] === fence.marker[0] && match[1].length >= fence.marker.length;
+}
+
+function splitReply(source: string): ReplyPart[] {
+	const reply = source.replace(/\r\n?/g, "\n");
 	const parts: ReplyPart[] = [];
 	let cursor = 0;
-	const fence = /(^|\n)```openui[ \t]*\r?\n/gm;
-	for (let match = fence.exec(reply); match; match = fence.exec(reply)) {
-		const start = match.index + (match[1]?.length ?? 0);
-		if (start > cursor) parts.push({ kind: "markdown", value: reply.slice(cursor, start) });
-		const bodyStart = fence.lastIndex;
-		const close = /(^|\n)```[ \t]*(?:\r?\n|$)/gm;
-		close.lastIndex = bodyStart;
-		const end = close.exec(reply);
-		if (end) {
-			const closeStart = end.index + (end[1]?.length ?? 0);
-			parts.push({ kind: "openui", value: reply.slice(bodyStart, closeStart) });
-			cursor = close.lastIndex;
-			fence.lastIndex = cursor;
+	let offset = 0;
+	let fence: Fence | undefined;
+	let openui = false;
+	for (const line of reply.split("\n")) {
+		const next = Math.min(offset + line.length + 1, reply.length);
+		if (fence) {
+			if (closesFence(line, fence)) {
+				if (openui) {
+					parts.push({ kind: "openui", value: reply.slice(cursor, offset) });
+					cursor = next;
+				}
+				fence = undefined;
+				openui = false;
+			}
 		} else {
-			parts.push({ kind: "openui", value: reply.slice(bodyStart), open: true });
-			return parts;
+			fence = openingFence(line);
+			openui = !!fence && fence.info === "openui" && fence.marker[0] === "`";
+			if (openui) {
+				if (offset > cursor) parts.push({ kind: "markdown", value: reply.slice(cursor, offset) });
+				cursor = next;
+			}
 		}
+		offset = next;
 	}
-	const trailing = reply.slice(cursor);
-	const opening = "```openui";
-	let hold = 0;
-	for (let length = 1; length <= opening.length; length += 1) {
-		const suffix = trailing.slice(-length);
-		if ((suffix === opening.slice(0, length) || suffix === `\n${opening.slice(0, length)}`) && length > hold) {
-			hold = length;
-		}
+	if (openui) {
+		parts.push({ kind: "openui", value: reply.slice(cursor) });
+		return parts;
 	}
-	if (/(?:^|\n)`{1,2}$/.test(trailing)) hold = Math.max(hold, trailing.match(/`{1,2}$/)?.[0].length ?? 0);
-	if (trailing.length > hold) parts.push({ kind: "markdown", value: trailing.slice(0, trailing.length - hold) });
+	let trailing = reply.slice(cursor);
+	if (!fence) {
+		const lastLine = trailing.slice(trailing.lastIndexOf("\n") + 1);
+		const candidate = lastLine.replace(/^ {0,3}/, "");
+		if (candidate && "```openui".startsWith(candidate)) trailing = trailing.slice(0, -lastLine.length);
+	}
+	if (trailing) parts.push({ kind: "markdown", value: trailing });
 	return parts;
 }
 
+function listItem(line: string) {
+	const match = line.match(/^(\s*)([-*+]|\d+\.)[ \t]+(.*)$/);
+	if (!match) return undefined;
+	const marker = match[2] ?? "";
+	return {
+		indent: (match[1] ?? "").replace(/\t/g, "    ").length,
+		ordered: /^\d/.test(marker),
+		start: Number.parseInt(marker, 10),
+		text: match[3] ?? "",
+	};
+}
+
 function MarkdownBlock({ source }: { source: string }) {
-	const lines = source.replace(/\r\n?/g, "\n").split("\n");
+	const lines = source.split("\n");
 	const lineAt = (lineIndex: number) => lines[lineIndex] ?? "";
 	const nodes: ReactNode[] = [];
 	let index = 0;
+	function readList(first: NonNullable<ReturnType<typeof listItem>>): ReactNode {
+		const key = `list-${index}`;
+		const items: ReactNode[] = [];
+		while (index < lines.length) {
+			const item = listItem(lineAt(index));
+			if (!item || item.indent !== first.indent || item.ordered !== first.ordered) break;
+			const itemKey = `item-${index}`;
+			const children: ReactNode[] = [];
+			index += 1;
+			let child = listItem(lineAt(index));
+			while (child && child.indent > first.indent) {
+				children.push(readList(child));
+				child = listItem(lineAt(index));
+			}
+			items.push(
+				<li key={itemKey}>
+					{inline(item.text)}
+					{children}
+				</li>,
+			);
+		}
+		return first.ordered ? (
+			<ol key={key} start={first.start}>
+				{items}
+			</ol>
+		) : (
+			<ul key={key}>{items}</ul>
+		);
+	}
 	while (index < lines.length) {
 		const line = lineAt(index);
 		if (!line.trim()) {
 			index += 1;
 			continue;
 		}
-		const fence = line.match(/^```([^`]*)$/);
+		const fence = openingFence(line);
 		if (fence) {
 			const code: string[] = [];
 			index += 1;
-			while (index < lines.length && !/^```\s*$/.test(lineAt(index))) code.push(lineAt(index++));
+			while (index < lines.length && !closesFence(lineAt(index), fence)) code.push(lineAt(index++));
 			if (index < lines.length) index += 1;
 			nodes.push(
 				<pre dir="ltr" key={`code-${index}`}>
@@ -92,18 +153,9 @@ function MarkdownBlock({ source }: { source: string }) {
 			index += 1;
 			continue;
 		}
-		const list = line.match(/^\s*([-*+] |\d+\. )(.*)$/);
+		const list = listItem(line);
 		if (list) {
-			const ordered = /^\d/.test(list[1] ?? "");
-			const items: ReactNode[] = [];
-			while (index < lines.length) {
-				const item = lineAt(index).match(/^\s*([-*+] |\d+\. )(.*)$/);
-				if (!item || /^\d/.test(item[1] ?? "") !== ordered) break;
-				items.push(<li key={`item-${index}`}>{inline(item[2] ?? "")}</li>);
-				index += 1;
-			}
-			const List = ordered ? "ol" : "ul";
-			nodes.push(<List key={`list-${index}`}>{items}</List>);
+			nodes.push(readList(list));
 			continue;
 		}
 		const paragraph = [line.trim()];
@@ -111,7 +163,9 @@ function MarkdownBlock({ source }: { source: string }) {
 		while (
 			index < lines.length &&
 			lineAt(index).trim() &&
-			!/^(#{1,6}\s|```|\s*([-*+] |\d+\. ))/.test(lineAt(index))
+			!/^#{1,6}\s/.test(lineAt(index)) &&
+			!openingFence(lineAt(index)) &&
+			!listItem(lineAt(index))
 		) {
 			paragraph.push(lineAt(index++).trim());
 		}

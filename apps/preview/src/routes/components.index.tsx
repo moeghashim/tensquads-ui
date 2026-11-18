@@ -33,8 +33,15 @@ function ComponentsPage() {
 					return (
 						<div className="component-card" key={name}>
 							<div className="component-card__preview">
-								{fixture ? <TensquadsRenderer stream={fixture} locale={locale} /> : <span>{name}</span>}
-								{name === "ChatReply" && fixture && <ChatReply reply={fixture} locale={locale} />}
+								{fixture ? (
+									name === "ChatReply" ? (
+										<ChatReply reply={fixture} locale={locale} />
+									) : (
+										<TensquadsRenderer stream={fixture} locale={locale} />
+									)
+								) : (
+									<span>{name}</span>
+								)}
 							</div>
 							<Link
 								className="component-card__link"
