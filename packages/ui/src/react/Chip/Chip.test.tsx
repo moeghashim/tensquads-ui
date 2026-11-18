@@ -47,7 +47,9 @@ describe("Chip", () => {
 				"utf8",
 			);
 			const { getByRole } = render(<TensquadsRenderer stream={fixture} locale={locale} />);
-			expect(getByRole("button", { name: "response_schema" })).toBeInTheDocument();
+			const chip = getByRole("button", { name: "response_schema" });
+			expect(chip).toBeInTheDocument();
+			expect(chip.textContent).toBe("response_schema");
 			cleanup();
 		}
 		expect(createTensquadsLibrary("en")).toBe(createTensquadsLibrary("en"));

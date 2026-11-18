@@ -6,4 +6,4 @@ Import `Chip` and `ChipProps` from `@tensquads/ui/react`. Chip wraps UI SDK `But
 
 The chip is a 28px `primary-soft` pill. Its icon uses `text-secondary`; its name uses `button-md`. Hover uses `primary-soft-hover`. Long identifiers remain visible and can wrap inside the pill.
 
-OpenUI accepts a serializable `name`. It supplies a generic decorative glyph because arbitrary React nodes cannot be represented in OpenUI streams.
+OpenUI accepts a serializable `name` and renders it without an icon or opening action. Host integrations supply the object icon and opening behavior through React's `icon`, `onClick`, or `render` props. React nodes and callbacks are not part of the OpenUI stream.

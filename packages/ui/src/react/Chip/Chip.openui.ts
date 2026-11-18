@@ -10,7 +10,7 @@ export const ChipOpenUI = defineComponent({
 	props: z.object({
 		name: z.string().min(1).describe("Object identifier"),
 	}),
-	component: ({ props }) => createElement(Chip, { ...props, icon: createElement("span", null, "◈") }),
+	component: ({ props }) => createElement(Chip, { ...props, icon: null }),
 });
 
 registerComponent(ChipOpenUI);
