@@ -1,6 +1,11 @@
-Dependency setup: root npm ci (prepare built UI), exit 0; preview npm ci, exit 0.
-Existing test: npx playwright test e2e/tooltip.spec.ts --reporter=line, exit 0.
-Final focused test: npx playwright test --config .tooltip-validation/playwright.config.ts, exit 0.
-Preview and consumer production builds completed through awaited Playwright webServer commands.
-Intermediate driver attempts required correcting config cwd, isolated port, hydration readiness, and removing an unnecessary Escape assertion between default-open placement samples.
-No lint, static analysis, full suite, pipeline control, push, PR mutation, or CI was executed.
+Local production preview served through Wrangler; real Chromium browser.
+Placement: e2e/tooltip.spec.ts, 8 locale/direction/theme configurations, exit 0.
+Physical top/right/bottom/left independently opened; one visible tooltip; rendered bounding boxes assert requested physical side.
+64 full-page PNG captures: 4 sides x 8 states x 2 widths (1440/390).
+Accessibility, theme focus ring, localized content, shortcut and no mobile overflow assertions passed.
+Interaction: temporary focused Playwright driver (preserved as interaction-driver.spec.ts), English and Arabic, exit 0.
+Hover opens without moving focus; pointer departure closes; Tab opens and changes focused tooltip; Escape closes and retains trigger focus; OpenUI fixture hint describes the correct localized trigger.
+Visual review: ar/rtl dark right 390, ar/rtl light left 390, ar/ltr dark right 390, en/ltr light left 1440, ar OpenUI dark screenshot.
+Both Playwright child sessions finished with exit 0; their managed web servers and browsers stopped.
+No full-suite, lint, format or static checks were run. Baseline inspection was read-only; mise was untrusted, so the available Node 26.13.1/npm toolchain was used directly.
+Temporary driver and preview build/runtime outputs removed; installed dependencies preserved.

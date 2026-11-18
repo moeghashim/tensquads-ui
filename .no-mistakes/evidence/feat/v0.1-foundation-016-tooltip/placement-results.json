@@ -1,0 +1,738 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.13.1_2/bin/node",
+      "{run-worktree}/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "{run-worktree}/playwright.config.ts",
+      "e2e/tooltip.spec.ts",
+      "--workers",
+      "2",
+      "--output",
+      "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/placement-results",
+      "--reporter",
+      "json"
+    ],
+    "configFile": "{run-worktree}/playwright.config.ts",
+    "rootDir": "{run-worktree}/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/placement-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/placement-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "snapshotDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:5173",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "browserName": "chromium",
+          "locale": "en-US",
+          "colorScheme": "light",
+          "launchOptions": {
+            "args": [
+              "--disable-lcd-text",
+              "--font-render-hinting=none"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "command": "npm run build:preview && npm --prefix apps/preview run preview",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "tooltip.spec.ts",
+      "file": "tooltip.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Tooltip preview works in en/ltr/light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3004,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:07.687Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-en-ltr-light-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-light-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-light-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-c5e37b9cc0e2672b0a49",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in en/ltr/dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3200,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:07.687Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-en-ltr-dark-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-ltr-dark-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-ltr-dark-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-929eb88fab772df45ce7",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in ar/rtl/light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2853,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:10.933Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-ar-rtl-light-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-light-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-light-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-47770287e09fae462cdf",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in ar/rtl/dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2574,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:11.128Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-ar-rtl-dark-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-rtl-dark-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-rtl-dark-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-479ac18e4d19b28f05e6",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in ar/ltr/light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2829,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:13.706Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-ar-ltr-light-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-light-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-light-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-c78aa26a7f81c21f3287",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in ar/ltr/dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2596,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:13.791Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-ar-ltr-dark-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-ar-ltr-dark-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-ar-ltr-dark-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-ba232c595edb09301c3a",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in en/rtl/light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2798,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:16.392Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-en-rtl-light-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-light-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-light-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-5772edfe8979a9ff1042",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        },
+        {
+          "title": "Tooltip preview works in en/rtl/dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2990,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T12:09:16.540Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "tooltip-en-rtl-dark-top-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-top-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-top-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-top-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-right-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-right-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-right-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-right-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-bottom-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-bottom-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-bottom-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-bottom-390.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-left-1440.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-left-1440.png"
+                    },
+                    {
+                      "name": "tooltip-en-rtl-dark-left-390.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/screenshots/tooltip-en-rtl-dark-left-390.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1591c405bf64c401697f-3f0f4bde011601196d34",
+          "file": "tooltip.spec.ts",
+          "line": 23,
+          "column": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-18T12:09:04.504Z",
+    "duration": 15082.853,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

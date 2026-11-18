@@ -1,13 +1,20 @@
 {
   "config": {
     "argv": [
-      "~/.local/share/mise/installs/node/26.13.1/bin/node",
-      "{run-worktree}/node_modules/.bin/playwright",
+      "/opt/homebrew/Cellar/node/26.13.1_2/bin/node",
+      "{run-worktree}/node_modules/@playwright/test/cli.js",
       "test",
       "--config",
-      ".tooltip-interaction.config.ts"
+      "{run-worktree}/playwright.config.ts",
+      "e2e/.tooltip-live.spec.ts",
+      "--workers",
+      "2",
+      "--output",
+      "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/interaction-results",
+      "--reporter",
+      "json"
     ],
-    "configFile": "{run-worktree}/.tooltip-interaction.config.ts",
+    "configFile": "{run-worktree}/playwright.config.ts",
     "rootDir": "{run-worktree}/e2e",
     "failOnFlakyTests": false,
     "forbidOnly": false,
@@ -35,7 +42,7 @@
         "testDir": "{run-worktree}/e2e",
         "testIgnore": [],
         "testMatch": [
-          "**/.tooltip-live.spec.ts"
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
         "timeout": 30000
       }
@@ -54,10 +61,10 @@
         "testDir": "{run-worktree}/e2e",
         "snapshotDir": "{run-worktree}/e2e",
         "testIgnore": [],
-        "testMatch": "**/.tooltip-live.spec.ts",
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
         "timeout": 30000,
         "use": {
-          "baseURL": "http://127.0.0.1:5186",
+          "baseURL": "http://localhost:5173",
           "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
           "viewport": {
             "width": 1280,
@@ -89,14 +96,7 @@
     "quiet": false,
     "reporter": [
       [
-        "list",
-        null
-      ],
-      [
-        "json",
-        {
-          "outputFile": "~/.no-mistakes/evidence/01M7Q67JPBXKJBJGGF9KBGNYKF/interaction-results.json"
-        }
+        "json"
       ]
     ],
     "reportSlowTests": {
@@ -109,7 +109,12 @@
     "updateSourceMethod": "patch",
     "version": "1.64.1",
     "workers": 2,
-    "webServer": null
+    "webServer": {
+      "command": "npm run build:preview && npm --prefix apps/preview run preview",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
   },
   "suites": [
     {
@@ -119,7 +124,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "live keyboard hover mobile and fixture en/ltr/light",
+          "title": "Tooltip hover, keyboard dismissal and OpenUI in en",
           "ok": true,
           "tags": [],
           "tests": [
@@ -134,12 +139,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2955,
+                  "duration": 1867,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T11:51:28.196Z",
+                  "startTime": "2026-11-18T12:09:56.148Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -147,13 +152,13 @@
               "status": "expected"
             }
           ],
-          "id": "f45d3206f8f32d2ce4ac-de74ac5bc7a57844657a",
+          "id": "f45d3206f8f32d2ce4ac-4ee16c9577ca3b7bd75c",
           "file": ".tooltip-live.spec.ts",
           "line": 5,
-          "column": 2
+          "column": 3
         },
         {
-          "title": "live keyboard hover mobile and fixture en/ltr/dark",
+          "title": "Tooltip hover, keyboard dismissal and OpenUI in ar",
           "ok": true,
           "tags": [],
           "tests": [
@@ -168,12 +173,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2955,
+                  "duration": 1674,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T11:51:28.213Z",
+                  "startTime": "2026-11-18T12:09:56.145Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -181,223 +186,19 @@
               "status": "expected"
             }
           ],
-          "id": "f45d3206f8f32d2ce4ac-be4f5b2dded6fc8e43bf",
+          "id": "f45d3206f8f32d2ce4ac-8f92b7393432e50ec275",
           "file": ".tooltip-live.spec.ts",
           "line": 5,
-          "column": 2
-        },
-        {
-          "title": "live keyboard hover mobile and fixture en/rtl/light",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 2125,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-18T11:51:31.374Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f45d3206f8f32d2ce4ac-bcbdbe05c0c763ad47f8",
-          "file": ".tooltip-live.spec.ts",
-          "line": 5,
-          "column": 2
-        },
-        {
-          "title": "live keyboard hover mobile and fixture en/rtl/dark",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 3210,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-18T11:51:31.374Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f45d3206f8f32d2ce4ac-1d3bfd2bf6e8dd3aaabe",
-          "file": ".tooltip-live.spec.ts",
-          "line": 5,
-          "column": 2
-        },
-        {
-          "title": "live keyboard hover mobile and fixture ar/ltr/light",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 2546,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-18T11:51:33.504Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f45d3206f8f32d2ce4ac-42ddfe46bd44d9cfd575",
-          "file": ".tooltip-live.spec.ts",
-          "line": 5,
-          "column": 2
-        },
-        {
-          "title": "live keyboard hover mobile and fixture ar/ltr/dark",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 3527,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-18T11:51:34.588Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f45d3206f8f32d2ce4ac-f860c5f2a34364cd15e4",
-          "file": ".tooltip-live.spec.ts",
-          "line": 5,
-          "column": 2
-        },
-        {
-          "title": "live keyboard hover mobile and fixture ar/rtl/light",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 2623,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-18T11:51:36.055Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f45d3206f8f32d2ce4ac-619a4c34bab873fb7414",
-          "file": ".tooltip-live.spec.ts",
-          "line": 5,
-          "column": 2
-        },
-        {
-          "title": "live keyboard hover mobile and fixture ar/rtl/dark",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 2413,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-18T11:51:38.120Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "f45d3206f8f32d2ce4ac-63c567d05d987fb97450",
-          "file": ".tooltip-live.spec.ts",
-          "line": 5,
-          "column": 2
+          "column": 3
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-18T11:51:25.179Z",
-    "duration": 15405.502,
-    "expected": 8,
+    "startTime": "2026-11-18T12:09:53.877Z",
+    "duration": 4379.428,
+    "expected": 2,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
