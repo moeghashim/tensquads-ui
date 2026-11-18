@@ -1,0 +1,74 @@
+[
+  {
+    "component": "Input",
+    "locale": "en",
+    "theme": "light",
+    "fixtureValue": "Northstar",
+    "readOnlyValue": "Read only",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Input",
+    "locale": "en",
+    "theme": "dark",
+    "fixtureValue": "Northstar",
+    "readOnlyValue": "Read only",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Input",
+    "locale": "ar",
+    "theme": "light",
+    "fixtureValue": "بنّاء",
+    "readOnlyValue": "للقراءة",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Input",
+    "locale": "ar",
+    "theme": "dark",
+    "fixtureValue": "بنّاء",
+    "readOnlyValue": "للقراءة",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Field",
+    "locale": "en",
+    "theme": "light",
+    "fixtureValue": "Northstar",
+    "readOnlyValue": "Read only",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Field",
+    "locale": "en",
+    "theme": "dark",
+    "fixtureValue": "Northstar",
+    "readOnlyValue": "Read only",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Field",
+    "locale": "ar",
+    "theme": "light",
+    "fixtureValue": "بنّاء",
+    "readOnlyValue": "للقراءة",
+    "disabled": true,
+    "mobileOverflow": false
+  },
+  {
+    "component": "Field",
+    "locale": "ar",
+    "theme": "dark",
+    "fixtureValue": "بنّاء",
+    "readOnlyValue": "للقراءة",
+    "disabled": true,
+    "mobileOverflow": false
+  }
+]

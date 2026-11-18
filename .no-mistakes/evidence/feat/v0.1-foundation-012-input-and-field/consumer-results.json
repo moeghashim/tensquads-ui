@@ -1,0 +1,38 @@
+[
+  {
+    "scenario": "Incremental OpenUI",
+    "locale": "en",
+    "result": "pass",
+    "observed": "N → Northstar in same mounted controls; edits survive unrelated rerender; new empty value clears both"
+  },
+  {
+    "scenario": "Input composition and controlled native props",
+    "locale": "en",
+    "result": "pass",
+    "observed": "InputGroup renders section and filled state; keyboard clear focuses input with clear-press event; custom search input updates controlled value and enforces maxlength"
+  },
+  {
+    "scenario": "Field parts, validation and form semantics",
+    "locale": "en",
+    "result": "pass",
+    "observed": "Legend and description name group; disabled fields excluded from FormData; enable restores editing; labels focus controls; required/email errors associate to input; readonly submitted unchanged; reset restores defaults and hides errors"
+  },
+  {
+    "scenario": "Incremental OpenUI",
+    "locale": "ar",
+    "result": "pass",
+    "observed": "N → Northstar in same mounted controls; edits survive unrelated rerender; new empty value clears both"
+  },
+  {
+    "scenario": "Input composition and controlled native props",
+    "locale": "ar",
+    "result": "pass",
+    "observed": "InputGroup renders section and filled state; keyboard clear focuses input with clear-press event; custom search input updates controlled value and enforces maxlength"
+  },
+  {
+    "scenario": "Field parts, validation and form semantics",
+    "locale": "ar",
+    "result": "pass",
+    "observed": "Legend and description name group; disabled fields excluded from FormData; enable restores editing; labels focus controls; required/email errors associate to input; readonly submitted unchanged; reset restores defaults and hides errors"
+  }
+]

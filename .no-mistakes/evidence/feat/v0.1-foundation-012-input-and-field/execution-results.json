@@ -1,0 +1,40 @@
+{
+  "baseline": "npm run check intentionally not run: phase prohibits lint/static analysis/full suite",
+  "setup": [
+    {
+      "command": "npx playwright test e2e/input-field.spec.ts --workers=1 --reporter=line",
+      "exit": 1,
+      "reason": "preview dependencies missing"
+    },
+    {
+      "command": "npm --prefix apps/preview ci --no-audit --no-fund",
+      "exit": 0
+    },
+    {
+      "command": "npx playwright test e2e/phase-input-evidence.spec.ts --workers=1 --reporter=line",
+      "exit": 1,
+      "reason": "shared default port occupied; switched to isolated port 5185"
+    }
+  ],
+  "completed": [
+    {
+      "command": "npx playwright test e2e/input-field.spec.ts --workers=1 --reporter=line",
+      "exit": 0,
+      "product": "production preview build and local Cloudflare Worker",
+      "observed": "Both component previews passed baseline screenshots, axe, mobile overflow, typing and focus in en/ar and light/dark"
+    },
+    {
+      "command": "node .phase-test/drive.mjs",
+      "exit": 0,
+      "product": "actual React library and OpenUI renderer in local Vite consumer",
+      "observations": "consumer-results.json"
+    },
+    {
+      "command": "npx playwright test e2e/phase-input-evidence.spec.ts --config=phase-playwright.config.ts --workers=1 --reporter=line",
+      "exit": 0,
+      "observations": "preview-observations.json",
+      "screenshots": 16
+    }
+  ],
+  "cleanup": "All test browsers and servers closed; disposable harness and build outputs removed; installed project dependencies retained."
+}
