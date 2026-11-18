@@ -2,6 +2,7 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
 	Dialog,
 	DialogBackdrop,
@@ -434,6 +435,34 @@ function ComponentPage() {
 			</main>
 		);
 	}
+	if (name === "Chip") {
+		return (
+			<main className="gallery chip-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>Chip</h1>
+				<section className="chip-preview__grid" aria-label={locale === "ar" ? "حالات الرقاقة" : "Chip states"}>
+					<h2>{locale === "ar" ? "مع أيقونة" : "With icon"}</h2>
+					<Chip name="response_schema" icon={<span aria-hidden="true">◇</span>} onClick={() => undefined} />
+					<Chip name="tool_search" icon={<span aria-hidden="true">⌕</span>} onClick={() => undefined} />
+					<h2>{locale === "ar" ? "من دون أيقونة" : "Without icon"}</h2>
+					<Chip name="output_format" icon={null} onClick={() => undefined} />
+					<h2>{locale === "ar" ? "معطّل" : "Disabled"}</h2>
+					<Chip name="disabled_object" icon={<span aria-hidden="true">◇</span>} disabled />
+					<h2>{locale === "ar" ? "معرّف طويل" : "Long identifier"}</h2>
+					<Chip
+						name="this_is_a_long_object_identifier_that_stays_visible"
+						icon={<span aria-hidden="true">◇</span>}
+					/>
+				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
 	if (name === "Menu") {
 		const labels =
 			locale === "ar"
@@ -468,11 +497,7 @@ function ComponentPage() {
 						<path d="m8 11 8-5M8 13l8 5" />
 					</>
 				),
-				delete: (
-					<>
-						<path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6" />
-					</>
-				),
+				delete: <path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6" />,
 			};
 			return (
 				<svg

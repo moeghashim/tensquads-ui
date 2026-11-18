@@ -3,6 +3,7 @@ import "../react/Badge/Badge.openui.js";
 import "../react/Dialog/Dialog.openui.js";
 import "../react/Field/Field.openui.js";
 import "../react/Input/Input.openui.js";
+import "../react/Chip/Chip.openui.js";
 import "../react/Squadmate/Squadmate.openui.js";
 import "../react/Menu/Menu.openui.js";
 import "../react/Switch/Switch.openui.js";

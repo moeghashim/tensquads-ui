@@ -114,6 +114,8 @@ describe("OpenUI round trips", () => {
 			expect.arrayContaining([
 				"Button",
 				"Badge",
+				"Chip",
+				"Dialog",
 				"Squadmate",
 				"Input",
 				"Field",
@@ -143,6 +145,11 @@ describe("OpenUI round trips", () => {
 					expect(result.getByRole("button", { name: expectedLabels[locale] })).toBeInTheDocument();
 				} else if (component.name === "Badge") {
 					expect(result.getByText(locale === "en" ? "Ready" : "جاهز")).toHaveAttribute("data-slot", "badge");
+				} else if (component.name === "Chip") {
+					expect(result.getByRole("link", { name: "response_schema" })).toHaveAttribute(
+						"href",
+						"#response_schema",
+					);
 				} else if (component.name === "Menu") {
 					expect(result.getByRole("button", { name: locale === "en" ? "Actions" : "الإجراءات" })).toHaveAttribute(
 						"data-slot",
