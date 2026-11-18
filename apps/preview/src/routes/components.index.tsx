@@ -27,21 +27,22 @@ function ComponentsPage() {
 				{components.map((name) => {
 					const fixture = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 					return (
-						<Link
-							className="component-card"
-							to="/components/$name"
-							params={{ name }}
-							search={search as never}
-							key={name}
-						>
+						<div className="component-card" key={name}>
 							<div className="component-card__preview">
 								{fixture ? <TensquadsRenderer stream={fixture} locale={locale} /> : <span>{name}</span>}
 							</div>
-							<strong>{name}</strong>
-							<span className="component-card__arrow" aria-hidden="true">
-								↗
-							</span>
-						</Link>
+							<Link
+								className="component-card__link"
+								to="/components/$name"
+								params={{ name }}
+								search={search as never}
+							>
+								<strong>{name}</strong>
+								<span className="component-card__arrow" aria-hidden="true">
+									↗
+								</span>
+							</Link>
+						</div>
 					);
 				})}
 			</div>

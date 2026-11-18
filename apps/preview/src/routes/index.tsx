@@ -137,7 +137,7 @@ function HomePage() {
 						</Button>
 					</div>
 				</div>
-				<div className="stream-screen" dir={demoDir}>
+				<div className="stream-screen" lang={demoLocale} dir={demoDir}>
 					<div className="stream-screen__agent">
 						<div className="stream-screen__avatar">
 							{completedLines >= 1 && (
@@ -145,8 +145,8 @@ function HomePage() {
 							)}
 						</div>
 						<div className="stream-screen__agent-copy">
-							<strong>{copy.petraTitle}</strong>
-							<span>{copy.petraRole}</span>
+							<strong>{siteCopy[demoLocale].petraTitle}</strong>
+							<span>{siteCopy[demoLocale].petraRole}</span>
 						</div>
 						{completedLines >= 2 && <TensquadsRenderer stream={playback.lines[1] ?? null} locale={demoLocale} />}
 					</div>
@@ -198,13 +198,7 @@ function HomePage() {
 					{components.map((name) => {
 						const fixturePath = `../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`;
 						return (
-							<Link
-								className="component-card"
-								to="/components/$name"
-								params={{ name }}
-								search={search as never}
-								key={name}
-							>
+							<div className="component-card" key={name}>
 								<div className="component-card__preview">
 									{previewFixtures[fixturePath] ? (
 										<TensquadsRenderer stream={previewFixtures[fixturePath]} locale={locale} />
@@ -212,11 +206,18 @@ function HomePage() {
 										<span>{name}</span>
 									)}
 								</div>
-								<strong>{name}</strong>
-								<span className="component-card__arrow" aria-hidden="true">
-									↗
-								</span>
-							</Link>
+								<Link
+									className="component-card__link"
+									to="/components/$name"
+									params={{ name }}
+									search={search as never}
+								>
+									<strong>{name}</strong>
+									<span className="component-card__arrow" aria-hidden="true">
+										↗
+									</span>
+								</Link>
+							</div>
 						);
 					})}
 				</div>
@@ -262,10 +263,16 @@ function HomePage() {
 				<p className="eyebrow">{copy.squadTitle}</p>
 				<div className="squad-row">
 					{mates.map((agent) => (
-						<div className="squadmate-card" key={agent}>
+						<Link
+							className="squadmate-card"
+							to="/components/$name"
+							params={{ name: "Squadmate" }}
+							search={search as never}
+							key={agent}
+						>
 							<Squadmate agent={agent} state="idle" size={52} locale={locale} />
 							<span>{squadmateCharacterName(agent, locale)}</span>
-						</div>
+						</Link>
 					))}
 				</div>
 			</section>
