@@ -115,62 +115,67 @@ export function MarkdownDocument({ markdown, labels }: { markdown: string; label
 			<section aria-label={labels.description}>
 				<h2>{labels.description}</h2>
 				{description?.type === "paragraph" ? (
-					<p>
+					<p lang="en" dir="ltr">
 						<InlineMarkdown text={description.text} />
 					</p>
 				) : null}
 			</section>
 			<section aria-label={labels.props}>
 				<h2>{labels.props}</h2>
-				{props.map((block) => {
-					if (block.type === "heading") {
-						const Heading = `h${Math.min(block.level + 1, 6)}` as "h2" | "h3" | "h4" | "h5" | "h6";
-						return (
-							<Heading key={blockKey(block)}>
-								<InlineMarkdown text={block.text} />
-							</Heading>
-						);
-					}
-					if (block.type === "paragraph")
-						return (
-							<p key={blockKey(block)}>
-								<InlineMarkdown text={block.text} />
-							</p>
-						);
-					if (block.type === "list") {
-						const List = block.ordered ? "ol" : "ul";
-						return (
-							<List key={blockKey(block)}>
-								{block.items.map((item) => (
-									<li key={item}>
-										<InlineMarkdown text={item} />
-									</li>
-								))}
-							</List>
-						);
-					}
-					return null;
-				})}
+				{/* Component docs are written in English; keep them left-to-right on Arabic pages. */}
+				<div lang="en" dir="ltr">
+					{props.map((block) => {
+						if (block.type === "heading") {
+							const Heading = `h${Math.min(block.level + 1, 6)}` as "h2" | "h3" | "h4" | "h5" | "h6";
+							return (
+								<Heading key={blockKey(block)}>
+									<InlineMarkdown text={block.text} />
+								</Heading>
+							);
+						}
+						if (block.type === "paragraph")
+							return (
+								<p key={blockKey(block)}>
+									<InlineMarkdown text={block.text} />
+								</p>
+							);
+						if (block.type === "list") {
+							const List = block.ordered ? "ol" : "ul";
+							return (
+								<List key={blockKey(block)}>
+									{block.items.map((item) => (
+										<li key={item}>
+											<InlineMarkdown text={item} />
+										</li>
+									))}
+								</List>
+							);
+						}
+						return null;
+					})}
+				</div>
 			</section>
-			<section aria-label={labels.usage}>
-				<h2>{labels.usage}</h2>
-				{usage.map((block) => (
-					<div className="copyable-code" key={`${block.language}-${block.text}`}>
-						<div className="copyable-code__header">
-							<span>{block.language || labels.codeLabel}</span>
-							<CopyCodeButton
-								code={block.text}
-								copyLabel={labels.copy}
-								copiedLabel={labels.copied}
-								failedLabel={labels.copyFailed}
-							/>
+			{usage.length > 0 && (
+				<section aria-label={labels.usage}>
+					<h2>{labels.usage}</h2>
+					{usage.map((block) => (
+						<div className="copyable-code" key={`${block.language}-${block.text}`}>
+							<div className="copyable-code__header">
+								<span>{block.language || labels.codeLabel}</span>
+								<CopyCodeButton
+									code={block.text}
+									copyLabel={labels.copy}
+									copiedLabel={labels.copied}
+									failedLabel={labels.copyFailed}
+								/>
+							</div>
+							<pre>
+								<code>{block.text}</code>
+							</pre>
 						</div>
-						<pre>
-							<code>{block.text}</code>
-						</pre>
-					</div>
-				))}
-			</section>
+					))}
+				</section>
+			)}
 		</div>
 	);
 }

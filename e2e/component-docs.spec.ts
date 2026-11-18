@@ -17,7 +17,12 @@ test("component docs load in English and Arabic with localized fixtures", async 
 			const docs = page.locator(".markdown-document");
 			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الوصف" : "Description" })).toBeVisible();
 			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الخصائص" : "Props" })).toBeVisible();
-			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الاستخدام" : "Usage" })).toBeVisible();
+			// Usage shows only when the component doc has code samples.
+			const usage = docs.getByRole("heading", { name: locale === "ar" ? "الاستخدام" : "Usage" });
+			if (["Field", "Input"].includes(name)) await expect(usage).toBeVisible();
+			else await expect(usage).toHaveCount(0);
+			// English doc text stays left-to-right on Arabic pages.
+			await expect(docs.locator("p[lang='en'][dir='ltr']").first()).toBeVisible();
 			await expect(
 				page.getByRole("heading", { name: locale === "ar" ? "أمثلة تفاعلية" : "Live examples" }),
 			).toBeVisible();
