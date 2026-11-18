@@ -1,0 +1,330 @@
+
+> preview
+> wrangler dev --config dist/server/wrangler.json --ip 127.0.0.1 --port 5173
+
+
+ ⛅️ wrangler 4.163.0 (update available 4.164.0)
+───────────────────────────────────────────────
+Attaching additional modules:
+┌─────────────────────────────────────────────────┬──────┬────────────┐
+│ Name                                            │ Type │ Size       │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Badge.fixture.ar-BD5GzLn4.txt            │ text │ 0.04 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Badge.fixture.en-VK0a8LAu.txt            │ text │ 0.03 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Button.fixture.ar-Bq_5H9km.txt           │ text │ 0.06 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Button.fixture.en-QUObEgma.txt           │ text │ 0.05 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Match-lLEmv2ux.js                        │ esm  │ 14.12 KiB  │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/SegmentedControl.fixture.ar-CtWtmPAW.txt │ text │ 0.09 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/SegmentedControl.fixture.en-fkYIFlzD.txt │ text │ 0.07 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Squadmate.fixture.ar-DInk8FuN.txt        │ text │ 0.05 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Squadmate.fixture.en-Pwdv8Waj.txt        │ text │ 0.05 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Switch.fixture.ar-Dtw2LH1r.txt           │ text │ 0.06 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/Switch.fixture.en-wdu3vNBo.txt           │ text │ 0.04 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/_tanstack-start-manifest_v-BcKd4u4V.js   │ esm  │ 0.96 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/announce-e8HKfvSx.js                     │ esm  │ 1.31 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/components._name-DQ3UItAQ.js             │ esm  │ 11.44 KiB  │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/components._name-Df_s9xRc.js             │ esm  │ 525.17 KiB │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/empty-plugin-adapters-pT5zLEOe.js        │ esm  │ 0.28 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/router-DZurePbu.js                       │ esm  │ 17.82 KiB  │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/routes-CJOnKcNQ.js                       │ esm  │ 5.62 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/start-Dtl0e55a.js                        │ esm  │ 0.19 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/state-DXgeoc6U.js                        │ esm  │ 8.14 KiB   │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ assets/useMatch-hIAO5F9z.js                     │ esm  │ 148.49 KiB │
+├─────────────────────────────────────────────────┼──────┼────────────┤
+│ Total (21 modules)                              │      │ 734.05 KiB │
+└─────────────────────────────────────────────────┴──────┴────────────┘
+⎔ Starting local server...
+Wrangler detected this dev session is running in an AI agent.
+The Local Explorer API is available at http://127.0.0.1:5173/cdn-cgi/local/explorer/api
+Useful routes:
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/workers - local Workers and bindings
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/scheduled?worker=<name> - invoke a Worker's scheduled handler; cron is required (see the OpenAPI schema for the full request)
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/storage/kv/namespaces - KV namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/d1/database - D1 databases
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/r2/buckets - R2 buckets
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workers/durable_objects/namespaces - Durable Object namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workflows - Workflows
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query - run a read-only SQL query (SELECT/WITH only) over captured request traces and console logs. Tables: spans, logs (read attributes via json(attributes)). Example:
+    curl -X POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query -H 'Content-Type: application/json' -d '{"sql":"SELECT service, name, outcome, duration_ms FROM spans WHERE parent_id IS NULL LIMIT 20"}'
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/clear - clear all captured traces and logs
+If the routes above don't cover what you need, fetch the full OpenAPI schema (large - use only as a last resort):
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api - OpenAPI schema
+[wrangler:info] Ready on http://127.0.0.1:5173
+[wrangler:info] GET / 200 OK (67ms)
+[wrangler:info] GET / 200 OK (3ms)
+[wrangler:info] GET /components/Switch 200 OK (34ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 200 OK (7ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 200 OK (12ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 200 OK (11ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 200 OK (11ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (3ms)
+[wrangler:info] GET /components/Switch 200 OK (6ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/Switch 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/Switch 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/Switch 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 200 OK (3ms)
+[wrangler:info] GET /components/Switch 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/Switch 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (5ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (5ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/Switch 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (1ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (1ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/Switch 200 OK (14ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 200 OK (4ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 200 OK (8ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 200 OK (8ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 200 OK (8ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (3ms)
+[wrangler:info] GET /components/Switch 200 OK (5ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/Switch 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /components/Switch 200 OK (7ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (5ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/Switch 200 OK (8ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 200 OK (2ms)
+[wrangler:info] GET /components/Switch 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (1ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/Switch 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (1ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/Switch 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (1ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (4ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (1ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (5ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (1ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (5ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (3ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)
+[wrangler:info] GET /components/SegmentedControl 200 OK (3ms)
+[wrangler:info] GET /assets/index-Dvn_aQ5v.css 304 Not Modified (2ms)
+[wrangler:info] GET /assets/index-COhsvzhU.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/preload-helper-CK0zdzpD.js 304 Not Modified (2ms)
+[wrangler:info] GET /assets/components._name-Du6KujTh.js 304 Not Modified (1ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 304 Not Modified (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 304 Not Modified (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 304 Not Modified (1ms)

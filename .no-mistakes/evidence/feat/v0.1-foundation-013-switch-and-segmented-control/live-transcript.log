@@ -1,0 +1,6 @@
+PASS Switch public API: disabled/readOnly guards, required form submission, controlled state, render and callback details
+PASS SegmentedControl public API: arrows skip disabled items and wrap in LTR/RTL, one tab stop, Space/Enter, render and controlled updates
+PASS Streamed Switch: late initial checked state applies until user interaction takes precedence
+PASS Streamed SegmentedControl: late and partial initial values preserve focus; growing labels preserve user selection in LTR/RTL
+PASS Adversarial streamed duplicates: every growing option slot retains focus and exclusive selection through duplicate labels; invalid schema inputs are rejected
+PASS Built preview: bilingual fixtures, visual states and no mobile overflow in light/dark at 1440/390px
