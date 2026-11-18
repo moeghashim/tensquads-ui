@@ -84,6 +84,25 @@ const en = {
 		copied: "Copied",
 		copyFailed: "Copy failed. Select the code and copy it manually.",
 	},
+	componentPage: {
+		preview: "Live examples",
+		fixture: "OpenUI fixture",
+		fixtureSource: "Show fixture source",
+		apiReference: "API reference",
+		copy: "Copy",
+		copied: "Copied",
+		copyFailed: "Could not copy this code.",
+		code: "Code",
+		previous: "Previous",
+		next: "Next",
+		backToComponents: "All components",
+		noFixture: "No OpenUI fixture is registered for this component.",
+		description: "Description",
+		props: "Props",
+		usage: "Usage",
+		pageNavigation: "Component pages",
+		unavailable: "Component documentation is unavailable.",
+	},
 } as const;
 
 export default en;

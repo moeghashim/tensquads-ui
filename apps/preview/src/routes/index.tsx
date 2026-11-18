@@ -15,6 +15,7 @@ import {
 } from "@tensquads/ui/react";
 import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
 import { useEffect, useMemo, useState } from "react";
+import { CopyCodeButton } from "../components/copy-code-button";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
@@ -40,8 +41,6 @@ function HomePage() {
 	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale];
 	const installLine = "npm install github:moeghashim/tensquads-ui#<commit-sha>";
-	const [copied, setCopied] = useState(false);
-	const [copyFailed, setCopyFailed] = useState(false);
 	const [demoLocale, setDemoLocale] = useState(locale);
 	const [completedLines, setCompletedLines] = useState(0);
 	const [replayIndex, setReplayIndex] = useState(0);
@@ -77,17 +76,6 @@ function HomePage() {
 		setCompletedLines(0);
 		setReplayIndex((index) => index + 1);
 	};
-	const copyInstall = async () => {
-		try {
-			await navigator.clipboard.writeText(installLine);
-			setCopyFailed(false);
-			setCopied(true);
-			window.setTimeout(() => setCopied(false), 1600);
-		} catch {
-			setCopied(false);
-			setCopyFailed(true);
-		}
-	};
 	const chooseDemoLocale = (value: string | null) => {
 		if (value && (value === "en" || value === "ar")) {
 			setDemoLocale(value);
@@ -110,12 +98,12 @@ function HomePage() {
 						<section className="install-card__command" aria-label={copy.install} tabIndex={0}>
 							<code>{installLine}</code>
 						</section>
-						<Button variant="soft" size="sm" onClick={() => void copyInstall()}>
-							{copied ? copy.copied : copy.copy}
-						</Button>
-						<span className="install-card__label" role="status">
-							{copyFailed ? copy.copyFailed : ""}
-						</span>
+						<CopyCodeButton
+							code={installLine}
+							copyLabel={copy.copy}
+							copiedLabel={copy.copied}
+							failedLabel={copy.copyFailed}
+						/>
 					</div>
 					<div className="hero__links">
 						<Button render={<Link to="/get-started" search={search as never} />}>{copy.getStarted}</Button>
