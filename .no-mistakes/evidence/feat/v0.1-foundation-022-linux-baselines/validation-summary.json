@@ -1,0 +1,409 @@
+{
+  "runtime": "Local built Cloudflare Worker through Wrangler, real Chromium, synthetic preview fixtures",
+  "e2e": {
+    "exit": 0,
+    "tests": 11
+  },
+  "screenshots": [
+    {
+      "name": "ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 26012
+    },
+    {
+      "name": "ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 21086
+    },
+    {
+      "name": "ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 25828
+    },
+    {
+      "name": "ar-rtl-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 21052
+    },
+    {
+      "name": "badge-ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 19969
+    },
+    {
+      "name": "badge-ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 15865
+    },
+    {
+      "name": "badge-ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 19715
+    },
+    {
+      "name": "badge-ar-rtl-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 15561
+    },
+    {
+      "name": "badge-en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 21504
+    },
+    {
+      "name": "badge-en-ltr-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 17179
+    },
+    {
+      "name": "badge-en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 21170
+    },
+    {
+      "name": "badge-en-ltr-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 16893
+    },
+    {
+      "name": "button-ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 918,
+      "bytes": 46194
+    },
+    {
+      "name": "button-ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 1138,
+      "bytes": 39803
+    },
+    {
+      "name": "button-ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 918,
+      "bytes": 45139
+    },
+    {
+      "name": "button-ar-rtl-light-390.png",
+      "width": 390,
+      "height": 1138,
+      "bytes": 39049
+    },
+    {
+      "name": "button-en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 918,
+      "bytes": 51186
+    },
+    {
+      "name": "button-en-ltr-dark-390.png",
+      "width": 390,
+      "height": 1138,
+      "bytes": 45843
+    },
+    {
+      "name": "button-en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 918,
+      "bytes": 50762
+    },
+    {
+      "name": "button-en-ltr-light-390.png",
+      "width": 390,
+      "height": 1138,
+      "bytes": 45348
+    },
+    {
+      "name": "en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 30511
+    },
+    {
+      "name": "en-ltr-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 25642
+    },
+    {
+      "name": "en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 30249
+    },
+    {
+      "name": "en-ltr-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 25591
+    },
+    {
+      "name": "field-ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 33784
+    },
+    {
+      "name": "field-ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 1014,
+      "bytes": 28834
+    },
+    {
+      "name": "field-ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 33512
+    },
+    {
+      "name": "field-ar-rtl-light-390.png",
+      "width": 390,
+      "height": 1014,
+      "bytes": 28481
+    },
+    {
+      "name": "field-en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 41494
+    },
+    {
+      "name": "field-en-ltr-dark-390.png",
+      "width": 390,
+      "height": 1034,
+      "bytes": 35978
+    },
+    {
+      "name": "field-en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 40883
+    },
+    {
+      "name": "field-en-ltr-light-390.png",
+      "width": 390,
+      "height": 1034,
+      "bytes": 35560
+    },
+    {
+      "name": "input-ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 21444
+    },
+    {
+      "name": "input-ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 17622
+    },
+    {
+      "name": "input-ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 21065
+    },
+    {
+      "name": "input-ar-rtl-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 17301
+    },
+    {
+      "name": "input-en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 26243
+    },
+    {
+      "name": "input-en-ltr-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 21738
+    },
+    {
+      "name": "input-en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 25848
+    },
+    {
+      "name": "input-en-ltr-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 21506
+    },
+    {
+      "name": "menu-ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 25533
+    },
+    {
+      "name": "menu-ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 22493
+    },
+    {
+      "name": "menu-ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 26169
+    },
+    {
+      "name": "menu-ar-rtl-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 22988
+    },
+    {
+      "name": "menu-en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 26716
+    },
+    {
+      "name": "menu-en-ltr-dark-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 23545
+    },
+    {
+      "name": "menu-en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 900,
+      "bytes": 27304
+    },
+    {
+      "name": "menu-en-ltr-light-390.png",
+      "width": 390,
+      "height": 900,
+      "bytes": 24139
+    },
+    {
+      "name": "squadmate-ar-rtl-dark-1440.png",
+      "width": 1440,
+      "height": 4000,
+      "bytes": 319871
+    },
+    {
+      "name": "squadmate-ar-rtl-dark-390.png",
+      "width": 390,
+      "height": 5300,
+      "bytes": 392851
+    },
+    {
+      "name": "squadmate-ar-rtl-light-1440.png",
+      "width": 1440,
+      "height": 4000,
+      "bytes": 315350
+    },
+    {
+      "name": "squadmate-ar-rtl-light-390.png",
+      "width": 390,
+      "height": 5300,
+      "bytes": 382611
+    },
+    {
+      "name": "squadmate-en-ltr-dark-1440.png",
+      "width": 1440,
+      "height": 4000,
+      "bytes": 311906
+    },
+    {
+      "name": "squadmate-en-ltr-dark-390.png",
+      "width": 390,
+      "height": 5300,
+      "bytes": 399281
+    },
+    {
+      "name": "squadmate-en-ltr-light-1440.png",
+      "width": 1440,
+      "height": 4000,
+      "bytes": 307176
+    },
+    {
+      "name": "squadmate-en-ltr-light-390.png",
+      "width": 390,
+      "height": 5300,
+      "bytes": 390058
+    }
+  ],
+  "configuration": {
+    "PR_events": {
+      "types": [
+        "opened",
+        "synchronize",
+        "reopened"
+      ]
+    },
+    "push": {
+      "branches": [
+        "main",
+        "feat/v0.1-foundation"
+      ]
+    },
+    "dispatch": {
+      "inputs": {
+        "branch": {
+          "description": "Branch to verify",
+          "required": true,
+          "type": "string"
+        }
+      }
+    },
+    "concurrency": {
+      "group": "ci-${{ github.event.pull_request.number || inputs.branch || github.ref }}",
+      "cancel-in-progress": true
+    },
+    "checkout": {
+      "ref": "${{ inputs.branch || github.event.pull_request.head.sha || github.sha }}",
+      "fetch-depth": 0
+    },
+    "commit_resolution": {
+      "name": "Resolve checked-out commit",
+      "id": "checkout-commit",
+      "run": "echo \"sha=$(git rev-parse HEAD)\" >> \"$GITHUB_OUTPUT\""
+    },
+    "git_install_environment": {
+      "GITHUB_SHA": "${{ steps.checkout-commit.outputs.sha }}"
+    },
+    "screenshot_upload": {
+      "name": "Upload screenshots",
+      "if": "always()",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "with": {
+        "name": "screenshots",
+        "path": "test-results/screenshots/",
+        "if-no-files-found": "ignore",
+        "retention-days": 14
+      }
+    },
+    "gate_test_command": "mise exec -- npm run verify"
+  },
+  "limits": "Workflow configuration was parsed semantically. Remote workflow triggering, cancellation, artifact retention and outer gate execution belong to the outer executor; they were not executed here.",
+  "visual_review": [
+    "en-ltr-light-1440.png: gallery component names and controls visible",
+    "ar-rtl-dark-390.png: RTL mobile gallery wraps within viewport",
+    "menu-ar-rtl-dark-390.png: full-page open popup and fixture visible"
+  ],
+  "setup": {
+    "initial_mise_attempt": "exit 1: untrusted worktree configuration; resolved using MISE_TRUSTED_CONFIG_PATHS=$PWD without changing user configuration",
+    "npm_ci_exit": 0,
+    "preview_install_exit": 0
+  },
+  "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD\" PLAYWRIGHT_HTML_OPEN=never PLAYWRIGHT_HTML_OUTPUT_DIR=~/.no-mistakes/evidence/01M7Q2F1XN6CP1Y0AVAM7GRTWN/playwright-report mise exec -- npm run e2e -- e2e/preview.spec.ts e2e/badge.spec.ts e2e/button.spec.ts e2e/input-field.spec.ts e2e/menu.spec.ts e2e/squadmate.spec.ts e2e/openui/fixtures.spec.ts --workers=2 --reporter=html,line --output=~/.no-mistakes/evidence/01M7Q2F1XN6CP1Y0AVAM7GRTWN/playwright-results"
+}
