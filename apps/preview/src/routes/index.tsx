@@ -7,8 +7,14 @@ import {
 	SegmentedControlItem,
 	Squadmate,
 	squadmateCharacterName,
+	squadmateStateLabel,
+	Tooltip,
+	TooltipArrow,
+	TooltipContent,
+	TooltipTrigger,
 } from "@tensquads/ui/react";
 import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
+import { SQUADMATES } from "@tensquads/ui/squadmates";
 import { useEffect, useMemo, useState } from "react";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
@@ -27,6 +33,7 @@ const components = getRegisteredComponents()
 	.map(({ name }) => name)
 	.sort();
 const mates = Object.values(AGENT_ROLE_TO_SLUG);
+const petra = SQUADMATES.find((mate) => mate.name.toLowerCase() === "petra");
 
 export const Route = createFileRoute("/")({ component: HomePage });
 
@@ -101,7 +108,10 @@ function HomePage() {
 				<div className="hero__actions">
 					<div className="install-card">
 						<span className="install-card__label">{copy.install}</span>
-						<code>{installLine}</code>
+						{/* biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard users need to scroll the command at narrow widths. */}
+						<section className="install-card__command" aria-label={copy.install} tabIndex={0}>
+							<code>{installLine}</code>
+						</section>
 						<Button variant="soft" size="sm" onClick={() => void copyInstall()}>
 							{copied ? copy.copied : copy.copy}
 						</Button>
@@ -112,7 +122,7 @@ function HomePage() {
 					<div className="hero__links">
 						<Button render={<Link to="/get-started" search={search as never} />}>{copy.getStarted}</Button>
 						<Button variant="soft" render={<Link to="/components" search={search as never} />}>
-							{copy.browse} {components.length}
+							{copy.browseComponents.replace("{count}", String(components.length))}
 						</Button>
 					</div>
 				</div>
@@ -130,10 +140,12 @@ function HomePage() {
 						</span>
 					</div>
 					<pre aria-live="polite">
-						{playback.lines.slice(0, completedLines).map((line) => (
+						{playback.lines.slice(0, completedLines).map((line, index) => (
 							<span className="stream-code__line" key={`${demoLocale}-${line}`}>
-								{line}
-								{"\n"}
+								<span className="stream-code__message-label">
+									{copy.message} {index + 1} {copy.of} {playback.lines.length}
+								</span>
+								<code>{line}</code>
 							</span>
 						))}
 					</pre>
@@ -155,8 +167,14 @@ function HomePage() {
 							)}
 						</div>
 						<div className="stream-screen__agent-copy">
-							<strong>{siteCopy[demoLocale].petraTitle}</strong>
-							<span>{siteCopy[demoLocale].petraRole}</span>
+							<strong>
+								{siteCopy[demoLocale].petraTitle.replace("{name}", squadmateCharacterName("petra", demoLocale))}
+							</strong>
+							{petra && (
+								<span>
+									{petra.role} · {squadmateStateLabel("running", demoLocale)}
+								</span>
+							)}
 						</div>
 						{completedLines >= 2 && <TensquadsRenderer stream={playback.lines[1] ?? null} locale={demoLocale} />}
 					</div>
@@ -201,7 +219,7 @@ function HomePage() {
 						<h2 id="home-components-heading">{copy.componentsLead}</h2>
 					</div>
 					<Link to="/components" search={search as never}>
-						{copy.browse} <span aria-hidden="true">↗</span>
+						{copy.browse} <span aria-hidden="true">{direction === "rtl" ? "←" : "→"}</span>
 					</Link>
 				</div>
 				<div className="component-grid">
@@ -210,7 +228,17 @@ function HomePage() {
 						return (
 							<div className="component-card" key={name}>
 								<div className="component-card__preview">
-									{previewFixtures[fixturePath] ? (
+									{name === "Tooltip" ? (
+										<Tooltip defaultOpen>
+											<TooltipTrigger render={<Button iconOnly aria-label={copy.tooltipAction} />}>
+												<span aria-hidden="true">+</span>
+											</TooltipTrigger>
+											<TooltipContent>
+												{copy.tooltipHint}
+												<TooltipArrow />
+											</TooltipContent>
+										</Tooltip>
+									) : previewFixtures[fixturePath] ? (
 										<TensquadsRenderer stream={previewFixtures[fixturePath]} locale={locale} />
 									) : (
 										<span>{name}</span>
@@ -224,7 +252,7 @@ function HomePage() {
 								>
 									<strong>{name}</strong>
 									<span className="component-card__arrow" aria-hidden="true">
-										↗
+										{direction === "rtl" ? "←" : "→"}
 									</span>
 								</Link>
 							</div>

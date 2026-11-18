@@ -156,10 +156,10 @@ test("demo copy follows its own locale in both directions", async ({ page }) => 
 			await expect(pane).toHaveAttribute("lang", selected);
 			await expect(pane).toHaveAttribute("dir", selected === "ar" ? "rtl" : "ltr");
 			await expect(pane.locator(".stream-screen__agent-copy strong")).toHaveText(
-				selected === "ar" ? "بترا تجهّز متجرك" : "Petra is setting up your store",
+				selected === "ar" ? "إعداد المتجر مع بترا" : "Petra is setting up your store",
 			);
 			await expect(pane.locator(".stream-screen__agent-copy span")).toHaveText(
-				selected === "ar" ? "القائدة · تعمل" : "Master · Running",
+				selected === "ar" ? "Master · قيد العمل" : "Master · Running skill",
 			);
 			await expect(
 				pane.getByRole("button", { name: selected === "ar" ? "اعتماد الخطة" : "Approve plan" }),
@@ -167,6 +167,58 @@ test("demo copy follows its own locale in both directions", async ({ page }) => 
 			await expect(page.locator("html")).toHaveAttribute("lang", locale);
 		}
 	}
+});
+
+test("homepage presents streamed messages and keeps previews readable", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" });
+	await page.setViewportSize({ width: 1440, height: 900 });
+	const messages = page.locator(".stream-code__line");
+	await expect(messages).toHaveCount(7);
+	await expect(messages.nth(2).locator(".stream-code__message-label")).toHaveText("Message 3 of 7");
+	const installCommand = page.locator(".install-card code");
+	await expect(installCommand).toHaveText("npm install github:moeghashim/tensquads-ui#<commit-sha>");
+	expect(
+		await installCommand.evaluate((element) => element.scrollWidth <= element.clientWidth),
+		"The install command should fit on one line at desktop width",
+	).toBe(true);
+	const actions = page.locator(".hero__links");
+	await expect(actions.getByRole("link", { name: "Get started", exact: true })).toBeVisible();
+	const browse = actions.getByRole("link", { name: "Browse 11 components", exact: true });
+	await expect(browse).toBeVisible();
+	expect(await browse.evaluate((element) => getComputedStyle(element).textDecorationLine)).toBe("none");
+	await expect(page.getByRole("tooltip")).toContainText("Create a new item");
+	await expect(page.locator(".component-card__arrow").first()).toHaveText("→");
+	const squadCards = page.locator(".squad-row").getByRole("link");
+	const squadRows = await squadCards.evaluateAll(
+		(cards) => new Set(cards.map((card) => Math.round(card.getBoundingClientRect().top))).size,
+	);
+	expect(squadRows).toBe(1);
+	const streamGridBottom = await page
+		.locator(".stream-screen__grid")
+		.evaluate((element) => element.getBoundingClientRect().bottom);
+	const localeControlTop = await page
+		.locator(".stream-screen__locale")
+		.evaluate((element) => element.getBoundingClientRect().top);
+	expect(localeControlTop - streamGridBottom).toBeLessThanOrEqual(20);
+	await page.setViewportSize({ width: 390, height: 844 });
+	expect(
+		await page
+			.locator(".component-grid")
+			.evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(" ").length),
+	).toBe(1);
+	const fieldCard = page.locator(".component-card").filter({
+		has: page.getByRole("link", { name: "Field", exact: true }),
+	});
+	await expect(fieldCard.getByRole("textbox")).toHaveValue("Northstar");
+	const chipCard = page.locator(".component-card").filter({
+		has: page.getByRole("link", { name: "Chip", exact: true }),
+	});
+	const chipText = chipCard.locator(".ts-chip__name");
+	await expect(chipText).toHaveText("response_schema");
+	expect(await chipText.evaluate((element) => getComputedStyle(element).whiteSpace)).toBe("nowrap");
+	await expectNoHorizontalScroll(page);
+	await openPreview(page, { locale: "ar", direction: "rtl", theme: "light" }, "/components");
+	await expect(page.locator(".component-card__arrow").first()).toHaveText("←");
 });
 
 test("squad cards link to Squadmate with URL state", async ({ page }) => {

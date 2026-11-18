@@ -16,7 +16,7 @@ export const Route = createFileRoute("/components/")({ component: ComponentsPage
 
 function ComponentsPage() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
-	const { locale } = getPreviewState(search);
+	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale];
 	return (
 		<main className="content-page">
@@ -39,7 +39,7 @@ function ComponentsPage() {
 							>
 								<strong>{name}</strong>
 								<span className="component-card__arrow" aria-hidden="true">
-									↗
+									{direction === "rtl" ? "←" : "→"}
 								</span>
 							</Link>
 						</div>
