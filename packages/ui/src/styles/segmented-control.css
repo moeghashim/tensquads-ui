@@ -1,0 +1,11 @@
+@layer tensquads {
+	[data-slot="segmented-control"].ts-segmented-control { position: relative; display: inline-flex; align-items: center; gap: var(--ts-space-1); max-inline-size: 100%; padding: var(--ts-space-0-5); border-radius: var(--ts-radius-full); background: var(--ts-gray-100); isolation: isolate; }
+	[data-slot="segmented-control-item"].ts-segmented-control__item { position: relative; z-index: 0; display: inline-flex; min-inline-size: var(--ts-control-md); min-block-size: var(--ts-control-md); align-items: center; justify-content: center; gap: var(--ts-space-2); padding-block: var(--ts-space-1); padding-inline: var(--ts-space-3); border: 0; border-radius: var(--ts-radius-full); background: transparent; color: var(--ts-text-secondary); font: inherit; cursor: pointer; white-space: nowrap; }
+	[data-slot="segmented-control-item"].ts-segmented-control__item[data-checked] { color: var(--ts-text-emphasis); }
+	[data-slot="segmented-control-item"].ts-segmented-control__item[data-disabled] { color: var(--ts-text-disabled); cursor: not-allowed; }
+	[data-slot="segmented-control-item"].ts-segmented-control__item:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	[data-slot="segmented-control-indicator"].ts-segmented-control__indicator { position: absolute; z-index: -1; inset-block-start: var(--segmented-control-indicator-top); inset-inline-start: var(--segmented-control-indicator-left); inline-size: var(--segmented-control-indicator-width); block-size: var(--segmented-control-indicator-height); border-radius: var(--ts-radius-full); background: var(--ts-segmented-thumb); box-shadow: var(--ts-shadow-100); transition: inset-block-start var(--ts-duration-basic) var(--ts-ease-move), inset-inline-start var(--ts-duration-basic) var(--ts-ease-move), inline-size var(--ts-duration-basic) var(--ts-ease-move), block-size var(--ts-duration-basic) var(--ts-ease-move); }
+	[dir="rtl"] [data-slot="segmented-control-indicator"].ts-segmented-control__indicator { inset-inline-start: var(--segmented-control-indicator-right); }
+	[data-slot="segmented-control-indicator"][data-activation-direction="none"] { transition: none; }
+	@media (prefers-reduced-motion: reduce) { [data-slot="segmented-control-indicator"].ts-segmented-control__indicator { transition: none; } }
+}

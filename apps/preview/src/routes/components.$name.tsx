@@ -13,10 +13,16 @@ import {
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
 import {
+	SegmentedControl,
+	SegmentedControlIndicator,
+	SegmentedControlItem,
+} from "../../../../packages/ui/src/react/SegmentedControl/SegmentedControl";
+import {
 	Squadmate,
 	squadmateCharacterName,
 	squadmateStateLabel,
 } from "../../../../packages/ui/src/react/Squadmate/Squadmate";
+import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
 import { AGENT_ROLE_TO_SLUG, type AgentState } from "../../../../packages/ui/src/schemas";
 import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squadmates";
 import { getPreviewState } from "../state";
@@ -146,6 +152,82 @@ function ComponentPage() {
 					)}
 				</section>
 				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
+	if (name === "Switch") {
+		const label = locale === "ar" ? "تحديثات المنتج" : "Product updates";
+		return (
+			<main className="gallery component-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>Switch</h1>
+				<section
+					className="component-list switch-preview"
+					aria-label={locale === "ar" ? "حالات المفتاح" : "Switch states"}
+				>
+					<div className="ts-switch-field">
+						<span>{label}</span>
+						<Switch aria-label={label} defaultChecked>
+							<SwitchThumb />
+						</Switch>
+					</div>
+					<div className="ts-switch-field">
+						<span>{locale === "ar" ? "الإشعارات" : "Notifications off"}</span>
+						<Switch aria-label={locale === "ar" ? "الإشعارات" : "Notifications off"}>
+							<SwitchThumb />
+						</Switch>
+					</div>
+					<div className="ts-switch-field">
+						<span>{locale === "ar" ? "مُعطّل" : "Disabled"}</span>
+						<Switch aria-label={locale === "ar" ? "مُعطّل" : "Disabled"} disabled defaultChecked>
+							<SwitchThumb />
+						</Switch>
+					</div>
+				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
+	if (name === "SegmentedControl") {
+		const options = locale === "ar" ? ["قائمة", "شبكة", "لوحة"] : ["List", "Grid", "Board"];
+		const iconOptions = locale === "ar" ? ["تحرير", "معاينة"] : ["Edit", "Preview"];
+		return (
+			<main className="gallery component-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>SegmentedControl</h1>
+				<section
+					className="component-list segmented-preview"
+					aria-label={locale === "ar" ? "أوضاع العرض" : "View modes"}
+				>
+					<SegmentedControl aria-label={locale === "ar" ? "طريقة العرض" : "View"} defaultValue={options[1]}>
+						<SegmentedControlIndicator />
+						{options.map((option) => (
+							<SegmentedControlItem value={option} key={option}>
+								{option}
+							</SegmentedControlItem>
+						))}
+					</SegmentedControl>
+					<SegmentedControl aria-label={locale === "ar" ? "تخطيط" : "Layout"} defaultValue="preview">
+						<SegmentedControlIndicator />
+						<SegmentedControlItem value="edit" aria-label={iconOptions[0]}>
+							<span aria-hidden="true">✎</span>
+						</SegmentedControlItem>
+						<SegmentedControlItem value="preview" aria-label={iconOptions[1]}>
+							<span aria-hidden="true">◉</span>
+						</SegmentedControlItem>
+					</SegmentedControl>
+				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
 					<TensquadsRenderer stream={stream ?? null} locale={locale} />
 				</section>
 			</main>
