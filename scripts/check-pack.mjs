@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, realpath, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,18 +27,18 @@ try {
 	for (const packageName of ["@ui-sdk/core", "@ui-sdk/react"]) {
 		await readFile(join(fixture, "node_modules", packageName, "package.json"), "utf8");
 		const npmTree = JSON.parse(
-			execFileSync("npm", ["ls", packageName, "--all", "--json"], { cwd: fixture, encoding: "utf8" }),
+			execFileSync("npm", ["ls", packageName, "--all", "--json", "--long"], { cwd: fixture, encoding: "utf8" }),
 		);
-		const versions = new Set();
-		const visit = (node) => {
+		const locations = new Set();
+		const visit = async (node) => {
 			for (const [name, dependency] of Object.entries(node.dependencies ?? {})) {
-				if (name === packageName) versions.add(dependency.version);
-				visit(dependency);
+				if (name === packageName) locations.add(await realpath(dependency.path));
+				await visit(dependency);
 			}
 		};
-		visit(npmTree);
-		if (versions.size !== 1)
-			throw new Error(`Expected one ${packageName} copy, found ${[...versions].join(", ") || "none"}`);
+		await visit(npmTree);
+		if (locations.size !== 1)
+			throw new Error(`Expected one ${packageName} copy, found ${[...locations].join(", ") || "none"}`);
 	}
 	const imports = [];
 	for (const [path, target] of Object.entries(packageJson.exports)) {
