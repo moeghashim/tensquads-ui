@@ -1,0 +1,18 @@
+[WebServer] (node:91298) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:91321) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 4 tests using 1 worker
+
+(node:91377) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] e2e/local-tooltip-validation.spec.ts:8:2 › en light: focus, dismissal, hover, OpenUI and responsive appearance
+[2/4] e2e/local-tooltip-validation.spec.ts:8:2 › en dark: focus, dismissal, hover, OpenUI and responsive appearance
+[3/4] e2e/local-tooltip-validation.spec.ts:8:2 › ar light: focus, dismissal, hover, OpenUI and responsive appearance
+[4/4] e2e/local-tooltip-validation.spec.ts:8:2 › ar dark: focus, dismissal, hover, OpenUI and responsive appearance
+  4 passed (5.7s)

@@ -1,0 +1,298 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1440,
+    "geometry": [
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "top",
+        "x": 382,
+        "right": 537.9375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "bottom",
+        "x": 902,
+        "right": 1057.9375,
+        "y": 304,
+        "bottom": 337,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "left",
+        "x": 284,
+        "right": 439.9375,
+        "y": 449,
+        "bottom": 482,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "geometry": [
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "top",
+        "x": 117,
+        "right": 272.9375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "bottom",
+        "x": 117,
+        "right": 272.9375,
+        "y": 666,
+        "bottom": 699,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "left",
+        "x": 19,
+        "right": 174.9375,
+        "y": 811,
+        "bottom": 844,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1440,
+    "geometry": [
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "top",
+        "x": 382,
+        "right": 537.9375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "bottom",
+        "x": 902,
+        "right": 1057.9375,
+        "y": 304,
+        "bottom": 337,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "left",
+        "x": 284,
+        "right": 439.9375,
+        "y": 449,
+        "bottom": 482,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "geometry": [
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "top",
+        "x": 117,
+        "right": 272.9375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "bottom",
+        "x": 117,
+        "right": 272.9375,
+        "y": 666,
+        "bottom": 699,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "Create a new item⁦K⁩",
+        "side": "left",
+        "x": 19,
+        "right": 174.9375,
+        "y": 811,
+        "bottom": 844,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 1440,
+    "geometry": [
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "top",
+        "x": 914,
+        "right": 1046.234375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "bottom",
+        "x": 394,
+        "right": 526.234375,
+        "y": 304,
+        "bottom": 337,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "left",
+        "x": 828,
+        "right": 960.234375,
+        "y": 449,
+        "bottom": 482,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 390,
+    "geometry": [
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "top",
+        "x": 129,
+        "right": 261.234375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "bottom",
+        "x": 129,
+        "right": 261.234375,
+        "y": 666,
+        "bottom": 699,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "left",
+        "x": 43,
+        "right": 175.234375,
+        "y": 811,
+        "bottom": 844,
+        "background": "rgb(48, 48, 48)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 1440,
+    "geometry": [
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "top",
+        "x": 914,
+        "right": 1046.234375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "bottom",
+        "x": 394,
+        "right": 526.234375,
+        "y": 304,
+        "bottom": 337,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "left",
+        "x": 828,
+        "right": 960.234375,
+        "y": 449,
+        "bottom": 482,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 390,
+    "geometry": [
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "top",
+        "x": 129,
+        "right": 261.234375,
+        "y": 231,
+        "bottom": 264,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "bottom",
+        "x": 129,
+        "right": 261.234375,
+        "y": 666,
+        "bottom": 699,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      },
+      {
+        "text": "أنشئ عنصراً جديداً⁦K⁩",
+        "side": "left",
+        "x": 43,
+        "right": 175.234375,
+        "y": 811,
+        "bottom": 844,
+        "background": "rgb(175, 175, 175)",
+        "color": "rgb(13, 13, 13)"
+      }
+    ]
+  }
+]
