@@ -1,6 +1,6 @@
 ---
 id: 022
-title: Make screenshot baselines Linux-only and stable
+title: Drop pixel comparisons; keep screenshots as CI artifacts (D20)
 milestone: v0.1-foundation
 category: ci
 priority: high
@@ -16,3 +16,6 @@ Added by Opus on 2026-11-18. Most failed CI runs so far came from screenshot bas
 - [ ] `capturePreviewScreenshots` waits for `document.fonts.ready` and for no element with `data-starting-style` / `data-ending-style`, so open-state popups are captured after their transition.
 - [ ] AGENTS.md follow-up for task 018: baselines come only from the workflow.
 - [ ] `npm run verify` exits 0 in CI.
+
+## Changed on 2026-11-18 (D20)
+Moe chose option B: no pixel comparisons and no committed baselines. The baseline workflow, macOS skip and `ALLOW_LOCAL_BASELINES` items above are dropped. See the brief in the task 022 thread and PLAN.md D20.

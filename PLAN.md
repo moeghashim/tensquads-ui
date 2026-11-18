@@ -187,7 +187,7 @@ All eleven locked by Moe on 2026-11-17.
 - [ ] `X.tsx`, `X.openui.ts`, `X.test.tsx`, `X.md` exist.
 - [ ] Behavior tests cover keyboard, focus and every documented state. All pass.
 - [ ] Preview page shows it in en/ltr and ar/rtl, light and dark.
-- [ ] Playwright screenshots at 1440 and 390 px in both directions; no horizontal scroll at 390 px.
+- [ ] Playwright screenshots at 1440 and 390 px in both directions, attached to CI for review (D20); no horizontal scroll at 390 px.
 - [ ] axe reports no violations. Every control has a name. Focus ring is 2px in the `ring` token colour of each theme, offset 2px.
 - [ ] Only Agent-UI tokens in its CSS (a lint script checks for raw colour literals).
 - [ ] OpenUI round-trip fixture renders in both locales.
@@ -216,6 +216,7 @@ All eleven locked by Moe on 2026-11-17.
 | D17 | Fonts | `@tensquads/ui/fonts.css` self-hosts Inter (Latin UI), IBM Plex Sans Arabic (Arabic UI) and JetBrains Mono (code), all SIL OFL 1.1, the same faces the website loads. The `sans` stack is Inter, then IBM Plex Sans Arabic, then system fallbacks. Consumers import `fonts.css` before `tokens.css`. Task 020 | Opus, Q2, 2026-11-17 (matches the website) |
 | D18 | Arabic agent-state labels | Gender-neutral nouns for all 13 agents: waiting بانتظارك، planning تخطيط، running قيد العمل، checking قيد التحقق، done تم، sentback إعادة للتعديل، blocked معلّق، escalated بانتظار قرارك، dropped أُلغي، idle في استراحة | Locked by user 2026-11-18 |
 | D19 | Node version | Node 26 LTS (26.13.1, npm 11.20.0) for tensquads-ui, pinned with `mise.toml`; engines `26.x`. The website switched in its own repo (tensquad-website PR #1, merged 2026-11-18). The tensquads app is not built yet (Moe, 2026-11-18), so it has nothing to switch. Task 021 | Locked by user 2026-11-18 |
+| D20 | Screenshots | No pixel comparisons. e2e takes full-page screenshots (1440 and 390 px, en/ar, light/dark) as CI artifacts for review only; no baselines are committed. Behaviour, accessibility, focus ring, overflow, keyboard, ARIA and OpenUI round-trip assertions stay. CI runs once per PR update with cancel-in-progress; no-mistakes runs the full verify before pushing. Task 022 | Locked by user 2026-11-18 (option B) |
 | D14 | UI SDK compatibility | Track every UI SDK release: exact same-version pins of `@ui-sdk/core` + `@ui-sdk/react` on the newest release (`beta` tag until 1.0, then `latest`); daily update job opens a verified PR with release notes and a refreshed ui-sdk skill; wrap, do not fork; public-entry usage check; upgrade playbook in AGENTS.md (§14). Task 019, run right after task 005 | Locked by user 2026-11-17 ("always up to date") |
 
 ## 14. Staying current with UI SDK
