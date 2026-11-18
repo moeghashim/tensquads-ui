@@ -6,6 +6,8 @@ import "../react/Input/Input.openui.js";
 import "../react/Chip/Chip.openui.js";
 import "../react/Squadmate/Squadmate.openui.js";
 import "../react/Menu/Menu.openui.js";
+import "../react/Switch/Switch.openui.js";
+import "../react/SegmentedControl/SegmentedControl.openui.js";
 import type { DefinedComponent } from "@openuidev/react-lang";
 import { getRegisteredDefinitions } from "./registration-store.js";
 

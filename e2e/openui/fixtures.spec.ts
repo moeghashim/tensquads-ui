@@ -16,7 +16,7 @@ test("every component fixture parses and renders", async ({ page }) => {
 			await page.goto(
 				`/components/${component.name}?locale=${locale}&dir=${locale === "ar" ? "rtl" : "ltr"}&theme=light`,
 			);
-			await expect(page.getByRole("heading", { name: component.name, exact: true })).toBeVisible();
+			await expect(page.getByRole("heading", { name: component.name, level: 1, exact: true })).toBeVisible();
 			const fixtureRegion = page.getByRole("region", {
 				name: locale === "en" ? "OpenUI fixture" : "عينة OpenUI",
 			});
@@ -62,6 +62,14 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await page.keyboard.press("Enter");
 				await expect(dialog).toHaveCount(0);
 				await expect(fixtureRegion.getByRole("button", { name: trigger })).toBeFocused();
+			} else if (component.name === "Switch") {
+				await expect(
+					fixtureRegion.getByRole("switch", { name: locale === "en" ? "Product updates" : "تحديثات المنتج" }),
+				).toBeVisible();
+			} else if (component.name === "SegmentedControl") {
+				await expect(
+					fixtureRegion.getByRole("radiogroup", { name: locale === "en" ? "View" : "العرض" }),
+				).toBeVisible();
 			} else {
 				const label =
 					component.name === "Input"

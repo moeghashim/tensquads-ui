@@ -81,6 +81,8 @@ After installing root and preview dependencies, run `npx playwright install chro
 
 End-to-end tests check behavior, mobile overflow, axe accessibility, and the focus ring in English/LTR and Arabic/RTL, in light and dark themes. They also capture full-page screenshots at 1440 and 390 px as review artifacts in CI; screenshots are not pixel-tested baselines. The preview-home test asserts the component names in text. Screenshot capture waits for product fonts and for UI SDK starting or ending styles to finish. CI uploads available screenshots from `test-results/screenshots/` for 14 days and the Playwright HTML report on failure. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts).
 
+Switch and SegmentedControl screenshots capture their default preview states before keyboard interaction. See [e2e/switch-segmented-control.spec.ts](e2e/switch-segmented-control.spec.ts) for the state assertions and capture order.
+
 Dialog artifacts use `dialog-<locale>-<theme>-<state>-<width>.png`, with separate `closed`, `simple-open`, `form-open`, and `destructive-open` states. Each open capture uses the trigger for that specific preview example.
 
 The [CI workflow](.github/workflows/ci.yml) runs when pull requests to any branch open, update, or reopen, and on pushes to `main` or `feat/v0.1-foundation`. Manual dispatch requires a `branch` input. Superseded runs are cancelled for the same pull request or ref; manual runs are grouped by the selected branch. The [no-mistakes configuration](.no-mistakes.yaml) runs full verification with mise before pushing.

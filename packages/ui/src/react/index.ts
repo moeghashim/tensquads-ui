@@ -84,6 +84,16 @@ export {
 	MenuSubTrigger,
 	MenuTrigger,
 } from "./Menu/Menu.js";
+export type {
+	SegmentedControlIndicatorProps,
+	SegmentedControlItemProps,
+	SegmentedControlProps,
+} from "./SegmentedControl/SegmentedControl.js";
+export {
+	SegmentedControl,
+	SegmentedControlIndicator,
+	SegmentedControlItem,
+} from "./SegmentedControl/SegmentedControl.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
 export {
 	Squadmate,
@@ -91,3 +101,5 @@ export {
 	squadmateCharacterName,
 	squadmateStateLabel,
 } from "./Squadmate/Squadmate.js";
+export type { SwitchProps, SwitchThumbProps } from "./Switch/Switch.js";
+export { Switch, SwitchThumb } from "./Switch/Switch.js";

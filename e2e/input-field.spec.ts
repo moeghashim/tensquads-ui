@@ -19,7 +19,7 @@ for (const component of ["Input", "Field"] as const) {
 	test(`${component} previews documented states in both directions and themes`, async ({ page }, testInfo) => {
 		for (const state of states) {
 			await openPreview(page, state, `/components/${component}`);
-			await expect(page.getByRole("heading", { name: component })).toBeVisible();
+			await expect(page.getByRole("heading", { name: component, level: 1, exact: true })).toBeVisible();
 			const inputs = page.getByRole("textbox");
 			await expect(inputs).toHaveCount(component === "Input" ? 6 : 8);
 			if (component === "Field") {
