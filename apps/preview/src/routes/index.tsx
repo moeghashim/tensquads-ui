@@ -154,7 +154,11 @@ function HomePage() {
 					<div className="stream-screen__agent">
 						<div className="stream-screen__avatar">
 							<Reveal shown={completedLines >= 1}>
-								<TensquadsRenderer stream={playback.lines[0] ?? null} locale={demoLocale} />
+								<TensquadsRenderer
+									key={playback.iteration}
+									stream={playback.lines[0] ?? null}
+									locale={demoLocale}
+								/>
 							</Reveal>
 						</div>
 						<div className="stream-screen__agent-copy">
@@ -164,29 +168,53 @@ function HomePage() {
 							<span>{squadmateStateLabel("running", demoLocale)}</span>
 						</div>
 						<Reveal shown={completedLines >= 2}>
-							<TensquadsRenderer stream={playback.lines[1] ?? null} locale={demoLocale} />
+							<TensquadsRenderer
+								key={playback.iteration}
+								stream={playback.lines[1] ?? null}
+								locale={demoLocale}
+							/>
 						</Reveal>
 					</div>
 					<div className="stream-screen__grid">
 						<div className="stream-screen__field">
 							<Reveal shown={completedLines >= 3}>
-								<TensquadsRenderer stream={playback.lines[2] ?? null} locale={demoLocale} />
+								<TensquadsRenderer
+									key={playback.iteration}
+									stream={playback.lines[2] ?? null}
+									locale={demoLocale}
+								/>
 							</Reveal>
 						</div>
 						<div className="stream-screen__settings">
 							<Reveal shown={completedLines >= 4}>
-								<TensquadsRenderer stream={playback.lines[3] ?? null} locale={demoLocale} />
+								<TensquadsRenderer
+									key={playback.iteration}
+									stream={playback.lines[3] ?? null}
+									locale={demoLocale}
+								/>
 							</Reveal>
 							<Reveal shown={completedLines >= 5}>
-								<TensquadsRenderer stream={playback.lines[4] ?? null} locale={demoLocale} />
+								<TensquadsRenderer
+									key={playback.iteration}
+									stream={playback.lines[4] ?? null}
+									locale={demoLocale}
+								/>
 							</Reveal>
 						</div>
 						<div className="stream-screen__actions">
 							<Reveal shown={completedLines >= 6}>
-								<TensquadsRenderer stream={playback.lines[5] ?? null} locale={demoLocale} />
+								<TensquadsRenderer
+									key={playback.iteration}
+									stream={playback.lines[5] ?? null}
+									locale={demoLocale}
+								/>
 							</Reveal>
 							<Reveal shown={completedLines >= 7}>
-								<TensquadsRenderer stream={playback.lines[6] ?? null} locale={demoLocale} />
+								<TensquadsRenderer
+									key={playback.iteration}
+									stream={playback.lines[6] ?? null}
+									locale={demoLocale}
+								/>
 							</Reveal>
 						</div>
 					</div>

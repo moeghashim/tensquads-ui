@@ -120,6 +120,29 @@ test("stream demo replays localized OpenUI fixtures", async ({ page }) => {
 	await expect(page.locator(".stream-screen")).toHaveAttribute("dir", "rtl");
 });
 
+for (const locale of ["en", "ar"] as const) {
+	test(`stream demo replay resets edited controls in ${locale}`, async ({ page }) => {
+		await openPreview(page, { locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "light" });
+		const pane = page.locator(".stream-screen");
+		const field = pane.getByRole("textbox", { name: locale === "ar" ? "اسم المتجر" : "Store name" });
+		const notifications = pane.getByRole("switch");
+		const weekly = pane.getByRole("radio", { name: locale === "ar" ? "أسبوعي" : "Weekly", exact: true });
+		const monthly = pane.getByRole("radio", { name: locale === "ar" ? "شهري" : "Monthly", exact: true });
+		await expect(page.locator(".stream-code__footer")).toContainText("7/7");
+		await field.fill("Edited store");
+		await notifications.click();
+		await monthly.click();
+		await expect(field).toHaveValue("Edited store");
+		await expect(notifications).not.toBeChecked();
+		await expect(monthly).toBeChecked();
+		await page.getByRole("button", { name: locale === "ar" ? "إعادة العرض" : "Replay", exact: true }).click();
+		await expect(page.locator(".stream-code__footer")).toContainText("7/7");
+		await expect(field).toHaveValue(locale === "ar" ? "متجر بنّاء" : "Bannaa Market");
+		await expect(notifications).toBeChecked();
+		await expect(weekly).toBeChecked();
+	});
+}
+
 test("fixture cards allow input independently of navigation", async ({ page }) => {
 	for (const locale of ["en", "ar"] as const) {
 		const direction = locale === "ar" ? "rtl" : "ltr";
