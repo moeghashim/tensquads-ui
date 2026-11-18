@@ -119,7 +119,3 @@
 @layer tensquads {
 	.switch-preview, .segmented-preview { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-6); }
 }
-
-@layer tensquads {
-	.switch-preview, .segmented-preview { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-6); }
-}
