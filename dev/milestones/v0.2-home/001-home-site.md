@@ -14,6 +14,6 @@ Decided by Moe on 2026-11-18 (option 3, D21). The gallery is already live at htt
 - [ ] One page per component generated from its `X.md`, with live examples, copyable code and the OpenUI fixture rendered; all section labels localised.
 - [ ] Getting-started page for coding agents: the `tensquads-ui` and `ui-sdk` skills and `llms.txt`.
 - [ ] OpenUI playground: type a request, stream UI through `buildSystemPrompt` + the Anthropic provider on the Worker. Needs an `ANTHROPIC_API_KEY` Worker secret and rate limiting before it is public; ask Moe before enabling.
-- [ ] Deploy on every merge to `main` through a workflow (needs a `CLOUDFLARE_API_TOKEN` repo secret from Moe).
-- [ ] Custom domain (Moe to choose: `10squads.com/ui` next to `10squads.com/design`, or `ui.10squads.com`).
+- [ ] Keep the address https://tensquads-ui-preview.mohanadgh.workers.dev. No custom domain (Moe, 2026-11-18).
+- [ ] No deploy workflow and no Cloudflare secret in the repo. Opus deploys by hand with `npm run deploy:preview` from `main` after each merge that changes the site (Moe, 2026-11-18). README states the address.
 - [ ] e2e and screenshots as in D20; `npm run verify` passes.
