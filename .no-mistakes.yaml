@@ -1,5 +1,5 @@
 commands:
-  test: "mise exec -- npm run verify"
+  test: 'MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify'
   lint: "npm run check"
 
 # no-mistakes appends these trailers to commits made by its agent steps.
