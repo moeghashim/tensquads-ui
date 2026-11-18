@@ -51,11 +51,7 @@ function DialogOpenUIView({ props }: { props: z.infer<typeof dialogPropsSchema> 
 			createElement(
 				"div",
 				{ "data-slot": "dialog-actions" },
-				createElement(
-					DialogClose,
-					{ render: createElement(Button, { variant: "outline" }) },
-					props.cancelLabel,
-				),
+				createElement(DialogClose, { render: createElement(Button, { variant: "outline" }) }, props.cancelLabel),
 				createElement(
 					DialogClose,
 					{
