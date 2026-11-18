@@ -312,6 +312,20 @@ describe("ChatReply", () => {
 		}
 	});
 
+	it("preserves a long list and its final streaming item", () => {
+		const items = Array.from({ length: 1000 }, (_, index) => `1. Step ${index + 1}`).join("\n");
+		const { container, rerender } = render(<ChatReply reply={items} />);
+		expect(screen.getAllByRole("listitem")).toHaveLength(1000);
+		expect(container.querySelectorAll("ol")).toHaveLength(1);
+		expect(screen.getByText("Step 1")).toBeInTheDocument();
+		expect(screen.getByText("Step 1000")).toBeInTheDocument();
+		rerender(<ChatReply reply={items + "\n\n1. Final `command`"} />);
+		expect(screen.getAllByRole("listitem")).toHaveLength(1001);
+		expect(container.querySelectorAll("ol")).toHaveLength(1);
+		expect(container.querySelector("ol")).toHaveAttribute("start", "1");
+		expect(container.querySelector("li:last-child code")).toHaveTextContent("command");
+	});
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);
