@@ -32,9 +32,7 @@ test("getting started covers agent setup in both locales, directions, and themes
 			}),
 		).toHaveAttribute("href", "https://github.com/moeghashim/tensquads-ui/blob/main/llms.txt");
 		await expect(page.locator(".get-started-code pre[dir='ltr']")).toHaveCount(5);
-		await expect(page.locator(".get-started-code code").first()).toContainText(
-			"tensquads-ui#<commit-sha>",
-		);
+		await expect(page.locator(".get-started-code code").first()).toContainText("tensquads-ui#<commit-sha>");
 		await expect(page.locator(".get-started-code code").nth(2)).toContainText("vercel-labs/ui --skill ui-sdk");
 		await expect(page.locator(".get-started-code code").last()).toContainText(
 			"createAnthropicProvider(env.ANTHROPIC_API_KEY)",
