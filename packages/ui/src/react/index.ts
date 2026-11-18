@@ -3,6 +3,24 @@ export { Badge } from "./Badge/Badge.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
 export type {
+	DialogBackdropProps,
+	DialogCloseProps,
+	DialogContentProps,
+	DialogDescriptionProps,
+	DialogProps,
+	DialogTitleProps,
+	DialogTriggerProps,
+} from "./Dialog/Dialog.js";
+export {
+	Dialog,
+	DialogBackdrop,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogTitle,
+	DialogTrigger,
+} from "./Dialog/Dialog.js";
+export type {
 	FieldControlProps,
 	FieldDescriptionProps,
 	FieldErrorProps,

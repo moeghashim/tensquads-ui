@@ -1,0 +1,40 @@
+@layer tensquads {
+	[data-slot="dialog-backdrop"].ts-dialog__backdrop {
+		position: fixed;
+		inset: 0;
+		background: var(--ts-backdrop);
+		opacity: 1;
+		transition: opacity var(--ts-duration-exit) var(--ts-ease-exit);
+	}
+	[data-slot="dialog-backdrop"].ts-dialog__backdrop:is([data-starting-style], [data-ending-style]) { opacity: 0; }
+	[data-slot="dialog-content"].ts-dialog__content {
+		box-sizing: border-box;
+		position: fixed;
+		inset-block-start: 50%;
+		inset-inline-start: 50%;
+		translate: -50% -50%;
+		display: grid;
+		gap: var(--ts-space-4);
+		inline-size: min(calc(100% - var(--ts-space-8)), 32rem);
+		max-block-size: min(80dvh, 48rem);
+		overflow: auto;
+		padding: var(--ts-space-6);
+		border: 1px solid var(--ts-panel-border);
+		border-radius: var(--ts-radius-2xl);
+		background: var(--ts-panel);
+		box-shadow: var(--ts-shadow-overlay);
+		color: var(--ts-text);
+		transition: opacity var(--ts-duration-enter) var(--ts-ease-enter), scale var(--ts-duration-enter) var(--ts-ease-enter);
+	}
+	[data-slot="dialog-content"].ts-dialog__content:is([data-starting-style], [data-ending-style]) { opacity: 0; scale: 0.98; }
+	[data-slot="dialog-content"].ts-dialog__content:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	[data-slot="dialog-title"].ts-dialog__title { margin: 0; color: var(--ts-text); font-family: var(--ts-panel-title-font-family); font-size: var(--ts-panel-title-font-size); line-height: var(--ts-panel-title-line-height); font-weight: var(--ts-panel-title-font-weight); letter-spacing: var(--ts-panel-title-letter-spacing); }
+	[data-slot="dialog-description"].ts-dialog__description { margin: 0; color: var(--ts-text-secondary); font-family: var(--ts-panel-description-font-family); font-size: var(--ts-panel-description-font-size); line-height: var(--ts-panel-description-line-height); font-weight: var(--ts-panel-description-font-weight); letter-spacing: var(--ts-panel-description-letter-spacing); }
+	[data-slot="dialog-body"] { margin: 0; color: var(--ts-text); font-family: var(--ts-text-md-font-family); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); }
+	[data-slot="dialog-actions"] { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--ts-space-2); }
+	[data-slot="dialog-example"] [role="status"] { color: var(--ts-text-secondary); }
+	@media (prefers-reduced-motion: reduce) {
+		[data-slot="dialog-backdrop"].ts-dialog__backdrop,
+		[data-slot="dialog-content"].ts-dialog__content { transition: none; }
+	}
+}
