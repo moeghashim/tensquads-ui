@@ -1,0 +1,13 @@
+Consumer resolved CSS and its assets: fonts.css
+Consumer resolved CSS and its assets: tokens.css
+Consumer resolved CSS and its assets: styles.css
+{
+  "ring": {
+    "light": "#0169cc",
+    "dark": "#0285ff"
+  },
+  "renderedHtml": "<div aria-busy=\"false\" style=\"position:relative\"><div style=\"opacity:1;transition:opacity 0.2s ease\"><p>Disposable consumer example</p></div></div>",
+  "schemas": "valid values accepted; invalid values rejected",
+  "library": "memoized",
+  "entries": "all public JS exports imported"
+}

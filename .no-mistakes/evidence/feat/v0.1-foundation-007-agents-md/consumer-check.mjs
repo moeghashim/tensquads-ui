@@ -1,0 +1,41 @@
+import {mkdir,writeFile,readFile,rm} from 'node:fs/promises';
+import {resolve,join} from 'node:path';
+import {spawnSync} from 'node:child_process';
+const root=process.cwd();
+const fixture=resolve('.phase-test/consumer');
+await mkdir(fixture,{recursive:true});
+const run=(args,cwd)=>{const r=spawnSync('npm',args,{cwd,encoding:'utf8'});if(r.status!==0)throw Error(r.stdout+r.stderr);return r.stdout};
+const [packed]=JSON.parse(run(['pack','--json','--pack-destination',fixture],root));
+await writeFile(join(fixture,'package.json'),JSON.stringify({name:'disposable-ui-consumer',version:'1.0.0',type:'module',private:true}));
+run(['install','--ignore-scripts','--no-audit','--no-fund',join(fixture,packed.filename)],fixture);
+await writeFile(join(fixture,'check.mjs'),`
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {tokens} from '@tensquads/ui/tokens';
+import * as reactEntry from '@tensquads/ui/react';
+import {createTensquadsLibrary,TensquadsRenderer} from '@tensquads/ui/openui';
+import {LocaleSchema,DirectionSchema,AgentSlugSchema,AgentStateSchema} from '@tensquads/ui/schemas';
+import * as squadmates from '@tensquads/ui/squadmates';
+import * as server from '@tensquads/ui/openui/server';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+assert.equal(tokens.ring.light,'#0169cc'); assert.equal(tokens.ring.dark,'#0285ff');
+assert.equal(LocaleSchema.safeParse('fr').success,false); assert.equal(LocaleSchema.parse('ar'),'ar');
+assert.equal(DirectionSchema.safeParse('up').success,false);
+assert.equal(AgentSlugSchema.parse('petra'),'petra');assert.equal(AgentSlugSchema.safeParse('unknown').success,false);
+assert.equal(AgentStateSchema.parse('running'),'running'); assert.equal(AgentStateSchema.safeParse('invalid').success,false);
+assert.equal(createTensquadsLibrary('en'),createTensquadsLibrary('en'));
+const stream='root = Example("Disposable consumer example")';
+const html=renderToStaticMarkup(createElement(TensquadsRenderer,{stream,locale:'en'}));
+assert.ok(html.includes('Disposable consumer example'));
+assert.ok(reactEntry);
+for(const path of ['fonts.css','tokens.css','styles.css']) {
+const url=import.meta.resolve('@tensquads/ui/'+path); const css=await readFile(new URL(url),'utf8');
+for(const [,font] of css.matchAll(/url\\(["']?([^"')]+)["']?\\)/g)) await readFile(new URL(font,url));
+console.log('Consumer resolved CSS and its assets:',path);
+}
+console.log(JSON.stringify({ring:tokens.ring,renderedHtml:html,schemas:'valid values accepted; invalid values rejected',library:'memoized',entries:'all public JS exports imported'},null,2));
+`);
+const result=spawnSync(process.execPath,['check.mjs'],{cwd:fixture,encoding:'utf8'});
+process.stdout.write(result.stdout);process.stderr.write(result.stderr);
+if(result.status!==0)process.exitCode=result.status??1;
