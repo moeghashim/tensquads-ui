@@ -36,6 +36,16 @@
         "002-component-pages",
         "003-get-started-for-agents"
       ]
+    },
+    {
+      "id": "v0.2-chat",
+      "status": "planned",
+      "tasks": [
+        "001-chat-components",
+        "002-chat-reply-stream",
+        "003-chat-actions",
+        "004-chat-site-demo"
+      ]
     }
   ]
 }
