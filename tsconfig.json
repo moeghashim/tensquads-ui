@@ -15,5 +15,5 @@
 		"skipLibCheck": true,
 		"types": ["node", "vitest/globals"]
 	},
-	"include": ["packages/ui/src/**/*.ts", "packages/ui/src/**/*.tsx", "scripts/**/*.mjs", "vitest.config.ts"]
+	"include": ["packages/ui/src/**/*.ts", "packages/ui/src/**/*.tsx", "scripts/**/*.mjs", "scripts/**/*.tsx", "vitest.config.ts"]
 }
