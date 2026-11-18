@@ -1,0 +1,1 @@
+root = Menu("الإجراءات", [{"label": "فتح المشروع", "value": "open"}, {"label": "إعادة التسمية", "value": "rename", "disabled": true}, {"label": "حذف", "value": "delete", "danger": true}])

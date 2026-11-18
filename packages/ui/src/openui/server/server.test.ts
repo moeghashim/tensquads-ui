@@ -126,7 +126,7 @@ describe("OpenUI server helpers", () => {
 		expect(close).toHaveBeenCalledOnce();
 	});
 
-	it("bundles the server without React DOM and confines SDK imports to the adapter", async () => {
+	it("keeps the server bundle limited to the React DOM modules required by UI SDK Menu", async () => {
 		const sdkImporters = new Set<string>();
 		const result = await build({
 			configFile: false,
@@ -163,7 +163,12 @@ describe("OpenUI server helpers", () => {
 				: [],
 		);
 		expect(modules.length).toBeGreaterThan(0);
-		expect(modules.filter((id) => /node_modules\/react-dom\//.test(id))).toEqual([]);
+		expect(modules.filter((id) => /node_modules\/react-dom\//.test(id)).sort()).toEqual(
+			[
+				join(process.cwd(), "node_modules/react-dom/cjs/react-dom.production.js"),
+				join(process.cwd(), "node_modules/react-dom/index.js"),
+			].sort(),
+		);
 	});
 });
 
