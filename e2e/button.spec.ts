@@ -51,3 +51,16 @@ test("Button previews variants, sizes, and interaction states", async ({ page },
 		await expectThemeFocusRing(page, state.theme);
 	}
 });
+
+test("danger button text stays white in light, explicit dark, and system dark themes", async ({ page }) => {
+	const danger = page.locator('[data-slot="button"].ts-button--danger').first();
+	for (const theme of ["light", "dark"] as const) {
+		await page.goto(`/components/Button?locale=en&dir=ltr&theme=${theme}`);
+		await expect(danger).toHaveCSS("color", "rgb(255, 255, 255)");
+	}
+
+	await page.emulateMedia({ colorScheme: "dark" });
+	await page.goto("/components/Button?locale=en&dir=ltr&theme=system");
+	await expect(page.locator("html")).not.toHaveAttribute("data-theme");
+	await expect(danger).toHaveCSS("color", "rgb(255, 255, 255)");
+});

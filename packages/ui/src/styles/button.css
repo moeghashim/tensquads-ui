@@ -33,11 +33,17 @@
 	[data-slot="button"].ts-button--ghost { color: var(--ts-text-secondary); background: transparent; }
 	[data-slot="button"].ts-button--ghost:hover:not([data-disabled]) { background: var(--ts-ghost-hover); }
 	[data-slot="button"].ts-button--ghost:active:not([data-disabled]) { background: var(--ts-ghost-active); }
-	[data-slot="button"].ts-button--danger { color: var(--ts-gray-0); background: var(--ts-danger-solid); }
+	[data-slot="button"].ts-button--danger {
+		--ts-button-danger-text: var(--ts-gray-0);
+		color: var(--ts-button-danger-text);
+		background: var(--ts-danger-solid);
+	}
+	[data-theme="dark"] .ts-button--danger { --ts-button-danger-text: var(--ts-gray-1000); }
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) .ts-button--danger { --ts-button-danger-text: var(--ts-gray-1000); }
+	}
 	[data-slot="button"].ts-button--danger:hover:not([data-disabled]) { filter: brightness(0.92); }
 	[data-slot="button"].ts-button--danger:active:not([data-disabled]) { filter: brightness(0.84); }
 	[data-slot="button"].ts-button[data-disabled] { color: var(--ts-text-disabled); background: var(--ts-alpha-05); border-color: transparent; cursor: not-allowed; }
 	[data-slot="button"].ts-button:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
-	[data-slot="button"].ts-button--danger { color: var(--ts-gray-0); }
-	:root[data-theme="dark"] [data-slot="button"].ts-button--danger { color: var(--ts-gray-1000); }
 }
