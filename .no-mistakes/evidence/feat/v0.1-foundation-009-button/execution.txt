@@ -1,0 +1,10 @@
+Focused existing browser run: npx playwright test e2e/button.spec.ts e2e/openui/fixtures.spec.ts e2e/preview.spec.ts e2e/squadmate.spec.ts --reporter=line --output=~/.no-mistakes/evidence/01M7PMSWBP7PG047JXJ2WYVZZG/playwright-results
+Exit 0. Playwright built the production preview and owned the Wrangler server. All four selected checks completed.
+Package: npm run build; npm pack --ignore-scripts --pack-destination .button-live; extracted tarball used directly by disposable Vite consumer. Exit 0 for build and pack.
+Consumer production build: apps/preview/node_modules/.bin/vite build --config .button-live/vite.config.mjs. Exit 0.
+Live evidence: npx playwright test --config .button-live/playwright.config.ts. Final exit 0. All three checks completed.
+Initial harness launch used an incorrect server cwd; corrected to worktree. Initial disabled assertion treated aria-disabled as native disabled; corrected to inspect the native disabled property. No product failure or source changes.
+Browser checks assert async callback ready/saving/ready on native and link renders, maintained wrapper classes, no duplicate calls, disabled suppression, optional disabled focus, icon guard, excess-args reporting, packed CSS geometry, hover/active styling, focus ring, and fixture display.
+Visual review: button-en-dark-1440.png, button-ar-light-390.png, packed-button-pending.png, packed-link-pending.png, packed-guards.png.
+All browser/server children awaited by Playwright; ports 5173 and 5174 have no listeners after completion.
+No lint, static analysis, full suite, pipeline control, push, PR, or CI phase executed.

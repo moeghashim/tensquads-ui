@@ -1,0 +1,1 @@
+body { background: var(--ts-canvas); color:var(--ts-text-primary); font-family:var(--ts-button-md-font-family); margin:32px; } section {display:flex; gap:16px; flex-wrap:wrap; margin-block:24px;} output {display:block; margin-block:24px;}
