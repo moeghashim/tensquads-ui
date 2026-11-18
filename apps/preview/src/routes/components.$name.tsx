@@ -91,7 +91,6 @@ function ComponentPage() {
 			<section className="component-doc-page__section" aria-label={copy.apiReference}>
 				<MarkdownDocument
 					markdown={markdown}
-					name={name}
 					labels={{
 						copy: copy.copy,
 						copied: copy.copied,
@@ -306,7 +305,12 @@ function ComponentExample() {
 								))}
 							</div>
 							<ExampleCodeBlock
-								code={`<Squadmate agent="${AGENT_ROLE_TO_SLUG[mate.id]}" state="planning" size={48} locale="${locale}" />`}
+								code={states
+									.map(
+										(state) =>
+											`<Squadmate agent="${AGENT_ROLE_TO_SLUG[mate.id]}" state="${state}" size={48} locale="${locale}" />`,
+									)
+									.join("\n")}
 							/>
 						</div>
 					))}
@@ -544,7 +548,17 @@ function ComponentExample() {
 							<Button variant={variant} disabled>
 								{locale === "ar" ? "معطّل" : "Disabled"}
 							</Button>
-							<ExampleCodeBlock code={`<Button variant="${variant}">Continue</Button>`} />
+							<ExampleCodeBlock
+								code={[
+									...sizes.map(
+										(size) =>
+											`<Button variant="${variant}" size="${size}">${locale === "ar" ? "متابعة" : "Continue"}</Button>`,
+									),
+									`<Button variant="${variant}" pill>${locale === "ar" ? "دائري" : "Pill"}</Button>`,
+									`<Button variant="${variant}" iconOnly aria-label="${locale === "ar" ? "إضافة" : "Add"}"><span aria-hidden="true">+</span></Button>`,
+									`<Button variant="${variant}" disabled>${locale === "ar" ? "معطّل" : "Disabled"}</Button>`,
+								].join("\n")}
+							/>
 						</div>
 					))}
 				</section>
@@ -591,7 +605,11 @@ function ComponentExample() {
 					<h2>{locale === "ar" ? "مع أيقونة" : "With icon"}</h2>
 					<Chip name="response_schema" icon={<span aria-hidden="true">◇</span>} onClick={() => undefined} />
 					<Chip name="tool_search" icon={<span aria-hidden="true">⌕</span>} onClick={() => undefined} />
-					<ExampleCodeBlock code={'<Chip name="response_schema" icon={<SchemaIcon />} onClick={openSchema} />'} />
+					<ExampleCodeBlock
+						code={
+							'<Chip name="response_schema" icon={<span aria-hidden="true">◇</span>} onClick={openSchema} />\n<Chip name="tool_search" icon={<span aria-hidden="true">⌕</span>} onClick={openSearch} />'
+						}
+					/>
 					<h2>{locale === "ar" ? "من دون أيقونة" : "Without icon"}</h2>
 					<Chip name="output_format" icon={null} onClick={() => undefined} />
 					<ExampleCodeBlock code={'<Chip name="output_format" icon={null} onClick={openOutputFormat} />'} />
@@ -615,7 +633,12 @@ function ComponentExample() {
 	}
 	if (name === "Tooltip") {
 		const ar = locale === "ar";
-		const sides = ["top", "right", "bottom", "left"] as const;
+		const sides = [
+			{ label: "top", side: "top" },
+			{ label: "right", side: "end" },
+			{ label: "bottom", side: "bottom" },
+			{ label: "left", side: "start" },
+		] as const;
 		const labels = ar
 			? { title: "مواضع التلميح", action: "إضافة عنصر", hint: "أنشئ عنصراً جديداً" }
 			: { title: "Tooltip placements", action: "Add item", hint: "Create a new item" };
@@ -626,14 +649,14 @@ function ComponentExample() {
 				</Link>
 				<p className="eyebrow">{ar ? "معاينة المكوّن" : "Component preview"}</p>
 				<section className="tooltip-preview__grid" aria-label={labels.title}>
-					{sides.map((side) => (
+					{sides.map(({ label, side }) => (
 						<div className="tooltip-preview__item" key={side}>
-							<h2>{side}</h2>
+							<h2>{label}</h2>
 							<Tooltip shortcut="k">
 								<TooltipTrigger render={<Button iconOnly aria-label={labels.action} />}>
 									<span aria-hidden="true">+</span>
 								</TooltipTrigger>
-								<TooltipContent side={side === "right" ? "end" : side === "left" ? "start" : side}>
+								<TooltipContent side={side}>
 									{labels.hint}
 									<TooltipShortcut />
 									<TooltipArrow />

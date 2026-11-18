@@ -16,22 +16,6 @@ type MarkdownLabels = {
 	usage: string;
 };
 
-const usageExamples: Record<string, string> = {
-	Badge: '<Badge tone="success">Complete</Badge>',
-	Button: '<Button variant="solid">Continue</Button>',
-	Chip: '<Chip name="response_schema" icon={null} onClick={openSchema} />',
-	Dialog: "<Dialog>\n  <DialogTrigger>Open dialog</DialogTrigger>\n  <DialogContent>...</DialogContent>\n</Dialog>",
-	Field: '<Field name="projectName">\n  <FieldLabel>Project name</FieldLabel>\n  <Input />\n</Field>',
-	Input: '<Input aria-label="Project name" placeholder="Enter a name" />',
-	Menu: "<Menu>\n  <MenuTrigger>Actions</MenuTrigger>\n  <MenuContent>...</MenuContent>\n</Menu>",
-	SegmentedControl:
-		'<SegmentedControl aria-label="View" defaultValue="list">\n  <SegmentedControlIndicator />\n  <SegmentedControlItem value="list">List</SegmentedControlItem>\n  <SegmentedControlItem value="grid">Grid</SegmentedControlItem>\n</SegmentedControl>',
-	Squadmate: '<Squadmate agent="petra" state="planning" locale="en" size={64} />',
-	Switch: '<Switch aria-label="Product updates" defaultChecked>\n  <SwitchThumb />\n</Switch>',
-	Tooltip:
-		'<Tooltip>\n  <TooltipTrigger render={<Button iconOnly aria-label="Add item">+</Button>} />\n  <TooltipContent>Create a new item</TooltipContent>\n</Tooltip>',
-};
-
 function parseMarkdown(markdown: string): MarkdownBlock[] {
 	const lines = markdown.replaceAll("\r\n", "\n").split("\n");
 	const blocks: MarkdownBlock[] = [];
@@ -119,11 +103,9 @@ function InlineMarkdown({ text }: { text: string }) {
 
 export function MarkdownDocument({
 	markdown,
-	name,
 	labels,
 }: {
 	markdown: string;
-	name: string;
 	labels: MarkdownLabels;
 }) {
 	const blocks = parseMarkdown(markdown).filter((block) => !(block.type === "heading" && block.level === 1));
@@ -178,39 +160,22 @@ export function MarkdownDocument({
 			</section>
 			<section aria-label={labels.usage}>
 				<h2>{labels.usage}</h2>
-				{usage.length > 0 ? (
-					usage.map((block) => (
-						<div className="copyable-code" key={`${block.language}-${block.text}`}>
-							<div className="copyable-code__header">
-								<span>{block.language || labels.codeLabel}</span>
-								<CopyCodeButton
-									code={block.text}
-									copyLabel={labels.copy}
-									copiedLabel={labels.copied}
-									failedLabel={labels.copyFailed}
-								/>
-							</div>
-							<pre>
-								<code>{block.text}</code>
-							</pre>
-						</div>
-					))
-				) : (
-					<div className="copyable-code">
+				{usage.map((block) => (
+					<div className="copyable-code" key={`${block.language}-${block.text}`}>
 						<div className="copyable-code__header">
-							<span>{labels.codeLabel}</span>
+							<span>{block.language || labels.codeLabel}</span>
 							<CopyCodeButton
-								code={usageExamples[name] ?? `<${name} />`}
+								code={block.text}
 								copyLabel={labels.copy}
 								copiedLabel={labels.copied}
 								failedLabel={labels.copyFailed}
 							/>
 						</div>
 						<pre>
-							<code>{usageExamples[name] ?? `<${name} />`}</code>
+							<code>{block.text}</code>
 						</pre>
 					</div>
-				)}
+				))}
 			</section>
 		</div>
 	);
