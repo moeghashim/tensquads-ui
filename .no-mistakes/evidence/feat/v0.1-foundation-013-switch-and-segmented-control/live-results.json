@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "name": "Switch controlled value, required submission, readOnly, disabled and custom render keyboard",
+      "result": "pass"
+    },
+    {
+      "name": "SegmentedControl direction-aware arrows skip disabled, wrap, one tab stop, Space and Enter form submission",
+      "result": "pass"
+    },
+    {
+      "name": "Switch streamed initial value arrives and subsequent user interaction takes precedence",
+      "result": "pass"
+    },
+    {
+      "name": "SegmentedControl late initial value and partial identity retain focus and user choice",
+      "result": "pass"
+    },
+    {
+      "name": "Growing second, third and fourth option keeps selection and focus through a temporary duplicate in LTR and RTL",
+      "result": "pass"
+    },
+    {
+      "name": "Duplicate options and absent initial value are rejected by schema while streamed controls remain exclusive and usable",
+      "result": "pass"
+    },
+    {
+      "name": "Explicitly selecting the current first option remains selected when duplicate grows and late default arrives",
+      "result": "pass"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,19 @@
+{
+  "baseline": "npm run check deliberately not run: test-phase instruction prohibits lint/static analysis and full suite.",
+  "focusedUnitBeforeExit": 1,
+  "focusedUnitAfterExit": 0,
+  "initialPreviewE2eExit": 0,
+  "finalProductionBuildAndPreviewE2eExit": 0,
+  "finalPreviewChecks": [
+    "committed Linux screenshot comparison on macOS Chromium",
+    "axe accessibility",
+    "2px theme focus outlines",
+    "390px overflow",
+    "English and Arabic fixtures toggled/selected",
+    "16 fresh gallery screenshots captured"
+  ],
+  "browserHarnessFinalExit": 0,
+  "setupRetries": "Temporary config cwd and duplicate --port mistakes corrected; final production preview used isolated port 5183.",
+  "cleanup": "Temporary harness and fixture spec removed; browser closed; Vite stopped (exit 130); Playwright production server children stopped on completion.",
+  "repairFile": "packages/ui/src/react/SegmentedControl/SegmentedControl.openui.ts"
+}

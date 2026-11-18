@@ -1,0 +1,17 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {flushSync} from 'react-dom';
+import {TensquadsRenderer} from '../packages/ui/src/openui/index.ts';
+import {Switch,SwitchThumb} from '../packages/ui/src/react/Switch/Switch.tsx';
+import {SegmentedControl,SegmentedControlItem,SegmentedControlIndicator} from '../packages/ui/src/react/SegmentedControl/SegmentedControl.tsx';
+import {SegmentedControlOpenUI} from '../packages/ui/src/react/SegmentedControl/SegmentedControl.openui.ts';
+import '../packages/ui/src/fonts.css';
+import '../packages/ui/src/tokens/tokens.css';
+import '../packages/ui/src/styles/styles.css';
+const root=createRoot(document.getElementById('root')!);
+const h=React.createElement;
+window.renderStream=(stream,reset=false)=>{if(reset)flushSync(()=>root.render(null));flushSync(()=>root.render(h(TensquadsRenderer,{stream})));};
+window.schemaValid=(options,value)=>SegmentedControlOpenUI.props.safeParse({label:'View',options,value}).success;
+window.renderControls=(checked=false)=>flushSync(()=>root.render(<><h1>Task 013 behavior</h1><form id="form" onSubmit={e=>{e.preventDefault();window.submissions=(window.submissions||0)+1;}}><Switch aria-label="Consent" name="consent" required checked={checked} onCheckedChange={(value,details)=>window.change={value,reason:details.reason}}><SwitchThumb/></Switch><Switch aria-label="Read only" readOnly defaultChecked><SwitchThumb/></Switch><Switch aria-label="Unavailable" disabled defaultChecked><SwitchThumb/></Switch><Switch aria-label="Custom" render={<div/>}><SwitchThumb/></Switch><SegmentedControl aria-label="View" defaultValue="list"><SegmentedControlIndicator/><SegmentedControlItem value="list">List</SegmentedControlItem><SegmentedControlItem value="grid">Grid</SegmentedControlItem><SegmentedControlItem value="board" disabled>Board</SegmentedControlItem></SegmentedControl><button type="submit">Submit</button></form></>));
+document.body.style.cssText='padding:40px;background:var(--ts-canvas);color:var(--ts-text);font-family:var(--ts-font-sans)';
+window.renderControls();

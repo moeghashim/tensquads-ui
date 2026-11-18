@@ -1,0 +1,17 @@
+{
+  "before": {
+    "unitCommand": "npx vitest run packages/ui/src/react/Switch/Switch.test.tsx packages/ui/src/react/Switch/Switch.openui.test.tsx packages/ui/src/react/SegmentedControl/SegmentedControl.test.tsx packages/ui/src/react/SegmentedControl/SegmentedControl.openui.test.tsx",
+    "unitExit": 1,
+    "browserCommand": "node .local-live-test/drive.mjs",
+    "browserExit": 1,
+    "observed": "Click List in root = SegmentedControl(\"View\", [\"List\", \"List, then complete to root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\"). Focus stays on List but aria-checked becomes false.",
+    "screenshot": "failure-7.png"
+  },
+  "repair": "Record activation on enabled OpenUI items even when value does not change.",
+  "after": {
+    "unitExit": 0,
+    "browserExit": 0,
+    "observed": "List retains aria-checked=true and focus after completion.",
+    "screenshot": "stream-current-after.png"
+  }
+}
