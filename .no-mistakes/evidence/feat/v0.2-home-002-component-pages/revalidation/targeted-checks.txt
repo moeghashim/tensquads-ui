@@ -1,0 +1,6 @@
+Executed in this revalidation run:
+ mise exec -- npx playwright test e2e/component-docs.spec.ts e2e/button.spec.ts e2e/input-field.spec.ts --workers=2 --reporter=line
+Exit 0: 6 passed (14.0s). The Playwright webServer awaited the production preview build and served it through Wrangler.
+ mise exec -- npm run build
+Exit 0. Built the public library API consumed by the live scenario driver.
+Baseline supplied by outer executor: mise exec -- npm run verify exited 1. Not repeated in this targeted phase; lint, static analysis, broad verification and CI remain owned by the outer executor.

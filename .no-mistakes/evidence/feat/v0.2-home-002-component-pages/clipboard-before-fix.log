@@ -1,0 +1,186 @@
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Button en light mobile axe
++ actual - expected
+
++ [
++   {
++     description: 'Ensure that elements labelled through their content must have their visible text as part of their accessible name',
++     help: 'Elements must have their visible text as part of their accessible name',
++     helpUrl: 'https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright',
++     id: 'label-content-name-mismatch',
++     impact: 'serious',
++     nodes: [
++       {
++         all: [],
++         any: [
++           {
++             data: null,
++             id: 'label-content-name-mismatch',
++             impact: 'serious',
++             message: 'Text inside the element is not included in the accessible name',
++             relatedNodes: []
++           }
++         ],
++         failureSummary: 'Fix any of the following:\n' +
++           '  Text inside the element is not included in the accessible name',
++         html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
++         impact: 'serious',
++         none: [],
++         target: [
++           '.button-preview__row:nth-child(2) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
++         ]
++       },
++       {
++         all: [],
++         any: [
++           {
++             data: null,
++             id: 'label-content-name-mismatch',
++             impact: 'serious',
++             message: 'Text inside the element is not included in the accessible name',
++             relatedNodes: []
++           }
++         ],
++         failureSummary: 'Fix any of the following:\n' +
++           '  Text inside the element is not included in the accessible name',
++         html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
++         impact: 'serious',
++         none: [],
++         target: [
++           '.button-preview__row:nth-child(3) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
++         ]
++       },
++       {
++         all: [],
++         any: [
++           {
++             data: null,
++             id: 'label-content-name-mismatch',
++             impact: 'serious',
++             message: 'Text inside the element is not included in the accessible name',
++             relatedNodes: []
++           }
++         ],
++         failureSummary: 'Fix any of the following:\n' +
++           '  Text inside the element is not included in the accessible name',
++         html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
++         impact: 'serious',
++         none: [],
++         target: [
++           '.button-preview__row:nth-child(4) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
++         ]
++       },
++       {
++         all: [],
++         any: [
++           {
++             data: null,
++             id: 'label-content-name-mismatch',
++             impact: 'serious',
++             message: 'Text inside the element is not included in the accessible name',
++             relatedNodes: []
++           }
++         ],
++         failureSummary: 'Fix any of the following:\n' +
++           '  Text inside the element is not included in the accessible name',
++         html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
++         impact: 'serious',
++         none: [],
++         target: [
++           '.button-preview__row:nth-child(5) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
++         ]
++       }
++     ],
++     tags: [
++       'cat.semantics',
++       'wcag21a',
++       'wcag253',
++       'EN-301-549',
++       'EN-9.2.5.3',
++       'RGAAv4',
++       'RGAA-6.1.5'
++     ]
++   }
++ ]
+- []
+
+    at file://{run-worktree}/.local-docs-test.mjs:53:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    {
+      id: 'label-content-name-mismatch',
+      impact: 'serious',
+      tags: [
+        'cat.semantics',
+        'wcag21a',
+        'wcag253',
+        'EN-301-549',
+        'EN-9.2.5.3',
+        'RGAAv4',
+        'RGAA-6.1.5'
+      ],
+      description: 'Ensure that elements labelled through their content must have their visible text as part of their accessible name',
+      help: 'Elements must have their visible text as part of their accessible name',
+      helpUrl: 'https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright',
+      nodes: [
+        {
+          any: [ [Object] ],
+          all: [],
+          none: [],
+          impact: 'serious',
+          html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
+          target: [
+            '.button-preview__row:nth-child(2) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
+          ],
+          failureSummary: 'Fix any of the following:\n' +
+            '  Text inside the element is not included in the accessible name'
+        },
+        {
+          any: [ [Object] ],
+          all: [],
+          none: [],
+          impact: 'serious',
+          html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
+          target: [
+            '.button-preview__row:nth-child(3) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
+          ],
+          failureSummary: 'Fix any of the following:\n' +
+            '  Text inside the element is not included in the accessible name'
+        },
+        {
+          any: [ [Object] ],
+          all: [],
+          none: [],
+          impact: 'serious',
+          html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
+          target: [
+            '.button-preview__row:nth-child(4) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
+          ],
+          failureSummary: 'Fix any of the following:\n' +
+            '  Text inside the element is not included in the accessible name'
+        },
+        {
+          any: [ [Object] ],
+          all: [],
+          none: [],
+          impact: 'serious',
+          html: '<button aria-label="Copy" class="ts-button ts-button--soft ts-button--sm" data-slot="button" type="button">Copied</button>',
+          target: [
+            '.button-preview__row:nth-child(5) > .copyable-code.component-example-code[dir="ltr"] > .copyable-code__header > .copy-code-control > .ts-button--sm.ts-button--soft[aria-label="Copy"]'
+          ],
+          failureSummary: 'Fix any of the following:\n' +
+            '  Text inside the element is not included in the accessible name'
+        }
+      ]
+    }
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.13.1

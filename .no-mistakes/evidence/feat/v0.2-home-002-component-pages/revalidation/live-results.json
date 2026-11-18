@@ -1,0 +1,570 @@
+{
+  "oracle": "Task 002, PLAN D20, component Markdown and fixture documents as public content contracts; registry order from library public API",
+  "order": [
+    "Button",
+    "Badge",
+    "Dialog",
+    "Field",
+    "Input",
+    "Chip",
+    "Squadmate",
+    "Menu",
+    "Switch",
+    "SegmentedControl",
+    "Tooltip"
+  ],
+  "scenarios": [
+    {
+      "name": "Read every component document and active-locale fixture in English/Arabic, light/dark, desktop/mobile",
+      "result": "pass"
+    },
+    {
+      "name": "Copy a documented Input example with the real browser clipboard and handle denied permission visibly",
+      "result": "pass"
+    },
+    {
+      "name": "Retained Button, Squadmate and Chip examples each expose corresponding copyable code",
+      "result": "pass"
+    },
+    {
+      "name": "Follow previous/next registry links, preserve Arabic dark settings, and handle first/last and unknown pages",
+      "result": "pass"
+    },
+    {
+      "name": "Focus horizontal Tooltips and verify copied logical sides mirror physical placement in RTL",
+      "result": "pass"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Button",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Button(\"Continue\", \"solid\", \"md\", false, false)",
+      "renderedText": "Continue",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Badge",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Badge(\"Ready\", \"success\")",
+      "renderedText": "Ready",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Dialog",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Dialog(\"Review\", \"Review request\", \"A new member asked to join Northstar.\", \"Check their profile before adding them to the squad.\", \"Cancel\", \"Add member\", false)",
+      "renderedText": "Review",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Field",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Field(\"Project name\", \"projectName\", \"Enter a name\", \"Northstar\", \"Use a name your team recognizes.\", \"\", false, false)",
+      "renderedText": "Project name\n\nUse a name your team recognizes.",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Input",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Input(\"Search projects\", \"Find a project\", \"Northstar\", \"soft\", false, false)",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Chip",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Chip(\"response_schema\", \"\u25c7\", \"#response_schema\")",
+      "renderedText": "\u25c7\nresponse_schema",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Squadmate",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Squadmate(\"petra\", \"planning\", 64, \"en\")",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Menu",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Menu(\"Actions\", [{\"label\": \"Open project\", \"value\": \"open\"}, {\"label\": \"Rename\", \"value\": \"rename\", \"disabled\": true}, {\"label\": \"Delete\", \"value\": \"delete\", \"danger\": true}])",
+      "renderedText": "Actions",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Switch",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Switch(\"Product updates\", true, false)",
+      "renderedText": "Product updates",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\"], \"Grid\")",
+      "renderedText": "List\nGrid\nBoard",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "root = Tooltip(\"Add item\", \"Create a new item\", \"top\")",
+      "renderedText": "+",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Button",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Button(\"Continue\", \"solid\", \"md\", false, false)",
+      "renderedText": "Continue",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Badge",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Badge(\"Ready\", \"success\")",
+      "renderedText": "Ready",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Dialog",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Dialog(\"Review\", \"Review request\", \"A new member asked to join Northstar.\", \"Check their profile before adding them to the squad.\", \"Cancel\", \"Add member\", false)",
+      "renderedText": "Review",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Field",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Field(\"Project name\", \"projectName\", \"Enter a name\", \"Northstar\", \"Use a name your team recognizes.\", \"\", false, false)",
+      "renderedText": "Project name\n\nUse a name your team recognizes.",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Input",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Input(\"Search projects\", \"Find a project\", \"Northstar\", \"soft\", false, false)",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Chip",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Chip(\"response_schema\", \"\u25c7\", \"#response_schema\")",
+      "renderedText": "\u25c7\nresponse_schema",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Squadmate",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Squadmate(\"petra\", \"planning\", 64, \"en\")",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Menu",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Menu(\"Actions\", [{\"label\": \"Open project\", \"value\": \"open\"}, {\"label\": \"Rename\", \"value\": \"rename\", \"disabled\": true}, {\"label\": \"Delete\", \"value\": \"delete\", \"danger\": true}])",
+      "renderedText": "Actions",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Switch",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Switch(\"Product updates\", true, false)",
+      "renderedText": "Product updates",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\"], \"Grid\")",
+      "renderedText": "List\nGrid\nBoard",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "root = Tooltip(\"Add item\", \"Create a new item\", \"top\")",
+      "renderedText": "+",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Button",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Button(\"\u0645\u062a\u0627\u0628\u0639\u0629\", \"solid\", \"md\", false, false)",
+      "renderedText": "\u0645\u062a\u0627\u0628\u0639\u0629",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Badge",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Badge(\"\u062c\u0627\u0647\u0632\", \"success\")",
+      "renderedText": "\u062c\u0627\u0647\u0632",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Dialog",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Dialog(\"\u0645\u0631\u0627\u062c\u0639\u0629\", \"\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0637\u0644\u0628\", \"\u0637\u0644\u0628 \u0639\u0636\u0648 \u062c\u062f\u064a\u062f \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0646\u0648\u0631\u062b \u0633\u062a\u0627\u0631.\", \"\u0631\u0627\u062c\u0639 \u0645\u0644\u0641\u0647 \u0627\u0644\u0634\u062e\u0635\u064a \u0642\u0628\u0644 \u0625\u0636\u0627\u0641\u062a\u0647 \u0625\u0644\u0649 \u0627\u0644\u0641\u0631\u064a\u0642.\", \"\u0625\u0644\u063a\u0627\u0621\", \"\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0639\u0636\u0648\", false)",
+      "renderedText": "\u0645\u0631\u0627\u062c\u0639\u0629",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Field",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Field(\"\u0627\u0633\u0645 \u0627\u0644\u0645\u0634\u0631\u0648\u0639\", \"projectName\", \"\u0623\u062f\u062e\u0644 \u0627\u0633\u0645\u0627\u064b\", \"\u0628\u0646\u0651\u0627\u0621\", \"\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0633\u0645\u0627\u064b \u064a\u0639\u0631\u0641\u0647 \u0641\u0631\u064a\u0642\u0643.\", \"\", false, false)",
+      "renderedText": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0634\u0631\u0648\u0639\n\n\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0633\u0645\u0627\u064b \u064a\u0639\u0631\u0641\u0647 \u0641\u0631\u064a\u0642\u0643.",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Input",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Input(\"\u0627\u0628\u062d\u062b \u0639\u0646 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639\", \"\u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u0634\u0631\u0648\u0639\", \"\u0628\u0646\u0651\u0627\u0621\", \"soft\", false, false)",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Chip",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Chip(\"response_schema\", \"\u25c7\", \"#response_schema\")",
+      "renderedText": "\u25c7\nresponse_schema",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Squadmate",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Squadmate(\"petra\", \"planning\", 64, \"ar\")",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Menu",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Menu(\"\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a\", [{\"label\": \"\u0641\u062a\u062d \u0627\u0644\u0645\u0634\u0631\u0648\u0639\", \"value\": \"open\"}, {\"label\": \"\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062a\u0633\u0645\u064a\u0629\", \"value\": \"rename\", \"disabled\": true}, {\"label\": \"\u062d\u0630\u0641\", \"value\": \"delete\", \"danger\": true}])",
+      "renderedText": "\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Switch",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Switch(\"\u062a\u062d\u062f\u064a\u062b\u0627\u062a \u0627\u0644\u0645\u0646\u062a\u062c\", true, false)",
+      "renderedText": "\u062a\u062d\u062f\u064a\u062b\u0627\u062a \u0627\u0644\u0645\u0646\u062a\u062c",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = SegmentedControl(\"\u0627\u0644\u0639\u0631\u0636\", [\"\u0642\u0627\u0626\u0645\u0629\", \"\u0634\u0628\u0643\u0629\", \"\u0644\u0648\u062d\u0629\"], \"\u0634\u0628\u0643\u0629\")",
+      "renderedText": "\u0642\u0627\u0626\u0645\u0629\n\u0634\u0628\u0643\u0629\n\u0644\u0648\u062d\u0629",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "root = Tooltip(\"\u0625\u0636\u0627\u0641\u0629 \u0639\u0646\u0635\u0631\", \"\u0623\u0646\u0634\u0626 \u0639\u0646\u0635\u0631\u0627\u064b \u062c\u062f\u064a\u062f\u0627\u064b\", \"top\")",
+      "renderedText": "+",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Button",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Button(\"\u0645\u062a\u0627\u0628\u0639\u0629\", \"solid\", \"md\", false, false)",
+      "renderedText": "\u0645\u062a\u0627\u0628\u0639\u0629",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Badge",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Badge(\"\u062c\u0627\u0647\u0632\", \"success\")",
+      "renderedText": "\u062c\u0627\u0647\u0632",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Dialog",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Dialog(\"\u0645\u0631\u0627\u062c\u0639\u0629\", \"\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0637\u0644\u0628\", \"\u0637\u0644\u0628 \u0639\u0636\u0648 \u062c\u062f\u064a\u062f \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0646\u0648\u0631\u062b \u0633\u062a\u0627\u0631.\", \"\u0631\u0627\u062c\u0639 \u0645\u0644\u0641\u0647 \u0627\u0644\u0634\u062e\u0635\u064a \u0642\u0628\u0644 \u0625\u0636\u0627\u0641\u062a\u0647 \u0625\u0644\u0649 \u0627\u0644\u0641\u0631\u064a\u0642.\", \"\u0625\u0644\u063a\u0627\u0621\", \"\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0639\u0636\u0648\", false)",
+      "renderedText": "\u0645\u0631\u0627\u062c\u0639\u0629",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Field",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Field(\"\u0627\u0633\u0645 \u0627\u0644\u0645\u0634\u0631\u0648\u0639\", \"projectName\", \"\u0623\u062f\u062e\u0644 \u0627\u0633\u0645\u0627\u064b\", \"\u0628\u0646\u0651\u0627\u0621\", \"\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0633\u0645\u0627\u064b \u064a\u0639\u0631\u0641\u0647 \u0641\u0631\u064a\u0642\u0643.\", \"\", false, false)",
+      "renderedText": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0634\u0631\u0648\u0639\n\n\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0633\u0645\u0627\u064b \u064a\u0639\u0631\u0641\u0647 \u0641\u0631\u064a\u0642\u0643.",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Input",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Input(\"\u0627\u0628\u062d\u062b \u0639\u0646 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639\", \"\u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u0634\u0631\u0648\u0639\", \"\u0628\u0646\u0651\u0627\u0621\", \"soft\", false, false)",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Chip",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Chip(\"response_schema\", \"\u25c7\", \"#response_schema\")",
+      "renderedText": "\u25c7\nresponse_schema",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Squadmate",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Squadmate(\"petra\", \"planning\", 64, \"ar\")",
+      "renderedText": "",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Menu",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Menu(\"\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a\", [{\"label\": \"\u0641\u062a\u062d \u0627\u0644\u0645\u0634\u0631\u0648\u0639\", \"value\": \"open\"}, {\"label\": \"\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062a\u0633\u0645\u064a\u0629\", \"value\": \"rename\", \"disabled\": true}, {\"label\": \"\u062d\u0630\u0641\", \"value\": \"delete\", \"danger\": true}])",
+      "renderedText": "\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Switch",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Switch(\"\u062a\u062d\u062f\u064a\u062b\u0627\u062a \u0627\u0644\u0645\u0646\u062a\u062c\", true, false)",
+      "renderedText": "\u062a\u062d\u062f\u064a\u062b\u0627\u062a \u0627\u0644\u0645\u0646\u062a\u062c",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = SegmentedControl(\"\u0627\u0644\u0639\u0631\u0636\", [\"\u0642\u0627\u0626\u0645\u0629\", \"\u0634\u0628\u0643\u0629\", \"\u0644\u0648\u062d\u0629\"], \"\u0634\u0628\u0643\u0629\")",
+      "renderedText": "\u0642\u0627\u0626\u0645\u0629\n\u0634\u0628\u0643\u0629\n\u0644\u0648\u062d\u0629",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "root = Tooltip(\"\u0625\u0636\u0627\u0641\u0629 \u0639\u0646\u0635\u0631\", \"\u0623\u0646\u0634\u0626 \u0639\u0646\u0635\u0631\u0627\u064b \u062c\u062f\u064a\u062f\u0627\u064b\", \"top\")",
+      "renderedText": "+",
+      "axe": "no violations",
+      "widths": [
+        1440,
+        390
+      ]
+    }
+  ],
+  "errors": [],
+  "environment": "Fresh production preview build served locally by Wrangler on localhost:5173; disposable Chromium context; no tenant or model access."
+}

@@ -1,0 +1,41 @@
+Navigate /components/Badge?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Badge?locale=ar&dir=rtl&theme=dark
+Navigate /components/Dialog?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Dialog?locale=ar&dir=rtl&theme=dark
+Navigate /components/Field?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Field?locale=ar&dir=rtl&theme=dark
+Navigate /components/Input?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Input?locale=ar&dir=rtl&theme=dark
+Navigate /components/Chip?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Chip?locale=ar&dir=rtl&theme=dark
+Navigate /components/Squadmate?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Squadmate?locale=ar&dir=rtl&theme=dark
+Navigate /components/Menu?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Menu?locale=ar&dir=rtl&theme=dark
+Navigate /components/Switch?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Switch?locale=ar&dir=rtl&theme=dark
+Navigate /components/SegmentedControl?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/SegmentedControl?locale=ar&dir=rtl&theme=dark
+Navigate /components/Tooltip?locale=ar&dir=rtl&theme=dark
+URL after click http://localhost:5174/components/Tooltip?locale=ar&dir=rtl&theme=dark
+[
+  {
+    "navigation": "all next links, previous, and gallery preserve Arabic/RTL/dark; final next absent"
+  },
+  {
+    "tooltip": "en",
+    "logicalEnd": "right",
+    "copiedSide": "end"
+  },
+  {
+    "tooltip": "ar",
+    "logicalEnd": "left",
+    "copiedSide": "end"
+  },
+  {
+    "clipboardDenied": "visible localized failure; code remains available for manual copy"
+  },
+  {
+    "unknownComponent": "localized unavailable message"
+  }
+]

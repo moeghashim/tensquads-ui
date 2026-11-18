@@ -1,0 +1,58 @@
+Verified Button en light
+Verified Badge en light
+Verified Dialog en light
+Verified Field en light
+Verified Input en light
+Verified Chip en light
+Verified Squadmate en light
+Verified Menu en light
+Verified Switch en light
+Verified SegmentedControl en light
+Verified Tooltip en light
+Verified Button en dark
+Verified Badge en dark
+Verified Dialog en dark
+Verified Field en dark
+Verified Input en dark
+Verified Chip en dark
+Verified Squadmate en dark
+Verified Menu en dark
+Verified Switch en dark
+Verified SegmentedControl en dark
+Verified Tooltip en dark
+Verified Button ar light
+Verified Badge ar light
+Verified Dialog ar light
+Verified Field ar light
+Verified Input ar light
+Verified Chip ar light
+Verified Squadmate ar light
+Verified Menu ar light
+Verified Switch ar light
+Verified SegmentedControl ar light
+Verified Tooltip ar light
+Verified Button ar dark
+Verified Badge ar dark
+Verified Dialog ar dark
+Verified Field ar dark
+Verified Input ar dark
+Verified Chip ar dark
+Verified Squadmate ar dark
+Verified Menu ar dark
+Verified Switch ar dark
+Verified SegmentedControl ar dark
+Verified Tooltip ar dark
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+page.waitForURL: Timeout 30000ms exceeded.
+=========================== logs ===========================
+waiting for navigation to "**/components/Switch?locale=ar&dir=rtl&theme=dark" until "load"
+============================================================
+    at {run-worktree}/.local-docs-test.mjs:62:14 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v26.13.1

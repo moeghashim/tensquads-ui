@@ -1,0 +1,24 @@
+[WebServer] (node:64609) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 13 tests using 2 workers
+
+(node:64693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64694) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/button.spec.ts:57:1 › danger button text stays white in light, explicit dark, and system dark themes (238ms)
+  ✓   2 e2e/button.spec.ts:18:1 › Button previews variants, sizes, and interaction states (3.3s)
+  ✓   4 e2e/component-docs.spec.ts:49:1 › component code examples copy and show confirmation (235ms)
+  ✓   5 e2e/component-docs.spec.ts:66:1 › copied confirmation is also the accessible button name (287ms)
+  ✓   3 e2e/component-docs.spec.ts:7:1 › component docs load in English and Arabic with localized fixtures (7.7s)
+  ✓   6 e2e/dialog.spec.ts:13:2 › Dialog screenshots cover closed and open states in en light (13.3s)
+  ✓   7 e2e/dialog.spec.ts:13:2 › Dialog screenshots cover closed and open states in en dark (13.5s)
+  ✓   8 e2e/dialog.spec.ts:13:2 › Dialog screenshots cover closed and open states in ar light (14.4s)
+  ✓   9 e2e/dialog.spec.ts:13:2 › Dialog screenshots cover closed and open states in ar dark (11.7s)
+  ✓  11 e2e/dialog.spec.ts:117:1 › Dialog traps Tab, opens from the keyboard, and returns focus after Escape (127ms)
+  ✓  12 e2e/input-field.spec.ts:19:2 › Input previews documented states in both directions and themes (3.4s)
+  ✓  10 e2e/dialog.spec.ts:89:1 › every Dialog example stays within the viewport (8.1s)
+  ✓  13 e2e/input-field.spec.ts:19:2 › Field previews documented states in both directions and themes (3.5s)
+
+  13 passed (42.7s)

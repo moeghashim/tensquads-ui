@@ -1,0 +1,445 @@
+{
+  "log": [
+    {
+      "name": "Button",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Badge",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Dialog",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Field",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Input",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Chip",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Squadmate",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Menu",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Switch",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Tooltip",
+      "locale": "en",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Button",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Badge",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Dialog",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Field",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Input",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Chip",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Squadmate",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Menu",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Switch",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Tooltip",
+      "locale": "en",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Button",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Badge",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Dialog",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Field",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Input",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Chip",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Squadmate",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Menu",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Switch",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Tooltip",
+      "locale": "ar",
+      "theme": "light",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "all live-example blocks copied to real browser clipboard",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Button",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Badge",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Dialog",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Field",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Input",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Chip",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Squadmate",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Menu",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Switch",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "SegmentedControl",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    },
+    {
+      "name": "Tooltip",
+      "locale": "ar",
+      "theme": "dark",
+      "fixtureSource": "exact active-locale fixture",
+      "fixtureRendered": true,
+      "copy": "covered in light",
+      "axe": "pass",
+      "overflow390": "pass"
+    }
+  ],
+  "errors": []
+}
