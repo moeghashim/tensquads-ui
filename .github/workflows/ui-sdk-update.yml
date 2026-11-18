@@ -67,6 +67,12 @@ jobs:
 						.agents/skills/ui-sdk/**
 					signoff: true
 					labels: ${{ steps.verify.outcome == 'failure' && 'ui-sdk-break' || '' }}
+			- name: Remove the failure label after verification passes
+				if: steps.diff.outputs.changed == 'true' && steps.verify.outcome == 'success' && steps.pr.outputs.pull-request-number != ''
+				env:
+					GH_TOKEN: ${{ github.token }}
+					PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
+				run: gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label ui-sdk-break
 			- name: Publish ui-sdk-verify status
 				if: steps.diff.outputs.changed == 'true' && steps.pr.outputs.pull-request-head-sha != ''
 				env:
