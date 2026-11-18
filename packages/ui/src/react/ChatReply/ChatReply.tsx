@@ -214,11 +214,7 @@ function renderBlocks(source: string, renderOpenUI: (stream: string, key: string
 		const key = `paragraph-${index}`;
 		const paragraph = [line.trim()];
 		index += 1;
-		while (
-			index < lines.length &&
-			isParagraphLine(lineAt(index)) &&
-			!pendingFence(index)
-		) {
+		while (index < lines.length && isParagraphLine(lineAt(index)) && !pendingFence(index)) {
 			paragraph.push(lineAt(index++).trim());
 		}
 		nodes.push({ kind: "markdown", value: <p key={key}>{inline(paragraph.join(" "))}</p> });

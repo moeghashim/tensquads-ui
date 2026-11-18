@@ -392,12 +392,12 @@ describe("ChatReply", () => {
 	it.each(["", "- ", "3. ", "- Parent\n  - ", "- Intro\n\n  "])(
 		"keeps a focused link mounted when a %s paragraph grows",
 		(prefix) => {
-			const reply = prefix + "[runbook](https://example.com)";
+			const reply = `${prefix}[runbook](https://example.com)`;
 			const { rerender } = render(<ChatReply reply={reply} />);
 			const link = screen.getByRole("link", { name: "runbook" });
 			link.focus();
 			expect(link).toHaveFocus();
-			rerender(<ChatReply reply={reply + "\nMore"} />);
+			rerender(<ChatReply reply={`${reply}\nMore`} />);
 			expect(screen.getByRole("link", { name: "runbook" })).toBe(link);
 			expect(link).toHaveFocus();
 			expect(link.parentElement).toHaveTextContent("runbook More");
