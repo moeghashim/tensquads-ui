@@ -21,7 +21,7 @@ At the start of every session, read:
 1. `AGENTS.md`.
 2. `PLAN.md`, including its full Decisions log and any relevant sections.
 3. The assigned task file.
-4. `README.md` and the relevant installed skill documentation.
+4. `README.md`, `.agents/skills/ui-sdk/SKILL.md`, and `.agents/skills/tensquads-ui/SKILL.md` before component work.
 5. The files named by the task.
 
 Before changing code, send a receipt listing the files read and the output of `npm run check`. State any conflicts or questions. If a decision is required, stop and wait for the owner.
@@ -29,6 +29,7 @@ Before changing code, send a receipt listing the files read and the output of `n
 ## Workflow
 
 - Work on one task, one branch, and one pull request. Name the branch `feat/<milestone>-NNN-slug`, using hyphens. Git cannot create a task branch nested under a milestone branch with the same prefix.
+- Start every run with `no-mistakes axi run --base-branch <milestone branch> --intent "<one line>"` and drive it to an `outcome:` before pushing.
 - Set the PR base to the milestone branch when opening it. Do not open it against `main`; that makes the DCO check include the full milestone history.
 - Use Conventional Commit messages and sign off every commit with the required DCO identity. Do not amend or rewrite commits during a run. A rewrite can strand the branch in the gate.
 - Push only through `no-mistakes`. If a commit is unsigned, stop and report its SHA. If a branch is stranded, stop and report it. Never force-push.
@@ -88,7 +89,7 @@ Write in Simplified Technical English: short, direct sentences and one idea per 
 
 ```markdown
 ## Task
-007 — <task title>
+<task id> — <task title>
 
 ## Linked
 <issue or task link>

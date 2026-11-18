@@ -1,52 +1,24 @@
 # tensquads-ui
 
-Use Node 26.13.1 and npm 11.20.0. Install [mise](https://mise.jdx.dev/), then run `mise trust` and `mise install` from the repository root. Run npm commands with `mise exec -- npm …` to use the pinned versions without changing the machine-wide Node or npm.
+`@tensquads/ui` is the shared React UI library for tensquads and بنّاء. It provides Agent-UI styled React components, Squadmate artwork, shared schemas, and an OpenUI Lang bridge for generated interfaces. Components support English and Arabic, including right-to-left layout.
 
-tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arabic), bringing React components and OpenUI definitions together in `@tensquads/ui`. See [PLAN.md](PLAN.md) for the project plan and decisions.
+## Requirements
 
-## Commands
+Use Node 26 and npm 11. The repository pins Node 26.13.1 and npm 11.20.0 in `mise.toml`. Install [mise](https://mise.jdx.dev/), then run `mise trust` and `mise install` in the repository root. Run npm commands with `mise exec -- npm …`.
 
-- `npm run check` — Run Biome, type checking, design integrity, generated-token and component-index staleness, CSS color-token and UI SDK import checks, unit tests, and the package check.
-- `npm run verify` — Run `check`, `preview:install`, `check:preview`, and `e2e`, in that order.
-- `npm run build` — Build the package into `packages/ui/dist`.
-- `npm run preview:install` — Install the preview app's dependencies from its own lockfile.
-- `npm run dev` — Start the preview development server.
-- `npm run check:preview` — Run preview type checking and unit tests.
-- `npm run build:preview` — Build the preview app for Cloudflare Workers.
-- `npm run deploy:preview` — Build and deploy the preview Worker using Wrangler.
-- `npm run tokens` — Regenerate CSS custom properties and typed TypeScript tokens from the synced `design/tokens.json`.
-- `npm run tokens:check` — Fail for missing or stale generated token files without writing them.
-- `npm run docs` — Regenerate [llms.txt](llms.txt) from component Markdown under `packages/ui/src/react`. Do not edit the generated index by hand.
-- `npm run docs:check` — Fail for a missing or stale component index or an OpenUI definition without its component Markdown file, without writing files.
-- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, verify exported entry points, and check that URLs in exported CSS resolve to files inside the installed package.
-- `npm run check:ui-sdk-usage` — Check UI SDK imports in `packages/ui/src` against the installed SDK documentation and require matching core and React version pins. If a package's documentation cannot be read, use its package exports. Reject internal and unknown entries.
-- `npm run ui-sdk:update` — Check upstream releases and update both UI SDK pins, the root lockfile, and the upstream skill. See [UI SDK updates](#ui-sdk-updates) for options and the PR workflow.
-- `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GIT_INSTALL_SHA` (commit to install); CI supplies the checked-out commit, including the selected branch's commit for manual dispatch.
-- `npm run check:css-tokens` — Reject raw color literals in CSS under `packages/ui/src/styles`, including variable fallbacks. Color token variables, `transparent`, `currentColor`, and CSS-wide keywords are allowed.
-- `npm run design:sync -- <commit>` — Sync design references and regenerate the SHA-256 manifest; pass a full 40-character commit SHA after the npm run separator (`--`), or omit it to use the script's default commit. Design files are never edited by hand.
-- `npm run design:check` — Check design files against the manifest, failing for changed, extra, or missing files and unsupported filesystem entries, including symlinks.
+## Install
 
-## UI SDK updates
+Install from a pinned Git commit so the application gets a reproducible build:
 
-Run `npm run ui-sdk:update -- --dry-run` to read the current npm tags and GitHub release notes without changing files. The updater uses the `beta` tag until `latest` is a stable release of at least `1.0.0`. Both packages must select the same version. If the selected version is not newer than the current React pin, the updater makes no changes.
+```sh
+npm install github:moeghashim/tensquads-ui#<commit-sha>
+```
 
-Run the command without `--dry-run` to apply the update. It also replaces `.agents/skills/ui-sdk` with the skill from the matching upstream React release tag and writes release notes and public export changes to `ui-sdk-update-body.md`. Run `npm ci` to install the updated dependencies before checking them. For an offline preview with recorded data, run `npm run ui-sdk:update -- --fixtures scripts/fixtures/ui-sdk-update-beta8.json --dry-run`.
+The root package builds `packages/ui/dist` during installation. React and React DOM 19 are peer dependencies.
 
-The [UI SDK update workflow](.github/workflows/ui-sdk-update.yml) runs daily and supports manual dispatch. For this foundation branch, set the manual `base` input to `feat/v0.1-foundation`; the default is `main`. The workflow checks out the selected PR base branch before updating dependencies. When an update changes files, the workflow installs the updated dependencies and Chromium, runs `npm run verify`, and opens or updates one PR on `bot/ui-sdk-update`. It publishes `ui-sdk-verify` on the PR head. Failed verification adds `ui-sdk-break` and includes the log tail in the PR body; successful verification removes that label. Update commits include a DCO sign-off. The workflow never merges the PR.
+## Styles, locale, and theme
 
-## Preview app
-
-Run `npm run preview:install`, then `npm run dev` from the repository root. The TanStack Start app in `apps/preview` is a separate npm project, outside the root `packages/*` workspaces. Root installation and `prepare` build only the UI package; `npm run check` covers the package independently of preview dependencies. Use `npm run check:preview` to check the app separately.
-
-The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. The gallery discovers components from their fixture files and links to case-sensitive `/components/<Name>` routes. Each component route renders the selected locale's OpenUI fixture. The Button route also shows all variants and sizes; see the [Button contract](packages/ui/src/react/Button/Button.md) for its API.
-
-`/components/Squadmate` shows every character and state in the selected locale and theme. See the [Squadmate contract](packages/ui/src/react/Squadmate/Squadmate.md) for its component and drawing APIs.
-
-Vite aliases and TypeScript paths resolve `@tensquads/ui/*` directly to `packages/ui/src`; the app has no npm dependency on the UI package and needs no package build before previewing source changes.
-
-## Consumer setup
-
-Install `@tensquads/ui` from a pinned Git commit, then add these imports to the consumer's global stylesheet in this order:
+In the consumer's global stylesheet, declare the cascade order and import the library styles in this order:
 
 ```css
 @layer ui-sdk, tensquads;
@@ -55,52 +27,110 @@ Install `@tensquads/ui` from a pinned Git commit, then add these imports to the 
 @import "@tensquads/ui/styles.css";
 ```
 
-See the [font inventory](packages/ui/src/fonts/README.md) for bundled families, pinned releases, weights, and licenses.
+Set the document language and direction on `<html>`. Choose `data-theme="light"` or `data-theme="dark"`, or omit it to follow the system theme.
 
-## OpenUI
+```html
+<html lang="ar" dir="rtl" data-theme="dark">
+```
 
-Import `TensquadsRenderer` from `@tensquads/ui/openui` to render an OpenUI text stream:
+The font stylesheet bundles Inter, IBM Plex Sans Arabic, and JetBrains Mono. All three use the SIL Open Font License 1.1. See [font details](packages/ui/src/fonts/README.md).
+
+## React components
+
+Import components from `@tensquads/ui/react`. UI SDK supplies interactive behavior; the library adds Agent-UI styling.
+
+```tsx
+import { Button, Field, FieldLabel, Input } from "@tensquads/ui/react";
+
+export function ProfileForm() {
+  return (
+    <form>
+      <Field name="displayName">
+        <FieldLabel>Display name</FieldLabel>
+        <Input placeholder="Your name" />
+      </Field>
+      <Button type="submit">Save profile</Button>
+    </form>
+  );
+}
+```
+
+Read [llms.txt](llms.txt) for the component contracts. The [tensquads-ui agent skill](.agents/skills/tensquads-ui/SKILL.md) explains component selection, composition, OpenUI, and backend use. It layers on the installed [UI SDK skill](.agents/skills/ui-sdk/SKILL.md).
+
+## Squadmate
+
+Use `Squadmate` to render a localized agent image. Its `agent` prop uses a character slug and its `state` uses an `AgentState` from `@tensquads/ui/schemas`.
+
+```tsx
+import { Squadmate } from "@tensquads/ui/squadmates";
+
+export function AgentStatus() {
+  return <Squadmate agent="petra" state="planning" locale="ar" size={64} />;
+}
+```
+
+The same `/squadmates` entry exports the roster and SVG drawing helpers. Shared schemas also map between role IDs such as `master` and character slugs such as `petra`.
+
+## OpenUI client
+
+Render an OpenUI Lang text stream with `TensquadsRenderer` from `@tensquads/ui/openui`:
 
 ```tsx
 import { TensquadsRenderer } from "@tensquads/ui/openui";
 
-<TensquadsRenderer
-  stream={'root = Button("Continue")'}
-  locale="en"
-  onError={(errors) => console.log(errors)}
-/>;
+export function GeneratedPanel({ stream }: { stream: string | null }) {
+  return <TensquadsRenderer stream={stream} locale="en" onError={(errors) => console.error(errors)} />;
+}
 ```
 
-`stream` accepts a string or `null`; `locale` defaults to `en`. The locale selects a lazily created, cached library, not a translation of the stream. Supply localized text in the stream itself. `onError` receives the upstream renderer's errors, including errors in streams that still render content.
+The entry also exports `defineComponent`, `getRegisteredComponents`, and `createTensquadsLibrary(locale)`. Components register typed, serializable props. The renderer creates its library lazily and reports parse and render errors through `onError`.
 
-The same entry exports `defineComponent` for typed OpenUI definitions, `getRegisteredComponents` for the built-in definitions, and `createTensquadsLibrary(locale)` for direct library access. See the [component index](llms.txt) for component contracts. Shared Zod schemas and their inferred types are exported from `@tensquads/ui/schemas`; [the schema source](packages/ui/src/schemas/index.ts) defines their accepted values.
+## OpenUI server
+
+Use the server entry in a Worker route. It provides request validation and caps, locale-aware prompt construction, provider adapters, and streaming responses:
+
+```ts
+import {
+  buildSystemPrompt,
+  createAnthropicProvider,
+  createTensquadsLibrary,
+  OpenUIServerError,
+  readOpenUIRequest,
+  streamOpenUIResponse,
+} from "@tensquads/ui/openui/server";
+
+export async function handleOpenUI(request: Request, apiKey: string): Promise<Response> {
+  try {
+    const { turns } = await readOpenUIRequest(request);
+    if (turns.length === 0 || turns.at(-1)?.role !== "user") {
+      return new Response("A user turn is required.", { status: 400 });
+    }
+    const locale = "en" as const;
+    const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale });
+    const provider = createAnthropicProvider(apiKey);
+    return await streamOpenUIResponse({ provider, system, turns });
+  } catch (error) {
+    if (error instanceof OpenUIServerError) {
+      return Response.json({ error: error.code }, { status: error.status });
+    }
+    throw error;
+  }
+}
+```
+
+`readOpenUIRequest` limits the body to 16 KiB and the conversation to 12 valid user or assistant turns. `streamOpenUIResponse` returns plain text and supports request cancellation. `createAnthropicProvider` defaults to `claude-haiku-5-5`; pass the API key from the server environment. The server entry also exports the `OpenUIStreamProvider` and request types. For Arabic, pass `locale: "ar"` to the library and prompt builder; the prompt includes Arabic rules and examples. Provide Arabic user content in the turns.
 
 ## Browser verification
 
-After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Stop any server using port 5173 first, including `npm run dev`. Playwright requires the port to be free and starts its own server. It builds the preview with Vite and serves the generated Cloudflare Worker locally through Wrangler at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings.
-
-End-to-end tests check behavior, mobile overflow, axe accessibility, and the focus ring in English/LTR and Arabic/RTL, in light and dark themes. They also capture full-page screenshots at 1440 and 390 px as review artifacts in CI; screenshots are not pixel-tested baselines. The preview-home test asserts the component names in text. Screenshot capture waits for product fonts and for UI SDK starting or ending styles to finish. CI uploads available screenshots from `test-results/screenshots/` for 14 days and the Playwright HTML report on failure. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts).
-
 Switch and SegmentedControl screenshots capture their default preview states before keyboard interaction. See [e2e/switch-segmented-control.spec.ts](e2e/switch-segmented-control.spec.ts) for the state assertions and capture order.
 
-Dialog artifacts use `dialog-<locale>-<theme>-<state>-<width>.png`, with separate `closed`, `simple-open`, `form-open`, and `destructive-open` states. Each open capture uses the trigger for that specific preview example.
+## Commands
 
-The [CI workflow](.github/workflows/ci.yml) runs when pull requests to any branch open, update, or reopen, and on pushes to `main` or `feat/v0.1-foundation`. Manual dispatch requires a `branch` input. Superseded runs are cancelled for the same pull request or ref; manual runs are grouped by the selected branch. The [no-mistakes configuration](.no-mistakes.yaml) runs full verification with mise before pushing.
+- `mise exec -- npm ci` installs root dependencies and builds the package.
+- `mise exec -- npm run check` runs lint, types, design and generated-file checks, unit tests, and package checks.
+- `mise exec -- npm run preview:install` installs the separate preview app dependencies.
+- `mise exec -- npm run verify` runs checks, preview checks, and browser tests.
+- `mise exec -- npm run docs` regenerates `llms.txt` from component docs.
+- `mise exec -- npm run dev` starts the preview gallery.
 
-## Design tokens
-
-After syncing design references, run `npm run tokens` and commit the generated `packages/ui/src/tokens/tokens.css` and `packages/ui/src/tokens/tokens.ts`. Do not edit these outputs by hand. Run `npm run build` to include them in the package; the package build copies and compiles the committed outputs rather than regenerating them.
-
-Follow [Consumer setup](#consumer-setup) for stylesheet imports and font licensing references.
-
-Import `@tensquads/ui/tokens.css` to use the `--ts-` custom properties in the `tensquads` cascade layer. Token names retain their spelling with dots replaced by hyphens, so `text-md.font-size` becomes `--ts-text-md-font-size`. Set `data-theme="light"` or `data-theme="dark"` on `<html>` to select a theme. Without an explicit theme, the root uses light values and follows `prefers-color-scheme: dark` when requested by the OS.
-
-The `tokens` object is the only runtime export from `@tensquads/ui/tokens`. It maps token names to resolved `light` and `dark` values, including inherited typography families. `TokenName`, `TokenTheme`, and `TokenValue<Name>` are type-only exports:
-
-```ts
-import { tokens, type TokenName, type TokenTheme } from "@tensquads/ui/tokens";
-
-const name: TokenName = "canvas";
-const theme: TokenTheme = "dark";
-const background = tokens[name][theme];
-```
+See [PLAN.md](PLAN.md) for architecture and decisions.
