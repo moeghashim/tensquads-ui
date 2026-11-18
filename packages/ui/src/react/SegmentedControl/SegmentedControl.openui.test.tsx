@@ -106,6 +106,7 @@ describe("streamed SegmentedControl values", () => {
 			<TensquadsRenderer stream={'root = SegmentedControl("View", ["List", "List'} />,
 		);
 		const list = getAllByRole("radio", { name: "List" })[0];
+		if (!list) throw new Error("Expected a List radio");
 		act(() => list.focus());
 		fireEvent.click(list);
 		expect(getAllByRole("radio").filter((item) => !item.hasAttribute("data-disabled"))).toHaveLength(1);
@@ -130,7 +131,7 @@ describe("streamed SegmentedControl values", () => {
 			const growing = getByRole("radio", { name: "Li" });
 			act(() => growing.focus());
 			fireEvent.click(growing);
-			for (const stream of [prefix + "st", prefix + 'st view"], "List view")']) {
+			for (const stream of [`${prefix}st`, `${prefix}st view"], "List view")`]) {
 				rerender(
 					<div dir={dir}>
 						<TensquadsRenderer stream={stream} />
