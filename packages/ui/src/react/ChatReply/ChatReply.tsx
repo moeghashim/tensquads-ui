@@ -108,14 +108,15 @@ function removeIndent(line: string, amount: number): string {
 }
 
 function listItem(line: string) {
-	const match = line.match(/^[ \t]*([-*+]|\d+\.)[ \t]+(.*)$/);
+	const match = line.match(/^[ \t]*([-*+]|\d+\.)([ \t]+)(.*)$/);
 	if (!match) return undefined;
 	const marker = match[1] ?? "";
 	return {
 		indent: lineIndent(line),
+		contentIndent: lineIndent(line) + marker.length + lineIndent(match[2] ?? ""),
 		ordered: /^\d/.test(marker),
 		start: Number.parseInt(marker, 10),
-		text: match[2] ?? "",
+		text: match[3] ?? "",
 	};
 }
 
@@ -126,17 +127,19 @@ function readListBody(lines: string[], start: number, item: NonNullable<ReturnTy
 	while (end < lines.length) {
 		let next = end;
 		while (next < lines.length && !lineAt(next).trim()) next += 1;
-		if (next === lines.length) break;
+		if (next === lines.length) {
+			while (end < lines.length) continuation.push(lineAt(end++));
+			break;
+		}
 		if (lineIndent(lineAt(next)) <= item.indent) {
 			if (listItem(lineAt(next))) end = next;
 			break;
 		}
 		while (end <= next) continuation.push(lineAt(end++));
 	}
-	const indentation = continuation.reduce(
-		(minimum, line) => line.trim() ? Math.min(minimum, lineIndent(line)) : minimum,
-		Number.POSITIVE_INFINITY,
-	);
+	const firstContinuation = continuation.find((line) => line.trim());
+	const indentation =
+		openingFence(item.text) || listItem(item.text) ? item.contentIndent : lineIndent(firstContinuation ?? "");
 	return { lines: [item.text, ...continuation.map((line) => removeIndent(line, indentation))], end };
 }
 

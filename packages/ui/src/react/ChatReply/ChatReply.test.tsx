@@ -178,7 +178,7 @@ describe("ChatReply", () => {
 		["unordered", "- ", " "],
 		["ordered", "3. ", " "],
 		["nested", "- Parent\n - ", "  "],
-		["deep ordered", "- Parent\n    3. ", "        "],
+		["deep ordered", "- Parent\n    3. ", "       "],
 		["continuation", "- Example:\n\n ", " "],
 		["deep continuation", "- Parent\n    3. Example:\n\n        ", "        "],
 	] as const)("isolates literal OpenUI in %s list fences and renders later UI", (_name, prefix, indent) => {
@@ -203,6 +203,32 @@ describe("ChatReply", () => {
 		expect(container.querySelector("li pre code")?.textContent).toBe("const x = 1;");
 		expect(screen.getByText("Ready", { exact: true })).toBeInTheDocument();
 		expect(container.querySelectorAll(".ts-chat-reply__openui")).toHaveLength(1);
+	});
+
+	it.each([
+		["unordered", "- ```python\n", "  "],
+		["ordered", "3. ```python\n", "   "],
+		["nested", "- Parent\n  - ```python\n", "    "],
+		["nested ordered", "- Parent\n  3. ```python\n", "     "],
+		["same-line nested", "- - ```python\n", "    "],
+		["continuation", "- Example:\n\n  ```python\n", "  "],
+		["nested continuation", "- Parent\n  - Example:\n\n    ```python\n", "    "],
+	] as const)("preserves code whitespace throughout %s list streaming", (_name, opening, indent) => {
+		const payload = "    print(1)";
+		const { container, rerender } = render(<ChatReply reply={opening} />);
+		for (let length = 0; length <= payload.length; length += 1) {
+			rerender(<ChatReply reply={opening + indent + payload.slice(0, length)} />);
+			const code = container.querySelector("li pre code");
+			expect(code?.textContent).toBe(payload.slice(0, length));
+		}
+		const closing = "\n" + indent + "```";
+		for (let length = 1; length <= closing.length; length += 1) {
+			rerender(<ChatReply reply={opening + indent + payload + closing.slice(0, length)} />);
+			const pre = container.querySelector("li pre");
+			expect(pre).toHaveAttribute("dir", "ltr");
+			expect(pre?.querySelector("code")?.textContent?.split("\n")[0]).toBe(payload);
+		}
+		expect(container.querySelector("li pre code")?.textContent).toBe(payload);
 	});
 
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
