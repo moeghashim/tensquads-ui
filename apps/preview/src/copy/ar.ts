@@ -80,6 +80,25 @@ const ar = {
 		copied: "تم النسخ",
 		copyFailed: "تعذّر النسخ. حدّد الشيفرة وانسخها يدوياً.",
 	},
+	componentPage: {
+		preview: "أمثلة تفاعلية",
+		fixture: "عينة OpenUI",
+		fixtureSource: "عرض مصدر العينة",
+		apiReference: "مرجع الواجهة البرمجية",
+		copy: "نسخ",
+		copied: "تم النسخ",
+		copyFailed: "تعذّر نسخ هذا الرمز.",
+		code: "الرمز",
+		previous: "السابق",
+		next: "التالي",
+		backToComponents: "كل المكوّنات",
+		noFixture: "لا توجد عينة OpenUI مسجّلة لهذا المكوّن.",
+		description: "الوصف",
+		props: "الخصائص",
+		usage: "الاستخدام",
+		pageNavigation: "صفحات المكوّنات",
+		unavailable: "توثيق المكوّن غير متاح.",
+	},
 } as const;
 
 export default ar;
