@@ -1,26 +1,22 @@
 {
   "config": {
     "argv": [
-      "/opt/homebrew/Cellar/node/26.13.1_2/bin/node",
+      "~/.local/share/mise/installs/node/26.13.1/bin/node",
       "{run-worktree}/node_modules/.bin/playwright",
       "test",
       "--config",
-      ".phase-test.config.ts",
-      "e2e/preview.spec.ts",
-      "e2e/openui/fixtures.spec.ts",
-      "--grep-invert",
-      "home works in both directions and themes"
+      ".local-test.config.ts"
     ],
-    "configFile": "{run-worktree}/.phase-test.config.ts",
+    "configFile": "{run-worktree}/.local-test.config.ts",
     "rootDir": "{run-worktree}/e2e",
     "failOnFlakyTests": false,
     "forbidOnly": false,
-    "fullyParallel": true,
+    "fullyParallel": false,
     "globalSetup": null,
     "globalTeardown": null,
     "globalTimeout": 0,
     "grep": {},
-    "grepInvert": null,
+    "grepInvert": {},
     "maxFailures": 0,
     "metadata": {
       "actualWorkers": 2
@@ -28,7 +24,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "~/.no-mistakes/evidence/01M7QYA6HGZQ2RZD9BZEHMTBF9/results",
+        "outputDir": "~/.no-mistakes/evidence/01M7R0RKKEGXGS3CV7YBM98KCG/browser-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -39,7 +35,8 @@
         "testDir": "{run-worktree}/e2e",
         "testIgnore": [],
         "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+          "preview.spec.ts",
+          "home-live.local.spec.ts"
         ],
         "timeout": 30000
       }
@@ -47,8 +44,8 @@
     "filteredProjects": [
       {
         "grep": {},
-        "grepInvert": null,
-        "outputDir": "~/.no-mistakes/evidence/01M7QYA6HGZQ2RZD9BZEHMTBF9/results",
+        "grepInvert": {},
+        "outputDir": "~/.no-mistakes/evidence/01M7R0RKKEGXGS3CV7YBM98KCG/browser-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -58,31 +55,17 @@
         "testDir": "{run-worktree}/e2e",
         "snapshotDir": "{run-worktree}/e2e",
         "testIgnore": [],
-        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "testMatch": [
+          "preview.spec.ts",
+          "home-live.local.spec.ts"
+        ],
         "timeout": 30000,
         "use": {
           "baseURL": "http://localhost:5173",
-          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
-          "viewport": {
-            "width": 1280,
-            "height": 720
-          },
-          "screen": {
-            "width": 1920,
-            "height": 1080
-          },
-          "deviceScaleFactor": 1,
-          "isMobile": false,
-          "hasTouch": false,
-          "defaultBrowserType": "chromium",
           "browserName": "chromium",
-          "locale": "en-US",
-          "colorScheme": "light",
-          "launchOptions": {
-            "args": [
-              "--disable-lcd-text",
-              "--font-render-hinting=none"
-            ]
+          "viewport": {
+            "width": 1440,
+            "height": 900
           }
         },
         "dependencies": [],
@@ -93,9 +76,13 @@
     "quiet": false,
     "reporter": [
       [
+        "list",
+        null
+      ],
+      [
         "json",
         {
-          "outputFile": "~/.no-mistakes/evidence/01M7QYA6HGZQ2RZD9BZEHMTBF9/browser-results.json"
+          "outputFile": "~/.no-mistakes/evidence/01M7R0RKKEGXGS3CV7YBM98KCG/browser-results.json"
         }
       ]
     ],
@@ -109,17 +96,22 @@
     "updateSourceMethod": "patch",
     "version": "1.64.1",
     "workers": 2,
-    "webServer": null
+    "webServer": {
+      "command": "npm run build:preview && npm --prefix apps/preview run preview",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
   },
   "suites": [
     {
-      "title": "openui/fixtures.spec.ts",
-      "file": "openui/fixtures.spec.ts",
+      "title": "home-live.local.spec.ts",
+      "file": "home-live.local.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "every component fixture parses and renders",
+          "title": "live home visual, accessibility and responsive matrix",
           "ok": true,
           "tags": [],
           "tests": [
@@ -134,12 +126,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4324,
+                  "duration": 13779,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:28.247Z",
+                  "startTime": "2026-11-18T19:07:27.389Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -147,13 +139,13 @@
               "status": "expected"
             }
           ],
-          "id": "f8122bb7694edec319d3-0820ac41e0bc8f1c66ac",
-          "file": "openui/fixtures.spec.ts",
-          "line": 6,
+          "id": "028bd4a241a6949be746-6358eb6de9bab578e4c5",
+          "file": "home-live.local.spec.ts",
+          "line": 4,
           "column": 1
         },
         {
-          "title": "home demo fixture lines parse in both locales",
+          "title": "live replay progressively renders seven messages and usable controls without model requests",
           "ok": true,
           "tags": [],
           "tests": [
@@ -165,15 +157,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 16,
+                  "duration": 5468,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:28.247Z",
+                  "startTime": "2026-11-18T19:07:41.592Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -181,9 +173,43 @@
               "status": "expected"
             }
           ],
-          "id": "f8122bb7694edec319d3-72ceda08a4a9bd00562d",
-          "file": "openui/fixtures.spec.ts",
-          "line": 92,
+          "id": "028bd4a241a6949be746-4f872d659ab144a2da77",
+          "file": "home-live.local.spec.ts",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "live reduced-motion replay immediately presents the complete Arabic fixture",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 590,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T19:07:47.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "028bd4a241a6949be746-3f7688d583a61b4a9e19",
+          "file": "home-live.local.spec.ts",
+          "line": 39,
           "column": 1
         }
       ]
@@ -210,12 +236,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2634,
+                  "duration": 2620,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:28.308Z",
+                  "startTime": "2026-11-18T19:07:27.397Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -244,12 +270,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2162,
+                  "duration": 2249,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:31.172Z",
+                  "startTime": "2026-11-18T19:07:30.436Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -275,15 +301,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2247,
+                  "duration": 2181,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:32.882Z",
+                  "startTime": "2026-11-18T19:07:32.695Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -312,12 +338,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2195,
+                  "duration": 2226,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:33.338Z",
+                  "startTime": "2026-11-18T19:07:34.882Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -343,15 +369,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2193,
+                  "duration": 2196,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:35.136Z",
+                  "startTime": "2026-11-18T19:07:37.115Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -380,12 +406,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2229,
+                  "duration": 2367,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:35.538Z",
+                  "startTime": "2026-11-18T19:07:39.320Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -411,15 +437,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2100,
+                  "duration": 2321,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:37.339Z",
+                  "startTime": "2026-11-18T19:07:41.696Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -448,12 +474,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2170,
+                  "duration": 2214,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:37.773Z",
+                  "startTime": "2026-11-18T19:07:44.024Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -479,15 +505,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 684,
+                  "duration": 365,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:39.448Z",
+                  "startTime": "2026-11-18T19:07:46.246Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -516,12 +542,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 468,
+                  "duration": 404,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:39.950Z",
+                  "startTime": "2026-11-18T19:07:46.616Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -547,15 +573,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4935,
+                  "duration": 4930,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:40.138Z",
+                  "startTime": "2026-11-18T19:07:47.025Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -584,12 +610,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2828,
+                  "duration": 3076,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:40.425Z",
+                  "startTime": "2026-11-18T19:07:51.963Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -618,12 +644,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 10143,
+                  "duration": 10213,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:43.264Z",
+                  "startTime": "2026-11-18T19:07:55.047Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -634,6 +660,40 @@
           "id": "f7191c1356a09079afd8-a7c2f63f94236f1f138a",
           "file": "preview.spec.ts",
           "line": 150,
+          "column": 1
+        },
+        {
+          "title": "homepage presents streamed messages and keeps previews readable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2558,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T19:08:05.269Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f7191c1356a09079afd8-1538bcfc006e0e58aba2",
+          "file": "preview.spec.ts",
+          "line": 172,
           "column": 1
         },
         {
@@ -649,15 +709,15 @@
               "projectName": "",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 401,
+                  "duration": 562,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-18T18:24:45.079Z",
+                  "startTime": "2026-11-18T19:08:07.832Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -667,7 +727,7 @@
           ],
           "id": "f7191c1356a09079afd8-d652b7ffecca42f80971",
           "file": "preview.spec.ts",
-          "line": 172,
+          "line": 224,
           "column": 1
         }
       ]
@@ -675,9 +735,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-18T18:24:27.757Z",
-    "duration": 25691.208,
-    "expected": 16,
+    "startTime": "2026-11-18T19:07:22.824Z",
+    "duration": 45610.412,
+    "expected": 18,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
