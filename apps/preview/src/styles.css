@@ -106,6 +106,8 @@
 	.button-preview__grid { display: grid; gap: var(--ts-space-4); margin-block-start: var(--ts-space-6); }
 	.button-preview__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-3); min-inline-size: 0; padding-block: var(--ts-space-4); border-block-start: thin solid var(--ts-border-subtle); }
 	.button-preview__row h2 { flex-basis: 100%; margin: 0; font: inherit; font-weight: var(--ts-text-md-font-weight); text-transform: capitalize; }
+	.chip-preview__grid { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-3); min-inline-size: 0; margin-block-start: var(--ts-space-6); }
+	.chip-preview__grid h2 { flex-basis: 100%; margin: var(--ts-space-3) 0 0; font: inherit; font-weight: var(--ts-text-md-font-weight); }
 	.menu-preview__examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: var(--ts-space-8); margin-block-start: var(--ts-space-6); }
 	.menu-preview__examples > div { min-inline-size: 0; min-block-size: 12rem; padding-block: var(--ts-space-4); padding-inline: var(--ts-space-4); border-block-start: thin solid var(--ts-border-subtle); }
 	.menu-preview__examples h2 { margin-block: 0 var(--ts-space-4); margin-inline: 0; font: inherit; font-weight: var(--ts-text-md-font-weight); }

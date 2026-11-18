@@ -1,0 +1,1 @@
+root = Chip("response_schema", "◇", "#response_schema")

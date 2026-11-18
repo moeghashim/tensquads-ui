@@ -28,6 +28,11 @@ test("every component fixture parses and renders", async ({ page }) => {
 				const badge = fixtureRegion.getByText(locale === "en" ? "Ready" : "جاهز", { exact: true });
 				await expect(badge).toBeVisible();
 				await expect(badge).toHaveJSProperty("tagName", "SPAN");
+			} else if (component.name === "Chip") {
+				const chip = fixtureRegion.getByRole("link", { name: "response_schema" });
+				await expect(chip).toBeVisible();
+				await expect(chip.locator(".ts-chip__icon")).toHaveText("◇");
+				await expect(chip).toHaveAttribute("href", "#response_schema");
 			} else if (component.name === "Menu") {
 				const trigger = fixtureRegion.getByRole("button", { name: locale === "en" ? "Actions" : "الإجراءات" });
 				await expect(trigger).toBeVisible();

@@ -2,6 +2,8 @@ export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
+export type { ChipProps } from "./Chip/Chip.js";
+export { Chip } from "./Chip/Chip.js";
 export type {
 	DialogBackdropProps,
 	DialogCloseProps,
