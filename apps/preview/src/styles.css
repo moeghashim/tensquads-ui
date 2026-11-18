@@ -107,3 +107,8 @@
 	.button-preview__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-3); min-inline-size: 0; padding-block: var(--ts-space-4); border-block-start: thin solid var(--ts-border-subtle); }
 	.button-preview__row h2 { flex-basis: 100%; margin: 0; font: inherit; font-weight: var(--ts-text-md-font-weight); text-transform: capitalize; }
 }
+@layer tensquads {
+	.input-preview__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--ts-space-5); margin-block-start: var(--ts-space-6); }
+	.input-preview__item { min-inline-size: 0; display: grid; align-content: start; gap: var(--ts-space-2); padding-block: var(--ts-space-4); border-block-start: thin solid var(--ts-border-subtle); }
+	.input-preview__item h2 { margin: 0; font: inherit; font-weight: var(--ts-text-md-font-weight); }
+}
