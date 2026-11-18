@@ -8,7 +8,7 @@ The home page at `/` shows installation, CSS setup, and an OpenUI fixture replay
 
 Browse the component gallery at `/components` and select a component name to open `/components/$name`. Header controls select the site language and theme. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`); changing the site language also sets its direction. Use `/get-started` for the English and Arabic agent setup guide with copyable examples.
 
-Each component page displays its reference from `packages/ui/src/react/<name>/<name>.md`, live examples with copyable code, and an OpenUI fixture in the selected language. Section labels follow the site language; the reference text remains in English. Use Copy beside a code block and wait for the visible confirmation. Expand Show fixture source to read or copy the OpenUI source. Previous and Next links follow component registry order.
+Each component page displays its reference from `packages/ui/src/react/<name>/<name>.md`, live examples with copyable code, and an OpenUI fixture in the selected language. Section labels follow the site language; the reference text remains in English and reads left to right, including on Arabic pages. The Usage section appears only when the reference document contains code samples. Use Copy beside a code block and wait for the visible confirmation. Expand Show fixture source to read or copy the OpenUI source. Previous and Next links follow component registry order.
 
 ## Requirements
 
