@@ -1,4 +1,6 @@
-import { createElement } from "react";
+"use client";
+
+import { createElement, useState } from "react";
 import { z } from "zod/v4";
 import { defineComponent } from "../../openui/define-component.js";
 import { registerComponent } from "../../openui/registration-store.js";
@@ -12,16 +14,23 @@ export const SwitchOpenUI = defineComponent({
 		checked: z.boolean().default(false),
 		disabled: z.boolean().default(false),
 	}),
-	component: ({ props }) =>
-		createElement(
+	component: function StreamedSwitch({ props }) {
+		const [userChecked, setUserChecked] = useState<boolean | null>(null);
+		return createElement(
 			"div",
 			{ className: "ts-switch-field" },
 			createElement("span", null, props.label),
 			createElement(
 				Switch,
-				{ defaultChecked: props.checked, disabled: props.disabled, "aria-label": props.label },
+				{
+					checked: userChecked ?? props.checked ?? false,
+					onCheckedChange: setUserChecked,
+					disabled: props.disabled,
+					"aria-label": props.label,
+				},
 				createElement(SwitchThumb),
 			),
-		),
+		);
+	},
 });
 registerComponent(SwitchOpenUI);
