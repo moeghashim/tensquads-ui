@@ -1,0 +1,8 @@
+Task 013 live validation
+Oracle: component docs Switch.md and SegmentedControl.md, task 013 acceptance criteria, PLAN.md D20.
+Production preview: npm run build:preview, then Wrangler on isolated localhost port 5187.
+Browser: installed Playwright Chromium; synthetic local consumer on port 5188 imports real React wrappers and TensquadsRenderer without mocks.
+Commands: npx playwright test --config .phase-test/config.ts (exit 0); npx playwright test --config .phase-test/harness.config.ts (exit 0).
+All browser checks passed. Screenshots captured directly here for both components at 1440 and 390 in en/ltr and ar/rtl, light and dark; selected captures visually inspected.
+Setup retries: default port 5173 occupied; moved to 5187 without touching existing server. Corrected disposable runner cwd and duplicate Wrangler --port argument before successful run.
+No full-suite, linter, static-analysis, push, PR or CI phase was run.
