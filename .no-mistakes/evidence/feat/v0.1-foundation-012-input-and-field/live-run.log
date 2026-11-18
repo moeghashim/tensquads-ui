@@ -1,0 +1,70 @@
+[
+  {
+    "scenario": "stream",
+    "component": "Input",
+    "locale": "en",
+    "partial": "N",
+    "completed": "Northstar",
+    "userEdit": "My project",
+    "retainedOnRerender": true,
+    "clearedByIncomingValue": true,
+    "sameDOMNode": true
+  },
+  {
+    "scenario": "stream",
+    "component": "Field",
+    "locale": "en",
+    "partial": "N",
+    "completed": "Northstar",
+    "userEdit": "My project",
+    "retainedOnRerender": true,
+    "clearedByIncomingValue": true,
+    "sameDOMNode": true
+  },
+  {
+    "scenario": "parts",
+    "locale": "en",
+    "direction": "ltr",
+    "clear": "keyboard Enter clears, emits clear-press and restores focus",
+    "disabledSubmission": {},
+    "enabledSubmission": {
+      "city": "Chicago",
+      "postal": "60601"
+    },
+    "validation": "empty submit focuses control and associates error; filling hides error; reset restores default"
+  },
+  {
+    "scenario": "stream",
+    "component": "Input",
+    "locale": "ar",
+    "partial": "N",
+    "completed": "Northstar",
+    "userEdit": "مشروعي",
+    "retainedOnRerender": true,
+    "clearedByIncomingValue": true,
+    "sameDOMNode": true
+  },
+  {
+    "scenario": "stream",
+    "component": "Field",
+    "locale": "ar",
+    "partial": "N",
+    "completed": "Northstar",
+    "userEdit": "مشروعي",
+    "retainedOnRerender": true,
+    "clearedByIncomingValue": true,
+    "sameDOMNode": true
+  },
+  {
+    "scenario": "parts",
+    "locale": "ar",
+    "direction": "rtl",
+    "clear": "keyboard Enter clears, emits clear-press and restores focus",
+    "disabledSubmission": {},
+    "enabledSubmission": {
+      "city": "Chicago",
+      "postal": "60601"
+    },
+    "validation": "empty submit focuses control and associates error; filling hides error; reset restores default"
+  }
+]

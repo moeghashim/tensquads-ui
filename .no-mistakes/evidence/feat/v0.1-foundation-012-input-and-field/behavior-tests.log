@@ -1,0 +1,21 @@
+[WebServer] (node:93294) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:93632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:93728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 4 tests using 1 worker
+
+(node:93791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] e2e/.test-phase.spec.ts:4:42 › Input actual visual matrix and state guards
+[2/4] e2e/.test-phase.spec.ts:4:42 › Field actual visual matrix and state guards
+[3/4] e2e/input-field.spec.ts:19:2 › Input previews documented states in both directions and themes
+[4/4] e2e/input-field.spec.ts:19:2 › Field previews documented states in both directions and themes
+  4 passed (14.2s)

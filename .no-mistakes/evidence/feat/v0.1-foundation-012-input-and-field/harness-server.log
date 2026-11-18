@@ -1,0 +1,7 @@
+2:49:59 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+  VITE v8.0.0  ready in 87 ms
+
+  ➜  Local:   http://127.0.0.1:5188/
+2:50:38 AM [vite] (client) ✨ new dependencies optimized: @openuidev/react-lang, @ui-sdk/react/button, @ui-sdk/react/field, @ui-sdk/react/input, react-dom/client, zod/v4
+2:50:38 AM [vite] (client) ✨ optimized dependencies changed. reloading
