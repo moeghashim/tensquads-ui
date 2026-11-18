@@ -18,13 +18,13 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 24
+          node-version: 26.13.1
           cache: npm
           cache-dependency-path: |
             package-lock.json
             apps/preview/package-lock.json
       - name: Use npm 11
-        run: npm install --global npm@11.19.0
+        run: npm install --global npm@11.20.0
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run verify

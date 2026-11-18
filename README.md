@@ -1,5 +1,7 @@
 # tensquads-ui
 
+Use Node 26.13.1 and npm 11.20.0. Install [mise](https://mise.jdx.dev/), then run `mise trust` and `mise install` from the repository root. Run npm commands with `mise exec -- npm …` to use the pinned versions without changing the machine-wide Node or npm.
+
 tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arabic), bringing React components and OpenUI definitions together in `@tensquads/ui`. See [PLAN.md](PLAN.md) for the project plan and decisions.
 
 ## Commands
