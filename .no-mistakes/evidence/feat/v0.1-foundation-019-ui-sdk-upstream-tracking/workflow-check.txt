@@ -1,0 +1,4 @@
+Before repair: Psych rejected tab indentation at line 4. After removing indentation tabs it also rejected unquoted colon-space fields (PR title, commit message and status run command).
+After repair: Psych parsed the workflow successfully. Normalized configuration preserves daily/manual triggers, write permissions, the fixed bot/ui-sdk-update branch, caller-supplied PR base, DCO signoff, restricted committed paths and verification continuation.
+Executed the parsed Compose PR body Bash command twice, with synthetic success/failure verification outcomes and BASE=feat/v0.1-foundation. Both exited 0. Success output omits failure logs; failure output includes the failure and log details.
+This does not execute GitHub Actions, create-pull-request, remote label recovery or remote commit statuses.
