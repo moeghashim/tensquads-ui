@@ -21,7 +21,6 @@ const loadDialogParts = (import.meta as ImportMeta & { env?: { SSR?: boolean } }
 
 function DialogOpenUIView({ props }: { props: z.infer<typeof dialogPropsSchema> }) {
 	const [parts, setParts] = useState<DialogParts>();
-	const [result, setResult] = useState("");
 	const [loadError, setLoadError] = useState("");
 	useEffect(() => {
 		let active = true;
@@ -39,45 +38,33 @@ function DialogOpenUIView({ props }: { props: z.infer<typeof dialogPropsSchema> 
 	if (!parts) return loadError ? createElement("p", { role: "status" }, loadError) : null;
 	const { Dialog, DialogBackdrop, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } = parts;
 	return createElement(
-		"div",
-		{ "data-slot": "dialog-example" },
+		Dialog,
+		null,
+		createElement(DialogTrigger, { render: createElement(Button, { variant: "outline" }) }, props.triggerLabel),
+		createElement(DialogBackdrop, null),
 		createElement(
-			Dialog,
-			{
-				onOpenChange: (open, details) => {
-					if (!open && details.returnValue) {
-						setResult(details.returnValue === "action" ? props.actionLabel : props.cancelLabel);
-					}
-				},
-			},
-			createElement(DialogTrigger, { render: createElement(Button, { variant: "outline" }) }, props.triggerLabel),
-			createElement(DialogBackdrop, null),
+			DialogContent,
+			null,
+			createElement(DialogTitle, null, props.title),
+			createElement(DialogDescription, null, props.description),
+			createElement("p", { "data-slot": "dialog-body" }, props.body),
 			createElement(
-				DialogContent,
-				null,
-				createElement(DialogTitle, null, props.title),
-				createElement(DialogDescription, null, props.description),
-				createElement("p", { "data-slot": "dialog-body" }, props.body),
+				"div",
+				{ "data-slot": "dialog-actions" },
 				createElement(
-					"div",
-					{ "data-slot": "dialog-actions" },
-					createElement(
-						DialogClose,
-						{ value: "cancel", render: createElement(Button, { variant: "outline" }) },
-						props.cancelLabel,
-					),
-					createElement(
-						DialogClose,
-						{
-							value: "action",
-							render: createElement(Button, { variant: props.destructive ? "danger" : "solid" }),
-						},
-						props.actionLabel,
-					),
+					DialogClose,
+					{ render: createElement(Button, { variant: "outline" }) },
+					props.cancelLabel,
+				),
+				createElement(
+					DialogClose,
+					{
+						render: createElement(Button, { variant: props.destructive ? "danger" : "solid" }),
+					},
+					props.actionLabel,
 				),
 			),
 		),
-		result ? createElement("p", { role: "status" }, result) : null,
 	);
 }
 

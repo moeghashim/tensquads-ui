@@ -11,8 +11,9 @@
 		box-sizing: border-box;
 		position: fixed;
 		inset-block-start: 50%;
-		inset-inline-start: 50%;
-		translate: -50% -50%;
+		inset-inline: 0;
+		margin-inline: auto;
+		translate: 0 -50%;
 		display: grid;
 		gap: var(--ts-space-4);
 		inline-size: min(calc(100% - var(--ts-space-8)), 32rem);
@@ -32,7 +33,6 @@
 	[data-slot="dialog-description"].ts-dialog__description { margin: 0; color: var(--ts-text-secondary); font-family: var(--ts-panel-description-font-family); font-size: var(--ts-panel-description-font-size); line-height: var(--ts-panel-description-line-height); font-weight: var(--ts-panel-description-font-weight); letter-spacing: var(--ts-panel-description-letter-spacing); }
 	[data-slot="dialog-body"] { margin: 0; color: var(--ts-text); font-family: var(--ts-text-md-font-family); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); }
 	[data-slot="dialog-actions"] { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--ts-space-2); }
-	[data-slot="dialog-example"] [role="status"] { color: var(--ts-text-secondary); }
 	@media (prefers-reduced-motion: reduce) {
 		[data-slot="dialog-backdrop"].ts-dialog__backdrop,
 		[data-slot="dialog-content"].ts-dialog__content { transition: none; }

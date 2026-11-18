@@ -38,6 +38,13 @@ test("Dialog screenshots cover closed and open states in both directions and the
 		expect(axe.violations).toEqual([]);
 		for (const width of [1440, 390]) {
 			await page.setViewportSize({ width, height: 900 });
+			const bounds = await dialog.boundingBox();
+			expect(bounds).not.toBeNull();
+			if (!bounds) throw new Error("Dialog has no visible bounds");
+			expect(bounds.x).toBeGreaterThanOrEqual(0);
+			expect(bounds.y).toBeGreaterThanOrEqual(0);
+			expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+			expect(bounds.y + bounds.height).toBeLessThanOrEqual(900);
 			await expect(page).toHaveScreenshot(`dialog-${state.locale}-${state.theme}-open-${width}.png`, {
 				animations: "disabled",
 				fullPage: true,
@@ -51,6 +58,34 @@ test("Dialog screenshots cover closed and open states in both directions and the
 		}
 		await page.keyboard.press("Escape");
 		await expect(page.getByRole("dialog")).toHaveCount(0);
+	}
+});
+
+test("every Dialog example stays within the viewport", async ({ page }) => {
+	for (const state of states) {
+		await openPreview(page, state, "/components/Dialog");
+		const labels =
+			state.locale === "en"
+				? ["Open dialog", "Edit project", "Delete project", "Review"]
+				: ["فتح الحوار", "تعديل المشروع", "حذف المشروع", "مراجعة"];
+		for (const width of [1440, 390]) {
+			await page.setViewportSize({ width, height: 900 });
+			for (const name of labels) {
+				await page.getByRole("button", { name, exact: true }).click();
+				const dialog = page.getByRole("dialog");
+				await expect(dialog).toBeVisible();
+				await expect(dialog).not.toHaveAttribute("data-starting-style");
+				const bounds = await dialog.boundingBox();
+				expect(bounds).not.toBeNull();
+				if (!bounds) throw new Error("Dialog has no visible bounds");
+				expect(bounds.x).toBeGreaterThanOrEqual(0);
+				expect(bounds.y).toBeGreaterThanOrEqual(0);
+				expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+				expect(bounds.y + bounds.height).toBeLessThanOrEqual(900);
+				await page.keyboard.press("Escape");
+				await expect(dialog).toHaveCount(0);
+			}
+		}
 	}
 });
 

@@ -55,9 +55,8 @@ test("every component fixture parses and renders", async ({ page }) => {
 				const action = dialog.getByRole("button", { name: locale === "en" ? "Add member" : "إضافة العضو" });
 				await action.focus();
 				await page.keyboard.press("Enter");
-				await expect(fixtureRegion.getByRole("status")).toContainText(
-					locale === "en" ? "Add member" : "إضافة العضو",
-				);
+				await expect(dialog).toHaveCount(0);
+				await expect(fixtureRegion.getByRole("button", { name: trigger })).toBeFocused();
 			} else {
 				const label =
 					component.name === "Input"
