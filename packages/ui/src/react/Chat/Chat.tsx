@@ -198,7 +198,11 @@ export function ChatComposer({
 						pill
 						iconOnly
 						aria-label={stopLabel ?? (locale === "ar" ? "إيقاف" : "Stop")}
-						onClick={onStop}
+						onClick={(event) => {
+							// onStop can turn this button into a submit control before click activation ends.
+							event.preventDefault();
+							onStop?.();
+						}}
 						className="ts-chat__send"
 					>
 						<svg aria-hidden="true" viewBox="0 0 12 12" fill="currentColor">
