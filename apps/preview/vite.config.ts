@@ -10,7 +10,7 @@ export default defineConfig({
 	plugins: [cloudflare({ viteEnvironment: { name: "ssr" } }), tanstackStart(), viteReact()],
 	resolve: {
 		alias: [
-			{ find: "@tensquads/ui/fonts.css", replacement: `${uiSource}fonts/fonts.css` },
+			{ find: "@tensquads/ui/fonts.css", replacement: `${uiSource}fonts.css` },
 			{ find: "@tensquads/ui/tokens.css", replacement: `${uiSource}tokens/tokens.css` },
 			{ find: "@tensquads/ui/styles.css", replacement: `${uiSource}styles/styles.css` },
 			{ find: /^@tensquads\/ui\/(.+)$/, replacement: `${uiSource}$1` },
