@@ -1,0 +1,7 @@
+root = Squadmate("petra", "running", 64, "ar")
+root = Badge("قيد التحقق", "info")
+root = Field("اسم المتجر", "storeName", "", "متجر بنّاء", "", "", false, false)
+root = Switch("أرسل إليّ إشعاراً عند الانتهاء", true, false)
+root = SegmentedControl("وتيرة الفوترة", ["أسبوعي", "شهري"], "أسبوعي")
+root = Button("إعادة للمراجعة", "soft", "md", true, false)
+root = Button("اعتماد الخطة", "solid", "md", true, false)

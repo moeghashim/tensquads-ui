@@ -19,9 +19,11 @@ test("Button previews variants, sizes, and interaction states", async ({ page },
 	for (const state of states) {
 		await openPreview(page, state, "/components/Button");
 		await expect(page.getByRole("heading", { name: "Button", level: 1, exact: true })).toBeVisible();
-		await expect(page.locator('[data-slot="button"]')).toHaveCount(31);
+		await expect(
+			page.locator('.button-preview__row > [data-slot="button"], .component-list [data-slot="button"]'),
+		).toHaveCount(31);
 		await expect(page.getByRole("button", { name: state.locale === "ar" ? "إضافة" : "Add" })).toHaveCount(5);
-		await expect(page.locator('[data-slot="button"][data-disabled]')).toHaveCount(5);
+		await expect(page.locator('.button-preview__row > [data-slot="button"][data-disabled]')).toHaveCount(5);
 		const first = page.getByRole("button", { name: state.locale === "ar" ? "متابعة" : "Continue" }).first();
 		await page.evaluate(() => {
 			(window as typeof window & { buttonActivationCount?: number }).buttonActivationCount = 0;

@@ -24,9 +24,9 @@ for (const component of ["Input", "Field"] as const) {
 			await expect(inputs).toHaveCount(component === "Input" ? 6 : 8);
 			if (component === "Field") {
 				await expect(page.locator('[data-slot="field"][data-invalid]')).toHaveCount(1);
-				await expect(
-					page.getByText(state.locale === "ar" ? "هذا الحقل مطلوب." : "This field is required."),
-				).toBeVisible();
+				await expect(page.locator('.input-preview__item [data-slot="field-error"]')).toContainText(
+					state.locale === "ar" ? "هذا الحقل مطلوب." : "This field is required.",
+				);
 			}
 			const first = inputs.first();
 			await capturePreviewScreenshots(
