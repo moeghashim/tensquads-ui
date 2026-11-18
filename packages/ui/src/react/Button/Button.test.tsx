@@ -48,6 +48,7 @@ describe("Button", () => {
 				variant="soft"
 				size="sm"
 				pill
+				// biome-ignore lint/a11y/useAnchorContent: Button forwards its children into render.
 				render={asLink ? <a href="#next" /> : undefined}
 				onClick={() => promise}
 				className={({ pending }) => (pending ? "saving" : "ready")}
