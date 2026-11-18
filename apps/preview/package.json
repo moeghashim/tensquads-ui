@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"preview": "wrangler dev --config dist/server/wrangler.json --ip 127.0.0.1 --port 5173",
 		"check": "tsc --noEmit -p tsconfig.json && vitest run --config vitest.config.ts",
 		"deploy": "vite build && wrangler deploy"
 	},

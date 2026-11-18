@@ -16,9 +16,9 @@ export default defineConfig({
 	},
 	snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
 	webServer: {
-		command: "npm run dev",
+		command: "npm run build:preview && npm --prefix apps/preview run preview",
 		url: "http://localhost:5173",
-		reuseExistingServer: !process.env.CI,
+		reuseExistingServer: false,
 		timeout: 120_000,
 	},
 });

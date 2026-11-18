@@ -55,17 +55,17 @@ describe("Squadmate image", () => {
 		expect(screen.getByRole("img", { name: "بترا، تخطيط" })).toBeInTheDocument();
 	});
 
-	it("names every state using roster English, website Arabic, and documented pending proposals", () => {
+	it("names every state using roster English and the D18 Arabic labels", () => {
 		const states = [
-			["blocked", "Blocked", "محظور"],
-			["checking", "Checking", "يتحقق"],
+			["blocked", "Blocked", "معلّق"],
+			["checking", "Checking", "قيد التحقق"],
 			["done", "Done", "تم"],
-			["dropped", "Dropped", "متوقف"],
-			["escalated", "Escalated", "مُصعّد"],
-			["idle", "Idle", "خامل"],
+			["dropped", "Dropped", "أُلغي"],
+			["escalated", "Escalated", "بانتظار قرارك"],
+			["idle", "Idle", "في استراحة"],
 			["planning", "Planning", "تخطيط"],
-			["running", "Running skill", "يعمل"],
-			["sentback", "Sent back", "أُعيد"],
+			["running", "Running skill", "قيد العمل"],
+			["sentback", "Sent back", "إعادة للتعديل"],
 			["waiting", "Waiting", "بانتظارك"],
 		] as const;
 		for (const [state, english, arabic] of states) {

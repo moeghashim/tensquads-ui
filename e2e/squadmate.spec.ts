@@ -19,8 +19,22 @@ test("Squadmate previews every character and state in both locales and themes", 
 	for (const state of states) {
 		await openPreview(page, state, "/components/Squadmate");
 		await expect(page.getByRole("heading", { name: "Squadmate" })).toBeVisible();
-		await expect(page.getByRole("img")).toHaveCount(130);
-		await expect(page.getByRole("img", { name: state.locale === "ar" ? "بترا، خامل" : "Petra, Idle" })).toBeVisible();
+		const gallery = page.getByRole("region", {
+			name: state.locale === "ar" ? "الزملاء وحالاتهم" : "Squadmates and states",
+		});
+		await expect(gallery.getByRole("img")).toHaveCount(130);
+		await expect(
+			gallery.getByRole("img", { name: state.locale === "ar" ? "بترا، في استراحة" : "Petra, Idle" }),
+		).toBeVisible();
+		const fixture = page.getByRole("region", {
+			name: state.locale === "ar" ? "عينة OpenUI" : "OpenUI fixture",
+		});
+		const fixtureImage = fixture.getByRole("img", {
+			name: state.locale === "ar" ? "بترا، تخطيط" : "Petra, Planning",
+		});
+		await expect(fixtureImage).toBeVisible();
+		await expect(fixtureImage).toHaveCSS("width", "64px");
+		await expect(fixtureImage).toHaveCSS("height", "64px");
 		await capturePreviewScreenshots(page, testInfo, `squadmate-${state.locale}-${state.direction}-${state.theme}`);
 		await expectNoHorizontalScroll(page);
 		await expectAccessible(page);

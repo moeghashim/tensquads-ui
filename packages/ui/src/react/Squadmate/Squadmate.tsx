@@ -21,14 +21,14 @@ const ARABIC_NAMES: Record<AgentSlug, string> = {
 const ARABIC_STATES: Record<AgentState, string> = {
 	waiting: "بانتظارك",
 	planning: "تخطيط",
-	running: "يعمل",
-	checking: "يتحقق",
+	running: "قيد العمل",
+	checking: "قيد التحقق",
 	done: "تم",
-	sentback: "أُعيد",
-	blocked: "محظور",
-	escalated: "مُصعّد",
-	dropped: "متوقف",
-	idle: "خامل",
+	sentback: "إعادة للتعديل",
+	blocked: "معلّق",
+	escalated: "بانتظار قرارك",
+	dropped: "أُلغي",
+	idle: "في استراحة",
 };
 
 const ENGLISH_STATES = Object.fromEntries([...AGENT_LOOP_STATES.map(({ id, label }) => [id, label]), ["idle", "Idle"]]);

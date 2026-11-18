@@ -36,7 +36,7 @@ The [UI SDK update workflow](.github/workflows/ui-sdk-update.yml) runs daily and
 
 Run `npm run preview:install`, then `npm run dev` from the repository root. The TanStack Start app in `apps/preview` is a separate npm project, outside the root `packages/*` workspaces. Root installation and `prepare` build only the UI package; `npm run check` covers the package independently of preview dependencies. Use `npm run check:preview` to check the app separately.
 
-The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. The gallery discovers components from their fixture files and links to case-sensitive `/components/<Name>` routes. `/components/Example` renders the selected locale's OpenUI fixture; a missing fixture displays a fallback message.
+The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system/light/dark theme controls. Settings are stored in the URL as `locale`, `dir`, and `theme`, for example `/?locale=ar&dir=rtl&theme=dark`. English, LTR, and system theme are the defaults; Arabic defaults to RTL unless `dir` overrides it. Selecting a locale resets the direction to that locale's default. The gallery discovers components from their fixture files and links to case-sensitive `/components/<Name>` routes. Each component route renders the selected locale's OpenUI fixture. The Button route also shows all variants and sizes; see the [Button contract](packages/ui/src/react/Button/Button.md) for its API.
 
 `/components/Squadmate` shows every character and state in the selected locale and theme. See the [Squadmate contract](packages/ui/src/react/Squadmate/Squadmate.md) for its component and drawing APIs.
 
@@ -63,7 +63,7 @@ Import `TensquadsRenderer` from `@tensquads/ui/openui` to render an OpenUI text 
 import { TensquadsRenderer } from "@tensquads/ui/openui";
 
 <TensquadsRenderer
-  stream={'root = Example("Hello")'}
+  stream={'root = Button("Continue")'}
   locale="en"
   onError={(errors) => console.log(errors)}
 />;
@@ -75,7 +75,7 @@ The same entry exports `defineComponent` for typed OpenUI definitions, `getRegis
 
 ## Browser verification
 
-After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Playwright starts the preview through its `webServer` at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings. The smoke test covers English/LTR and Arabic/RTL in light and dark themes, screenshots at 1440 and 390 px widths, mobile overflow, axe accessibility, and the focus ring.
+After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Stop any server using port 5173 first, including `npm run dev`. Playwright requires the port to be free and starts its own server. It builds the preview with Vite and serves the generated Cloudflare Worker locally through Wrangler at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings. The smoke test covers English/LTR and Arabic/RTL in light and dark themes, screenshots at 1440 and 390 px widths, mobile overflow, axe accessibility, and the focus ring.
 
 Run `npm run e2e:update` on Linux to regenerate the committed baselines in `e2e/__screenshots__`, then review the image changes. Routine CI compares the committed baselines without regenerating them. The preview app and consumers load the bundled product fonts. Chromium disables LCD text and font hinting, and the helper removes native select arrows in tests to normalize control widths across macOS and Linux. Screenshots allow at most 0.1% differing pixels for residual platform glyph rasterization, with Playwright's default per-pixel sensitivity. Use Linux for final baseline verification. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts). Failed CI runs upload the Playwright HTML report.
 

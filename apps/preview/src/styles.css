@@ -103,4 +103,7 @@
 	.squadmate-gallery__states { display: grid; grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); gap: var(--ts-space-2); }
 	.squadmate-gallery figure { display: grid; justify-items: center; gap: var(--ts-space-1); min-inline-size: 0; margin: 0; padding-block: var(--ts-space-2); }
 	.squadmate-gallery figcaption { color: var(--ts-text-secondary); font-size: var(--ts-text-xs-font-size); text-align: center; overflow-wrap: anywhere; }
+	.button-preview__grid { display: grid; gap: var(--ts-space-4); margin-block-start: var(--ts-space-6); }
+	.button-preview__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-3); min-inline-size: 0; padding-block: var(--ts-space-4); border-block-start: thin solid var(--ts-border-subtle); }
+	.button-preview__row h2 { flex-basis: 100%; margin: 0; font: inherit; font-weight: var(--ts-text-md-font-weight); text-transform: capitalize; }
 }
