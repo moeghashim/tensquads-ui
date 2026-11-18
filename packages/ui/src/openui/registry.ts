@@ -1,4 +1,5 @@
 import "../react/Button/Button.openui.js";
+import "../react/Chip/Chip.openui.js";
 import "../react/Squadmate/Squadmate.openui.js";
 import type { DefinedComponent } from "@openuidev/react-lang";
 import { getRegisteredDefinitions } from "./registration-store.js";

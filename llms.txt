@@ -1,4 +1,5 @@
 # tensquads UI component index
 
 - [Button](packages/ui/src/react/Button/Button.md): Import `Button` and the `ButtonProps` type from `@tensquads/ui/react`. It wraps UI SDK's `Button` from `@ui-sdk/react/button` and keeps its native button behavior, `data-slot`, `render` prop, and forwarded props.
+- [Chip](packages/ui/src/react/Chip/Chip.md): Import `Chip` and `ChipProps` from `@tensquads/ui/react`. Chip wraps UI SDK `Button` from `@ui-sdk/react/button`. A chip opens an attached object, so it uses button action behavior without a pressed state.
 - [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md): Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.

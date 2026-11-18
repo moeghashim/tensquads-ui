@@ -1,0 +1,32 @@
+@layer tensquads {
+	[data-slot="button"].ts-chip {
+		box-sizing: border-box;
+		display: inline-flex;
+		min-block-size: var(--ts-control-sm);
+		max-inline-size: 100%;
+		align-items: center;
+		justify-content: flex-start;
+		gap: var(--ts-space-2);
+		padding-block: var(--ts-space-1);
+		padding-inline: var(--ts-space-3);
+		border: 1px solid transparent;
+		border-radius: var(--ts-radius-full);
+		color: var(--ts-text);
+		background: var(--ts-primary-soft);
+		font-family: var(--ts-button-md-font-family);
+		font-size: var(--ts-button-md-font-size);
+		font-weight: var(--ts-button-md-font-weight);
+		line-height: var(--ts-button-md-line-height);
+		letter-spacing: var(--ts-button-md-letter-spacing);
+		text-align: start;
+		cursor: pointer;
+		transition: background-color var(--ts-duration-basic) var(--ts-ease-basic);
+	}
+	[data-slot="button"].ts-chip:hover:not([data-disabled]) { background: var(--ts-primary-soft-hover); }
+	[data-slot="button"].ts-chip:active:not([data-disabled]) { background: var(--ts-primary-soft-active); }
+	[data-slot="button"].ts-chip[data-disabled] { color: var(--ts-text-disabled); background: var(--ts-alpha-05); cursor: not-allowed; }
+	[data-slot="button"].ts-chip:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	.ts-chip__icon { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; inline-size: var(--ts-icon-sm); block-size: var(--ts-icon-sm); color: var(--ts-text-secondary); }
+	.ts-chip__icon > svg { inline-size: 100%; block-size: 100%; }
+	.ts-chip__name { min-inline-size: 0; overflow-wrap: anywhere; }
+}
