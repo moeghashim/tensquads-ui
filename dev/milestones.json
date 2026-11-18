@@ -39,7 +39,7 @@
     },
     {
       "id": "v0.2-chat",
-      "status": "planned",
+      "status": "in-progress",
       "tasks": [
         "001-chat-components",
         "002-chat-reply-stream",
