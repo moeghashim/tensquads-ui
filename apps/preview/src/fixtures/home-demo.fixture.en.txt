@@ -1,0 +1,7 @@
+root = Squadmate("petra", "running", 64, "en")
+root = Badge("Checking", "info")
+root = Field("Store name", "storeName", "", "Bannaa Market", "", "", false, false)
+root = Switch("Email me when done", true, false)
+root = SegmentedControl("Billing cadence", ["Weekly", "Monthly"], "Weekly")
+root = Button("Send back", "soft", "md", true, false)
+root = Button("Approve plan", "solid", "md", true, false)

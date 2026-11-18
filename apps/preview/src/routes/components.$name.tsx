@@ -110,7 +110,7 @@ function ComponentPage() {
 				};
 		return (
 			<main className="gallery dialog-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{copy.back}
 				</Link>
 				<p className="eyebrow">{copy.eyebrow}</p>
@@ -187,7 +187,7 @@ function ComponentPage() {
 		const states: AgentState[] = ["idle", ...AGENT_LOOP_STATES.map(({ id }) => id)];
 		return (
 			<main className="gallery">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -254,7 +254,7 @@ function ComponentPage() {
 		];
 		return (
 			<main className="gallery input-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{ar ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{ar ? "معاينة المكوّن" : "Component preview"}</p>
@@ -304,7 +304,7 @@ function ComponentPage() {
 		const label = locale === "ar" ? "تحديثات المنتج" : "Product updates";
 		return (
 			<main className="gallery component-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -343,7 +343,7 @@ function ComponentPage() {
 		const iconOptions = locale === "ar" ? ["تحرير", "معاينة"] : ["Edit", "Preview"];
 		return (
 			<main className="gallery component-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -381,7 +381,7 @@ function ComponentPage() {
 		const sizes = ["sm", "md", "lg"] as const;
 		return (
 			<main className="gallery button-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -424,7 +424,7 @@ function ComponentPage() {
 				: { default: "Draft", success: "Complete", warning: "Pending", danger: "Failed", info: "Information" };
 		return (
 			<main className="gallery badge-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -445,7 +445,7 @@ function ComponentPage() {
 	if (name === "Chip") {
 		return (
 			<main className="gallery chip-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -478,7 +478,7 @@ function ComponentPage() {
 			: { title: "Tooltip placements", action: "Add item", hint: "Create a new item" };
 		return (
 			<main className="gallery tooltip-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{ar ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{ar ? "معاينة المكوّن" : "Component preview"}</p>
@@ -579,7 +579,7 @@ function ComponentPage() {
 		);
 		return (
 			<main className="gallery menu-preview">
-				<Link className="route-example" to="/" search={search as never}>
+				<Link className="route-example" to="/components" search={search as never}>
 					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
 				</Link>
 				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
@@ -612,7 +612,7 @@ function ComponentPage() {
 	}
 	return (
 		<main className="gallery">
-			<Link to="/" search={search as never}>
+			<Link to="/components" search={search as never}>
 				Back to gallery
 			</Link>
 			<p className="eyebrow">Component preview</p>

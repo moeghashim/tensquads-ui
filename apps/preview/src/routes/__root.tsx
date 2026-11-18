@@ -1,9 +1,10 @@
-import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import "../layers.css";
 import "@tensquads/ui/fonts.css";
 import "@tensquads/ui/tokens.css";
 import "@tensquads/ui/styles.css";
+import { SiteShell } from "../components/site-shell";
 import { getPreviewAttributes } from "../state";
 import "../styles.css";
 
@@ -12,7 +13,7 @@ export const Route = createRootRoute({
 		meta: [
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ title: "tensquads UI preview" },
+			{ title: "tensquads ui" },
 		],
 	}),
 	component: RootPage,
@@ -20,7 +21,7 @@ export const Route = createRootRoute({
 });
 
 function RootPage() {
-	return <Outlet />;
+	return <SiteShell />;
 }
 
 function Document({ children }: { readonly children: ReactNode }) {

@@ -2,6 +2,12 @@
 
 `@tensquads/ui` is the shared React UI library for tensquads and بنّاء. It provides Agent-UI styled React components, Squadmate artwork, shared schemas, and an OpenUI Lang bridge for generated interfaces. Components support English and Arabic, including right-to-left layout.
 
+Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.mohanadgh.workers.dev)
+
+The home page at `/` shows installation, CSS setup, and an OpenUI fixture replay. Use Copy to copy the install command. If clipboard access fails, the page asks you to select and copy the command manually. Use Replay to restart the demo or its language control to switch the rendered example between English and Arabic. The demo runs in the browser without a model request and shows its final state immediately when reduced motion is enabled.
+
+Browse the component gallery at `/components` and select a component name to open `/components/$name`. Header controls select the site language and theme. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`); changing the site language also sets its direction. `/get-started` currently contains only a heading; use the installation instructions below.
+
 ## Requirements
 
 Use Node 26 and npm 11. The repository pins Node 26.13.1 and npm 11.20.0 in `mise.toml`. Install [mise](https://mise.jdx.dev/), then run `mise trust` and `mise install` in the repository root. Run npm commands with `mise exec -- npm …`.
@@ -133,6 +139,6 @@ Tooltip artifacts use `tooltip-<locale>-<direction>-<theme>-<side>-<width>.png`.
 - `mise exec -- npm run preview:install` installs the separate preview app dependencies.
 - `mise exec -- npm run verify` runs checks, preview checks, and browser tests.
 - `mise exec -- npm run docs` regenerates `llms.txt` from component docs.
-- `mise exec -- npm run dev` starts the preview gallery.
+- `mise exec -- npm run dev` starts the site locally.
 
 See [PLAN.md](PLAN.md) for architecture and decisions.

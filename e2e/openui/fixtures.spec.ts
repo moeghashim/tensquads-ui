@@ -88,3 +88,14 @@ test("every component fixture parses and renders", async ({ page }) => {
 		}
 	}
 });
+
+test("home demo fixture lines parse in both locales", () => {
+	for (const locale of ["en", "ar"] as const) {
+		const fixture = readFileSync(`apps/preview/src/fixtures/home-demo.fixture.${locale}.txt`, "utf8");
+		for (const line of fixture.trim().split("\n")) {
+			const parsed = createParser(createTensquadsLibrary(locale).toJSONSchema()).parse(line);
+			expect(parsed.root).toBeTruthy();
+			expect(parsed.meta.errors).toEqual([]);
+		}
+	}
+});

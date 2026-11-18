@@ -26,7 +26,7 @@ Live at https://tensquads-ui-preview.mohanadgh.workers.dev (address kept; no cus
 
 ## Brand Commitments
 - Agent-UI visual language from tensquads-design-system (synced in `design/`): neutral first, near-black primary, soft tints only where they carry meaning, sentence case, no emoji, no exclamation marks.
-- The ten squadmates (landmark mascots: Petra, Pisa, Alexandria, Angkor, Delphi, Giza, Greenwich, Kyoto, Machu, Rio) with their state artwork, and the tensquads logo, from `design/`.
+- The squadmates with their state artwork, and the tensquads logo, from `design/`. See the [Squadmate contract](../../packages/ui/src/react/Squadmate/Squadmate.md) for the roster and drawing APIs.
 - Fonts: Inter, IBM Plex Sans Arabic, JetBrains Mono (D17).
 - Arabic copy is natural MSA, gender-neutral when addressing the reader (D18 style).
 
