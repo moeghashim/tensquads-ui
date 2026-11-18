@@ -11,19 +11,22 @@ const menuItemSchema = z.object({
 	disabled: z.boolean().default(false).describe("Whether this action is unavailable"),
 });
 
+const menuPropsSchema = z.object({
+	label: z.string().min(1).describe("Accessible trigger label"),
+	items: z.array(menuItemSchema).min(1).max(6).describe("Actions shown in the menu"),
+});
+
 export const MenuOpenUI = defineComponent({
 	name: "Menu",
 	description:
 		"A button menu with up to six serializable actions. Each action has a label and value, with optional danger and disabled states. A destructive action is placed last after a separator.",
-	props: z.object({
-		label: z.string().min(1).describe("Accessible trigger label"),
-		items: z.array(menuItemSchema).min(1).max(6).describe("Actions shown in the menu"),
-	}),
+	props: menuPropsSchema,
 	component: ({ props }) => {
-		const dangerItems = props.items.filter((item) => item.danger);
+		const { label, items: actions } = menuPropsSchema.parse(props);
+		const dangerItems = actions.filter((item) => item.danger);
 		if (dangerItems.length > 1) throw new Error("Menu supports one destructive item");
 		const dangerItem = dangerItems[0];
-		const items = props.items.filter((item) => !item.danger);
+		const items = actions.filter((item) => !item.danger);
 		const children = [
 			...items.map((item) =>
 				createElement(MenuItem, { key: item.value, value: item.value, disabled: item.disabled }, item.label),
@@ -51,7 +54,7 @@ export const MenuOpenUI = defineComponent({
 					document.dispatchEvent(new CustomEvent("tensquads:menu-action", { detail: { value } }));
 				},
 			},
-			createElement(MenuTrigger, { "aria-label": props.label }, props.label),
+			createElement(MenuTrigger, { "aria-label": label }, label),
 			createElement(MenuContent, { side: "bottom", align: "start" }, ...children),
 		);
 	},

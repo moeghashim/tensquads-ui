@@ -25,25 +25,43 @@ export {
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
 export type {
+	MenuCheckboxItemProps,
 	MenuContentProps,
+	MenuContextTriggerProps,
 	MenuGroupLabelProps,
 	MenuGroupProps,
 	MenuItemIconProps,
+	MenuItemIndicatorProps,
 	MenuItemProps,
+	MenuItemsProps,
 	MenuProps,
+	MenuRadioGroupProps,
+	MenuRadioItemProps,
 	MenuSeparatorProps,
 	MenuShortcutProps,
+	MenuSubContentProps,
+	MenuSubProps,
+	MenuSubTriggerProps,
 	MenuTriggerProps,
 } from "./Menu/Menu.js";
 export {
 	Menu,
+	MenuCheckboxItem,
 	MenuContent,
+	MenuContextTrigger,
 	MenuGroup,
 	MenuGroupLabel,
 	MenuItem,
 	MenuItemIcon,
+	MenuItemIndicator,
+	MenuItems,
+	MenuRadioGroup,
+	MenuRadioItem,
 	MenuSeparator,
 	MenuShortcut,
+	MenuSub,
+	MenuSubContent,
+	MenuSubTrigger,
 	MenuTrigger,
 } from "./Menu/Menu.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
