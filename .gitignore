@@ -1,7 +1,0 @@
-node_modules/
-dist/
-packages/ui/dist/
-.wrangler/
-playwright-report/
-test-results/
-playwright/.cache/

@@ -1,7 +1,0 @@
-{
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "tensquads-ui-preview",
-	"compatibility_date": "2026-11-17",
-	"compatibility_flags": ["nodejs_compat"],
-	"main": "@tanstack/react-start/server-entry"
-}
