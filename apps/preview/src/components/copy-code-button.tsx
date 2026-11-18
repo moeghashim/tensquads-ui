@@ -23,7 +23,12 @@ export function CopyCodeButton({ code, copyLabel, copiedLabel, failedLabel }: Co
 
 	return (
 		<div className="copy-code-control">
-			<Button variant="soft" size="sm" aria-label={copyLabel} onClick={() => void copyCode()}>
+			<Button
+				variant="soft"
+				size="sm"
+				aria-label={status === "copied" ? copiedLabel : copyLabel}
+				onClick={() => void copyCode()}
+			>
 				{status === "copied" ? copiedLabel : copyLabel}
 			</Button>
 			<span role="status" aria-live="polite" className="copy-code-control__status">

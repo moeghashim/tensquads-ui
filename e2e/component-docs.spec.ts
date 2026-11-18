@@ -62,3 +62,19 @@ test("component code examples copy and show confirmation", async ({ page }) => {
 	await expect(code.getByRole("status")).toHaveText("تم النسخ");
 	expect(await page.evaluate(() => sessionStorage.getItem("copied-code"))).toBe(content);
 });
+
+test("copied confirmation is also the accessible button name", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components/Button");
+	await page.evaluate(() => {
+		Object.defineProperty(navigator, "clipboard", {
+			configurable: true,
+			value: { writeText: async () => undefined },
+		});
+	});
+	const code = page.locator(".button-preview__row .copyable-code").first();
+	const button = code.getByRole("button");
+	await button.click();
+	await expect(button).toHaveText("Copied");
+	await expect(button).toHaveAccessibleName("Copied");
+	await expect(code.getByRole("status")).toHaveText("Copied");
+});

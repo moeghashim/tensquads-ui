@@ -9,8 +9,8 @@ const states: PreviewState[] = [
 	{ locale: "ar", direction: "rtl", theme: "dark" },
 ];
 
-test("Dialog screenshots cover closed and open states in both directions and themes", async ({ page }, testInfo) => {
-	for (const state of states) {
+for (const state of states) {
+	test(`Dialog screenshots cover closed and open states in ${state.locale} ${state.theme}`, async ({ page }, testInfo) => {
 		await openPreview(page, state, "/components/Dialog");
 		const copy =
 			state.locale === "en"
@@ -83,8 +83,8 @@ test("Dialog screenshots cover closed and open states in both directions and the
 				await expect(dialog).toHaveCount(0);
 			}
 		}
-	}
-});
+	});
+}
 
 test("every Dialog example stays within the viewport", async ({ page }) => {
 	for (const state of states) {
