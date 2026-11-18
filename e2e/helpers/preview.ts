@@ -31,7 +31,8 @@ export async function capturePreviewScreenshots(page: Page, testInfo: TestInfo, 
 			animations: "disabled",
 			caret: "hide",
 			fullPage: true,
-			// Allow bounded macOS/Linux glyph rasterization differences without masking text.
+			// Ignore small glyph-edge shading differences between macOS and Linux.
+			threshold: 0.25,
 			maxDiffPixelRatio: 0.001,
 		});
 	}
