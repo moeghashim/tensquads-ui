@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -58,15 +58,14 @@ async function getJson(url) {
 }
 
 async function packageEntries(packageName, version) {
-	const temp = await mkdir(join(tmpdir(), `ui-sdk-package-${process.pid}-${packageName.split("/").at(-1)}`), {
-		recursive: true,
-	}).then(() => join(tmpdir(), `ui-sdk-package-${process.pid}-${packageName.split("/").at(-1)}`));
+	const temp = await mkdtemp(join(tmpdir(), "ui-sdk-package-"));
 	try {
-		execFileSync("npm", ["pack", `${packageName}@${version}`, "--pack-destination", temp, "--silent"], {
-			cwd: root,
-			stdio: "ignore",
-		});
-		const [archive] = (await readdir(temp)).filter((name) => name.endsWith(".tgz"));
+		const [{ filename: archive }] = JSON.parse(
+			execFileSync("npm", ["pack", `${packageName}@${version}`, "--pack-destination", temp, "--json"], {
+				cwd: root,
+				encoding: "utf8",
+			}),
+		);
 		execFileSync("tar", ["-xzf", join(temp, archive), "-C", temp]);
 		const pkg = JSON.parse(await readFile(join(temp, "package/package.json"), "utf8"));
 		return Object.keys(pkg.exports ?? {})
