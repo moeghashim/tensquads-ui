@@ -14,7 +14,7 @@ describe("Button", () => {
 	it("wraps the UI SDK button and forwards native and render props", () => {
 		const onClick = vi.fn();
 		const { getByRole } = render(
-			<Button variant="soft" size="sm" name="continue" data-testid="continue" onClick={onClick}>
+			<Button variant="soft" size="sm" className="custom" name="continue" data-testid="continue" onClick={onClick}>
 				Continue
 			</Button>,
 		);
@@ -23,6 +23,7 @@ describe("Button", () => {
 		expect(button).toHaveAttribute("name", "continue");
 		expect(button).toHaveAttribute("data-testid", "continue");
 		expect(button.className).toContain("ts-button--soft");
+		expect(button).toHaveClass("custom");
 		fireEvent.click(button);
 		expect(onClick).toHaveBeenCalledOnce();
 	});
@@ -35,6 +36,36 @@ describe("Button", () => {
 			</Button>,
 		);
 		expect(getByRole("button", { name: "Add" })).toBeInTheDocument();
+	});
+
+	it.each([false, true])("composes state classes through async actions with link rendering %s", async (asLink) => {
+		let finishAction!: () => void;
+		const promise = new Promise<void>((resolve) => {
+			finishAction = resolve;
+		});
+		const { getByRole } = render(
+			<Button
+				variant="soft"
+				size="sm"
+				pill
+				render={asLink ? <a href="#next" /> : undefined}
+				onClick={() => promise}
+				className={({ pending }) => (pending ? "saving" : "ready")}
+			>
+				Save
+			</Button>,
+		);
+		const button = getByRole(asLink ? "link" : "button", { name: "Save" });
+		expect(button).toHaveClass("ts-button", "ts-button--soft", "ts-button--sm", "ts-button--pill", "ready");
+		expect(button).not.toHaveClass("saving");
+		fireEvent.click(button);
+		expect(button).toHaveAttribute("aria-busy", "true");
+		expect(button).toHaveClass("ts-button", "ts-button--soft", "ts-button--sm", "ts-button--pill", "saving");
+		expect(button).not.toHaveClass("ready");
+		await act(async () => finishAction());
+		expect(button).not.toHaveAttribute("aria-busy");
+		expect(button).toHaveClass("ts-button", "ts-button--soft", "ts-button--sm", "ts-button--pill", "ready");
+		expect(button).not.toHaveClass("saving");
 	});
 
 	it("preserves disabled state and link rendering", () => {
