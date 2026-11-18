@@ -142,6 +142,8 @@
 	.ts-chat__composer-actions { align-items: center; display: flex; justify-content: space-between; min-block-size: var(--ts-control-md); }
 	.ts-chat__send { block-size: var(--ts-control-md); inline-size: var(--ts-control-md); padding: 0; }
 	.ts-chat__send > svg { inline-size: 16px; block-size: 16px; }
+	/* The send arrow points in the reading direction. */
+	.ts-chat__send:dir(rtl) > svg { scale: -1 1; }
 	.ts-chat__send:disabled { background: var(--ts-alpha-12); color: var(--ts-text-disabled); }
 	.ts-chat__attach:empty { display: none; }
 	.ts-chat__attach > button { color: var(--ts-text-secondary); }
