@@ -1,0 +1,15 @@
+# Deployment status
+
+The deployment is **ready**. See the [runbook](https://example.com/runbook).
+
+```openui
+root = Badge("Ready", "success")
+```
+
+The checks passed:
+
+```openui
+root = Button("Continue", "solid", "md", false, false)
+```
+
+Use `npm run deploy` to continue.

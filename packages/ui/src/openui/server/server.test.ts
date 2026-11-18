@@ -17,6 +17,18 @@ import {
 } from "./index.js";
 
 describe("OpenUI server helpers", () => {
+	it.each(["en", "ar"] as const)("keeps the default %s prompt identical to explicit UI mode", (locale) => {
+		const input = { library: createTensquadsLibrary(locale), locale };
+		expect(buildSystemPrompt(input)).toBe(buildSystemPrompt({ ...input, mode: "ui" }));
+	});
+
+	it.each(["en", "ar"] as const)("teaches the %s chat reply format", (locale) => {
+		const prompt = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, mode: "chat" });
+		expect(prompt).toContain("```openui");
+		expect(prompt).toContain(locale === "en" ? "each UI moment" : "كتلة لكل لحظة واجهة");
+		expect(prompt).toContain(locale === "en" ? "Here is the current status." : "هذه هي الحالة الحالية.");
+	});
+
 	it.each(["en", "ar"] as const)("builds a live %s catalogue and locale example", (locale) => {
 		const prompt = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, persona: "Persona" });
 		for (const component of getRegisteredComponents()) {

@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { getRegisteredComponents } from "../packages/ui/src/openui";
 import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
-const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat"];
+const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
 
 test("component docs load in English and Arabic with localized fixtures", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");

@@ -1,0 +1,12 @@
+.ts-chat-reply { min-inline-size: 0; color: var(--ts-text-emphasis); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); overflow-wrap: anywhere; }
+.ts-chat-reply__markdown > :first-child { margin-block-start: 0; }
+.ts-chat-reply__markdown > :last-child { margin-block-end: 0; }
+.ts-chat-reply__markdown p, .ts-chat-reply__markdown ul, .ts-chat-reply__markdown ol { margin-block: var(--ts-space-3); }
+.ts-chat-reply__markdown h1, .ts-chat-reply__markdown h2, .ts-chat-reply__markdown h3, .ts-chat-reply__markdown h4, .ts-chat-reply__markdown h5, .ts-chat-reply__markdown h6 { margin-block: var(--ts-space-4) var(--ts-space-2); color: var(--ts-text-emphasis); font-weight: 500; }
+.ts-chat-reply__markdown ul, .ts-chat-reply__markdown ol { padding-inline-start: var(--ts-space-6); }
+.ts-chat-reply__markdown li + li { margin-block-start: var(--ts-space-1); }
+.ts-chat-reply__markdown a { color: var(--ts-primary-solid); text-decoration: underline; text-underline-offset: 0.15em; }
+.ts-chat-reply__markdown code, .ts-chat-reply__markdown pre { font-family: var(--ts-code-font-family); }
+.ts-chat-reply__markdown :not(pre) > code { padding-block: 0.1em; padding-inline: 0.35em; border-radius: var(--ts-radius-sm); background: var(--ts-surface-secondary); font-size: 0.9em; }
+.ts-chat-reply__markdown pre { max-inline-size: 100%; margin-block: var(--ts-space-3); padding: var(--ts-space-4); overflow: auto; border-radius: var(--ts-radius-md); background: var(--ts-surface-secondary); direction: ltr; text-align: start; white-space: pre; }
+.ts-chat-reply__openui { margin-block: var(--ts-space-3); }
