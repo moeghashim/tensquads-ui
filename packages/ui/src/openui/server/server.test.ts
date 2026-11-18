@@ -1,9 +1,12 @@
 import { isBuiltin } from "node:module";
 import { join } from "node:path";
+import { render } from "@testing-library/react";
+import { createElement } from "react";
 import { build } from "vite";
 import { describe, expect, it, vi } from "vitest";
 import { createTensquadsLibrary } from "../library.js";
 import { getRegisteredComponents } from "../registry.js";
+import { TensquadsRenderer } from "../TensquadsRenderer.js";
 import {
 	buildSystemPrompt,
 	MAX_BODY_BYTES,
@@ -30,6 +33,20 @@ describe("OpenUI server helpers", () => {
 			expect(prompt).toContain("Return only an OpenUI Lang program.");
 		}
 		expect(prompt).toContain("Persona");
+	});
+
+	it.each([
+		["en", "Petra, Planning"],
+		["ar", "بترا، تخطيط"],
+	] as const)("renders the emitted %s Squadmate example with its localized accessible name", (locale, name) => {
+		const prompt = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale });
+		const examples = prompt.match(/^root = Squadmate\(.+\)$/gm) ?? [];
+		expect(examples.length).toBeGreaterThan(0);
+		for (const stream of examples) {
+			const view = render(createElement(TensquadsRenderer, { stream, locale }));
+			expect(view.getByRole("img", { name })).toBeInTheDocument();
+			view.unmount();
+		}
 	});
 
 	it("enforces body byte and turn caps with typed errors", async () => {
