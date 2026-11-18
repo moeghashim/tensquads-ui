@@ -64,6 +64,9 @@ export const SegmentedControlOpenUI = defineComponent({
 						key: id,
 						value: id,
 						disabled,
+						onClick: () => {
+							if (!disabled) setUserSlot(id);
+						},
 						onFocus: () => setFocusedSlot(id),
 						onBlur: () => setFocusedSlot(null),
 					},
