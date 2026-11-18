@@ -1,0 +1,492 @@
+{
+  "config": {
+    "argv": [
+      "~/.local/share/mise/installs/node/26.13.1/bin/node",
+      "{run-worktree}/node_modules/.bin/playwright",
+      "test",
+      "--config=.chip-live/playwright.config.ts",
+      "e2e/chip-live.spec.ts",
+      "--workers=1"
+    ],
+    "configFile": "{run-worktree}/.chip-live/playwright.config.ts",
+    "rootDir": "{run-worktree}/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "snapshotDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "browserName": "chromium",
+          "locale": "en-US",
+          "colorScheme": "light",
+          "launchOptions": {
+            "args": [
+              "--disable-lcd-text",
+              "--font-render-hinting=none"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "chip-live.spec.ts",
+      "file": "chip-live.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "en light 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 294,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:39.887Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-c63f9fa66b38c3aa9c9a",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "en light 390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 217,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:40.269Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-77e25b72abba072c1c56",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "en dark 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 214,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:40.491Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-f9bd79688a37f043dbe7",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "en dark 390",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 474,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  436 pixels (ratio 0.01 of all image pixels) are different.\n\n  Snapshot: chromium-chip-en-ltr-dark-390.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(chromium-chip-en-ltr-dark-390.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 436 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 436 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  436 pixels (ratio 0.01 of all image pixels) are different.\n\n  Snapshot: chromium-chip-en-ltr-dark-390.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(chromium-chip-en-ltr-dark-390.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 436 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 436 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\n    at {run-worktree}/e2e/chip-live.spec.ts:7:20",
+                    "location": {
+                      "file": "{run-worktree}/e2e/chip-live.spec.ts",
+                      "column": 20,
+                      "line": 7
+                    },
+                    "snippet": "  5 | await page.locator('.chip-preview__grid').getByRole('button',{name:'tool_search'}).focus();\n  6 | await page.setViewportSize({width,height:900});\n> 7 | await expect(page).toHaveScreenshot(`chromium-chip-${locale}-${direction}-${theme}-${width}.png`,{animations:'disabled',caret:'hide',fullPage:true,maxDiffPixelRatio:0.001});\n    |                    ^\n  8 | });\n  9 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/chip-live.spec.ts",
+                        "column": 20,
+                        "line": 7
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  436 pixels (ratio 0.01 of all image pixels) are different.\n\n  Snapshot: chromium-chip-en-ltr-dark-390.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(chromium-chip-en-ltr-dark-390.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 436 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 436 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\n\n  5 | await page.locator('.chip-preview__grid').getByRole('button',{name:'tool_search'}).focus();\n  6 | await page.setViewportSize({width,height:900});\n> 7 | await expect(page).toHaveScreenshot(`chromium-chip-${locale}-${direction}-${theme}-${width}.png`,{animations:'disabled',caret:'hide',fullPage:true,maxDiffPixelRatio:0.001});\n    |                    ^\n  8 | });\n  9 |\n    at {run-worktree}/e2e/chip-live.spec.ts:7:20"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:40.709Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "chromium-chip-en-ltr-dark-390-expected.png",
+                      "contentType": "image/png",
+                      "path": "{run-worktree}/e2e/__screenshots__/chip.spec.ts/chromium-chip-en-ltr-dark-390.png"
+                    },
+                    {
+                      "name": "chromium-chip-en-ltr-dark-390-actual.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results/chip-live-en-dark-390/chromium-chip-en-ltr-dark-390-actual.png"
+                    },
+                    {
+                      "name": "chromium-chip-en-ltr-dark-390-diff.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results/chip-live-en-dark-390/chromium-chip-en-ltr-dark-390-diff.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results/chip-live-en-dark-390/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/chip-live.spec.ts",
+                    "column": 20,
+                    "line": 7
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-040bc380c11d3720f0aa",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "ar light 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 237,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:41.396Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-aba63bba1eb64faa7ef3",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "ar light 390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 220,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:41.707Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-4e45ebac896f76de1619",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "ar dark 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 250,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:41.932Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-3e50e1db6f4dff24e4f7",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        },
+        {
+          "title": "ar dark 390",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 453,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  482 pixels (ratio 0.01 of all image pixels) are different.\n\n  Snapshot: chromium-chip-ar-rtl-dark-390.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(chromium-chip-ar-rtl-dark-390.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 482 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 482 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  482 pixels (ratio 0.01 of all image pixels) are different.\n\n  Snapshot: chromium-chip-ar-rtl-dark-390.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(chromium-chip-ar-rtl-dark-390.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 482 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 482 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\n    at {run-worktree}/e2e/chip-live.spec.ts:7:20",
+                    "location": {
+                      "file": "{run-worktree}/e2e/chip-live.spec.ts",
+                      "column": 20,
+                      "line": 7
+                    },
+                    "snippet": "  5 | await page.locator('.chip-preview__grid').getByRole('button',{name:'tool_search'}).focus();\n  6 | await page.setViewportSize({width,height:900});\n> 7 | await expect(page).toHaveScreenshot(`chromium-chip-${locale}-${direction}-${theme}-${width}.png`,{animations:'disabled',caret:'hide',fullPage:true,maxDiffPixelRatio:0.001});\n    |                    ^\n  8 | });\n  9 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/chip-live.spec.ts",
+                        "column": 20,
+                        "line": 7
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  482 pixels (ratio 0.01 of all image pixels) are different.\n\n  Snapshot: chromium-chip-ar-rtl-dark-390.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(chromium-chip-ar-rtl-dark-390.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 482 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 482 pixels (ratio 0.01 of all image pixels) are different.\u001b[22m\n\n\n  5 | await page.locator('.chip-preview__grid').getByRole('button',{name:'tool_search'}).focus();\n  6 | await page.setViewportSize({width,height:900});\n> 7 | await expect(page).toHaveScreenshot(`chromium-chip-${locale}-${direction}-${theme}-${width}.png`,{animations:'disabled',caret:'hide',fullPage:true,maxDiffPixelRatio:0.001});\n    |                    ^\n  8 | });\n  9 |\n    at {run-worktree}/e2e/chip-live.spec.ts:7:20"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-18T09:58:42.186Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "chromium-chip-ar-rtl-dark-390-expected.png",
+                      "contentType": "image/png",
+                      "path": "{run-worktree}/e2e/__screenshots__/chip.spec.ts/chromium-chip-ar-rtl-dark-390.png"
+                    },
+                    {
+                      "name": "chromium-chip-ar-rtl-dark-390-actual.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results/chip-live-ar-dark-390/chromium-chip-ar-rtl-dark-390-actual.png"
+                    },
+                    {
+                      "name": "chromium-chip-ar-rtl-dark-390-diff.png",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results/chip-live-ar-dark-390/chromium-chip-ar-rtl-dark-390-diff.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ/matrix-results/chip-live-ar-dark-390/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/chip-live.spec.ts",
+                    "column": 20,
+                    "line": 7
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7d7ed5c14b5aee459a0f-c5428be5b9f6483f96a0",
+          "file": "chip-live.spec.ts",
+          "line": 3,
+          "column": 117
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-18T09:58:39.593Z",
+    "duration": 3073.272,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

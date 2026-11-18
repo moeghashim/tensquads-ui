@@ -1,0 +1,7 @@
+Command: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test e2e/chip.spec.ts e2e/preview.spec.ts --workers=1 --reporter=list
+Exit: 1
+OpenUI Chip fixtures show the supplied icon and open their object: passed (all four locale/theme combinations).
+Preview home works in both directions and themes: passed (all eight committed screenshots).
+Chip previews icon, no icon, disabled, and long identifier states: failed at chromium-chip-en-ltr-dark-390.png with 436 differing pixels. This reproduces the exact macOS comparison failure already declined in test round 7. No comparator or baseline changes were made.
+Follow-up live browser driver completed with exit 0 and exercised all four Chip locale/theme combinations independently of screenshot comparison, including focus, overflow, axe, and visual captures. See live-results.txt.
+Linux: docker info --format '{{.OSType}}' did not respond and was interrupted (exit 130). No Linux result is claimed. Final GitHub verify remains owned by the outer CI phase.

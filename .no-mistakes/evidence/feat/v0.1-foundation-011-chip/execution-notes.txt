@@ -1,0 +1,8 @@
+Pinned Node 26.13.1 / npm 11.20.0 ran via MISE_TRUSTED_CONFIG_PATHS="$PWD" mise exec.
+Initial targeted Playwright run built the preview successfully and exited 1: OpenUI navigation and home gallery passed; Chip stopped at the known 436-pixel English/dark mobile glyph difference.
+Independent eight-case Chip screenshot comparison exited 1: six passed; English/dark/390 had 436 differing pixels; Arabic/dark/390 had 482. Visual review found differences at glyph edges. No baselines or tolerance changed.
+Disposable browser consumer driver exited 0 after React click/Enter/Space, disabled click/focus/Tab, OpenUI invoice_schema navigation, and four-state sizing/hover/focus/wrapping/overflow/axe checks.
+Initial driver setup attempt exited 1 because Axe requires browser.newContext(); corrected driver re-ran successfully.
+Docker info was terminated and waited after a 10-second timeout. No responsive Linux runtime was available. Linux CI confirmation remains outside this test phase.
+A preview launch on 5173 exited 1 due to another worktree taking the port after the initial run; independent checks used our own 5175 server.
+Both owned Vite and Wrangler servers stopped with exit 130; browser children closed in finally.

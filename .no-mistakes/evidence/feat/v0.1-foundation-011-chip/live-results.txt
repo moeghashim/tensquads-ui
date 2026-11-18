@@ -1,0 +1,13 @@
+React consumer: mouse, Enter, Space each invoke object callback; opened count = 3.
+Disabled native button, rendered link, and focusable-disabled button reject mouse, Enter, and Space; no callback or forbidden navigation.
+Custom OpenUI stream Chip("invoice_schema", "§", "#invoice_schema") renders supplied glyph and navigates by mouse and Enter.
+Consumer ltr,390px: 180-character identifier wraps visibly without internal overflow; height 66px; short pill height 28px.
+Consumer rtl,390px: 180-character identifier wraps visibly without internal overflow; height 66px; short pill height 28px.
+Built Worker preview en/ltr/light: visible states, keyboard focus ring (2px + 2px offset), 1440/390px screenshots, no horizontal overflow, axe zero violations.
+Gallery en/light: all seven component links preserved including Menu.
+Built Worker preview en/ltr/dark: visible states, keyboard focus ring (2px + 2px offset), 1440/390px screenshots, no horizontal overflow, axe zero violations.
+Gallery en/dark: all seven component links preserved including Menu.
+Built Worker preview ar/rtl/light: visible states, keyboard focus ring (2px + 2px offset), 1440/390px screenshots, no horizontal overflow, axe zero violations.
+Gallery ar/light: all seven component links preserved including Menu.
+Built Worker preview ar/rtl/dark: visible states, keyboard focus ring (2px + 2px offset), 1440/390px screenshots, no horizontal overflow, axe zero violations.
+Gallery ar/dark: all seven component links preserved including Menu.

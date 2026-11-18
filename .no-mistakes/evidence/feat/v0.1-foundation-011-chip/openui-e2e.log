@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:73461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/chip.spec.ts:18:1 › OpenUI Chip fixtures show the supplied icon and open their object (16.6s)
+
+  1 passed (20.4s)

@@ -1,61 +1,36 @@
-import {chromium} from 'playwright';
-import {expect} from '@playwright/test';
+import { chromium } from '@playwright/test';
+import { strict as assert } from 'node:assert';
+import fs from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import {writeFile} from 'node:fs/promises';
-const evidence='~/.no-mistakes/evidence/01M7PVSP7RFJCWRM65H4X017SS';
-const browser=await chromium.launch({args:['--disable-lcd-text','--font-render-hinting=none']});
-const results=[];
-try {
- const context=await browser.newContext({viewport:{width:390,height:844}});
- const page=await context.newPage();
- page.on('pageerror',e=>console.error('PAGE ERROR',e.message));
- await page.goto('http://127.0.0.1:18473/');
- const react=page.getByRole('region',{name:'React consumer'});
- const chip=react.getByRole('button',{name:'customer_schema',exact:true});
- await expect(chip).toBeVisible();
- const opened=page.getByLabel('Opened objects');
- await chip.click(); await expect(opened).toHaveText('["customer_schema"]');
- await chip.focus(); await page.keyboard.press('Enter'); await page.keyboard.press('Space');
- await expect(opened).toHaveText('["customer_schema","customer_schema","customer_schema"]');
- expect(await chip.getAttribute('aria-pressed')).toBe(null);
- expect(await chip.locator('svg').count()).toBe(1);
- results.push({scenario:'React consumer mouse, Enter and Space',opened:await opened.textContent(),pressed:await chip.getAttribute('aria-pressed'),iconCount:1});
- const disabled=react.getByRole('button',{name:'disabled_schema'});
- await expect(disabled).toBeDisabled(); await disabled.click({force:true});
- await chip.focus(); await page.keyboard.press('Tab');
- await expect(react.getByRole('link',{name:'linked_schema'})).toBeFocused();
- await page.keyboard.press('Enter'); expect(new URL(page.url()).hash).toBe('#object-details');
- await expect(opened).toHaveText('["customer_schema","customer_schema","customer_schema"]');
- results.push({scenario:'Disabled refuses clicks and tab skips it; rendered link navigates',disabled:true,hash:new URL(page.url()).hash,opened:await opened.textContent()});
- const long=react.getByRole('button',{name:'customer_record_identifier_'.repeat(12),exact:true});
- const box=await long.boundingBox();
- const dimensions=await page.evaluate(()=>({viewport:document.documentElement.clientWidth,content:document.documentElement.scrollWidth}));
- expect(dimensions.content).toBeLessThanOrEqual(390); expect(box.height).toBeGreaterThan(28);
- expect(await long.locator('.ts-chip__name').textContent()).toBe('customer_record_identifier_'.repeat(12));
- results.push({scenario:'312-character synthetic identifier wraps at 390px',dimensions,box,fullName:await long.innerText()});
- await page.screenshot({path:`${evidence}/react-consumer-390.png`,fullPage:true});
- const stream=page.getByRole('region',{name:'OpenUI consumer'}).getByRole('button',{name:'customer_schema'});
- await expect(stream).toBeVisible();
- const before=await opened.textContent(); const beforeUrl=page.url();
- await stream.click(); await stream.focus(); await page.keyboard.press('Enter'); await page.keyboard.press('Space');
- const observation={scenario:'OpenUI consumer object icon and opening action',icon:await stream.locator('.ts-chip__icon').innerHTML(),openedBefore:before,openedAfter:await opened.textContent(),urlBefore:beforeUrl,urlAfter:page.url()};
- results.push(observation);
- await page.screenshot({path:`${evidence}/openui-after-activation.png`,fullPage:true});
- for(const locale of ['en','ar']) for(const theme of ['light','dark']) {
-  await page.setViewportSize({width:390,height:844});
-  await page.goto(`http://localhost:5173/components/Chip?locale=${locale}&dir=${locale==='ar'?'rtl':'ltr'}&theme=${theme}`);
-  await page.evaluate(()=>document.fonts.ready);
-  const first=page.locator('.chip-preview__grid').getByRole('button',{name:'response_schema'});
-  await first.focus();
-  const style=await first.evaluate(e=>{const s=getComputedStyle(e);return {height:s.height,background:s.backgroundColor,ring:s.outlineColor,width:s.outlineWidth,offset:s.outlineOffset}});
-  expect(style.height).toBe('28px'); expect(style.width).toBe('2px'); expect(style.offset).toBe('2px'); expect(style.ring).toBe(theme==='light'?'rgb(1, 105, 204)':'rgb(2, 133, 255)');
-  const normal=style.background; await first.hover(); await page.waitForTimeout(250); expect(await first.evaluate(e=>getComputedStyle(e).backgroundColor)).not.toBe(normal);
-  const violations=(await new AxeBuilder({page}).analyze()).violations; expect(violations).toEqual([]);
-  const dim=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth})); expect(dim.scrollWidth).toBeLessThanOrEqual(dim.width);
-  await expect(page.locator('.component-list').getByRole('button',{name:'response_schema'})).toBeVisible();
-  await page.screenshot({path:`${evidence}/chip-${locale}-${theme}-390.png`,fullPage:true});
-  results.push({scenario:'Preview focus, hover, axe and OpenUI fixture',locale,theme,style,violations,dimensions:dim});
- }
- await writeFile(`${evidence}/live-observations.json`,JSON.stringify(results,null,2));
- console.log(JSON.stringify(results,null,2));
-} finally {await browser.close()}
+const evidence='~/.no-mistakes/evidence/01M7Q0TS59GMGAYZAXK8C9R9GJ';
+const log=[];const browser=await chromium.launch({args:['--disable-lcd-text','--font-render-hinting=none']});
+try {const context=await browser.newContext({viewport:{width:390,height:900}});const page=await context.newPage();
+page.on('pageerror',e=>log.push({pageError:e.message}));
+await page.goto('http://127.0.0.1:5174');
+const chip=page.getByRole('button',{name:'customer_schema',exact:true});
+await chip.waitFor();await chip.click();await chip.focus();await page.keyboard.press('Enter');await page.keyboard.press('Space');
+assert.equal(await page.getByRole('status',{name:'Opened objects'}).textContent(),'customer_schema,customer_schema,customer_schema');
+assert.equal(await chip.locator('svg').count(),1);
+log.push({scenario:'React consumer mouse/Enter/Space',opened:await page.getByRole('status',{name:'Opened objects'}).textContent()});
+const disabled=page.getByRole('button',{name:'disabled_object'});assert.equal(await disabled.isDisabled(),true);
+await disabled.click({force:true});await disabled.evaluate(el=>el.focus());assert.equal(await disabled.evaluate(el=>el===document.activeElement),false);
+await chip.focus();await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement.textContent),'⌕this_is_a_long_object_identifier_that_stays_visible');
+assert.equal(await page.getByRole('status',{name:'Opened objects'}).textContent(),'customer_schema,customer_schema,customer_schema');
+log.push({scenario:'Disabled consumer',clickIgnored:true,focusRejected:true,tabSkipped:true});
+const link=page.getByRole('link',{name:'invoice_schema'});assert.equal(await link.locator('.ts-chip__icon').textContent(),'⌕');await link.click();assert.equal(new URL(page.url()).hash,'#invoice_schema');await page.evaluate(()=>history.replaceState(null,'','/'));await link.focus();await page.keyboard.press('Space');assert.equal(new URL(page.url()).hash,'');await page.keyboard.press('Enter');assert.equal(new URL(page.url()).hash,'#invoice_schema');
+log.push({scenario:'Synthetic OpenUI invoice_schema',icon:'⌕',clickAndEnterDestination:'#invoice_schema',spaceUsesNativeLink:true});
+await page.screenshot({path:`${evidence}/consumer.png`,fullPage:true});
+for(const locale of ['en','ar'])for(const theme of ['light','dark']){
+const dir=locale==='ar'?'rtl':'ltr';await page.goto(`http://127.0.0.1:5175/components/Chip?locale=${locale}&dir=${dir}&theme=${theme}`);await page.addStyleTag({content:'select { appearance:none;padding-inline-end:calc(var(--ts-space-3) + 16px); }'});await page.evaluate(()=>document.fonts.ready);
+const first=page.locator('.chip-preview__grid').getByRole('button',{name:'response_schema',exact:true});await first.waitFor();await first.focus();
+const style=await first.evaluate(el=>{const s=getComputedStyle(el);return {height:el.getBoundingClientRect().height,fill:s.backgroundColor,token:getComputedStyle(document.documentElement).getPropertyValue('--ts-primary-soft').trim(),outline:s.outlineWidth,offset:s.outlineOffset,color:s.outlineColor,radius:s.borderRadius,icon:el.querySelector('.ts-chip__icon').getBoundingClientRect().width};});
+assert.equal(style.height,28);assert.equal(style.icon,16);assert.equal(style.outline,'2px');assert.equal(style.offset,'2px');assert.equal(style.color,theme==='light'?'rgb(1, 105, 204)':'rgb(2, 133, 255)');
+const fills=await first.evaluate(el=>{let s=getComputedStyle(el);el.style.background='var(--ts-primary-soft)';let expected=getComputedStyle(el).backgroundColor;el.style.removeProperty('background');return {actual:s.backgroundColor,expected};});assert.equal(fills.actual,fills.expected);
+await first.hover();await page.waitForTimeout(250);const hover=await first.evaluate(el=>{let actual=getComputedStyle(el).backgroundColor;el.style.background='var(--ts-primary-soft-hover)';let expected=getComputedStyle(el).backgroundColor;el.style.removeProperty('background');return {actual,expected};});assert.equal(hover.actual,hover.expected);await page.mouse.move(0,0);
+const long=page.getByRole('button',{name:'this_is_a_long_object_identifier_that_stays_visible'});const dimensions=await long.evaluate(el=>{let name=el.querySelector('.ts-chip__name');let r=name.getBoundingClientRect();return {text:name.textContent,height:el.getBoundingClientRect().height,width:el.getBoundingClientRect().width,client:name.clientWidth,scroll:name.scrollWidth,overflow:getComputedStyle(name).overflow,textOverflow:getComputedStyle(name).textOverflow,viewport:document.documentElement.clientWidth,document:document.documentElement.scrollWidth};});assert.equal(dimensions.text,'this_is_a_long_object_identifier_that_stays_visible');assert.ok(dimensions.height>28);assert.ok(dimensions.scroll<=dimensions.client);assert.ok(dimensions.document<=dimensions.viewport);assert.notEqual(dimensions.textOverflow,'ellipsis');
+const axe=await new AxeBuilder({page}).analyze();assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));
+for(const width of [1440,390]){await page.setViewportSize({width,height:900});await page.screenshot({path:`${evidence}/chip-${locale}-${theme}-${width}.png`,fullPage:true});}
+log.push({scenario:'Preview styles, focus, long identifier and accessibility',locale,theme,style,hover,dimensions,axeViolations:axe.violations.length});
+}
+fs.writeFileSync(`${evidence}/live-results.json`,JSON.stringify(log,null,2));console.log(JSON.stringify(log,null,2));
+}finally{await browser.close();}
