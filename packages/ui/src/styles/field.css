@@ -1,4 +1,9 @@
 @layer tensquads {
+	[data-slot="field-set"].ts-field-set { display: grid; gap: var(--ts-space-3); min-inline-size: 0; margin: 0; padding: 0; border: 0; }
+	[data-slot="field-legend"].ts-field-legend { color: var(--ts-text); font-family: var(--ts-field-label-font-family); font-size: var(--ts-field-label-font-size); line-height: var(--ts-field-label-line-height); font-weight: var(--ts-field-label-font-weight); }
+	[data-slot="field-group"].ts-field-group { display: grid; gap: var(--ts-space-3); min-inline-size: 0; }
+	[data-slot="field-set"].ts-field-set > [data-slot="field-description"] { grid-column: auto; }
+
 	[data-slot="field"].ts-field { display: grid; min-inline-size: 0; grid-template-columns: minmax(60px, max-content) minmax(0, 1fr); align-items: center; column-gap: var(--ts-space-3); row-gap: var(--ts-space-1-5); }
 	[data-slot="field-label"].ts-field__label { color: var(--ts-text); font-family: var(--ts-field-label-font-family); font-size: var(--ts-field-label-font-size); line-height: var(--ts-field-label-line-height); font-weight: var(--ts-field-label-font-weight); letter-spacing: var(--ts-field-label-letter-spacing); }
 	[data-slot="field-control"].ts-field__control { box-sizing: border-box; min-inline-size: 0; block-size: var(--ts-control-sm); padding-inline: var(--ts-space-2-5); border: 1px solid transparent; border-radius: var(--ts-radius-md); color: var(--ts-text); background: var(--ts-input-bg); font-family: var(--ts-field-value-font-family); font-size: var(--ts-field-value-font-size); line-height: var(--ts-field-value-line-height); font-weight: var(--ts-field-value-font-weight); letter-spacing: var(--ts-field-value-letter-spacing); }

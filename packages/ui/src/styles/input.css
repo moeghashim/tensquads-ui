@@ -1,4 +1,8 @@
 @layer tensquads {
+	[data-slot="input-group"] { display: flex; align-items: center; gap: var(--ts-space-1-5); min-inline-size: 0; }
+	[data-slot="input-clear"] { color: var(--ts-text-secondary); background: transparent; border: 0; border-radius: var(--ts-radius-md); font: inherit; cursor: pointer; }
+	[data-slot="input-clear"]:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+
 	[data-slot="input"].ts-input {
 		box-sizing: border-box;
 		inline-size: 100%;

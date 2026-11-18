@@ -6,12 +6,24 @@ export type {
 	FieldControlProps,
 	FieldDescriptionProps,
 	FieldErrorProps,
+	FieldGroupProps,
 	FieldLabelProps,
+	FieldLegendProps,
 	FieldProps,
+	FieldSetProps,
 } from "./Field/Field.js";
-export { Field, FieldControl, FieldDescription, FieldError, FieldLabel } from "./Field/Field.js";
-export type { InputProps, InputVariant } from "./Input/Input.js";
-export { Input } from "./Input/Input.js";
+export {
+	Field,
+	FieldControl,
+	FieldDescription,
+	FieldError,
+	FieldGroup,
+	FieldLabel,
+	FieldLegend,
+	FieldSet,
+} from "./Field/Field.js";
+export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
+export { Input, InputClear, InputGroup } from "./Input/Input.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
 export {
 	Squadmate,

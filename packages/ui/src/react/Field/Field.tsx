@@ -3,7 +3,10 @@ import {
 	FieldControl as UiFieldControl,
 	FieldDescription as UiFieldDescription,
 	FieldError as UiFieldError,
+	FieldGroup as UiFieldGroup,
 	FieldLabel as UiFieldLabel,
+	FieldLegend as UiFieldLegend,
+	FieldSet as UiFieldSet,
 } from "@ui-sdk/react/field";
 import type { ComponentProps } from "react";
 
@@ -36,4 +39,19 @@ export function FieldDescription({ className, ...props }: FieldDescriptionProps)
 export type FieldErrorProps = ComponentProps<typeof UiFieldError>;
 export function FieldError({ className, ...props }: FieldErrorProps) {
 	return <UiFieldError {...props} className={classes(className, "ts-field__error")} />;
+}
+
+export type FieldSetProps = ComponentProps<typeof UiFieldSet>;
+export function FieldSet({ className, ...props }: FieldSetProps) {
+	return <UiFieldSet {...props} className={classes(className, "ts-field-set")} />;
+}
+
+export type FieldLegendProps = ComponentProps<typeof UiFieldLegend>;
+export function FieldLegend({ className, ...props }: FieldLegendProps) {
+	return <UiFieldLegend {...props} className={classes(className, "ts-field-legend")} />;
+}
+
+export type FieldGroupProps = ComponentProps<typeof UiFieldGroup>;
+export function FieldGroup({ className, ...props }: FieldGroupProps) {
+	return <UiFieldGroup {...props} className={classes(className, "ts-field-group")} />;
 }

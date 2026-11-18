@@ -1,6 +1,7 @@
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Input } from "./Input.js";
+import { TensquadsRenderer } from "../../openui/TensquadsRenderer.js";
+import { Input, InputClear, InputGroup } from "../index.js";
 
 afterEach(cleanup);
 
@@ -36,5 +37,60 @@ describe("Input", () => {
 	it.each(["disabled", "readOnly"] as const)("preserves %s state", (state) => {
 		const { getByRole } = render(<Input aria-label="Value" {...{ [state]: true }} />);
 		expect(getByRole("textbox", { name: "Value" })).toHaveAttribute(state === "readOnly" ? "readonly" : "disabled");
+	});
+});
+
+describe("OpenUI streamed values", () => {
+	it.each(["en", "ar"] as const)("updates streamed text and preserves edits in %s", (locale) => {
+		const stream = (value: string) => `root = Input("Search", "Find", "${value}")`.replace("${value}", value);
+		const { getByRole, rerender } = render(<TensquadsRenderer stream={stream("N").slice(0, -2)} locale={locale} />);
+		const input = getByRole("textbox", { name: "Search" });
+		expect(input).toHaveValue("N");
+		rerender(<TensquadsRenderer stream={stream("Northstar")} locale={locale} />);
+		expect(getByRole("textbox", { name: "Search" })).toBe(input);
+		expect(input).toHaveValue("Northstar");
+		fireEvent.input(input, { target: { value: "My project" } });
+		expect(input).toHaveValue("My project");
+		rerender(<TensquadsRenderer stream={stream("Northstar")} locale={locale} />);
+		expect(input).toHaveValue("My project");
+		rerender(<TensquadsRenderer stream={stream("")} locale={locale} />);
+		expect(input).toHaveValue("");
+	});
+});
+
+describe("Input parts", () => {
+	it.each(["ltr", "rtl"])("clears grouped text and returns focus in %s", async (dir) => {
+		const onValueChange = vi.fn();
+		const { getByRole, getByTestId, queryByRole } = render(
+			<InputGroup
+				dir={dir}
+				data-testid="group"
+				render={<section />}
+				className={(state) => (state.filled ? "filled" : "empty")}
+			>
+				<Input aria-label="Website" defaultValue="example.com" onValueChange={onValueChange} />
+				<InputClear
+					aria-label="Clear website"
+					render={<button type="button" />}
+					className={(state) => (state.filled ? "clearable" : "empty")}
+				/>
+			</InputGroup>,
+		);
+		const group = getByTestId("group");
+		expect(group.tagName).toBe("SECTION");
+		expect(group).toHaveAttribute("data-slot", "input-group");
+		expect(group).toHaveAttribute("dir", dir);
+		await waitFor(() => expect(group).toHaveClass("filled"));
+		const clear = getByRole("button", { name: "Clear website" });
+		expect(clear).toHaveAttribute("data-slot", "input-clear");
+		expect(clear).toHaveAttribute("type", "button");
+		expect(clear).toHaveClass("clearable");
+		fireEvent.click(clear);
+		const input = getByRole("textbox", { name: "Website" });
+		expect(input).toHaveValue("");
+		expect(input).toHaveFocus();
+		expect(onValueChange).toHaveBeenCalledWith("", expect.objectContaining({ reason: "clear-press" }));
+		expect(queryByRole("button", { name: "Clear website" })).not.toBeInTheDocument();
+		await waitFor(() => expect(group).toHaveClass("empty"));
 	});
 });

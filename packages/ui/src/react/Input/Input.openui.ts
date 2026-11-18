@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, useEffect, useState } from "react";
 import { z } from "zod/v4";
 import { defineComponent } from "../../openui/define-component.js";
 import { registerComponent } from "../../openui/registration-store.js";
@@ -18,7 +18,14 @@ export const InputOpenUI = defineComponent({
 	component: ({ props }) => {
 		const { label, ...inputProps } = props;
 		const { value, ...rest } = inputProps;
-		return createElement(Input, { ...rest, defaultValue: value, "aria-label": label });
+		const [currentValue, setCurrentValue] = useState(value ?? "");
+		useEffect(() => setCurrentValue(value ?? ""), [value]);
+		return createElement(Input, {
+			...rest,
+			value: currentValue,
+			onValueChange: setCurrentValue,
+			"aria-label": label,
+		});
 	},
 });
 

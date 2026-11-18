@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, useEffect, useState } from "react";
 import { z } from "zod/v4";
 import { defineComponent } from "../../openui/define-component.js";
 import { registerComponent } from "../../openui/registration-store.js";
@@ -18,21 +18,25 @@ export const FieldOpenUI = defineComponent({
 		disabled: z.boolean().default(false),
 		readOnly: z.boolean().default(false),
 	}),
-	component: ({ props }) =>
-		createElement(
+	component: ({ props }) => {
+		const [currentValue, setCurrentValue] = useState(props.value ?? "");
+		useEffect(() => setCurrentValue(props.value ?? ""), [props.value]);
+		return createElement(
 			Field,
 			{ name: props.name, disabled: props.disabled, invalid: Boolean(props.error) },
 			createElement(FieldLabel, null, props.label),
 			createElement(Input, {
 				name: props.name,
 				placeholder: props.placeholder,
-				defaultValue: props.value,
+				value: currentValue,
+				onValueChange: setCurrentValue,
 				disabled: props.disabled,
 				readOnly: props.readOnly,
 			}),
 			props.description ? createElement(FieldDescription, null, props.description) : null,
 			props.error ? createElement(FieldError, { match: true }, props.error) : null,
-		),
+		);
+	},
 });
 
 registerComponent(FieldOpenUI);
