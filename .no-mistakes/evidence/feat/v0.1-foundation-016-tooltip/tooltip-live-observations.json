@@ -1,0 +1,667 @@
+[
+  {
+    "locale": "en",
+    "hoverHint": "Create a new item",
+    "hoverPreservedFocus": true,
+    "pointerOverHint": "stayed open",
+    "pointerAway": "closed",
+    "escape": "closed and retained trigger focus",
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "openui": {
+      "label": "Add item",
+      "description": "Create a new item",
+      "id": "ui-sdk-_R_laq_-content"
+    }
+  },
+  {
+    "locale": "ar",
+    "hoverHint": "أنشئ عنصراً جديداً",
+    "hoverPreservedFocus": true,
+    "pointerOverHint": "stayed open",
+    "pointerAway": "closed",
+    "escape": "closed and retained trigger focus",
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "openui": {
+      "label": "إضافة عنصر",
+      "description": "أنشئ عنصراً جديداً",
+      "id": "ui-sdk-_R_laq_-content"
+    }
+  },
+  {
+    "consumer": "real Tooltip React exports with synthetic labels",
+    "disabled": "hover and focus keep hint closed; Enter still executes action",
+    "controlled": "focus opens and updates output; Escape closes and updates output",
+    "collision": {
+      "requested": "top",
+      "actual": "bottom",
+      "viewport": 390,
+      "bounds": {
+        "x": 156.52000427246094,
+        "y": 40,
+        "width": 224.09999084472656,
+        "height": 30.720001220703125
+      }
+    },
+    "touch": "tap opens; second tap closes"
+  },
+  {
+    "placementsAndPaintedTokenColors": [
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 382,
+          "y": 231,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 740,
+          "y": 268,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 902,
+          "y": 304,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1440,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 284,
+          "y": 449,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 117,
+          "y": 231,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 215,
+          "y": 449,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 117,
+          "y": 666,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 390,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 19,
+          "y": 811,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 382,
+          "y": 231,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 740,
+          "y": 268,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 902,
+          "y": 304,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 284,
+          "y": 449,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 117,
+          "y": 231,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 215,
+          "y": 449,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 117,
+          "y": 666,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "width": 390,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 19,
+          "y": 811,
+          "width": 155.9375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 914,
+          "y": 231,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 740,
+          "y": 268,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 394,
+          "y": 304,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 1440,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 828,
+          "y": 449,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 129,
+          "y": 231,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 215,
+          "y": 449,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 129,
+          "y": 666,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "width": 390,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(48, 48, 48)",
+          "text": "rgb(255, 255, 255)",
+          "arrow": "rgb(48, 48, 48)",
+          "shortcut": "rgb(255, 255, 255)"
+        },
+        "box": {
+          "x": 43,
+          "y": 811,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 914,
+          "y": 231,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 740,
+          "y": 268,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 394,
+          "y": 304,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 1440,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 828,
+          "y": 449,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "top",
+        "actual": "top",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 129,
+          "y": 231,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "right",
+        "actual": "right",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 215,
+          "y": 449,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "bottom",
+        "actual": "bottom",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 129,
+          "y": 666,
+          "width": 132.234375,
+          "height": 33
+        }
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 390,
+        "requested": "left",
+        "actual": "left",
+        "painted": {
+          "fill": "rgb(175, 175, 175)",
+          "text": "rgb(13, 13, 13)",
+          "arrow": "rgb(175, 175, 175)",
+          "shortcut": "rgb(13, 13, 13)"
+        },
+        "box": {
+          "x": 43,
+          "y": 811,
+          "width": 132.234375,
+          "height": 33
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+Dependency setup: root npm ci (prepare built UI), exit 0; preview npm ci, exit 0.
+Existing test: npx playwright test e2e/tooltip.spec.ts --reporter=line, exit 0.
+Final focused test: npx playwright test --config .tooltip-validation/playwright.config.ts, exit 0.
+Preview and consumer production builds completed through awaited Playwright webServer commands.
+Intermediate driver attempts required correcting config cwd, isolated port, hydration readiness, and removing an unnecessary Escape assertion between default-open placement samples.
+No lint, static analysis, full suite, pipeline control, push, PR mutation, or CI was executed.

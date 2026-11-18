@@ -1,0 +1,667 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Tooltip live validation evidence</title><style>body{font:16px system-ui;margin:32px;max-width:1500px} img{max-width:100%;border:1px solid #ccc}figure{margin:32px 0}pre{white-space:pre-wrap}h2{margin-top:48px}</style><h1>Tooltip live validation</h1><p>Real Chromium against a production-built local Cloudflare preview and a production-built disposable React consumer. Synthetic labels only. Screenshots are review artifacts, without pixel comparisons.</p><p>The existing Tooltip end-to-end test exited 0. The focused driver exited 0 after correcting readiness and port setup. Full verify, PR, and CI are owned by the outer executor.</p><figure><figcaption>consumer-edge-flip.png</figcaption><a href="consumer-edge-flip.png"><img loading="lazy" src="consumer-edge-flip.png"></a></figure><figure><figcaption>consumer-touch-open.png</figcaption><a href="consumer-touch-open.png"><img loading="lazy" src="consumer-touch-open.png"></a></figure><figure><figcaption>openui-tooltip-ar.png</figcaption><a href="openui-tooltip-ar.png"><img loading="lazy" src="openui-tooltip-ar.png"></a></figure><figure><figcaption>openui-tooltip-en.png</figcaption><a href="openui-tooltip-en.png"><img loading="lazy" src="openui-tooltip-en.png"></a></figure><figure><figcaption>placement-right-ar-dark-1440.png</figcaption><a href="placement-right-ar-dark-1440.png"><img loading="lazy" src="placement-right-ar-dark-1440.png"></a></figure><figure><figcaption>placement-right-ar-dark-390.png</figcaption><a href="placement-right-ar-dark-390.png"><img loading="lazy" src="placement-right-ar-dark-390.png"></a></figure><figure><figcaption>placement-right-ar-light-1440.png</figcaption><a href="placement-right-ar-light-1440.png"><img loading="lazy" src="placement-right-ar-light-1440.png"></a></figure><figure><figcaption>placement-right-ar-light-390.png</figcaption><a href="placement-right-ar-light-390.png"><img loading="lazy" src="placement-right-ar-light-390.png"></a></figure><figure><figcaption>placement-right-en-dark-1440.png</figcaption><a href="placement-right-en-dark-1440.png"><img loading="lazy" src="placement-right-en-dark-1440.png"></a></figure><figure><figcaption>placement-right-en-dark-390.png</figcaption><a href="placement-right-en-dark-390.png"><img loading="lazy" src="placement-right-en-dark-390.png"></a></figure><figure><figcaption>placement-right-en-light-1440.png</figcaption><a href="placement-right-en-light-1440.png"><img loading="lazy" src="placement-right-en-light-1440.png"></a></figure><figure><figcaption>placement-right-en-light-390.png</figcaption><a href="placement-right-en-light-390.png"><img loading="lazy" src="placement-right-en-light-390.png"></a></figure><figure><figcaption>tooltip-ar-rtl-dark-1440.png</figcaption><a href="tooltip-ar-rtl-dark-1440.png"><img loading="lazy" src="tooltip-ar-rtl-dark-1440.png"></a></figure><figure><figcaption>tooltip-ar-rtl-dark-390.png</figcaption><a href="tooltip-ar-rtl-dark-390.png"><img loading="lazy" src="tooltip-ar-rtl-dark-390.png"></a></figure><figure><figcaption>tooltip-ar-rtl-light-1440.png</figcaption><a href="tooltip-ar-rtl-light-1440.png"><img loading="lazy" src="tooltip-ar-rtl-light-1440.png"></a></figure><figure><figcaption>tooltip-ar-rtl-light-390.png</figcaption><a href="tooltip-ar-rtl-light-390.png"><img loading="lazy" src="tooltip-ar-rtl-light-390.png"></a></figure><figure><figcaption>tooltip-en-ltr-dark-1440.png</figcaption><a href="tooltip-en-ltr-dark-1440.png"><img loading="lazy" src="tooltip-en-ltr-dark-1440.png"></a></figure><figure><figcaption>tooltip-en-ltr-dark-390.png</figcaption><a href="tooltip-en-ltr-dark-390.png"><img loading="lazy" src="tooltip-en-ltr-dark-390.png"></a></figure><figure><figcaption>tooltip-en-ltr-light-1440.png</figcaption><a href="tooltip-en-ltr-light-1440.png"><img loading="lazy" src="tooltip-en-ltr-light-1440.png"></a></figure><figure><figcaption>tooltip-en-ltr-light-390.png</figcaption><a href="tooltip-en-ltr-light-390.png"><img loading="lazy" src="tooltip-en-ltr-light-390.png"></a></figure><h2>Observed behavior and measurements</h2><pre>[
+  {
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;hoverHint&quot;: &quot;Create a new item&quot;,
+    &quot;hoverPreservedFocus&quot;: true,
+    &quot;pointerOverHint&quot;: &quot;stayed open&quot;,
+    &quot;pointerAway&quot;: &quot;closed&quot;,
+    &quot;escape&quot;: &quot;closed and retained trigger focus&quot;,
+    &quot;focusRing&quot;: {
+      &quot;width&quot;: &quot;2px&quot;,
+      &quot;offset&quot;: &quot;2px&quot;,
+      &quot;color&quot;: &quot;rgb(1, 105, 204)&quot;
+    },
+    &quot;openui&quot;: {
+      &quot;label&quot;: &quot;Add item&quot;,
+      &quot;description&quot;: &quot;Create a new item&quot;,
+      &quot;id&quot;: &quot;ui-sdk-_R_laq_-content&quot;
+    }
+  },
+  {
+    &quot;locale&quot;: &quot;ar&quot;,
+    &quot;hoverHint&quot;: &quot;أنشئ عنصراً جديداً&quot;,
+    &quot;hoverPreservedFocus&quot;: true,
+    &quot;pointerOverHint&quot;: &quot;stayed open&quot;,
+    &quot;pointerAway&quot;: &quot;closed&quot;,
+    &quot;escape&quot;: &quot;closed and retained trigger focus&quot;,
+    &quot;focusRing&quot;: {
+      &quot;width&quot;: &quot;2px&quot;,
+      &quot;offset&quot;: &quot;2px&quot;,
+      &quot;color&quot;: &quot;rgb(1, 105, 204)&quot;
+    },
+    &quot;openui&quot;: {
+      &quot;label&quot;: &quot;إضافة عنصر&quot;,
+      &quot;description&quot;: &quot;أنشئ عنصراً جديداً&quot;,
+      &quot;id&quot;: &quot;ui-sdk-_R_laq_-content&quot;
+    }
+  },
+  {
+    &quot;consumer&quot;: &quot;real Tooltip React exports with synthetic labels&quot;,
+    &quot;disabled&quot;: &quot;hover and focus keep hint closed; Enter still executes action&quot;,
+    &quot;controlled&quot;: &quot;focus opens and updates output; Escape closes and updates output&quot;,
+    &quot;collision&quot;: {
+      &quot;requested&quot;: &quot;top&quot;,
+      &quot;actual&quot;: &quot;bottom&quot;,
+      &quot;viewport&quot;: 390,
+      &quot;bounds&quot;: {
+        &quot;x&quot;: 156.52000427246094,
+        &quot;y&quot;: 40,
+        &quot;width&quot;: 224.09999084472656,
+        &quot;height&quot;: 30.720001220703125
+      }
+    },
+    &quot;touch&quot;: &quot;tap opens; second tap closes&quot;
+  },
+  {
+    &quot;placementsAndPaintedTokenColors&quot;: [
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 382,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 740,
+          &quot;y&quot;: 268,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 902,
+          &quot;y&quot;: 304,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 284,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 117,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 215,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 117,
+          &quot;y&quot;: 666,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 19,
+          &quot;y&quot;: 811,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 382,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 740,
+          &quot;y&quot;: 268,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 902,
+          &quot;y&quot;: 304,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 284,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 117,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 215,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 117,
+          &quot;y&quot;: 666,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 19,
+          &quot;y&quot;: 811,
+          &quot;width&quot;: 155.9375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 914,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 740,
+          &quot;y&quot;: 268,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 394,
+          &quot;y&quot;: 304,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 828,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 129,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 215,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 129,
+          &quot;y&quot;: 666,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;light&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;text&quot;: &quot;rgb(255, 255, 255)&quot;,
+          &quot;arrow&quot;: &quot;rgb(48, 48, 48)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(255, 255, 255)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 43,
+          &quot;y&quot;: 811,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 914,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 740,
+          &quot;y&quot;: 268,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 394,
+          &quot;y&quot;: 304,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 1440,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 828,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;top&quot;,
+        &quot;actual&quot;: &quot;top&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 129,
+          &quot;y&quot;: 231,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;right&quot;,
+        &quot;actual&quot;: &quot;right&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 215,
+          &quot;y&quot;: 449,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;bottom&quot;,
+        &quot;actual&quot;: &quot;bottom&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 129,
+          &quot;y&quot;: 666,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      },
+      {
+        &quot;locale&quot;: &quot;ar&quot;,
+        &quot;theme&quot;: &quot;dark&quot;,
+        &quot;width&quot;: 390,
+        &quot;requested&quot;: &quot;left&quot;,
+        &quot;actual&quot;: &quot;left&quot;,
+        &quot;painted&quot;: {
+          &quot;fill&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;text&quot;: &quot;rgb(13, 13, 13)&quot;,
+          &quot;arrow&quot;: &quot;rgb(175, 175, 175)&quot;,
+          &quot;shortcut&quot;: &quot;rgb(13, 13, 13)&quot;
+        },
+        &quot;box&quot;: {
+          &quot;x&quot;: 43,
+          &quot;y&quot;: 811,
+          &quot;width&quot;: 132.234375,
+          &quot;height&quot;: 33
+        }
+      }
+    ]
+  }
+]</pre></html>
