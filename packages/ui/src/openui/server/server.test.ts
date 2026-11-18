@@ -130,10 +130,12 @@ describe("OpenUI server helpers", () => {
 		const sdkImporters = new Set<string>();
 		const result = await build({
 			configFile: false,
+			define: { "process.env.NODE_ENV": JSON.stringify("production") },
 			ssr: { noExternal: true },
 			plugins: [
 				{
 					name: "server-boundary",
+					enforce: "pre",
 					resolveId(source, importer) {
 						if (source === "@anthropic-ai/sdk" && importer) sdkImporters.add(importer);
 						return null;
