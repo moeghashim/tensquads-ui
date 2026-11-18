@@ -89,6 +89,14 @@ function listItem(line: string) {
 	};
 }
 
+function matchHeading(line: string) {
+	return line.match(/^ {0,3}(#{1,6})\s+(.+?)(?:[ \t]+#+)?[ \t]*$/);
+}
+
+function isParagraphLine(line: string): boolean {
+	return !!line.trim() && !openingFence(line) && !matchHeading(line) && !listItem(line);
+}
+
 function readListBody(lines: Lines, start: number, item: NonNullable<ReturnType<typeof listItem>>) {
 	let firstContinuation = start + 1;
 	while (firstContinuation < lines.length && !lines.at(firstContinuation)?.trim()) firstContinuation += 1;
@@ -104,8 +112,10 @@ function readListBody(lines: Lines, start: number, item: NonNullable<ReturnType<
 			return line === undefined ? undefined : removeIndent(line, indentation);
 		},
 	};
+	let paragraph = false;
 	function blockEnd(index: number): number {
 		const line = body.at(index) ?? "";
+		paragraph = isParagraphLine(line);
 		const fence = openingFence(line);
 		if (fence) return readFence(body, index, fence).end;
 		const nested = listItem(line);
@@ -122,6 +132,10 @@ function readListBody(lines: Lines, start: number, item: NonNullable<ReturnType<
 		}
 		const original = lines.at(start + next) ?? "";
 		if (lineIndent(original) <= item.indent) {
+			if (next === end && paragraph && isParagraphLine(body.at(next) ?? "")) {
+				end = blockEnd(next);
+				continue;
+			}
 			if (listItem(original)) end = next;
 			break;
 		}
@@ -185,7 +199,7 @@ function renderBlocks(source: string, renderOpenUI: (stream: string, key: string
 			}
 			continue;
 		}
-		const heading = line.match(/^ {0,3}(#{1,6})\s+(.+?)(?:[ \t]+#+)?[ \t]*$/);
+		const heading = matchHeading(line);
 		if (heading) {
 			const Tag = `h${heading[1]?.length ?? 1}` as ElementType;
 			nodes.push({ kind: "markdown", value: <Tag key={`heading-${index}`}>{inline(heading[2] ?? "")}</Tag> });
@@ -197,19 +211,17 @@ function renderBlocks(source: string, renderOpenUI: (stream: string, key: string
 			nodes.push({ kind: "markdown", value: readList(list) });
 			continue;
 		}
+		const key = `paragraph-${index}`;
 		const paragraph = [line.trim()];
 		index += 1;
 		while (
 			index < lines.length &&
-			lineAt(index).trim() &&
-			!pendingFence(index) &&
-			!/^ {0,3}#{1,6}\s/.test(lineAt(index)) &&
-			!openingFence(lineAt(index)) &&
-			!listItem(lineAt(index))
+			isParagraphLine(lineAt(index)) &&
+			!pendingFence(index)
 		) {
 			paragraph.push(lineAt(index++).trim());
 		}
-		nodes.push({ kind: "markdown", value: <p key={`paragraph-${index}`}>{inline(paragraph.join(" "))}</p> });
+		nodes.push({ kind: "markdown", value: <p key={key}>{inline(paragraph.join(" "))}</p> });
 	}
 	return nodes;
 }

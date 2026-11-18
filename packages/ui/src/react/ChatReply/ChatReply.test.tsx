@@ -366,6 +366,45 @@ describe("ChatReply", () => {
 		expect(container.querySelector("li:last-child code")).toHaveTextContent("command");
 	});
 
+	it.each([
+		["ordered", "1. First\ncontinued\n1. Second"],
+		["unordered", "- First\ncontinued\n- Second"],
+		["nested", "- Parent\n  3. First\ncontinued\n  1. Second"],
+	] as const)("keeps lazy paragraph continuations inside %s list items", (_name, reply) => {
+		const { container } = render(<ChatReply reply={reply} />);
+		const paragraph = screen.getByText("First continued");
+		expect(paragraph.tagName).toBe("P");
+		const item = paragraph.closest("li")!;
+		const list = item.parentElement!;
+		expect(list.querySelectorAll(":scope > li")).toHaveLength(2);
+		expect(screen.getByText("Second").closest("li")?.parentElement).toBe(list);
+		expect(container.querySelectorAll("ol")).toHaveLength(reply.includes("1.") ? 1 : 0);
+	});
+
+	it.each(["- First\n\nOutside", "- ## Heading\nOutside", "- First\n# Outside"])(
+		"ends a list paragraph at a block boundary in %s",
+		(reply) => {
+			render(<ChatReply reply={reply} />);
+			expect(screen.getByText("Outside").closest("li")).toBeNull();
+		},
+	);
+
+	it.each(["", "- ", "3. ", "- Parent\n  - ", "- Intro\n\n  "])(
+		"keeps a focused link mounted when a %s paragraph grows",
+		(prefix) => {
+			const reply = prefix + "[runbook](https://example.com)";
+			const { rerender } = render(<ChatReply reply={reply} />);
+			const link = screen.getByRole("link", { name: "runbook" });
+			link.focus();
+			expect(link).toHaveFocus();
+			rerender(<ChatReply reply={reply + "\nMore"} />);
+			expect(screen.getByRole("link", { name: "runbook" })).toBe(link);
+			expect(link).toHaveFocus();
+			expect(link.parentElement).toHaveTextContent("runbook More");
+			if (prefix) expect(link.closest("li")).not.toBeNull();
+		},
+	);
+
 	it.each([1, 2, 3, 4, 5, 6])("preserves content hashes in level %i headings", (level) => {
 		const marker = "#".repeat(level);
 		render(<ChatReply reply={`${marker} Learn C#\n\n${marker} Learn C# ###\n\n${marker} تعلم C#`} />);
