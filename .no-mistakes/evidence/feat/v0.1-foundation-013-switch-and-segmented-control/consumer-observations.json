@@ -1,0 +1,2263 @@
+{
+  "surface": "Real library components and TensquadsRenderer in Chromium on localhost:5184 with synthetic consumer props and streams",
+  "results": [
+    {
+      "name": "Switch forms, controlled updates, readOnly, disabled, custom render and callbacks",
+      "result": "pass"
+    },
+    {
+      "name": "SegmentedControl arrows skip disabled and wrap with one tab stop in LTR and RTL; Space selects and Enter submits",
+      "result": "pass"
+    },
+    {
+      "name": "Streamed Switch accepts arriving initial state and preserves a user override when disabled arrives",
+      "result": "pass"
+    },
+    {
+      "name": "Streamed segmented initial values and partial strings preserve user choice, exclusive selection and focus",
+      "result": "pass"
+    },
+    {
+      "name": "Growing second, third and fourth options keep selected or unselected focus through temporary duplicate labels in LTR and RTL",
+      "result": "pass"
+    },
+    {
+      "name": "OpenUI schema rejects duplicate options and non-member values; rendered invalid streams remain exclusively selectable",
+      "result": "pass"
+    }
+  ],
+  "observations": [
+    {
+      "label": "Controlled switch update and submitted data",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "",
+          "label": "Consent",
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "",
+          "label": "Read only",
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "",
+          "label": "Disabled",
+          "checked": "true",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "",
+          "label": "Rendered switch",
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        }
+      ],
+      "events": [
+        {
+          "value": true,
+          "reason": "press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "consent",
+              "yes"
+            ],
+            [
+              "readonly",
+              "on"
+            ],
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "submit": [
+            [
+              "consent",
+              "yes"
+            ],
+            [
+              "readonly",
+              "on"
+            ],
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ltr wrapping, disabled skip and form reset",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl wrapping, disabled skip and form reset",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "Arriving disabled state preserves user override",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "",
+          "label": "Updates",
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr partial option and initial value",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl partial option and initial value",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 2 selected: root = SegmentedControl(\"View\", [\"List\", \"List",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 2 selected: root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\")",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 2 focused: root = SegmentedControl(\"View\", [\"List\", \"List",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 2 focused: root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\")",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 3 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 3 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List view\"], \"List view\")",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 3 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "-1"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 3 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List view\"], \"List view\")",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 4 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 4 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List view\"], \"List view\")",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 4 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "-1"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "ltr slot 4 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List view\"], \"List view\")",
+      "direction": "ltr",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 2 selected: root = SegmentedControl(\"View\", [\"List\", \"List",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 2 selected: root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 2 focused: root = SegmentedControl(\"View\", [\"List\", \"List",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 2 focused: root = SegmentedControl(\"View\", [\"List\", \"List view\"], \"List view\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 3 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 3 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List view\"], \"List view\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 3 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "-1"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 3 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"List view\"], \"List view\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 4 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 4 selected: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List view\"], \"List view\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 4 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "0"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "-1"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "rtl slot 4 focused: root = SegmentedControl(\"View\", [\"List\", \"Grid\", \"Board\", \"List view\"], \"List view\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Board",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List view",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "Invalid input remains usable: root = SegmentedControl(\"View\", [\"List\", \"List\", \"Grid\"], \"List\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": true,
+          "focused": false,
+          "tabindex": null
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    },
+    {
+      "label": "Invalid input remains usable: root = SegmentedControl(\"View\", [\"List\", \"Grid\"], \"Board\")",
+      "direction": "rtl",
+      "controls": [
+        {
+          "text": "List",
+          "label": null,
+          "checked": "false",
+          "disabled": false,
+          "focused": false,
+          "tabindex": "-1"
+        },
+        {
+          "text": "Grid",
+          "label": null,
+          "checked": "true",
+          "disabled": false,
+          "focused": true,
+          "tabindex": "0"
+        }
+      ],
+      "events": [
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "grid",
+          "reason": "list-navigation",
+          "source": "keyboard"
+        },
+        {
+          "value": "list",
+          "reason": "item-press",
+          "source": "keyboard"
+        },
+        {
+          "submit": [
+            [
+              "mode",
+              "list"
+            ]
+          ]
+        },
+        {
+          "value": "grid",
+          "reason": "item-press",
+          "source": "mouse"
+        },
+        {
+          "value": "list",
+          "reason": "reset",
+          "source": "programmatic"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

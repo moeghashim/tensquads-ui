@@ -1,0 +1,80 @@
+{
+  "platform": "macOS (Darwin), Chromium via Playwright 1.64.1",
+  "production_build": {
+    "command": "npm run build:preview",
+    "exit_code": 0
+  },
+  "targeted_unit_tests": {
+    "command": "npm exec -- vitest run packages/ui/src/react/Switch/Switch.test.tsx packages/ui/src/react/Switch/Switch.openui.test.tsx packages/ui/src/react/SegmentedControl/SegmentedControl.test.tsx packages/ui/src/react/SegmentedControl/SegmentedControl.openui.test.tsx",
+    "exit_code": 0
+  },
+  "browser_behavior": {
+    "command": "EVIDENCE_DIR=<evidence> npm exec -- playwright test --config=.validation/playwright.config.ts switch-segmented-control.spec.ts",
+    "exit_code": 0,
+    "report": "behavior-e2e.json"
+  },
+  "rendered_fixtures": {
+    "command": "EVIDENCE_DIR=<evidence> npm exec -- playwright test --config=.validation/playwright.config.ts __validation.spec.ts",
+    "exit_code": 0,
+    "report": "fixture-e2e.json",
+    "screenshots": [
+      "SegmentedControl-ar-dark-1440.png",
+      "SegmentedControl-ar-dark-390.png",
+      "SegmentedControl-ar-light-1440.png",
+      "SegmentedControl-ar-light-390.png",
+      "SegmentedControl-en-dark-1440.png",
+      "SegmentedControl-en-dark-390.png",
+      "SegmentedControl-en-light-1440.png",
+      "SegmentedControl-en-light-390.png",
+      "Switch-ar-dark-1440.png",
+      "Switch-ar-dark-390.png",
+      "Switch-ar-light-1440.png",
+      "Switch-ar-light-390.png",
+      "Switch-en-dark-1440.png",
+      "Switch-en-dark-390.png",
+      "Switch-en-light-1440.png",
+      "Switch-en-light-390.png",
+      "consumer-controls.png",
+      "failure-7.png",
+      "preview-SegmentedControl-ar-dark-1440.png",
+      "preview-SegmentedControl-ar-dark-390.png",
+      "preview-SegmentedControl-ar-light-1440.png",
+      "preview-SegmentedControl-ar-light-390.png",
+      "preview-SegmentedControl-en-dark-1440.png",
+      "preview-SegmentedControl-en-dark-390.png",
+      "preview-SegmentedControl-en-light-1440.png",
+      "preview-SegmentedControl-en-light-390.png",
+      "preview-Switch-ar-dark-1440.png",
+      "preview-Switch-ar-dark-390.png",
+      "preview-Switch-ar-light-1440.png",
+      "preview-Switch-ar-light-390.png",
+      "preview-Switch-en-dark-1440.png",
+      "preview-Switch-en-dark-390.png",
+      "preview-Switch-en-light-1440.png",
+      "preview-Switch-en-light-390.png",
+      "segmented-disabled-controlled.png",
+      "segmented-keyboard-rtl.png",
+      "stream-current-after.png",
+      "stream-current-before.png",
+      "stream-duplicate-ltr-slot2.png",
+      "stream-duplicate-ltr-slot3.png",
+      "stream-duplicate-ltr-slot4.png",
+      "stream-duplicate-recovered.png",
+      "stream-duplicate-rtl-slot2.png",
+      "stream-duplicate-rtl-slot3.png",
+      "stream-duplicate-rtl-slot4.png",
+      "stream-growing-option-rtl.png",
+      "stream-switch-user-choice.png",
+      "streamed-duplicate-final.png",
+      "switch-behavior.png",
+      "switch-required-controlled.png"
+    ]
+  },
+  "consumer": {
+    "command": "EVIDENCE_DIR=<evidence> node .validation/consumer.mjs",
+    "exit_code": 0,
+    "observations": "consumer-observations.json"
+  },
+  "isolation": "Synthetic consumer inputs; production preview on localhost:5183 and consumer server on localhost:5184. Both stopped. Existing localhost:5173 server untouched.",
+  "limits": "No Linux execution; Linux CI belongs to the outer executor. Declined gallery baseline issue unchanged."
+}
