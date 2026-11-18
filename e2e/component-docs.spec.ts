@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { getRegisteredComponents } from "../packages/ui/src/openui";
 import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
-const registryOrder = getRegisteredComponents().map(({ name }) => name);
+const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat"];
 
 test("component docs load in English and Arabic with localized fixtures", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");
@@ -26,10 +26,15 @@ test("component docs load in English and Arabic with localized fixtures", async 
 			await expect(
 				page.getByRole("heading", { name: locale === "ar" ? "أمثلة تفاعلية" : "Live examples" }),
 			).toBeVisible();
-			await expect(page.locator(".component-list").first()).toBeVisible();
-			await expect(page.locator(".fixture-source summary")).toHaveText(
-				locale === "ar" ? "عرض مصدر العينة" : "Show fixture source",
-			);
+			if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
+			else await expect(page.locator(".component-list").first()).toBeVisible();
+			if (name === "Chat") {
+				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
+			} else {
+				await expect(page.locator(".fixture-source summary")).toHaveText(
+					locale === "ar" ? "عرض مصدر العينة" : "Show fixture source",
+				);
+			}
 			const index = registryOrder.indexOf(name);
 			const previous = page.locator('.component-doc-nav [rel="prev"]');
 			const next = page.locator('.component-doc-nav [rel="next"]');

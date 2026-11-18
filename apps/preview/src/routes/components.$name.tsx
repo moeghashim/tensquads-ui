@@ -2,6 +2,14 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import {
+	Chat,
+	ChatComposer,
+	ChatHeader,
+	ChatLog,
+	ChatStep,
+	ChatUserMessage,
+} from "../../../../packages/ui/src/react/Chat/Chat";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
 	Dialog,
@@ -57,7 +65,7 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = getRegisteredComponents().map(({ name }) => name);
+const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat"];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 
@@ -141,6 +149,57 @@ function ComponentExample() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Chat") {
+		const ar = locale === "ar";
+		return (
+			<div className="gallery chat-preview">
+				<Chat className="chat-preview__surface">
+					<ChatHeader locale={locale}>{ar ? "محادثة الوكيل" : "Agent chat"}</ChatHeader>
+					<ChatLog>
+						<ChatUserMessage>{ar ? "ساعدني في تخطيط المشروع" : "Help me plan the project"}</ChatUserMessage>
+						<ChatStep
+							name={ar ? "المخطط" : "Planner"}
+							glyph={<span aria-hidden="true">◇</span>}
+							status={ar ? "تم التوجيه" : "Routed"}
+							responseId="resp_8f31"
+							reply={
+								<>
+									<p>{ar ? "سأقسّم العمل إلى خطوات واضحة." : "I will break the work into clear steps."}</p>
+									<ul>
+										<li>{ar ? "تحديد الهدف" : "Define the goal"}</li>
+										<li>{ar ? "ترتيب الخطوات" : "Order the steps"}</li>
+									</ul>
+								</>
+							}
+						/>
+						<ChatStep name={ar ? "البحث" : "Research"} glyph={<span aria-hidden="true">⌕</span>} running />
+					</ChatLog>
+					<ChatComposer
+						placeholder={ar ? "اكتب رسالة" : "Write a message"}
+						locale={locale}
+						sendLabel={ar ? "إرسال" : "Send"}
+						stopLabel={ar ? "إيقاف" : "Stop"}
+						onSend={() => undefined}
+						attach={
+							<Button variant="ghost" iconOnly aria-label={ar ? "إرفاق ملف" : "Attach file"}>
+								<svg
+									aria-hidden="true"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="1.7"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path d="m12 5-6.5 6.5a4 4 0 0 0 5.7 5.7l7.2-7.2a2.5 2.5 0 0 0-3.5-3.5l-7.1 7.1a1 1 0 0 0 1.4 1.4l6.4-6.4" />
+								</svg>
+							</Button>
+						}
+					/>
+				</Chat>
+			</div>
+		);
+	}
 	if (name === "Dialog") {
 		const ar = locale === "ar";
 		const copy = ar
