@@ -27,3 +27,14 @@ test("Chat docs show the surface in both locales and themes", async ({ page }) =
 	await writeFile(join(output, "chat-ar-dark-390.png"), arabicShot);
 	await test.info().attach("chat-ar-dark-390.png", { body: arabicShot, contentType: "image/png" });
 });
+
+test("Chat composer inserts a newline with Shift+Enter and sends with Enter", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components/Chat");
+	const input = page.getByRole("textbox", { name: "Message" });
+	await input.fill("First line");
+	await input.press("End");
+	await input.press("Shift+Enter");
+	await expect(input).toHaveValue("First line\n");
+	await input.press("Enter");
+	await expect(input).toHaveValue("");
+});

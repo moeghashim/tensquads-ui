@@ -65,7 +65,7 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat"].sort();
+const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat"];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 

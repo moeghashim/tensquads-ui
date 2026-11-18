@@ -28,12 +28,21 @@ export function ChatHeader({ children, onNewChat, newChatLabel, locale = "en", c
 export type ChatLogProps = ComponentProps<"div"> & { children?: ReactNode };
 export function ChatLog({ children, className, ...props }: ChatLogProps) {
 	const ref = useRef<HTMLDivElement>(null);
+	const contentRef = useRef<HTMLDivElement>(null);
 	const pinned = useRef(true);
 	useEffect(() => {
 		const log = ref.current;
-		if (!log || !pinned.current) return;
-		log.scrollTop = log.scrollHeight;
-	}, [children]);
+		const content = contentRef.current;
+		if (!log || !content) return;
+		const follow = () => {
+			if (pinned.current) log.scrollTop = log.scrollHeight;
+		};
+		const observer = new ResizeObserver(follow);
+		observer.observe(content);
+		observer.observe(log);
+		follow();
+		return () => observer.disconnect();
+	}, []);
 	return (
 		<div
 			{...props}
@@ -47,7 +56,9 @@ export function ChatLog({ children, className, ...props }: ChatLogProps) {
 				pinned.current = scrollHeight - scrollTop - clientHeight < 24;
 			}}
 		>
-			{children}
+			<div ref={contentRef} className="ts-chat__log-content">
+				{children}
+			</div>
 		</div>
 	);
 }
