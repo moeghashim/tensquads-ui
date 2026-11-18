@@ -16,7 +16,7 @@ test("every component fixture parses and renders", async ({ page }) => {
 			await page.goto(
 				`/components/${component.name}?locale=${locale}&dir=${locale === "ar" ? "rtl" : "ltr"}&theme=light`,
 			);
-			await expect(page.getByRole("heading", { name: component.name })).toBeVisible();
+			await expect(page.getByRole("heading", { name: component.name, level: 1, exact: true })).toBeVisible();
 			const fixtureRegion = page.getByRole("region", {
 				name: locale === "en" ? "OpenUI fixture" : "عينة OpenUI",
 			});

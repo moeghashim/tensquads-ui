@@ -17,7 +17,7 @@ const states: PreviewState[] = [
 test("Badge previews every tone in both locales and themes", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Badge");
-		await expect(page.getByRole("heading", { name: "Badge" })).toBeVisible();
+		await expect(page.getByRole("heading", { name: "Badge", level: 1, exact: true })).toBeVisible();
 		await expect(page.locator('[data-slot="badge"]')).toHaveCount(6);
 		for (const tone of ["default", "success", "warning", "danger", "info"]) {
 			await expect(page.locator(`[data-slot="badge"].ts-badge--${tone}`)).toHaveCount(tone === "success" ? 2 : 1);

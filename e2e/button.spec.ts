@@ -18,7 +18,7 @@ const states: PreviewState[] = [
 test("Button previews variants, sizes, and interaction states", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Button");
-		await expect(page.getByRole("heading", { name: "Button" })).toBeVisible();
+		await expect(page.getByRole("heading", { name: "Button", level: 1, exact: true })).toBeVisible();
 		await expect(page.locator('[data-slot="button"]')).toHaveCount(31);
 		await expect(page.getByRole("button", { name: state.locale === "ar" ? "إضافة" : "Add" })).toHaveCount(5);
 		await expect(page.locator('[data-slot="button"][data-disabled]')).toHaveCount(5);

@@ -18,7 +18,7 @@ const states: PreviewState[] = [
 test("Squadmate previews every character and state in both locales and themes", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state, "/components/Squadmate");
-		await expect(page.getByRole("heading", { name: "Squadmate" })).toBeVisible();
+		await expect(page.getByRole("heading", { name: "Squadmate", level: 1, exact: true })).toBeVisible();
 		const gallery = page.getByRole("region", {
 			name: state.locale === "ar" ? "الزملاء وحالاتهم" : "Squadmates and states",
 		});
