@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
+import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
 import {
 	Squadmate,
@@ -88,6 +89,32 @@ function ComponentPage() {
 								{locale === "ar" ? "معطّل" : "Disabled"}
 							</Button>
 						</div>
+					))}
+				</section>
+				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</main>
+		);
+	}
+	if (name === "Badge") {
+		const tones = ["default", "success", "warning", "danger", "info"] as const;
+		const labels =
+			locale === "ar"
+				? { default: "مسودة", success: "مكتمل", warning: "قيد الانتظار", danger: "فشل", info: "معلومات" }
+				: { default: "Draft", success: "Complete", warning: "Pending", danger: "Failed", info: "Information" };
+		return (
+			<main className="gallery badge-preview">
+				<Link className="route-example" to="/" search={search as never}>
+					{locale === "ar" ? "العودة إلى المعرض" : "Back to gallery"}
+				</Link>
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<h1>Badge</h1>
+				<section className="badge-preview__grid" aria-label={locale === "ar" ? "نغمات الشارة" : "Badge tones"}>
+					{tones.map((tone) => (
+						<Badge key={tone} tone={tone}>
+							{labels[tone]}
+						</Badge>
 					))}
 				</section>
 				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
