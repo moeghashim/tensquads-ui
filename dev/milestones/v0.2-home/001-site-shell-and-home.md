@@ -11,6 +11,9 @@ Decided by Moe on 2026-11-18 (D21). The gallery is live at https://tensquads-ui-
 
 Tasks 002 and 003 build on this shell and run in parallel after it merges. Keep the shell small and stable so they do not touch the same files.
 
+## Design (approved by Moe, 2026-11-18)
+Moe chose the "Stream to screen" homepage. Build to the direction contract in `apps/preview/.impeccable/surfaces/src-routes-index-tsx.md` (read it in full). Product truth is in `apps/preview/PRODUCT.md`. The reference sketch is `apps/preview/.impeccable/mocks/decision/stream-to-screen.html`; match its composition with real library components, not its hard-coded hex values. Replace the native `<select>` controls with `SegmentedControl` pill toggles (Moe flagged the misplaced select arrows). Use the real `Button.fixture`-style OpenUI fixtures through `TensquadsRenderer` for the stream demo; the stream animation is client-side replay of fixture text, not a network call.
+
 ## Acceptance criteria
 - [ ] Shared site layout in `apps/preview`: header with the site name, primary nav (Home, Components, Get started), locale switch (en/ar) and theme switch (light/dark/system), built from `@tensquads/ui` components where one fits. Locale and theme stay in the URL as today (`state.ts`).
 - [ ] Site copy lives in one module per locale (for example `apps/preview/src/copy/en.ts` and `ar.ts`) with the same keys. Arabic copy is natural Modern Standard Arabic, gender-neutral where it addresses the reader (follow the D18 style).

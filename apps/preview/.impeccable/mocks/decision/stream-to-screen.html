@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{background:#f3f3f3;color:#3a3a3a;font:16px/24px Inter,sans-serif;letter-spacing:-.01em}
+.mono{font-family:"JetBrains Mono",monospace;letter-spacing:0}
+.nav{height:64px;display:flex;align-items:center;gap:32px;padding-inline:48px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:#0d0d0d;font-size:15px}
+.links{display:flex;gap:4px;margin-inline-start:24px}
+.links a{padding:6px 12px;border-radius:999px;color:#5c5c5c;font-size:14px;text-decoration:none}
+.links a.on{background:#e6e6e6;color:#0d0d0d}
+.tools{margin-inline-start:auto;display:flex;gap:8px;align-items:center}
+.seg{display:flex;background:rgba(0,0,0,.06);border-radius:999px;padding:3px}
+.seg span{padding:4px 12px;border-radius:999px;font-size:13px;color:#5c5c5c}
+.seg span.on{background:#fff;color:#0d0d0d;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding-inline:18px;border-radius:999px;font-size:14px;font-weight:500}
+.btn.primary{background:#1a1a1a;color:#fff}
+.btn.soft{background:rgba(0,0,0,.06);color:#0d0d0d}
+.panel{background:#fcfcfc;border:.5px solid #e2e2e2;border-radius:16px}
+.node{background:#fff;border-radius:16px;box-shadow:0 0 0 1px #e6e6e6,0 1px 2px rgba(0,0,0,.04)}
+.label{font-size:12px;color:#8f8f8f;font-weight:500}
+.badge{display:inline-flex;align-items:center;gap:6px;height:22px;padding-inline:8px;border-radius:6px;font-size:12px;font-weight:500}
+.input{height:36px;border-radius:8px;background:rgba(0,0,0,.05);padding-inline:12px;display:flex;align-items:center;font-size:14px;color:#8f8f8f}
+.switch{width:36px;height:20px;border-radius:999px;background:#1a1a1a;position:relative;display:inline-block}
+.switch:after{content:"";position:absolute;inset-block-start:2px;inset-inline-end:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding-inline:10px;border-radius:999px;background:rgba(0,0,0,.06);font-size:13px;color:#0d0d0d}
+</style></head><body>
+<div class="nav"><div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" height="28" role="img" aria-label="tensquads"><rect width="64" height="64" rx="16" fill="#0d0d0d"/><circle cx="32.00" cy="13.00" r="4.6" fill="#E98065"/><circle cx="43.17" cy="16.63" r="4.6" fill="#EDB54E"/><circle cx="50.07" cy="26.13" r="4.6" fill="#86C7A5"/><circle cx="50.07" cy="37.87" r="4.6" fill="#8AACEE"/><circle cx="43.17" cy="47.37" r="4.6" fill="#A88BEB"/><circle cx="32.00" cy="51.00" r="4.6" fill="#E3958A"/><circle cx="20.83" cy="47.37" r="4.6" fill="#EE9F5A"/><circle cx="13.93" cy="37.87" r="4.6" fill="#A9B4C5"/><circle cx="13.93" cy="26.13" r="4.6" fill="#0169cc"/><circle cx="20.83" cy="16.63" r="4.6" fill="#2A2D34"/><circle cx="32" cy="32" r="6" fill="#fff"/></svg> tensquads ui</div>
+<div class="links"><a class="on">Home</a><a>Components</a><a>Get started</a></div>
+<div class="tools"><div class="seg"><span class="on">English</span><span style="font-family:'IBM Plex Sans Arabic'">العربية</span></div>
+<div class="seg"><span>Light</span><span>Dark</span><span class="on">System</span></div></div></div>
+<section style="padding:56px 48px 0;display:flex;align-items:flex-end;gap:48px">
+ <div style="flex:1">
+  <h1 style="font-size:64px;line-height:68px;font-weight:600;letter-spacing:-.035em;color:#0d0d0d;max-width:820px">One component set.<br>Hand-built or streamed by an agent.</h1>
+  <p style="margin-top:20px;font-size:18px;line-height:29px;color:#5c5c5c;max-width:640px">React components on UI SDK, in English and Arabic, light and dark. Coding agents import them. Live agents stream them as OpenUI.</p>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+  <div class="panel mono" style="padding:12px 16px;font-size:14px;color:#0d0d0d;display:flex;gap:16px;align-items:center">npm i github:moeghashim/tensquads-ui#&lt;sha&gt; <span class="badge" style="background:rgba(0,0,0,.06)">Copy</span></div>
+  <div style="display:flex;gap:8px"><span class="btn primary">Get started</span><span class="btn soft">Browse 11 components</span></div>
+ </div>
+</section>
+<section class="panel" style="margin:40px 48px 0;height:520px;display:grid;grid-template-columns:460px 1fr;overflow:hidden">
+ <div style="background:#161616;color:#d9d9d9;padding:24px;font-size:13px;line-height:22px" class="mono">
+  <div style="display:flex;justify-content:space-between;color:#8f8f8f;margin-bottom:16px;font-family:Inter"><span>OpenUI stream · Petra</span><span style="color:#93D2B1">● streaming</span></div>
+  <div>root = Stack([header, form, actions])</div>
+  <div>header = Squadmate(<span style="color:#F5C25C">"petra"</span>, <span style="color:#F5C25C">"running"</span>)</div>
+  <div>form = Field(<span style="color:#F5C25C">"Store name"</span>, Input(<span style="color:#F5C25C">"Bannaa Market"</span>))</div>
+  <div>notify = Switch(<span style="color:#F5C25C">"Email me when done"</span>, true)</div>
+  <div>plan = SegmentedControl([<span style="color:#F5C25C">"Weekly"</span>, <span style="color:#F5C25C">"Monthly"</span>])</div>
+  <div>status = Badge(<span style="color:#F5C25C">"Checking"</span>, <span style="color:#F5C25C">"info"</span>)</div>
+  <div>actions = Button(<span style="color:#F5C25C">"Approve plan"</span>)<span style="display:inline-block;width:8px;height:16px;background:#d9d9d9;vertical-align:middle;margin-inline-start:2px"></span></div>
+  <div style="margin-top:220px;color:#8f8f8f;font-family:Inter;font-size:12px">Fixture: Button.fixture.en.txt · 7 of 9 lines</div>
+ </div>
+ <div style="padding:32px 40px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-content:start">
+  <div class="node" style="grid-column:1/-1;padding:20px;display:flex;gap:20px;align-items:center">
+   <svg xmlns="http://www.w3.org/2000/svg" height="96" viewBox="0 0 300 370" role="img" aria-label="Petra, the master mascot"><defs><radialGradient id="petra96masterb" cx="32%" cy="26%" r="85%"><stop offset="0" stop-color="#FBD8D0"/><stop offset=".55" stop-color="#EBA196"/><stop offset="1" stop-color="#C9746A"/></radialGradient><radialGradient id="petra96masterl" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></radialGradient><filter id="petra96masterf" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter><filter id="petra96masters" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter></defs><ellipse cx="150" cy="356" rx="95" ry="10" fill="#1B2430" opacity=".14" filter="url(#petra96masters)"/><path d="M125 300 L122 344" fill="none" stroke="#E3958A" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" opacity=".96"/><path d="M175 300 L178 344" fill="none" stroke="#E3958A" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" opacity=".96"/><ellipse cx="118" cy="347" rx="17" ry="9" fill="#E3958A"/><ellipse cx="182" cy="347" rx="17" ry="9" fill="#E3958A"/>
+<path d="M94 205 Q70 230 74 268" fill="none" stroke="#E3958A" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" opacity=".96"/><circle cx="74" cy="270" r="10" fill="#E3958A"/>
+<path d="M206 195 Q244 182 250 128" fill="none" stroke="#E3958A" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" opacity=".96"/><g transform="translate(250 118)"><ellipse rx="12" ry="14" fill="#E3958A"/><path d="M-9 -8 L-14 -24 M-2 -12 L-3 -30 M5 -11 L9 -28 M10 -5 L18 -18" stroke="#E3958A" stroke-width="7" stroke-linecap="round"/></g>
+<path d="M150 60 m-11 0 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M144 68 L156 68 L158 84 L142 84 Z" fill="url(#petra96masterb)"/>
+<path d="M88 296 L88 146 A62 62 0 0 1 212 146 L212 296 Q212 310 198 310 L102 310 Q88 310 88 296 Z" fill="url(#petra96masterb)"/>
+<path d="M108 300 L108 154 A42 42 0 0 1 192 154 L192 300" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5"/>
+<path d="M104 150 A46 46 0 0 1 150 104 Q132 130 112 200 Z" fill="#fff" opacity=".42" filter="url(#petra96masterf)"/>
+<circle cx="126" cy="178" r="7" fill="#1B1B1F"/><circle cx="123.55" cy="175.55" r="2.1" fill="#fff" opacity=".9"/><circle cx="174" cy="178" r="7" fill="#1B1B1F"/><circle cx="171.55" cy="175.55" r="2.1" fill="#fff" opacity=".9"/><circle cx="174" cy="178" r="27" fill="url(#petra96masterl)" stroke="#fff" stroke-opacity=".9" stroke-width="4"/><circle cx="174" cy="178" r="20" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2"/><path d="M159.15 168.55 A18.9 18.9 0 0 1 171.3 159.64" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".85"/><path d="M140 212 Q150 220 160 212" fill="none" stroke="#1B1B1F" stroke-width="3" stroke-linecap="round" opacity=".7"/></svg>
+   <div><div style="font-weight:600;color:#0d0d0d;font-size:18px">Petra is setting up your store</div><div style="color:#5c5c5c;font-size:14px;margin-top:4px">Master · Running</div></div>
+   <span class="badge" style="margin-inline-start:auto;background:#DCE8FF;color:#2b4f99">Checking</span>
+  </div>
+  <div class="node" style="padding:20px"><div class="label">Store name</div><div class="input" style="margin-top:8px;color:#0d0d0d">Bannaa Market</div></div>
+  <div class="node" style="padding:20px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#0d0d0d">Email me when done <span class="switch"></span></div>
+   <div class="seg" style="align-self:start"><span class="on">Weekly</span><span>Monthly</span></div></div>
+  <div style="grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end"><span class="btn soft">Send back</span><span class="btn primary">Approve plan</span></div>
+  <div style="grid-column:1/-1;display:flex;gap:8px;align-items:center;color:#8f8f8f;font-size:13px">Same stream in <span class="chip">English</span><span class="chip" style="font-family:'IBM Plex Sans Arabic'">العربية · RTL</span></div>
+ </div>
+</section></body></html>
