@@ -29,15 +29,26 @@ export const SegmentedControlOpenUI = defineComponent({
 	props: segmentedProps,
 	component: function StreamedSegmentedControl({ props }) {
 		const [userSlot, setUserSlot] = useState<string | null>(null);
+		const [focusedSlot, setFocusedSlot] = useState<string | null>(null);
 		const options = optionSlots.flatMap((id, position) => {
 			const label = props.options?.[position];
-			if (!label || props.options.indexOf(label) !== position) return [];
+			if (!label) return [];
 			return [{ id, label }];
 		});
+		const items = options.map((option) => {
+			const duplicates = options.filter(({ label }) => label === option.label);
+			const owner =
+				duplicates.find(({ id }) => id === focusedSlot) ??
+				duplicates.find(({ id }) => id === userSlot) ??
+				duplicates[0];
+			return { ...option, disabled: owner?.id !== option.id };
+		});
+		const selectable = items.filter(({ disabled }) => !disabled);
+		const userOption = options.find(({ id }) => id === userSlot);
 		const selected =
-			options.find((option) => option.id === userSlot) ??
-			options.find((option) => option.label === props.value) ??
-			options[0];
+			selectable.find(({ label }) => label === userOption?.label) ??
+			selectable.find(({ label }) => label === props.value) ??
+			selectable[0];
 		return createElement(
 			SegmentedControl,
 			{
@@ -46,7 +57,19 @@ export const SegmentedControlOpenUI = defineComponent({
 				onValueChange: setUserSlot,
 			},
 			createElement(SegmentedControlIndicator),
-			...options.map(({ id, label }) => createElement(SegmentedControlItem, { key: id, value: id }, label)),
+			...items.map(({ id, label, disabled }) =>
+				createElement(
+					SegmentedControlItem,
+					{
+						key: id,
+						value: id,
+						disabled,
+						onFocus: () => setFocusedSlot(id),
+						onBlur: () => setFocusedSlot(null),
+					},
+					label,
+				),
+			),
 		);
 	},
 });
