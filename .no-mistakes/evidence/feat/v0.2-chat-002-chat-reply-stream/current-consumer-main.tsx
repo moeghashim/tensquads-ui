@@ -1,0 +1,14 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {flushSync} from 'react-dom';
+import {ChatReply} from '../packages/ui/src/react/index.ts';
+import {createTensquadsLibrary} from '../packages/ui/src/openui/index.ts';
+import {buildSystemPrompt} from '../packages/ui/src/openui/server/index.ts';
+import '../packages/ui/src/fonts.css';
+import '../packages/ui/src/tokens/tokens.css';
+import '../packages/ui/src/styles/styles.css';
+const root = createRoot(document.getElementById('root')!);
+window.errors = [];
+window.renderReply = (reply, locale='en') => flushSync(() => root.render(<ChatReply reply={reply} locale={locale} onError={e=>window.errors.push(e)}/>));
+window.promptOutput = (locale, mode) => buildSystemPrompt({library:createTensquadsLibrary(locale), locale, mode});
+window.renderReply('Ready for input');

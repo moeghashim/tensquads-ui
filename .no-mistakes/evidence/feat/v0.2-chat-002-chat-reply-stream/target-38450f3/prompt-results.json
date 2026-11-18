@@ -1,0 +1,14 @@
+[
+  {
+    "locale": "en",
+    "defaultMatchesExplicitUi": true,
+    "localizedMixedExample": true,
+    "closeFenceInstruction": true
+  },
+  {
+    "locale": "ar",
+    "defaultMatchesExplicitUi": true,
+    "localizedMixedExample": true,
+    "closeFenceInstruction": true
+  }
+]

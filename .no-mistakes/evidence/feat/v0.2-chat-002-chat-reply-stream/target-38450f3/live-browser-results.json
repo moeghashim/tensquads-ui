@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "name": "Localized fixtures stream character by character in reading order and keep fence text hidden",
+      "result": "pass",
+      "detail": {
+        "prefixes": 519,
+        "focusCases": 4
+      }
+    },
+    {
+      "name": "Markdown displays headings lists and LTR code while rejecting unsafe links and raw HTML",
+      "result": "pass",
+      "detail": {
+        "safeLinks": 3,
+        "executableHtmlNodes": 0,
+        "code": "    const x = 1;"
+      }
+    },
+    {
+      "name": "Loose nested and lazy lists retain containers around streamed OpenUI and literal fences",
+      "result": "pass",
+      "detail": {
+        "cases": 16
+      }
+    },
+    {
+      "name": "A thousand-item ordered reply remains usable when its final item streams",
+      "result": "pass",
+      "detail": {
+        "items": 1001,
+        "initialRenderMs": 15.300000071525574
+      }
+    }
+  ],
+  "errors": []
+}

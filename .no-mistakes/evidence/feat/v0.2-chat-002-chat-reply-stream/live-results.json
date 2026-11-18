@@ -1,92 +1,121 @@
 {
   "results": [
     {
-      "name": "localized-gallery",
+      "name": "Local React consumer streams both localized fixtures character by character, preserves UI nodes and focused links",
       "result": "pass",
-      "detail": {
-        "surface": "production-built preview /components/ChatReply",
-        "locales": [
-          "en/ltr",
-          "ar/rtl"
+      "details": {
+        "details": [
+          {
+            "locale": "en",
+            "frames": 271,
+            "order": [
+              "text",
+              "ui",
+              "text",
+              "ui",
+              "text"
+            ]
+          },
+          {
+            "locale": "ar",
+            "frames": 248,
+            "order": [
+              "text",
+              "ui",
+              "text",
+              "ui",
+              "text"
+            ]
+          }
         ],
-        "themes": [
-          "light",
-          "dark"
+        "openFence": "Ready rendered before closing fence",
+        "focus": "retained in root and list paragraphs"
+      }
+    },
+    {
+      "name": "Local React consumer renders markdown safely, keeping code LTR and HTML inert",
+      "result": "pass",
+      "details": {
+        "safeLinks": 3,
+        "unsafeLinks": 4,
+        "rawHtml": "literal text",
+        "code": "LTR; long line scrolls within block"
+      }
+    },
+    {
+      "name": "Local React consumer preserves loose, nested and lazy list structure with streamed code and embedded OpenUI",
+      "result": "pass",
+      "details": {
+        "codeCases": [
+          {
+            "marker": "- ",
+            "nested": false,
+            "code": "    print(1)"
+          },
+          {
+            "marker": "- ",
+            "nested": true,
+            "code": "    print(1)"
+          },
+          {
+            "marker": "3. ",
+            "nested": false,
+            "code": "    print(1)"
+          },
+          {
+            "marker": "3. ",
+            "nested": true,
+            "code": "    print(1)"
+          }
         ],
-        "screenshotWidths": [
-          1440,
-          390
-        ],
-        "checks": [
-          "visible heading, Badge and Button",
-          "axe accessibility",
-          "no horizontal overflow at 390px"
+        "mixedList": "single ordered list starts at 3; embedded badge and continuation remain in first item; lazy continuation in second",
+        "literalFences": "backtick and tilde in ordered/unordered lists remain inert; following OpenUI renders at root"
+      }
+    },
+    {
+      "name": "Local React consumer updates a 1000-item streaming list without losing items",
+      "result": "pass",
+      "details": {
+        "items": 1000,
+        "renderMilliseconds": [
+          25.399999976158142,
+          16.699999928474426,
+          15.300000071525574,
+          13.699999928474426,
+          16.800000071525574
         ]
       }
     },
     {
-      "name": "streaming",
+      "name": "Local public prompt API emits English and Arabic chat examples that render, preserving default UI mode",
       "result": "pass",
-      "detail": {
-        "frames": 519,
-        "unclosedBlock": "Progressive badge visible before closing fence",
-        "exceptions": []
-      }
+      "details": [
+        {
+          "locale": "en",
+          "defaultMatchesUi": true,
+          "exampleBadge": "Ready"
+        },
+        {
+          "locale": "ar",
+          "defaultMatchesUi": true,
+          "exampleBadge": "جاهز"
+        }
+      ]
     },
     {
-      "name": "markdown-safety",
+      "name": "Built local preview documents ChatReply usage in English and Arabic",
       "result": "pass",
-      "detail": {
-        "links": [
-          "http",
-          "https",
-          "mail"
-        ],
-        "literalHTML": true,
-        "code": "    const x = 1;"
-      }
-    },
-    {
-      "name": "list-fence-regressions",
-      "result": "pass",
-      "detail": {
-        "cases": 9,
-        "looseList": "one list with two siblings, UI and continuation stay in first item",
-        "fenceCoordinates": "literal markers preserved; following live block outside list"
-      }
-    },
-    {
-      "name": "long-list",
-      "result": "pass",
-      "detail": {
-        "items": 1001,
-        "elapsedIncludingBrowserRoundTripsMs": 161,
-        "lastItem": "Final command"
-      }
-    },
-    {
-      "name": "emitted-prompts",
-      "result": "pass",
-      "detail": {
-        "defaultEqualsExplicitUI": true,
-        "chatExamplesRendered": [
-          "Ready",
-          "جاهز"
-        ],
-        "contract": "emitted prompt output only; model interpretation not evaluated"
-      }
+      "details": [
+        {
+          "locale": "en",
+          "usage": "visible"
+        },
+        {
+          "locale": "ar",
+          "usage": "visible"
+        }
+      ]
     }
   ],
-  "exceptions": [],
-  "repairs": [
-    "Make fence capture length safe for the production compiler",
-    "Explicitly clean up ChatReply unit renders after each test",
-    "Expect the Markdown continuation paragraph Example: Details"
-  ],
-  "finalExitCodes": {
-    "packageBuild": 0,
-    "focusedUnit": 0,
-    "galleryPlaywright": 0,
-    "liveConsumerDriver": 0
-  }
+  "pageErrors": []
 }

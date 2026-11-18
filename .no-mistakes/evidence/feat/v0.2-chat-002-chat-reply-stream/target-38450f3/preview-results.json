@@ -1,0 +1,11 @@
+{
+  "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx playwright test e2e/chat-reply.spec.ts --reporter=list --output=~/.no-mistakes/evidence/01M7RCJYCNAFA7FG3E3MGJ80MJ/preview-results",
+  "exitCode": 0,
+  "surface": "Production preview built by Playwright webServer and served locally through Wrangler",
+  "observations": [
+    "English LTR and Arabic RTL rendered heading, Badge and Continue button in both light and dark themes",
+    "Axe accessibility checks found no violations",
+    "390px viewport had no document horizontal overflow",
+    "Full-page screenshots captured at 1440px and 390px in each locale/theme"
+  ]
+}

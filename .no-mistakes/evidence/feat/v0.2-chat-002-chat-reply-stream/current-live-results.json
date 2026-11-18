@@ -1,0 +1,145 @@
+{
+  "results": [
+    {
+      "name": "Local React consumer streams both localized fixtures character by character, preserves UI nodes and focused links",
+      "result": "pass",
+      "details": {
+        "details": [
+          {
+            "locale": "en",
+            "frames": 271,
+            "order": [
+              "text",
+              "ui",
+              "text",
+              "ui",
+              "text"
+            ]
+          },
+          {
+            "locale": "ar",
+            "frames": 248,
+            "order": [
+              "text",
+              "ui",
+              "text",
+              "ui",
+              "text"
+            ]
+          }
+        ],
+        "openFence": "Ready rendered before closing fence",
+        "focus": "retained in root and list paragraphs"
+      }
+    },
+    {
+      "name": "Local React consumer renders markdown safely, keeping code LTR and HTML inert",
+      "result": "pass",
+      "details": {
+        "safeLinks": 3,
+        "unsafeLinks": 4,
+        "rawHtml": "literal text",
+        "code": "LTR; long line scrolls within block"
+      }
+    },
+    {
+      "name": "Local React consumer preserves loose, nested and lazy list structure with streamed code and embedded OpenUI",
+      "result": "pass",
+      "details": {
+        "codeCases": [
+          {
+            "marker": "- ",
+            "nested": false,
+            "code": "    print(1)"
+          },
+          {
+            "marker": "- ",
+            "nested": true,
+            "code": "    print(1)"
+          },
+          {
+            "marker": "3. ",
+            "nested": false,
+            "code": "    print(1)"
+          },
+          {
+            "marker": "3. ",
+            "nested": true,
+            "code": "    print(1)"
+          }
+        ],
+        "mixedList": "single ordered list starts at 3; embedded badge and continuation remain in first item; lazy continuation in second",
+        "literalFences": "backtick and tilde in ordered/unordered lists remain inert; following OpenUI renders at root"
+      }
+    },
+    {
+      "name": "Local React consumer updates a 1000-item streaming list without losing items",
+      "result": "pass",
+      "details": {
+        "items": 1000,
+        "renderMilliseconds": [
+          25.399999976158142,
+          16.699999928474426,
+          15.300000071525574,
+          13.699999928474426,
+          16.800000071525574
+        ]
+      }
+    },
+    {
+      "name": "Local public prompt API emits English and Arabic chat examples that render, preserving default UI mode",
+      "result": "pass",
+      "details": [
+        {
+          "locale": "en",
+          "defaultMatchesUi": true,
+          "exampleBadge": "Ready"
+        },
+        {
+          "locale": "ar",
+          "defaultMatchesUi": true,
+          "exampleBadge": "\u062c\u0627\u0647\u0632"
+        }
+      ]
+    },
+    {
+      "name": "Built local preview documents ChatReply usage in English and Arabic",
+      "result": "pass",
+      "details": [
+        {
+          "locale": "en",
+          "usage": "visible"
+        },
+        {
+          "locale": "ar",
+          "usage": "visible"
+        }
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "gallery": {
+    "surface": "production-built local Cloudflare preview",
+    "locales": [
+      "en",
+      "ar"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1440,
+      390
+    ],
+    "accessibility": "no axe violations",
+    "overflow": "none at 390px",
+    "commandExit": 0
+  },
+  "baseline": {
+    "providedCommand": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npm run verify",
+    "providedExitCode": 1,
+    "rerun": false,
+    "reason": "Complete suite and static analysis excluded by test-phase instruction; outer executor owns broad checks."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "name": "Localized fixtures stream character by character in reading order and keep fence text hidden",
+      "result": "pass",
+      "detail": {
+        "prefixes": 519,
+        "focusCases": 4
+      }
+    },
+    {
+      "name": "Markdown displays headings lists and LTR code while rejecting unsafe links and raw HTML",
+      "result": "fail",
+      "error": "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator: locator('ol')\nExpected: \"3\"\nError: strict mode violation: locator('ol') resolved to 2 elements:\n    1) <ol start=\"3\">…</ol> aka getByText('ResumeFinish')\n    2) <ol>…</ol> aka getByLabel('OpenUI Debug', { exact: true }).locator('ol')\n\nCall log:\n  - Expect \"toHaveAttribute\" locator('ol') with timeout 5000ms\n  - waiting for locator('ol')\n\n    at captureRawStack ({run-worktree}/node_modules/playwright/node_modules/playwright-core/lib/coreBundle.js:9282:17)\n    at callMatcherAsStep ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13316:57)\n    at Object.toHaveAttribute ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13308:23)\n    at {run-worktree}/.chat-reply-live/run.mjs:38:135\n    at async scenario ({run-worktree}/.chat-reply-live/run.mjs:15:51)\n    at async file://{run-worktree}/.chat-reply-live/run.mjs:36:1"
+    },
+    {
+      "name": "Loose nested and lazy lists retain containers around streamed OpenUI and literal fences",
+      "result": "fail",
+      "error": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('ol > li')\nExpected: 2\nReceived: 6\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('ol > li') with timeout 5000ms\n  - waiting for locator('ol > li')\n    14 × locator resolved to 6 elements\n       - unexpected value \"6\"\n\n    at captureRawStack ({run-worktree}/node_modules/playwright/node_modules/playwright-core/lib/coreBundle.js:9282:17)\n    at callMatcherAsStep ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13316:57)\n    at Object.toHaveCount ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13308:23)\n    at {run-worktree}/.chat-reply-live/run.mjs:55:201\n    at async scenario ({run-worktree}/.chat-reply-live/run.mjs:15:51)\n    at async file://{run-worktree}/.chat-reply-live/run.mjs:44:1"
+    },
+    {
+      "name": "A thousand-item ordered reply remains usable when its final item streams",
+      "result": "fail",
+      "error": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('ol > li')\nExpected: 1000\nReceived: 1004\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('ol > li') with timeout 5000ms\n  - waiting for locator('ol > li')\n    14 × locator resolved to 1004 elements\n       - unexpected value \"1004\"\n\n    at captureRawStack ({run-worktree}/node_modules/playwright/node_modules/playwright-core/lib/coreBundle.js:9282:17)\n    at callMatcherAsStep ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13316:57)\n    at Object.toHaveCount ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13308:23)\n    at {run-worktree}/.chat-reply-live/run.mjs:63:241\n    at async scenario ({run-worktree}/.chat-reply-live/run.mjs:15:51)\n    at async file://{run-worktree}/.chat-reply-live/run.mjs:62:1"
+    }
+  ],
+  "errors": []
+}
