@@ -14,7 +14,7 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 - `npm run deploy:preview` — Build and deploy the preview Worker using Wrangler.
 - `npm run tokens` — Regenerate CSS custom properties and typed TypeScript tokens from the synced `design/tokens.json`.
 - `npm run tokens:check` — Fail for missing or stale generated token files without writing them.
-- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, and verify exported entry points.
+- `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, verify exported entry points, and check that URLs in exported CSS resolve to files inside the installed package.
 - `npm run check:ui-sdk-usage` — Check UI SDK imports in `packages/ui/src` against the installed SDK documentation and require matching core and React version pins. If a package's documentation cannot be read, use its package exports. Reject internal and unknown entries.
 - `npm run ui-sdk:update` — Check upstream releases and update both UI SDK pins, the root lockfile, and the upstream skill. See [UI SDK updates](#ui-sdk-updates) for options and the PR workflow.
 - `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GITHUB_SHA` (commit to install); CI supplies these for the PR head or pushed commit.
@@ -38,17 +38,32 @@ The gallery at `/` provides English/Arabic locale, LTR/RTL direction, and system
 
 Vite aliases and TypeScript paths resolve `@tensquads/ui/*` directly to `packages/ui/src`; the app has no npm dependency on the UI package and needs no package build before previewing source changes.
 
+## Consumer setup
+
+Install `@tensquads/ui` from a pinned Git commit, then add these imports to the consumer's global stylesheet in this order:
+
+```css
+@layer ui-sdk, tensquads;
+@import "@tensquads/ui/fonts.css";
+@import "@tensquads/ui/tokens.css";
+@import "@tensquads/ui/styles.css";
+```
+
+See the [font inventory](packages/ui/src/fonts/README.md) for bundled families, pinned releases, weights, and licenses.
+
 ## Browser verification
 
 After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Playwright starts the preview through its `webServer` at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings. The smoke test covers English/LTR and Arabic/RTL in light and dark themes, screenshots at 1440 and 390 px widths, mobile overflow, axe accessibility, and the focus ring.
 
-Run `npm run e2e:update` on Linux to regenerate the committed baselines in `e2e/__screenshots__`, then review the image changes. Routine CI compares the committed baselines without regenerating them. The route helper loads pinned Inter and IBM Plex Sans Arabic fonts for tests only; see the [font inventory](e2e/fonts/README.md) for releases, weights, sources, and separate licenses. The product font choice remains open. Chromium disables LCD text and font hinting, and the helper removes native select arrows in tests to normalize control widths across macOS and Linux. Screenshots allow at most 0.1% differing pixels for residual platform glyph rasterization, with Playwright's default per-pixel sensitivity. Use Linux for final baseline verification. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts). Failed CI runs upload the Playwright HTML report.
+Run `npm run e2e:update` on Linux to regenerate the committed baselines in `e2e/__screenshots__`, then review the image changes. Routine CI compares the committed baselines without regenerating them. The preview app and consumers load the bundled product fonts. Chromium disables LCD text and font hinting, and the helper removes native select arrows in tests to normalize control widths across macOS and Linux. Screenshots allow at most 0.1% differing pixels for residual platform glyph rasterization, with Playwright's default per-pixel sensitivity. Use Linux for final baseline verification. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts). Failed CI runs upload the Playwright HTML report.
 
 ## Design tokens
 
 After syncing design references, run `npm run tokens` and commit the generated `packages/ui/src/tokens/tokens.css` and `packages/ui/src/tokens/tokens.ts`. Do not edit these outputs by hand. Run `npm run build` to include them in the package; the package build copies and compiles the committed outputs rather than regenerating them.
 
-Import `@tensquads/ui/tokens.css` to use the `--ts-` custom properties in the `tensquads` cascade layer. Token names retain their spelling with dots replaced by hyphens, so `text-md.font-size` becomes `--ts-text-md-font-size`. Set `data-theme="light"` or `data-theme="dark"` on `<html>` to select a theme. Without an explicit theme, the root uses light values and follows `prefers-color-scheme: dark` when requested by the OS. Font tokens reference family names; font files and font loading are not supplied by the package or preview app. The e2e helper uses Inter and IBM Plex Sans Arabic only to keep test screenshots consistent. The product font choice remains open.
+Follow [Consumer setup](#consumer-setup) for stylesheet imports and font licensing references.
+
+Import `@tensquads/ui/tokens.css` to use the `--ts-` custom properties in the `tensquads` cascade layer. Token names retain their spelling with dots replaced by hyphens, so `text-md.font-size` becomes `--ts-text-md-font-size`. Set `data-theme="light"` or `data-theme="dark"` on `<html>` to select a theme. Without an explicit theme, the root uses light values and follows `prefers-color-scheme: dark` when requested by the OS.
 
 The `tokens` object is the only runtime export from `@tensquads/ui/tokens`. It maps token names to resolved `light` and `dark` values, including inherited typography families. `TokenName`, `TokenTheme`, and `TokenValue<Name>` are type-only exports:
 
