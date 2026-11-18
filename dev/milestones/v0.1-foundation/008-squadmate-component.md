@@ -19,5 +19,7 @@ files: ["packages/ui/src/squadmates/**", "packages/ui/src/react/Squadmate/**", "
 - [ ] OpenUI round-trip fixture renders in both locales.
 - [ ] `llms.txt` lists Squadmate. `npm run verify` exits 0 in CI.
 
+- [ ] Add `AgentRoleSchema` to `@tensquads/ui/schemas` with the 13 role ids from `design/mascots/mascots.json` (`master`, `orders`, `support`, …; the tensquads app uses these as image ids) and a typed map between `AgentRole` and `AgentSlug` (the character name, used for files and display). Note from the PR #8 review.
+
 ## Suggested approach
 Keep the moved drawing and roster behavior faithful to the source commit. Avoid module-scope randomness or timers. If the component has no meaningful OpenUI use, explain why in `Squadmate.md` and keep its definition consistent with the shared API.
