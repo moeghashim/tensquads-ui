@@ -21,24 +21,32 @@ const segmentedProps = z
 		"Initial value must be one of the options.",
 	);
 
+const optionSlots = ["first", "second", "third", "fourth"] as const;
+
 export const SegmentedControlOpenUI = defineComponent({
 	name: "SegmentedControl",
 	description: "An accessible exclusive selection control for two or more modes.",
 	props: segmentedProps,
 	component: function StreamedSegmentedControl({ props }) {
-		const [userValue, setUserValue] = useState<string | null | undefined>(undefined);
-		const parsed = segmentedProps.safeParse(props);
-		if (!parsed.success) return null;
-		const { label, options, value } = parsed.data;
+		const [userSlot, setUserSlot] = useState<string | null>(null);
+		const options = optionSlots.flatMap((id, position) => {
+			const label = props.options?.[position];
+			if (!label || props.options.indexOf(label) !== position) return [];
+			return [{ id, label }];
+		});
+		const selected =
+			options.find((option) => option.id === userSlot) ??
+			options.find((option) => option.label === props.value) ??
+			options[0];
 		return createElement(
 			SegmentedControl,
 			{
-				"aria-label": label,
-				value: userValue === undefined ? value ?? options[0] : userValue,
-				onValueChange: setUserValue,
+				"aria-label": props.label,
+				value: selected?.id ?? null,
+				onValueChange: setUserSlot,
 			},
 			createElement(SegmentedControlIndicator),
-			...options.map((option) => createElement(SegmentedControlItem, { key: option, value: option }, option)),
+			...options.map(({ id, label }) => createElement(SegmentedControlItem, { key: id, value: id }, label)),
 		);
 	},
 });
