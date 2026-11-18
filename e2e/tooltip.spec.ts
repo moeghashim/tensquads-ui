@@ -13,10 +13,14 @@ const states: PreviewState[] = [
 	{ locale: "en", direction: "ltr", theme: "dark" },
 	{ locale: "ar", direction: "rtl", theme: "light" },
 	{ locale: "ar", direction: "rtl", theme: "dark" },
+	{ locale: "ar", direction: "ltr", theme: "light" },
+	{ locale: "ar", direction: "ltr", theme: "dark" },
+	{ locale: "en", direction: "rtl", theme: "light" },
+	{ locale: "en", direction: "rtl", theme: "dark" },
 ];
 
-test("Tooltip preview works in both directions and themes", async ({ page }, testInfo) => {
-	for (const state of states) {
+for (const state of states) {
+	test(`Tooltip preview works in ${state.locale}/${state.direction}/${state.theme}`, async ({ page }, testInfo) => {
 		await openPreview(page, state, "/components/Tooltip");
 		await expect(page.getByRole("heading", { name: "Tooltip" })).toBeVisible();
 		await expectThemeFocusRing(page, state.theme);
@@ -51,7 +55,10 @@ test("Tooltip preview works in both directions and themes", async ({ page }, tes
 				testInfo,
 				`tooltip-${state.locale}-${state.direction}-${state.theme}-${side}`,
 			);
+			await expect(tooltip).toHaveCount(1);
+			await expect(tooltip).toBeVisible();
+			await expect(tooltip).toHaveAttribute("data-side", expectedSide);
 		}
 		await expectNoHorizontalScroll(page);
-	}
-});
+	});
+}

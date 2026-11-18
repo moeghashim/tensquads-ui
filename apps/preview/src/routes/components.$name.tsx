@@ -473,7 +473,7 @@ function ComponentPage() {
 	if (name === "Tooltip") {
 		const ar = locale === "ar";
 		const sides = ["top", "right", "bottom", "left"] as const;
-		const rtlSides = { top: "top", right: "left", bottom: "bottom", left: "right" } as const;
+		const logicalSides = { top: "top", right: "end", bottom: "bottom", left: "start" } as const;
 		const labels = ar
 			? { title: "مواضع التلميح", action: "إضافة عنصر", hint: "أنشئ عنصراً جديداً" }
 			: { title: "Tooltip placements", action: "Add item", hint: "Create a new item" };
@@ -492,7 +492,7 @@ function ComponentPage() {
 								<TooltipTrigger render={<Button iconOnly aria-label={labels.action} />}>
 									<span aria-hidden="true">+</span>
 								</TooltipTrigger>
-								<TooltipContent side={ar ? rtlSides[side] : side}>
+								<TooltipContent side={logicalSides[side]}>
 									{labels.hint}
 									<TooltipShortcut />
 									<TooltipArrow />
