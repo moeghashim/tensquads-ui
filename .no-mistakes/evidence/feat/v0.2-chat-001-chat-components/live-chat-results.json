@@ -1,0 +1,66 @@
+[
+  {
+    "scenario": "Keyboard Enter on Stop must only stop, preserving the pending draft",
+    "locale": "en",
+    "afterStop": {
+      "value": "",
+      "messages": "[\"First line\\nSecond line\",\"こんにちは\",\"Click send\",\"Hold while busy\"]",
+      "enabled": false
+    },
+    "result": "fail"
+  },
+  {
+    "scenario": "Pointer click Stop must only stop, preserving the pending draft",
+    "locale": "en",
+    "value": "",
+    "messages": "[\"First line\\nSecond line\",\"こんにちは\",\"Click send\",\"Hold while busy\",\"Click Stop draft\"]",
+    "stopCount": "2",
+    "result": "fail"
+  },
+  {
+    "scenario": "Composer keyboard, simulated IME, empty/whitespace guard, click Send, busy send guard, Tab focus and 160px growth",
+    "locale": "en",
+    "dimensions": {
+      "height": 160,
+      "scroll": 1472
+    },
+    "ring": [
+      "2px",
+      "2px",
+      "rgb(1, 105, 204)"
+    ],
+    "result": "pass"
+  },
+  {
+    "scenario": "Keyboard Enter on Stop must only stop, preserving the pending draft",
+    "locale": "ar",
+    "afterStop": {
+      "value": "",
+      "messages": "[\"First line\\nSecond line\",\"こんにちは\",\"Click send\",\"Hold while busy\"]",
+      "enabled": false
+    },
+    "result": "fail"
+  },
+  {
+    "scenario": "Pointer click Stop must only stop, preserving the pending draft",
+    "locale": "ar",
+    "value": "",
+    "messages": "[\"First line\\nSecond line\",\"こんにちは\",\"Click send\",\"Hold while busy\",\"Click Stop draft\"]",
+    "stopCount": "2",
+    "result": "fail"
+  },
+  {
+    "scenario": "Composer keyboard, simulated IME, empty/whitespace guard, click Send, busy send guard, Tab focus and 160px growth",
+    "locale": "ar",
+    "dimensions": {
+      "height": 160,
+      "scroll": 1472
+    },
+    "ring": [
+      "2px",
+      "2px",
+      "rgb(2, 133, 255)"
+    ],
+    "result": "pass"
+  }
+]

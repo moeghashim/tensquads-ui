@@ -1,0 +1,14 @@
+{
+  "Button": {
+    "previous": null,
+    "next": "Badge"
+  },
+  "Tooltip": {
+    "previous": "SegmentedControl",
+    "next": "Chat"
+  },
+  "Chat": {
+    "previous": "Tooltip",
+    "next": null
+  }
+}

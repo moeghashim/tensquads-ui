@@ -1,0 +1,14 @@
+Real Chromium against the real exported React components, served by repository-local Vite at 127.0.0.1:5174. Synthetic conversation only; no remote services.
+
+Stop failure (English/light/LTR and Arabic/dark/RTL):
+1. Render ChatComposer with onSend appending to messages and onStop setting busy=false.
+2. Enter a nonempty draft. Set busy=true.
+3. Click Stop, or Tab to Stop and press Enter.
+Expected: onStop fires once; draft remains; onSend does not fire.
+Observed: onStop fires once AND onSend fires with the pending draft; textarea becomes empty. live-chat-results.json retains the exact callback output and draft state. stop-enter-en.png and stop-enter-ar.png show the resulting sent-message array and cleared composer.
+
+The browser driver exited 1 because Stop failed. Other composer assertions passed. The independent scroll driver exited 0 after font loading and layout settled. An earlier combined diagnostic had intermittent scroll-follow assertions after rapid composer resizing; the independently initialized log passed in both directions.
+
+Targeted production preview tests exited 0: e2e/chat.spec.ts and the retained preview-theme-driver.ts. Screenshots cover en/light/1440, ar/dark/390, en/dark/390 and ar/light/390. Axe and mobile overflow checks passed. Navigation checks confirmed Button -> Badge and Tooltip -> Chat.
+
+No source changes retained. No full suite, lint, formatter, gate, push, PR or CI action was run in this phase. Supplied baseline npm run verify had already passed before this phase.

@@ -1,0 +1,70 @@
+[
+  {
+    "locale": "en",
+    "before": {
+      "top": 657,
+      "height": 1030,
+      "client": 373
+    },
+    "growth": {
+      "top": 1057,
+      "height": 1430,
+      "client": 373
+    },
+    "appended": {
+      "top": 1117,
+      "height": 1490,
+      "client": 373
+    },
+    "up": {
+      "top": 767,
+      "height": 1490,
+      "client": 373
+    },
+    "held": {
+      "top": 767,
+      "height": 1890,
+      "client": 373
+    },
+    "resumed": {
+      "top": 1977,
+      "height": 2350,
+      "client": 373
+    },
+    "result": "pass"
+  },
+  {
+    "locale": "ar",
+    "before": {
+      "top": 657,
+      "height": 1030,
+      "client": 373
+    },
+    "growth": {
+      "top": 1057,
+      "height": 1430,
+      "client": 373
+    },
+    "appended": {
+      "top": 1117,
+      "height": 1490,
+      "client": 373
+    },
+    "up": {
+      "top": 767,
+      "height": 1490,
+      "client": 373
+    },
+    "held": {
+      "top": 767,
+      "height": 1890,
+      "client": 373
+    },
+    "resumed": {
+      "top": 1977,
+      "height": 2350,
+      "client": 373
+    },
+    "result": "pass"
+  }
+]

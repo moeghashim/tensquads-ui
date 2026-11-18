@@ -1,0 +1,62 @@
+import { chromium } from '@playwright/test';
+import assert from 'node:assert/strict';
+import {writeFile} from 'node:fs/promises';
+const evidence='~/.no-mistakes/evidence/01M7RCHHQ9B9S1Q0SD2JGD56J4';
+const browser=await chromium.launch();
+const results=[];
+try {
+for(const locale of ['en','ar']) for(const theme of ['light','dark']) {
+ const page=await browser.newPage({viewport:{width:locale==='ar'?390:1440,height:900}});
+ page.on('pageerror',e=>console.log('PAGE ERROR',e.message));
+ await page.goto(`http://127.0.0.1:5174/?locale=${locale}&theme=${theme}`);
+ const input=page.getByRole('textbox'); await input.waitFor();
+ await page.evaluate(()=>document.fonts.ready);
+ const send=page.getByRole('button',{name:locale==='ar'?'إرسال':'Send',exact:true});
+ assert(await send.isDisabled()); await input.fill('   '); assert(await send.isDisabled());
+ await input.fill('こんにちは');
+ await input.dispatchEvent('compositionstart');
+ await input.dispatchEvent('keydown',{key:'Enter',code:'Enter',isComposing:true,bubbles:true});
+ assert.equal(await input.inputValue(),'こんにちは');
+ assert.equal(await page.getByRole('status',{name:'Sent messages'}).textContent(),'[]');
+ await input.dispatchEvent('compositionend');
+ await input.press('End'); await input.press('Shift+Enter'); assert.equal(await input.inputValue(),'こんにちは\n');
+ await input.press('Enter'); assert.equal(await input.inputValue(),'');
+ assert.equal(await page.getByRole('status',{name:'Sent messages'}).textContent(),'["こんにちは"]');
+ assert(await input.evaluate(e=>e===document.activeElement));
+ await input.fill('busy text'); await input.press('Enter');
+ assert.equal(await page.getByRole('status',{name:'Sent messages'}).textContent(),'["こんにちは"]');
+ await page.getByRole('button',{name:locale==='ar'?'إيقاف':'Stop',exact:true}).click();
+ assert.equal(await page.getByRole('status',{name:'Stop count'}).textContent(),'1');
+ await input.fill(''); const initial=(await input.boundingBox()).height;
+ await input.fill(Array.from({length:24},(_,i)=>'Line '+i).join('\n'));
+ const tall=(await input.boundingBox()).height;console.log({initial,tall,metrics:await input.evaluate(e=>({width:e.offsetWidth,parent:e.parentElement.clientWidth,box:getComputedStyle(e).boxSizing,max:getComputedStyle(e).maxBlockSize}))});assert(tall>initial);assert(tall<=160);
+ assert(await input.evaluate(e=>e.scrollHeight>e.clientHeight));
+ await input.fill('');assert((await input.boundingBox()).height<tall);
+ await input.focus();await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement.textContent),'Attach');
+ await page.keyboard.press('Shift+Tab'); assert(await input.evaluate(e=>e===document.activeElement));
+ const ring=await page.locator('.ts-chat__composer').evaluate(e=>{const s=getComputedStyle(e);return [s.outlineWidth,s.outlineOffset,s.outlineColor]});
+ assert.deepEqual(ring,['2px','2px',theme==='light'?'rgb(1, 105, 204)':'rgb(2, 133, 255)']);
+ await page.waitForTimeout(250);
+ const log=page.getByRole('log');
+ const metrics=()=>log.evaluate(e=>({top:e.scrollTop,height:e.scrollHeight,client:e.clientHeight}));
+ const settle=()=>page.waitForTimeout(150);
+ await log.evaluate(e=>{e.scrollTop=e.scrollHeight});await settle();
+ let before=await metrics();assert(before.height>before.client);assert(Math.abs(before.height-before.client-before.top)<2);
+ // Click in DOM avoids browser auto-scrolling to the nested button before testing resize following.
+ await page.getByRole('button',{name:'Grow nested reply'}).evaluate(e=>e.click());await settle();
+ let after=await metrics();console.log({before,after});assert(after.height>before.height);assert(Math.abs(after.height-after.client-after.top)<2);
+ await log.hover();await page.mouse.wheel(0,-300);await settle();before=await metrics();assert(before.top<before.height-before.client-24);
+ await page.getByRole('button',{name:'Grow nested reply'}).evaluate(e=>e.click());await settle();after=await metrics();assert(after.height>before.height);assert(Math.abs(after.top-before.top)<2);
+ await log.evaluate(e=>{e.scrollTop=e.scrollHeight});await settle();
+ await page.getByRole('button',{name:'Grow nested reply'}).evaluate(e=>e.click());await settle();after=await metrics();assert(Math.abs(after.height-after.client-after.top)<2);
+ await page.emulateMedia({reducedMotion:'reduce'});assert.equal(await page.locator('.ts-chat__spinner').evaluate(e=>getComputedStyle(e).animationName),'none');
+ assert.equal(await log.getAttribute('aria-live'),'polite');
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
+ assert(await log.evaluate(e=>e.scrollWidth<=e.clientWidth));
+ await page.screenshot({path:`${evidence}/chat-consumer-${locale}-${theme}.png`,fullPage:true});
+ results.push({locale,theme,keyboard:'empty and whitespace disabled; Shift+Enter newline; Enter sends once and keeps focus',ime:'composing Enter retained nonempty text and emitted no message',stop:'busy Enter blocked; Stop callback incremented once',growth:{initial,tall},focus:ring,scroll:'nested content follows at bottom, wheel scroll up preserves position, returning bottom resumes',reducedMotion:'spinner animation none',overflow:'document and log fit viewport'});
+ await page.close();
+}
+await writeFile(`${evidence}/live-consumer-results.json`,JSON.stringify(results,null,2));
+console.log(JSON.stringify(results,null,2));
+} finally {await browser.close()}

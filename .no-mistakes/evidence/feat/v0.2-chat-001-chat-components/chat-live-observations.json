@@ -1,0 +1,151 @@
+[
+  {
+    "locale": "en",
+    "scenario": "keyboard, IME, blank-send, focus and textarea growth",
+    "events": {
+      "sent": [
+        "First\nSecond",
+        "こんにちは"
+      ],
+      "stops": 0,
+      "resets": 1,
+      "clicks": 0
+    },
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)",
+      "token": "#0169cc"
+    },
+    "textarea": {
+      "height": 160,
+      "scroll": 728
+    }
+  },
+  {
+    "locale": "en",
+    "scenario": "follow nested content, preserve reader position, resume following",
+    "before": {
+      "top": 551,
+      "height": 1054,
+      "viewport": 503,
+      "bottom": 0
+    },
+    "after": {
+      "top": 1031,
+      "height": 1534,
+      "viewport": 503,
+      "bottom": 0
+    },
+    "up": {
+      "top": 531,
+      "height": 1534,
+      "viewport": 503,
+      "bottom": 500
+    },
+    "preserved": {
+      "top": 531,
+      "height": 2014,
+      "viewport": 503,
+      "bottom": 980
+    },
+    "resumed": {
+      "top": 1991,
+      "height": 2494,
+      "viewport": 503,
+      "bottom": 0
+    }
+  },
+  {
+    "locale": "en",
+    "scenario": "arbitrary reply action, states, reduced motion and mobile overflow",
+    "events": {
+      "sent": [
+        "First\nSecond",
+        "こんにちは",
+        "long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_"
+      ],
+      "stops": 1,
+      "resets": 1,
+      "clicks": 1
+    },
+    "spinner": "animation none",
+    "documentWidth": 390
+  },
+  {
+    "locale": "ar",
+    "scenario": "keyboard, IME, blank-send, focus and textarea growth",
+    "events": {
+      "sent": [
+        "First\nSecond",
+        "こんにちは"
+      ],
+      "stops": 0,
+      "resets": 1,
+      "clicks": 0
+    },
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)",
+      "token": "#0285ff"
+    },
+    "textarea": {
+      "height": 160,
+      "scroll": 728
+    }
+  },
+  {
+    "locale": "ar",
+    "scenario": "follow nested content, preserve reader position, resume following",
+    "before": {
+      "top": 551,
+      "height": 1054,
+      "viewport": 503,
+      "bottom": 0
+    },
+    "after": {
+      "top": 1031,
+      "height": 1534,
+      "viewport": 503,
+      "bottom": 0
+    },
+    "up": {
+      "top": 531,
+      "height": 1534,
+      "viewport": 503,
+      "bottom": 500
+    },
+    "preserved": {
+      "top": 531,
+      "height": 2014,
+      "viewport": 503,
+      "bottom": 980
+    },
+    "resumed": {
+      "top": 1991,
+      "height": 2494,
+      "viewport": 503,
+      "bottom": 0
+    }
+  },
+  {
+    "locale": "ar",
+    "scenario": "arbitrary reply action, states, reduced motion and mobile overflow",
+    "events": {
+      "sent": [
+        "First\nSecond",
+        "こんにちは",
+        "long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_long_unbroken_message_"
+      ],
+      "stops": 1,
+      "resets": 1,
+      "clicks": 1
+    },
+    "spinner": "animation none",
+    "documentWidth": 390
+  },
+  {
+    "result": "All disposable consumer assertions passed"
+  }
+]

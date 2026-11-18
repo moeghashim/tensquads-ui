@@ -1,0 +1,78 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "keyboard": "empty and whitespace disabled; Shift+Enter newline; Enter sends once and keeps focus",
+    "ime": "composing Enter retained nonempty text and emitted no message",
+    "stop": "busy Enter blocked; Stop callback incremented once",
+    "growth": {
+      "initial": 32,
+      "tall": 160
+    },
+    "focus": [
+      "2px",
+      "2px",
+      "rgb(1, 105, 204)"
+    ],
+    "scroll": "nested content follows at bottom, wheel scroll up preserves position, returning bottom resumes",
+    "reducedMotion": "spinner animation none",
+    "overflow": "document and log fit viewport"
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "keyboard": "empty and whitespace disabled; Shift+Enter newline; Enter sends once and keeps focus",
+    "ime": "composing Enter retained nonempty text and emitted no message",
+    "stop": "busy Enter blocked; Stop callback incremented once",
+    "growth": {
+      "initial": 32,
+      "tall": 160
+    },
+    "focus": [
+      "2px",
+      "2px",
+      "rgb(2, 133, 255)"
+    ],
+    "scroll": "nested content follows at bottom, wheel scroll up preserves position, returning bottom resumes",
+    "reducedMotion": "spinner animation none",
+    "overflow": "document and log fit viewport"
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "keyboard": "empty and whitespace disabled; Shift+Enter newline; Enter sends once and keeps focus",
+    "ime": "composing Enter retained nonempty text and emitted no message",
+    "stop": "busy Enter blocked; Stop callback incremented once",
+    "growth": {
+      "initial": 32,
+      "tall": 160
+    },
+    "focus": [
+      "2px",
+      "2px",
+      "rgb(1, 105, 204)"
+    ],
+    "scroll": "nested content follows at bottom, wheel scroll up preserves position, returning bottom resumes",
+    "reducedMotion": "spinner animation none",
+    "overflow": "document and log fit viewport"
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "keyboard": "empty and whitespace disabled; Shift+Enter newline; Enter sends once and keeps focus",
+    "ime": "composing Enter retained nonempty text and emitted no message",
+    "stop": "busy Enter blocked; Stop callback incremented once",
+    "growth": {
+      "initial": 32,
+      "tall": 160
+    },
+    "focus": [
+      "2px",
+      "2px",
+      "rgb(2, 133, 255)"
+    ],
+    "scroll": "nested content follows at bottom, wheel scroll up preserves position, returning bottom resumes",
+    "reducedMotion": "spinner animation none",
+    "overflow": "document and log fit viewport"
+  }
+]
