@@ -1061,8 +1061,8 @@ export const tokens = {
 		dark: "#414141",
 	},
 	"font-sans": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"font-mono": {
 		light: "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
@@ -1085,8 +1085,8 @@ export const tokens = {
 		dark: "-0.02em",
 	},
 	"heading-5xl.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-4xl.font-size": {
 		light: "60px",
@@ -1105,8 +1105,8 @@ export const tokens = {
 		dark: "-0.02em",
 	},
 	"heading-4xl.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-3xl.font-size": {
 		light: "48px",
@@ -1125,8 +1125,8 @@ export const tokens = {
 		dark: "-0.02em",
 	},
 	"heading-3xl.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-2xl.font-size": {
 		light: "36px",
@@ -1145,8 +1145,8 @@ export const tokens = {
 		dark: "-0.02em",
 	},
 	"heading-2xl.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-xl.font-size": {
 		light: "32px",
@@ -1165,8 +1165,8 @@ export const tokens = {
 		dark: "-0.02em",
 	},
 	"heading-xl.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-lg.font-size": {
 		light: "24px",
@@ -1185,8 +1185,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"heading-lg.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-md.font-size": {
 		light: "20px",
@@ -1205,8 +1205,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"heading-md.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-sm.font-size": {
 		light: "18px",
@@ -1225,8 +1225,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"heading-sm.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"heading-xs.font-size": {
 		light: "16px",
@@ -1245,8 +1245,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"heading-xs.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"text-lg.font-size": {
 		light: "18px",
@@ -1265,8 +1265,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"text-lg.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"text-md.font-size": {
 		light: "16px",
@@ -1285,8 +1285,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"text-md.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"text-sm.font-size": {
 		light: "14px",
@@ -1305,8 +1305,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"text-sm.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"text-xs.font-size": {
 		light: "12px",
@@ -1325,8 +1325,8 @@ export const tokens = {
 		dark: "0",
 	},
 	"text-xs.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"text-2xs.font-size": {
 		light: "10px",
@@ -1345,8 +1345,8 @@ export const tokens = {
 		dark: "0",
 	},
 	"text-2xs.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"text-3xs.font-size": {
 		light: "8px",
@@ -1365,8 +1365,8 @@ export const tokens = {
 		dark: "0",
 	},
 	"text-3xs.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"small-caps-md.font-size": {
 		light: "11px",
@@ -1385,8 +1385,8 @@ export const tokens = {
 		dark: "0.65px",
 	},
 	"small-caps-md.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"small-caps-lg.font-size": {
 		light: "13px",
@@ -1405,8 +1405,8 @@ export const tokens = {
 		dark: "0.6px",
 	},
 	"small-caps-lg.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"page-title.font-size": {
 		light: "36px",
@@ -1425,8 +1425,8 @@ export const tokens = {
 		dark: "0.36px",
 	},
 	"page-title.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"panel-title.font-size": {
 		light: "16px",
@@ -1445,8 +1445,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"panel-title.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"panel-description.font-size": {
 		light: "14px",
@@ -1465,8 +1465,8 @@ export const tokens = {
 		dark: "-0.14px",
 	},
 	"panel-description.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"field-label.font-size": {
 		light: "14px",
@@ -1485,8 +1485,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"field-label.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"field-value.font-size": {
 		light: "14px",
@@ -1505,8 +1505,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"field-value.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"input-text.font-size": {
 		light: "14px",
@@ -1525,8 +1525,8 @@ export const tokens = {
 		dark: "-0.14px",
 	},
 	"input-text.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"palette-item.font-size": {
 		light: "14px",
@@ -1545,8 +1545,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"palette-item.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"palette-section.font-size": {
 		light: "12px",
@@ -1565,8 +1565,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"palette-section.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"node-title.font-size": {
 		light: "12px",
@@ -1585,8 +1585,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"node-title.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"node-meta.font-size": {
 		light: "10px",
@@ -1605,8 +1605,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"node-meta.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"branch-label.font-size": {
 		light: "12px",
@@ -1625,8 +1625,8 @@ export const tokens = {
 		dark: "-0.16px",
 	},
 	"branch-label.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"badge.font-size": {
 		light: "12px",
@@ -1645,8 +1645,8 @@ export const tokens = {
 		dark: "0.36px",
 	},
 	"badge.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"button-md.font-size": {
 		light: "14px",
@@ -1665,8 +1665,8 @@ export const tokens = {
 		dark: "-0.14px",
 	},
 	"button-md.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"button-sm.font-size": {
 		light: "12px",
@@ -1685,8 +1685,8 @@ export const tokens = {
 		dark: "0",
 	},
 	"button-sm.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"button-lg.font-size": {
 		light: "16px",
@@ -1705,8 +1705,8 @@ export const tokens = {
 		dark: "-0.01em",
 	},
 	"button-lg.font-family": {
-		light: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
-		dark: "\"Inter\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		light: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
+		dark: "\"Inter\", \"IBM Plex Sans Arabic\", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif",
 	},
 	"code.font-size": {
 		light: "13px",

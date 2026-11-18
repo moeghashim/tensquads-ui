@@ -24,7 +24,9 @@ describe("design tokens", () => {
 		for (const group of source.type.groups) {
 			for (const style of group.styles) {
 				const family = "family" in style ? style.family : group.family;
-				const expected = source.type.families[family as keyof typeof source.type.families];
+				const sourceFamily = source.type.families[family as keyof typeof source.type.families];
+				const expected =
+					family === "sans" ? sourceFamily.replace('"Inter",', '"Inter", "IBM Plex Sans Arabic",') : sourceFamily;
 				const name = `${style.name}.font-family` as keyof typeof tokens;
 				expect(tokens[name]).toEqual({ light: expected, dark: expected });
 				expect(css.split(`--ts-${style.name}-font-family: ${expected};`)).toHaveLength(4);

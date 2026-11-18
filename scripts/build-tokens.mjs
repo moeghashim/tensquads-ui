@@ -5,6 +5,18 @@ function cssName(name) {
 	return `--ts-${name.replaceAll(".", "-")}`;
 }
 
+function mapFontFamily(name, family) {
+	// Keep design tokens authoritative while adding the product fallback faces defined by D17.
+	if (name === "sans")
+		return `"Inter", "IBM Plex Sans Arabic", ${family
+			.split(",")
+			.slice(1)
+			.map((part) => part.trim())
+			.join(", ")}`;
+	if (name === "mono" && !family.includes("JetBrains Mono")) return `"JetBrains Mono", ${family}`;
+	return family;
+}
+
 function resolveValue(value, source, theme, css = false) {
 	if (typeof value !== "string") return value;
 	return value.replace(/\{([^}]+)\}/g, (_match, name) => {
@@ -24,7 +36,8 @@ function entriesFrom(source, resolve = false) {
 		if (group === "name" || group === "version" || group === "meta") continue;
 		if (group === "type") {
 			for (const [name, family] of Object.entries(value.families)) {
-				entries.push([`font-${name}`, { light: family, dark: family }]);
+				const mappedFamily = mapFontFamily(name, family);
+				entries.push([`font-${name}`, { light: mappedFamily, dark: mappedFamily }]);
 			}
 			for (const styleGroup of value.groups) {
 				for (const style of styleGroup.styles) {
@@ -38,10 +51,8 @@ function entriesFrom(source, resolve = false) {
 					}
 					const family = style.family ?? styleGroup.family;
 					if (family) {
-						entries.push([
-							`${style.name}.font-family`,
-							{ light: value.families[family], dark: value.families[family] },
-						]);
+						const mappedFamily = mapFontFamily(family, value.families[family]);
+						entries.push([`${style.name}.font-family`, { light: mappedFamily, dark: mappedFamily }]);
 					}
 				}
 			}

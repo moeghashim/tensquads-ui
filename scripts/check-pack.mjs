@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { mkdtemp, readFile, realpath, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -24,6 +24,7 @@ try {
 	execFileSync("npm", ["install", "--ignore-scripts", tarball], { cwd: fixture, stdio: "inherit" });
 
 	const packageJson = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
+	const installedPackage = join(fixture, "node_modules/@tensquads/ui");
 	for (const packageName of ["@ui-sdk/core", "@ui-sdk/react"]) {
 		await readFile(join(fixture, "node_modules", packageName, "package.json"), "utf8");
 		const npmTree = JSON.parse(
@@ -43,7 +44,16 @@ try {
 	const imports = [];
 	for (const [path, target] of Object.entries(packageJson.exports)) {
 		if (path.endsWith(".css")) {
-			await readFile(join(fixture, "node_modules/@tensquads/ui", target));
+			const cssPath = join(installedPackage, target);
+			const css = await readFile(cssPath, "utf8");
+			for (const [, url] of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
+				const fontPath = resolve(cssPath, "..", url);
+				const packageRelativePath = relative(installedPackage, fontPath);
+				if (packageRelativePath.startsWith("..") || packageRelativePath === "") {
+					throw new Error(`CSS URL escapes the installed package: ${url}`);
+				}
+				await readFile(fontPath);
+			}
 			continue;
 		}
 		imports.push(`import(${JSON.stringify(`@tensquads/ui${path.slice(1)}`)})`);

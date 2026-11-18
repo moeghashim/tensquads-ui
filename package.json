@@ -22,6 +22,7 @@
 		},
 		"./tokens.css": "./packages/ui/dist/tokens/tokens.css",
 		"./styles.css": "./packages/ui/dist/styles/styles.css",
+		"./fonts.css": "./packages/ui/dist/fonts.css",
 		"./react": {
 			"types": "./packages/ui/dist/react/index.d.ts",
 			"import": "./packages/ui/dist/react/index.js"

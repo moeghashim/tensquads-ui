@@ -1,6 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import "../layers.css";
+import "@tensquads/ui/fonts.css";
 import "@tensquads/ui/tokens.css";
 import "@tensquads/ui/styles.css";
 import { getPreviewAttributes } from "../state";

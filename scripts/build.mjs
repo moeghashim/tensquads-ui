@@ -9,5 +9,8 @@ await rm(dist, { recursive: true, force: true });
 execFileSync("npx", ["tsc", "-p", "tsconfig.build.json"], { cwd: root, stdio: "inherit" });
 await mkdir(new URL("tokens/", dist), { recursive: true });
 await mkdir(new URL("styles/", dist), { recursive: true });
+await mkdir(new URL("fonts/", dist), { recursive: true });
 await cp(new URL("../packages/ui/src/tokens/tokens.css", import.meta.url), new URL("tokens/tokens.css", dist));
 await cp(new URL("../packages/ui/src/styles/styles.css", import.meta.url), new URL("styles/styles.css", dist));
+await cp(new URL("../packages/ui/src/fonts/fonts.css", import.meta.url), new URL("fonts.css", dist));
+await cp(new URL("../packages/ui/src/fonts/", import.meta.url), new URL("fonts/", dist), { recursive: true });
