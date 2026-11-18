@@ -11,10 +11,10 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": "24.x",
+		"node": "26.x",
 		"npm": "11.x"
 	},
-	"packageManager": "npm@11.19.0",
+	"packageManager": "npm@11.20.0",
 	"exports": {
 		"./tokens": {
 			"types": "./packages/ui/dist/tokens/index.d.ts",
@@ -51,7 +51,6 @@
 		"deploy:preview": "npm --prefix apps/preview run deploy",
 		"check:preview": "npm --prefix apps/preview run check",
 		"e2e": "playwright test",
-		"e2e:update": "playwright test --update-snapshots",
 		"build": "node scripts/build.mjs",
 		"prepare": "npm run build",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
@@ -88,7 +87,7 @@
 		"@playwright/test": "1.64.1",
 		"@testing-library/jest-dom": "6.9.1",
 		"@testing-library/react": "16.3.3",
-		"@types/node": "24.19.2",
+		"@types/node": "26.6.6",
 		"@types/react": "19.3.0",
 		"@types/react-dom": "19.3.0",
 		"jsdom": "31.0.1",

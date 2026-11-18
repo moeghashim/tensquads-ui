@@ -1,5 +1,7 @@
 # tensquads-ui
 
+Use Node 26.13.1 and npm 11.20.0. Install [mise](https://mise.jdx.dev/), then run `mise trust` and `mise install` from the repository root. Run npm commands with `mise exec -- npm …` to use the pinned versions without changing the machine-wide Node or npm.
+
 tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arabic), bringing React components and OpenUI definitions together in `@tensquads/ui`. See [PLAN.md](PLAN.md) for the project plan and decisions.
 
 ## Commands
@@ -19,7 +21,7 @@ tensquads-ui is the shared UI layer for tensquads (English) and بنّاء (Arab
 - `npm run check:pack` — Pack and install the package in a temporary fixture, reject test files and duplicate UI SDK installations, verify exported entry points, and check that URLs in exported CSS resolve to files inside the installed package.
 - `npm run check:ui-sdk-usage` — Check UI SDK imports in `packages/ui/src` against the installed SDK documentation and require matching core and React version pins. If a package's documentation cannot be read, use its package exports. Reject internal and unknown entries.
 - `npm run ui-sdk:update` — Check upstream releases and update both UI SDK pins, the root lockfile, and the upstream skill. See [UI SDK updates](#ui-sdk-updates) for options and the PR workflow.
-- `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GITHUB_SHA` (commit to install); CI supplies these for the PR head or pushed commit.
+- `npm run check:git-install` — Install a git commit in a temporary consumer fixture, import each JavaScript export, and check CSS entry files exist. Requires `GITHUB_WORKSPACE` (repository path) and `GIT_INSTALL_SHA` (commit to install); CI supplies the checked-out commit, including the selected branch's commit for manual dispatch.
 - `npm run check:css-tokens` — Reject raw color literals in CSS under `packages/ui/src/styles`, including variable fallbacks. Color token variables, `transparent`, `currentColor`, and CSS-wide keywords are allowed.
 - `npm run design:sync -- <commit>` — Sync design references and regenerate the SHA-256 manifest; pass a full 40-character commit SHA after the npm run separator (`--`), or omit it to use the script's default commit. Design files are never edited by hand.
 - `npm run design:check` — Check design files against the manifest, failing for changed, extra, or missing files and unsupported filesystem entries, including symlinks.
@@ -75,9 +77,11 @@ The same entry exports `defineComponent` for typed OpenUI definitions, `getRegis
 
 ## Browser verification
 
-After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Stop any server using port 5173 first, including `npm run dev`. Playwright requires the port to be free and starts its own server. It builds the preview with Vite and serves the generated Cloudflare Worker locally through Wrangler at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings. The smoke test covers English/LTR and Arabic/RTL in light and dark themes, screenshots at 1440 and 390 px widths, mobile overflow, axe accessibility, and the focus ring.
+After installing root and preview dependencies, run `npx playwright install chromium`, then `npm run e2e`. Stop any server using port 5173 first, including `npm run dev`. Playwright requires the port to be free and starts its own server. It builds the preview with Vite and serves the generated Cloudflare Worker locally through Wrangler at `http://localhost:5173`; see [playwright.config.ts](playwright.config.ts) for server and browser settings.
 
-Run `npm run e2e:update` on Linux to regenerate the committed baselines in `e2e/__screenshots__`, then review the image changes. Routine CI compares the committed baselines without regenerating them. The preview app and consumers load the bundled product fonts. Chromium disables LCD text and font hinting, and the helper removes native select arrows in tests to normalize control widths across macOS and Linux. Screenshots allow at most 0.1% differing pixels for residual platform glyph rasterization, with Playwright's default per-pixel sensitivity. Use Linux for final baseline verification. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts). Failed CI runs upload the Playwright HTML report.
+End-to-end tests check behavior, mobile overflow, axe accessibility, and the focus ring in English/LTR and Arabic/RTL, in light and dark themes. They also capture full-page screenshots at 1440 and 390 px as review artifacts in CI; screenshots are not pixel-tested baselines. The preview-home test asserts the component names in text. Screenshot capture waits for product fonts and for UI SDK starting or ending styles to finish. CI uploads available screenshots from `test-results/screenshots/` for 14 days and the Playwright HTML report on failure. Reusable route, screenshot, overflow, accessibility, and focus helpers live in [e2e/helpers/preview.ts](e2e/helpers/preview.ts).
+
+The [CI workflow](.github/workflows/ci.yml) runs when pull requests to any branch open, update, or reopen, and on pushes to `main` or `feat/v0.1-foundation`. Manual dispatch requires a `branch` input. Superseded runs are cancelled for the same pull request or ref; manual runs are grouped by the selected branch. The [no-mistakes configuration](.no-mistakes.yaml) runs full verification with mise before pushing.
 
 ## Design tokens
 
