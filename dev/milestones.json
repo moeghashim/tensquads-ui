@@ -2,7 +2,7 @@
   "milestones": [
     {
       "id": "v0.1-foundation",
-      "status": "planned",
+      "status": "done",
       "tasks": [
         "001-scaffold-and-package-shape",
         "002-sync-design-reference",
