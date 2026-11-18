@@ -7,9 +7,9 @@
 		padding-block: var(--ts-space-1-5);
 		padding-inline: var(--ts-space-2-5);
 		border-radius: var(--ts-radius-md);
-		background: var(--ts-primary-solid);
+		background: var(--ts-tooltip-compact-bg);
 		box-shadow: var(--ts-shadow-overlay), var(--ts-shadow-hairline);
-		color: var(--ts-text-inverse);
+		color: var(--ts-gray-0);
 		font-family: var(--ts-text-sm-font-family);
 		font-size: var(--ts-text-sm-font-size);
 		line-height: var(--ts-text-sm-line-height);
@@ -27,7 +27,7 @@
 		position: absolute;
 		inline-size: var(--ts-space-1-5);
 		block-size: var(--ts-space-1-5);
-		background: var(--ts-primary-solid);
+		background: var(--ts-tooltip-compact-bg);
 		transform: rotate(45deg);
 	}
 
@@ -40,7 +40,7 @@
 
 	[data-slot="tooltip-shortcut"] {
 		margin-inline-start: var(--ts-space-3);
-		color: var(--ts-text-inverse);
+		color: var(--ts-gray-0);
 		font-family: var(--ts-font-mono);
 		font-size: var(--ts-text-xs-font-size);
 	}
