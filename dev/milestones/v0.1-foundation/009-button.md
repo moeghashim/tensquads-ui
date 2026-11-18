@@ -17,6 +17,7 @@ files: ["packages/ui/src/react/Button/**", "packages/ui/src/styles/button.css", 
 - [ ] OpenUI round-trip fixture renders in both locales.
 - [ ] `llms.txt` lists it.
 - [ ] Remove the placeholder test component from task 006.
+- [ ] Playwright runs against the built preview (`vite build` then `vite preview`), not the dev server: the PR #11 baselines show a dev-only floating button at the right edge. Regenerate the affected baselines on Linux and say which changed.
 - [ ] `npm run verify` exits 0 in CI.
 
 ## Suggested approach
