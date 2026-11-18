@@ -1,0 +1,18 @@
+.test-node26/engine-guard: Node 24.21.0 npm 11.19.0 npm ci --engine-strict --ignore-scripts --dry-run
+npm error code EBADENGINE
+npm error engine Unsupported engine
+npm error engine Not compatible with your version of node/npm: @tensquads/ui@0.1.0
+npm error notsup Not compatible with your version of node/npm: @tensquads/ui@0.1.0
+npm error notsup Required: {"node":"26.x","npm":"11.x"}
+npm error notsup Actual:   {"node":"v24.21.0","npm":"11.19.0"}
+npm error A complete log of this run can be found in: {run-worktree}/.test-node26/npm-cache/_logs/2026-11-18T09_29_08_504Z-debug-0.log
+Exit: 1 (expected rejection)
+.test-node26/engine-guard/apps/preview: Node 24.21.0 npm 11.19.0 npm ci --engine-strict --ignore-scripts --dry-run
+npm error code EBADENGINE
+npm error engine Unsupported engine
+npm error engine Not compatible with your version of node/npm: undefined
+npm error notsup Not compatible with your version of node/npm: undefined
+npm error notsup Required: {"node":"26.x","npm":"11.x"}
+npm error notsup Actual:   {"node":"v24.21.0","npm":"11.19.0"}
+npm error A complete log of this run can be found in: {run-worktree}/.test-node26/npm-cache/_logs/2026-11-18T09_29_09_706Z-debug-0.log
+Exit: 1 (expected rejection)

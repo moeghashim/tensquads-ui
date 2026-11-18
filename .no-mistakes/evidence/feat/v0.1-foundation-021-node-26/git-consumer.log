@@ -1,0 +1,37 @@
+Command: mise exec -- npm run check:git-install
+
+> @tensquads/ui@0.1.0 check:git-install
+> node scripts/check-git-install.mjs
+
+Wrote to {run-worktree}/.test-node26/tmp/tensquads-ui-git-install-A53pUz/package.json:
+
+{
+  "name": "tensquads-ui-git-install-a53puz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+added 21 packages, and audited 22 packages in 18s
+
+2 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm warn install-scripts 2 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   @tensquads/ui@0.1.0 (prepare: npm run build)
+npm warn install-scripts   @openuidev/lang-core@1.1.1 (postinstall: node ./postinstall.cjs)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+Git dependency install built dist and resolved every public subpath.
+
+Exit: 0

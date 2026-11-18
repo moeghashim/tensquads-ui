@@ -1,0 +1,7 @@
+Command: mise exec -- sh -c node --version && npm --version && command -v node && command -v npm
+v26.13.1
+11.20.0
+{run-worktree}/.test-node26/mise-data/installs/node/26.13.1/bin/node
+{run-worktree}/.test-node26/mise-data/installs/node/26.13.1/bin/npm
+
+Exit: 0

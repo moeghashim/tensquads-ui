@@ -1,0 +1,12 @@
+Command: mise exec -- npx vitest run packages/ui/src/openui/import-safety.test.ts packages/ui/src/entrypoints.test.ts
+
+ RUN  v5.1.0 {run-worktree}
+
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  03:28:50
+   Duration  5.39s (environment 72%, tests 19%, setup 8%, transform 1%)
+
+
+Exit: 0
