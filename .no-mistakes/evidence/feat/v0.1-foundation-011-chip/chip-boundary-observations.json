@@ -1,0 +1,126 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "disabledClicks": 0,
+    "disabledFocused": false,
+    "layout": {
+      "button": {
+        "x": 16,
+        "y": 479,
+        "width": 358,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 53,
+          "y": 482,
+          "width": 303.234375,
+          "height": 17
+        },
+        {
+          "x": 53,
+          "y": 496,
+          "width": 20,
+          "height": 17
+        }
+      ],
+      "labelWidth": 308,
+      "contentWidth": 308,
+      "text": "this_is_a_long_object_identifier_that_stays_visible"
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "disabledClicks": 0,
+    "disabledFocused": false,
+    "layout": {
+      "button": {
+        "x": 16,
+        "y": 479,
+        "width": 358,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 53,
+          "y": 482,
+          "width": 303.234375,
+          "height": 17
+        },
+        {
+          "x": 53,
+          "y": 496,
+          "width": 20,
+          "height": 17
+        }
+      ],
+      "labelWidth": 308,
+      "contentWidth": 308,
+      "text": "this_is_a_long_object_identifier_that_stays_visible"
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "disabledClicks": 0,
+    "disabledFocused": false,
+    "layout": {
+      "button": {
+        "x": 16,
+        "y": 479,
+        "width": 358,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 33.765625,
+          "y": 482,
+          "width": 303.234375,
+          "height": 17
+        },
+        {
+          "x": 317,
+          "y": 496,
+          "width": 20,
+          "height": 17
+        }
+      ],
+      "labelWidth": 308,
+      "contentWidth": 308,
+      "text": "this_is_a_long_object_identifier_that_stays_visible"
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "disabledClicks": 0,
+    "disabledFocused": false,
+    "layout": {
+      "button": {
+        "x": 16,
+        "y": 479,
+        "width": 358,
+        "height": 38
+      },
+      "lines": [
+        {
+          "x": 33.765625,
+          "y": 482,
+          "width": 303.234375,
+          "height": 17
+        },
+        {
+          "x": 317,
+          "y": 496,
+          "width": 20,
+          "height": 17
+        }
+      ],
+      "labelWidth": 308,
+      "contentWidth": 308,
+      "text": "this_is_a_long_object_identifier_that_stays_visible"
+    }
+  }
+]
