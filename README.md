@@ -8,7 +8,7 @@ The home page at `/` shows installation, CSS setup, and an OpenUI fixture replay
 
 Browse the component gallery at `/components` and select a component name to open `/components/$name`. Header controls select the site language and theme. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`); changing the site language also sets its direction. Use `/get-started` for the English and Arabic agent setup guide with copyable examples.
 
-Each component page displays its reference from `packages/ui/src/react/<name>/<name>.md` and live examples. OpenUI components also show a fixture in the selected language. `/components/Chat` shows a static React conversation; see the [Chat contract](packages/ui/src/react/Chat/Chat.md) for its surface API and OpenUI boundary. Section labels follow the site language; the reference text remains in English and reads left to right, including on Arabic pages. The Usage section appears only when the reference document contains code samples. Use Copy beside a code block and wait for the visible confirmation. Expand Show fixture source to read or copy the OpenUI source where available. Previous and Next links follow component registry order, with Chat appended after the registered components.
+Each component page displays its reference from `packages/ui/src/react/<name>/<name>.md` and live examples. OpenUI components also show a fixture in the selected language. ChatReply uses a mixed Markdown and OpenUI fixture. `/components/Chat` shows a static React conversation; see the [Chat contract](packages/ui/src/react/Chat/Chat.md) for its surface API and OpenUI boundary. Section labels follow the site language; the reference text remains in English and reads left to right, including on Arabic pages. The Usage section appears only when the reference document contains code samples. Use Copy beside a code block and wait for the visible confirmation. Expand Show fixture source to read or copy the OpenUI source where available. Previous and Next links follow component registry order, with Chat and then ChatReply appended after the registered components.
 
 ## Requirements
 
@@ -93,6 +93,8 @@ export function GeneratedPanel({ stream }: { stream: string | null }) {
 
 The entry also exports `defineComponent`, `getRegisteredComponents`, and `createTensquadsLibrary(locale)`. Components register typed, serializable props. The renderer creates its library lazily and reports parse and render errors through `onError`.
 
+For chat replies, use `ChatReply` from `@tensquads/ui/react`. See the [ChatReply contract](packages/ui/src/react/ChatReply/ChatReply.md) for usage and the supported reply format.
+
 ## OpenUI server
 
 Use the server entry in a Worker route. It provides request validation and caps, locale-aware prompt construction, provider adapters, and streaming responses:
@@ -127,6 +129,12 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
 ```
 
 `readOpenUIRequest` limits the body to 16 KiB and the conversation to 12 valid user or assistant turns. `streamOpenUIResponse` returns plain text and supports request cancellation. `createAnthropicProvider` defaults to `claude-haiku-5-5`; pass the API key from the server environment. The server entry also exports the `OpenUIStreamProvider` and request types. For Arabic, pass `locale: "ar"` to the library and prompt builder; the prompt includes Arabic rules and examples. Provide Arabic user content in the turns.
+
+`buildSystemPrompt` defaults to `mode: "ui"` for OpenUI-only output. Pass `mode: "chat"` for replies rendered by ChatReply. Chat mode teaches the [ChatReply format](packages/ui/src/react/ChatReply/ChatReply.md), with rules and examples in the selected locale:
+
+```ts
+const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, mode: "chat" });
+```
 
 ## Browser verification
 

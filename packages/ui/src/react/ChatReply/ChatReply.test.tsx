@@ -1,8 +1,10 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen, within } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { ChatReply } from "./ChatReply.js";
+
+afterEach(cleanup);
 
 const fixtures = {
 	en: readFileSync(resolve(process.cwd(), "packages/ui/src/react/ChatReply/ChatReply.fixture.en.txt"), "utf8"),
@@ -250,7 +252,7 @@ describe("ChatReply", () => {
 			rerender(<ChatReply reply={opening + indent + payload + closing.slice(0, length)} />);
 			expect(container.querySelector("li pre code")?.textContent?.split("\n")[0]).toBe(payload);
 		}
-		expect(screen.getByText("Details")).toBeInTheDocument();
+		expect(screen.getByText("Example: Details")).toBeInTheDocument();
 		expect(container.querySelector("li pre")).toHaveAttribute("dir", "ltr");
 		expect(container.querySelector("li pre code")?.textContent).toBe(payload);
 	});

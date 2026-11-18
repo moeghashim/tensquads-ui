@@ -46,7 +46,7 @@ function openingFence(line: string): Fence | undefined {
 
 function closesFence(line: string, fence: Fence): boolean {
 	const match = line.match(/^ {0,3}(`{3,}|~{3,})[ \t]*$/);
-	return !!match && match[1]?.[0] === fence.marker[0] && match[1].length >= fence.marker.length;
+	return !!match && match[1]?.[0] === fence.marker[0] && (match[1]?.length ?? 0) >= fence.marker.length;
 }
 
 function readFence(lines: Lines, start: number, fence: Fence) {
