@@ -15,6 +15,57 @@ const states: PreviewState[] = [
 	{ locale: "ar", direction: "rtl", theme: "dark" },
 ];
 
+for (const state of states) {
+	for (const failure of ["denied", "unavailable"] as const) {
+		test(`install copy handles ${failure} clipboard in ${state.locale} ${state.theme}`, async ({ page }) => {
+			const errors: string[] = [];
+			page.on("pageerror", (error) => errors.push(error.message));
+			await openPreview(page, state);
+			await page.evaluate((mode) => {
+				Object.defineProperty(navigator, "clipboard", {
+					configurable: true,
+					value:
+						mode === "unavailable"
+							? undefined
+							: {
+									writeText: async () => {
+										throw new DOMException("Permission denied", "NotAllowedError");
+									},
+								},
+				});
+			}, failure);
+			const card = page.locator(".install-card");
+			const button = card.getByRole("button");
+			await button.click();
+			await expect(card.getByRole("status")).toHaveText(
+				state.locale === "ar"
+					? "تعذّر النسخ. يمكن تحديد الأمر أعلاه ونسخه يدوياً."
+					: "Could not copy. Select and copy the command above.",
+			);
+			await expect(button).toHaveText(state.locale === "ar" ? "نسخ" : "Copy");
+			await expect(card.locator("code")).toHaveText("npm install github:moeghashim/tensquads-ui#<commit-sha>");
+			await page.evaluate(() => {
+				Object.defineProperty(navigator, "clipboard", {
+					configurable: true,
+					value: {
+						writeText: async (text: string) => {
+							sessionStorage.setItem("copied-command", text);
+						},
+					},
+				});
+			});
+			await button.click();
+			await expect(button).toHaveText(state.locale === "ar" ? "تم النسخ" : "Copied");
+			await expect(card.getByRole("status")).toBeEmpty();
+			expect(await page.evaluate(() => sessionStorage.getItem("copied-command"))).toBe(
+				"npm install github:moeghashim/tensquads-ui#<commit-sha>",
+			);
+			await expect(button).toHaveText(state.locale === "ar" ? "نسخ" : "Copy");
+			expect(errors).toEqual([]);
+		});
+	}
+}
+
 test("home works in both directions and themes", async ({ page }, testInfo) => {
 	for (const state of states) {
 		await openPreview(page, state);

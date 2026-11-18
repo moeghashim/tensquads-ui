@@ -11,6 +11,7 @@ const en = {
 	install: "Install from a pinned commit",
 	copy: "Copy",
 	copied: "Copied",
+	copyFailed: "Could not copy. Select and copy the command above.",
 	getStarted: "Get started",
 	browse: "Browse components",
 	streamTitle: "OpenUI stream · Petra",

@@ -11,6 +11,7 @@ const ar = {
 	install: "التثبيت من إصدار محدد",
 	copy: "نسخ",
 	copied: "تم النسخ",
+	copyFailed: "تعذّر النسخ. يمكن تحديد الأمر أعلاه ونسخه يدوياً.",
 	getStarted: "دليل البدء",
 	browse: "عرض المكوّنات",
 	streamTitle: "تدفّق OpenUI · بترا",

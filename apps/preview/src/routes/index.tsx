@@ -36,6 +36,7 @@ function HomePage() {
 	const copy = siteCopy[locale];
 	const installLine = "npm install github:moeghashim/tensquads-ui#<commit-sha>";
 	const [copied, setCopied] = useState(false);
+	const [copyFailed, setCopyFailed] = useState(false);
 	const [demoLocale, setDemoLocale] = useState(locale);
 	const [completedLines, setCompletedLines] = useState(0);
 	const [replayIndex, setReplayIndex] = useState(0);
@@ -72,9 +73,15 @@ function HomePage() {
 		setReplayIndex((index) => index + 1);
 	};
 	const copyInstall = async () => {
-		await navigator.clipboard.writeText(installLine);
-		setCopied(true);
-		window.setTimeout(() => setCopied(false), 1600);
+		try {
+			await navigator.clipboard.writeText(installLine);
+			setCopyFailed(false);
+			setCopied(true);
+			window.setTimeout(() => setCopied(false), 1600);
+		} catch {
+			setCopied(false);
+			setCopyFailed(true);
+		}
 	};
 	const chooseDemoLocale = (value: string | null) => {
 		if (value && (value === "en" || value === "ar")) {
@@ -98,6 +105,9 @@ function HomePage() {
 						<Button variant="soft" size="sm" onClick={() => void copyInstall()}>
 							{copied ? copy.copied : copy.copy}
 						</Button>
+						<span className="install-card__label" role="status">
+							{copyFailed ? copy.copyFailed : ""}
+						</span>
 					</div>
 					<div className="hero__links">
 						<Button render={<Link to="/get-started" search={search as never} />}>{copy.getStarted}</Button>
