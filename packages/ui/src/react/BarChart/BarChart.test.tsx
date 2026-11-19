@@ -37,8 +37,20 @@ describe("BarChart", () => {
 				{ label: "B", value: 3 },
 			],
 			[
-				{ label: "A", segments: [{ key: "one", value: 1 }, { key: "two", value: 1 }] },
-				{ label: "B", segments: [{ key: "one", value: 1 }, { key: "two", value: 2 }] },
+				{
+					label: "A",
+					segments: [
+						{ key: "one", value: 1 },
+						{ key: "two", value: 1 },
+					],
+				},
+				{
+					label: "B",
+					segments: [
+						{ key: "one", value: 1 },
+						{ key: "two", value: 2 },
+					],
+				},
 			],
 		]) {
 			const { container, getByRole, unmount } = render(
@@ -68,7 +80,13 @@ describe("BarChart", () => {
 					points={[
 						{ label: "Quarter", value: 0.25 },
 						{ label: "Half", value: 0.5 },
-						{ label: "Stacked", segments: [{ key: "a", value: 0.125 }, { key: "b", value: 0.375 }] },
+						{
+							label: "Stacked",
+							segments: [
+								{ key: "a", value: 0.125 },
+								{ key: "b", value: 0.375 },
+							],
+						},
 						{ label: "Zero", value: 0 },
 					]}
 				/>
@@ -128,8 +146,20 @@ describe("BarChart", () => {
 			<BarChart
 				points={[
 					{ label: "Zero", value: 0 },
-					{ label: "Empty stack", segments: [{ key: "a", value: 0 }, { key: "b", value: 0 }] },
-					{ label: "Mixed", segments: [{ key: "a", value: 0 }, { key: "b", value: 4 }] },
+					{
+						label: "Empty stack",
+						segments: [
+							{ key: "a", value: 0 },
+							{ key: "b", value: 0 },
+						],
+					},
+					{
+						label: "Mixed",
+						segments: [
+							{ key: "a", value: 0 },
+							{ key: "b", value: 4 },
+						],
+					},
 				]}
 			/>,
 		);

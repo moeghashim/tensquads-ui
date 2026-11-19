@@ -85,14 +85,19 @@ for (const locale of ["en", "ar"] as const) {
 					await expect(columns.nth(1)).toBeFocused();
 					await page.keyboard.press(direction === "rtl" ? "ArrowRight" : "ArrowLeft");
 					await expect(columns.first()).toBeFocused();
-					await page.locator(".component-list .ts-bar-chart").evaluate((element, dir) => {
-						element.setAttribute("dir", dir);
-					}, direction === "rtl" ? "ltr" : "rtl");
+					await page.locator(".component-list .ts-bar-chart").evaluate(
+						(element, dir) => {
+							element.setAttribute("dir", dir);
+						},
+						direction === "rtl" ? "ltr" : "rtl",
+					);
 					await page.keyboard.press(direction === "rtl" ? "ArrowRight" : "ArrowLeft");
 					await expect(columns.nth(1)).toBeFocused();
 					await page.keyboard.press(direction === "rtl" ? "ArrowLeft" : "ArrowRight");
 					await expect(columns.first()).toBeFocused();
-					await page.locator(".component-list .ts-bar-chart").evaluate((element) => element.removeAttribute("dir"));
+					await page
+						.locator(".component-list .ts-bar-chart")
+						.evaluate((element) => element.removeAttribute("dir"));
 				}
 				if (name === "Bars") await expect(page.locator(".component-list .ts-bars__row")).toHaveCount(2);
 				if (name === "Distribution")

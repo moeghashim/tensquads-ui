@@ -82,13 +82,15 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 											aria-hidden="true"
 											style={{ blockSize: `${(total / max) * 100}%` }}
 										>
-											{parts.filter((part) => part.value !== 0).map((part) => (
-												<span
-													key={part.key}
-													className={`ts-bar-chart__segment ts-bar-chart__segment--${keys.find((item) => item.key === part.key)?.tone ?? (isHighlighted ? "strong" : "muted")}`}
-													style={{ flexGrow: (part.value / total) * 100 }}
-												/>
-											))}
+											{parts
+												.filter((part) => part.value !== 0)
+												.map((part) => (
+													<span
+														key={part.key}
+														className={`ts-bar-chart__segment ts-bar-chart__segment--${keys.find((item) => item.key === part.key)?.tone ?? (isHighlighted ? "strong" : "muted")}`}
+														style={{ flexGrow: (part.value / total) * 100 }}
+													/>
+												))}
 										</span>
 									</TooltipTrigger>
 									<TooltipContent>

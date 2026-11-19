@@ -30,7 +30,13 @@ describe("Distribution", () => {
 	it.each(["en", "ar"] as const)("fills the distribution proportionally for fractional %s values", (locale) => {
 		const { container, rerender } = render(
 			<div dir={locale === "ar" ? "rtl" : "ltr"}>
-				<Distribution locale={locale} parts={[{ label: "A", value: 0.125 }, { label: "B", value: 0.375 }]} />
+				<Distribution
+					locale={locale}
+					parts={[
+						{ label: "A", value: 0.125 },
+						{ label: "B", value: 0.375 },
+					]}
+				/>
 			</div>,
 		);
 		const weights = Array.from(container.querySelectorAll(".ts-distribution__segment"), (part) =>
@@ -59,7 +65,9 @@ describe("Distribution", () => {
 			expect(container.querySelector("p")).toHaveTextContent(locale === "ar" ? "التوزيع:" : "Distribution:");
 			expect(getByText(locale === "ar" ? "أخرى" : "Other")).toBeInTheDocument();
 			expect(
-				Array.from(container.querySelectorAll(".ts-distribution__segment"), (segment) => segment.getAttribute("title")),
+				Array.from(container.querySelectorAll(".ts-distribution__segment"), (segment) =>
+					segment.getAttribute("title"),
+				),
 			).toEqual(["G: 7", "F: 6", "E: 5", "D: 4", "C: 3", locale === "ar" ? "أخرى: 3" : "Other: 3"]);
 			for (const item of getAllByRole("listitem")) {
 				expect(item).toHaveTextContent(locale === "ar" ? "من 28" : "of 28");
@@ -83,7 +91,9 @@ describe("Distribution", () => {
 				"utf8",
 			);
 			const onError = vi.fn();
-			const { getByText, getByTitle } = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
+			const { getByText, getByTitle } = render(
+				<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />,
+			);
 			expect(getByText(locale === "en" ? "Run outcomes" : "نتائج التشغيل")).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);
 			for (const title of locale === "ar"
@@ -91,9 +101,7 @@ describe("Distribution", () => {
 				: ["Pass: 68", "Fail: 12", "Skipped: 5"]) {
 				expect(getByTitle(title)).toHaveClass("ts-distribution__segment");
 			}
-			expect(document.querySelector(".ts-distribution__key")).toHaveTextContent(
-				locale === "ar" ? "من 85" : "of 85",
-			);
+			expect(document.querySelector(".ts-distribution__key")).toHaveTextContent(locale === "ar" ? "من 85" : "of 85");
 			cleanup();
 		}
 	});
