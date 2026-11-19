@@ -9,7 +9,7 @@ import { Form } from "./Form.js";
 export const FormOpenUI = defineComponent({
 	name: "Form",
 	description:
-		"A named form of text fields and optional action buttons. Submit sends their current values as a chat action.",
+		"A named form of text fields, switches, segmented controls, and optional action buttons. Submit sends their current values as a chat action.",
 	props: z.object({
 		name: z.string().min(1).describe("Unique form name within this OpenUI block"),
 		children: z

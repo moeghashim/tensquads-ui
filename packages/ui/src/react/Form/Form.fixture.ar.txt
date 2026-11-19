@@ -1,1 +1,1 @@
-root = Form("المشروع", [Field("اسم المشروع", "project", "", "بنّاء"), Input("المسؤول", "", "محمد", "soft", false, false, "owner")], "حفظ المشروع", {type: "SaveProject", params: {planId: "p1"}})
+root = Form("المشروع", [Field("اسم المشروع", "project", "", "بنّاء"), Input("المسؤول", "", "محمد", "soft", false, false, "owner"), Switch("تحديثات البريد", true, false, "emailUpdates"), SegmentedControl("التخطيط", ["قائمة", "شبكة"], "قائمة", false, "layout")], "حفظ المشروع", {type: "SaveProject", params: {planId: "p1"}})

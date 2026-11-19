@@ -23,6 +23,10 @@ const copy = {
 		name: "Project",
 		field: "Project name",
 		input: "Owner",
+		notifications: "Email updates",
+		layout: "Layout",
+		list: "List",
+		grid: "Grid",
 		submit: "Save project",
 		initial: "Northstar",
 		owner: "Moe",
@@ -31,6 +35,10 @@ const copy = {
 		name: "المشروع",
 		field: "اسم المشروع",
 		input: "المسؤول",
+		notifications: "تحديثات البريد",
+		layout: "التخطيط",
+		list: "قائمة",
+		grid: "شبكة",
 		submit: "حفظ المشروع",
 		initial: "بنّاء",
 		owner: "محمد",
@@ -72,9 +80,13 @@ describe("Form", () => {
 			const { rerender } = render(<ChatReply reply={reply} locale={locale} onAction={onAction} />);
 			const field = screen.getByRole("textbox", { name: labels.field });
 			const input = screen.getByRole("textbox", { name: labels.input });
+			const notifications = screen.getByRole("switch", { name: labels.notifications });
+			const layout = screen.getByRole("radiogroup", { name: labels.layout });
 			const submit = screen.getByRole("button", { name: labels.submit });
 			expect(field).toHaveValue(labels.initial);
 			expect(input).toHaveValue(labels.owner);
+			expect(notifications).toHaveAttribute("aria-checked", "true");
+			expect(screen.getByRole("radio", { name: labels.list })).toHaveAttribute("aria-checked", "true");
 			fireEvent.click(submit);
 			expect(onAction).toHaveBeenLastCalledWith(
 				expect.objectContaining({
@@ -85,6 +97,8 @@ describe("Form", () => {
 						[labels.name]: {
 							project: { value: labels.initial, componentType: "Field" },
 							owner: { value: labels.owner, componentType: "Input" },
+							emailUpdates: { value: true, componentType: "Switch" },
+							layout: { value: labels.list, componentType: "SegmentedControl" },
 						},
 					},
 				}),
@@ -92,19 +106,27 @@ describe("Form", () => {
 			);
 			fireEvent.input(field, { target: { value: "Edited project" } });
 			fireEvent.input(input, { target: { value: "Edited owner" } });
+			fireEvent.click(notifications);
+			fireEvent.click(screen.getByRole("radio", { name: labels.grid }));
 			fireEvent.submit(screen.getByRole("form", { name: labels.name }));
 			expect(onAction).toHaveBeenCalledTimes(2);
 			expect(onAction.mock.calls[1]?.[0].formState).toEqual({
 				[labels.name]: {
 					project: { value: "Edited project", componentType: "Field" },
 					owner: { value: "Edited owner", componentType: "Input" },
+					emailUpdates: { value: false, componentType: "Switch" },
+					layout: { value: labels.grid, componentType: "SegmentedControl" },
 				},
 			});
 			rerender(<ChatReply reply={reply} locale={locale} onAction={onAction} locked />);
 			expect(screen.getByRole("textbox", { name: labels.field })).toBe(field);
 			expect(field).toHaveValue("Edited project");
 			expect(input).toHaveValue("Edited owner");
-			for (const control of [field, input, submit]) expect(control).toBeDisabled();
+			expect(notifications).toHaveAttribute("aria-checked", "false");
+			expect(screen.getByRole("radio", { name: labels.grid })).toHaveAttribute("aria-checked", "true");
+			for (const control of [field, input, notifications, ...layout.querySelectorAll('[role="radio"]'), submit]) {
+				expect(control).toBeDisabled();
+			}
 			fireEvent.submit(screen.getByRole("form", { name: labels.name }));
 			expect(onAction).toHaveBeenCalledTimes(2);
 		},
@@ -112,10 +134,12 @@ describe("Form", () => {
 
 	it("disables streaming form controls and includes current form values in child button actions", async () => {
 		const stream =
-			'root = Form("Project", [Field("Name", "name", "", "Northstar"), Button("Check", "solid", "md", false, false, {type: "Check"})], "Save", {type: "Save"})';
+			'root = Form("Project", [Field("Name", "name", "", "Northstar"), Switch("Updates", true, false, "updates"), SegmentedControl("Layout", ["List", "Grid"], "List", false, "layout"), Button("Check", "solid", "md", false, false, {type: "Check"})], "Save", {type: "Save"})';
 		const onAction = vi.fn();
 		const { rerender } = render(<TensquadsRenderer stream={stream} onAction={onAction} isStreaming />);
 		expect(screen.getByRole("textbox")).toBeDisabled();
+		expect(screen.getByRole("switch", { name: "Updates" })).toBeDisabled();
+		for (const radio of screen.getAllByRole("radio")) expect(radio).toHaveAttribute("data-disabled");
 		for (const button of screen.getAllByRole("button")) expect(button).toBeDisabled();
 		fireEvent.submit(screen.getByRole("form"));
 		expect(onAction).not.toHaveBeenCalled();
@@ -128,7 +152,13 @@ describe("Form", () => {
 			expect.objectContaining({
 				type: "Check",
 				formName: "Project",
-				formState: { Project: { name: { value: "Updated", componentType: "Field" } } },
+				formState: {
+					Project: {
+						name: { value: "Updated", componentType: "Field" },
+						updates: { value: true, componentType: "Switch" },
+						layout: { value: "List", componentType: "SegmentedControl" },
+					},
+				},
 			}),
 		);
 	});
@@ -192,6 +222,8 @@ describe("Form", () => {
 							[labels.name]: {
 								project: { value: "Edited", componentType: "Field" },
 								owner: { value: labels.owner, componentType: "Input" },
+								emailUpdates: { value: true, componentType: "Switch" },
+								layout: { value: labels.list, componentType: "SegmentedControl" },
 							},
 						},
 					},

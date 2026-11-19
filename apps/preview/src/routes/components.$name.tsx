@@ -246,7 +246,9 @@ function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }
 			/>
 			{chat.turns.map((turn) =>
 				turn.role === "action" ? (
-					<ChatUserMessage key="action">{turn.action.summary}</ChatUserMessage>
+					<ChatUserMessage key="action" data-values={JSON.stringify(turn.action.values)}>
+						{turn.action.summary}
+					</ChatUserMessage>
 				) : turn.role === "assistant" ? (
 					<p key="reply">{turn.content}</p>
 				) : null,
