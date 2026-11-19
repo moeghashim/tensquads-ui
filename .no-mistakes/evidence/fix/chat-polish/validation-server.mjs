@@ -1,0 +1,6 @@
+import { createServer } from '../apps/preview/node_modules/vite/dist/node/index.js';
+import react from '../apps/preview/node_modules/@vitejs/plugin-react/dist/index.js';
+const sessions = new Map();
+const server = await createServer({configFile:false,root:'.chat-validation',plugins:[react(),{name:'local-http-endpoint',configureServer(vite){vite.middlewares.use('/api/reply',(req,res)=>{const id=new URL(req.url,'http://local').searchParams.get('session');let body='';req.on('data',chunk=>body+=chunk);req.on('end',()=>{const attempt=(sessions.get(id)||0)+1;sessions.set(id,attempt);console.log(JSON.stringify({session:id,attempt,request:JSON.parse(body)}));setTimeout(()=>{if(attempt===1){res.writeHead(503,{'content-type':'application/json'});res.end(JSON.stringify({error:'Local service unavailable'}));}else{res.writeHead(200,{'content-type':'text/plain'});res.write('Recovered reply');setTimeout(()=>res.end(' complete'),400);}},900);});});}}],server:{host:'127.0.0.1',port:5174,strictPort:true,fs:{allow:[process.cwd()]}}});
+await server.listen();console.log('Harness http://127.0.0.1:5174');
+for(const sig of ['SIGINT','SIGTERM'])process.on(sig,async()=>{await server.close();process.exit(0)});
