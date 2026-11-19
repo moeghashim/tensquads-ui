@@ -1,6 +1,14 @@
 const ar = {
 	brand: "tensquads",
-	nav: { home: "الرئيسية", components: "المكوّنات", getStarted: "البدء" },
+	nav: { home: "الرئيسية", components: "المكوّنات", chat: "عرض المحادثة", getStarted: "البدء" },
+	chat: {
+		eyebrow: "محادثة تتضمّن واجهة",
+		title: "تعرّف إلى المحادثة التي تبني الواجهة.",
+		intro: "توجّه بترا الطلب إلى الفريق، ثم تعرض خطة قابلة للتعديل داخل المحادثة.",
+		newChat: "إعادة العرض",
+		composer: "جرّب إرسال رسالة",
+		localOnly: "لا يتصل هذا الموقع بنموذج مباشر. تستخدم المحادثة رداً معدّاً مسبقاً.",
+	},
 	localeLabel: "اللغة",
 	themeLabel: "السمة",
 	locale: { en: "English", ar: "العربية" },
@@ -14,6 +22,7 @@ const ar = {
 	copyFailed: "تعذّر النسخ. يمكن تحديد الأمر أعلاه ونسخه يدوياً.",
 	getStarted: "دليل البدء",
 	browse: "عرض المكوّنات",
+	openChat: "عرض المحادثة التفاعلية",
 	browseComponents: "عرض {count} مكوّناً",
 	streamTitle: "تدفّق OpenUI · بترا",
 	message: "رسالة",
