@@ -87,14 +87,14 @@ describe("BarChart", () => {
 				</div>,
 			);
 			expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual([
-				"10",
-				"5",
+				"4",
+				"2",
 				"0",
 			]);
 			const smaller = getByRole("button", { name: "A: 2" }).querySelector<HTMLElement>(".ts-bar-chart__stack");
-			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(20, 3);
+			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(50, 3);
 			expect(getByRole("button", { name: "B: 3" }).querySelector(".ts-bar-chart__stack")).toHaveStyle({
-				blockSize: "30%",
+				blockSize: "75%",
 			});
 			unmount();
 		}
@@ -106,8 +106,8 @@ describe("BarChart", () => {
 			<BarChart points={[{ label: "Today", value: 3 }]} formatValue={formatValue} />,
 		);
 		expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual([
-			"$10.00",
-			"$5.00",
+			"$4.00",
+			"$2.00",
 			"$0.00",
 		]);
 		fireEvent.focus(getByRole("button", { name: "Today: $3.00" }));
@@ -221,7 +221,7 @@ describe("BarChart", () => {
 			expect(stack?.children).toHaveLength(0);
 		}
 		const mixed = getByRole("button", { name: "Mixed: 4" });
-		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "40%" });
+		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "100%" });
 		expect(mixed.querySelectorAll(".ts-bar-chart__segment")).toHaveLength(1);
 		fireEvent.focus(mixed);
 		expect(document.body).toHaveTextContent("a: 0");

@@ -16,11 +16,14 @@ export type BarChartProps = {
 
 function niceAxisMaximum(value: number) {
 	if (value <= 0) return 1;
+	// The smallest "round" maximum at or above the data whose half is also whole, so the
+	// three grid lines (0, half, max) read as whole numbers and bars fill most of the plot.
 	const magnitude = 10 ** Math.floor(Math.log10(value));
-	const normalized = value / magnitude;
-	const step = normalized <= 1 ? 1 : normalized <= 2 ? 2 : normalized <= 5 ? 5 : 10;
-	const rounded = step * magnitude;
-	return Number.isInteger(rounded / 2) ? rounded : rounded * 2;
+	for (const m of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) {
+		const candidate = Math.round(m * magnitude * 1e6) / 1e6;
+		if (candidate >= value && Number.isInteger(candidate / 2)) return candidate;
+	}
+	return 10 * magnitude;
 }
 
 export function BarChart({ points, keys = [], highlight, label, locale = "en", formatValue }: BarChartProps) {
@@ -44,7 +47,8 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en", f
 				`${pointLabel}: ${value ?? segments?.reduce((sum, part) => sum + part.value, 0) ?? 0}`,
 		)
 		.join(", ");
-	const chartColumns = `max-content minmax(calc(${points.length} * 2.75rem), 1fr) 2rem`;
+	// Each column needs at least 1.5rem plus 0.5rem of spacing; wider plots grow the columns up to 2.25rem.
+	const chartColumns = `max-content minmax(calc(${points.length} * 2rem), 1fr) 2rem`;
 	const showTickLabel = (index: number) => points.length <= 14 || index % 5 === 0;
 	const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
 		const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
