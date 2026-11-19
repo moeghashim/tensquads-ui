@@ -34,7 +34,7 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en", f
 	const integerData = points.every((point) =>
 		point.value !== undefined
 			? Number.isInteger(point.value)
-			: point.segments?.every((part) => Number.isInteger(part.value)) ?? true,
+			: (point.segments?.every((part) => Number.isInteger(part.value)) ?? true),
 	);
 	const max = integerData ? niceAxisMaximum(dataMax) : dataMax;
 	const format = (value: number) => (formatValue ? formatValue(value) : String(value));
@@ -118,7 +118,8 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en", f
 												parts.map((part) => (
 													<span key={part.key}>
 														{" "}
-														· {keys.find((item) => item.key === part.key)?.label ?? part.key}: {format(part.value)}
+														· {keys.find((item) => item.key === part.key)?.label ?? part.key}:{" "}
+														{format(part.value)}
 													</span>
 												))}
 										</TooltipContent>
