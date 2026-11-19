@@ -1,6 +1,12 @@
 const en = {
 	brand: "tensquads",
-	nav: { home: "Home", components: "Components", chat: "Chat demo", getStarted: "Get started" },
+	nav: {
+		home: "Home",
+		components: "Components",
+		chat: "Chat demo",
+		dashboards: "Dashboards",
+		getStarted: "Get started",
+	},
 	chat: {
 		eyebrow: "Chat with inline UI",
 		title: "See the conversation behind an agent-built screen.",

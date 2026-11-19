@@ -19,6 +19,7 @@ The library ships these components today. Each row links to its reference and it
 | [Button](packages/ui/src/react/Button/Button.md) | An accessible button that runs an action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Button) |
 | [Card](packages/ui/src/react/Card/Card.md) | A dashboard panel with a title, one body, optional count and footer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Card) |
 | [Chat](packages/ui/src/react/Chat/Chat.md) | Chat parts build a chat surface: a scrolling log, user messages, agent replies, working and error lines, and a composer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chat) |
+| [ChatLauncher](packages/ui/src/react/ChatLauncher/ChatLauncher.md) | A floating button that opens the assistant chat. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatLauncher) |
 | [ChatReply](packages/ui/src/react/ChatReply/ChatReply.md) | ChatReply renders Markdown text and fenced `openui` blocks in reading order. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatReply) |
 | [Chip](packages/ui/src/react/Chip/Chip.md) | A pill that opens an attached object such as an output schema or tool. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chip) |
 | [DataTable](packages/ui/src/react/DataTable/DataTable.md) | A selectable table of records with labelled columns. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/DataTable) |
@@ -179,6 +180,10 @@ const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), loca
 ```
 
 ## Browser verification
+
+## Dashboard demos
+
+Open the [store owner dashboard](/dashboards/home) or [platform admin dashboard](/dashboards/admin) in the preview site. The pages use fictional demo data and include English and Arabic, light and dark views.
 
 Switch and SegmentedControl screenshots capture their default preview states before keyboard interaction. See [e2e/switch-segmented-control.spec.ts](e2e/switch-segmented-control.spec.ts) for the state assertions and capture order.
 

@@ -116,6 +116,12 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(fixtureRegion.getByRole("table")).toBeVisible();
 			} else if (component.name === "EmptyState") {
 				await expect(fixtureRegion.locator("[data-slot='empty-state']")).toBeVisible();
+			} else if (component.name === "ChatLauncher") {
+				await expect(
+					fixtureRegion.getByRole("button", {
+						name: locale === "en" ? /Ask Petra.*4 waiting/ : /اسأل بيترا.*٤ بانتظارك/,
+					}),
+				).toBeVisible();
 			} else {
 				const label =
 					component.name === "Input"

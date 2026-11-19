@@ -14,6 +14,8 @@ import { Route as ChatRouteImport } from './routes/chat'
 import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as ComponentsIndexRouteImport } from './routes/components.index'
 import { Route as ComponentsNameRouteImport } from './routes/components.$name'
+import { Route as DashboardsAdminRouteImport } from './routes/dashboards.admin'
+import { Route as DashboardsHomeRouteImport } from './routes/dashboards.home'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,12 +42,24 @@ const ComponentsNameRoute = ComponentsNameRouteImport.update({
   path: '/components/$name',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardsAdminRoute = DashboardsAdminRouteImport.update({
+  id: '/dashboards/admin',
+  path: '/dashboards/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardsHomeRoute = DashboardsHomeRouteImport.update({
+  id: '/dashboards/home',
+  path: '/dashboards/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
   '/get-started': typeof GetStartedRoute
   '/components/$name': typeof ComponentsNameRoute
+  '/dashboards/admin': typeof DashboardsAdminRoute
+  '/dashboards/home': typeof DashboardsHomeRoute
   '/components/': typeof ComponentsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +67,8 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/get-started': typeof GetStartedRoute
   '/components/$name': typeof ComponentsNameRoute
+  '/dashboards/admin': typeof DashboardsAdminRoute
+  '/dashboards/home': typeof DashboardsHomeRoute
   '/components': typeof ComponentsIndexRoute
 }
 export interface FileRoutesById {
@@ -61,20 +77,37 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/get-started': typeof GetStartedRoute
   '/components/$name': typeof ComponentsNameRoute
+  '/dashboards/admin': typeof DashboardsAdminRoute
+  '/dashboards/home': typeof DashboardsHomeRoute
   '/components/': typeof ComponentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/chat' | '/get-started' | '/components/$name' | '/components/'
+    | '/'
+    | '/chat'
+    | '/get-started'
+    | '/components/$name'
+    | '/dashboards/admin'
+    | '/dashboards/home'
+    | '/components/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/get-started' | '/components/$name' | '/components'
+  to:
+    | '/'
+    | '/chat'
+    | '/get-started'
+    | '/components/$name'
+    | '/dashboards/admin'
+    | '/dashboards/home'
+    | '/components'
   id:
     | '__root__'
     | '/'
     | '/chat'
     | '/get-started'
     | '/components/$name'
+    | '/dashboards/admin'
+    | '/dashboards/home'
     | '/components/'
   fileRoutesById: FileRoutesById
 }
@@ -83,6 +116,8 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   GetStartedRoute: typeof GetStartedRoute
   ComponentsNameRoute: typeof ComponentsNameRoute
+  DashboardsAdminRoute: typeof DashboardsAdminRoute
+  DashboardsHomeRoute: typeof DashboardsHomeRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
 }
 
@@ -123,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsNameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboards/admin': {
+      id: '/dashboards/admin'
+      path: '/dashboards/admin'
+      fullPath: '/dashboards/admin'
+      preLoaderRoute: typeof DashboardsAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboards/home': {
+      id: '/dashboards/home'
+      path: '/dashboards/home'
+      fullPath: '/dashboards/home'
+      preLoaderRoute: typeof DashboardsHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -131,6 +180,8 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   GetStartedRoute: GetStartedRoute,
   ComponentsNameRoute: ComponentsNameRoute,
+  DashboardsAdminRoute: DashboardsAdminRoute,
+  DashboardsHomeRoute: DashboardsHomeRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
 }
 export const routeTree = rootRouteImport

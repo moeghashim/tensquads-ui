@@ -1,0 +1,7 @@
+@layer tensquads {
+	.ts-chat-launcher { position: fixed; z-index: 20; inset-inline-end: max(var(--ts-space-6), env(safe-area-inset-right)); inset-block-end: max(var(--ts-space-6), env(safe-area-inset-bottom)); display: inline-flex; align-items: center; gap: var(--ts-space-2); min-block-size: var(--ts-control-md); padding: var(--ts-space-1-5) var(--ts-space-4) var(--ts-space-1-5) var(--ts-space-1-5); border-radius: var(--ts-radius-full); box-shadow: var(--ts-shadow-300); font: inherit; font-size: var(--ts-text-sm-font-size); font-weight: 600; cursor: pointer; }
+	[dir="rtl"] .ts-chat-launcher { inset-inline-end: max(var(--ts-space-6), env(safe-area-inset-left)); }
+	.ts-chat-launcher:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	.ts-chat-launcher__avatar { display: grid; inline-size: 2rem; block-size: 2rem; flex: none; place-items: center; overflow: hidden; border-radius: var(--ts-radius-full); background: var(--ts-surface-primary); }
+	.ts-chat-launcher__count { background: var(--ts-danger-solid); color: var(--ts-on-danger); font-variant-numeric: tabular-nums; }
+}

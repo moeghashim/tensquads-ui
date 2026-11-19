@@ -113,6 +113,12 @@ function HomePage() {
 						<Button variant="ghost" render={<Link to="/chat" search={search as never} />}>
 							{copy.openChat}
 						</Button>
+						<Button variant="ghost" render={<Link to="/dashboards/home" search={search as never} />}>
+							{copy.nav.dashboards}
+						</Button>
+						<Button variant="ghost" render={<Link to="/dashboards/admin" search={search as never} />}>
+							{locale === "ar" ? "إدارة المنصة" : "Platform admin"}
+						</Button>
 					</div>
 				</div>
 			</section>

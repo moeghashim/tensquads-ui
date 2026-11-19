@@ -1,6 +1,12 @@
 const ar = {
 	brand: "tensquads",
-	nav: { home: "الرئيسية", components: "المكوّنات", chat: "عرض المحادثة", getStarted: "البدء" },
+	nav: {
+		home: "الرئيسية",
+		components: "المكوّنات",
+		chat: "عرض المحادثة",
+		dashboards: "لوحات المعلومات",
+		getStarted: "البدء",
+	},
 	chat: {
 		eyebrow: "محادثة تتضمّن واجهة",
 		title: "تعرّف إلى المحادثة التي تبني الواجهة.",

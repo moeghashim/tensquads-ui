@@ -37,6 +37,8 @@ export {
 } from "./Chat/Chat.js";
 export type { ChatTransport, UseChatOptions, UseChatResult } from "./Chat/useChat.js";
 export { useChat } from "./Chat/useChat.js";
+export type { ChatLauncherProps } from "./ChatLauncher/ChatLauncher.js";
+export { ChatLauncher } from "./ChatLauncher/ChatLauncher.js";
 export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
 export { ChatReply } from "./ChatReply/ChatReply.js";
 export type { ChipProps } from "./Chip/Chip.js";
