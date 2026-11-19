@@ -16,6 +16,13 @@
 	:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.site-shell { min-block-size: 100vh; }
 	.chat-preview { min-block-size: 30rem; max-inline-size: 42rem; margin-inline: auto; }
+	.sidebar-preview { min-block-size: 36rem; display: flex; background: var(--ts-canvas); }
+	.sidebar-preview > .ts-sidebar-shell { flex: none; }
+	.sidebar-preview__content { min-inline-size: 0; flex: 1; display: grid; align-content: start; gap: var(--ts-space-4); padding: var(--ts-space-4); border-start-start-radius: var(--ts-radius-2xl); border-end-start-radius: var(--ts-radius-2xl); background: var(--ts-surface); }
+	.sidebar-preview__squad { max-inline-size: 18rem; }
+	.sidebar-preview__placeholder { min-block-size: 12rem; padding: var(--ts-space-4); border-radius: var(--ts-radius-lg); background: var(--ts-surface-secondary); }
+	.sidebar-preview__placeholder h2 { margin: 0; color: var(--ts-text-emphasis); font-size: var(--ts-text-lg-font-size); }
+	.sidebar-preview__placeholder p { color: var(--ts-text-secondary); }
 	.chat-preview__surface { block-size: 30rem; overflow: hidden; border: 1px solid var(--ts-border-subtle); border-radius: var(--ts-radius-2xl); }
 	.chat-preview .ts-chat__header { color: var(--ts-text-emphasis); font-weight: 500; }
 	.chat-page { max-inline-size: 64rem; }

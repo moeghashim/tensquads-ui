@@ -51,6 +51,14 @@ import {
 	SegmentedControlItem,
 } from "../../../../packages/ui/src/react/SegmentedControl/SegmentedControl";
 import {
+	Sidebar,
+	SidebarAgent,
+	SidebarBrand,
+	SidebarItem,
+	SidebarSection,
+	SidebarUser,
+} from "../../../../packages/ui/src/react/Sidebar/Sidebar";
+import {
 	Squadmate,
 	squadmateCharacterName,
 	squadmateStateLabel,
@@ -81,7 +89,13 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "OwnerMessageView", "Chat", "ChatReply"];
+const componentOrder = [
+	...getRegisteredComponents().map(({ name }) => name),
+	"OwnerMessageView",
+	"Chat",
+	"ChatReply",
+	"Sidebar",
+];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 
@@ -137,16 +151,18 @@ function ComponentPage() {
 					<ChatActionExample locale={locale} />
 				</section>
 			)}
-			<div className="component-doc-page__section">
-				<h2 id="component-fixture-heading">{copy.fixture}</h2>
-				{!stream && <p>{noFixtureReason ?? copy.noFixture}</p>}
-				{stream && (
-					<details className="fixture-source">
-						<summary>{copy.fixtureSource}</summary>
-						<ExampleCodeBlock code={stream.trim()} />
-					</details>
-				)}
-			</div>
+			{name !== "Sidebar" && (
+				<div className="component-doc-page__section">
+					<h2 id="component-fixture-heading">{copy.fixture}</h2>
+					{!stream && <p>{noFixtureReason ?? copy.noFixture}</p>}
+					{stream && (
+						<details className="fixture-source">
+							<summary>{copy.fixtureSource}</summary>
+							<ExampleCodeBlock code={stream.trim()} />
+						</details>
+					)}
+				</div>
+			)}
 			<nav className="component-doc-nav" aria-label={copy.pageNavigation}>
 				{previous ? (
 					<Link to="/components/$name" params={{ name: previous }} search={search as never} rel="prev">
@@ -410,6 +426,7 @@ function ComponentExample() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "DataTable" || name === "EmptyState") {
 		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
 	}
@@ -1308,6 +1325,89 @@ ${menuContentsCode}
 					<p className="empty-state">No {locale} OpenUI fixture is registered for this component.</p>
 				)}
 			</section>
+		</div>
+	);
+}
+
+function SidebarPreview({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const icon = (path: string) => (
+		<svg
+			aria-hidden="true"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="1.7"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<path d={path} />
+		</svg>
+	);
+	return (
+		<div className="sidebar-preview">
+			<Sidebar label={ar ? "التنقل الجانبي" : "Main navigation"} mobileLabel={ar ? "فتح التنقل" : "Open navigation"}>
+				<SidebarBrand
+					icon={icon("M4 5h16v14H4z M8 9h8 M8 13h5")}
+					title={ar ? "منصة الإدارة" : "Platform admin"}
+					subtitle={ar ? "حساب شركتك" : "Your company account"}
+				/>
+				<SidebarSection label={ar ? "المساحة" : "Workspace"}>
+					<SidebarItem icon={icon("M3 10.5 12 3l9 7.5v9H3z M9 19v-6h6v6")} active>
+						{ar ? "نظرة عامة" : "Overview"}
+					</SidebarItem>
+					<SidebarItem icon={icon("M4 5h16v14H4z M8 9h8 M8 13h5")} count={8}>
+						{ar ? "الشركات" : "Companies"}
+					</SidebarItem>
+					<SidebarItem icon={icon("M5 19V9l7-5 7 5v10 M9 19v-5h6v5")} render={<a href="#squads" />}>
+						{ar ? "الفرق" : "Squads"}
+					</SidebarItem>
+				</SidebarSection>
+				<SidebarSection label={ar ? "قريباً" : "Coming next"}>
+					<SidebarItem icon={icon("M4 5h16v14H4z")} disabled>
+						{ar ? "الفوترة" : "Billing"}
+					</SidebarItem>
+				</SidebarSection>
+				<SidebarUser
+					initials="MG"
+					name={ar ? "محمد غاشم" : "Moe Ghashim"}
+					userRole={ar ? "مدير المنصة" : "Platform admin"}
+				/>
+			</Sidebar>
+			<div className="sidebar-preview__content">
+				<div className="sidebar-preview__squad">
+					<SidebarAgent
+						agent="petra"
+						state="planning"
+						name={ar ? "بترا" : "Petra"}
+						roleLabel=""
+						status="online"
+						featured
+						meta={ar ? "تدير ٥ فرق · متجر تجريبي" : "Runs 5 squads · Demo store"}
+						locale={locale}
+					/>
+					<SidebarAgent
+						agent="pisa"
+						state="running"
+						name={ar ? "بيزا" : "Pisa"}
+						roleLabel={ar ? "الطلبات" : "Orders"}
+						status="online"
+						locale={locale}
+					/>
+					<SidebarAgent
+						agent="kyoto"
+						state="idle"
+						name={ar ? "كيوتو" : "Kyoto"}
+						roleLabel={ar ? "المخزون" : "Inventory"}
+						status="idle"
+						locale={locale}
+					/>
+				</div>
+				<div className="sidebar-preview__placeholder">
+					<h2>{ar ? "نظرة عامة" : "Overview"}</h2>
+					<p>{ar ? "محتوى لوحة التحكم" : "Dashboard content"}</p>
+				</div>
+			</div>
 		</div>
 	);
 }

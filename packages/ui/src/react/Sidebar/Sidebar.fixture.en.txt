@@ -1,0 +1,1 @@
+Sidebar is app navigation and is not available in OpenUI.
