@@ -128,12 +128,12 @@
     "images": [
       {
         "label": "Images",
-        "value": "18",
+        "value": "3",
         "foot": "In the registry"
       },
       {
         "label": "Deployed",
-        "value": "16",
+        "value": "3",
         "foot": "In production"
       },
       {
