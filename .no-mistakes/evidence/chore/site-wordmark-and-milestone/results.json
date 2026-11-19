@@ -1,0 +1,81 @@
+[
+  {
+    "label": "desktop-light",
+    "viewBox": "0 0 281.2 64",
+    "expectedViewBox": "0 0 281.2 64",
+    "color": "rgb(13, 13, 13)",
+    "background": "rgba(0, 0, 0, 0)",
+    "rect": {
+      "x": 48,
+      "y": 19.5,
+      "width": 105.4375,
+      "height": 24
+    },
+    "width": 1440,
+    "scrollWidth": 1440,
+    "theme": "light",
+    "dir": "ltr"
+  },
+  {
+    "label": "favicon",
+    "type": "image/svg+xml",
+    "status": 200,
+    "matchesSyncedSvg": true,
+    "href": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%20width='32'%20height='32'%20role='img'%20aria-label='tensquads'%3e%3crect%20width='64'%20height='64'%20rx='16'%20fill='%23151515'/%3e%3cg%20transform='translate(6.75%2013.57)%20scale(0.6557)'%3e%3cline%20x1='17'%20y1='13'%20x2='17'%20y2='7.5'%20stroke='%23E9806A'%20stroke-width='2.4'%20stroke-linecap='round'/%3e%3ccircle%20cx='17'%20cy='6'%20r='2.8'%20fill='%23E9806A'/%3e%3crect%20x='8'%20y='13'%20width='18'%20height='40'%20rx='9'%20fill='%23E9806A'/%3e%3ccircle%20cx='49'%20cy='33'%20r='15.5'%20fill='none'%20stroke='%23ffffff'%20stroke-width='9'/%3e%3c/g%3e%3c/svg%3e"
+  },
+  {
+    "label": "desktop-dark",
+    "viewBox": "0 0 281.2 64",
+    "expectedViewBox": "0 0 281.2 64",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgba(0, 0, 0, 0)",
+    "rect": {
+      "x": 48,
+      "y": 19.5,
+      "width": 105.4375,
+      "height": 24
+    },
+    "width": 1440,
+    "scrollWidth": 1440,
+    "theme": "dark",
+    "dir": "ltr"
+  },
+  {
+    "label": "mobile-arabic-dark",
+    "viewBox": "0 0 281.2 64",
+    "expectedViewBox": "0 0 281.2 64",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgba(0, 0, 0, 0)",
+    "rect": {
+      "x": 272.5625,
+      "y": 12,
+      "width": 105.4375,
+      "height": 24
+    },
+    "width": 390,
+    "scrollWidth": 390,
+    "theme": "dark",
+    "dir": "rtl"
+  },
+  {
+    "label": "nested-route-navigation",
+    "url": "http://127.0.0.1:5173/?locale=ar&theme=dark&dir=rtl",
+    "faviconPreserved": true
+  },
+  {
+    "label": "milestone-saved-record",
+    "record": {
+      "id": "v0.2-dashboards",
+      "status": "done",
+      "tasks": [
+        "001-card-pageheader-stattile",
+        "002-charts",
+        "005-platform-contract-approvalcard",
+        "003-datatable-emptystate",
+        "004-sidebar",
+        "006-dashboard-demos"
+      ]
+    },
+    "runtimeSurface": false
+  }
+]

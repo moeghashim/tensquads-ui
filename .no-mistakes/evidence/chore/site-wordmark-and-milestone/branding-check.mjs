@@ -1,0 +1,64 @@
+import { createRequire } from 'node:module';
+import { readFile, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const require = createRequire(`${process.cwd()}/package.json`);
+const { chromium } = require('playwright');
+const out = '~/.no-mistakes/evidence/01M7V0XM8V98TFASY27AP4AJZ0';
+const wordmark = await readFile('design/logo/wordmark.svg','utf8');
+const favicon = await readFile('design/logo/favicon.svg','utf8');
+const results = [];
+const browser = await chromium.launch({headless:true});
+try {
+const page = await browser.newPage({ viewport:{width:1440,height:1000}, reducedMotion:'reduce' });
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://127.0.0.1:5173/?locale=en&theme=light');
+await page.getByRole('link',{name:'tensquads',exact:true}).waitFor();
+await page.evaluate(()=>document.fonts.ready);
+async function inspect(label) {
+ const result=await page.evaluate((reference)=>{
+  const svg=document.querySelector('.site-brand__wordmark');
+  const ref=new DOMParser().parseFromString(reference,'image/svg+xml').documentElement;
+  const shapes=el=>Array.from(el.querySelectorAll('line,circle,rect,path')).map(n=>({tag:n.tagName,attrs:Object.fromEntries(Array.from(n.attributes).map(a=>[a.name,a.value==='#151515'?'currentColor':a.value]))}));
+  const rect=svg.getBoundingClientRect();
+  return {viewBox:svg.getAttribute('viewBox'),expectedViewBox:ref.getAttribute('viewBox'),shapes:shapes(svg),expectedShapes:shapes(ref),color:getComputedStyle(svg).color,background:getComputedStyle(document.body).backgroundColor,rect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height},width:innerWidth,scrollWidth:document.documentElement.scrollWidth,theme:document.documentElement.dataset.theme,dir:document.documentElement.dir};
+ },wordmark);
+ assert.equal(result.viewBox,result.expectedViewBox);assert.deepEqual(result.shapes,result.expectedShapes);
+ assert(result.rect.width>90 && result.rect.height>15); assert(result.rect.x>=0 && result.rect.x+result.rect.width<=result.width);
+ assert(result.scrollWidth<=result.width);
+ delete result.shapes;delete result.expectedShapes;
+ results.push({label,...result});
+ await page.screenshot({path:`${out}/${label}.png`});
+ return result;
+}
+const light=await inspect('desktop-light');
+const faviconHref=await page.locator('link[rel="icon"]').getAttribute('href');
+const response=await page.evaluate(async href=>{const r=await fetch(href);return {ok:r.ok,status:r.status,body:await r.text()};},faviconHref);
+assert(response.ok);
+const sameIcon=await page.evaluate(([a,b])=>{const normalize=s=>new XMLSerializer().serializeToString(new DOMParser().parseFromString(s.trim(),'image/svg+xml'));return normalize(a)===normalize(b);},[response.body,favicon]);
+assert(sameIcon);
+results.push({label:'favicon',type:await page.locator('link[rel="icon"]').getAttribute('type'),status:response.status,matchesSyncedSvg:true,href:faviconHref});
+await page.getByRole('radio',{name:'Dark',exact:true}).click();
+await page.waitForURL(/theme=dark/);
+const dark=await inspect('desktop-dark');assert.notEqual(dark.color,light.color);
+await page.setViewportSize({width:390,height:844});
+await page.getByRole('radio',{name:'العربية',exact:true}).click();
+await page.waitForURL(/locale=ar/);
+const rtl=await inspect('mobile-arabic-dark');assert.equal(rtl.dir,'rtl');assert.equal(rtl.theme,'dark');
+await page.getByRole('link',{name:'tensquads',exact:true}).click();
+await page.waitForURL(u=>u.pathname==='/'&&u.searchParams.get('locale')==='ar'&&u.searchParams.get('theme')==='dark');
+await page.goto('http://127.0.0.1:5173/dashboards/home?locale=ar&theme=dark&dir=rtl');
+await page.locator('.site-brand__wordmark').waitFor();
+assert.equal(await page.locator('link[rel="icon"]').getAttribute('href'),faviconHref);
+await page.getByRole('link',{name:'tensquads',exact:true}).click();
+await page.waitForURL(u=>u.pathname==='/'&&u.searchParams.get('locale')==='ar'&&u.searchParams.get('theme')==='dark');
+results.push({label:'nested-route-navigation',url:page.url(),faviconPreserved:true});
+assert.deepEqual(errors,[]);
+const iconPage=await browser.newPage({viewport:{width:160,height:160}});
+await iconPage.goto(new URL(faviconHref,'http://127.0.0.1:5173').href);
+await iconPage.screenshot({path:`${out}/favicon-rendered.png`});
+const milestone=JSON.parse(await readFile('dev/milestones.json','utf8')).milestones.filter(m=>m.id==='v0.2-dashboards');
+assert.equal(milestone.length,1);assert.equal(milestone[0].status,'done');
+results.push({label:'milestone-saved-record',record:milestone[0],runtimeSurface:false});
+await writeFile(`${out}/results.json`,JSON.stringify(results,null,2));
+console.log(JSON.stringify(results,null,2));
+} finally { await browser.close(); }
