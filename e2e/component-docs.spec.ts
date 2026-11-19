@@ -4,14 +4,16 @@ import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpe
 
 const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
 
-test("component docs load in English and Arabic with localized fixtures", async ({ page }) => {
+test("component index lists every documented component", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");
 	const names = await page.locator(".component-card__link strong").allTextContents();
-	expect(names.length).toBeGreaterThan(0);
+	expect(names).toEqual([...registryOrder].sort());
+});
 
-	for (const locale of ["en", "ar"] as const) {
-		const direction = locale === "ar" ? "rtl" : "ltr";
-		for (const name of names) {
+for (const locale of ["en", "ar"] as const) {
+	const direction = locale === "ar" ? "rtl" : "ltr";
+	for (const name of registryOrder) {
+		test(`${name} docs load in ${locale} with localized fixtures`, async ({ page }) => {
 			await openPreview(page, { locale, direction, theme: "light" }, `/components/${name}`);
 			await expect(page.locator(".component-doc-page__header h1")).toHaveText(name);
 			const docs = page.locator(".markdown-document");
@@ -52,9 +54,9 @@ test("component docs load in English and Arabic with localized fixtures", async 
 			}
 			await expectAccessible(page);
 			await expectNoHorizontalScroll(page);
-		}
+		});
 	}
-});
+}
 
 test("component code examples copy and show confirmation", async ({ page }) => {
 	await openPreview(page, { locale: "ar", direction: "rtl", theme: "dark" }, "/components/Dialog");
