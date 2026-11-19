@@ -4,6 +4,33 @@
 
 Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.mohanadgh.workers.dev)
 
+## Components
+
+The library ships these components today. Each row links to its reference and its live page. Coding agents: read [llms.txt](llms.txt) for the full index, then install the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md). Import from `@tensquads/ui/react`.
+
+<!-- components:start -->
+
+| Component | What it is | Live |
+|---|---|---|
+| [Badge](packages/ui/src/react/Badge/Badge.md) | A non-interactive label that names a state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Badge) |
+| [Button](packages/ui/src/react/Button/Button.md) | An accessible button that runs an action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Button) |
+| [Chat](packages/ui/src/react/Chat/Chat.md) | Chat parts build a chat surface: a scrolling log, user messages, agent replies, working and error lines, and a composer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chat) |
+| [ChatReply](packages/ui/src/react/ChatReply/ChatReply.md) | ChatReply renders Markdown text and fenced `openui` blocks in reading order. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatReply) |
+| [Chip](packages/ui/src/react/Chip/Chip.md) | A pill that opens an attached object such as an output schema or tool. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chip) |
+| [Dialog](packages/ui/src/react/Dialog/Dialog.md) | A focused modal window that explains a task and offers a clear action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Dialog) |
+| [Field](packages/ui/src/react/Field/Field.md) | A labeled text input with optional description and validation message. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Field) |
+| [Form](packages/ui/src/react/Form/Form.md) | A named form of text fields, switches, segmented controls, and optional action buttons. Submit sends their current values as a chat action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form) |
+| [Input](packages/ui/src/react/Input/Input.md) | A named single-line text input. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Input) |
+| [Menu](packages/ui/src/react/Menu/Menu.md) | A button menu with up to six serializable actions. Each action has a label and value, with optional danger and disabled states. A destructive action is placed last after a separator. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Menu) |
+| [SegmentedControl](packages/ui/src/react/SegmentedControl/SegmentedControl.md) | An accessible exclusive selection control for two or more modes. Inside a Form it submits its selected value by name. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/SegmentedControl) |
+| [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md) | An accessible image of a tensquads agent in a loop state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Squadmate) |
+| [Switch](packages/ui/src/react/Switch/Switch.md) | An accessible switch for turning a setting on or off. Inside a Form it submits its named boolean value. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch) |
+| [Tooltip](packages/ui/src/react/Tooltip/Tooltip.md) | A short hint shown when a control receives focus or hover. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Tooltip) |
+
+<!-- components:end -->
+
+## Site
+
 The home page at `/` shows installation, CSS setup, and an OpenUI fixture replay. Use Copy to copy the install command. If clipboard access fails, the page asks you to select and copy the command manually. Use Replay to restart the demo and reset edited controls to their fixture defaults. Use its language control to switch the rendered example between English and Arabic; changing the demo language restarts playback and resets edited controls to the selected language's fixture defaults. The demo reserves space for all messages and controls before revealing them, so playback does not shift the page layout. It runs in the browser without a model request and shows its final state immediately when reduced motion is enabled.
 
 Browse the component gallery at `/components` and select a component name to open `/components/$name`. Header controls select the site language and theme. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`); changing the site language also sets its direction. Use `/get-started` for the English and Arabic agent setup guide with copyable examples.
