@@ -96,18 +96,12 @@ function ChatExperience({
 								return (
 									<Fragment key={turnId}>
 										<ChatUserMessage>{turn.content}</ChatUserMessage>
-										{turn === chat.turns[0] && (
-											<RoutedSteps steps={fixture.steps} locale={locale} />
-										)}
+										{turn === chat.turns[0] && <RoutedSteps steps={fixture.steps} locale={locale} />}
 									</Fragment>
 								);
 							}
 							if (turn.role === "action") {
-								return (
-									<ChatUserMessage key={turnId}>
-										{turn.action.summary}
-									</ChatUserMessage>
-								);
+								return <ChatUserMessage key={turnId}>{turn.action.summary}</ChatUserMessage>;
 							}
 							return (
 								<ChatStep
@@ -229,7 +223,7 @@ function fillFollowup(template: string, turn: ChatActionTurn, locale: Locale) {
 				: "unchanged";
 	const values: Record<string, unknown> = { store, frequency, email: emailLabel };
 	return template.replace(/\{(store|frequency|email)\}/g, (_, name: string) =>
-		String(values[name]).replace(/[\\`*_[\]{}()#+.!<>~|\-]/g, "\\$&"),
+		String(values[name]).replace(/[\\`*_[\]{}()#+.!<>~|-]/g, "\\$&"),
 	);
 }
 

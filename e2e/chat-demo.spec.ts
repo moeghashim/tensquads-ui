@@ -35,13 +35,16 @@ const states = [
 for (const localized of states) {
 	for (const theme of ["light", "dark"] as const) {
 		const state = { ...localized, theme };
-		test(`chat demo submits inline form and uses its values in ${state.locale}/${theme}`, async ({ page }, testInfo) => {
+		test(`chat demo submits inline form and uses its values in ${state.locale}/${theme}`, async ({
+			page,
+		}, testInfo) => {
 			await openPreview(page, state, "/chat");
 			await expect(page.getByRole("textbox", { name: state.storeLabel })).toBeVisible();
 			await expect(page.getByRole("button", { name: state.approve })).toBeVisible();
 			const form = page.locator(".ts-form");
 			const formWidth = (await form.boundingBox())?.width ?? 0;
-			const submitWidth = (await page.getByRole("button", { name: state.approve }).boundingBox())?.width ?? formWidth;
+			const submitWidth =
+				(await page.getByRole("button", { name: state.approve }).boundingBox())?.width ?? formWidth;
 			const segmentWidth = (await form.locator("[data-slot='segmented-control']").boundingBox())?.width ?? formWidth;
 			expect(submitWidth).toBeLessThan(formWidth);
 			expect(segmentWidth).toBeLessThan(formWidth);

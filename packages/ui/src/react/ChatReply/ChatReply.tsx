@@ -247,7 +247,7 @@ function renderBlocks(
 
 function inline(source: string): ReactNode[] {
 	const nodes: ReactNode[] = [];
-	const token = /(\\[\\`*_[\]{}()#+.!<>~|\-]|`[^`]+`|\[([^\]]+)\]\(|\*\*((?:\\.|[^*\\])+)\*\*)/g;
+	const token = /(\\[\\`*_[\]{}()#+.!<>~|-]|`[^`]+`|\[([^\]]+)\]\(|\*\*((?:\\.|[^*\\])+)\*\*)/g;
 	let cursor = 0;
 	for (let match = token.exec(source); match; match = token.exec(source)) {
 		if (match.index > cursor) nodes.push(source.slice(cursor, match.index));
@@ -273,7 +273,7 @@ function inline(source: string): ReactNode[] {
 			);
 		} else {
 			nodes.push(
-				<strong key={match.index}>{(match[3] ?? "").replace(/\\([\\`*_[\]{}()#+.!<>~|\-])/g, "$1")}</strong>,
+				<strong key={match.index}>{(match[3] ?? "").replace(/\\([\\`*_[\]{}()#+.!<>~|-])/g, "$1")}</strong>,
 			);
 		}
 		cursor = token.lastIndex;
