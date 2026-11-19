@@ -16,7 +16,6 @@
 .ts-data-table tbody tr[tabindex]:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 .ts-data-table__toolbar { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--ts-space-2); }
 .ts-data-table__toolbar > [data-slot="input"] { inline-size: 12rem; }
-.ts-data-table__filters { display: flex; flex-wrap: wrap; gap: var(--ts-space-1); }
 .ts-data-table__entity { display: flex; align-items: center; gap: var(--ts-space-3); min-inline-size: 220px; }
 .ts-data-table__tile { display: grid; flex: 0 0 32px; inline-size: 32px; block-size: 32px; place-items: center; border-radius: var(--ts-radius-lg); font-size: 0.75rem; font-weight: 600; }
 .ts-data-table__tile--primary { background: var(--ts-primary-soft); color: var(--ts-primary-solid); }

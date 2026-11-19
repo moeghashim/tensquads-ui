@@ -48,7 +48,7 @@ export function StackCell({ primary, secondary }: { primary: string; secondary: 
 	return (
 		<span className="ts-data-table__stack">
 			<strong>{primary}</strong>
-			<span>{secondary}</span>
+			<span title={secondary}>{secondary}</span>
 		</span>
 	);
 }

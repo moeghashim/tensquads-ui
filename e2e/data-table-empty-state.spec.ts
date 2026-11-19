@@ -1,32 +1,87 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import { join } from "node:path";
 import { expect, test } from "@playwright/test";
-import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
+import {
+	capturePreviewScreenshots,
+	expectAccessible,
+	expectNoHorizontalScroll,
+	openPreview,
+} from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	for (const theme of ["light", "dark"] as const) {
 		for (const name of ["DataTable", "EmptyState"] as const) {
-			test(`${name} renders and stays contained in ${locale} ${theme}`, async ({ page }) => {
+			test(`${name} renders and stays contained in ${locale} ${theme}`, async ({ page }, testInfo) => {
 				const direction = locale === "ar" ? "rtl" : "ltr";
 				await openPreview(page, { locale, direction, theme }, `/components/${name}`);
 				await expectAccessible(page);
-				for (const width of [1440, 390]) {
-					await page.setViewportSize({ width, height: 900 });
-					const directory = join(process.cwd(), ".review", "003");
-					await mkdir(directory, { recursive: true });
-					await writeFile(
-						join(directory, `${name}-${locale}-${direction}-${theme}-${width}.png`),
-						await page.screenshot({ fullPage: true, animations: "disabled" }),
-					);
+				await capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`);
+				const ar = locale === "ar";
+				const card = page.locator(".dashboard-component-preview > [data-slot=card]");
+				const search = card.getByRole("textbox", { name: ar ? "البحث عن الشركات" : "Search companies" });
+				const clear = card.getByRole("button", { name: ar ? "مسح البحث" : "Clear search" });
+				const count = card.getByRole("heading", { level: 2 });
+				const group = card.getByRole("radiogroup", { name: ar ? "حالة الشركة" : "Company status" });
+				const all = group.getByRole("radio", { name: ar ? "الكل" : "All", exact: true });
+				if (name === "EmptyState") {
+					await expect(count).toHaveText(ar ? "كل الشركات (٠ من ٢)" : "All companies (0 of 2)");
+					await expect(card.getByRole("table")).toHaveCount(0);
+					await clear.click();
+					await expect(search).toHaveValue("");
 				}
-				if (name === "DataTable") {
-					const row = page.getByRole("row", { name: /Acme Studio/ });
-					await row.click();
-					await expect(row).toHaveAttribute("aria-selected", "true");
-					await row.focus();
-					await page.keyboard.press("Space");
-					await expect(row).toBeFocused();
+				const acme = card.getByRole("row", { name: /Acme Studio/ });
+				const northstar = card.getByRole("row", { name: /Northstar/ });
+				await expect(acme).toHaveAttribute("aria-selected", "true");
+				await expect(northstar).toHaveAttribute("aria-selected", "false");
+				await northstar.click();
+				await expect(northstar).toHaveAttribute("aria-selected", "true");
+				await expect(acme).toHaveAttribute("aria-selected", "false");
+				await acme.focus();
+				await page.keyboard.press("Space");
+				await expect(acme).toBeFocused();
+				await expect(acme).toHaveAttribute("aria-selected", "true");
+				await expect(northstar).toHaveAttribute("aria-selected", "false");
+				await northstar.focus();
+				await page.keyboard.press("Enter");
+				await expect(northstar).toHaveAttribute("aria-selected", "true");
+				await expect(acme).toHaveAttribute("aria-selected", "false");
+				await expect(acme.getByText(ar ? "يُدفع شهرياً" : "Billed monthly")).toHaveAttribute(
+					"title",
+					ar ? "يُدفع شهرياً" : "Billed monthly",
+				);
+				await expect(acme.getByText("maya@example.com")).toHaveAttribute("title", "maya@example.com");
+				await expect(acme.getByText(/Reach/)).toHaveAttribute("title", "DS / Demo store / Reach $1M in annual sales");
+				await search.fill("  NORTH  ");
+				await expect(acme).toHaveCount(0);
+				await expect(northstar).toBeVisible();
+				await expect(count).toHaveText(ar ? "كل الشركات (١ من ٢)" : "All companies (1 of 2)");
+				const active = group.getByRole("radio", { name: ar ? "نشطة" : "Active", exact: true });
+				await active.click();
+				await expect(active).toHaveAttribute("aria-checked", "true");
+				await expect(card.getByRole("table")).toHaveCount(0);
+				await expect(
+					card.getByRole("heading", { name: ar ? "لا تطابق أي شركة البحث" : "No companies match" }),
+				).toBeVisible();
+				await clear.click();
+				await expect(search).toHaveValue("");
+				await expect(all).toHaveAttribute("aria-checked", "true");
+				for (const [label, expected] of [
+					[ar ? "نشطة" : "Active", /Acme Studio/],
+					[ar ? "تجربة" : "Trial", /Northstar/],
+				] as const) {
+					await group.getByRole("radio", { name: label, exact: true }).click();
+					await expect(card.getByRole("row")).toHaveCount(2);
+					await expect(card.getByRole("row", { name: expected })).toBeVisible();
+					await expect(count).toHaveText(ar ? "كل الشركات (١ من ٢)" : "All companies (1 of 2)");
 				}
+				await group.getByRole("radio", { name: ar ? "متوقفة" : "Paused", exact: true }).click();
+				await expect(count).toHaveText(ar ? "كل الشركات (٠ من ٢)" : "All companies (0 of 2)");
+				await clear.click();
+				await search.fill("No such company");
+				await expect(card.getByRole("table")).toHaveCount(0);
+				await expect(count).toHaveText(ar ? "كل الشركات (٠ من ٢)" : "All companies (0 of 2)");
+				await clear.click();
+				await expect(search).toHaveValue("");
+				await expect(card.getByRole("row")).toHaveCount(3);
+				await expect(count).toHaveText(ar ? "كل الشركات (٢ من ٢)" : "All companies (2 of 2)");
 				await expectNoHorizontalScroll(page);
 			});
 		}
