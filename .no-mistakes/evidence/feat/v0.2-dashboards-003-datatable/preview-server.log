@@ -1,0 +1,160 @@
+
+> preview
+> wrangler dev --config dist/server/wrangler.json --ip 127.0.0.1 --port 5173
+
+
+ ⛅️ wrangler 4.163.0 (update available 4.165.0)
+───────────────────────────────────────────────
+
+Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+Attaching additional modules:
+┌───────────────────────────────────────────────┬──────┬─────────────┐
+│ Name                                          │ Type │ Size        │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Match-BnuodgZJ.js                      │ esm  │ 14.12 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/Tooltip.fixture.en-BqcUyzCa.js         │ esm  │ 18.85 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/_tanstack-start-manifest_v-SAvDIqBw.js │ esm  │ 2.20 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/announce-BoRVLlhG.js                   │ esm  │ 1.47 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/chat-CD86WDMt.js                       │ esm  │ 11.50 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/components._name-B5iUKILs.js           │ esm  │ 12.33 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/components._name-CGwtJ4RO.js           │ esm  │ 127.53 KiB  │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/components.index-DQvyMv5s.js           │ esm  │ 8.97 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/copy-code-button-j7iNM8oA.js           │ esm  │ 1.33 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/empty-plugin-adapters-HCpz9NXQ.js      │ esm  │ 0.28 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/get-started-BoFdrLs8.js                │ esm  │ 10.33 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/keyboard-Rq5LX-F6.js                   │ esm  │ 2.95 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/link-DrwyE885.js                       │ esm  │ 5.79 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/openui-BWfNWJnd.js                     │ esm  │ 0.00 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/pointer-BMlUt5sb.js                    │ esm  │ 5.99 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/react-C4W4Oked.js                      │ esm  │ 34.91 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/react-dom-D-dVV3eK.js                  │ esm  │ 154.70 KiB  │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/router-WpPOuyQT.js                     │ esm  │ 35.76 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/routes-DD1URlpL.js                     │ esm  │ 25.46 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/sheet-presentation-DNLVLew4.js         │ esm  │ 71.87 KiB   │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/squadmates-D2dUCaFU.js                 │ esm  │ 0.22 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/start-BnVKbPDK.js                      │ esm  │ 0.19 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/state-DSQv3yRk.js                      │ esm  │ 817.36 KiB  │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ assets/utils-CvZvEDsB.js                      │ esm  │ 0.51 KiB    │
+├───────────────────────────────────────────────┼──────┼─────────────┤
+│ Total (24 modules)                            │      │ 1364.63 KiB │
+└───────────────────────────────────────────────┴──────┴─────────────┘
+⎔ Starting local server...
+Wrangler detected this dev session is running in an AI agent.
+The Local Explorer API is available at http://127.0.0.1:5173/cdn-cgi/local/explorer/api
+Useful routes:
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/workers - local Workers and bindings
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/scheduled?worker=<name> - invoke a Worker's scheduled handler; cron is required (see the OpenAPI schema for the full request)
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/storage/kv/namespaces - KV namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/d1/database - D1 databases
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/r2/buckets - R2 buckets
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workers/durable_objects/namespaces - Durable Object namespaces
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api/workflows - Workflows
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query - run a read-only SQL query (SELECT/WITH only) over captured request traces and console logs. Tables: spans, logs (read attributes via json(attributes)). Example:
+    curl -X POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/query -H 'Content-Type: application/json' -d '{"sql":"SELECT service, name, outcome, duration_ms FROM spans WHERE parent_id IS NULL LIMIT 20"}'
+  POST http://127.0.0.1:5173/cdn-cgi/local/explorer/api/local/observability/clear - clear all captured traces and logs
+If the routes above don't cover what you need, fetch the full OpenAPI schema (large - use only as a last resort):
+  GET http://127.0.0.1:5173/cdn-cgi/local/explorer/api - OpenAPI schema
+[wrangler:info] Ready on http://127.0.0.1:5173
+[wrangler:info] GET /components/DataTable 200 OK (45ms)
+[wrangler:info] GET /assets/index-Bpoojq0W.css 200 OK (3ms)
+[wrangler:info] GET /assets/index-DaKkq7gD.js 200 OK (7ms)
+[wrangler:info] GET /assets/modal-attribute-Ca4176ci.js 200 OK (7ms)
+[wrangler:info] GET /assets/state-Du7gCW21.js 200 OK (8ms)
+[wrangler:info] GET /assets/sides-rXhkcWR2.js 200 OK (7ms)
+[wrangler:info] GET /assets/pointer-BlhHrnpT.js 200 OK (8ms)
+[wrangler:info] GET /assets/announce-DCnb6Cw4.js 200 OK (9ms)
+[wrangler:info] GET /assets/Dialog-BYr_xhwh.js 200 OK (4ms)
+[wrangler:info] GET /assets/link-DF2X0g8d.js 200 OK (4ms)
+[wrangler:info] GET /assets/keyboard-DLQVYMr8.js 200 OK (5ms)
+[wrangler:info] GET /assets/components._name-CS40WmgK.js 200 OK (4ms)
+[wrangler:info] GET /assets/Tooltip.fixture.en-BuWl3YdC.js 200 OK (5ms)
+[wrangler:info] GET /assets/copy-code-button-P5imA5M1.js 200 OK (5ms)
+[wrangler:info] GET /assets/squadmates-ClNiQUAQ.js 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (2ms)
+[wrangler:info] GET /components/DataTable 200 OK (8ms)
+[wrangler:info] GET /assets/index-Bpoojq0W.css 200 OK (3ms)
+[wrangler:info] GET /assets/state-Du7gCW21.js 200 OK (7ms)
+[wrangler:info] GET /assets/pointer-BlhHrnpT.js 200 OK (8ms)
+[wrangler:info] GET /assets/index-DaKkq7gD.js 200 OK (9ms)
+[wrangler:info] GET /assets/modal-attribute-Ca4176ci.js 200 OK (8ms)
+[wrangler:info] GET /assets/sides-rXhkcWR2.js 200 OK (8ms)
+[wrangler:info] GET /assets/announce-DCnb6Cw4.js 200 OK (11ms)
+[wrangler:info] GET /assets/Dialog-BYr_xhwh.js 200 OK (5ms)
+[wrangler:info] GET /assets/link-DF2X0g8d.js 200 OK (5ms)
+[wrangler:info] GET /assets/keyboard-DLQVYMr8.js 200 OK (5ms)
+[wrangler:info] GET /assets/components._name-CS40WmgK.js 200 OK (5ms)
+[wrangler:info] GET /assets/Tooltip.fixture.en-BuWl3YdC.js 200 OK (6ms)
+[wrangler:info] GET /assets/copy-code-button-P5imA5M1.js 200 OK (6ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 200 OK (5ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (1ms)
+[wrangler:info] GET /assets/squadmates-ClNiQUAQ.js 200 OK (1ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (2ms)
+[wrangler:info] GET /components/DataTable 200 OK (6ms)
+[wrangler:info] GET /assets/index-Bpoojq0W.css 200 OK (3ms)
+[wrangler:info] GET /assets/state-Du7gCW21.js 200 OK (8ms)
+[wrangler:info] GET /assets/pointer-BlhHrnpT.js 200 OK (8ms)
+[wrangler:info] GET /assets/index-DaKkq7gD.js 200 OK (8ms)
+[wrangler:info] GET /assets/modal-attribute-Ca4176ci.js 200 OK (8ms)
+[wrangler:info] GET /assets/sides-rXhkcWR2.js 200 OK (8ms)
+[wrangler:info] GET /assets/announce-DCnb6Cw4.js 200 OK (10ms)
+[wrangler:info] GET /assets/Dialog-BYr_xhwh.js 200 OK (5ms)
+[wrangler:info] GET /assets/link-DF2X0g8d.js 200 OK (5ms)
+[wrangler:info] GET /assets/keyboard-DLQVYMr8.js 200 OK (5ms)
+[wrangler:info] GET /assets/components._name-CS40WmgK.js 200 OK (5ms)
+[wrangler:info] GET /assets/Tooltip.fixture.en-BuWl3YdC.js 200 OK (5ms)
+[wrangler:info] GET /assets/copy-code-button-P5imA5M1.js 200 OK (5ms)
+[wrangler:info] GET /assets/squadmates-ClNiQUAQ.js 200 OK (3ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 200 OK (1ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Medium-CRRMh-dh.woff2 200 OK (2ms)
+[wrangler:info] GET /components/DataTable 200 OK (6ms)
+[wrangler:info] GET /assets/index-Bpoojq0W.css 200 OK (2ms)
+[wrangler:info] GET /assets/state-Du7gCW21.js 200 OK (8ms)
+[wrangler:info] GET /assets/pointer-BlhHrnpT.js 200 OK (8ms)
+[wrangler:info] GET /assets/index-DaKkq7gD.js 200 OK (8ms)
+[wrangler:info] GET /assets/modal-attribute-Ca4176ci.js 200 OK (9ms)
+[wrangler:info] GET /assets/sides-rXhkcWR2.js 200 OK (9ms)
+[wrangler:info] GET /assets/announce-DCnb6Cw4.js 200 OK (10ms)
+[wrangler:info] GET /assets/Dialog-BYr_xhwh.js 200 OK (4ms)
+[wrangler:info] GET /assets/link-DF2X0g8d.js 200 OK (4ms)
+[wrangler:info] GET /assets/keyboard-DLQVYMr8.js 200 OK (5ms)
+[wrangler:info] GET /assets/components._name-CS40WmgK.js 200 OK (5ms)
+[wrangler:info] GET /assets/Tooltip.fixture.en-BuWl3YdC.js 200 OK (4ms)
+[wrangler:info] GET /assets/copy-code-button-P5imA5M1.js 200 OK (4ms)
+[wrangler:info] GET /assets/Inter-Medium-CDhBSFyE.woff2 200 OK (3ms)
+[wrangler:info] GET /assets/squadmates-ClNiQUAQ.js 200 OK (4ms)
+[wrangler:info] GET /assets/Inter-Regular-COLGFB3M.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/Inter-SemiBold-BAEEcJ4E.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Regular-B2a76lLF.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-SemiBold-FtXILkUg.woff2 200 OK (2ms)
+[wrangler:info] GET /assets/IBMPlexSansArabic-Medium-CRRMh-dh.woff2 200 OK (1ms)

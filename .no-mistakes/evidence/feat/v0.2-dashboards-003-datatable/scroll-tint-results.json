@@ -1,0 +1,270 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "geometry": {
+      "width": 362,
+      "content": 771,
+      "offset": 0,
+      "table": {
+        "x": 14,
+        "y": 341.46875,
+        "width": 771,
+        "height": 161,
+        "top": 341.46875,
+        "right": 785,
+        "bottom": 502.46875,
+        "left": 14
+      },
+      "scroller": {
+        "x": 14,
+        "y": 341.46875,
+        "width": 362,
+        "height": 161,
+        "top": 341.46875,
+        "right": 376,
+        "bottom": 502.46875,
+        "left": 14
+      },
+      "page": 390
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "tint": "primary",
+    "actual": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(24, 24, 24)"
+    },
+    "expected": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(24, 24, 24)"
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "tint": "success",
+    "actual": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)"
+    },
+    "expected": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)"
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "keyboardScroll": 40,
+    "wheelScroll": {
+      "offset": 409,
+      "width": 362,
+      "content": 771
+    },
+    "selection": "mouse Northstar then Space Acme"
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "geometry": {
+      "width": 362,
+      "content": 771,
+      "offset": 0,
+      "table": {
+        "x": 14,
+        "y": 341.46875,
+        "width": 771,
+        "height": 161,
+        "top": 341.46875,
+        "right": 785,
+        "bottom": 502.46875,
+        "left": 14
+      },
+      "scroller": {
+        "x": 14,
+        "y": 341.46875,
+        "width": 362,
+        "height": 161,
+        "top": 341.46875,
+        "right": 376,
+        "bottom": 502.46875,
+        "left": 14
+      },
+      "page": 390
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "tint": "primary",
+    "actual": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(243, 243, 243)"
+    },
+    "expected": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(243, 243, 243)"
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "tint": "success",
+    "actual": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)"
+    },
+    "expected": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)"
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "keyboardScroll": 40,
+    "wheelScroll": {
+      "offset": 409,
+      "width": 362,
+      "content": 771
+    },
+    "selection": "mouse Northstar then Space Acme"
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "geometry": {
+      "width": 362,
+      "content": 760,
+      "offset": 0,
+      "table": {
+        "x": -384.234375,
+        "y": 341.46875,
+        "width": 760.234375,
+        "height": 161,
+        "top": 341.46875,
+        "right": 376,
+        "bottom": 502.46875,
+        "left": -384.234375
+      },
+      "scroller": {
+        "x": 14,
+        "y": 341.46875,
+        "width": 362,
+        "height": 161,
+        "top": 341.46875,
+        "right": 376,
+        "bottom": 502.46875,
+        "left": 14
+      },
+      "page": 390
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "tint": "primary",
+    "actual": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(24, 24, 24)"
+    },
+    "expected": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(24, 24, 24)"
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "tint": "success",
+    "actual": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)"
+    },
+    "expected": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)"
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "keyboardScroll": -40,
+    "wheelScroll": {
+      "offset": -398,
+      "width": 362,
+      "content": 760
+    },
+    "selection": "mouse Northstar then Space Acme"
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "geometry": {
+      "width": 362,
+      "content": 760,
+      "offset": 0,
+      "table": {
+        "x": -384.234375,
+        "y": 341.46875,
+        "width": 760.234375,
+        "height": 161,
+        "top": 341.46875,
+        "right": 376,
+        "bottom": 502.46875,
+        "left": -384.234375
+      },
+      "scroller": {
+        "x": 14,
+        "y": 341.46875,
+        "width": 362,
+        "height": 161,
+        "top": 341.46875,
+        "right": 376,
+        "bottom": 502.46875,
+        "left": 14
+      },
+      "page": 390
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "tint": "primary",
+    "actual": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(243, 243, 243)"
+    },
+    "expected": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(243, 243, 243)"
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "tint": "success",
+    "actual": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)"
+    },
+    "expected": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)"
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "keyboardScroll": -40,
+    "wheelScroll": {
+      "offset": -398,
+      "width": 362,
+      "content": 760
+    },
+    "selection": "mouse Northstar then Space Acme"
+  }
+]
