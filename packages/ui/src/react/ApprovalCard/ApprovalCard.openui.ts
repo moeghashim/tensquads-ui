@@ -1,6 +1,7 @@
-import { useIsStreaming, useTriggerAction } from "@openuidev/react-lang";
-import { createElement } from "react";
+import { useIsStreaming } from "@openuidev/react-lang";
+import { createElement, useContext } from "react";
 import { z } from "zod/v4";
+import { ActionHandlerContext } from "../../openui/action-handler.js";
 import { defineComponent } from "../../openui/define-component.js";
 import { registerComponent } from "../../openui/registration-store.js";
 import { ApprovalCard } from "./ApprovalCard.js";
@@ -31,7 +32,7 @@ export const ApprovalCardOpenUI = defineComponent({
 	description: "An approval request with approve and decline actions.",
 	props: propsSchema,
 	component: function OpenUIApprovalCard({ props }) {
-		const triggerAction = useTriggerAction();
+		const onAction = useContext(ActionHandlerContext);
 		const streaming = useIsStreaming();
 		return createElement(ApprovalCard, {
 			request: {
@@ -51,8 +52,13 @@ export const ApprovalCardOpenUI = defineComponent({
 					decision === "approve"
 						? props.labels?.approve ?? (props.locale === "ar" ? "موافقة" : "Approve")
 						: props.labels?.decline ?? (props.locale === "ar" ? "رفض" : "Decline");
-				triggerAction(label, "ApprovalCard", { type, params: { approvalId, contentHash, decision } });
-				return false;
+				return onAction?.({
+					type,
+					params: { approvalId, contentHash, decision },
+					humanFriendlyMessage: label,
+					formName: "ApprovalCard",
+					formState: {},
+				});
 			},
 		});
 	},

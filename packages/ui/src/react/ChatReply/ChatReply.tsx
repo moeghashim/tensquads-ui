@@ -10,7 +10,7 @@ export type ChatReplyProps = {
 	locale?: Locale;
 	plainText?: boolean;
 	onError?: TensquadsRendererProps["onError"];
-	onAction?: (event: ActionEvent, blockId: string) => void;
+	onAction?: (event: ActionEvent, blockId: string) => ReturnType<NonNullable<TensquadsRendererProps["onAction"]>>;
 	locked?: boolean | ((blockId: string) => boolean);
 } & Omit<TensquadsRendererProps, "stream" | "locale" | "onError" | "onAction">;
 
@@ -84,10 +84,22 @@ export function ChatReply({
 
 function plainTextLinks(text: string): ReactNode[] {
 	const nodes: ReactNode[] = [];
-	const pattern = /(https?:\/\/[^\s<>()]+[^\s<>().,!?:;])/g;
+	const pattern = /https?:\/\/[^\s<>]+/g;
 	let cursor = 0;
 	for (const match of text.matchAll(pattern)) {
-		const value = match[0];
+		let value = match[0];
+		let depth = 0;
+		for (let index = 0; index < value.length; index += 1) {
+			if (value[index] === "(") depth += 1;
+			else if (value[index] === ")") {
+				if (depth === 0) {
+					value = value.slice(0, index);
+					break;
+				}
+				depth -= 1;
+			}
+		}
+		value = value.replace(/[.,!?:;]+$/, "");
 		const start = match.index ?? 0;
 		if (start > cursor) nodes.push(text.slice(cursor, start));
 		nodes.push(

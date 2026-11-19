@@ -1,8 +1,10 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { TensquadsRenderer } from "../../openui/TensquadsRenderer.js";
 import type { PlatformApprovalRequest } from "../../schemas/platform.js";
 import { formatMillionths } from "../../schemas/platform.js";
-import { TensquadsRenderer } from "../../openui/TensquadsRenderer.js";
+import { ChatReply } from "../ChatReply/ChatReply.js";
+import { useChat } from "../Chat/useChat.js";
 import { ApprovalCard } from "./ApprovalCard.js";
 
 afterEach(cleanup);
@@ -20,39 +22,98 @@ const request: PlatformApprovalRequest = {
 };
 
 describe("ApprovalCard", () => {
-	it("emits each decision with approval id and content hash, then locks", () => {
+	it("emits each decision with approval id and content hash, then locks", async () => {
 		const onDecision = vi.fn();
 		render(<ApprovalCard request={request} onDecision={onDecision} actionLabels={{ refund: "Refund" }} />);
 		fireEvent.click(screen.getByRole("button", { name: "Approve" }));
 		expect(onDecision).toHaveBeenCalledWith({ type: "ApprovalDecision", approvalId: "a1", contentHash: "hash-42", decision: "approve" });
-		expect(screen.getByText("Approved")).toBeTruthy();
+		expect(await screen.findByText("Approved")).toBeTruthy();
 		expect(screen.getByRole("button", { name: "Decline" })).toHaveProperty("disabled", true);
 	});
-	it("emits reject with the request identifiers", () => {
+	it("emits reject with the request identifiers", async () => {
 		const onDecision = vi.fn();
 		render(<ApprovalCard request={request} onDecision={onDecision} />);
 		fireEvent.click(screen.getByRole("button", { name: "Decline" }));
 		expect(onDecision).toHaveBeenCalledWith({ type: "ApprovalDecision", approvalId: "a1", contentHash: "hash-42", decision: "reject" });
+		expect(await screen.findByText("Declined")).toBeInTheDocument();
 	});
-	it.each(["en", "ar"] as const)("supports card copy overrides in %s", (locale) => {
+	it.each(["en", "ar"] as const)("supports card copy overrides in %s", async (locale) => {
 		render(<ApprovalCard request={request} locale={locale} taskId="t1" labels={{ approve: "Allow", decline: "Deny", approved: "Allowed", declined: "Denied", limit: "Cap", task: "Job" }} />);
 		expect(screen.getByText(/^Cap /)).toBeTruthy();
 		expect(screen.getByText(/Job:/)).toBeTruthy();
 		fireEvent.click(screen.getByRole("button", { name: "Deny" }));
-		expect(screen.getByText("Denied")).toBeInTheDocument();
+		expect(await screen.findByText("Denied")).toBeInTheDocument();
 		expect(screen.getByRole("button", { name: "Allow" })).toBeDisabled();
 	});
-	it("leaves streamed decisions unlocked for host acceptance", () => {
+	it.each([
+		["Allow", "approve", "Approved"],
+		["Deny", "reject", "Declined"],
+	] as const)("locks an accepted streamed %s decision", async (button, decision, outcome) => {
 		const onAction = vi.fn();
-		const stream = 'root = ApprovalCard("a1", "refund", "Refund order 42", "hash-42", null, 20000000, {}, "en", {approve: "Allow", decline: "Deny", limit: "Cap"})';
+		const stream = 'root = ApprovalCard("a1", "refund", "Refund order 42", "hash-42", null, 20000000, {}, "en", {approve: "Allow", decline: "Deny"})';
+		const { container } = render(<TensquadsRenderer stream={stream} onAction={onAction} />);
+		fireEvent.click(screen.getByRole("button", { name: button }));
+		expect(onAction).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({
+			type: "ApprovalDecision",
+			params: { approvalId: "a1", contentHash: "hash-42", decision },
+		}));
+		expect(await screen.findByText(outcome)).toBeInTheDocument();
+		expect(container.querySelector(".ts-approval-card__outcome svg")).not.toBeNull();
+		for (const name of ["Allow", "Deny"]) {
+			expect(screen.getByRole("button", { name })).toBeDisabled();
+			fireEvent.click(screen.getByRole("button", { name }));
+		}
+		expect(onAction).toHaveBeenCalledOnce();
+	});
+	it.each(["approve", "reject"] as const)("shows accepted %s after a useChat veto", async (decision) => {
+		let allow = false;
+		const transport = vi.fn(async function* () {
+			yield "Recorded";
+		});
+		function Example() {
+			const chat = useChat({ endpoint: "/chat", transport, onAction: () => allow });
+			return (
+				<ChatReply
+				reply={'```openui\nroot = ApprovalCard("a1", "refund", "Refund", "hash-42")\n```'}
+				onAction={(event, id) => chat.act(event, id)}
+				locked={(id) => chat.locked.has(id)}
+				isStreaming={chat.busy}
+				/>
+			);
+		}
+		render(<Example />);
+		fireEvent.click(screen.getByRole("button", { name: "Approve" }));
+		await waitFor(() => expect(screen.getByRole("button", { name: "Decline" })).toBeEnabled());
+		expect(screen.queryByText("Approved")).toBeNull();
+		expect(transport).not.toHaveBeenCalled();
+		allow = true;
+		fireEvent.click(screen.getByRole("button", { name: decision === "approve" ? "Approve" : "Decline" }));
+		expect(await screen.findByText(decision === "approve" ? "Approved" : "Declined")).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: "Approve" })).toBeDisabled();
+		expect(screen.getByRole("button", { name: "Decline" })).toBeDisabled();
+		expect(transport).toHaveBeenCalledOnce();
+	});
+	it("blocks opposing decisions during asynchronous acceptance and recovers from rejection", async () => {
+		let settle!: (accepted: boolean) => void;
+		const onAction = vi.fn(() => new Promise<boolean>((resolve) => {
+			settle = resolve;
+		}));
+		const stream = 'root = ApprovalCard("a1", "refund", "Refund", "hash-42")';
 		const { rerender } = render(<TensquadsRenderer stream={stream} onAction={onAction} />);
-		fireEvent.click(screen.getByRole("button", { name: "Allow" }));
-		expect(onAction).toHaveBeenLastCalledWith(expect.objectContaining({ type: "ApprovalDecision", params: { approvalId: "a1", contentHash: "hash-42", decision: "approve" } }));
-		expect(screen.getByRole("button", { name: "Deny" })).toBeEnabled();
-		fireEvent.click(screen.getByRole("button", { name: "Deny" }));
-		expect(onAction).toHaveBeenLastCalledWith(expect.objectContaining({ type: "ApprovalDecision", params: { approvalId: "a1", contentHash: "hash-42", decision: "reject" } }));
-		rerender(<TensquadsRenderer stream={stream} onAction={onAction} isStreaming />);
-		expect(screen.getByRole("button", { name: "Allow" })).toBeDisabled();
+		fireEvent.click(screen.getByRole("button", { name: "Approve" }));
+		expect(screen.getByRole("button", { name: "Decline" })).toBeDisabled();
+		fireEvent.click(screen.getByRole("button", { name: "Decline" }));
+		expect(onAction).toHaveBeenCalledOnce();
+		await act(async () => settle(false));
+		expect(screen.getByRole("button", { name: "Decline" })).toBeEnabled();
+		rerender(<TensquadsRenderer stream={stream} onAction={() => Promise.reject(new Error("Veto"))} />);
+		fireEvent.click(screen.getByRole("button", { name: "Approve" }));
+		await waitFor(() => expect(screen.getByRole("button", { name: "Decline" })).toBeEnabled());
+		expect(screen.queryByText("Approved")).toBeNull();
+		rerender(<TensquadsRenderer stream={stream} onAction={onAction} />);
+		fireEvent.click(screen.getByRole("button", { name: "Decline" }));
+		await act(async () => settle(true));
+		expect(screen.getByText("Declined")).toBeInTheDocument();
 	});
 
 	it("restores a host decision and formats millionths", () => {

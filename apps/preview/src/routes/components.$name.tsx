@@ -189,7 +189,7 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 							locale={locale}
 							reply={turn.content}
 							locked={(blockId) => chat.locked.has(`${turnIndex}/${blockId}`)}
-							onAction={(event, blockId) => void chat.act(event, `${turnIndex}/${blockId}`)}
+							onAction={(event, blockId) => chat.act(event, `${turnIndex}/${blockId}`)}
 						/>
 					);
 				}
@@ -249,7 +249,7 @@ function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }
 				locale={locale}
 				isStreaming={chat.busy}
 				locked={(id) => chat.locked.has(id)}
-				onAction={(event, id) => void chat.act(event, id)}
+				onAction={(event, id) => chat.act(event, id)}
 			/>
 			{chat.turns.map((turn) =>
 				turn.role === "action" ? (

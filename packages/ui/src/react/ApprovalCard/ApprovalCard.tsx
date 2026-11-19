@@ -24,7 +24,7 @@ export type ApprovalCardProps = {
 	bot?: string;
 	taskId?: string;
 	decision?: "approve" | "reject";
-	onDecision?: (command: ReturnType<typeof approvalDecisionCommand>) => void | boolean;
+	onDecision?: (command: ReturnType<typeof approvalDecisionCommand>) => void | boolean | Promise<void | boolean>;
 };
 
 export function ApprovalCard({
@@ -39,12 +39,19 @@ export function ApprovalCard({
 	onDecision,
 }: ApprovalCardProps) {
 	const [localDecision, setLocalDecision] = useState<"approve" | "reject">();
+	const [pending, setPending] = useState(false);
 	const selected = decision ?? localDecision;
 	const agent = AgentSlugSchema.safeParse(bot);
-	const choose = (next: "approve" | "reject") => {
-		if (selected || disabled) return;
-		if (onDecision?.(approvalDecisionCommand(request, next)) === false) return;
-		setLocalDecision(next);
+	const choose = async (next: "approve" | "reject") => {
+		if (selected || disabled || pending) return;
+		setPending(true);
+		try {
+			if ((await onDecision?.(approvalDecisionCommand(request, next))) !== false) setLocalDecision(next);
+		} catch {
+			return;
+		} finally {
+			setPending(false);
+		}
 	};
 	const defaults =
 		locale === "ar"
@@ -110,10 +117,10 @@ export function ApprovalCard({
 						{selected === "approve" ? labels.approved : labels.declined}
 					</span>
 				)}
-				<Button pill size="sm" disabled={disabled || selected !== undefined} onClick={() => choose("approve")}>
+				<Button pill size="sm" disabled={disabled || pending || selected !== undefined} onClick={() => choose("approve")}>
 					{labels.approve}
 				</Button>
-				<Button pill size="sm" variant="soft" disabled={disabled || selected !== undefined} onClick={() => choose("reject")}>
+				<Button pill size="sm" variant="soft" disabled={disabled || pending || selected !== undefined} onClick={() => choose("reject")}>
 					{labels.decline}
 				</Button>
 			</div>

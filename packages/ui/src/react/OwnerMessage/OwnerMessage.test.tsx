@@ -25,6 +25,19 @@ const messages = [
 ] as const;
 
 describe("OwnerMessageView", () => {
+	it.each(["en", "ar"] as const)("preserves URL destinations across owner text in %s", (locale) => {
+		const text = "See (https://en.wikipedia.org/wiki/Refund_(finance)).";
+		render(<OwnerMessageView locale={locale} messages={[
+			{ ...messages[5], text },
+			{ ...messages[2], summary: text, evidence: [text] },
+		]} />);
+		expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+			"https://en.wikipedia.org/wiki/Refund_(finance)",
+			"https://en.wikipedia.org/wiki/Refund_(finance)",
+			"https://en.wikipedia.org/wiki/Refund_(finance)",
+		]);
+	});
+
 	it("renders all six messages in sequence and emits answer commands", () => {
 		const onCommand = vi.fn();
 		const { container } = render(<OwnerMessageView messages={messages} onCommand={onCommand} />);
@@ -47,11 +60,12 @@ describe("OwnerMessageView", () => {
 		expect(within(cards[0] as HTMLElement).getByRole("button", { name: "Approve" })).toBeDisabled();
 		expect(within(cards[1] as HTMLElement).getByRole("button", { name: "Approve" })).toBeEnabled();
 	});
-	it("preserves question and approval locks when earlier messages are removed", () => {
+	it("preserves question and approval locks when earlier messages are removed", async () => {
 		const onCommand = vi.fn();
 		const { rerender } = render(<OwnerMessageView messages={messages} onCommand={onCommand} />);
 		fireEvent.click(screen.getByRole("button", { name: "Small" }));
 		fireEvent.click(screen.getByRole("button", { name: "Approve" }));
+		await screen.findByText("Approved");
 		rerender(<OwnerMessageView messages={messages.filter((message) => message.seq !== 1)} onCommand={onCommand} />);
 		expect(screen.getByRole("button", { name: "Small" })).toBeDisabled();
 		expect(screen.getByRole("button", { name: "Decline" })).toBeDisabled();
