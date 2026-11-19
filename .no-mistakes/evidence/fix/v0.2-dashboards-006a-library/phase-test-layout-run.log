@@ -1,0 +1,41 @@
+[WebServer] (node:70015) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] [PLUGIN_TIMINGS] Warning: Your build spent significant time in plugins. Here is a breakdown:
+[WebServer]   - tanstack-start-core:import-protection (45%)
+[WebServer]   - tanstack-start-core:import-protection-transform-cache (33%)
+[WebServer]   - tanstack-router:code-splitter:compile-reference-file (11%)
+[WebServer]   - vite:css (4%)
+[WebServer]   - tanstack-router:code-splitter:compile-virtual-file (3%)
+[WebServer] See https://rolldown.rs/options/checks#plugintimings for more details.
+[WebServer] 
+
+[WebServer] (node:70563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 14 tests using 2 workers
+
+(node:70784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:70783) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/14] e2e/bar-chart-layout.spec.ts:8:2 › BarChart reserves formatted axis space in ltr
+[2/14] e2e/bar-chart-layout.spec.ts:8:2 › BarChart reserves formatted axis space in rtl
+[3/14] e2e/dashboard-components.spec.ts:7:4 › StatTile dashboard states in en light
+[4/14] e2e/dashboard-components.spec.ts:7:4 › StatTile dashboard states in en dark
+[5/14] e2e/dashboard-components.spec.ts:7:4 › StatTile dashboard states in ar light
+[6/14] e2e/dashboard-components.spec.ts:7:4 › StatTile dashboard states in ar dark
+[7/14] e2e/dashboard-components.spec.ts:78:4 › BarChart chart states in en light
+[8/14] e2e/dashboard-components.spec.ts:78:4 › BarChart chart states in en dark
+[9/14] e2e/dashboard-components.spec.ts:78:4 › BarChart chart states in ar light
+[10/14] e2e/dashboard-components.spec.ts:78:4 › BarChart chart states in ar dark
+[11/14] e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in en light
+[12/14] e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in en dark
+[13/14] e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in ar light
+[14/14] e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in ar dark
+  14 passed (46.2s)

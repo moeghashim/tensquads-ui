@@ -1,0 +1,7 @@
+Target: 09d80ee77bc606edc0bf15394da770517807b62b
+Supplied baseline: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify — exit 0 (outer executor).
+Executed: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test e2e/bar-chart-layout.spec.ts e2e/stat-tile-layout.spec.ts e2e/dashboard-components.spec.ts --grep "BarChart|StatTile" --workers=2 --reporter=line --output=~/.no-mistakes/evidence/01M7TPSWRD43TYFTEVB7V8914N/playwright — exit 0; production preview built and all 14 targeted browser tests passed.
+Executed: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- node .phase-test/drive.mjs — exit 0. Live Chromium against local Vite consumer of actual library source, synthetic inputs.
+Harness setup corrected config path. Initial tooltip check lacked keyboard modality; after a real Tab key established keyboard focus, formatted tooltips opened and assertions passed. No product changes needed.
+Independent oracles: documented whole-number ticks and zero baseline (2/10=20%, 3/10=30%); USD Intl formatting; EntityCell documentation initials from name despite stale supplied initials; ApprovalCard documented rule visibility and preserved positional locale/copy contract; documented 1180/760/339px breakpoints.
+Screenshots and live-observations.json record actual rendered surfaces and measured geometry.

@@ -1,0 +1,264 @@
+[
+  {
+    "locale": "en",
+    "id": "integer",
+    "ticks": [
+      "10",
+      "5",
+      "0"
+    ],
+    "measuredHeightFractions": [
+      0.1999470338983051,
+      0.2999646892655367,
+      0
+    ]
+  },
+  {
+    "locale": "en",
+    "id": "stacked",
+    "ticks": [
+      "10",
+      "5",
+      "0"
+    ],
+    "measuredHeightFractions": [
+      0.1999470338983051,
+      0.2999646892655367
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "formattedAxis": {
+      "viewport": {
+        "left": 8,
+        "right": 1432,
+        "top": 1004.78125,
+        "bottom": 1233.78125
+      },
+      "labels": [
+        {
+          "left": 16,
+          "right": 65.5,
+          "top": 1024.28125,
+          "bottom": 1037.28125
+        },
+        {
+          "left": 21.5,
+          "right": 65.5,
+          "top": 1113.28125,
+          "bottom": 1126.28125
+        },
+        {
+          "left": 40.75,
+          "right": 65.5,
+          "top": 1202.28125,
+          "bottom": 1215.28125
+        }
+      ],
+      "columns": [
+        {
+          "left": 73.5,
+          "right": 109.5,
+          "top": 1030.78125,
+          "bottom": 1207.78125
+        },
+        {
+          "left": 1356,
+          "right": 1392,
+          "top": 1030.78125,
+          "bottom": 1207.78125
+        }
+      ]
+    },
+    "keyboardTooltip": "B: $10,000.00"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "formattedAxis": {
+      "viewport": {
+        "left": 8,
+        "right": 382,
+        "top": 385.78125,
+        "bottom": 614.78125
+      },
+      "labels": [
+        {
+          "left": 16,
+          "right": 65.5,
+          "top": 405.28125,
+          "bottom": 418.28125
+        },
+        {
+          "left": 21.5,
+          "right": 65.5,
+          "top": 494.28125,
+          "bottom": 507.28125
+        },
+        {
+          "left": 40.75,
+          "right": 65.5,
+          "top": 583.28125,
+          "bottom": 596.28125
+        }
+      ],
+      "columns": [
+        {
+          "left": 73.5,
+          "right": 109.5,
+          "top": 411.78125,
+          "bottom": 588.78125
+        },
+        {
+          "left": 306,
+          "right": 342,
+          "top": 411.78125,
+          "bottom": 588.78125
+        }
+      ]
+    },
+    "keyboardTooltip": "B: $10,000.00"
+  },
+  {
+    "locale": "en",
+    "initials": [
+      "BH",
+      "CE",
+      "NS",
+      "M"
+    ],
+    "approval": "unmapped rule hidden with limit retained; mapped rule visible; legacy Arabic locale and extended copy positions retained; approve locks controls"
+  },
+  {
+    "locale": "ar",
+    "id": "integer",
+    "ticks": [
+      "10",
+      "5",
+      "0"
+    ],
+    "measuredHeightFractions": [
+      0.1999470338983051,
+      0.2999646892655367,
+      0
+    ]
+  },
+  {
+    "locale": "ar",
+    "id": "stacked",
+    "ticks": [
+      "10",
+      "5",
+      "0"
+    ],
+    "measuredHeightFractions": [
+      0.1999470338983051,
+      0.2999646892655367
+    ]
+  },
+  {
+    "locale": "ar",
+    "width": 1440,
+    "formattedAxis": {
+      "viewport": {
+        "left": 8,
+        "right": 1432,
+        "top": 1004.78125,
+        "bottom": 1233.78125
+      },
+      "labels": [
+        {
+          "left": 1374.5,
+          "right": 1424,
+          "top": 1024.28125,
+          "bottom": 1037.28125
+        },
+        {
+          "left": 1374.5,
+          "right": 1418.5,
+          "top": 1113.28125,
+          "bottom": 1126.28125
+        },
+        {
+          "left": 1374.5,
+          "right": 1399.25,
+          "top": 1202.28125,
+          "bottom": 1215.28125
+        }
+      ],
+      "columns": [
+        {
+          "left": 1330.5,
+          "right": 1366.5,
+          "top": 1030.78125,
+          "bottom": 1207.78125
+        },
+        {
+          "left": 48,
+          "right": 84,
+          "top": 1030.78125,
+          "bottom": 1207.78125
+        }
+      ]
+    },
+    "keyboardTooltip": "B: $10,000.00"
+  },
+  {
+    "locale": "ar",
+    "width": 390,
+    "formattedAxis": {
+      "viewport": {
+        "left": 8,
+        "right": 382,
+        "top": 385.78125,
+        "bottom": 614.78125
+      },
+      "labels": [
+        {
+          "left": 324.5,
+          "right": 374,
+          "top": 405.28125,
+          "bottom": 418.28125
+        },
+        {
+          "left": 324.5,
+          "right": 368.5,
+          "top": 494.28125,
+          "bottom": 507.28125
+        },
+        {
+          "left": 324.5,
+          "right": 349.25,
+          "top": 583.28125,
+          "bottom": 596.28125
+        }
+      ],
+      "columns": [
+        {
+          "left": 280.5,
+          "right": 316.5,
+          "top": 411.78125,
+          "bottom": 588.78125
+        },
+        {
+          "left": 48,
+          "right": 84,
+          "top": 411.78125,
+          "bottom": 588.78125
+        }
+      ]
+    },
+    "keyboardTooltip": "B: $10,000.00"
+  },
+  {
+    "locale": "ar",
+    "initials": [
+      "BH",
+      "CE",
+      "NS",
+      "M"
+    ],
+    "approval": "unmapped rule hidden with limit retained; mapped rule visible; legacy Arabic locale and extended copy positions retained; approve locks controls"
+  }
+]

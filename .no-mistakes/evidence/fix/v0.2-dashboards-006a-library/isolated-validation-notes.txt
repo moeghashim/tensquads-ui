@@ -1,0 +1,5 @@
+Supplied configured baseline: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify exited 1. Not rerun: this assigned phase prohibits full-suite and lint execution.
+Focused Vitest: BarChart, DataTable, ApprovalCard: exit 0.
+Initial browser run encountered port 5173 collision and is discarded as setup-contaminated. Isolated production preview on port 5197 completed: 14 targeted Playwright tests, exit 0. Production build completed successfully as its webServer prerequisite.
+Real React/OpenUI components mounted through disposable Vite consumer: English/LTR and Arabic/RTL, 1440/390px, synthetic chart values, names and requests; exit 0.
+All launched browser/server children closed. No source changes.

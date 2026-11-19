@@ -1,0 +1,15 @@
+
+Running 4 tests using 1 worker
+
+(node:70613) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] .local-test/runtime.spec.ts:11:1 › public dashboard library en light
+.local-test/runtime.spec.ts:11:1 › public dashboard library en light
+Port 5173 is in use, trying another one...
+
+[2/4] .local-test/runtime.spec.ts:11:1 › public dashboard library en dark
+[3/4] .local-test/runtime.spec.ts:11:1 › public dashboard library ar light
+[4/4] .local-test/runtime.spec.ts:11:1 › public dashboard library ar dark
+  4 passed (26.0s)

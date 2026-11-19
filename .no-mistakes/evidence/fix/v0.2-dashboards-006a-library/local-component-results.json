@@ -1,0 +1,86 @@
+[
+  {
+    "scenario": "chart ticks and currency clipping",
+    "locale": "en",
+    "heights": [
+      "20%",
+      "30%",
+      "0%"
+    ],
+    "ticks": [
+      "Day 1",
+      "",
+      "",
+      "",
+      "",
+      "Day 6",
+      "",
+      "",
+      "",
+      "",
+      "Day 11",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "result": "pass"
+  },
+  {
+    "scenario": "entity initials ignore stale supplied initials",
+    "locale": "en",
+    "initials": [
+      "AS",
+      "NO",
+      "LC"
+    ],
+    "result": "pass"
+  },
+  {
+    "scenario": "mapped and unmapped approval rules and legacy positional OpenUI",
+    "locale": "en",
+    "result": "pass"
+  },
+  {
+    "scenario": "chart ticks and currency clipping",
+    "locale": "ar",
+    "heights": [
+      "20%",
+      "30%",
+      "0%"
+    ],
+    "ticks": [
+      "Day 1",
+      "",
+      "",
+      "",
+      "",
+      "Day 6",
+      "",
+      "",
+      "",
+      "",
+      "Day 11",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "result": "pass"
+  },
+  {
+    "scenario": "entity initials ignore stale supplied initials",
+    "locale": "ar",
+    "initials": [
+      "AS",
+      "NO",
+      "LC"
+    ],
+    "result": "pass"
+  },
+  {
+    "scenario": "mapped and unmapped approval rules and legacy positional OpenUI",
+    "locale": "ar",
+    "result": "pass"
+  }
+]

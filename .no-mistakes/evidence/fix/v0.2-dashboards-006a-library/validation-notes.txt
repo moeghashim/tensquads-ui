@@ -1,0 +1,11 @@
+Baseline supplied by outer executor: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify exited 127. Full verify was not repeated in this targeted phase.
+Runtime on PATH: Node 26.13.1, npm 11.20.0.
+Root and preview npm ci --ignore-scripts --no-audit --no-fund: exit 0.
+WRANGLER_SEND_METRICS=false npm run build:preview: exit 0.
+Initial server on 5173 failed to start: address in use. Initial preview test results discarded because they reached that unrelated server.
+Isolated server: apps/preview/node_modules/.bin/wrangler dev --config dist/server/wrangler.json --ip 127.0.0.1 --port 5197 (cwd apps/preview).
+Targeted production preview tests: playwright test --config .phase-playwright.config.ts e2e/dashboard-components.spec.ts e2e/bar-chart-layout.spec.ts e2e/stat-tile-layout.spec.ts e2e/platform-messages.spec.ts --grep "BarChart|StatTile|Card dashboard|ApprovalCard": exit 0. 22 passed.
+Disposable real React consumer: playwright test --config .phase-consumer.config.ts e2e/.phase-consumer.spec.ts: exit 0. 4 passed. See retained consumer-driver.ts and consumer-fixture.tsx.
+Independent oracles: documented integer axis ticks and zero baseline (2 and 3 have heights 20% and 30% against tick 10); USD Intl formatting ($10,000.00); first two words or two letters yield NG/NO/AS/BS; recorded approval-label and positional compatibility decisions; stat grid documented breakpoints 1180/760/339.
+Visual inspection: StatTile-ar-rtl-dark-390.png and consumer-en-light-390.png confirm readable values, separated trends, currency axis clearance, initials, and mapped/unmapped rules.
+No source changes. Disposable fixture, configuration, screenshots in worktree, build outputs and local runtime state removed after evidence retention.

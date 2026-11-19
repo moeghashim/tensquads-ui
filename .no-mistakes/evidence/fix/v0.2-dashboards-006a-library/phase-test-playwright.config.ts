@@ -1,0 +1,2 @@
+import { defineConfig } from '@playwright/test';
+export default defineConfig({testDir:'../e2e', fullyParallel:true, reporter:'line',outputDir:'../.local-test/results',use:{baseURL:'http://localhost:5279',browserName:'chromium',launchOptions:{args:['--disable-lcd-text','--font-render-hinting=none']}},webServer:{cwd:process.cwd(),command:'cd apps/preview && npm run build && npx wrangler dev --config dist/server/wrangler.json --ip 127.0.0.1 --port 5279',url:'http://localhost:5279',reuseExistingServer:false,timeout:120000}});

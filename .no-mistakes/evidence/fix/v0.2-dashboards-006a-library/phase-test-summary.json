@@ -1,0 +1,14 @@
+{
+  "target": "4250b51ddd5e561400295b1a0930995748e360a3",
+  "configured_baseline": "Reported npm run verify exit 1; not rerun because lint and full-suite execution are forbidden in this phase. Failure diagnostics were not supplied.",
+  "production_preview": "Build completed; 14 targeted Playwright tests passed, exit 0. Dedicated port 5279.",
+  "public_consumer": "Real React components and TensquadsRenderer hosted by disposable Vite server; four English/Arabic and light/dark browser runs passed, exit 0. Synthetic records only.",
+  "oracles": {
+    "ticks": "Documented zero baseline, whole integer ticks, exact worked example 2 and 3 occupy 20% and 30% against axis 10; fractional data remains fractional.",
+    "clipping": "Rendered labels and focus-ring bounds stay inside viewport; x-label slots align with columns; currency axis text is $10,000.00; arrow keys respect direction.",
+    "initials": "Documented first letters of first two words, or first two letters for a single word; stale initials WRONG cannot appear.",
+    "approvals": "Documented unmapped ids hidden, labels visible, limits preserved; prior OpenUI argument positions retained, decline emits reject with original identifiers and locks.",
+    "tiles": "Recorded breakpoint decision: 6/3/2/1 columns at 1440/1180/760/339; 390 and 480 remain two columns; trend 112x32 without overlap or page overflow."
+  },
+  "setup_retries": "Original port occupied; isolated config corrected cwd and preview command. Direct programmatic focus lacked keyboard modality after pointer use; verified documented tooltip via real pointer hover. No product edits."
+}
