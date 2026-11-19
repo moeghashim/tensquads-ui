@@ -9,9 +9,9 @@ export type ChatReplyProps = {
 	reply: string;
 	locale?: Locale;
 	onError?: TensquadsRendererProps["onError"];
-	onAction?: (event: ActionEvent) => void;
-	locked?: boolean;
-} & Omit<TensquadsRendererProps, "stream" | "locale" | "onError">;
+	onAction?: (event: ActionEvent, blockId: string) => void;
+	locked?: boolean | ((blockId: string) => boolean);
+} & Omit<TensquadsRendererProps, "stream" | "locale" | "onError" | "onAction">;
 
 export function ChatReply({
 	reply,
@@ -28,8 +28,8 @@ export function ChatReply({
 				stream={stream}
 				locale={locale}
 				onError={onError}
-				onAction={onAction}
-				isStreaming={locked || rendererProps.isStreaming}
+				onAction={(event) => onAction?.(event, key)}
+				isStreaming={(typeof locked === "function" ? locked(key) : locked) || rendererProps.isStreaming}
 			/>
 		</div>
 	));
@@ -161,7 +161,11 @@ function readListBody(lines: Lines, start: number, item: NonNullable<ReturnType<
 	return { lines: Array.from({ length: end }, (_, index) => body.at(index) ?? ""), end: start + end };
 }
 
-function renderBlocks(source: string, renderOpenUI: (stream: string, key: string) => ReactNode): ReplyBlock[] {
+function renderBlocks(
+	source: string,
+	renderOpenUI: (stream: string, key: string) => ReactNode,
+	prefix = "",
+): ReplyBlock[] {
 	const lines = source.split("\n");
 	const lineAt = (lineIndex: number) => lines[lineIndex] ?? "";
 	const nodes: ReplyBlock[] = [];
@@ -176,11 +180,13 @@ function renderBlocks(source: string, renderOpenUI: (stream: string, key: string
 		while (index < lines.length) {
 			const item = listItem(lineAt(index));
 			if (!item || item.indent !== first.indent || item.ordered !== first.ordered) break;
-			const itemKey = `item-${index}`;
+			const itemKey = `${prefix}item-${index}`;
 			const body = readListBody(lines, index, item);
 			index = body.end;
 			items.push(
-				<li key={itemKey}>{renderBlocks(body.lines.join("\n"), renderOpenUI).map((block) => block.value)}</li>,
+				<li key={itemKey}>
+					{renderBlocks(body.lines.join("\n"), renderOpenUI, `${itemKey}/`).map((block) => block.value)}
+				</li>,
 			);
 		}
 		return first.ordered ? (
@@ -199,7 +205,7 @@ function renderBlocks(source: string, renderOpenUI: (stream: string, key: string
 		}
 		const fence = openingFence(line);
 		if (fence) {
-			const key = `fence-${index}`;
+			const key = `${prefix}fence-${index}`;
 			const block = readFence(lines, index, fence);
 			index = block.end;
 			if (fence.info === "openui" && fence.marker[0] === "`") {

@@ -18,9 +18,9 @@ export type UseChatResult = {
 	turns: ChatTurn[];
 	busy: boolean;
 	error: Error | null;
-	locked: boolean;
+	locked: ReadonlySet<string>;
 	send: (text: string) => Promise<void>;
-	act: (event: ActionEvent) => Promise<boolean>;
+	act: (event: ActionEvent, elementId: string) => Promise<boolean>;
 	stop: () => void;
 	reset: () => void;
 	retry: () => Promise<void>;
@@ -43,24 +43,28 @@ export function useChat({
 	const [turns, setTurns] = useState<ChatTurn[]>([]);
 	const [busy, setBusy] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
-	const [locked, setLocked] = useState(false);
+	const [locked, setLocked] = useState<ReadonlySet<string>>(new Set());
 	const abortRef = useRef<AbortController | null>(null);
 	const retryRef = useRef<ChatTurn[] | null>(null);
 	const run = useCallback(
-		async (nextTurns: ChatTurn[]) => {
+		async (nextTurns: ChatTurn[], controller = new AbortController()) => {
 			retryRef.current = nextTurns;
-			const controller = new AbortController();
-			abortRef.current?.abort();
 			abortRef.current = controller;
+			setTurns(nextTurns);
 			setBusy(true);
 			setError(null);
 			try {
 				const output = await transport({ endpoint, turns: nextTurns, locale }, { signal: controller.signal });
 				let reply = "";
+				const publish = (chunk: string) => {
+					if (controller.signal.aborted || abortRef.current !== controller) return;
+					reply += chunk;
+					if (reply) setTurns([...nextTurns, { role: "assistant", content: reply }]);
+				};
 				if (Symbol.asyncIterator in Object(output)) {
 					for await (const chunk of output as AsyncIterable<string>) {
 						if (controller.signal.aborted) break;
-						reply += chunk;
+						publish(chunk);
 					}
 				} else {
 					const response = output as Response;
@@ -68,19 +72,18 @@ export function useChat({
 						const body = (await response.json().catch(() => ({}))) as { error?: string };
 						throw new Error(body.error ?? `Request failed (${response.status})`);
 					}
-					if (!response.body) reply = await response.text();
+					if (!response.body) publish(await response.text());
 					else {
 						const reader = response.body.getReader();
 						const decoder = new TextDecoder();
 						while (true) {
 							const { done, value } = await reader.read();
 							if (done || controller.signal.aborted) break;
-							reply += decoder.decode(value, { stream: true });
+							publish(decoder.decode(value, { stream: true }));
 						}
-						reply += decoder.decode();
+						publish(decoder.decode());
 					}
 				}
-				if (!controller.signal.aborted && reply) setTurns([...nextTurns, { role: "assistant", content: reply }]);
 			} catch (caught) {
 				if (!controller.signal.aborted) setError(caught instanceof Error ? caught : new Error(String(caught)));
 			} finally {
@@ -95,48 +98,60 @@ export function useChat({
 	const send = useCallback(
 		async (text: string) => {
 			const content = text.trim();
-			if (!content || busy) return;
+			if (!content || abortRef.current) return;
 			const next = [...turns, { role: "user" as const, content }];
-			setTurns(next);
-			setLocked(false);
 			await run(next);
 		},
-		[busy, run, turns],
+		[run, turns],
 	);
 	const act = useCallback(
-		async (event: ActionEvent) => {
-			if (busy || locked) return false;
-			if ((await onAction?.(event)) === false) return false;
-			const summary = event.humanFriendlyMessage || event.type;
-			const actionTurn: ChatActionTurn = {
-				role: "action",
-				action: {
-					name: event.type,
-					source:
-						(event as ActionEvent & { sourceComponent?: string }).sourceComponent ?? event.formName ?? "OpenUI",
-					values: event.formState ?? event.params,
-					summary,
-				},
-			};
-			const next = [...turns, actionTurn];
-			setTurns(next);
-			setLocked(true);
-			await run(next);
-			return true;
+		async (event: ActionEvent, elementId: string) => {
+			if (abortRef.current || locked.has(elementId)) return false;
+			const controller = new AbortController();
+			abortRef.current = controller;
+			setBusy(true);
+			try {
+				if ((await onAction?.(event)) === false) return false;
+				if (controller.signal.aborted || abortRef.current !== controller) return false;
+				const summary = event.humanFriendlyMessage || event.type;
+				const actionTurn: ChatActionTurn = {
+					role: "action",
+					action: {
+						name: event.type,
+						source:
+							(event as ActionEvent & { sourceComponent?: string }).sourceComponent ?? event.formName ?? "OpenUI",
+						values: event.formState ?? event.params,
+						summary,
+					},
+				};
+				const next = [...turns, actionTurn];
+				setLocked((previous) => new Set([...previous, elementId]));
+				await run(next, controller);
+				return true;
+			} finally {
+				if (abortRef.current === controller) {
+					abortRef.current = null;
+					setBusy(false);
+				}
+			}
 		},
-		[busy, locked, onAction, run, turns],
+		[locked, onAction, run, turns],
 	);
-	const stop = useCallback(() => abortRef.current?.abort(), []);
+	const stop = useCallback(() => {
+		abortRef.current?.abort();
+		abortRef.current = null;
+		setBusy(false);
+	}, []);
 	const retry = useCallback(async () => {
-		if (!busy && retryRef.current) await run(retryRef.current);
-	}, [busy, run]);
+		if (!abortRef.current && retryRef.current) await run(retryRef.current);
+	}, [run]);
 	const reset = useCallback(() => {
 		abortRef.current?.abort();
 		abortRef.current = null;
 		setTurns([]);
 		setBusy(false);
 		setError(null);
-		setLocked(false);
+		setLocked(new Set());
 		retryRef.current = null;
 	}, []);
 	return { turns, busy, error, locked, send, act, stop, reset, retry };

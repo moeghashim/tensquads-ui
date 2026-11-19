@@ -12,9 +12,14 @@ Set `locale="ar"` on `ChatHeader`, `ChatEmptyState`, and `ChatComposer` for thei
 
 The chat surface has no OpenUI definition because it hosts replies and inline OpenUI content rather than being streamed as a component. Use [ChatReply](../ChatReply/ChatReply.md) to render a streamed reply inside `ChatStep`.
 
-`useChat({ endpoint, locale, transport, onAction })` owns `turns`, `busy`, `error`, and `locked`, and returns `send(text)`, `act(event)`, `stop()`, `reset()`, and `retry()`. The default transport posts `{ locale, turns }` as JSON to `endpoint` and reads a plain text response stream. A transport can instead return an `AsyncIterable<string>` for deterministic mocks. `onAction` receives the OpenUI `ActionEvent`; return `false` to veto it. Accepted actions append a `ChatActionTurn` with its name, source, form values, and readable summary, then send it as the next turn. `ChatReply` accepts `locked={chat.locked}` so the used UI stays rendered and disabled. Render `chat.error` as a blocked `ChatStep` and wire its retry button to `chat.retry()`.
+`useChat({ endpoint, locale, transport, onAction })` owns `turns`, `busy`, `error`, and `locked`, and returns `send(text)`, `act(event, elementId)`, `stop()`, `reset()`, and `retry()`. The default transport posts `{ locale, turns }` as JSON to `endpoint` and reads a plain text response stream. A transport can instead return an `AsyncIterable<string>` for deterministic mocks. `onAction` receives the OpenUI `ActionEvent`; return `false` to veto it. Accepted actions append a `ChatActionTurn` with its name, source, form values, and readable summary, then send it as the next turn. `locked` is a set of consumed element IDs. Give each action a stable ID that includes its reply and OpenUI block. IDs stay locked across text turns and new replies until `reset()`. `ChatReply` supplies the block ID as the second callback argument and accepts a block predicate for `locked`. Render `chat.error` as a blocked `ChatStep` and wire its retry button to `chat.retry()`.
 
 ```tsx
 const chat = useChat({ endpoint: "/api/chat", locale: "en" });
-<ChatReply reply={reply} onAction={chat.act} locked={chat.locked} />;
+<ChatReply
+  reply={reply}
+  isStreaming={chat.busy}
+  onAction={(event, blockId) => void chat.act(event, `${replyId}/${blockId}`)}
+  locked={(blockId) => chat.locked.has(`${replyId}/${blockId}`)}
+/>;
 ```

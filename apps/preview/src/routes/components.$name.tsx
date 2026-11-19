@@ -167,7 +167,7 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 			{chat.turns.length === 0 && (
 				<ChatReply locale={locale} reply={ar ? "الخطة جاهزة للمراجعة." : "The plan is ready for review."} />
 			)}
-			{chat.turns.map((turn) => {
+			{chat.turns.map((turn, turnIndex) => {
 				if (turn.role === "action") {
 					return (
 						<div className="ts-chat__user-message" key={`action:${turn.action.name}:${turn.action.summary}`}>
@@ -181,7 +181,8 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 							key={`assistant:${turn.content}`}
 							locale={locale}
 							reply={turn.content}
-							locked={chat.locked}
+							locked={(blockId) => chat.locked.has(`${turnIndex}/${blockId}`)}
+							onAction={(event, blockId) => void chat.act(event, `${turnIndex}/${blockId}`)}
 						/>
 					);
 				}
@@ -194,17 +195,20 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 			{chat.error && <p role="status">{ar ? "تعذر إكمال الخطوة." : "The step is blocked."}</p>}
 			<div className="component-example">
 				<Button
-					disabled={chat.busy || chat.locked}
+					disabled={chat.busy || chat.locked.has("plan")}
 					onClick={() => {
-						void chat.act({
-							type: "Approve",
-							params: {},
-							humanFriendlyMessage: ar ? "الموافقة على الخطة" : "Approve plan",
-							formName: "PlanCard",
-						});
+						void chat.act(
+							{
+								type: "Approve",
+								params: {},
+								humanFriendlyMessage: ar ? "الموافقة على الخطة" : "Approve plan",
+								formName: "PlanCard",
+							},
+							"plan",
+						);
 					}}
 				>
-					{chat.locked ? (ar ? "تمت الموافقة" : "Approved") : ar ? "الموافقة على الخطة" : "Approve plan"}
+					{chat.locked.has("plan") ? (ar ? "تمت الموافقة" : "Approved") : ar ? "الموافقة على الخطة" : "Approve plan"}
 				</Button>
 				{chat.error && (
 					<Button variant="ghost" onClick={() => void chat.retry()}>

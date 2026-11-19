@@ -42,11 +42,32 @@ describe("ChatReply", () => {
 				params: { ok: true },
 				humanFriendlyMessage: "Approve plan",
 			}),
+			"fence-0",
 		);
 		rerender(<ChatReply reply={reply} onAction={onAction} locked />);
 		expect(screen.getByRole("button", { name: "Approve plan" })).toBe(button);
 		expect(button).toBeDisabled();
 	});
+	it.each(["en", "ar"] as const)("locks only the originating block, including nested blocks in %s", (locale) => {
+		const button = (label: string) => `\`\`\`openui\nroot = Button("${label}", "solid", "md", false, false, {type: "Continue"})\n\`\`\``;
+		const reply = `${button("First")}\n\n- Parent\n\n  ${button("Nested").replaceAll("\n", "\n  ")}\n\n${button("Last")}`;
+		const onAction = vi.fn();
+		const { rerender } = render(<ChatReply reply={reply} locale={locale} onAction={onAction} />);
+		const nested = screen.getByRole("button", { name: "Nested" });
+		fireEvent.click(nested);
+		const blockId = onAction.mock.calls[0]?.[1];
+		expect(blockId).toBeTypeOf("string");
+		rerender(<ChatReply reply={reply} locale={locale} onAction={onAction} locked={(id) => id === blockId} />);
+		expect(screen.getByRole("button", { name: "Nested" })).toBe(nested);
+		expect(nested).toBeDisabled();
+		for (const name of ["First", "Last"]) {
+			const sibling = screen.getByRole("button", { name });
+			expect(sibling).toBeEnabled();
+			fireEvent.click(sibling);
+			expect(onAction.mock.calls.at(-1)?.[1]).not.toBe(blockId);
+		}
+	});
+
 	it("renders Markdown and OpenUI blocks in reading order", () => {
 		const { container } = render(<ChatReply reply={en} />);
 		expect(screen.getByRole("heading", { name: "Deployment status" })).toBeInTheDocument();
