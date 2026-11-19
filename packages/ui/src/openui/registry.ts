@@ -2,6 +2,7 @@ import "../react/Button/Button.openui.js";
 import "../react/Badge/Badge.openui.js";
 import "../react/Dialog/Dialog.openui.js";
 import "../react/Field/Field.openui.js";
+import "../react/Form/Form.openui.js";
 import "../react/Input/Input.openui.js";
 import "../react/Chip/Chip.openui.js";
 import "../react/Squadmate/Squadmate.openui.js";

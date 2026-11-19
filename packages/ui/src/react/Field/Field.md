@@ -4,7 +4,7 @@ Import `Field`, `FieldLabel`, `FieldControl`, `FieldDescription`, `FieldError`, 
 
 The root accepts UI SDK field props such as `name`, `disabled`, and `invalid`. A `FieldLabel` names the control. `FieldDescription` supplies help text. By default, `FieldError` shows validation errors after a submit attempt, or immediately with `invalid`. For a custom error, pass `invalid` to `Field` and `match={true}` to `FieldError`. The `FieldControl` part is available for another native input control.
 
-The OpenUI definition produces a complete text field from `label`, `name`, optional `placeholder`, `value`, `description`, `error`, `disabled`, and `readOnly`. This definition does not accept event handlers or arbitrary React nodes.
+The OpenUI definition produces a complete text field from `label`, `name`, optional `placeholder`, `value`, `description`, `error`, `disabled`, and `readOnly`. Inside [Form](../Form/Form.md), defaults and edits update OpenUI form state under `name`. Streaming and locked renderers disable edits. This definition does not accept event handlers or arbitrary React nodes.
 
 `FieldSet`, `FieldLegend`, and `FieldGroup`, with their prop types, wrap the remaining public field parts. Keep the legend first so it names the set. A description directly inside the set describes the group. Disabling the set disables its controls. Each part preserves SDK slots, `render`, class callbacks, and native props.
 

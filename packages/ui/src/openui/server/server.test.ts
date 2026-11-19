@@ -84,6 +84,38 @@ describe("OpenUI server helpers", () => {
 		).rejects.toMatchObject({ name: "OpenUIServerError", code: "invalid_json", status: 400 });
 	});
 
+	it("accepts the exact byte and turn limits with structured action turns", async () => {
+		const action = {
+			role: "action",
+			action: { name: "Approve", source: "ApprovalCard", values: { z: 1, a: "yes" }, summary: "Approve plan" },
+		};
+		const turns = [
+			action,
+			...Array.from({ length: MAX_TURNS - 1 }, (_, index) => ({
+				role: index % 2 ? "assistant" : "user",
+				content: "x",
+			})),
+		];
+		const body = JSON.stringify({ locale: "en", turns });
+		const padding = " ".repeat(MAX_BODY_BYTES - new TextEncoder().encode(body).byteLength);
+		const exact = `${body.slice(0, -1)}${padding}}`;
+		const parsed = await readOpenUIRequest(new Request("https://worker.test", { method: "POST", body: exact }));
+		expect(parsed.turns).toHaveLength(MAX_TURNS);
+		expect(parsed.turns[0]).toEqual({
+			role: "user",
+			content:
+				'The user chose the action “Approve plan” in the “ApprovalCard” component. Action name: Approve. Values: {"a":"yes","z":1}',
+		});
+	});
+
+	it("renders Arabic action turns in neutral Arabic", async () => {
+		const turns = [{ role: "action", action: { name: "Submit", source: "Form", values: {}, summary: "إرسال" } }];
+		const parsed = await readOpenUIRequest(
+			new Request("https://worker.test", { method: "POST", body: JSON.stringify({ locale: "ar", turns }) }),
+		);
+		expect(parsed.turns[0]?.content).toContain("اختار المستخدم الإجراء");
+	});
+
 	it("returns a plain text response from the provider seam without network access", async () => {
 		let receivedSystem = "";
 		const provider = {

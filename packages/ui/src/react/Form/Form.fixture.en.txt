@@ -1,0 +1,1 @@
+root = Form("Project", [Field("Project name", "project", "", "Northstar"), Input("Owner", "", "Moe", "soft", false, false, "owner"), Switch("Email updates", true, false, "emailUpdates"), SegmentedControl("Layout", ["List", "Grid"], "List", false, "layout")], "Save project", {type: "SaveProject", params: {planId: "p1"}})

@@ -1,0 +1,11 @@
+# Form
+
+Import `Form` and `FormProps` from `@tensquads/ui/react`. Form composes a native form and the library FieldSet. It prevents page navigation on submit, forwards native form props, and calls `onSubmit` when enabled. `disabled` disables the field set and blocks submission. In OpenUI forms, named Field and Input text controls, Switch boolean controls, and SegmentedControl selected values participate in form state and submit together. Name the form with `aria-label` or `aria-labelledby`. Compose its fields and submit button from the library.
+
+The OpenUI definition accepts `name`, an array of `children`, `submitLabel`, `action: { type, params? }`, and optional `disabled`. Use a unique form name within each OpenUI block. Children can include named Field and Input text controls, Switch boolean controls, SegmentedControl selection controls, and optional Button actions. Field requires `name`; Input, Switch, and SegmentedControl accept an optional name and otherwise use their accessible label. Nesting forms is not supported.
+
+The submit button and Enter in a text field use native form submission and emit one OpenUI action. The event includes the form name, action parameters, and current OpenUI form state. Defaults are registered and edits update that state. Field, Input, Switch, and SegmentedControl are disabled during streaming and when the reply block is locked. Values remain visible when locked. A host veto leaves the form editable. Wire ChatReply to `useChat().act` as described in [Chat](../Chat/Chat.md) to append the user action pill and send the next turn.
+
+OpenUI form state uses the upstream shape: `{ formName: { fieldName: { value, componentType } } }`. Named Field and Input values are strings, Switch values are booleans, and SegmentedControl values are the selected option strings. Defaults and edits for all four controls participate in the same form state. The action turn keeps this shape in `values`, alongside action parameters. Controls keep their visible values when disabled after submission.
+
+Example OpenUI program: `root = Form("Project", [Field("Project name", "project", "", "Northstar"), Switch("Email updates", true, false, "emailUpdates"), SegmentedControl("Layout", ["List", "Grid"], "List", false, "layout")], "Save project", {type: "SaveProject"})`.

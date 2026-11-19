@@ -4,7 +4,7 @@ Import `Input` and `InputProps` from `@tensquads/ui/react`. Input wraps UI SDK's
 
 `variant` is `soft` (default) or `outline`. The value API accepts `defaultValue`, or `value` with `onValueChange(value, details)`. Native input props include `disabled`, `readOnly`, and `placeholder`.
 
-The OpenUI definition accepts a required accessible `label`, `placeholder`, `value`, `variant`, `disabled`, and `readOnly`. This definition does not accept event handlers or arbitrary React nodes.
+The OpenUI definition accepts a required accessible `label`, `placeholder`, `value`, `variant`, `disabled`, and `readOnly`, plus an optional `name` as its last positional prop. Inside [Form](../Form/Form.md), its name defaults to the accessible label and its current value is included in action events. Streaming and locked renderers disable edits. This definition does not accept event handlers or arbitrary React nodes.
 
 `InputGroup` and `InputClear`, with `InputGroupProps` and `InputClearProps`, wrap the remaining public input parts. Put `Input` and a named `InputClear` inside `InputGroup`. The clear button appears when text can be cleared. Pressing it clears the value, reports `clear-press`, and focuses the input. All parts preserve SDK slots, `render`, class callbacks, and native props.
 

@@ -19,7 +19,7 @@ test("component docs load in English and Arabic with localized fixtures", async 
 			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الخصائص" : "Props" })).toBeVisible();
 			// Usage shows only when the component doc has code samples.
 			const usage = docs.getByRole("heading", { name: locale === "ar" ? "الاستخدام" : "Usage" });
-			if (["Field", "Input", "ChatReply"].includes(name)) await expect(usage).toBeVisible();
+			if (["Field", "Input", "Chat", "ChatReply"].includes(name)) await expect(usage).toBeVisible();
 			else await expect(usage).toHaveCount(0);
 			// English doc text stays left-to-right on Arabic pages.
 			await expect(docs.locator("p[lang='en'][dir='ltr']").first()).toBeVisible();

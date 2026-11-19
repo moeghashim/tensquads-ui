@@ -42,3 +42,42 @@ test("Chat composer inserts a newline with Shift+Enter and sends with Enter", as
 	await input.press("Enter");
 	await expect(input).toHaveValue("");
 });
+
+test("Chat action advances a turn and locks its control in English and Arabic", async ({ page }, testInfo) => {
+	const cases = [
+		{
+			locale: "en",
+			direction: "ltr",
+			theme: "light",
+			width: 1440,
+			action: "Approve plan",
+			locked: "Approved",
+			pill: "Approve plan",
+			reply: "Approval recorded. I will start the next step.",
+		},
+		{
+			locale: "ar",
+			direction: "rtl",
+			theme: "dark",
+			width: 390,
+			action: "الموافقة على الخطة",
+			locked: "تمت الموافقة",
+			pill: "الموافقة على الخطة",
+			reply: "تم تسجيل موافقتك. سأبدأ بالخطوة التالية.",
+		},
+	] as const;
+	for (const state of cases) {
+		await openPreview(page, state, "/components/Chat");
+		await expect(page.getByRole("button", { name: state.action })).toBeEnabled();
+		await capturePreviewScreenshots(page, testInfo, `ChatAction-before-${state.locale}-${state.theme}`, [
+			state.width,
+		]);
+		await page.getByRole("button", { name: state.action }).click();
+		await expect(page.getByText(state.pill, { exact: true })).toBeVisible();
+		await expect(page.getByText(state.reply, { exact: true })).toBeVisible();
+		await expect(page.getByRole("button", { name: state.locked })).toBeDisabled();
+		await expectAccessible(page);
+		await expectNoHorizontalScroll(page);
+		await capturePreviewScreenshots(page, testInfo, `ChatAction-after-${state.locale}-${state.theme}`, [state.width]);
+	}
+});

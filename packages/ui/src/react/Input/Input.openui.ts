@@ -1,7 +1,8 @@
-import { createElement, useEffect, useState } from "react";
+import { createElement } from "react";
 import { z } from "zod/v4";
 import { defineComponent } from "../../openui/define-component.js";
 import { registerComponent } from "../../openui/registration-store.js";
+import { useTextField } from "../../openui/use-text-field.js";
 import { Input } from "./Input.js";
 
 export const InputOpenUI = defineComponent({
@@ -14,16 +15,17 @@ export const InputOpenUI = defineComponent({
 		variant: z.enum(["soft", "outline"]).default("soft"),
 		disabled: z.boolean().default(false),
 		readOnly: z.boolean().default(false),
+		name: z.string().min(1).optional().describe("Form field name; defaults to the accessible label"),
 	}),
 	component: ({ props }) => {
-		const { label, ...inputProps } = props;
-		const { value, ...rest } = inputProps;
-		const [currentValue, setCurrentValue] = useState(value ?? "");
-		useEffect(() => setCurrentValue(value ?? ""), [value]);
+		const { label, value, name = label, disabled, ...rest } = props;
+		const field = useTextField(name, value ?? "", "Input");
 		return createElement(Input, {
 			...rest,
-			value: currentValue,
-			onValueChange: setCurrentValue,
+			name,
+			value: field.value,
+			onValueChange: field.onValueChange,
+			disabled: disabled || field.isStreaming,
 			"aria-label": label,
 		});
 	},
