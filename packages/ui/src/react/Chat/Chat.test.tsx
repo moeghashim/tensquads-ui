@@ -1,7 +1,16 @@
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import { useState } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ChatComposer, ChatEmptyState, ChatLog, ChatStep, ChatUserMessage } from "./Chat.js";
+import {
+	ChatAssistantMessage,
+	ChatComposer,
+	ChatEmptyState,
+	ChatError,
+	ChatLog,
+	ChatStep,
+	ChatUserMessage,
+	ChatWorking,
+} from "./Chat.js";
 
 let notifyResize: () => void;
 const disconnect = vi.fn();
@@ -147,5 +156,32 @@ describe("Chat surface", () => {
 		expect(getByText("معاينة الوكيل")).toBeInTheDocument();
 		expect(getByRole("textbox", { name: "رسالة" })).toHaveAttribute("placeholder", "اكتب رسالة");
 		expect(getByRole("button", { name: "إيقاف" })).toBeInTheDocument();
+	});
+
+	it("renders assistant replies without a name row", () => {
+		const { getByText, container } = render(<ChatAssistantMessage>Plan ready</ChatAssistantMessage>);
+		expect(getByText("Plan ready")).toHaveClass("ts-chat__assistant");
+		expect(container.querySelector("strong")).toBeNull();
+	});
+
+	it("announces the working state with a default label per locale", () => {
+		const { getByRole, rerender } = render(<ChatWorking glyph={<svg />} />);
+		expect(getByRole("status")).toHaveTextContent("Working");
+		rerender(<ChatWorking locale="ar" />);
+		expect(getByRole("status")).toHaveTextContent("جارٍ العمل");
+	});
+
+	it("shows an error with its message and a working retry", () => {
+		const onRetry = vi.fn();
+		const { getByRole } = render(<ChatError onRetry={onRetry}>Sign in to use this demo.</ChatError>);
+		expect(getByRole("alert")).toHaveTextContent("Something went wrong");
+		expect(getByRole("alert")).toHaveTextContent("Sign in to use this demo.");
+		fireEvent.click(getByRole("button", { name: "Retry" }));
+		expect(onRetry).toHaveBeenCalledOnce();
+	});
+
+	it("uses the English placeholder by default", () => {
+		const { getByRole } = render(<ChatComposer onSend={() => {}} />);
+		expect(getByRole("textbox", { name: "Message" })).toHaveAttribute("placeholder", "Ask anything");
 	});
 });

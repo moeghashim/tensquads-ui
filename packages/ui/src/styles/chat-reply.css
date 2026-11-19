@@ -3,7 +3,7 @@
 .ts-chat-reply__markdown > :last-child { margin-block-end: 0; }
 .ts-chat-reply__markdown p, .ts-chat-reply__markdown ul, .ts-chat-reply__markdown ol { margin-block: var(--ts-space-3); }
 .ts-chat-reply__markdown h1, .ts-chat-reply__markdown h2, .ts-chat-reply__markdown h3, .ts-chat-reply__markdown h4, .ts-chat-reply__markdown h5, .ts-chat-reply__markdown h6 { margin-block: var(--ts-space-4) var(--ts-space-2); color: var(--ts-text-emphasis); font-weight: 500; }
-.ts-chat-reply__markdown h1, .ts-chat-reply__markdown h2 { font-size: var(--ts-text-lg-font-size); line-height: var(--ts-text-lg-line-height); }
+.ts-chat-reply__markdown h1, .ts-chat-reply__markdown h2 { font-size: var(--ts-heading-md-font-size); line-height: var(--ts-heading-md-line-height); font-weight: 600; letter-spacing: -0.01em; }
 .ts-chat-reply__markdown h3, .ts-chat-reply__markdown h4, .ts-chat-reply__markdown h5, .ts-chat-reply__markdown h6 { font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); }
 .ts-chat-reply__markdown ul, .ts-chat-reply__markdown ol { padding-inline-start: var(--ts-space-6); }
 .ts-chat-reply__markdown li + li { margin-block-start: var(--ts-space-1); }

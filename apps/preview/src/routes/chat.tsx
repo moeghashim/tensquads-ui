@@ -2,13 +2,15 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import {
 	Button,
 	Chat,
+	ChatAssistantMessage,
 	ChatComposer,
-	ChatHeader,
+	ChatError,
 	ChatLog,
 	ChatReply,
 	ChatStep,
 	type ChatTransport,
 	ChatUserMessage,
+	ChatWorking,
 	squadmateCharacterName,
 	useChat,
 } from "@tensquads/ui/react";
@@ -59,6 +61,8 @@ function ChatExperience({
 		[],
 	);
 	const chat = useChat({ endpoint: "/scripted-chat", locale, transport });
+	const lastTurn = chat.turns.at(-1);
+	const waiting = chat.busy && !(lastTurn?.role === "assistant" && lastTurn.content);
 	const replay = () => {
 		chat.reset();
 		setReplayNumber((number) => number + 1);
@@ -80,9 +84,6 @@ function ChatExperience({
 			</header>
 			<section className="chat-demo" aria-label={copy.eyebrow}>
 				<Chat className="chat-demo__surface" lang={locale} dir={direction}>
-					<ChatHeader onNewChat={replay} newChatLabel={copy.newChat} locale={locale}>
-						<strong>{squadmateCharacterName("petra", locale)}</strong>
-					</ChatHeader>
 					<ChatLog>
 						{chat.turns.map((turn, position) => {
 							const requestTurn = turn.role === "assistant" ? chat.turns[position - 1]! : turn;
@@ -103,31 +104,29 @@ function ChatExperience({
 							if (turn.role === "action") {
 								return <ChatUserMessage key={turnId}>{turn.action.summary}</ChatUserMessage>;
 							}
+							if (!turn.content) return null;
 							return (
-								<ChatStep
-									key={turnId}
-									name={squadmateCharacterName("petra", locale)}
-									glyph={<Squadmate agent="petra" state="planning" size={24} locale={locale} />}
-									reply={
-										<ChatReply
-											reply={turn.content}
-											locale={locale}
-											isStreaming={chat.busy}
-											onAction={(event, blockId) => void chat.act(event, `${turnId}/${blockId}`)}
-											locked={(blockId) => chat.locked.has(`${turnId}/${blockId}`)}
-										/>
-									}
-								/>
+								<ChatAssistantMessage key={turnId}>
+									<ChatReply
+										reply={turn.content}
+										locale={locale}
+										isStreaming={chat.busy}
+										onAction={(event, blockId) => void chat.act(event, `${turnId}/${blockId}`)}
+										locked={(blockId) => chat.locked.has(`${turnId}/${blockId}`)}
+									/>
+								</ChatAssistantMessage>
 							);
 						})}
-						{chat.error && (
-							<ChatStep
-								name={squadmateCharacterName("petra", locale)}
-								status={chat.error.message}
-								statusVariant="danger"
-								onRetry={() => void chat.retry()}
-								retryLabel={locale === "ar" ? "إعادة المحاولة" : "Retry"}
+						{waiting && (
+							<ChatWorking
+								locale={locale}
+								glyph={<Squadmate agent="petra" state="planning" size={24} locale={locale} />}
 							/>
+						)}
+						{chat.error && (
+							<ChatError locale={locale} onRetry={() => void chat.retry()}>
+								{chat.error.message}
+							</ChatError>
 						)}
 					</ChatLog>
 					<ChatComposer
@@ -139,10 +138,15 @@ function ChatExperience({
 					/>
 				</Chat>
 			</section>
-			<p className="chat-page__note">{copy.localOnly}</p>
-			<Button variant="ghost" render={<Link to="/components" search={search as never} />}>
-				{siteCopy[locale].browse}
-			</Button>
+			<div className="chat-page__footer">
+				<p className="chat-page__note">{copy.localOnly}</p>
+				<Button variant="ghost" size="sm" onClick={replay}>
+					{copy.newChat}
+				</Button>
+				<Button variant="ghost" size="sm" render={<Link to="/components" search={search as never} />}>
+					{siteCopy[locale].browse}
+				</Button>
+			</div>
 		</main>
 	);
 }
@@ -183,6 +187,9 @@ async function* streamReply(reply: string, signal: AbortSignal) {
 		yield reply;
 		return;
 	}
+	// A short wait first, so the visitor sees the working state a live agent shows.
+	await playbackPause(signal, 700);
+	if (signal.aborted) return;
 	const openUiStart = reply.indexOf("\n\n```openui");
 	if (openUiStart < 0) {
 		yield reply;
@@ -193,12 +200,12 @@ async function* streamReply(reply: string, signal: AbortSignal) {
 	if (!signal.aborted) yield reply.slice(openUiStart);
 }
 
-function playbackPause(signal: AbortSignal) {
+function playbackPause(signal: AbortSignal, delay = 320) {
 	return new Promise<void>((resolve) => {
 		const timer = window.setTimeout(() => {
 			signal.removeEventListener("abort", stop);
 			resolve();
-		}, 320);
+		}, delay);
 		const stop = () => {
 			window.clearTimeout(timer);
 			resolve();

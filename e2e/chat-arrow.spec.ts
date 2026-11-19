@@ -3,13 +3,13 @@ import { openPreview } from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	for (const theme of ["light", "dark"] as const) {
-		test(`Send arrow follows direction in ${locale}/${theme}`, async ({ page }) => {
+		test(`Send arrow points up in ${locale}/${theme}`, async ({ page }) => {
 			const direction = locale === "ar" ? "rtl" : "ltr";
 			await openPreview(page, { locale, direction, theme }, "/components/Chat");
 			const input = page.getByRole("textbox", { name: locale === "ar" ? "رسالة" : "Message" });
 			const send = page.getByRole("button", { name: locale === "ar" ? "إرسال" : "Send", exact: true });
 			const form = input.locator("xpath=ancestor::form");
-			// The RTL contract requires a left-pointing arrow, independent of language.
+			// The send arrow points up in both directions, so it is never mirrored.
 			const orientation = () =>
 				send.locator("svg").evaluate((svg: SVGSVGElement) => {
 					const matrix = svg.getScreenCTM()!;
@@ -20,7 +20,7 @@ for (const locale of ["en", "ar"] as const) {
 				await page.setViewportSize({ width, height: 900 });
 				for (const dir of [direction, direction === "rtl" ? "ltr" : "rtl", direction]) {
 					await form.evaluate((node, value) => node.setAttribute("dir", value), dir);
-					const expected = { horizontal: dir === "rtl" ? -1 : 1, vertical: 1 };
+					const expected = { horizontal: 1, vertical: 1 };
 					await input.fill("   ");
 					await expect(send).toBeDisabled();
 					await expect.poll(orientation).toEqual(expected);

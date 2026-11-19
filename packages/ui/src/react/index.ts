@@ -4,15 +4,29 @@ export { Badge } from "./Badge/Badge.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
 export type {
+	ChatAssistantMessageProps,
 	ChatComposerProps,
 	ChatEmptyStateProps,
+	ChatErrorProps,
 	ChatHeaderProps,
 	ChatLogProps,
 	ChatProps,
 	ChatStepProps,
 	ChatUserMessageProps,
+	ChatWorkingProps,
 } from "./Chat/Chat.js";
-export { Chat, ChatComposer, ChatEmptyState, ChatHeader, ChatLog, ChatStep, ChatUserMessage } from "./Chat/Chat.js";
+export {
+	Chat,
+	ChatAssistantMessage,
+	ChatComposer,
+	ChatEmptyState,
+	ChatError,
+	ChatHeader,
+	ChatLog,
+	ChatStep,
+	ChatUserMessage,
+	ChatWorking,
+} from "./Chat/Chat.js";
 export type { ChatTransport, UseChatOptions, UseChatResult } from "./Chat/useChat.js";
 export { useChat } from "./Chat/useChat.js";
 export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
