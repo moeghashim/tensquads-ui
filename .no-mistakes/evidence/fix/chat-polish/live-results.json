@@ -1,0 +1,942 @@
+{
+  "oracle": "Author intent: polish composer, spacing and inline forms; Chat.md keyboard/resize/localization contract; PLAN D8/D23 direction and action locking. Geometry rejects overlapping, clipped or oversized controls.",
+  "results": [
+    {
+      "name": "compact composer, placeholder, focus and keyboard send en-light-1440",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(1, 105, 204)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 78,
+          "y": 839,
+          "width": 1250,
+          "height": 32
+        },
+        "send": {
+          "x": 1336,
+          "y": 839,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "First line\nSecond line"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send en-light-1440",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 512
+        },
+        "dims": {
+          "w": 1440,
+          "sw": 1440,
+          "cw": 1308,
+          "csw": 1308
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks en-light-1440",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 480,
+          "parent": 1276,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 201.921875,
+            "right": 562,
+            "width": 360.078125
+          },
+          {
+            "left": 277.84375,
+            "right": 309.84375,
+            "width": 32
+          },
+          {
+            "left": 115,
+            "right": 116,
+            "width": 1
+          },
+          {
+            "left": 116,
+            "right": 286.421875,
+            "width": 170.421875
+          },
+          {
+            "left": 118,
+            "right": 196.390625,
+            "width": 78.390625
+          },
+          {
+            "left": 117,
+            "right": 118,
+            "width": 1
+          },
+          {
+            "left": 200.390625,
+            "right": 284.421875,
+            "width": 84.03125
+          },
+          {
+            "left": 117,
+            "right": 118,
+            "width": 1
+          },
+          {
+            "left": 116,
+            "right": 237.1875,
+            "width": 121.1875
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer en-light-1440",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send en-light-390",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(1, 105, 204)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 42,
+          "y": 800,
+          "width": 272,
+          "height": 32
+        },
+        "send": {
+          "x": 322,
+          "y": 800,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "First line\nSecond line"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send en-light-390",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 1016
+        },
+        "dims": {
+          "w": 390,
+          "sw": 390,
+          "cw": 330,
+          "csw": 330
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks en-light-390",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 298,
+          "parent": 298,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 165.921875,
+            "right": 344,
+            "width": 178.078125
+          },
+          {
+            "left": 241.84375,
+            "right": 273.84375,
+            "width": 32
+          },
+          {
+            "left": 79,
+            "right": 80,
+            "width": 1
+          },
+          {
+            "left": 80,
+            "right": 250.421875,
+            "width": 170.421875
+          },
+          {
+            "left": 82,
+            "right": 160.390625,
+            "width": 78.390625
+          },
+          {
+            "left": 81,
+            "right": 82,
+            "width": 1
+          },
+          {
+            "left": 164.390625,
+            "right": 248.421875,
+            "width": 84.03125
+          },
+          {
+            "left": 81,
+            "right": 82,
+            "width": 1
+          },
+          {
+            "left": 80,
+            "right": 201.1875,
+            "width": 121.1875
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer en-light-390",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send en-dark-1440",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(2, 133, 255)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 78,
+          "y": 839,
+          "width": 1250,
+          "height": 32
+        },
+        "send": {
+          "x": 1336,
+          "y": 839,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "First line\nSecond line"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send en-dark-1440",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 512
+        },
+        "dims": {
+          "w": 1440,
+          "sw": 1440,
+          "cw": 1308,
+          "csw": 1308
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks en-dark-1440",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 480,
+          "parent": 1276,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 201.921875,
+            "right": 562,
+            "width": 360.078125
+          },
+          {
+            "left": 277.84375,
+            "right": 309.84375,
+            "width": 32
+          },
+          {
+            "left": 115,
+            "right": 116,
+            "width": 1
+          },
+          {
+            "left": 116,
+            "right": 286.421875,
+            "width": 170.421875
+          },
+          {
+            "left": 118,
+            "right": 196.390625,
+            "width": 78.390625
+          },
+          {
+            "left": 117,
+            "right": 118,
+            "width": 1
+          },
+          {
+            "left": 200.390625,
+            "right": 284.421875,
+            "width": 84.03125
+          },
+          {
+            "left": 117,
+            "right": 118,
+            "width": 1
+          },
+          {
+            "left": 116,
+            "right": 237.1875,
+            "width": 121.1875
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer en-dark-1440",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send en-dark-390",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(2, 133, 255)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 42,
+          "y": 800,
+          "width": 272,
+          "height": 32
+        },
+        "send": {
+          "x": 322,
+          "y": 800,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "First line\nSecond line"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send en-dark-390",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 1016
+        },
+        "dims": {
+          "w": 390,
+          "sw": 390,
+          "cw": 330,
+          "csw": 330
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks en-dark-390",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 298,
+          "parent": 298,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 165.921875,
+            "right": 344,
+            "width": 178.078125
+          },
+          {
+            "left": 241.84375,
+            "right": 273.84375,
+            "width": 32
+          },
+          {
+            "left": 79,
+            "right": 80,
+            "width": 1
+          },
+          {
+            "left": 80,
+            "right": 250.421875,
+            "width": 170.421875
+          },
+          {
+            "left": 82,
+            "right": 160.390625,
+            "width": 78.390625
+          },
+          {
+            "left": 81,
+            "right": 82,
+            "width": 1
+          },
+          {
+            "left": 164.390625,
+            "right": 248.421875,
+            "width": 84.03125
+          },
+          {
+            "left": 81,
+            "right": 82,
+            "width": 1
+          },
+          {
+            "left": 80,
+            "right": 201.1875,
+            "width": 121.1875
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer en-dark-390",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send ar-light-1440",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(1, 105, 204)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 112,
+          "y": 839,
+          "width": 1250,
+          "height": 32
+        },
+        "send": {
+          "x": 72,
+          "y": 839,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "سطر أول\nسطر ثان"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send ar-light-1440",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 464
+        },
+        "dims": {
+          "w": 1440,
+          "sw": 1440,
+          "cw": 1308,
+          "csw": 1308
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks ar-light-1440",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 480,
+          "parent": 1276,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 878,
+            "right": 1252,
+            "width": 374
+          },
+          {
+            "left": 1125.015625,
+            "right": 1157.015625,
+            "width": 32
+          },
+          {
+            "left": 1324,
+            "right": 1325,
+            "width": 1
+          },
+          {
+            "left": 1185.453125,
+            "right": 1324,
+            "width": 138.546875
+          },
+          {
+            "left": 1251.65625,
+            "right": 1322,
+            "width": 70.34375
+          },
+          {
+            "left": 1322,
+            "right": 1323,
+            "width": 1
+          },
+          {
+            "left": 1187.453125,
+            "right": 1247.65625,
+            "width": 60.203125
+          },
+          {
+            "left": 1322,
+            "right": 1323,
+            "width": 1
+          },
+          {
+            "left": 1219.5625,
+            "right": 1324,
+            "width": 104.4375
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer ar-light-1440",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send ar-light-390",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(1, 105, 204)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 76,
+          "y": 974,
+          "width": 272,
+          "height": 32
+        },
+        "send": {
+          "x": 36,
+          "y": 974,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "سطر أول\nسطر ثان"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send ar-light-390",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 848
+        },
+        "dims": {
+          "w": 390,
+          "sw": 390,
+          "cw": 330,
+          "csw": 330
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks ar-light-390",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 298,
+          "parent": 298,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 46,
+            "right": 238,
+            "width": 192
+          },
+          {
+            "left": 111.015625,
+            "right": 143.015625,
+            "width": 32
+          },
+          {
+            "left": 310,
+            "right": 311,
+            "width": 1
+          },
+          {
+            "left": 171.453125,
+            "right": 310,
+            "width": 138.546875
+          },
+          {
+            "left": 237.65625,
+            "right": 308,
+            "width": 70.34375
+          },
+          {
+            "left": 308,
+            "right": 309,
+            "width": 1
+          },
+          {
+            "left": 173.453125,
+            "right": 233.65625,
+            "width": 60.203125
+          },
+          {
+            "left": 308,
+            "right": 309,
+            "width": 1
+          },
+          {
+            "left": 205.5625,
+            "right": 310,
+            "width": 104.4375
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer ar-light-390",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send ar-dark-1440",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(2, 133, 255)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 112,
+          "y": 839,
+          "width": 1250,
+          "height": 32
+        },
+        "send": {
+          "x": 72,
+          "y": 839,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "سطر أول\nسطر ثان"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send ar-dark-1440",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 464
+        },
+        "dims": {
+          "w": 1440,
+          "sw": 1440,
+          "cw": 1308,
+          "csw": 1308
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks ar-dark-1440",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 480,
+          "parent": 1276,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 878,
+            "right": 1252,
+            "width": 374
+          },
+          {
+            "left": 1125.015625,
+            "right": 1157.015625,
+            "width": 32
+          },
+          {
+            "left": 1324,
+            "right": 1325,
+            "width": 1
+          },
+          {
+            "left": 1185.453125,
+            "right": 1324,
+            "width": 138.546875
+          },
+          {
+            "left": 1251.65625,
+            "right": 1322,
+            "width": 70.34375
+          },
+          {
+            "left": 1322,
+            "right": 1323,
+            "width": 1
+          },
+          {
+            "left": 1187.453125,
+            "right": 1247.65625,
+            "width": 60.203125
+          },
+          {
+            "left": 1322,
+            "right": 1323,
+            "width": 1
+          },
+          {
+            "left": 1219.5625,
+            "right": 1324,
+            "width": 104.4375
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer ar-dark-1440",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    },
+    {
+      "name": "compact composer, placeholder, focus and keyboard send ar-dark-390",
+      "result": "pass",
+      "detail": {
+        "focus": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(2, 133, 255)",
+          "innerStyle": "none"
+        },
+        "textarea": {
+          "x": 76,
+          "y": 974,
+          "width": 272,
+          "height": 32
+        },
+        "send": {
+          "x": 36,
+          "y": 974,
+          "width": 32,
+          "height": 32
+        },
+        "sent": "سطر أول\nسطر ثان"
+      }
+    },
+    {
+      "name": "long draft stays bounded; whitespace and IME cannot send ar-dark-390",
+      "result": "pass",
+      "detail": {
+        "measure": {
+          "height": 160,
+          "client": 160,
+          "scroll": 848
+        },
+        "dims": {
+          "w": 390,
+          "sw": 390,
+          "cw": 330,
+          "csw": 330
+        }
+      }
+    },
+    {
+      "name": "spaced conversation and inline form submit preserves values and locks ar-dark-390",
+      "result": "pass",
+      "detail": {
+        "geometry": {
+          "width": 298,
+          "parent": 298,
+          "padding": 16,
+          "border": "1px",
+          "radius": "12px"
+        },
+        "gaps": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "controls": [
+          {
+            "left": 46,
+            "right": 238,
+            "width": 192
+          },
+          {
+            "left": 111.015625,
+            "right": 143.015625,
+            "width": 32
+          },
+          {
+            "left": 310,
+            "right": 311,
+            "width": 1
+          },
+          {
+            "left": 171.453125,
+            "right": 310,
+            "width": 138.546875
+          },
+          {
+            "left": 237.65625,
+            "right": 308,
+            "width": 70.34375
+          },
+          {
+            "left": 308,
+            "right": 309,
+            "width": 1
+          },
+          {
+            "left": 173.453125,
+            "right": 233.65625,
+            "width": 60.203125
+          },
+          {
+            "left": 308,
+            "right": 309,
+            "width": 1
+          },
+          {
+            "left": 205.5625,
+            "right": 310,
+            "width": 104.4375
+          }
+        ],
+        "accessibilityViolations": []
+      }
+    },
+    {
+      "name": "attachment and send remain reachable in compact gallery composer ar-dark-390",
+      "result": "pass",
+      "detail": {
+        "noOverlap": true,
+        "keyboardOrder": "textarea, attachment, send"
+      }
+    }
+  ],
+  "pageErrors": []
+}
