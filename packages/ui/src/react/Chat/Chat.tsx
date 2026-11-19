@@ -197,7 +197,7 @@ export function ChatComposer({
 				autoResize
 				submitShortcut="enter"
 				onSubmit={send}
-				placeholder={placeholder ?? (locale === "ar" ? "اكتب رسالة" : undefined)}
+				placeholder={placeholder ?? (locale === "ar" ? "اكتب رسالة" : "Write a message")}
 			/>
 			<div className="ts-chat__composer-actions">
 				<div className="ts-chat__attach">{attach}</div>

@@ -12,3 +12,7 @@
 .ts-chat-reply__markdown :not(pre) > code { padding-block: 0.1em; padding-inline: 0.35em; border-radius: var(--ts-radius-sm); background: var(--ts-surface-secondary); font-size: 0.9em; }
 .ts-chat-reply__markdown pre { max-inline-size: 100%; margin-block: var(--ts-space-3); padding: var(--ts-space-4); overflow: auto; border-radius: var(--ts-radius-md); background: var(--ts-surface-secondary); direction: ltr; text-align: start; white-space: pre; }
 .ts-chat-reply__openui { margin-block: var(--ts-space-3); }
+/* A form in a reply is something to act on, not prose: set it apart on its own surface. */
+.ts-chat-reply__openui:has(.ts-form) { box-sizing: border-box; max-inline-size: 30rem; padding: var(--ts-space-4); border: 1px solid var(--ts-border-subtle); border-radius: var(--ts-radius-xl); background: var(--ts-surface); box-shadow: var(--ts-shadow-hairline); }
+.ts-chat-reply__openui .ts-form > [data-slot="field-set"] { gap: var(--ts-space-4); }
+.ts-chat-reply__openui .ts-form [data-slot="button"][type="submit"] { margin-block-start: var(--ts-space-1); }
