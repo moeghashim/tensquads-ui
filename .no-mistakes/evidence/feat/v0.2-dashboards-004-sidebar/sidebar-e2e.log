@@ -1,0 +1,13 @@
+[WebServer] (node:10799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:10941) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/sidebar.spec.ts:12:2 › Sidebar navigation in en ltr light (2.2s)
+  ✓  2 e2e/sidebar.spec.ts:12:2 › Sidebar navigation in en ltr dark (2.1s)
+  ✓  3 e2e/sidebar.spec.ts:12:2 › Sidebar navigation in ar rtl light (2.2s)
+  ✓  4 e2e/sidebar.spec.ts:12:2 › Sidebar navigation in ar rtl dark (1.9s)
+
+  4 passed (13.8s)

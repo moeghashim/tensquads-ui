@@ -1,0 +1,1690 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "desktop": {
+      "secondary": [
+        {
+          "text": "Your company account",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 400,
+          "y": 337.46875,
+          "width": 138.6875,
+          "height": 24,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Platform admin",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 396,
+          "y": 831.46875,
+          "width": 90.296875,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "Runs 5 squads · Demo store",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 652,
+          "y": 345.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "Orders",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 675.375,
+          "y": 391.46875,
+          "width": 40.96875,
+          "height": 24,
+          "scrollWidth": 41,
+          "clientWidth": 41
+        },
+        {
+          "text": "Inventory",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 685.609375,
+          "y": 435.46875,
+          "width": 56.1875,
+          "height": 24,
+          "scrollWidth": 56,
+          "clientWidth": 56
+        }
+      ],
+      "titles": [
+        {
+          "text": "Platform admin",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 400,
+          "y": 311.46875,
+          "width": 138.6875,
+          "height": 24,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 396,
+          "y": 805.46875,
+          "width": 90.296875,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "Petra",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 652,
+          "y": 319.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "Pisa",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 640,
+          "y": 391.46875,
+          "width": 27.375,
+          "height": 24,
+          "scrollWidth": 27,
+          "clientWidth": 27
+        },
+        {
+          "text": "Kyoto",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 640,
+          "y": 435.46875,
+          "width": 37.609375,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(24, 24, 24)",
+          "x": 352,
+          "y": 318.46875,
+          "width": 36,
+          "height": 36,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": [
+        {
+          "featured": true,
+          "name": "Petra",
+          "role": "Runs 5 squads · Demo store",
+          "nameBox": {
+            "x": 652,
+            "y": 319.46875,
+            "width": 240,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 652,
+            "y": 345.46875,
+            "width": 240,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "Pisa",
+          "role": "Orders",
+          "nameBox": {
+            "x": 640,
+            "y": 391.46875,
+            "width": 27.375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 675.375,
+            "y": 391.46875,
+            "width": 40.96875,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "Kyoto",
+          "role": "Inventory",
+          "nameBox": {
+            "x": 640,
+            "y": 435.46875,
+            "width": 37.609375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 685.609375,
+            "y": 435.46875,
+            "width": 56.1875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "narrow": {
+      "secondary": [
+        {
+          "text": "Runs 5 squads · Demo store",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 268.40625,
+          "y": 188.96875,
+          "width": 105.796875,
+          "height": 48,
+          "scrollWidth": 106,
+          "clientWidth": 106
+        },
+        {
+          "text": "Orders",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 291.78125,
+          "y": 258.96875,
+          "width": 40.96875,
+          "height": 24,
+          "scrollWidth": 41,
+          "clientWidth": 41
+        },
+        {
+          "text": "Inventory",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 302.015625,
+          "y": 302.96875,
+          "width": 56.1875,
+          "height": 24,
+          "scrollWidth": 56,
+          "clientWidth": 56
+        }
+      ],
+      "titles": [
+        {
+          "text": "Petra",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 268.40625,
+          "y": 162.96875,
+          "width": 105.796875,
+          "height": 24,
+          "scrollWidth": 106,
+          "clientWidth": 106
+        },
+        {
+          "text": "Pisa",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 256.40625,
+          "y": 258.96875,
+          "width": 27.375,
+          "height": 24,
+          "scrollWidth": 27,
+          "clientWidth": 27
+        },
+        {
+          "text": "Kyoto",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 256.40625,
+          "y": 302.96875,
+          "width": 37.609375,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        }
+      ],
+      "tile": [],
+      "agents": [
+        {
+          "featured": true,
+          "name": "Petra",
+          "role": "Runs 5 squads · Demo store",
+          "nameBox": {
+            "x": 268.40625,
+            "y": 162.96875,
+            "width": 105.796875,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 268.40625,
+            "y": 188.96875,
+            "width": 105.796875,
+            "height": 48
+          }
+        },
+        {
+          "featured": false,
+          "name": "Pisa",
+          "role": "Orders",
+          "nameBox": {
+            "x": 256.40625,
+            "y": 258.96875,
+            "width": 27.375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 291.78125,
+            "y": 258.96875,
+            "width": 40.96875,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "Kyoto",
+          "role": "Inventory",
+          "nameBox": {
+            "x": 256.40625,
+            "y": 302.96875,
+            "width": 37.609375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 302.015625,
+            "y": 302.96875,
+            "width": 56.1875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "mobile": {
+      "secondary": [
+        {
+          "text": "Your company account",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 62,
+          "y": 53.52000427246094,
+          "width": 135.91375732421875,
+          "height": 23.519996643066406,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Platform admin",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 58.07999801635742,
+          "y": 800.280029296875,
+          "width": 88.49093627929688,
+          "height": 23.51995849609375,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "titles": [
+        {
+          "text": "Platform admin",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 62,
+          "y": 28.040002822875977,
+          "width": 135.91375732421875,
+          "height": 23.520002365112305,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 58.07999801635742,
+          "y": 774.7999877929688,
+          "width": 88.49093627929688,
+          "height": 23.52001953125,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(24, 24, 24)",
+          "x": 14.959997177124023,
+          "y": 34.900001525878906,
+          "width": 35.279998779296875,
+          "height": 35.280006408691406,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": []
+    },
+    "selectionClosesSheet": true,
+    "pageErrors": []
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "desktop": {
+      "secondary": [
+        {
+          "text": "Your company account",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 400,
+          "y": 337.46875,
+          "width": 138.6875,
+          "height": 24,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Platform admin",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 396,
+          "y": 831.46875,
+          "width": 90.296875,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "Runs 5 squads · Demo store",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 652,
+          "y": 345.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "Orders",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 675.375,
+          "y": 391.46875,
+          "width": 40.96875,
+          "height": 24,
+          "scrollWidth": 41,
+          "clientWidth": 41
+        },
+        {
+          "text": "Inventory",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 685.609375,
+          "y": 435.46875,
+          "width": 56.1875,
+          "height": 24,
+          "scrollWidth": 56,
+          "clientWidth": 56
+        }
+      ],
+      "titles": [
+        {
+          "text": "Platform admin",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 400,
+          "y": 311.46875,
+          "width": 138.6875,
+          "height": 24,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 396,
+          "y": 805.46875,
+          "width": 90.296875,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "Petra",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 652,
+          "y": 319.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "Pisa",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 640,
+          "y": 391.46875,
+          "width": 27.375,
+          "height": 24,
+          "scrollWidth": 27,
+          "clientWidth": 27
+        },
+        {
+          "text": "Kyoto",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 640,
+          "y": 435.46875,
+          "width": 37.609375,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgb(243, 243, 243)",
+          "x": 352,
+          "y": 318.46875,
+          "width": 36,
+          "height": 36,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": [
+        {
+          "featured": true,
+          "name": "Petra",
+          "role": "Runs 5 squads · Demo store",
+          "nameBox": {
+            "x": 652,
+            "y": 319.46875,
+            "width": 240,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 652,
+            "y": 345.46875,
+            "width": 240,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "Pisa",
+          "role": "Orders",
+          "nameBox": {
+            "x": 640,
+            "y": 391.46875,
+            "width": 27.375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 675.375,
+            "y": 391.46875,
+            "width": 40.96875,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "Kyoto",
+          "role": "Inventory",
+          "nameBox": {
+            "x": 640,
+            "y": 435.46875,
+            "width": 37.609375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 685.609375,
+            "y": 435.46875,
+            "width": 56.1875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "narrow": {
+      "secondary": [
+        {
+          "text": "Runs 5 squads · Demo store",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 268.40625,
+          "y": 188.96875,
+          "width": 105.796875,
+          "height": 48,
+          "scrollWidth": 106,
+          "clientWidth": 106
+        },
+        {
+          "text": "Orders",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 291.78125,
+          "y": 258.96875,
+          "width": 40.96875,
+          "height": 24,
+          "scrollWidth": 41,
+          "clientWidth": 41
+        },
+        {
+          "text": "Inventory",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 302.015625,
+          "y": 302.96875,
+          "width": 56.1875,
+          "height": 24,
+          "scrollWidth": 56,
+          "clientWidth": 56
+        }
+      ],
+      "titles": [
+        {
+          "text": "Petra",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 268.40625,
+          "y": 162.96875,
+          "width": 105.796875,
+          "height": 24,
+          "scrollWidth": 106,
+          "clientWidth": 106
+        },
+        {
+          "text": "Pisa",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 256.40625,
+          "y": 258.96875,
+          "width": 27.375,
+          "height": 24,
+          "scrollWidth": 27,
+          "clientWidth": 27
+        },
+        {
+          "text": "Kyoto",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 256.40625,
+          "y": 302.96875,
+          "width": 37.609375,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        }
+      ],
+      "tile": [],
+      "agents": [
+        {
+          "featured": true,
+          "name": "Petra",
+          "role": "Runs 5 squads · Demo store",
+          "nameBox": {
+            "x": 268.40625,
+            "y": 162.96875,
+            "width": 105.796875,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 268.40625,
+            "y": 188.96875,
+            "width": 105.796875,
+            "height": 48
+          }
+        },
+        {
+          "featured": false,
+          "name": "Pisa",
+          "role": "Orders",
+          "nameBox": {
+            "x": 256.40625,
+            "y": 258.96875,
+            "width": 27.375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 291.78125,
+            "y": 258.96875,
+            "width": 40.96875,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "Kyoto",
+          "role": "Inventory",
+          "nameBox": {
+            "x": 256.40625,
+            "y": 302.96875,
+            "width": 37.609375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 302.015625,
+            "y": 302.96875,
+            "width": 56.1875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "mobile": {
+      "secondary": [
+        {
+          "text": "Your company account",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 62,
+          "y": 53.52000427246094,
+          "width": 135.91375732421875,
+          "height": 23.519996643066406,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Platform admin",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 58.07999801635742,
+          "y": 800.280029296875,
+          "width": 88.49093627929688,
+          "height": 23.51995849609375,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "titles": [
+        {
+          "text": "Platform admin",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 62,
+          "y": 28.040002822875977,
+          "width": 135.91375732421875,
+          "height": 23.520002365112305,
+          "scrollWidth": 139,
+          "clientWidth": 139
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 58.07999801635742,
+          "y": 774.7999877929688,
+          "width": 88.49093627929688,
+          "height": 23.52001953125,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgb(243, 243, 243)",
+          "x": 14.959997177124023,
+          "y": 34.900001525878906,
+          "width": 35.279998779296875,
+          "height": 35.280006408691406,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": []
+    },
+    "selectionClosesSheet": true,
+    "pageErrors": []
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "desktop": {
+      "secondary": [
+        {
+          "text": "حساب شركتك",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 970.453125,
+          "y": 337.46875,
+          "width": 69.546875,
+          "height": 24,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "مدير المنصة",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 953.796875,
+          "y": 831.46875,
+          "width": 90.203125,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "تدير ٥ فرق · متجر تجريبي",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 548,
+          "y": 345.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "الطلبات",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 738.734375,
+          "y": 391.46875,
+          "width": 37.90625,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        },
+        {
+          "text": "المخزون",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 725.234375,
+          "y": 435.46875,
+          "width": 40.453125,
+          "height": 24,
+          "scrollWidth": 40,
+          "clientWidth": 40
+        }
+      ],
+      "titles": [
+        {
+          "text": "منصة الإدارة",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 970.453125,
+          "y": 311.46875,
+          "width": 69.546875,
+          "height": 24,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 953.796875,
+          "y": 805.46875,
+          "width": 90.203125,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "بترا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 548,
+          "y": 319.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "بيزا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 784.640625,
+          "y": 391.46875,
+          "width": 15.359375,
+          "height": 24,
+          "scrollWidth": 15,
+          "clientWidth": 15
+        },
+        {
+          "text": "كيوتو",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 773.6875,
+          "y": 435.46875,
+          "width": 26.3125,
+          "height": 24,
+          "scrollWidth": 26,
+          "clientWidth": 26
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(24, 24, 24)",
+          "x": 1052,
+          "y": 318.46875,
+          "width": 36,
+          "height": 36,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": [
+        {
+          "featured": true,
+          "name": "بترا",
+          "role": "تدير ٥ فرق · متجر تجريبي",
+          "nameBox": {
+            "x": 548,
+            "y": 319.46875,
+            "width": 240,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 548,
+            "y": 345.46875,
+            "width": 240,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "بيزا",
+          "role": "الطلبات",
+          "nameBox": {
+            "x": 784.640625,
+            "y": 391.46875,
+            "width": 15.359375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 738.734375,
+            "y": 391.46875,
+            "width": 37.90625,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "كيوتو",
+          "role": "المخزون",
+          "nameBox": {
+            "x": 773.6875,
+            "y": 435.46875,
+            "width": 26.3125,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 725.234375,
+            "y": 435.46875,
+            "width": 40.453125,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "narrow": {
+      "secondary": [
+        {
+          "text": "تدير ٥ فرق · متجر تجريبي",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 28,
+          "y": 188.96875,
+          "width": 129.03125,
+          "height": 24,
+          "scrollWidth": 129,
+          "clientWidth": 129
+        },
+        {
+          "text": "الطلبات",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 107.765625,
+          "y": 234.96875,
+          "width": 37.90625,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        },
+        {
+          "text": "المخزون",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 94.265625,
+          "y": 278.96875,
+          "width": 40.453125,
+          "height": 24,
+          "scrollWidth": 40,
+          "clientWidth": 40
+        }
+      ],
+      "titles": [
+        {
+          "text": "بترا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 28,
+          "y": 162.96875,
+          "width": 129.03125,
+          "height": 24,
+          "scrollWidth": 129,
+          "clientWidth": 129
+        },
+        {
+          "text": "بيزا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 153.671875,
+          "y": 234.96875,
+          "width": 15.359375,
+          "height": 24,
+          "scrollWidth": 15,
+          "clientWidth": 15
+        },
+        {
+          "text": "كيوتو",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 142.71875,
+          "y": 278.96875,
+          "width": 26.3125,
+          "height": 24,
+          "scrollWidth": 26,
+          "clientWidth": 26
+        }
+      ],
+      "tile": [],
+      "agents": [
+        {
+          "featured": true,
+          "name": "بترا",
+          "role": "تدير ٥ فرق · متجر تجريبي",
+          "nameBox": {
+            "x": 28,
+            "y": 162.96875,
+            "width": 129.03125,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 28,
+            "y": 188.96875,
+            "width": 129.03125,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "بيزا",
+          "role": "الطلبات",
+          "nameBox": {
+            "x": 153.671875,
+            "y": 234.96875,
+            "width": 15.359375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 107.765625,
+            "y": 234.96875,
+            "width": 37.90625,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "كيوتو",
+          "role": "المخزون",
+          "nameBox": {
+            "x": 142.71875,
+            "y": 278.96875,
+            "width": 26.3125,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 94.265625,
+            "y": 278.96875,
+            "width": 40.453125,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "mobile": {
+      "secondary": [
+        {
+          "text": "حساب شركتك",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 259.84405517578125,
+          "y": 53.52000427246094,
+          "width": 68.15594482421875,
+          "height": 23.519996643066406,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "مدير المنصة",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(93, 93, 93)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 243.52093505859375,
+          "y": 800.280029296875,
+          "width": 88.3990478515625,
+          "height": 23.51995849609375,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "titles": [
+        {
+          "text": "منصة الإدارة",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 259.84405517578125,
+          "y": 28.040002822875977,
+          "width": 68.15594482421875,
+          "height": 23.520002365112305,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 243.52093505859375,
+          "y": 774.7999877929688,
+          "width": 88.3990478515625,
+          "height": 23.52001953125,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(24, 24, 24)",
+          "x": 339.760009765625,
+          "y": 34.900001525878906,
+          "width": 35.27996826171875,
+          "height": 35.280006408691406,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": []
+    },
+    "selectionClosesSheet": true,
+    "pageErrors": []
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "desktop": {
+      "secondary": [
+        {
+          "text": "حساب شركتك",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 970.453125,
+          "y": 337.46875,
+          "width": 69.546875,
+          "height": 24,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "مدير المنصة",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 953.796875,
+          "y": 831.46875,
+          "width": 90.203125,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "تدير ٥ فرق · متجر تجريبي",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 548,
+          "y": 345.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "الطلبات",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 738.734375,
+          "y": 391.46875,
+          "width": 37.90625,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        },
+        {
+          "text": "المخزون",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 725.234375,
+          "y": 435.46875,
+          "width": 40.453125,
+          "height": 24,
+          "scrollWidth": 40,
+          "clientWidth": 40
+        }
+      ],
+      "titles": [
+        {
+          "text": "منصة الإدارة",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 970.453125,
+          "y": 311.46875,
+          "width": 69.546875,
+          "height": 24,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 953.796875,
+          "y": 805.46875,
+          "width": 90.203125,
+          "height": 24,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        },
+        {
+          "text": "بترا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 548,
+          "y": 319.46875,
+          "width": 240,
+          "height": 24,
+          "scrollWidth": 240,
+          "clientWidth": 240
+        },
+        {
+          "text": "بيزا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 784.640625,
+          "y": 391.46875,
+          "width": 15.359375,
+          "height": 24,
+          "scrollWidth": 15,
+          "clientWidth": 15
+        },
+        {
+          "text": "كيوتو",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 773.6875,
+          "y": 435.46875,
+          "width": 26.3125,
+          "height": 24,
+          "scrollWidth": 26,
+          "clientWidth": 26
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgb(243, 243, 243)",
+          "x": 1052,
+          "y": 318.46875,
+          "width": 36,
+          "height": 36,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": [
+        {
+          "featured": true,
+          "name": "بترا",
+          "role": "تدير ٥ فرق · متجر تجريبي",
+          "nameBox": {
+            "x": 548,
+            "y": 319.46875,
+            "width": 240,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 548,
+            "y": 345.46875,
+            "width": 240,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "بيزا",
+          "role": "الطلبات",
+          "nameBox": {
+            "x": 784.640625,
+            "y": 391.46875,
+            "width": 15.359375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 738.734375,
+            "y": 391.46875,
+            "width": 37.90625,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "كيوتو",
+          "role": "المخزون",
+          "nameBox": {
+            "x": 773.6875,
+            "y": 435.46875,
+            "width": 26.3125,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 725.234375,
+            "y": 435.46875,
+            "width": 40.453125,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "narrow": {
+      "secondary": [
+        {
+          "text": "تدير ٥ فرق · متجر تجريبي",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 28,
+          "y": 188.96875,
+          "width": 129.03125,
+          "height": 24,
+          "scrollWidth": 129,
+          "clientWidth": 129
+        },
+        {
+          "text": "الطلبات",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 107.765625,
+          "y": 234.96875,
+          "width": 37.90625,
+          "height": 24,
+          "scrollWidth": 38,
+          "clientWidth": 38
+        },
+        {
+          "text": "المخزون",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 94.265625,
+          "y": 278.96875,
+          "width": 40.453125,
+          "height": 24,
+          "scrollWidth": 40,
+          "clientWidth": 40
+        }
+      ],
+      "titles": [
+        {
+          "text": "بترا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 28,
+          "y": 162.96875,
+          "width": 129.03125,
+          "height": 24,
+          "scrollWidth": 129,
+          "clientWidth": 129
+        },
+        {
+          "text": "بيزا",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 153.671875,
+          "y": 234.96875,
+          "width": 15.359375,
+          "height": 24,
+          "scrollWidth": 15,
+          "clientWidth": 15
+        },
+        {
+          "text": "كيوتو",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 142.71875,
+          "y": 278.96875,
+          "width": 26.3125,
+          "height": 24,
+          "scrollWidth": 26,
+          "clientWidth": 26
+        }
+      ],
+      "tile": [],
+      "agents": [
+        {
+          "featured": true,
+          "name": "بترا",
+          "role": "تدير ٥ فرق · متجر تجريبي",
+          "nameBox": {
+            "x": 28,
+            "y": 162.96875,
+            "width": 129.03125,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 28,
+            "y": 188.96875,
+            "width": 129.03125,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "بيزا",
+          "role": "الطلبات",
+          "nameBox": {
+            "x": 153.671875,
+            "y": 234.96875,
+            "width": 15.359375,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 107.765625,
+            "y": 234.96875,
+            "width": 37.90625,
+            "height": 24
+          }
+        },
+        {
+          "featured": false,
+          "name": "كيوتو",
+          "role": "المخزون",
+          "nameBox": {
+            "x": 142.71875,
+            "y": 278.96875,
+            "width": 26.3125,
+            "height": 24
+          },
+          "roleBox": {
+            "x": 94.265625,
+            "y": 278.96875,
+            "width": 40.453125,
+            "height": 24
+          }
+        }
+      ]
+    },
+    "mobile": {
+      "secondary": [
+        {
+          "text": "حساب شركتك",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 259.84405517578125,
+          "y": 53.52000427246094,
+          "width": 68.15594482421875,
+          "height": 23.519996643066406,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "مدير المنصة",
+          "size": "13px",
+          "weight": "400",
+          "color": "rgb(175, 175, 175)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 243.52093505859375,
+          "y": 800.280029296875,
+          "width": 88.3990478515625,
+          "height": 23.51995849609375,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "titles": [
+        {
+          "text": "منصة الإدارة",
+          "size": "14px",
+          "weight": "600",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 259.84405517578125,
+          "y": 28.040002822875977,
+          "width": 68.15594482421875,
+          "height": 23.520002365112305,
+          "scrollWidth": 70,
+          "clientWidth": 70
+        },
+        {
+          "text": "Moe Ghashim",
+          "size": "14px",
+          "weight": "500",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "x": 243.52093505859375,
+          "y": 774.7999877929688,
+          "width": 88.3990478515625,
+          "height": 23.52001953125,
+          "scrollWidth": 90,
+          "clientWidth": 90
+        }
+      ],
+      "tile": [
+        {
+          "text": "",
+          "size": "16px",
+          "weight": "400",
+          "color": "rgb(13, 13, 13)",
+          "background": "rgb(243, 243, 243)",
+          "x": 339.760009765625,
+          "y": 34.900001525878906,
+          "width": 35.27996826171875,
+          "height": 35.280006408691406,
+          "scrollWidth": 36,
+          "clientWidth": 36
+        }
+      ],
+      "agents": []
+    },
+    "selectionClosesSheet": true,
+    "pageErrors": []
+  }
+]
