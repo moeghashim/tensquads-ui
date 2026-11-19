@@ -1,0 +1,642 @@
+[
+  {
+    "scenario": "submit-lock-replay",
+    "locale": "en",
+    "theme": "light",
+    "store": "Boundary Store 42",
+    "record": "Set up a store for me\nPisa\nDone\norders-204\nAngkor\nDone\nwebsite-318\nPetra\nDone\nmaster-421\nLaunch plan\n\nI have a plan ready. Update any details, then approve it to continue.\n\nStore name\nEmail me when done\nWeekly\nMonthly\nApprove plan\n\nSent\n\nApprove plan\n\nPlan approved for Boundary Store 42. I will send Monthly updates. Email notifications are off.\n\nPlan approved",
+    "style": {
+      "cursor": "default",
+      "color": "rgb(40, 40, 40)",
+      "normal": "#282828"
+    },
+    "duplicateActions": 0,
+    "resetValue": "Bannaa Market",
+    "errors": []
+  },
+  {
+    "scenario": "header-size",
+    "locale": "en",
+    "theme": "light",
+    "width": 1440,
+    "metrics": {
+      "nav": [
+        {
+          "text": "Home",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Components",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Chat demo",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Get started",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Light",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Dark",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "System",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 1440,
+      "scroll": 1440,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-size",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "metrics": {
+      "nav": [
+        {
+          "text": "Home",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Components",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Chat demo",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Get started",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Light",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Dark",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "System",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 390,
+      "scroll": 390,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-operate",
+    "from": "en-light",
+    "locale": "ar",
+    "theme": "dark",
+    "navigation": "http://127.0.0.1:5173/components?locale=ar&dir=rtl&theme=dark"
+  },
+  {
+    "scenario": "submit-lock-replay",
+    "locale": "en",
+    "theme": "dark",
+    "store": "Boundary Store 42",
+    "record": "Set up a store for me\nPisa\nDone\norders-204\nAngkor\nDone\nwebsite-318\nPetra\nDone\nmaster-421\nLaunch plan\n\nI have a plan ready. Update any details, then approve it to continue.\n\nStore name\nEmail me when done\nWeekly\nMonthly\nApprove plan\n\nSent\n\nApprove plan\n\nPlan approved for Boundary Store 42. I will send Monthly updates. Email notifications are off.\n\nPlan approved",
+    "style": {
+      "cursor": "default",
+      "color": "rgb(220, 220, 220)",
+      "normal": "#dcdcdc"
+    },
+    "duplicateActions": 0,
+    "resetValue": "Bannaa Market",
+    "errors": []
+  },
+  {
+    "scenario": "header-size",
+    "locale": "en",
+    "theme": "dark",
+    "width": 1440,
+    "metrics": {
+      "nav": [
+        {
+          "text": "Home",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Components",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Chat demo",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Get started",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Light",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Dark",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "System",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 1440,
+      "scroll": 1440,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-size",
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "metrics": {
+      "nav": [
+        {
+          "text": "Home",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Components",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Chat demo",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "Get started",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Light",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "Dark",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "System",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 390,
+      "scroll": 390,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-operate",
+    "from": "en-dark",
+    "locale": "ar",
+    "theme": "light",
+    "navigation": "http://127.0.0.1:5173/components?locale=ar&dir=rtl&theme=light"
+  },
+  {
+    "scenario": "submit-lock-replay",
+    "locale": "ar",
+    "theme": "light",
+    "store": "متجر الاختبار 42",
+    "record": "أعدّ لي متجراً\nبيزا\nتم\norders-204\nأنغكور\nتم\nwebsite-318\nبترا\nتم\nmaster-421\nخطة الإطلاق\n\nأعددت الخطة. يمكن تعديل التفاصيل ثم اعتمادها للمتابعة.\n\nاسم المتجر\nأرسل إليّ إشعاراً عند الانتهاء\nأسبوعي\nشهري\nاعتماد الخطة\n\nأُرسلت\n\nاعتماد الخطة\n\nتم اعتماد خطة متجر الاختبار 42. سأرسل تحديثات شهري. إشعارات البريد غير مفعّلة.\n\nتم اعتماد الخطة",
+    "style": {
+      "cursor": "default",
+      "color": "rgb(40, 40, 40)",
+      "normal": "#282828"
+    },
+    "duplicateActions": 0,
+    "resetValue": "متجر بنّاء",
+    "errors": []
+  },
+  {
+    "scenario": "header-size",
+    "locale": "ar",
+    "theme": "light",
+    "width": 1440,
+    "metrics": {
+      "nav": [
+        {
+          "text": "الرئيسية",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "المكوّنات",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "عرض المحادثة",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "البدء",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "فاتحة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "داكنة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "النظام",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 1440,
+      "scroll": 1440,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-size",
+    "locale": "ar",
+    "theme": "light",
+    "width": 390,
+    "metrics": {
+      "nav": [
+        {
+          "text": "الرئيسية",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "المكوّنات",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "عرض المحادثة",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "البدء",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "فاتحة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "داكنة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "النظام",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 390,
+      "scroll": 390,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-operate",
+    "from": "ar-light",
+    "locale": "en",
+    "theme": "dark",
+    "navigation": "http://127.0.0.1:5173/components?locale=en&dir=ltr&theme=dark"
+  },
+  {
+    "scenario": "submit-lock-replay",
+    "locale": "ar",
+    "theme": "dark",
+    "store": "متجر الاختبار 42",
+    "record": "أعدّ لي متجراً\nبيزا\nتم\norders-204\nأنغكور\nتم\nwebsite-318\nبترا\nتم\nmaster-421\nخطة الإطلاق\n\nأعددت الخطة. يمكن تعديل التفاصيل ثم اعتمادها للمتابعة.\n\nاسم المتجر\nأرسل إليّ إشعاراً عند الانتهاء\nأسبوعي\nشهري\nاعتماد الخطة\n\nأُرسلت\n\nاعتماد الخطة\n\nتم اعتماد خطة متجر الاختبار 42. سأرسل تحديثات شهري. إشعارات البريد غير مفعّلة.\n\nتم اعتماد الخطة",
+    "style": {
+      "cursor": "default",
+      "color": "rgb(220, 220, 220)",
+      "normal": "#dcdcdc"
+    },
+    "duplicateActions": 0,
+    "resetValue": "متجر بنّاء",
+    "errors": []
+  },
+  {
+    "scenario": "header-size",
+    "locale": "ar",
+    "theme": "dark",
+    "width": 1440,
+    "metrics": {
+      "nav": [
+        {
+          "text": "الرئيسية",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "المكوّنات",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "عرض المحادثة",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "البدء",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "فاتحة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "داكنة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "النظام",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 1440,
+      "scroll": 1440,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-size",
+    "locale": "ar",
+    "theme": "dark",
+    "width": 390,
+    "metrics": {
+      "nav": [
+        {
+          "text": "الرئيسية",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "المكوّنات",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "عرض المحادثة",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        },
+        {
+          "text": "البدء",
+          "height": 36,
+          "fontSize": "14px",
+          "lineHeight": "24px"
+        }
+      ],
+      "controls": [
+        {
+          "text": "English",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "العربية",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "فاتحة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "داكنة",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        },
+        {
+          "text": "النظام",
+          "height": 28,
+          "fontSize": "14px",
+          "lineHeight": "20px"
+        }
+      ],
+      "viewport": 390,
+      "scroll": 390,
+      "sizeMatches": false
+    }
+  },
+  {
+    "scenario": "header-operate",
+    "from": "ar-dark",
+    "locale": "en",
+    "theme": "light",
+    "navigation": "http://127.0.0.1:5173/components?locale=en&dir=ltr&theme=light"
+  }
+]
