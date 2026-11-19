@@ -155,4 +155,11 @@ describe("ApprovalCard", () => {
 		expect(formatMillionths(1_000_000_000, "en")).toBe("$1,000.00");
 		expect(formatMillionths(20_000_000, "ar")).toContain("٢٠٫٠٠");
 	});
+	it("hides raw rule ids and shows a supplied label and limit", () => {
+		const { rerender } = render(<ApprovalCard request={request} />);
+		expect(screen.queryByText("daily_limit")).toBeNull();
+		expect(screen.getByText("Limit $20.00")).toBeInTheDocument();
+		rerender(<ApprovalCard request={request} ruleLabels={{ daily_limit: "Daily refund limit" }} />);
+		expect(screen.getByText("Daily refund limit")).toBeInTheDocument();
+	});
 });

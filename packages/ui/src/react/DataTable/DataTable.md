@@ -1,6 +1,6 @@
 # DataTable
 
-Import `DataTable`, its column and row types, and the `EntityCell`, `PersonCell`, `StackCell`, and `StatusCell` helpers from `@tensquads/ui/react`. Provide an accessible `caption`, columns, and rows with stable string IDs. Cells accept text or React nodes. Set `align: "end"` for numeric columns and optionally set `width` or `mono`.
+Import `DataTable`, its column and row types, and the `EntityCell`, `PersonCell`, `StackCell`, and `StatusCell` helpers from `@tensquads/ui/react`. Provide an accessible `caption`, columns, and rows with stable string IDs. Cells accept text or React nodes. Set `align: "end"` for numeric columns and optionally set `width` or `mono`. `EntityCell` derives uppercase Latin initials from the first two words, or the first two letters when the name has one word.
 
 Rows become selectable by click and keyboard when `onRowSelect` is provided. Control selection with `selectedId` and update it from `onRowSelect(id)`. Enter and Space select the row when the row itself has focus. Keyboard events from controls inside cells keep their native behavior. The host owns filtering and search. Put the search input and filter controls in the containing `Card` actions. Render [EmptyState](../EmptyState/EmptyState.md) when no records match.
 

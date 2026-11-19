@@ -28,6 +28,11 @@ describe("DataTable", () => {
 		expect(onRowSelect).toHaveBeenCalledTimes(2);
 		expect(screen.getByText(/Reach \$1M/)).toHaveAttribute("title", "DS / Demo store / Reach $1M in annual sales");
 	});
+
+	it("derives entity initials from the first two words", () => {
+		const { getByText } = render(<EntityCell initials="No" name="Northstar Goods" detail="Store" />);
+		expect(getByText("NG")).toBeInTheDocument();
+	});
 	it.each(["ltr", "rtl"] as const)("preserves cell keyboard defaults and row selection in %s", (dir) => {
 		const onRowSelect = vi.fn();
 		render(

@@ -1,6 +1,6 @@
 # ApprovalCard
 
-Import `ApprovalCard` and `ApprovalCardProps` from `@tensquads/ui/react`. Pass a platform `approval_request` as `request`. The card displays its action, content, optional rule and limit, and approve or decline controls. `actionLabels` localizes action ids. Optional `bot` values display a Squadmate only when they match a known slug. Optional `taskId` and `decision` values come from the host because they are not fields on the approval request.
+Import `ApprovalCard` and `ApprovalCardProps` from `@tensquads/ui/react`. Pass a platform `approval_request` as `request`. The card displays its action, content, optional labeled rule and limit, and approve or decline controls. `actionLabels` localizes action ids. `ruleLabels` maps rule ids to human-readable labels; an unmapped rule id is hidden. A limit is always shown when present. Optional `bot` values display a Squadmate only when they match a known slug. Optional `taskId` and `decision` values come from the host because they are not fields on the approval request.
 
 The `onDecision` callback receives an `ApprovalDecision` command body without `commandId` and `at`. The host adds those values and can retain the same id for a retry. `decision` restores the locked state after loading saved host state.
 

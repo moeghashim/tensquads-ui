@@ -11,7 +11,7 @@ for (const locale of ["en", "ar"] as const) {
 				renderToStaticMarkup(
 					createElement(StatTile, {
 						label: locale === "ar" ? "الإيرادات" : "Revenue",
-						value: locale === "ar" ? "٢٤٬٨٦٠" : "24,860",
+				value: locale === "ar" ? "٢٤٬٨٦٠" : "$14,568",
 						unit: index % 2 === 0 ? (locale === "ar" ? "ر.س" : "SAR") : undefined,
 						series: [3, 7, 4, 9],
 					}),
@@ -28,7 +28,8 @@ for (const locale of ["en", "ar"] as const) {
 				[1180, 3],
 				[760, 2],
 				[480, 1],
-				[390, 1],
+				[390, 2],
+				[339, 1],
 			] as const) {
 				await page.setViewportSize({ width, height: 900 });
 				const grid = page.locator(".ts-stat-grid");
@@ -41,6 +42,12 @@ for (const locale of ["en", "ar"] as const) {
 					expect(value).not.toBeNull();
 					expect(trend).not.toBeNull();
 					if (!value || !trend) throw new Error("Missing value or trend");
+					const tileBox = await tile.boundingBox();
+					expect(tileBox).not.toBeNull();
+					if (tileBox) {
+						expect(value.x).toBeGreaterThanOrEqual(tileBox.x);
+						expect(value.x + value.width).toBeLessThanOrEqual(tileBox.x + tileBox.width);
+					}
 					expect(trend.width).toBe(112);
 					expect(trend.height).toBe(32);
 					expect(

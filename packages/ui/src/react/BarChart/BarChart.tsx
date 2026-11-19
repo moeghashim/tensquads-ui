@@ -11,23 +11,40 @@ export type BarChartProps = {
 	highlight?: [number, number] | null;
 	label?: string;
 	locale?: Locale;
+	formatValue?: (value: number) => string;
 };
 
-export function BarChart({ points, keys = [], highlight, label, locale = "en" }: BarChartProps) {
+function niceAxisMaximum(value: number) {
+	if (value <= 0) return 1;
+	const magnitude = 10 ** Math.floor(Math.log10(value));
+	const normalized = value / magnitude;
+	const step = normalized <= 1 ? 1 : normalized <= 2 ? 2 : normalized <= 5 ? 5 : 10;
+	const rounded = step * magnitude;
+	return Number.isInteger(rounded / 2) ? rounded : rounded * 2;
+}
+
+export function BarChart({ points, keys = [], highlight, label, locale = "en", formatValue }: BarChartProps) {
 	const [active, setActive] = useState(0);
 	const activeIndex = Math.min(active, Math.max(0, points.length - 1));
 	const refs = useRef<Array<HTMLButtonElement | null>>([]);
-	const max = Math.max(
+	const dataMax = Math.max(
 		1,
 		...points.map((point) => point.value ?? point.segments?.reduce((sum, part) => sum + part.value, 0) ?? 0),
 	);
+	const integerData = points.every((point) =>
+		point.value !== undefined
+			? Number.isInteger(point.value)
+			: point.segments?.every((part) => Number.isInteger(part.value)) ?? true,
+	);
+	const max = integerData ? niceAxisMaximum(dataMax) : dataMax;
+	const format = (value: number) => (formatValue ? formatValue(value) : String(value));
 	const summary = points
 		.map(
 			({ label: pointLabel, value, segments }) =>
 				`${pointLabel}: ${value ?? segments?.reduce((sum, part) => sum + part.value, 0) ?? 0}`,
 		)
 		.join(", ");
-	const chartMinWidth = `calc(${points.length} * 2.75rem + 2rem)`;
+	const chartMinWidth = `calc(${points.length} * 2.75rem + 4rem)`;
 	const showTickLabel = (index: number) => points.length <= 14 || index % 5 === 0;
 	const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
 		const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
@@ -48,7 +65,7 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 				<div className="ts-bar-chart__plot" style={{ minInlineSize: chartMinWidth }}>
 					{[0, 1, 2].map((line) => (
 						<div className="ts-bar-chart__gridline" key={line}>
-							<span>{(max * (2 - line)) / 2}</span>
+							<span>{format((max * (2 - line)) / 2)}</span>
 						</div>
 					))}
 					<div className="ts-bar-chart__columns">
@@ -60,7 +77,7 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 							const isHighlighted = highlight
 								? index >= highlight[0] && index <= highlight[1]
 								: index === points.length - 1;
-							const accessibleName = `${point.label}: ${total}`;
+							const accessibleName = `${point.label}: ${format(total)}`;
 							return (
 								<Tooltip key={`${point.label}-${index}`}>
 									<TooltipTrigger
@@ -95,12 +112,12 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 										</span>
 									</TooltipTrigger>
 									<TooltipContent>
-										{point.label}: {total}
+						{point.label}: {format(total)}
 										{parts.length > 1 &&
 											parts.map((part) => (
 												<span key={part.key}>
 													{" "}
-													· {keys.find((item) => item.key === part.key)?.label ?? part.key}: {part.value}
+									· {keys.find((item) => item.key === part.key)?.label ?? part.key}: {format(part.value)}
 												</span>
 											))}
 									</TooltipContent>
