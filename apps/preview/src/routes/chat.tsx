@@ -30,7 +30,6 @@ const scripts = {
 	en: JSON.parse(fixtures["../fixtures/chat-demo.fixture.en.txt"] ?? "{}") as ChatFixture,
 	ar: JSON.parse(fixtures["../fixtures/chat-demo.fixture.ar.txt"] ?? "{}") as ChatFixture,
 };
-const setupReplyId = "store-setup";
 
 export const Route = createFileRoute("/chat")({ component: ChatPage });
 
@@ -53,6 +52,8 @@ function ChatExperience({
 	const fixture = scripts[locale];
 	const [replayNumber, setReplayNumber] = useState(0);
 	const startedRun = useRef<string | null>(null);
+	const turnIds = useRef(new WeakMap<ChatTurn, number>());
+	const nextTurnId = useRef(0);
 	const transport = useCallback<ChatTransport>(
 		(request, { signal }) => scriptedTransport(request.turns, request.locale, signal),
 		[],
@@ -83,12 +84,19 @@ function ChatExperience({
 						<strong>{squadmateCharacterName("petra", locale)}</strong>
 					</ChatHeader>
 					<ChatLog>
-						{chat.turns.map((turn) => {
+						{chat.turns.map((turn, position) => {
+							const requestTurn = turn.role === "assistant" ? chat.turns[position - 1]! : turn;
+							let requestId = turnIds.current.get(requestTurn);
+							if (requestId === undefined) {
+								requestId = nextTurnId.current++;
+								turnIds.current.set(requestTurn, requestId);
+							}
+							const turnId = `${turn.role}-${requestId}`;
 							if (turn.role === "user") {
 								return (
-									<Fragment key={`user-${turn.content}`}>
+									<Fragment key={turnId}>
 										<ChatUserMessage>{turn.content}</ChatUserMessage>
-										{turn.content === fixture.request && (
+										{turn === chat.turns[0] && (
 											<RoutedSteps steps={fixture.steps} locale={locale} />
 										)}
 									</Fragment>
@@ -96,15 +104,14 @@ function ChatExperience({
 							}
 							if (turn.role === "action") {
 								return (
-									<ChatUserMessage key={`action-${turn.action.name}-${turn.action.summary}`}>
+									<ChatUserMessage key={turnId}>
 										{turn.action.summary}
 									</ChatUserMessage>
 								);
 							}
-							const replyId = turn.content === fixture.reply ? setupReplyId : `reply-${turn.content}`;
 							return (
 								<ChatStep
-									key={`assistant-${turn.content}`}
+									key={turnId}
 									name={squadmateCharacterName("petra", locale)}
 									glyph={<Squadmate agent="petra" state="planning" size={24} locale={locale} />}
 									reply={
@@ -112,8 +119,8 @@ function ChatExperience({
 											reply={turn.content}
 											locale={locale}
 											isStreaming={chat.busy}
-											onAction={(event, blockId) => void chat.act(event, `${replyId}/${blockId}`)}
-											locked={(blockId) => chat.locked.has(`${setupReplyId}/${blockId}`)}
+											onAction={(event, blockId) => void chat.act(event, `${turnId}/${blockId}`)}
+											locked={(blockId) => chat.locked.has(`${turnId}/${blockId}`)}
 										/>
 									}
 								/>
@@ -220,10 +227,10 @@ function fillFollowup(template: string, turn: ChatActionTurn, locale: Locale) {
 					? "غير مفعّلة"
 					: "off"
 				: "unchanged";
-	return template
-		.replace("{store}", String(store))
-		.replace("{frequency}", String(frequency))
-		.replace("{email}", emailLabel);
+	const values: Record<string, unknown> = { store, frequency, email: emailLabel };
+	return template.replace(/\{(store|frequency|email)\}/g, (_, name: string) =>
+		String(values[name]).replace(/[\\`*_[\]{}()#+.!<>~|\-]/g, "\\$&"),
+	);
 }
 
 function findValue(value: unknown, name: string): unknown {
