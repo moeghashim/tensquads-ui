@@ -2,6 +2,7 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import { Card } from "../../../../packages/ui/src/react/Card/Card";
 import {
 	Chat,
 	ChatComposer,
@@ -32,6 +33,7 @@ import {
 	MenuSeparator,
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
+import { PageHeader } from "../../../../packages/ui/src/react/PageHeader/PageHeader";
 import {
 	SegmentedControl,
 	SegmentedControlIndicator,
@@ -42,6 +44,7 @@ import {
 	squadmateCharacterName,
 	squadmateStateLabel,
 } from "../../../../packages/ui/src/react/Squadmate/Squadmate";
+import { StatTile } from "../../../../packages/ui/src/react/StatTile/StatTile";
 import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
 import {
 	Tooltip,
@@ -262,6 +265,69 @@ function ComponentExample() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (["Card", "PageHeader", "StatTile"].includes(name)) {
+		const ar = locale === "ar";
+		const tileLabels = ar
+			? ["الإيرادات", "الطلبات", "التحويل", "متوسط الطلب", "الزيارات", "العملاء"]
+			: ["Revenue", "Orders", "Conversion", "Avg. order", "Visits", "Customers"];
+		return (
+			<div className="gallery dashboard-component-preview">
+				{name === "PageHeader" ? (
+					<PageHeader
+						headingLevel={2}
+						title={ar ? "نظرة عامة" : "Overview"}
+						subtitle={ar ? "ملخص نشاط المتجر خلال هذا الأسبوع" : "A summary of store activity this week"}
+						actions={<Button pill>{ar ? "تصدير التقرير" : "Export report"}</Button>}
+						meta={
+							<>
+								<Badge tone="info">{ar ? "بيانات تجريبية" : "Demo data"}</Badge>
+								<span>{ar ? "٥٣ متجراً متصلاً الآن" : "53 stores online now"}</span>
+							</>
+						}
+					/>
+				) : name === "Card" ? (
+					<div className="dashboard-component-preview__cards">
+						<Card
+							title={ar ? "الطلبات المفتوحة" : "Open orders"}
+							subtitle={ar ? "خلال آخر ٧ أيام" : "Over the last 7 days"}
+							count="3"
+							legend={[{ label: ar ? "مكتمل" : "Complete" }, { label: ar ? "قيد الانتظار" : "Pending" }]}
+							footer={ar ? "عرض كل الطلبات" : "View all orders"}
+						>
+							<div className="dashboard-component-preview__body">{ar ? "محتوى البطاقة" : "Card body"}</div>
+						</Card>
+						<Card flush title={ar ? "تفاصيل الطلبات" : "Order details"}>
+							<div className="dashboard-component-preview__body">
+								{ar ? "محتوى بعرض البطاقة" : "Edge-to-edge content"}
+							</div>
+						</Card>
+						<Card variant="inset" title={ar ? "عنصر موافقة" : "Approval item"}>
+							<p>{ar ? "تم تحديث تفاصيل الطلب" : "Order details were updated"}</p>
+						</Card>
+					</div>
+				) : (
+					<div className="ts-stat-grid">
+						{tileLabels.map((label, index) => (
+							<StatTile
+								key={label}
+								label={label}
+								value={["$24.8k", "1,284", "3.8%", "$68.40", "18.2k", "936"][index] ?? "0"}
+								delta={
+									index % 3 === 1
+										? { text: ar ? "−٢٫١٪ مقارنة بالأسبوع الماضي" : "−2.1% vs last week", tone: "negative" }
+										: { text: ar ? "+١٢٪ مقارنة بالأسبوع الماضي" : "+12% vs last week", tone: "positive" }
+								}
+								series={index === 5 ? null : [3, 5, 4, 8, 6, 9, 7]}
+							/>
+						))}
+					</div>
+				)}
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</div>
+		);
+	}
 	if (name === "Form" && stream) return <FormExample locale={locale} stream={stream} />;
 	if (name === "Chat") {
 		const ar = locale === "ar";

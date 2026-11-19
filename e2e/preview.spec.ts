@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { getRegisteredComponents } from "../packages/ui/src/openui";
 import {
 	capturePreviewScreenshots,
 	expectAccessible,
@@ -74,7 +75,7 @@ test("home works in both directions and themes", async ({ page }, testInfo) => {
 		await expect(
 			page.getByRole("navigation", { name: state.locale === "ar" ? "التنقل الرئيسي" : "Primary navigation" }),
 		).toBeVisible();
-		await expect(page.locator(".component-card")).toHaveCount(12);
+		await expect(page.locator(".component-card")).toHaveCount(getRegisteredComponents().length);
 		await expect(
 			page.getByRole("button", { name: state.locale === "ar" ? "اعتماد الخطة" : "Approve plan" }),
 		).toBeVisible({ timeout: 5000 });

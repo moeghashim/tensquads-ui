@@ -3,6 +3,8 @@ export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
+export type { CardLegendItem, CardProps } from "./Card/Card.js";
+export { Card } from "./Card/Card.js";
 export type {
 	ChatAssistantMessageProps,
 	ChatComposerProps,
@@ -115,6 +117,8 @@ export {
 	MenuSubTrigger,
 	MenuTrigger,
 } from "./Menu/Menu.js";
+export type { PageHeaderProps } from "./PageHeader/PageHeader.js";
+export { PageHeader } from "./PageHeader/PageHeader.js";
 export type {
 	SegmentedControlIndicatorProps,
 	SegmentedControlItemProps,
@@ -132,6 +136,8 @@ export {
 	squadmateCharacterName,
 	squadmateStateLabel,
 } from "./Squadmate/Squadmate.js";
+export type { StatTileDelta, StatTileProps } from "./StatTile/StatTile.js";
+export { StatTile } from "./StatTile/StatTile.js";
 export type { SwitchProps, SwitchThumbProps } from "./Switch/Switch.js";
 export { Switch, SwitchThumb } from "./Switch/Switch.js";
 export type {
