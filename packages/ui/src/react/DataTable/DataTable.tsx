@@ -93,7 +93,7 @@ export function DataTable({ caption, columns, rows, selectedId, onRowSelect }: D
 							onKeyDown={
 								onRowSelect
 									? (event) => {
-											if (event.key === "Enter" || event.key === " ") {
+											if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) {
 												event.preventDefault();
 												onRowSelect(row.id);
 											}
