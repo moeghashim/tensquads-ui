@@ -16,6 +16,16 @@ for (const locale of ["en", "ar"] as const) {
 				const count = card.getByRole("heading", { level: 2 });
 				const group = card.getByRole("radiogroup", { name: ar ? "حالة الشركة" : "Company status" });
 				const all = group.getByRole("radio", { name: ar ? "الكل" : "All", exact: true });
+				const originalViewport = page.viewportSize();
+				for (const width of [1440, 390]) {
+					await page.setViewportSize({ width, height: 900 });
+					const searchBounds = await search.boundingBox();
+					const filterBounds = await group.boundingBox();
+					expect(searchBounds).not.toBeNull();
+					expect(filterBounds).not.toBeNull();
+					expect(searchBounds?.height).toBe(filterBounds?.height);
+				}
+				if (originalViewport) await page.setViewportSize(originalViewport);
 				if (name === "EmptyState") {
 					await expect(count).toHaveText(ar ? /^كل الشركات \([0٠] من [2٢]\)$/ : "All companies (0 of 2)");
 					await expect(card.getByRole("table")).toHaveCount(0);
@@ -43,10 +53,23 @@ for (const locale of ["en", "ar"] as const) {
 					ar ? "يُدفع شهرياً" : "Billed monthly",
 				);
 				await expect(acme.getByText("maya@example.com")).toHaveAttribute("title", "maya@example.com");
-				await expect(acme.getByText(/Reach/)).toHaveAttribute(
-					"title",
-					"DS / Demo store / Reach $1M in annual sales",
-				);
+				for (const [row, detail, price] of [
+					[
+						acme,
+						ar
+							? "متجر تجريبي / الوصول إلى مليون دولار من المبيعات السنوية"
+							: "DS / Demo store / Reach $1M in annual sales",
+						ar ? "١٤٩ دولاراً / شهر" : "$149 / mo",
+					],
+					[
+						northstar,
+						ar ? "متجر إلكتروني / ٣ أعضاء في الفريق" : "Online store / 3 team members",
+						ar ? "٧٩ دولاراً / شهر" : "$79 / mo",
+					],
+				] as const) {
+					await expect(row.getByText(detail, { exact: true })).toHaveAttribute("title", detail);
+					await expect(row.getByText(price, { exact: true })).toBeVisible();
+				}
 				await search.fill("  NORTH  ");
 				await expect(acme).toHaveCount(0);
 				await expect(northstar).toBeVisible();

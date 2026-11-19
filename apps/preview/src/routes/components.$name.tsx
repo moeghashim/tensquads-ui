@@ -287,12 +287,21 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 					<EntityCell
 						initials="AC"
 						name="Acme Studio"
-						detail="DS / Demo store / Reach $1M in annual sales"
+						detail={
+							ar
+								? "متجر تجريبي / الوصول إلى مليون دولار من المبيعات السنوية"
+								: "DS / Demo store / Reach $1M in annual sales"
+						}
 						tint="primary"
 					/>
 				),
 				owner: <PersonCell name="Maya Chen" email="maya@example.com" />,
-				plan: <StackCell primary="$149 / mo" secondary={ar ? "يُدفع شهرياً" : "Billed monthly"} />,
+				plan: (
+					<StackCell
+						primary={ar ? "١٤٩ دولاراً / شهر" : "$149 / mo"}
+						secondary={ar ? "يُدفع شهرياً" : "Billed monthly"}
+					/>
+				),
 				status: <StatusCell label={ar ? "نشطة" : "Active"} />,
 			},
 		},
@@ -302,10 +311,20 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 			status: "trial",
 			cells: {
 				company: (
-					<EntityCell initials="NS" name="Northstar" detail="Online store / 3 team members" tint="success" />
+					<EntityCell
+						initials="NS"
+						name="Northstar"
+						detail={ar ? "متجر إلكتروني / ٣ أعضاء في الفريق" : "Online store / 3 team members"}
+						tint="success"
+					/>
 				),
 				owner: <PersonCell name="Omar Saleh" email="omar@example.com" />,
-				plan: <StackCell primary="$79 / mo" secondary={ar ? "يُدفع شهرياً" : "Billed monthly"} />,
+				plan: (
+					<StackCell
+						primary={ar ? "٧٩ دولاراً / شهر" : "$79 / mo"}
+						secondary={ar ? "يُدفع شهرياً" : "Billed monthly"}
+					/>
+				),
 				status: <StatusCell label={ar ? "تجربة" : "Trial"} />,
 			},
 		},
