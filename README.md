@@ -179,11 +179,15 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
 const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, mode: "chat" });
 ```
 
-## Browser verification
-
 ## Dashboard demos
 
 Open the [store owner dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home) or [platform admin dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin) in the preview site. The pages use fictional demo data and include English and Arabic, light and dark views.
+
+The admin sidebar switches between Companies and Squad images with `view=companies|images` in the URL. Search and subscription filters narrow the company table. Image filters narrow the registry table; selecting an image updates its details, bugs, and feature requests. Roll out and View changelog are display-only demo controls.
+
+On the store owner dashboard, approving or declining a request removes it from the list, lowers the count, and displays the command body locally. Changing the site language translates pending requests and preserves those decisions. Ask Petra opens `/chat` with the current URL settings. These dashboards do not send commands to a backend.
+
+## Browser verification
 
 Switch and SegmentedControl screenshots capture their default preview states before keyboard interaction. See [e2e/switch-segmented-control.spec.ts](e2e/switch-segmented-control.spec.ts) for the state assertions and capture order.
 
