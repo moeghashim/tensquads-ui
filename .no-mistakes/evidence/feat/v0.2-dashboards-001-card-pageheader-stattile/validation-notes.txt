@@ -1,0 +1,6 @@
+Supplied baseline: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify exited 1 before this phase. Not rerun: test phase prohibits full suite/static analysis.
+Preview production build and local Wrangler startup completed for both targeted Playwright invocations.
+Dashboard page checks: exit 1. Card and PageHeader passed both locales/themes; StatTile light passed. Dark StatTile axe reports color-contrast 3.72:1 for negative delta (#e02e2a on #1c1c1c at 12px), required 4.5:1, in English and Arabic.
+Supplemental grid and OpenUI/keyboard checks: exit 0. Real React StatTiles with synthetic metrics rendered in Chromium; six/three/two/one columns at 1440/1180/760/480 and 390, 112x32 trends without value intersection. Real preview OpenUI fixture row, localized names and RTL sparkline, PageHeader keyboard focus checked.
+Screenshots: all three pages x both locales x both themes x 1440/390, plus six-tile grid captures. Representative screenshots visually inspected.
+Both Playwright children exited and stopped their managed local servers. No source changes.

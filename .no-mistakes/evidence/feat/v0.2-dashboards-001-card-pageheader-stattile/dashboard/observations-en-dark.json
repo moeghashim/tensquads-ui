@@ -1,0 +1,48 @@
+[
+  {
+    "headerAction": "Export report",
+    "keyboardReachable": true,
+    "focusRing": [
+      "2px",
+      "2px",
+      "rgb(2, 133, 255)"
+    ]
+  },
+  {
+    "negativeDelta": "−2.1% vs last week",
+    "foreground": "rgb(255, 103, 100)",
+    "background": "rgb(28, 28, 28)",
+    "contrastRatio": 5.985919792744515,
+    "rtlTrend": false
+  },
+  {
+    "width": 1440,
+    "columns": 6,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 1180,
+    "columns": 3,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 760,
+    "columns": 2,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 480,
+    "columns": 1,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 390,
+    "columns": 1,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  }
+]

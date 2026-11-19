@@ -1,0 +1,48 @@
+[
+  {
+    "headerAction": "تصدير التقرير",
+    "keyboardReachable": true,
+    "focusRing": [
+      "2px",
+      "2px",
+      "rgb(1, 105, 204)"
+    ]
+  },
+  {
+    "negativeDelta": "−٢٫١٪ مقارنة بالأسبوع الماضي",
+    "foreground": "rgb(145, 30, 27)",
+    "background": "rgb(252, 252, 252)",
+    "contrastRatio": 8.509266672386268,
+    "rtlTrend": true
+  },
+  {
+    "width": 1440,
+    "columns": 6,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 1180,
+    "columns": 3,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 760,
+    "columns": 2,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 480,
+    "columns": 1,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  },
+  {
+    "width": 390,
+    "columns": 1,
+    "noPriorPeriod": true,
+    "absentSeries": true
+  }
+]

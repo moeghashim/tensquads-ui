@@ -1,0 +1,698 @@
+[
+  {
+    "scenario": "Public React consumer grid, optional trends and actions en light",
+    "status": "failed",
+    "errors": [
+      "Error: Metric and sparkline must not overlap at 1440\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 47\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 104.328125,\u001b[39m\n\u001b[31m+       \"y\": 421,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 0,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 109.734375,\u001b[39m\n\u001b[31m+       \"x\": 37,\u001b[39m\n\u001b[31m+       \"y\": 418,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 341.65625,\u001b[39m\n\u001b[31m+       \"y\": 421,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 1,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 91.40625,\u001b[39m\n\u001b[31m+       \"x\": 274.328125,\u001b[39m\n\u001b[31m+       \"y\": 418,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 578.984375,\u001b[39m\n\u001b[31m+       \"y\": 421,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 2,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 82.140625,\u001b[39m\n\u001b[31m+       \"x\": 511.65625,\u001b[39m\n\u001b[31m+       \"y\": 418,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  18 |    }));\n  19 |    dimensions.push({width,columns,overflow,overlaps});\n> 20 |    expect.soft(overlaps,`Metric and sparkline must not overlap at ${width}`).toEqual([]);\n     |                                                                              ^\n  21 |    await page.screenshot({path:`${evidence}/consumer-${locale}-${theme}-${width}.png`,fullPage:true});\n  22 |    expect.soft(overflow.content,`No page overflow at ${width}`).toBeLessThanOrEqual(overflow.viewport);\n  23 |   }\n    at {run-worktree}/.local-dashboard-test/consumer.spec.ts:20:78"
+    ],
+    "measurements": [
+      {
+        "name": "accessibility",
+        "data": []
+      },
+      {
+        "name": "layout measurements",
+        "data": [
+          {
+            "width": 1440,
+            "columns": 6,
+            "overflow": {
+              "viewport": 1440,
+              "content": 1440
+            },
+            "overlaps": [
+              {
+                "tile": 0,
+                "value": {
+                  "x": 37,
+                  "y": 418,
+                  "width": 109.734375,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 104.328125,
+                  "y": 421,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 1,
+                "value": {
+                  "x": 274.328125,
+                  "y": 418,
+                  "width": 91.40625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 341.65625,
+                  "y": 421,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 2,
+                "value": {
+                  "x": 511.65625,
+                  "y": 418,
+                  "width": 82.140625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 578.984375,
+                  "y": 421,
+                  "width": 112,
+                  "height": 32
+                }
+              }
+            ]
+          },
+          {
+            "width": 1180,
+            "columns": 3,
+            "overflow": {
+              "viewport": 1180,
+              "content": 1180
+            },
+            "overlaps": []
+          },
+          {
+            "width": 760,
+            "columns": 2,
+            "overflow": {
+              "viewport": 760,
+              "content": 760
+            },
+            "overlaps": []
+          },
+          {
+            "width": 480,
+            "columns": 1,
+            "overflow": {
+              "viewport": 480,
+              "content": 480
+            },
+            "overlaps": []
+          },
+          {
+            "width": 390,
+            "columns": 1,
+            "overflow": {
+              "viewport": 390,
+              "content": 390
+            },
+            "overlaps": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "Public React consumer grid, optional trends and actions en dark",
+    "status": "failed",
+    "errors": [
+      "Error: Metric and sparkline must not overlap at 1440\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 47\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 104.328125,\u001b[39m\n\u001b[31m+       \"y\": 421,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 0,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 109.734375,\u001b[39m\n\u001b[31m+       \"x\": 37,\u001b[39m\n\u001b[31m+       \"y\": 418,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 341.65625,\u001b[39m\n\u001b[31m+       \"y\": 421,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 1,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 91.40625,\u001b[39m\n\u001b[31m+       \"x\": 274.328125,\u001b[39m\n\u001b[31m+       \"y\": 418,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 578.984375,\u001b[39m\n\u001b[31m+       \"y\": 421,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 2,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 82.140625,\u001b[39m\n\u001b[31m+       \"x\": 511.65625,\u001b[39m\n\u001b[31m+       \"y\": 418,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  18 |    }));\n  19 |    dimensions.push({width,columns,overflow,overlaps});\n> 20 |    expect.soft(overlaps,`Metric and sparkline must not overlap at ${width}`).toEqual([]);\n     |                                                                              ^\n  21 |    await page.screenshot({path:`${evidence}/consumer-${locale}-${theme}-${width}.png`,fullPage:true});\n  22 |    expect.soft(overflow.content,`No page overflow at ${width}`).toBeLessThanOrEqual(overflow.viewport);\n  23 |   }\n    at {run-worktree}/.local-dashboard-test/consumer.spec.ts:20:78",
+      "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 93\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must meet minimum color contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2%</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(5)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2%</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.color\",\u001b[39m\n\u001b[31m+       \"wcag2aa\",\u001b[39m\n\u001b[31m+       \"wcag143\",\u001b[39m\n\u001b[31m+       \"TTv5\",\u001b[39m\n\u001b[31m+       \"TT13.c\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.4.3\",\u001b[39m\n\u001b[31m+       \"ACT\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-3.2.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  37 |   const filter=page.getByRole('button',{name:locale==='ar'?'تصفية':'Filter'});await filter.focus();await page.keyboard.press('Space');await expect(page.getByRole('status')).toHaveText('2');\n  38 |   const header=page.locator('.ts-page-header');const copy=await header.locator('.ts-page-header__copy').boundingBox();const action=await exportButton.boundingBox();expect(action!.y).toBeGreaterThanOrEqual(copy!.y+copy!.height);\n> 39 |   const axe=(await new AxeBuilder({page}).analyze()).violations; await test.info().attach('accessibility',{body:JSON.stringify(axe,null,2),contentType:'application/json'}); expect.soft(axe).toEqual([]);\n     |                                                                                                                                                                                               ^\n  40 |   await test.info().attach('layout measurements',{body:JSON.stringify(dimensions,null,2),contentType:'application/json'});\n  41 |  });\n  42 | }\n    at {run-worktree}/.local-dashboard-test/consumer.spec.ts:39:191"
+    ],
+    "measurements": [
+      {
+        "name": "accessibility",
+        "data": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#e02e2a",
+                      "bgColor": "#1c1c1c",
+                      "contrastRatio": 3.72,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+                        "target": [
+                          "article:nth-child(2)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−2%</span>",
+                "target": [
+                  "article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#e02e2a",
+                      "bgColor": "#1c1c1c",
+                      "contrastRatio": 3.72,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+                        "target": [
+                          "article:nth-child(5)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−2%</span>",
+                "target": [
+                  "article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "layout measurements",
+        "data": [
+          {
+            "width": 1440,
+            "columns": 6,
+            "overflow": {
+              "viewport": 1440,
+              "content": 1440
+            },
+            "overlaps": [
+              {
+                "tile": 0,
+                "value": {
+                  "x": 37,
+                  "y": 418,
+                  "width": 109.734375,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 104.328125,
+                  "y": 421,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 1,
+                "value": {
+                  "x": 274.328125,
+                  "y": 418,
+                  "width": 91.40625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 341.65625,
+                  "y": 421,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 2,
+                "value": {
+                  "x": 511.65625,
+                  "y": 418,
+                  "width": 82.140625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 578.984375,
+                  "y": 421,
+                  "width": 112,
+                  "height": 32
+                }
+              }
+            ]
+          },
+          {
+            "width": 1180,
+            "columns": 3,
+            "overflow": {
+              "viewport": 1180,
+              "content": 1180
+            },
+            "overlaps": []
+          },
+          {
+            "width": 760,
+            "columns": 2,
+            "overflow": {
+              "viewport": 760,
+              "content": 760
+            },
+            "overlaps": []
+          },
+          {
+            "width": 480,
+            "columns": 1,
+            "overflow": {
+              "viewport": 480,
+              "content": 480
+            },
+            "overlaps": []
+          },
+          {
+            "width": 390,
+            "columns": 1,
+            "overflow": {
+              "viewport": 390,
+              "content": 390
+            },
+            "overlaps": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "Public React consumer grid, optional trends and actions ar light",
+    "status": "failed",
+    "errors": [
+      "Error: Metric and sparkline must not overlap at 1440\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 47\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 1223.671875,\u001b[39m\n\u001b[31m+       \"y\": 432,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 0,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 109.734375,\u001b[39m\n\u001b[31m+       \"x\": 1293.265625,\u001b[39m\n\u001b[31m+       \"y\": 429,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 986.34375,\u001b[39m\n\u001b[31m+       \"y\": 432,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 1,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 91.40625,\u001b[39m\n\u001b[31m+       \"x\": 1074.265625,\u001b[39m\n\u001b[31m+       \"y\": 429,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 749.015625,\u001b[39m\n\u001b[31m+       \"y\": 432,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 2,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 82.140625,\u001b[39m\n\u001b[31m+       \"x\": 846.203125,\u001b[39m\n\u001b[31m+       \"y\": 429,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  18 |    }));\n  19 |    dimensions.push({width,columns,overflow,overlaps});\n> 20 |    expect.soft(overlaps,`Metric and sparkline must not overlap at ${width}`).toEqual([]);\n     |                                                                              ^\n  21 |    await page.screenshot({path:`${evidence}/consumer-${locale}-${theme}-${width}.png`,fullPage:true});\n  22 |    expect.soft(overflow.content,`No page overflow at ${width}`).toBeLessThanOrEqual(overflow.viewport);\n  23 |   }\n    at {run-worktree}/.local-dashboard-test/consumer.spec.ts:20:78"
+    ],
+    "measurements": [
+      {
+        "name": "accessibility",
+        "data": []
+      },
+      {
+        "name": "layout measurements",
+        "data": [
+          {
+            "width": 1440,
+            "columns": 6,
+            "overflow": {
+              "viewport": 1440,
+              "content": 1440
+            },
+            "overlaps": [
+              {
+                "tile": 0,
+                "value": {
+                  "x": 1293.265625,
+                  "y": 429,
+                  "width": 109.734375,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 1223.671875,
+                  "y": 432,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 1,
+                "value": {
+                  "x": 1074.265625,
+                  "y": 429,
+                  "width": 91.40625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 986.34375,
+                  "y": 432,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 2,
+                "value": {
+                  "x": 846.203125,
+                  "y": 429,
+                  "width": 82.140625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 749.015625,
+                  "y": 432,
+                  "width": 112,
+                  "height": 32
+                }
+              }
+            ]
+          },
+          {
+            "width": 1180,
+            "columns": 3,
+            "overflow": {
+              "viewport": 1180,
+              "content": 1180
+            },
+            "overlaps": []
+          },
+          {
+            "width": 760,
+            "columns": 2,
+            "overflow": {
+              "viewport": 760,
+              "content": 760
+            },
+            "overlaps": []
+          },
+          {
+            "width": 480,
+            "columns": 1,
+            "overflow": {
+              "viewport": 480,
+              "content": 480
+            },
+            "overlaps": []
+          },
+          {
+            "width": 390,
+            "columns": 1,
+            "overflow": {
+              "viewport": 390,
+              "content": 390
+            },
+            "overlaps": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "Public React consumer grid, optional trends and actions ar dark",
+    "status": "failed",
+    "errors": [
+      "Error: Metric and sparkline must not overlap at 1440\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 47\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 1223.671875,\u001b[39m\n\u001b[31m+       \"y\": 432,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 0,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 109.734375,\u001b[39m\n\u001b[31m+       \"x\": 1293.265625,\u001b[39m\n\u001b[31m+       \"y\": 429,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 986.34375,\u001b[39m\n\u001b[31m+       \"y\": 432,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 1,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 91.40625,\u001b[39m\n\u001b[31m+       \"x\": 1074.265625,\u001b[39m\n\u001b[31m+       \"y\": 429,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"chart\": Object {\u001b[39m\n\u001b[31m+       \"height\": 32,\u001b[39m\n\u001b[31m+       \"width\": 112,\u001b[39m\n\u001b[31m+       \"x\": 749.015625,\u001b[39m\n\u001b[31m+       \"y\": 432,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     \"tile\": 2,\u001b[39m\n\u001b[31m+     \"value\": Object {\u001b[39m\n\u001b[31m+       \"height\": 38,\u001b[39m\n\u001b[31m+       \"width\": 82.140625,\u001b[39m\n\u001b[31m+       \"x\": 846.203125,\u001b[39m\n\u001b[31m+       \"y\": 429,\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  18 |    }));\n  19 |    dimensions.push({width,columns,overflow,overlaps});\n> 20 |    expect.soft(overlaps,`Metric and sparkline must not overlap at ${width}`).toEqual([]);\n     |                                                                              ^\n  21 |    await page.screenshot({path:`${evidence}/consumer-${locale}-${theme}-${width}.png`,fullPage:true});\n  22 |    expect.soft(overflow.content,`No page overflow at ${width}`).toBeLessThanOrEqual(overflow.viewport);\n  23 |   }\n    at {run-worktree}/.local-dashboard-test/consumer.spec.ts:20:78",
+      "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 93\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must meet minimum color contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2%</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(5)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2%</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.color\",\u001b[39m\n\u001b[31m+       \"wcag2aa\",\u001b[39m\n\u001b[31m+       \"wcag143\",\u001b[39m\n\u001b[31m+       \"TTv5\",\u001b[39m\n\u001b[31m+       \"TT13.c\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.4.3\",\u001b[39m\n\u001b[31m+       \"ACT\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-3.2.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  37 |   const filter=page.getByRole('button',{name:locale==='ar'?'تصفية':'Filter'});await filter.focus();await page.keyboard.press('Space');await expect(page.getByRole('status')).toHaveText('2');\n  38 |   const header=page.locator('.ts-page-header');const copy=await header.locator('.ts-page-header__copy').boundingBox();const action=await exportButton.boundingBox();expect(action!.y).toBeGreaterThanOrEqual(copy!.y+copy!.height);\n> 39 |   const axe=(await new AxeBuilder({page}).analyze()).violations; await test.info().attach('accessibility',{body:JSON.stringify(axe,null,2),contentType:'application/json'}); expect.soft(axe).toEqual([]);\n     |                                                                                                                                                                                               ^\n  40 |   await test.info().attach('layout measurements',{body:JSON.stringify(dimensions,null,2),contentType:'application/json'});\n  41 |  });\n  42 | }\n    at {run-worktree}/.local-dashboard-test/consumer.spec.ts:39:191"
+    ],
+    "measurements": [
+      {
+        "name": "accessibility",
+        "data": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#e02e2a",
+                      "bgColor": "#1c1c1c",
+                      "contrastRatio": 3.72,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+                        "target": [
+                          "article:nth-child(2)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−2%</span>",
+                "target": [
+                  "article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#e02e2a",
+                      "bgColor": "#1c1c1c",
+                      "contrastRatio": 3.72,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+                        "target": [
+                          "article:nth-child(5)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−2%</span>",
+                "target": [
+                  "article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "layout measurements",
+        "data": [
+          {
+            "width": 1440,
+            "columns": 6,
+            "overflow": {
+              "viewport": 1440,
+              "content": 1440
+            },
+            "overlaps": [
+              {
+                "tile": 0,
+                "value": {
+                  "x": 1293.265625,
+                  "y": 429,
+                  "width": 109.734375,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 1223.671875,
+                  "y": 432,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 1,
+                "value": {
+                  "x": 1074.265625,
+                  "y": 429,
+                  "width": 91.40625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 986.34375,
+                  "y": 432,
+                  "width": 112,
+                  "height": 32
+                }
+              },
+              {
+                "tile": 2,
+                "value": {
+                  "x": 846.203125,
+                  "y": 429,
+                  "width": 82.140625,
+                  "height": 38
+                },
+                "chart": {
+                  "x": 749.015625,
+                  "y": 432,
+                  "width": 112,
+                  "height": 32
+                }
+              }
+            ]
+          },
+          {
+            "width": 1180,
+            "columns": 3,
+            "overflow": {
+              "viewport": 1180,
+              "content": 1180
+            },
+            "overlaps": []
+          },
+          {
+            "width": 760,
+            "columns": 2,
+            "overflow": {
+              "viewport": 760,
+              "content": 760
+            },
+            "overlaps": []
+          },
+          {
+            "width": 480,
+            "columns": 1,
+            "overflow": {
+              "viewport": 480,
+              "content": 480
+            },
+            "overlaps": []
+          },
+          {
+            "width": 390,
+            "columns": 1,
+            "overflow": {
+              "viewport": 390,
+              "content": 390
+            },
+            "overlaps": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "Card dashboard states in en light",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "PageHeader dashboard states in en light",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "StatTile dashboard states in en light",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "Card dashboard states in en dark",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "PageHeader dashboard states in en dark",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "StatTile dashboard states in en dark",
+    "status": "failed",
+    "errors": [
+      "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 93\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must meet minimum color contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2.1% vs last week</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(5)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2.1% vs last week</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.color\",\u001b[39m\n\u001b[31m+       \"wcag2aa\",\u001b[39m\n\u001b[31m+       \"wcag143\",\u001b[39m\n\u001b[31m+       \"TTv5\",\u001b[39m\n\u001b[31m+       \"TT13.c\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.4.3\",\u001b[39m\n\u001b[31m+       \"ACT\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-3.2.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  63 | \t\t\t\t\t\t).toBeVisible();\n  64 | \t\t\t\t\t}\n> 65 | \t\t\t\t\tawait expectAccessible(page).catch(error => expect.soft(false, error.message).toBe(true));\n     | \t\t\t\t\t                                                                              ^\n  66 | \t\t\t\t\tawait capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);\n  67 | \t\t\t\t}\n  68 | \t\t\t\tawait expectNoHorizontalScroll(page);\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:84\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:6",
+      "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 93\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must meet minimum color contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2.1% vs last week</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(5)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−2.1% vs last week</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.color\",\u001b[39m\n\u001b[31m+       \"wcag2aa\",\u001b[39m\n\u001b[31m+       \"wcag143\",\u001b[39m\n\u001b[31m+       \"TTv5\",\u001b[39m\n\u001b[31m+       \"TT13.c\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.4.3\",\u001b[39m\n\u001b[31m+       \"ACT\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-3.2.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  63 | \t\t\t\t\t\t).toBeVisible();\n  64 | \t\t\t\t\t}\n> 65 | \t\t\t\t\tawait expectAccessible(page).catch(error => expect.soft(false, error.message).toBe(true));\n     | \t\t\t\t\t                                                                              ^\n  66 | \t\t\t\t\tawait capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);\n  67 | \t\t\t\t}\n  68 | \t\t\t\tawait expectNoHorizontalScroll(page);\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:84\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:6"
+    ],
+    "measurements": []
+  },
+  {
+    "scenario": "Card dashboard states in ar light",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "PageHeader dashboard states in ar light",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "StatTile dashboard states in ar light",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "Card dashboard states in ar dark",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "PageHeader dashboard states in ar dark",
+    "status": "passed",
+    "errors": [],
+    "measurements": []
+  },
+  {
+    "scenario": "StatTile dashboard states in ar dark",
+    "status": "failed",
+    "errors": [
+      "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 93\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must meet minimum color contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−٢٫١٪ مقارنة بالأسبوع الماضي</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(5)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−٢٫١٪ مقارنة بالأسبوع الماضي</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.color\",\u001b[39m\n\u001b[31m+       \"wcag2aa\",\u001b[39m\n\u001b[31m+       \"wcag143\",\u001b[39m\n\u001b[31m+       \"TTv5\",\u001b[39m\n\u001b[31m+       \"TT13.c\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.4.3\",\u001b[39m\n\u001b[31m+       \"ACT\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-3.2.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  63 | \t\t\t\t\t\t).toBeVisible();\n  64 | \t\t\t\t\t}\n> 65 | \t\t\t\t\tawait expectAccessible(page).catch(error => expect.soft(false, error.message).toBe(true));\n     | \t\t\t\t\t                                                                              ^\n  66 | \t\t\t\t\tawait capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);\n  67 | \t\t\t\t}\n  68 | \t\t\t\tawait expectNoHorizontalScroll(page);\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:84\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:6",
+      "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 93\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must meet minimum color contrast ratio thresholds\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−٢٫١٪ مقارنة بالأسبوع الماضي</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"bgColor\": \"#1c1c1c\",\u001b[39m\n\u001b[31m+               \"contrastRatio\": 3.72,\u001b[39m\n\u001b[31m+               \"expectedContrastRatio\": \"4.5:1\",\u001b[39m\n\u001b[31m+               \"fgColor\": \"#e02e2a\",\u001b[39m\n\u001b[31m+               \"fontSize\": \"9.0pt (12px)\",\u001b[39m\n\u001b[31m+               \"fontWeight\": \"normal\",\u001b[39m\n\u001b[31m+               \"messageKey\": null,\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<article data-slot=\\\"stat-tile\\\" class=\\\"ts-stat-tile\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(5)\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1\",\u001b[39m\n\u001b[31m+         \"html\": \"<span class=\\\"ts-stat-tile__delta ts-stat-tile__delta--negative\\\">−٢٫١٪ مقارنة بالأسبوع الماضي</span>\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.color\",\u001b[39m\n\u001b[31m+       \"wcag2aa\",\u001b[39m\n\u001b[31m+       \"wcag143\",\u001b[39m\n\u001b[31m+       \"TTv5\",\u001b[39m\n\u001b[31m+       \"TT13.c\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.4.3\",\u001b[39m\n\u001b[31m+       \"ACT\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-3.2.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  63 | \t\t\t\t\t\t).toBeVisible();\n  64 | \t\t\t\t\t}\n> 65 | \t\t\t\t\tawait expectAccessible(page).catch(error => expect.soft(false, error.message).toBe(true));\n     | \t\t\t\t\t                                                                              ^\n  66 | \t\t\t\t\tawait capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);\n  67 | \t\t\t\t}\n  68 | \t\t\t\tawait expectNoHorizontalScroll(page);\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:84\n    at {run-worktree}/.local-dashboard-test/dashboard.spec.ts:65:6"
+    ],
+    "measurements": []
+  }
+]

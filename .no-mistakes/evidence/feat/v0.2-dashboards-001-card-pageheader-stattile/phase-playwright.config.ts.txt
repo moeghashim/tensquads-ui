@@ -1,0 +1,8 @@
+import { defineConfig } from '@playwright/test';
+import base from './playwright.config';
+export default defineConfig(base, {
+ workers: 2,
+ outputDir: '~/.no-mistakes/evidence/01M7SMMD2XH955PSB96AAGBXGM/browser-results',
+ reporter: [['list'], ['json', {outputFile: '~/.no-mistakes/evidence/01M7SMMD2XH955PSB96AAGBXGM/browser-results.json'}]],
+ use: {...base.use, screenshot: {mode:'only-on-failure', fullPage:true}},
+});

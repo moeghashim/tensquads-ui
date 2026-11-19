@@ -1,0 +1,279 @@
+[WebServer] (node:35051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 2 workers
+
+(node:35657) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/dashboard-components.spec.ts:12:4 › PageHeader dashboard states in en light (1.6s)
+  ✓   2 e2e/dashboard-components.spec.ts:12:4 › Card dashboard states in en light (1.8s)
+  ✓   3 e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in en light (1.5s)
+  ✓   4 e2e/dashboard-components.spec.ts:12:4 › Card dashboard states in en dark (1.5s)
+  ✘   6 e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in en dark (711ms)
+(node:36018) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 e2e/dashboard-components.spec.ts:12:4 › PageHeader dashboard states in en dark (1.2s)
+  ✓   8 e2e/dashboard-components.spec.ts:12:4 › PageHeader dashboard states in ar light (1.4s)
+  ✓   7 e2e/dashboard-components.spec.ts:12:4 › Card dashboard states in ar light (1.6s)
+  ✓  10 e2e/dashboard-components.spec.ts:12:4 › Card dashboard states in ar dark (1.2s)
+  ✓   9 e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in ar light (1.5s)
+  ✘  12 e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in ar dark (829ms)
+(node:36163) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 e2e/dashboard-components.spec.ts:12:4 › PageHeader dashboard states in ar dark (1.3s)
+  ✓  14 e2e/phase-dashboard-evidence.spec.ts:4:2 › dashboard fixture composition and captures en dark (1.3s)
+  ✓  13 e2e/phase-dashboard-evidence.spec.ts:4:2 › dashboard fixture composition and captures en light (1.6s)
+  ✓  16 e2e/phase-dashboard-evidence.spec.ts:4:2 › dashboard fixture composition and captures ar dark (1.3s)
+  ✓  15 e2e/phase-dashboard-evidence.spec.ts:4:2 › dashboard fixture composition and captures ar light (1.7s)
+  ✓  17 e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in en light (490ms)
+  ✓  18 e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in en dark (455ms)
+  ✓  19 e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in ar light (363ms)
+  ✓  20 e2e/stat-tile-layout.spec.ts:9:3 › StatTile values and trends stay separate in ar dark (292ms)
+
+
+  1) e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in en dark ──────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 93
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    +     "help": "Elements must meet minimum color contrast ratio thresholds",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright",
+    +     "id": "color-contrast",
+    +     "impact": "serious",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "bgColor": "#1c1c1c",
+    +               "contrastRatio": 3.72,
+    +               "expectedContrastRatio": "4.5:1",
+    +               "fgColor": "#e02e2a",
+    +               "fontSize": "9.0pt (12px)",
+    +               "fontWeight": "normal",
+    +               "messageKey": null,
+    +             },
+    +             "id": "color-contrast",
+    +             "impact": "serious",
+    +             "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2)",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +         "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−2.1% vs last week</span>",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "bgColor": "#1c1c1c",
+    +               "contrastRatio": 3.72,
+    +               "expectedContrastRatio": "4.5:1",
+    +               "fgColor": "#e02e2a",
+    +               "fontSize": "9.0pt (12px)",
+    +               "fontWeight": "normal",
+    +               "messageKey": null,
+    +             },
+    +             "id": "color-contrast",
+    +             "impact": "serious",
+    +             "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+    +                 "target": Array [
+    +                   "article:nth-child(5)",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +         "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−2.1% vs last week</span>",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.color",
+    +       "wcag2aa",
+    +       "wcag143",
+    +       "TTv5",
+    +       "TT13.c",
+    +       "EN-301-549",
+    +       "EN-9.1.4.3",
+    +       "ACT",
+    +       "RGAAv4",
+    +       "RGAA-3.2.1",
+    +     ],
+    +   },
+    + ]
+
+       at helpers/preview.ts:58
+
+      56 | export async function expectAccessible(page: Page) {
+      57 | 	const results = await new AxeBuilder({ page }).analyze();
+    > 58 | 	expect(results.violations).toEqual([]);
+         | 	                           ^
+      59 | }
+      60 |
+      61 | export async function expectThemeFocusRing(page: Page, theme: PreviewTheme) {
+        at expectAccessible ({run-worktree}/e2e/helpers/preview.ts:58:29)
+        at {run-worktree}/e2e/dashboard-components.spec.ts:66:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../evidence/01M7SMMD2XH955PSB96AAGBXGM/browser-results/dashboard-components-StatTile-dashboard-states-in-en-dark/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../evidence/01M7SMMD2XH955PSB96AAGBXGM/browser-results/dashboard-components-StatTile-dashboard-states-in-en-dark/error-context.md
+
+  2) e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in ar dark ──────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 93
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    +     "help": "Elements must meet minimum color contrast ratio thresholds",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright",
+    +     "id": "color-contrast",
+    +     "impact": "serious",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "bgColor": "#1c1c1c",
+    +               "contrastRatio": 3.72,
+    +               "expectedContrastRatio": "4.5:1",
+    +               "fgColor": "#e02e2a",
+    +               "fontSize": "9.0pt (12px)",
+    +               "fontWeight": "normal",
+    +               "messageKey": null,
+    +             },
+    +             "id": "color-contrast",
+    +             "impact": "serious",
+    +             "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2)",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +         "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−٢٫١٪ مقارنة بالأسبوع الماضي</span>",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(2) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "bgColor": "#1c1c1c",
+    +               "contrastRatio": 3.72,
+    +               "expectedContrastRatio": "4.5:1",
+    +               "fgColor": "#e02e2a",
+    +               "fontSize": "9.0pt (12px)",
+    +               "fontWeight": "normal",
+    +               "messageKey": null,
+    +             },
+    +             "id": "color-contrast",
+    +             "impact": "serious",
+    +             "message": "Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<article data-slot=\"stat-tile\" class=\"ts-stat-tile\">",
+    +                 "target": Array [
+    +                   "article:nth-child(5)",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Element has insufficient color contrast of 3.72 (foreground color: #e02e2a, background color: #1c1c1c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+    +         "html": "<span class=\"ts-stat-tile__delta ts-stat-tile__delta--negative\">−٢٫١٪ مقارنة بالأسبوع الماضي</span>",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(5) > .ts-stat-tile__footer > .ts-stat-tile__delta--negative.ts-stat-tile__delta",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.color",
+    +       "wcag2aa",
+    +       "wcag143",
+    +       "TTv5",
+    +       "TT13.c",
+    +       "EN-301-549",
+    +       "EN-9.1.4.3",
+    +       "ACT",
+    +       "RGAAv4",
+    +       "RGAA-3.2.1",
+    +     ],
+    +   },
+    + ]
+
+       at helpers/preview.ts:58
+
+      56 | export async function expectAccessible(page: Page) {
+      57 | 	const results = await new AxeBuilder({ page }).analyze();
+    > 58 | 	expect(results.violations).toEqual([]);
+         | 	                           ^
+      59 | }
+      60 |
+      61 | export async function expectThemeFocusRing(page: Page, theme: PreviewTheme) {
+        at expectAccessible ({run-worktree}/e2e/helpers/preview.ts:58:29)
+        at {run-worktree}/e2e/dashboard-components.spec.ts:66:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../evidence/01M7SMMD2XH955PSB96AAGBXGM/browser-results/dashboard-components-StatTile-dashboard-states-in-ar-dark/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../evidence/01M7SMMD2XH955PSB96AAGBXGM/browser-results/dashboard-components-StatTile-dashboard-states-in-ar-dark/error-context.md
+
+  2 failed
+    e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in en dark ───────────────────
+    e2e/dashboard-components.spec.ts:12:4 › StatTile dashboard states in ar dark ───────────────────
+  18 passed (36.5s)

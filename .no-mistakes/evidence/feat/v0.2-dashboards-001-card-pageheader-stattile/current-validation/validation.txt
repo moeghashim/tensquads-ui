@@ -1,0 +1,9 @@
+Supplied baseline: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify exited 1 before this phase. Not rerun because full-suite and static checks are outside this phase.
+Executed: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test e2e/dashboard-components.spec.ts e2e/stat-tile-layout.spec.ts --workers=2 --reporter=line
+Exit 1. Production preview build completed; local Wrangler preview ran. Card and PageHeader passed en/ar, light/dark at desktop/mobile with axe and overflow checks. Light StatTile passed. Dark StatTile failed axe in both locales: negative deltas #e02e2a on #1c1c1c, 12px, contrast 3.72:1 (required 4.5:1). See retained error contexts.
+Real React StatTiles rendered into Chromium with synthetic metrics passed six/three/two/one columns at 1440/1180/760/480 and 390px, 112x32 trends, no value overlap or horizontal overflow.
+Executed: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test --config .phase-test.config.ts
+Exit 0. Supplemental driver used built local preview. Card OpenUI two-tile row at desktop and stack at mobile passed in both directions/themes; PageHeader action keyboard reachability passed; StatTile localized accessible names and RTL time direction passed.
+Captured all three component pages at 1440/390, en/ar, light/dark, including dark failure states. Visually inspected StatTile-en-ltr-dark-1440 and Card-ar-rtl-dark-390.
+Both Playwright child exit statuses read. Managed servers stopped; port 5173 had no listener.
+No source changes. Transient drivers, test-results, preview build and Wrangler output removed. Dependencies preserved.
