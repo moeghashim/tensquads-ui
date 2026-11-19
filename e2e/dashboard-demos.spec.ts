@@ -40,12 +40,16 @@ test("store approvals send a command and launcher preserves URL state", async ({
 	await expect(page.getByRole("heading", { name: /Moe/ })).toBeVisible();
 	await expect(page.getByRole("button", { name: "موافقة" }).first()).toBeEnabled();
 	await page.getByRole("button", { name: "موافقة" }).first().click();
-	await expect(page.getByRole("heading", { name: "تم إرسال أمر قرار الموافقة" })).toBeVisible();
 	await expect(page.locator(".ts-card__count")).toHaveText("3");
-	await expect(page.locator(".sent-command pre")).toContainText('"type": "ApprovalDecision"');
+	await expect(page.locator(".sent-commands")).toBeVisible();
+	await expect(page.locator(".sent-commands")).not.toHaveAttribute("open", "");
+	await page.getByText("الأوامر المُرسلة", { exact: true }).click();
+	await expect(page.locator(".sent-commands pre")).toContainText('"type": "ApprovalDecision"');
+	await expect(page.locator(".ts-approval-card__agent").first()).toContainText("كيوتو");
 	await expectAccessible(page);
 	await expectNoHorizontalScroll(page);
-	await page.getByRole("button", { name: "اسأل بيترا" }).click();
+	await expect(page.getByRole("button", { name: /اسأل بيترا.*٣ بانتظارك/ })).toBeVisible();
+	await page.getByRole("button", { name: /اسأل بيترا.*٣ بانتظارك/ }).click();
 	await expect(page).toHaveURL(/\/chat\?.*locale=ar.*dir=rtl.*theme=dark/);
 });
 
@@ -80,12 +84,21 @@ for (const [locale, direction] of [
 					if (view === "companies") {
 						await expect(page.locator(".ts-bars__labels")).toHaveText(["Growth4", "Starter3", "Scale2"]);
 					} else if (view === "home") {
-						await expect(
-							page.getByText(locale === "ar" ? "الأسبوع السابق" : "Previous week", { exact: true }),
-						).toHaveCount(1);
-						await expect(
-							page.getByText(locale === "ar" ? "هذا الأسبوع" : "This week", { exact: true }),
-						).toHaveCount(1);
+						await expect(page.locator(".ts-bar-chart__legend li")).toHaveText([
+							locale === "ar" ? "الأسبوع السابق" : "Previous week",
+							locale === "ar" ? "هذا الأسبوع" : "This week",
+						]);
+						await expect(page.locator(".ts-stat-tile__delta")).toHaveCount(6);
+						if (width === 390) {
+							await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+							const [launcher, lastActions] = await Promise.all([
+								page.getByRole("button", { name: /Ask Petra|اسأل بيترا/ }).boundingBox(),
+								page.locator(".ts-approval-card__footer").last().boundingBox(),
+							]);
+							expect(launcher).not.toBeNull();
+							expect(lastActions).not.toBeNull();
+							expect(lastActions!.y + lastActions!.height).toBeLessThanOrEqual(launcher!.y);
+						}
 					}
 					await expectAccessible(page);
 					const dimensions = await page.evaluate(() => ({
@@ -120,5 +133,6 @@ test("approval decisions survive language changes while pending content is trans
 		"Refund order 1088 after duplicate payment",
 	]);
 	await expect(page.locator(".ts-card__count")).toHaveText("2");
-	await expect(page.locator(".sent-command pre")).toContainText('"decision": "reject"');
+	await page.locator(".sent-commands summary").click();
+	await expect(page.locator(".sent-commands pre")).toContainText('"decision": "reject"');
 });

@@ -1,0 +1,24 @@
+{
+  "approvalDetails": {
+    "approval-1042": {
+      "agent": "giza",
+      "taskId": "TASK-1042"
+    },
+    "approval-1043": {
+      "agent": "kyoto",
+      "taskId": "TASK-1043"
+    },
+    "approval-1044": {
+      "agent": "rio",
+      "taskId": "TASK-1044"
+    },
+    "approval-1045": {
+      "agent": "petra",
+      "taskId": "TASK-1045"
+    }
+  },
+  "ruleLabels": {
+    "refund_limit": "Refund limit",
+    "discount_limit": "Discount limit"
+  }
+}

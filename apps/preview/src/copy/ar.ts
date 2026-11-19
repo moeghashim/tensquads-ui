@@ -7,6 +7,12 @@ const ar = {
 		dashboards: "لوحات المعلومات",
 		getStarted: "البدء",
 	},
+	dashboardHome: {
+		vsLastWeek: "مقارنة بالأسبوع السابق",
+		thisWeek: "هذا الأسبوع",
+		runsSquads: "تشغّل ٥ فرق · متجر تجريبي",
+		sentCommands: "الأوامر المُرسلة",
+	},
 	chat: {
 		eyebrow: "محادثة تتضمّن واجهة",
 		title: "تعرّف إلى المحادثة التي تبني الواجهة.",

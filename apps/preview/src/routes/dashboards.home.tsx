@@ -15,6 +15,9 @@ import {
 } from "@tensquads/ui/react";
 import type { PlatformApprovalRequest } from "@tensquads/ui/schemas";
 import { useState } from "react";
+import { siteCopy } from "../copy";
+import arHome from "../fixtures/dashboard-home.fixture.ar.json";
+import enHome from "../fixtures/dashboard-home.fixture.en.json";
 import { getPreviewState } from "../state";
 import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
@@ -32,12 +35,22 @@ const requestsByLocale = {
 		approvalFixtures["../fixtures/dashboard-approvals.fixture.ar.json"] ?? "[]",
 	) as PlatformApprovalRequest[],
 };
+const homeData = { en: enHome, ar: arHome };
 
 function StoreDashboard() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
 	const ar = locale === "ar";
 	const c = demoCopy[locale];
+	const homeCopy = siteCopy[locale].dashboardHome;
+	const statDeltas = [
+		{ text: `+${ar ? "١٢" : "12"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
+		{ text: `+${ar ? "٨" : "8"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
+		{ text: `+${ar ? "٤" : "4"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
+		{ text: `${ar ? "-١ نقطة" : "-1 pt"} ${homeCopy.vsLastWeek}`, tone: "negative" },
+		{ text: homeCopy.thisWeek, tone: "neutral" },
+		{ text: homeCopy.thisWeek, tone: "neutral" },
+	] as const;
 	const [pendingIds, setPendingIds] = useState(() => requestsByLocale[locale].map((request) => request.approvalId));
 	const pending = requestsByLocale[locale].filter((request) => pendingIds.includes(request.approvalId));
 	const [sent, setSent] = useState<string>();
@@ -49,7 +62,7 @@ function StoreDashboard() {
 			roleLabel: ar ? "قائدة الفريق" : "Team lead",
 			status: "online" as const,
 			featured: true,
-			meta: ar ? "متصلة" : "Online",
+			meta: homeCopy.runsSquads,
 		},
 		{
 			agent: "pisa" as const,
@@ -107,7 +120,7 @@ function StoreDashboard() {
 					</SidebarSection>
 					<SidebarUser initials="MG" name="Moe Ghashim" userRole={ar ? "مالك المتجر" : "Store owner"} />
 				</Sidebar>
-				<section className="dashboard-panel">
+				<section className="dashboard-panel dashboard-panel--home">
 					<PageHeader
 						title={ar ? "صباح الخير، Moe" : "Good morning, Moe"}
 						subtitle={ar ? "إليك ملخص متجرك اليوم" : "Here is your store overview for today"}
@@ -123,8 +136,8 @@ function StoreDashboard() {
 						}
 					/>
 					<div className="ts-stat-grid dashboard-stats">
-						{dashboardData[locale].stats.home.map((stat) => (
-							<StatTile key={stat.label} {...stat} />
+						{dashboardData[locale].stats.home.map((stat, index) => (
+							<StatTile key={stat.label} {...stat} delta={statDeltas[index]} />
 						))}
 					</div>
 					<div className="dashboard-grid dashboard-grid--3-2">
@@ -140,13 +153,23 @@ function StoreDashboard() {
 							/>
 						</Card>
 						<Card title={c.needsApproval} count={pending.length}>
+							{/* TODO: pass ruleLabels when ApprovalCard exposes that prop. */}
 							<div className="approval-list">
 								{pending.map((request) => (
 									<ApprovalCard
 										key={request.approvalId}
 										request={request}
 										locale={locale}
-										bot="petra"
+										bot={
+											homeData[locale].approvalDetails[
+												request.approvalId as keyof typeof homeData.en.approvalDetails
+											]?.agent
+										}
+										taskId={
+											homeData[locale].approvalDetails[
+												request.approvalId as keyof typeof homeData.en.approvalDetails
+											]?.taskId
+										}
 										actionLabels={actionLabels}
 										onDecision={(command) => {
 											setSent(JSON.stringify(command, null, 2));
@@ -155,17 +178,19 @@ function StoreDashboard() {
 									/>
 								))}
 							</div>
+							{sent && (
+								<details className="sent-commands">
+									<summary>{homeCopy.sentCommands}</summary>
+									<pre>{sent}</pre>
+								</details>
+							)}
 						</Card>
 					</div>
-					{sent && (
-						<Card className="sent-command" title={c.commandSent}>
-							<pre>{sent}</pre>
-						</Card>
-					)}
 				</section>
 			</DashboardFrame>
 			<ChatLauncher
 				locale={locale}
+				waiting={pending.length}
 				label={ar ? "اسأل بيترا" : "Ask Petra"}
 				onClick={() => {
 					window.location.href = `/chat?${new URLSearchParams(chatSearch as Record<string, string>).toString()}`;
