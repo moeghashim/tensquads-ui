@@ -137,4 +137,4 @@ Follow PLAN.md §12 and the D20 screenshot policy:
 3. Test keyboard and focus behavior, all documented states, and the OpenUI round trip in both locales.
 4. Add preview coverage for English/LTR and Arabic/RTL in light and dark themes. Check mobile overflow and accessibility.
 5. Use Agent-UI tokens only. Keep screenshots as CI artifacts for review; do not add pixel comparisons or committed baselines.
-6. Regenerate `llms.txt` with `npm run docs` and run `npm run verify`.
+6. Regenerate documentation with the command in [README Commands](../../../README.md#commands), then run `npm run verify`.
