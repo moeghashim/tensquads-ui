@@ -74,7 +74,7 @@ test("home works in both directions and themes", async ({ page }, testInfo) => {
 		await expect(
 			page.getByRole("navigation", { name: state.locale === "ar" ? "التنقل الرئيسي" : "Primary navigation" }),
 		).toBeVisible();
-		await expect(page.locator(".component-card")).toHaveCount(11);
+		await expect(page.locator(".component-card")).toHaveCount(12);
 		await expect(
 			page.getByRole("button", { name: state.locale === "ar" ? "اعتماد الخطة" : "Approve plan" }),
 		).toBeVisible({ timeout: 5000 });

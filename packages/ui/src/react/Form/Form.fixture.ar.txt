@@ -1,0 +1,1 @@
+root = Form("المشروع", [Field("اسم المشروع", "project", "", "بنّاء"), Input("المسؤول", "", "محمد", "soft", false, false, "owner")], "حفظ المشروع", {type: "SaveProject", params: {planId: "p1"}})

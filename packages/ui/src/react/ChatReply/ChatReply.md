@@ -15,3 +15,5 @@ import { ChatReply } from "@tensquads/ui/react";
 `reply` is required. Update it with the full accumulated string as tokens arrive. `locale` defaults to `"en"`; use `"ar"` for Arabic. The locale selects the OpenUI library and does not translate reply text. For server prompt setup, see [OpenUI server](../../../../../README.md#openui-server).
 
 `onAction(event, blockId)` receives the upstream `ActionEvent` and the stable block ID within this reply, including nested list blocks. Pass `locked={(blockId) => consumed.has(blockId)}` after accepting an action to keep its form state visible while disabling that block. A boolean locks all blocks. Combine the block ID with a stable reply ID when calling `useChat().act(event, elementId)`; the hook appends the readable user action pill and sends the structured turn. See [Chat](../Chat/Chat.md) for transport and retry usage.
+
+Use [Form](../Form/Form.md) inside an OpenUI block to submit current text-field values as the next action turn.

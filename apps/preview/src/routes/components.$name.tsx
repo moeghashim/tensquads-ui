@@ -208,7 +208,13 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 						);
 					}}
 				>
-					{chat.locked.has("plan") ? (ar ? "تمت الموافقة" : "Approved") : ar ? "الموافقة على الخطة" : "Approve plan"}
+					{chat.locked.has("plan")
+						? ar
+							? "تمت الموافقة"
+							: "Approved"
+						: ar
+							? "الموافقة على الخطة"
+							: "Approve plan"}
 				</Button>
 				{chat.error && (
 					<Button variant="ghost" onClick={() => void chat.retry()}>
@@ -220,11 +226,41 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 	);
 }
 
+function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }) {
+	const ar = locale === "ar";
+	const chat = useChat({
+		endpoint: "mock://form",
+		locale,
+		transport: async function* () {
+			yield ar ? "تم حفظ المشروع." : "Project saved.";
+		},
+	});
+	return (
+		<div className="component-list" data-testid="form-example">
+			<ChatReply
+				reply={`\`\`\`openui\n${stream}\n\`\`\``}
+				locale={locale}
+				isStreaming={chat.busy}
+				locked={(id) => chat.locked.has(id)}
+				onAction={(event, id) => void chat.act(event, id)}
+			/>
+			{chat.turns.map((turn) =>
+				turn.role === "action" ? (
+					<ChatUserMessage key="action">{turn.action.summary}</ChatUserMessage>
+				) : turn.role === "assistant" ? (
+					<p key="reply">{turn.content}</p>
+				) : null,
+			)}
+		</div>
+	);
+}
+
 function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Form" && stream) return <FormExample locale={locale} stream={stream} />;
 	if (name === "Chat") {
 		const ar = locale === "ar";
 		return (

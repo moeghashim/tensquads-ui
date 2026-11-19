@@ -57,6 +57,8 @@ export {
 	FieldLegend,
 	FieldSet,
 } from "./Field/Field.js";
+export type { FormProps } from "./Form/Form.js";
+export { Form } from "./Form/Form.js";
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
 export type {
