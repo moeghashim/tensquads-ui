@@ -1,0 +1,84 @@
+$ npm run docs
+
+> @tensquads/ui@0.1.0 docs
+> node scripts/build-llms.mjs
+
+Wrote llms.txt and the README.md component table (14 component docs).
+
+exit 0
+
+$ npm run docs:check
+
+> @tensquads/ui@0.1.0 docs:check
+> node scripts/build-llms.mjs --check
+
+llms.txt and README.md are current (14 component docs).
+
+exit 0
+
+SCENARIO 1: generated README starts with Components, lists exactly the 14 shipped families, and links every reference and preview route. Committed outputs reproduce byte-for-byte.
+
+$ npm run docs
+
+> @tensquads/ui@0.1.0 docs
+> node scripts/build-llms.mjs
+
+Wrote llms.txt and the README.md component table (15 component docs).
+
+exit 0
+
+$ npm run docs:check
+
+> @tensquads/ui@0.1.0 docs:check
+> node scripts/build-llms.mjs --check
+
+llms.txt and README.md are current (15 component docs).
+
+exit 0
+
+$ npm run docs
+
+> @tensquads/ui@0.1.0 docs
+> node scripts/build-llms.mjs
+
+Wrote llms.txt and the README.md component table (14 component docs).
+
+exit 0
+
+SCENARIO 2: adding synthetic ZenithProbe generates a fifteenth row and updates the agent index count. A literal pipe stays in one description cell and Arabic survives Markdown rendering. Removing it restores both original outputs; surrounding README content remains unchanged.
+
+$ npm run docs:check
+
+> @tensquads/ui@0.1.0 docs:check
+> node scripts/build-llms.mjs --check
+
+file://{run-worktree}/.test-docs-discoverability/product/scripts/build-llms.mjs:89
+	if (readme !== nextReadme) throw new Error("README.md component table is stale. Run npm run docs.");
+	                                 ^
+
+Error: README.md component table is stale. Run npm run docs.
+    at file://{run-worktree}/.test-docs-discoverability/product/scripts/build-llms.mjs:89:35
+
+Node.js v26.13.1
+
+exit 1
+
+$ npm run docs
+
+> @tensquads/ui@0.1.0 docs
+> node scripts/build-llms.mjs
+
+Wrote llms.txt and the README.md component table (14 component docs).
+
+exit 0
+
+$ npm run docs:check
+
+> @tensquads/ui@0.1.0 docs:check
+> node scripts/build-llms.mjs --check
+
+llms.txt and README.md are current (14 component docs).
+
+exit 0
+
+SCENARIO 3: README-only drift fails with an actionable stale-table error and check mode does not write. npm run docs repairs it, and the next docs:check exits 0.
