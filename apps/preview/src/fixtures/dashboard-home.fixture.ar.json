@@ -16,9 +16,5 @@
       "agent": "petra",
       "taskId": "TASK-1045"
     }
-  },
-  "ruleLabels": {
-    "refund_limit": "حد الاسترداد",
-    "discount_limit": "حد الخصم"
   }
 }
