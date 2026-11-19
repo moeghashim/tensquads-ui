@@ -43,7 +43,11 @@ test("admin dashboard filters companies and selects image details", async ({ pag
 
 for (const locale of ["en", "ar"] as const) {
 	test(`admin image records and reference totals agree in ${locale}`, async ({ page }) => {
-		await openPreview(page, { locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "light" }, "/dashboards/admin");
+		await openPreview(
+			page,
+			{ locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "light" },
+			"/dashboards/admin",
+		);
 		await page.getByRole("button", { name: locale === "ar" ? "صور الفرق" : "Squad images" }).click();
 		await expect(page.locator(".ts-stat-tile__value")).toHaveText(["7", "127", "8", "15", "4"]);
 		await expect(page.locator(".ts-stat-tile__footer")).toHaveText(

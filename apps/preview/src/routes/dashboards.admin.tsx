@@ -405,7 +405,10 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 		{
 			label: copy.featuresRequested,
 			value: String(requests.length),
-			foot: copy.featuresFoot.replace("{count}", numberText(requests.filter((request) => request.inProgress).length)),
+			foot: copy.featuresFoot.replace(
+				"{count}",
+				numberText(requests.filter((request) => request.inProgress).length),
+			),
 		},
 		{
 			label: copy.updatedThisWeek,
@@ -527,7 +530,10 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 								{copy.onLatestCount
 									.replace("{latest}", String(selectedImage.latest))
 									.replace("{deployed}", String(selectedImage.deployed))
-									.replace("{percent}", String(Math.round((selectedImage.latest / selectedImage.deployed) * 100)))}
+									.replace(
+										"{percent}",
+										String(Math.round((selectedImage.latest / selectedImage.deployed) * 100)),
+									)}
 							</dd>
 						</dl>
 						<div className="dashboard-actions">
