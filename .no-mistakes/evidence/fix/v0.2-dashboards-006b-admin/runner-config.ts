@@ -1,0 +1,2 @@
+import config from './playwright.config';
+export default { ...config, testDir: new URL('./e2e', import.meta.url).pathname, outputDir: '~/.no-mistakes/evidence/01M7TR2K5KB9FWFR7D5HNWYW27/results', reporter: [['list'], ['html', { outputFolder: '~/.no-mistakes/evidence/01M7TR2K5KB9FWFR7D5HNWYW27/report', open: 'never' }]], workers: 2, webServer: { ...config.webServer, cwd: new URL('.', import.meta.url).pathname } };

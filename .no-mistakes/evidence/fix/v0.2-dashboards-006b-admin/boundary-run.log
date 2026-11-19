@@ -1,0 +1,56 @@
+[WebServer] (node:91115) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 2 workers
+
+(node:91249) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:91248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary ar (30.0s)
+  ✘  2 ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary en (30.0s)
+
+
+  1) ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary en 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Squad images', exact: true })
+
+
+      19 |   await expect(page.getByRole('row')).toHaveCount(2);
+      20 |   await expect(page.getByRole('row').last()).toContainText('Northstar Goods');
+    > 21 |   await page.getByRole('button',{name:ar?'صور الفرق':'Squad images',exact:true}).click();
+         |                                                                                  ^
+      22 |   await expect(page).toHaveURL(new RegExp(`locale=${locale}.*dir=${ar?'rtl':'ltr'}.*theme=dark.*view=images`));
+      23 |   await page.getByRole('button',{name:ar?'تحتاج إلى مراجعة':'Needs attention',exact:true}).click();
+      24 |   await expect(page.getByRole('row')).toHaveCount(3);
+        at {run-worktree}/e2e/phase-admin.spec.ts:21:82
+
+    Error Context: boundary-results/phase-admin-phase-company--9de41-image-attention-boundary-en/error-context.md
+
+  2) ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary ar 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'صور الفرق', exact: true })
+
+
+      19 |   await expect(page.getByRole('row')).toHaveCount(2);
+      20 |   await expect(page.getByRole('row').last()).toContainText('Northstar Goods');
+    > 21 |   await page.getByRole('button',{name:ar?'صور الفرق':'Squad images',exact:true}).click();
+         |                                                                                  ^
+      22 |   await expect(page).toHaveURL(new RegExp(`locale=${locale}.*dir=${ar?'rtl':'ltr'}.*theme=dark.*view=images`));
+      23 |   await page.getByRole('button',{name:ar?'تحتاج إلى مراجعة':'Needs attention',exact:true}).click();
+      24 |   await expect(page.getByRole('row')).toHaveCount(3);
+        at {run-worktree}/e2e/phase-admin.spec.ts:21:82
+
+    Error Context: boundary-results/phase-admin-phase-company--97ba7-image-attention-boundary-ar/error-context.md
+
+  2 failed
+    ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary en 
+    ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary ar 

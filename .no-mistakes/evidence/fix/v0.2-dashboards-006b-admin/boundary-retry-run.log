@@ -1,0 +1,13 @@
+[WebServer] (node:93347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 2 workers
+
+(node:93464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:93463) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary ar (1.3s)
+  ✓  1 ../../worktrees/383d5bb0a3fa/01M7TR2K5KB9FWFR7D5HNWYW27/e2e/phase-admin.spec.ts:4:2 › phase company filters and image attention boundary en (1.8s)
+
+  2 passed (5.1s)

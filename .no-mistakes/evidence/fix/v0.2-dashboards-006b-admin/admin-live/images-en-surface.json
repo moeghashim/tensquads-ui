@@ -1,0 +1,10 @@
+{
+  "summary": [
+    "Images73 stable · 2 beta or draft",
+    "Deployments12716 behind the latest version",
+    "Open bugs82 high severity",
+    "Features requested153 in progress",
+    "Updated this week4of 7 images"
+  ],
+  "details": "Orders\n\nOrder processing and fulfillment\n\nNeeds attention\nImage\nregistry.agents.example/orders:1.8.2\nVersion\n1.8.2\nLast updated\n6 hours ago\nDeployed to\n34\nOn latest\n22 of 34 (65%)\nRoll out 2.1.1\nView changelog\nOpen bugs\n2\nHighRetry can duplicate a shipment\nB-430 · open 1 day · reported by 5 accounts\nMediumStatus may lag after a refund\nB-418 · open 3 days · reported by 2 accounts\nFeatures to add\n2\nAdd split shipment supportPlanned\nAdd gift order notesBacklog"
+}

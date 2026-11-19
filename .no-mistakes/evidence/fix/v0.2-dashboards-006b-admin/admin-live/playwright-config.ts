@@ -1,0 +1,2 @@
+import { defineConfig } from '@playwright/test';
+export default defineConfig({testDir:'./e2e', reporter:[['line'],['json',{outputFile:'~/.no-mistakes/evidence/01M7TR2K5KB9FWFR7D5HNWYW27/admin-live/existing-results.json'}]], outputDir:'~/.no-mistakes/evidence/01M7TR2K5KB9FWFR7D5HNWYW27/admin-live/playwright', use:{baseURL:'http://127.0.0.1:5279',browserName:'chromium',viewport:{width:1440,height:900},trace:'retain-on-failure'},workers:1});

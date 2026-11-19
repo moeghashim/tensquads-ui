@@ -1,0 +1,354 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "companies",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "companies",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "companies",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "companies",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "images",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "images",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "images",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "view": "images",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "companies",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "companies",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "companies",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "companies",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "images",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "images",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "images",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "view": "images",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "companies",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "companies",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "companies",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "companies",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "images",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "images",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "images",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "view": "images",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "companies",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "companies",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "companies",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "companies",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "images",
+    "width": 1440,
+    "dimensions": {
+      "viewport": 1440,
+      "content": 1440
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "images",
+    "width": 1180,
+    "dimensions": {
+      "viewport": 1180,
+      "content": 1180
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "images",
+    "width": 760,
+    "dimensions": {
+      "viewport": 760,
+      "content": 760
+    },
+    "accessibilityViolations": 0
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "view": "images",
+    "width": 390,
+    "dimensions": {
+      "viewport": 390,
+      "content": 390
+    },
+    "accessibilityViolations": 0
+  }
+]

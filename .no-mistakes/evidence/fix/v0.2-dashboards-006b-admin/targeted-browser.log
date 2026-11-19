@@ -1,0 +1,59 @@
+[WebServer] (node:39916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] [PLUGIN_TIMINGS] Warning: Your build spent significant time in plugins. Here is a breakdown:
+[WebServer]   - tanstack-start-core:import-protection (53%)
+[WebServer]   - tanstack-start-core:import-protection-transform-cache (28%)
+[WebServer]   - tanstack-router:code-splitter:compile-reference-file (6%)
+[WebServer]   - tanstack-start-core::server-fn:ssr (5%)
+[WebServer]   - tanstack-router:code-splitter:compile-virtual-file (3%)
+[WebServer] See https://rolldown.rs/options/checks#plugintimings for more details.
+[WebServer] 
+
+
+Running 35 tests using 2 workers
+
+(node:40545) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:40546) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/35] e2e/dashboard-demos.spec.ts:4:1 › admin dashboard filters companies and selects image details
+[2/35] e2e/dashboard-demos.spec.ts:45:2 › admin image records and reference totals agree in en
+[3/35] e2e/dashboard-demos.spec.ts:45:2 › admin image records and reference totals agree in ar
+[4/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en light at 1440px
+[5/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en light at 1180px
+[6/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en light at 760px
+[7/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en light at 390px
+[8/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en light at 1440px
+[9/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en light at 1180px
+[10/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en light at 760px
+[11/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en light at 390px
+[12/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en dark at 1440px
+[13/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en dark at 1180px
+[14/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en dark at 760px
+[15/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies en dark at 390px
+[16/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en dark at 1440px
+[17/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en dark at 1180px
+[18/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en dark at 760px
+[19/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images en dark at 390px
+[20/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar light at 1440px
+[21/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar light at 1180px
+[22/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar light at 760px
+[23/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar light at 390px
+[24/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar light at 1440px
+[25/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar light at 1180px
+[26/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar light at 760px
+[27/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar light at 390px
+[28/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar dark at 1440px
+[29/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar dark at 1180px
+[30/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar dark at 760px
+[31/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard companies ar dark at 390px
+[32/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar dark at 1440px
+[33/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar dark at 1180px
+[34/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar dark at 760px
+[35/35] e2e/dashboard-demos.spec.ts:226:5 › dashboard images ar dark at 390px
+  35 passed (40.9s)

@@ -1,0 +1,61 @@
+[WebServer] (node:60129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+(node:60352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:60351) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] e2e/local-admin-validation.spec.ts:5:2 › local admin filter boundaries and keyboard selection en
+[2/2] e2e/local-admin-validation.spec.ts:5:2 › local admin filter boundaries and keyboard selection ar
+  1) e2e/local-admin-validation.spec.ts:5:2 › local admin filter boundaries and keyboard selection en 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Squad images', exact: true })
+
+
+      17 |   await page.getByRole('button',{name:locale==='ar'?'إزالة عوامل التصفية':'Clear filters'}).click();
+      18 |   await expect(page.getByRole('row')).toHaveCount(10);
+    > 19 |   await page.getByRole('button',{name:locale==='ar'?'صور الفرق':'Squad images',exact:true}).click();
+         |                                                                                             ^
+      20 |   const url=new URL(page.url());
+      21 |   expect(Object.fromEntries(url.searchParams)).toMatchObject({locale,dir:locale==='ar'?'rtl':'ltr',theme:'dark',view:'images'});
+      22 |   await page.getByRole('button',{name:locale==='ar'?'تحتاج إلى مراجعة':'Needs attention',exact:true}).click();
+        at {run-worktree}/e2e/local-admin-validation.spec.ts:19:93
+
+    Error Context: test-results/local-admin-validation-loc-549d9-s-and-keyboard-selection-en/error-context.md
+
+
+  2) e2e/local-admin-validation.spec.ts:5:2 › local admin filter boundaries and keyboard selection ar 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'صور الفرق', exact: true })
+
+
+      17 |   await page.getByRole('button',{name:locale==='ar'?'إزالة عوامل التصفية':'Clear filters'}).click();
+      18 |   await expect(page.getByRole('row')).toHaveCount(10);
+    > 19 |   await page.getByRole('button',{name:locale==='ar'?'صور الفرق':'Squad images',exact:true}).click();
+         |                                                                                             ^
+      20 |   const url=new URL(page.url());
+      21 |   expect(Object.fromEntries(url.searchParams)).toMatchObject({locale,dir:locale==='ar'?'rtl':'ltr',theme:'dark',view:'images'});
+      22 |   await page.getByRole('button',{name:locale==='ar'?'تحتاج إلى مراجعة':'Needs attention',exact:true}).click();
+        at {run-worktree}/e2e/local-admin-validation.spec.ts:19:93
+
+    Error Context: test-results/local-admin-validation-loc-8acd1-s-and-keyboard-selection-ar/error-context.md
+
+
+  2 failed
+    e2e/local-admin-validation.spec.ts:5:2 › local admin filter boundaries and keyboard selection en 
+    e2e/local-admin-validation.spec.ts:5:2 › local admin filter boundaries and keyboard selection ar 

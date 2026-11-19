@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "name": "companies-en",
+      "result": "pass"
+    },
+    {
+      "name": "companies-ar",
+      "result": "pass"
+    },
+    {
+      "name": "image-filters-keyboard-en",
+      "result": "pass"
+    },
+    {
+      "name": "image-filters-keyboard-ar",
+      "result": "pass"
+    },
+    {
+      "name": "responsive-accessible-matrix",
+      "result": "pass"
+    }
+  ],
+  "errors": []
+}
