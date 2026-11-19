@@ -1,0 +1,28 @@
+[
+  {
+    "behavior": "active toggle",
+    "buttonCurrent": null,
+    "linkCurrent": "page"
+  },
+  {
+    "behavior": "async button pending and repeated Enter ignored",
+    "classes": "ts-sidebar-item saving",
+    "busy": "true",
+    "calls": "1"
+  },
+  {
+    "behavior": "async link pending and repeated Enter ignored",
+    "classes": "ts-sidebar-item saving",
+    "busy": "true",
+    "calls": "2"
+  },
+  {
+    "behavior": "disabled rendered link rejects pointer activation",
+    "calls": 2,
+    "hash": ""
+  },
+  {
+    "behavior": "mobile button and link run actions and close sheet, returning menu focus",
+    "calls": 4
+  }
+]

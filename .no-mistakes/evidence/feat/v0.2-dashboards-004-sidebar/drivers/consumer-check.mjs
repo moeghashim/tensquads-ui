@@ -1,0 +1,66 @@
+import {chromium, expect} from '@playwright/test';
+import {writeFile} from 'node:fs/promises';
+const evidence='~/.no-mistakes/evidence/01M7TGDSYKRTHQVD49EWM71BVH';
+const browser=await chromium.launch();
+const logs=[];
+try {
+ const page=await browser.newPage({viewport:{width:1100,height:800}});
+ page.on('pageerror', e=>logs.push({pageError:e.message}));
+ await page.goto('http://127.0.0.1:5174');
+ const nav=page.getByRole('navigation',{name:'Consumer navigation'});
+ const button=nav.getByRole('button',{name:'Save button',exact:true});
+ const link=nav.getByRole('link',{name:'Save link',exact:true});
+ await expect(button).toBeVisible();
+ await expect(button).toHaveClass(/ready/);
+ await expect(button).toHaveAttribute('aria-current','page');
+ await expect(link).not.toHaveAttribute('aria-current');
+ await page.getByRole('button',{name:'Switch current page'}).click();
+ await expect(button).not.toHaveAttribute('aria-current');
+ await expect(link).toHaveAttribute('aria-current','page');
+ logs.push({behavior:'active toggle',buttonCurrent:await button.getAttribute('aria-current'),linkCurrent:await link.getAttribute('aria-current')});
+ for (const [item,name,n] of [[button,'button',1],[link,'link',2]]) {
+  await item.click();
+  await expect(item).toHaveAttribute('aria-busy','true');
+  await expect(item).toHaveClass(/ts-sidebar-item/);
+  await expect(item).toHaveClass(/saving/);
+  await expect(item).not.toHaveClass(/ready/);
+  await item.focus(); await page.keyboard.press('Enter');
+  await expect(page.getByLabel('Action calls')).toHaveText(String(n));
+  logs.push({behavior:`async ${name} pending and repeated Enter ignored`,classes:await item.getAttribute('class'),busy:await item.getAttribute('aria-busy'),calls:await page.getByLabel('Action calls').textContent()});
+  await page.screenshot({path:`${evidence}/consumer-${name}-pending.png`});
+  await page.getByRole('button',{name:'Complete action'}).click();
+  await expect(item).not.toHaveAttribute('aria-busy');
+  await expect(item).toHaveClass(/ready/);
+  await expect(item).not.toHaveClass(/saving/);
+ }
+ await expect(nav.getByRole('link',{name:'Unavailable'})).toHaveCount(0);
+ await nav.getByText('Unavailable',{exact:true}).click();
+ await expect(page.getByLabel('Action calls')).toHaveText('2');
+ logs.push({behavior:'disabled rendered link rejects pointer activation',calls:2,hash:new URL(page.url()).hash});
+ await page.setViewportSize({width:390,height:844});
+ const menu=page.getByRole('button',{name:'Open navigation'});
+ await menu.click();
+ const sheet=page.getByRole('dialog');
+ const sheetButton=sheet.getByRole('button',{name:'Save button',exact:true});
+ await expect(sheetButton).toHaveClass(/ready/);
+ await sheetButton.click();
+ await expect(sheet).toBeHidden();
+ await expect(menu).toBeFocused();
+ await expect(page.getByLabel('Action calls')).toHaveText('3');
+ await page.getByRole('button',{name:'Complete action'}).click();
+ await menu.click();
+ const sheetLink=sheet.getByRole('link',{name:'Save link',exact:true});
+ await expect(sheetLink).toHaveClass(/ready/);
+ await expect(sheetLink).toHaveAttribute('aria-current','page');
+ await sheetLink.click();
+ await expect(sheet).toBeHidden();
+ await expect(menu).toBeFocused();
+ await expect(page.getByLabel('Action calls')).toHaveText('4');
+ await page.getByRole('button',{name:'Complete action'}).click();
+ logs.push({behavior:'mobile button and link run actions and close sheet, returning menu focus',calls:4});
+ await page.screenshot({path:`evidence-not-used`}).catch(()=>{});
+ await writeFile(`${evidence}/consumer-behavior.json`,JSON.stringify(logs,null,2));
+ console.log(JSON.stringify(logs,null,2));
+ if(logs.some(x=>x.pageError)) throw Error('Browser errors');
+} catch(e) {await writeFile(`${evidence}/consumer-behavior.json`,JSON.stringify([...logs,{failure:String(e)}],null,2));throw e;}
+finally {await browser.close();}

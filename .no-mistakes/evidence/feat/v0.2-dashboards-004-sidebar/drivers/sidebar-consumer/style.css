@@ -1,0 +1,4 @@
+@layer ui-sdk, tensquads;
+body { margin: 20px; background: var(--ts-canvas); color: var(--ts-text); font-family: var(--ts-font-sans); }
+.layout {display:flex; min-height:500px;} main {padding:20px; background:var(--ts-surface);flex:1;} button {margin: 8px;} .saving {outline: 2px solid var(--ts-ring);}
+@media(max-width:959px){.layout{display:block;}}

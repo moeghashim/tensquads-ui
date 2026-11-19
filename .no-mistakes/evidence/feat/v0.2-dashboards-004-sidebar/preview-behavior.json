@@ -1,0 +1,170 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "layout": {
+      "width": 248,
+      "padding": "12px",
+      "brandWidth": 36,
+      "iconWidth": 16
+    },
+    "desktopMirrors": true,
+    "userPinned": true,
+    "agents": [
+      {
+        "text": "PetraRuns 5 squads · Demo store",
+        "imageWidth": 40,
+        "imageLoaded": true,
+        "statusColor": null,
+        "statusAtInlineEnd": null
+      },
+      {
+        "text": "PisaOrdersOnline",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(0, 162, 64)",
+        "statusAtInlineEnd": 1
+      },
+      {
+        "text": "KyotoInventoryIdle",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(175, 175, 175)",
+        "statusAtInlineEnd": 1
+      }
+    ],
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "breakpoint960Visible959Collapsed": true,
+    "mobileLinkNavigatesAndCloses": true
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "layout": {
+      "width": 248,
+      "padding": "12px",
+      "brandWidth": 36,
+      "iconWidth": 16
+    },
+    "desktopMirrors": true,
+    "userPinned": true,
+    "agents": [
+      {
+        "text": "PetraRuns 5 squads · Demo store",
+        "imageWidth": 40,
+        "imageLoaded": true,
+        "statusColor": null,
+        "statusAtInlineEnd": null
+      },
+      {
+        "text": "PisaOrdersOnline",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(0, 134, 53)",
+        "statusAtInlineEnd": 1
+      },
+      {
+        "text": "KyotoInventoryIdle",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(48, 48, 48)",
+        "statusAtInlineEnd": 1
+      }
+    ],
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)"
+    },
+    "breakpoint960Visible959Collapsed": true,
+    "mobileLinkNavigatesAndCloses": true
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "layout": {
+      "width": 248,
+      "padding": "12px",
+      "brandWidth": 36,
+      "iconWidth": 16
+    },
+    "desktopMirrors": true,
+    "userPinned": true,
+    "agents": [
+      {
+        "text": "بتراتدير ٥ فرق · متجر تجريبي",
+        "imageWidth": 40,
+        "imageLoaded": true,
+        "statusColor": null,
+        "statusAtInlineEnd": null
+      },
+      {
+        "text": "بيزاالطلباتمتصل",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(0, 162, 64)",
+        "statusAtInlineEnd": -1
+      },
+      {
+        "text": "كيوتوالمخزونخامل",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(175, 175, 175)",
+        "statusAtInlineEnd": -1
+      }
+    ],
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "breakpoint960Visible959Collapsed": true,
+    "mobileLinkNavigatesAndCloses": true
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "layout": {
+      "width": 248,
+      "padding": "12px",
+      "brandWidth": 36,
+      "iconWidth": 16
+    },
+    "desktopMirrors": true,
+    "userPinned": true,
+    "agents": [
+      {
+        "text": "بتراتدير ٥ فرق · متجر تجريبي",
+        "imageWidth": 40,
+        "imageLoaded": true,
+        "statusColor": null,
+        "statusAtInlineEnd": null
+      },
+      {
+        "text": "بيزاالطلباتمتصل",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(0, 134, 53)",
+        "statusAtInlineEnd": -1
+      },
+      {
+        "text": "كيوتوالمخزونخامل",
+        "imageWidth": 28,
+        "imageLoaded": true,
+        "statusColor": "rgb(48, 48, 48)",
+        "statusAtInlineEnd": -1
+      }
+    ],
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)"
+    },
+    "breakpoint960Visible959Collapsed": true,
+    "mobileLinkNavigatesAndCloses": true
+  }
+]
