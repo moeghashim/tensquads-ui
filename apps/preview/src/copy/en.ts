@@ -5,6 +5,7 @@ const en = {
 		needsAttention: "Needs attention",
 		deployedTo: "Deployed to",
 		onLatest: "On latest",
+		onLatestCount: "{latest} of {deployed} ({percent}%)",
 		rollOut: "Roll out 2.1.1",
 		viewChangelog: "View changelog",
 		imageName: "Image",

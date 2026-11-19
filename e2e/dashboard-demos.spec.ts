@@ -50,15 +50,15 @@ for (const locale of ["en", "ar"] as const) {
 			"٣ مستقرة · ٢ تجريبية أو مسودة", "١٦ متأخرة عن أحدث إصدار", "خطآن بدرجة خطورة عالية", "٣ قيد التنفيذ", "من أصل ٧ صور",
 		] : ["3 stable · 2 beta or draft", "16 behind the latest version", "2 high severity", "3 in progress", "of 7 images"]);
 		const records = [
-			["orders", "Orders", "الطلبات", "Order processing and fulfillment", "معالجة الطلبات وتنفيذها", "6 hours ago", "منذ ٦ ساعات", 34, 2, 2, "22 of 34 (65%)"],
-			["support", "Support", "الدعم", "Customer support and triage", "دعم العملاء وفرز الاستفسارات", "1 day ago", "منذ يوم واحد", 21, 2, 3, "20 of 21 (95%)"],
-			["marketing", "Marketing", "التسويق", "Campaign planning and reporting", "تخطيط الحملات وإعداد التقارير", "2 days ago", "منذ يومين", 18, 2, 3, "17 of 18 (94%)"],
-			["finance", "Finance", "المالية", "Payout reconciliation and reporting", "تسوية المدفوعات وإعداد التقارير", "5 days ago", "منذ ٥ أيام", 15, 0, 3, "14 of 15 (93%)"],
-			["inventory", "Inventory", "المخزون", "Stock monitoring and replenishment", "مراقبة المخزون وتجديده", "9 days ago", "منذ ٩ أيام", 14, 2, 0, "13 of 14 (93%)"],
-			["analytics", "Analytics", "التحليلات", "Store performance insights", "تحليل أداء المتجر", "16 days ago", "منذ ١٦ يوماً", 13, 0, 4, "13 of 13 (100%)"],
-			["people", "People", "الموارد البشرية", "Hiring and team operations", "التوظيف وعمليات الفريق", "21 days ago", "منذ ٢١ يوماً", 12, 0, 0, "12 of 12 (100%)"],
+			["orders", "Orders", "الطلبات", "Order processing and fulfillment", "معالجة الطلبات وتنفيذها", "6 hours ago", "منذ ٦ ساعات", 34, 2, 2, "22 of 34 (65%)", "22 من 34 (65%)"],
+			["support", "Support", "الدعم", "Customer support and triage", "دعم العملاء وفرز الاستفسارات", "1 day ago", "منذ يوم واحد", 21, 2, 3, "20 of 21 (95%)", "20 من 21 (95%)"],
+			["marketing", "Marketing", "التسويق", "Campaign planning and reporting", "تخطيط الحملات وإعداد التقارير", "2 days ago", "منذ يومين", 18, 2, 3, "17 of 18 (94%)", "17 من 18 (94%)"],
+			["finance", "Finance", "المالية", "Payout reconciliation and reporting", "تسوية المدفوعات وإعداد التقارير", "5 days ago", "منذ ٥ أيام", 15, 0, 3, "14 of 15 (93%)", "14 من 15 (93%)"],
+			["inventory", "Inventory", "المخزون", "Stock monitoring and replenishment", "مراقبة المخزون وتجديده", "9 days ago", "منذ ٩ أيام", 14, 2, 0, "13 of 14 (93%)", "13 من 14 (93%)"],
+			["analytics", "Analytics", "التحليلات", "Store performance insights", "تحليل أداء المتجر", "16 days ago", "منذ ١٦ يوماً", 13, 0, 4, "13 of 13 (100%)", "13 من 13 (100%)"],
+			["people", "People", "الموارد البشرية", "Hiring and team operations", "التوظيف وعمليات الفريق", "21 days ago", "منذ ٢١ يوماً", 12, 0, 0, "12 of 12 (100%)", "12 من 12 (100%)"],
 		] as const;
-		for (const [id, name, nameAr, role, roleAr, age, ageAr, deployed, bugs, requests, latest] of records) {
+		for (const [id, name, nameAr, role, roleAr, age, ageAr, deployed, bugs, requests, latest, latestAr] of records) {
 			const row = page.getByRole("row").filter({ hasText: `registry.agents.example/${id}:` });
 			await expect(row.locator("strong")).toHaveText(locale === "ar" ? nameAr : name);
 			await expect(row.getByRole("cell").nth(2)).toHaveText(locale === "ar" ? ageAr : age);
@@ -69,7 +69,7 @@ for (const locale of ["en", "ar"] as const) {
 			await expect(cards.first().getByRole("heading")).toHaveText(locale === "ar" ? nameAr : name);
 			await expect(cards.first().locator("p")).toHaveText(locale === "ar" ? roleAr : role);
 			await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? ageAr : age);
-			await expect(page.locator(".dashboard-details")).toContainText(latest);
+			await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? latestAr : latest);
 			await expect(cards.nth(1).locator(".dashboard-inset-row")).toHaveCount(bugs);
 			await expect(cards.nth(2).locator(".dashboard-inset-row")).toHaveCount(requests);
 			if (!bugs) await expect(cards.nth(1).locator(".dashboard-empty-line")).toBeVisible();

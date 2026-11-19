@@ -522,7 +522,12 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 							<dt>{copy.deployedTo}</dt>
 							<dd className="dashboard-numeric">{selectedImage.deployed}</dd>
 							<dt>{copy.onLatest}</dt>
-							<dd dir="ltr">{`${selectedImage.latest} of ${selectedImage.deployed} (${Math.round((selectedImage.latest / selectedImage.deployed) * 100)}%)`}</dd>
+							<dd>
+								{copy.onLatestCount
+									.replace("{latest}", String(selectedImage.latest))
+									.replace("{deployed}", String(selectedImage.deployed))
+									.replace("{percent}", String(Math.round((selectedImage.latest / selectedImage.deployed) * 100)))}
+							</dd>
 						</dl>
 						<div className="dashboard-actions">
 							<Button>{copy.rollOut}</Button>
