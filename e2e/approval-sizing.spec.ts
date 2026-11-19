@@ -58,7 +58,7 @@ for (const [locale, direction, theme] of [
 				await buttons.nth(reject ? 1 : 0).focus();
 				await page.keyboard.press("Space");
 				await expect(card.locator(".ts-approval-card__outcome")).toHaveText(
-					locale === "ar" ? (reject ? "تم الرفض" : "تمت الموافقة") : (reject ? "Declined" : "Approved"),
+					locale === "ar" ? (reject ? "تم الرفض" : "تمت الموافقة") : reject ? "Declined" : "Approved",
 				);
 				for (const button of await buttons.all()) await expect(button).toBeDisabled();
 				await expect(commands).toContainText('"approvalId": "approval_42"');
