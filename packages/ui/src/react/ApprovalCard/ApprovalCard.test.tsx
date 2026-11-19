@@ -3,8 +3,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { TensquadsRenderer } from "../../openui/TensquadsRenderer.js";
 import type { PlatformApprovalRequest } from "../../schemas/platform.js";
 import { formatMillionths } from "../../schemas/platform.js";
-import { ChatReply } from "../ChatReply/ChatReply.js";
 import { useChat } from "../Chat/useChat.js";
+import { ChatReply } from "../ChatReply/ChatReply.js";
 import { ApprovalCard } from "./ApprovalCard.js";
 
 afterEach(cleanup);
@@ -26,7 +26,12 @@ describe("ApprovalCard", () => {
 		const onDecision = vi.fn();
 		render(<ApprovalCard request={request} onDecision={onDecision} actionLabels={{ refund: "Refund" }} />);
 		fireEvent.click(screen.getByRole("button", { name: "Approve" }));
-		expect(onDecision).toHaveBeenCalledWith({ type: "ApprovalDecision", approvalId: "a1", contentHash: "hash-42", decision: "approve" });
+		expect(onDecision).toHaveBeenCalledWith({
+			type: "ApprovalDecision",
+			approvalId: "a1",
+			contentHash: "hash-42",
+			decision: "approve",
+		});
 		expect(await screen.findByText("Approved")).toBeTruthy();
 		expect(screen.getByRole("button", { name: "Decline" })).toHaveProperty("disabled", true);
 	});
@@ -34,11 +39,23 @@ describe("ApprovalCard", () => {
 		const onDecision = vi.fn();
 		render(<ApprovalCard request={request} onDecision={onDecision} />);
 		fireEvent.click(screen.getByRole("button", { name: "Decline" }));
-		expect(onDecision).toHaveBeenCalledWith({ type: "ApprovalDecision", approvalId: "a1", contentHash: "hash-42", decision: "reject" });
+		expect(onDecision).toHaveBeenCalledWith({
+			type: "ApprovalDecision",
+			approvalId: "a1",
+			contentHash: "hash-42",
+			decision: "reject",
+		});
 		expect(await screen.findByText("Declined")).toBeInTheDocument();
 	});
 	it.each(["en", "ar"] as const)("supports card copy overrides in %s", async (locale) => {
-		render(<ApprovalCard request={request} locale={locale} taskId="t1" labels={{ approve: "Allow", decline: "Deny", approved: "Allowed", declined: "Denied", limit: "Cap", task: "Job" }} />);
+		render(
+			<ApprovalCard
+				request={request}
+				locale={locale}
+				taskId="t1"
+				labels={{ approve: "Allow", decline: "Deny", approved: "Allowed", declined: "Denied", limit: "Cap", task: "Job" }}
+			/>,
+		);
 		expect(screen.getByText(/^Cap /)).toBeTruthy();
 		expect(screen.getByText(/Job:/)).toBeTruthy();
 		fireEvent.click(screen.getByRole("button", { name: "Deny" }));
@@ -50,13 +67,16 @@ describe("ApprovalCard", () => {
 		["Deny", "reject", "Declined"],
 	] as const)("locks an accepted streamed %s decision", async (button, decision, outcome) => {
 		const onAction = vi.fn();
-		const stream = 'root = ApprovalCard("a1", "refund", "Refund order 42", "hash-42", null, 20000000, {}, "en", {approve: "Allow", decline: "Deny"})';
+		const stream =
+			'root = ApprovalCard("a1", "refund", "Refund order 42", "hash-42", null, 20000000, {}, "en", {approve: "Allow", decline: "Deny"})';
 		const { container } = render(<TensquadsRenderer stream={stream} onAction={onAction} />);
 		fireEvent.click(screen.getByRole("button", { name: button }));
-		expect(onAction).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({
-			type: "ApprovalDecision",
-			params: { approvalId: "a1", contentHash: "hash-42", decision },
-		}));
+		expect(onAction).toHaveBeenCalledExactlyOnceWith(
+			expect.objectContaining({
+				type: "ApprovalDecision",
+				params: { approvalId: "a1", contentHash: "hash-42", decision },
+			}),
+		);
 		expect(await screen.findByText(outcome)).toBeInTheDocument();
 		expect(container.querySelector(".ts-approval-card__outcome svg")).not.toBeNull();
 		for (const name of ["Allow", "Deny"]) {
@@ -74,10 +94,10 @@ describe("ApprovalCard", () => {
 			const chat = useChat({ endpoint: "/chat", transport, onAction: () => allow });
 			return (
 				<ChatReply
-				reply={'```openui\nroot = ApprovalCard("a1", "refund", "Refund", "hash-42")\n```'}
-				onAction={(event, id) => chat.act(event, id)}
-				locked={(id) => chat.locked.has(id)}
-				isStreaming={chat.busy}
+					reply={'```openui\nroot = ApprovalCard("a1", "refund", "Refund", "hash-42")\n```'}
+					onAction={(event, id) => chat.act(event, id)}
+					locked={(id) => chat.locked.has(id)}
+					isStreaming={chat.busy}
 				/>
 			);
 		}
@@ -95,9 +115,12 @@ describe("ApprovalCard", () => {
 	});
 	it("blocks opposing decisions during asynchronous acceptance and recovers from rejection", async () => {
 		let settle!: (accepted: boolean) => void;
-		const onAction = vi.fn(() => new Promise<boolean>((resolve) => {
-			settle = resolve;
-		}));
+		const onAction = vi.fn(
+			() =>
+				new Promise<boolean>((resolve) => {
+					settle = resolve;
+				}),
+		);
 		const stream = 'root = ApprovalCard("a1", "refund", "Refund", "hash-42")';
 		const { rerender } = render(<TensquadsRenderer stream={stream} onAction={onAction} />);
 		fireEvent.click(screen.getByRole("button", { name: "Approve" }));

@@ -27,10 +27,15 @@ const messages = [
 describe("OwnerMessageView", () => {
 	it.each(["en", "ar"] as const)("preserves URL destinations across owner text in %s", (locale) => {
 		const text = "See (https://en.wikipedia.org/wiki/Refund_(finance)).";
-		render(<OwnerMessageView locale={locale} messages={[
-			{ ...messages[5], text },
-			{ ...messages[2], summary: text, evidence: [text] },
-		]} />);
+		render(
+			<OwnerMessageView
+				locale={locale}
+				messages={[
+					{ ...messages[5], text },
+					{ ...messages[2], summary: text, evidence: [text] },
+				]}
+			/>,
+		);
 		expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
 			"https://en.wikipedia.org/wiki/Refund_(finance)",
 			"https://en.wikipedia.org/wiki/Refund_(finance)",
@@ -41,9 +46,18 @@ describe("OwnerMessageView", () => {
 	it("renders all six messages in sequence and emits answer commands", () => {
 		const onCommand = vi.fn();
 		const { container } = render(<OwnerMessageView messages={messages} onCommand={onCommand} />);
-		const ordered = Array.from(container.querySelector(".ts-owner-messages")?.children ?? []).map((node) => node.textContent);
+		const ordered = Array.from(container.querySelector(".ts-owner-messages")?.children ?? []).map(
+			(node) => node.textContent,
+		);
 		expect(ordered).toHaveLength(6);
-		for (const [index, text] of ["See **literal** https://example.com", "Choose a size", "Refund order", "Order updated", "Checking the order", "Could not verify the refund"].entries()) {
+		for (const [index, text] of [
+			"See **literal** https://example.com",
+			"Choose a size",
+			"Refund order",
+			"Order updated",
+			"Checking the order",
+			"Could not verify the refund",
+		].entries()) {
 			expect(ordered[index]).toContain(text);
 		}
 		expect(screen.getByRole("link", { name: "https://example.com" })).toBeTruthy();
@@ -55,7 +69,9 @@ describe("OwnerMessageView", () => {
 	});
 	it("restores only the matching approval", () => {
 		const second = { ...messages[3], seq: 7, approvalId: "a2", content: "Second request" };
-		const { container } = render(<OwnerMessageView messages={[messages[3], second]} approvalDecisions={{ a1: "approve" }} />);
+		const { container } = render(
+			<OwnerMessageView messages={[messages[3], second]} approvalDecisions={{ a1: "approve" }} />,
+		);
 		const cards = container.querySelectorAll(".ts-approval-card");
 		expect(within(cards[0] as HTMLElement).getByRole("button", { name: "Approve" })).toBeDisabled();
 		expect(within(cards[1] as HTMLElement).getByRole("button", { name: "Approve" })).toBeEnabled();
@@ -73,12 +89,30 @@ describe("OwnerMessageView", () => {
 		expect(onCommand).toHaveBeenCalledTimes(2);
 	});
 	it.each(["en", "ar"] as const)("shares plain text links and supports copy overrides in %s", (locale) => {
-		render(<OwnerMessageView locale={locale} messages={[
-			{ ...messages[2], summary: "See **summary** https://example.com/summary.", evidence: ["See **evidence** https://example.com/order/42."] },
-			{ ...messages[4], options: [] }, messages[1], messages[0],
-		]} labels={{ answerHint: "Answer here", attempt: "Try", errorTitle: "Unconfirmed" }} />);
-		expect(screen.getByRole("link", { name: "https://example.com/order/42" })).toHaveAttribute("href", "https://example.com/order/42");
-		expect(screen.getByRole("link", { name: "https://example.com/summary" })).toHaveAttribute("href", "https://example.com/summary");
+		render(
+			<OwnerMessageView
+				locale={locale}
+				messages={[
+					{
+						...messages[2],
+						summary: "See **summary** https://example.com/summary.",
+						evidence: ["See **evidence** https://example.com/order/42."],
+					},
+					{ ...messages[4], options: [] },
+					messages[1],
+					messages[0],
+				]}
+				labels={{ answerHint: "Answer here", attempt: "Try", errorTitle: "Unconfirmed" }}
+			/>,
+		);
+		expect(screen.getByRole("link", { name: "https://example.com/order/42" })).toHaveAttribute(
+			"href",
+			"https://example.com/order/42",
+		);
+		expect(screen.getByRole("link", { name: "https://example.com/summary" })).toHaveAttribute(
+			"href",
+			"https://example.com/summary",
+		);
 		expect(screen.getByText("Answer here")).toBeInTheDocument();
 		expect(screen.getByRole("status")).toHaveTextContent("Try 2");
 		expect(screen.getByText("Unconfirmed")).toBeInTheDocument();

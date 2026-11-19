@@ -50,8 +50,8 @@ export const ApprovalCardOpenUI = defineComponent({
 			onDecision: ({ type, approvalId, contentHash, decision }) => {
 				const label =
 					decision === "approve"
-						? props.labels?.approve ?? (props.locale === "ar" ? "موافقة" : "Approve")
-						: props.labels?.decline ?? (props.locale === "ar" ? "رفض" : "Decline");
+						? (props.labels?.approve ?? (props.locale === "ar" ? "موافقة" : "Approve"))
+						: (props.labels?.decline ?? (props.locale === "ar" ? "رفض" : "Decline"));
 				return onAction?.({
 					type,
 					params: { approvalId, contentHash, decision },
