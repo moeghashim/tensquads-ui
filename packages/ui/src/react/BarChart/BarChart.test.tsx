@@ -30,6 +30,36 @@ describe("BarChart", () => {
 		expect(document.querySelector(".ts-visually-hidden")).toHaveTextContent("Oct 26: 2, Oct 27: 4, Oct 28: 3");
 	});
 
+	it.each(["ltr", "rtl"] as const)("keeps odd-maximum ticks on the column scale in %s", (dir) => {
+		for (const points of [
+			[
+				{ label: "A", value: 2 },
+				{ label: "B", value: 3 },
+			],
+			[
+				{ label: "A", segments: [{ key: "one", value: 1 }, { key: "two", value: 1 }] },
+				{ label: "B", segments: [{ key: "one", value: 1 }, { key: "two", value: 2 }] },
+			],
+		]) {
+			const { container, getByRole, unmount } = render(
+				<div dir={dir}>
+					<BarChart locale={dir === "rtl" ? "ar" : "en"} points={points} />
+				</div>,
+			);
+			expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual([
+				"3",
+				"1.5",
+				"0",
+			]);
+			const smaller = getByRole("button", { name: "A: 2" }).querySelector<HTMLElement>(".ts-bar-chart__stack");
+			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(66.6667, 3);
+			expect(getByRole("button", { name: "B: 3" }).querySelector(".ts-bar-chart__stack")).toHaveStyle({
+				blockSize: "100%",
+			});
+			unmount();
+		}
+	});
+
 	it("shows tooltip label and total on focus", () => {
 		const { getByRole, getByText } = render(<BarChart points={[{ label: "Oct 26", value: 3 }]} />);
 		fireEvent.focus(getByRole("button", { name: "Oct 26: 3" }));

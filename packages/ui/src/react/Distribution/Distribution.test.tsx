@@ -41,6 +41,9 @@ describe("Distribution", () => {
 		const checkCopy = () => {
 			expect(container.querySelector("p")).toHaveTextContent(locale === "ar" ? "التوزيع:" : "Distribution:");
 			expect(getByText(locale === "ar" ? "أخرى" : "Other")).toBeInTheDocument();
+			expect(
+				Array.from(container.querySelectorAll(".ts-distribution__segment"), (segment) => segment.getAttribute("title")),
+			).toEqual(["G: 7", "F: 6", "E: 5", "D: 4", "C: 3", locale === "ar" ? "أخرى: 3" : "Other: 3"]);
 			for (const item of getAllByRole("listitem")) {
 				expect(item).toHaveTextContent(locale === "ar" ? "من 28" : "of 28");
 			}
@@ -63,9 +66,14 @@ describe("Distribution", () => {
 				"utf8",
 			);
 			const onError = vi.fn();
-			const { getByText } = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
+			const { getByText, getByTitle } = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
 			expect(getByText(locale === "en" ? "Run outcomes" : "نتائج التشغيل")).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);
+			for (const title of locale === "ar"
+				? ["ناجح: 68", "فشل: 12", "تم التخطي: 5"]
+				: ["Pass: 68", "Fail: 12", "Skipped: 5"]) {
+				expect(getByTitle(title)).toHaveClass("ts-distribution__segment");
+			}
 			expect(document.querySelector(".ts-distribution__key")).toHaveTextContent(
 				locale === "ar" ? "من 85" : "of 85",
 			);

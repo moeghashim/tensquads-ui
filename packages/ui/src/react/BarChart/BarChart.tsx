@@ -47,7 +47,7 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 				<div className="ts-bar-chart__plot" style={{ minInlineSize: chartMinWidth }}>
 					{[0, 1, 2].map((line) => (
 						<div className="ts-bar-chart__gridline" key={line}>
-							<span>{Math.round((max * (2 - line)) / 2)}</span>
+							<span>{(max * (2 - line)) / 2}</span>
 						</div>
 					))}
 					<div className="ts-bar-chart__columns">

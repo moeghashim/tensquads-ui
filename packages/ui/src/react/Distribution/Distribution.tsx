@@ -26,6 +26,7 @@ export function Distribution({ parts, label, locale = "en" }: DistributionProps)
 				{folded.map((part, index) => (
 					<span
 						key={part.label}
+						title={`${part.label}: ${part.value}`}
 						className={`ts-distribution__segment ts-distribution__segment--${Math.min(5, 5 - index)}`}
 						style={{ flexGrow: part.value }}
 					/>
