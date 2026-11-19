@@ -26,6 +26,7 @@ export const BarChartOpenUI = defineComponent({
 			.optional(),
 		highlight: z.tuple([z.number(), z.number()]).nullable().optional(),
 		label: z.string().optional(),
+		locale: z.enum(["en", "ar"]).optional(),
 	}),
 	component: ({ props }) => createElement(BarChart, props),
 });

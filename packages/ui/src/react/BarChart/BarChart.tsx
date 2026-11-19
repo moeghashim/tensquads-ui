@@ -1,4 +1,5 @@
 import { type KeyboardEvent, useRef, useState } from "react";
+import type { Locale } from "../../schemas/index.js";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip.js";
 
 export type BarChartSegment = { key: string; value: number };
@@ -9,10 +10,12 @@ export type BarChartProps = {
 	keys?: BarChartKey[];
 	highlight?: [number, number] | null;
 	label?: string;
+	locale?: Locale;
 };
 
-export function BarChart({ points, keys = [], highlight, label = "Chart" }: BarChartProps) {
+export function BarChart({ points, keys = [], highlight, label, locale = "en" }: BarChartProps) {
 	const [active, setActive] = useState(0);
+	const activeIndex = Math.min(active, Math.max(0, points.length - 1));
 	const refs = useRef<Array<HTMLButtonElement | null>>([]);
 	const max = Math.max(
 		1,
@@ -29,7 +32,8 @@ export function BarChart({ points, keys = [], highlight, label = "Chart" }: BarC
 		const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
 		if (step) {
 			event.preventDefault();
-			const next = Math.max(0, Math.min(points.length - 1, index + (document.dir === "rtl" ? -step : step)));
+			const direction = getComputedStyle(event.currentTarget).direction;
+			const next = Math.max(0, Math.min(points.length - 1, index + (direction === "rtl" ? -step : step)));
 			setActive(next);
 			refs.current[next]?.focus();
 		}
@@ -37,7 +41,7 @@ export function BarChart({ points, keys = [], highlight, label = "Chart" }: BarC
 	return (
 		<div className="ts-bar-chart" data-slot="bar-chart">
 			<p className="ts-visually-hidden">
-				{label}: {summary}
+				{label ?? (locale === "ar" ? "رسم بياني" : "Chart")}: {summary}
 			</p>
 			<div className="ts-bar-chart__viewport">
 				<div className="ts-bar-chart__plot" style={{ minInlineSize: chartMinWidth }}>
@@ -67,7 +71,7 @@ export function BarChart({ points, keys = [], highlight, label = "Chart" }: BarC
 												type="button"
 												className="ts-bar-chart__column"
 												aria-label={accessibleName}
-												tabIndex={index === active ? 0 : -1}
+												tabIndex={index === activeIndex ? 0 : -1}
 												onFocus={() => setActive(index)}
 												onKeyDown={(event) => onKeyDown(event, index)}
 											/>
@@ -76,9 +80,9 @@ export function BarChart({ points, keys = [], highlight, label = "Chart" }: BarC
 										<span
 											className="ts-bar-chart__stack"
 											aria-hidden="true"
-											style={{ blockSize: `${Math.max(2, (total / max) * 100)}%` }}
+											style={{ blockSize: `${(total / max) * 100}%` }}
 										>
-											{parts.map((part) => (
+											{parts.filter((part) => part.value !== 0).map((part) => (
 												<span
 													key={part.key}
 													className={`ts-bar-chart__segment ts-bar-chart__segment--${keys.find((item) => item.key === part.key)?.tone ?? (isHighlighted ? "strong" : "muted")}`}

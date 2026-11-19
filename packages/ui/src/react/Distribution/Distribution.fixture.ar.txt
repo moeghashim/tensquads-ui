@@ -1,1 +1,1 @@
-root = Card("نتائج التشغيل", "هذا الأسبوع", null, [Distribution([{label: "ناجح", value: 68}, {label: "فشل", value: 12}, {label: "تم التخطي", value: 5}], "نتائج التشغيل")], null, false, "default")
+root = Card("نتائج التشغيل", "هذا الأسبوع", null, [Distribution([{label: "ناجح", value: 68}, {label: "فشل", value: 12}, {label: "تم التخطي", value: 5}], "نتائج التشغيل", "ar")], null, false, "default")

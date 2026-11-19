@@ -60,6 +60,58 @@ describe("BarChart", () => {
 		expect(container.querySelectorAll(".ts-bar-chart__columns .ts-bar-chart__segment--strong")).toHaveLength(1);
 	});
 
+	it("keeps zero marks empty in scalar and stacked columns", () => {
+		const { getByRole } = render(
+			<BarChart
+				points={[
+					{ label: "Zero", value: 0 },
+					{ label: "Empty stack", segments: [{ key: "a", value: 0 }, { key: "b", value: 0 }] },
+					{ label: "Mixed", segments: [{ key: "a", value: 0 }, { key: "b", value: 4 }] },
+				]}
+			/>,
+		);
+		for (const name of ["Zero: 0", "Empty stack: 0"]) {
+			const stack = getByRole("button", { name }).querySelector(".ts-bar-chart__stack");
+			expect(stack).toHaveStyle({ blockSize: "0%" });
+			expect(stack?.children).toHaveLength(0);
+		}
+		const mixed = getByRole("button", { name: "Mixed: 4" });
+		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "100%" });
+		expect(mixed.querySelectorAll(".ts-bar-chart__segment")).toHaveLength(1);
+		fireEvent.focus(mixed);
+		expect(document.body).toHaveTextContent("a: 0");
+	});
+
+	it("retains one tab stop after shrinking, emptying and growing points", () => {
+		const points = Array.from({ length: 14 }, (_, index) => ({ label: `Day ${index}`, value: index }));
+		const { getAllByRole, rerender } = render(<BarChart points={points} />);
+		fireEvent.focus(getAllByRole("button")[13]!);
+		rerender(<BarChart points={points.slice(0, 7)} />);
+		let columns = getAllByRole("button");
+		expect(columns.filter((column) => column.tabIndex === 0)).toEqual([columns[6]]);
+		fireEvent.keyDown(columns[6]!, { key: "ArrowLeft" });
+		expect(columns[5]).toHaveFocus();
+		rerender(<BarChart points={[]} />);
+		rerender(<BarChart points={points.slice(0, 2)} />);
+		columns = getAllByRole("button");
+		expect(columns.filter((column) => column.tabIndex === 0)).toEqual([columns[1]]);
+		fireEvent.keyDown(columns[1]!, { key: "ArrowLeft" });
+		expect(columns[0]).toHaveFocus();
+	});
+
+	it.each(["en", "ar"] as const)("localizes the default %s summary in React and OpenUI", (locale) => {
+		const label = locale === "ar" ? "رسم بياني" : "Chart";
+		const { container, rerender } = render(<BarChart locale={locale} points={[{ label: "A", value: 1 }]} />);
+		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent(`${label}: A: 1`);
+		rerender(
+			<TensquadsRenderer
+				locale={locale}
+				stream={`root = BarChart([{label: "A", value: 1}], [], null, null, "${locale}")`}
+			/>,
+		);
+		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent(`${label}: A: 1`);
+	});
+
 	it("round trips both locale fixtures", () => {
 		expect(getRegisteredComponents().map(({ name }) => name)).toContain("BarChart");
 		for (const locale of ["en", "ar"] as const) {

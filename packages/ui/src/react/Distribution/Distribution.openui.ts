@@ -10,6 +10,7 @@ export const DistributionOpenUI = defineComponent({
 	props: z.object({
 		parts: z.array(z.object({ label: z.string(), value: z.number().nonnegative() })),
 		label: z.string().optional(),
+		locale: z.enum(["en", "ar"]).optional(),
 	}),
 	component: ({ props }) => createElement(Distribution, props),
 });

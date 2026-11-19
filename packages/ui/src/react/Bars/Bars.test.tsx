@@ -24,6 +24,25 @@ describe("Bars", () => {
 		expect(container.querySelector(".ts-bars__fill--info")).toBeInTheDocument();
 	});
 
+	it.each(["ranked", "progress"] as const)("scales fractional values to the maximum in %s style", (style) => {
+		const { container, rerender } = render(
+			<Bars
+				style={style}
+				rows={[
+					{ label: "Fast", value: 0.25, display: "0.25 s" },
+					{ label: "Slow", value: 0.5, display: "0.5 s" },
+				]}
+			/>,
+		);
+		const fills = container.querySelectorAll(".ts-bars__fill");
+		expect(fills[0]).toHaveStyle({ inlineSize: "100%" });
+		expect(fills[1]).toHaveStyle({ inlineSize: "50%" });
+		rerender(<Bars style={style} rows={[{ label: "Zero", value: 0, display: "0 s" }]} />);
+		expect(container.querySelector(".ts-bars__fill")).toHaveStyle({ inlineSize: "0%" });
+		rerender(<Bars style={style} rows={[]} />);
+		expect(container.querySelectorAll(".ts-bars__fill")).toHaveLength(0);
+	});
+
 	it("round trips both locale fixtures", () => {
 		expect(getRegisteredComponents().map(({ name }) => name)).toContain("Bars");
 		for (const locale of ["en", "ar"] as const) {

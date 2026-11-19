@@ -9,7 +9,7 @@
 	.ts-bar-chart__column { position: relative; flex: 1 0 min(28px, 8%); max-inline-size: 28px; min-inline-size: 14px; display: flex; align-items: flex-end; justify-content: center; padding: 0; border: 0; background: transparent; cursor: pointer; }
 	.ts-bar-chart__column:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.ts-bar-chart__stack { inline-size: 100%; max-block-size: 100%; display: flex; flex-direction: column-reverse; gap: 2px; overflow: hidden; border-radius: var(--ts-radius-sm) var(--ts-radius-sm) 0 0; }
-	.ts-bar-chart__segment { min-block-size: 2px; background: var(--ts-gray-250); }
+	.ts-bar-chart__segment { background: var(--ts-gray-250); }
 	.ts-bar-chart__segment--muted { background: var(--ts-gray-250); }
 	.ts-bar-chart__segment--strong { background: var(--ts-primary-solid); }
 	.ts-bar-chart__segment--success { background: var(--ts-green-500); }

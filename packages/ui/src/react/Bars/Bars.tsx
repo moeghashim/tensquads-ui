@@ -3,7 +3,7 @@ export type BarsProps = { rows: BarsRow[]; style?: "ranked" | "progress"; captio
 
 export function Bars({ rows, style = "ranked", caption }: BarsProps) {
 	const sortedRows = [...rows].sort((a, b) => b.value - a.value);
-	const max = Math.max(1, ...sortedRows.map(({ value }) => value));
+	const max = Math.max(0, ...sortedRows.map(({ value }) => value)) || 1;
 	return (
 		<div className={`ts-bars ts-bars--${style}`} data-slot="bars">
 			<ol className="ts-bars__list">
