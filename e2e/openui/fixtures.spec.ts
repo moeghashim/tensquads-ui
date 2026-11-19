@@ -112,6 +112,10 @@ test("every component fixture parses and renders", async ({ page }) => {
 			} else if (["BarChart", "Bars", "Distribution"].includes(component.name)) {
 				const slot = component.name === "BarChart" ? "bar-chart" : component.name.toLowerCase();
 				await expect(fixtureRegion.locator(`[data-slot="${slot}"]`)).toBeVisible();
+			} else if (component.name === "DataTable") {
+				await expect(fixtureRegion.getByRole("table")).toBeVisible();
+			} else if (component.name === "EmptyState") {
+				await expect(fixtureRegion.locator("[data-slot='empty-state']")).toBeVisible();
 			} else {
 				const label =
 					component.name === "Input"

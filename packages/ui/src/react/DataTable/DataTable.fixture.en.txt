@@ -1,0 +1,1 @@
+root = DataTable("Companies", [{key: "company", label: "Company"}, {key: "owner", label: "Owner"}, {key: "plan", label: "Plan", align: "end"}, {key: "status", label: "Status"}], [{id: "acme", cells: {company: "Acme", owner: "Maya Chen", plan: "$149 / mo", status: "Active"}}])

@@ -17,6 +17,13 @@ import { useChat } from "../../../../packages/ui/src/react/Chat/useChat";
 import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
+	DataTable,
+	EntityCell,
+	PersonCell,
+	StackCell,
+	StatusCell,
+} from "../../../../packages/ui/src/react/DataTable/DataTable";
+import {
 	Dialog,
 	DialogBackdrop,
 	DialogClose,
@@ -25,6 +32,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "../../../../packages/ui/src/react/Dialog/Dialog";
+import { EmptyState } from "../../../../packages/ui/src/react/EmptyState/EmptyState";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
 import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import {
@@ -264,11 +272,147 @@ function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }
 	);
 }
 
+function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stream: string | null; empty: boolean }) {
+	const [selectedId, setSelectedId] = useState("acme");
+	const [query, setQuery] = useState(empty ? (locale === "ar" ? "شركة غير موجودة" : "Unmatched company") : "");
+	const [filter, setFilter] = useState<string | null>("all");
+	const ar = locale === "ar";
+	const companies = [
+		{
+			id: "acme",
+			name: "Acme Studio",
+			status: "active",
+			cells: {
+				company: (
+					<EntityCell
+						initials="AC"
+						name="Acme Studio"
+						detail={
+							ar
+								? "متجر تجريبي / الوصول إلى مليون دولار من المبيعات السنوية"
+								: "DS / Demo store / Reach $1M in annual sales"
+						}
+						tint="primary"
+					/>
+				),
+				owner: <PersonCell name="Maya Chen" email="maya@example.com" />,
+				plan: (
+					<StackCell
+						primary={ar ? "١٤٩ دولاراً / شهرياً" : "$149 / mo"}
+						secondary={ar ? "الفوترة شهرياً" : "Billed monthly"}
+					/>
+				),
+				status: <StatusCell label={ar ? "نشطة" : "Active"} />,
+			},
+		},
+		{
+			id: "northstar",
+			name: "Northstar",
+			status: "trial",
+			cells: {
+				company: (
+					<EntityCell
+						initials="NS"
+						name="Northstar"
+						detail={ar ? "متجر إلكتروني / ٣ أعضاء في الفريق" : "Online store / 3 team members"}
+						tint="success"
+					/>
+				),
+				owner: <PersonCell name="Omar Saleh" email="omar@example.com" />,
+				plan: (
+					<StackCell
+						primary={ar ? "٧٩ دولاراً / شهرياً" : "$79 / mo"}
+						secondary={ar ? "الفوترة شهرياً" : "Billed monthly"}
+					/>
+				),
+				status: <StatusCell label={ar ? "تجربة" : "Trial"} />,
+			},
+		},
+	];
+	const visibleCompanies = companies.filter(
+		(company) =>
+			(filter === "all" || company.status === filter) &&
+			company.name.toLowerCase().includes(query.trim().toLowerCase()),
+	);
+	const number = new Intl.NumberFormat(locale);
+	return (
+		<div className="gallery dashboard-component-preview component-list">
+			<Card
+				flush
+				title={
+					ar
+						? `كل الشركات (${number.format(visibleCompanies.length)} من ${number.format(companies.length)})`
+						: `All companies (${visibleCompanies.length} of ${companies.length})`
+				}
+				actions={
+					<div className="ts-data-table__toolbar">
+						<Input
+							value={query}
+							onValueChange={setQuery}
+							aria-label={ar ? "البحث عن الشركات" : "Search companies"}
+							placeholder={ar ? "البحث عن الشركات" : "Search companies"}
+						/>
+						<SegmentedControl
+							aria-label={ar ? "حالة الشركة" : "Company status"}
+							value={filter}
+							onValueChange={setFilter}
+						>
+							<SegmentedControlIndicator />
+							{["all", "active", "trial", "paused"].map((value, index) => (
+								<SegmentedControlItem key={value} value={value}>
+									{(ar ? ["الكل", "نشطة", "تجربة", "متوقفة"] : ["All", "Active", "Trial", "Paused"])[index]}
+								</SegmentedControlItem>
+							))}
+						</SegmentedControl>
+					</div>
+				}
+			>
+				{visibleCompanies.length === 0 ? (
+					<EmptyState
+						title={ar ? "لا تطابق أي شركة البحث" : "No companies match"}
+						description={ar ? "امسح البحث لعرض جميع الشركات." : "Clear the search to see all companies."}
+						action={
+							<Button
+								pill
+								onClick={() => {
+									setQuery("");
+									setFilter("all");
+								}}
+							>
+								{ar ? "مسح البحث" : "Clear search"}
+							</Button>
+						}
+					/>
+				) : (
+					<DataTable
+						caption={ar ? "الشركات" : "Companies"}
+						columns={[
+							{ key: "company", label: ar ? "الشركة" : "Company" },
+							{ key: "owner", label: ar ? "المالك" : "Owner" },
+							{ key: "plan", label: ar ? "الخطة" : "Plan", align: "end" },
+							{ key: "status", label: ar ? "الحالة" : "Status" },
+						]}
+						rows={visibleCompanies}
+						selectedId={selectedId}
+						onRowSelect={setSelectedId}
+					/>
+				)}
+			</Card>
+			<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+				<TensquadsRenderer stream={stream} locale={locale} />
+			</section>
+		</div>
+	);
+}
+
 function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "DataTable" || name === "EmptyState") {
+		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
+	}
 	if (name === "ApprovalCard") return <ApprovalCardPreview locale={locale} stream={stream ?? null} />;
 	if (name === "OwnerMessageView") return <OwnerMessagePreview locale={locale} />;
 	if (["Card", "PageHeader", "StatTile"].includes(name)) {

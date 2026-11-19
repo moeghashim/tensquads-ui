@@ -31,6 +31,8 @@ for (const locale of ["en", "ar"] as const) {
 			if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
 			else if (["ApprovalCard", "OwnerMessageView"].includes(name))
 				await expect(page.locator(".owner-message-preview")).toBeVisible();
+			else if (name === "DataTable") await expect(page.getByRole("table").first()).toBeVisible();
+			else if (name === "EmptyState") await expect(page.locator("[data-slot='empty-state']").first()).toBeVisible();
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();

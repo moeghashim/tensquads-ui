@@ -1,0 +1,1 @@
+root = EmptyState("No companies yet", "Add a company to see it listed here.")
