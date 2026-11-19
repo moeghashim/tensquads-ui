@@ -4,10 +4,16 @@ import { capturePreviewScreenshots, expectAccessible, expectNoHorizontalScroll, 
 test("admin dashboard filters companies and selects image details", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/dashboards/admin");
 	await expect(page.getByRole("row")).toHaveCount(10);
-	await expect(page.locator(".ts-bars__labels")).toHaveText(["Growth4", "Starter3", "Scale2"]);
+	await expect(page.locator(".ts-bars__labels")).toContainText([
+		"Growth4 companies · 27 squads",
+		"Starter3 companies · 17 squads",
+		"Scale2 companies · 22 squads",
+	]);
+	await expect(page.locator(".ts-bar-chart__segment").first()).toHaveClass(/segment--subtle/);
+	await expect(page.locator(".ts-bar-chart__segment").last()).toHaveClass(/segment--strong/);
 	const online = await page.getByRole("row").all();
-	const onlineCounts = await Promise.all(online.slice(1).map((row) => row.getByRole("cell").last().innerText()));
-	expect(onlineCounts.reduce((sum, value) => sum + Number(value), 0)).toBe(53);
+	const onlineCounts = await Promise.all(online.slice(1).map((row) => row.getByRole("cell").last().textContent()));
+	expect(onlineCounts.reduce((sum, value) => sum + Number.parseInt(value ?? "0", 10), 0)).toBe(53);
 	await page.getByRole("button", { name: "Trial", exact: true }).click();
 	await expect(page.getByRole("row")).toHaveCount(3);
 	await page.getByRole("button", { name: "All", exact: true }).click();
@@ -19,18 +25,18 @@ test("admin dashboard filters companies and selects image details", async ({ pag
 	await page.getByRole("button", { name: "Squad images" }).click();
 	await expect(page).toHaveURL(/view=images/);
 	await page.getByRole("button", { name: "With bugs" }).click();
-	await expect(page.getByRole("row")).toHaveCount(3);
+	await expect(page.getByRole("row")).toHaveCount(5);
 	await page.getByRole("button", { name: "All", exact: true }).click();
-	await page.getByRole("row", { name: /squad\/pisa.svg/ }).click();
-	await expect(page.locator(".dashboard-details")).toContainText("pisa.svg");
-	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator("p")).toHaveCount(0);
-	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator("p")).toHaveCount(0);
+	await page.getByRole("row", { name: /registry\.agents\.example\/orders:1\.8\.2/ }).click();
+	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/orders:1.8.2");
+	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator(".dashboard-inset-row")).toHaveCount(2);
+	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(2);
 	await page.getByRole("button", { name: "With requests" }).click();
-	await expect(page.getByRole("row")).toHaveCount(2);
-	await page.getByRole("row", { name: /squad\/kyoto.svg/ }).click();
-	await expect(page.locator(".dashboard-details")).toContainText("kyoto.svg");
-	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator("p")).toHaveCount(2);
-	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator("p")).toHaveCount(5);
+	await expect(page.getByRole("row")).toHaveCount(6);
+	await page.getByRole("row", { name: /registry\.agents\.example\/analytics:1\.1\.2/ }).click();
+	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/analytics:1.1.2");
+	await expect(page.locator(".dashboard-stack .ts-card").nth(1)).toContainText("No open bugs");
+	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(1);
 	await expectAccessible(page);
 	await expectNoHorizontalScroll(page);
 });
@@ -65,6 +71,7 @@ for (const [locale, direction] of [
 					);
 					if (view === "images") {
 						if (width <= 760) {
+							await expect(page.locator(".ts-sidebar-mobile-bar")).toContainText("Platform admin");
 							await page
 								.getByRole("button", { name: locale === "ar" ? "فتح التنقل" : "Open navigation" })
 								.click();
@@ -73,12 +80,12 @@ for (const [locale, direction] of [
 						await expect(page).toHaveURL(/view=images/);
 						await expect(page.getByRole("dialog")).toHaveCount(0);
 						await expect(page.locator(".dashboard-details")).toContainText(
-							locale === "ar" ? "١٤ نوفمبر ٢٠٢٥" : "Nov 14, 2025",
+							locale === "ar" ? "منذ يومين" : "2 days ago",
 						);
 					}
 					await expect(page.locator(".dashboard-panel h1")).toBeVisible();
 					if (view === "companies") {
-						await expect(page.locator(".ts-bars__labels")).toHaveText(["Growth4", "Starter3", "Scale2"]);
+						await expect(page.locator(".ts-bars__labels")).toContainText(["Growth4", "Starter3", "Scale2"]);
 					} else if (view === "home") {
 						await expect(
 							page.getByText(locale === "ar" ? "الأسبوع السابق" : "Previous week", { exact: true }),

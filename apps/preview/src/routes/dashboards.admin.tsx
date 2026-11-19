@@ -19,6 +19,7 @@ import {
 	StatTile,
 } from "@tensquads/ui/react";
 import { useMemo, useState } from "react";
+import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
@@ -46,12 +47,44 @@ const companiesByLocale = {
 	en: JSON.parse(companyFixtures["../fixtures/dashboard-companies.fixture.en.json"] ?? "[]") as Company[],
 	ar: JSON.parse(companyFixtures["../fixtures/dashboard-companies.fixture.ar.json"] ?? "[]") as Company[],
 };
+const imageFixtures = import.meta.glob<string>("../fixtures/dashboard-images.fixture.*.json", {
+	eager: true,
+	query: "?raw",
+	import: "default",
+});
+type ImageFixture = {
+	id: string;
+	name: string;
+	nameAr: string;
+	role: string;
+	roleAr: string;
+	path: string;
+	version: string;
+	updated: string;
+	deployed: number;
+	latest: string;
+	attention: boolean;
+	bugs: {
+		id: string;
+		title: string;
+		titleAr: string;
+		severity: string;
+		age: string;
+		ageAr: string;
+		accounts: number;
+	}[];
+	requests: { id: string; title: string; titleAr: string; status: string }[];
+};
+const imagesByLocale: Record<"en" | "ar", ImageFixture[]> = {
+	en: JSON.parse(imageFixtures["../fixtures/dashboard-images.fixture.en.json"] ?? "[]"),
+	ar: JSON.parse(imageFixtures["../fixtures/dashboard-images.fixture.ar.json"] ?? "[]"),
+};
 
 function AdminDashboard() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
-	const ar = locale === "ar";
 	const copy = demoCopy[locale];
+	const adminCopy = siteCopy[locale].adminDemo;
 	const view = search.view === "images" ? "images" : "companies";
 	const navigate = useNavigate();
 	const [filter, setFilter] = useState("All");
@@ -69,16 +102,49 @@ function AdminDashboard() {
 	const setView = (next: "companies" | "images") =>
 		void navigate({ to: ".", search: { ...search, view: next } as never });
 	const data = dashboardData[locale];
-	const stats = view === "companies" ? data.stats.admin : data.stats.images;
+	const stats =
+		view === "companies"
+			? data.stats.admin.map((stat, index) => ({
+					...stat,
+					foot:
+						index === 0 || index === 3 || index === 4
+							? undefined
+							: [
+									adminCopy.companyDelta,
+									adminCopy.trialPaused,
+									adminCopy.onlineNow,
+									adminCopy.tasksDelta,
+									adminCopy.payingCompanies,
+									adminCopy.averagePaying,
+								][index],
+					delta:
+						index === 0
+							? { text: adminCopy.companyDelta, tone: "positive" as const }
+							: index === 3
+								? { text: adminCopy.tasksDelta, tone: "positive" as const }
+								: index === 4
+									? { text: adminCopy.payingCompanies, tone: "positive" as const }
+									: null,
+				}))
+			: [];
 	const planCounts = new Map<string, number>();
 	for (const company of companiesByLocale[locale]) {
 		planCounts.set(company.plan, (planCounts.get(company.plan) ?? 0) + 1);
 	}
-	const plans = Array.from(planCounts, ([label, value]) => ({ label, value, display: String(value) }));
+	const plans = Array.from(planCounts, ([label, value]) => {
+		const planCompanies = companiesByLocale[locale].filter((company) => company.plan === label);
+		const squads = planCompanies.reduce((total, company) => total + Number(company.squads), 0);
+		return {
+			label,
+			value,
+			display: `${value} ${adminCopy.companyUnit} · ${squads} ${adminCopy.squadUnit}`,
+			tone: label === "Growth" ? ("info" as const) : undefined,
+		};
+	});
 	return (
 		<main className="dashboard-page" dir={direction}>
 			<DashboardFrame>
-				<Sidebar label={ar ? copy.adminNav : copy.adminNav} mobileLabel={copy.openNavigation}>
+				<Sidebar label="Platform admin" mobileLabel={copy.openNavigation}>
 					<SidebarBrand icon={<Icon name="grid" />} title="Platform admin" subtitle={copy.workspace} />
 					<SidebarSection label={copy.workspace}>
 						<SidebarItem
@@ -117,23 +183,36 @@ function AdminDashboard() {
 						meta={
 							<>
 								<DemoPill locale={locale} />
-								<Badge tone="success">{view === "companies" ? data.squadsOnline : data.imagesAttention}</Badge>
+								<Badge tone={view === "images" ? "danger" : "success"}>
+									{view === "companies" ? data.squadsOnline : data.imagesAttention}
+								</Badge>
 							</>
 						}
 					/>
-					<div className="ts-stat-grid dashboard-stats">
-						{stats.map((stat) => (
-							<StatTile key={stat.label} {...stat} />
-						))}
-					</div>
+					{view === "companies" && (
+						<div className="ts-stat-grid dashboard-stats">
+							{stats.map((stat) => (
+								<StatTile key={stat.label} {...stat} />
+							))}
+						</div>
+					)}
 					{view === "companies" ? (
 						<>
 							<div className="dashboard-grid dashboard-grid--3-2">
 								<Card title={copy.companiesChartTitle} subtitle={copy.lastEightWeeks}>
-									<BarChart locale={locale} label={copy.companiesChartTitle} points={data.companiesChart} />
+									<BarChart
+										locale={locale}
+										label={adminCopy.companiesCreated}
+										keys={[{ key: "history", label: "", tone: "subtle" }]}
+										points={data.companiesChart.map((point, index, points) =>
+											index === points.length - 1
+												? point
+												: { label: point.label, segments: [{ key: "history", value: point.value ?? 0 }] },
+										)}
+									/>
 								</Card>
 								<Card title={copy.plansTitle} subtitle={copy.activePlans}>
-									<Bars style="progress" rows={plans} />
+									<Bars style="progress" caption={adminCopy.planCaption} rows={plans} />
 								</Card>
 							</div>
 							<Card
@@ -188,8 +267,8 @@ function AdminDashboard() {
 											{ key: "subscription", label: copy.subscription },
 											{ key: "started", label: copy.started },
 											{ key: "value", label: copy.allTimeValue, align: "end" },
-											{ key: "squads", label: copy.squads },
-											{ key: "online", label: copy.online },
+											{ key: "squads", label: copy.squads, align: "end" },
+											{ key: "online", label: copy.online, align: "end" },
 										]}
 										rows={rows.map((row) => ({
 											id: row.id,
@@ -199,6 +278,13 @@ function AdminDashboard() {
 														initials={row.name.slice(0, 2)}
 														name={row.name}
 														detail={row.mission}
+														tint={
+															(["primary", "success"] as const)[
+																companiesByLocale[locale].findIndex(
+																	(company) => company.id === row.id,
+																) % 2
+															]
+														}
 													/>
 												),
 												owner: <PersonCell name={row.owner} email={row.email} />,
@@ -213,13 +299,19 @@ function AdminDashboard() {
 																	: "default"
 														}
 													>
-														{copy.filters[row.subscription as keyof typeof copy.filters]}
+														{adminCopy.status[row.subscription as keyof typeof adminCopy.status]}
 													</Badge>
 												),
 												started: row.started,
 												value: row.value,
-												squads: row.squads,
-												online: row.online,
+												squads: <span className="dashboard-numeric">{row.squads}</span>,
+												online: (
+													<Badge
+														tone={Number(row.online) / Number(row.squads) >= 0.75 ? "success" : "default"}
+													>
+														{row.online} / {row.squads}
+													</Badge>
+												),
 											},
 										}))}
 									/>
@@ -235,25 +327,71 @@ function AdminDashboard() {
 	);
 }
 
+function TemplateIcon({ id }: { id: string }) {
+	const paths: Record<string, string> = {
+		orders: "M4 5h16v14H4zM8 9h8M8 13h5M8 16h3",
+		support: "M4 5h16v12H9l-5 3zM8 9h8M8 13h5",
+		marketing: "M4 14V9l11-4v13L4 14zm11-4h4l2 3v3h-6m-8-2 1 5h4l-1-4",
+		finance: "M4 7h16M6 4v3m12-3v3M5 7v13h14V7M8 11h8M8 15h5",
+		inventory: "M4 7h16v13H4zM3 4h18M8 11h8M8 15h5",
+		analytics: "M4 19V5m0 14h16M7 15l4-4 3 2 5-7",
+		people: "M16 20v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m6-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8m6-7a4 4 0 0 1 0 7",
+	};
+	return (
+		<svg
+			aria-hidden="true"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="1.6"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<path d={paths[id] ?? paths.orders} />
+		</svg>
+	);
+}
+
 function ImageView({ locale }: { locale: "en" | "ar" }) {
-	const [selected, setSelected] = useState("petra");
+	const [selected, setSelected] = useState("orders");
 	const [filter, setFilter] = useState("all");
 	const c = demoCopy[locale];
-	const images = dashboardData[locale].images;
-	const selectedImage = images.find((image) => image.id === selected);
+	const copy = siteCopy[locale].adminDemo;
+	const images = imagesByLocale[locale];
+	const selectedImage = images.find((image) => image.id === selected) ?? images[0]!;
+	const numberText = (value: number) =>
+		locale === "ar"
+			? String(value).replace(/[0-9]/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)] ?? digit)
+			: String(value);
 	const visibleImages = images.filter(
 		(image) =>
 			filter === "all" ||
-			(filter === "attention" && (image.bugs.length > 0 || image.requests.length > 0)) ||
+			(filter === "attention" && image.attention) ||
 			(filter === "bugs" && image.bugs.length > 0) ||
 			(filter === "requests" && image.requests.length > 0),
 	);
+	const stats = [
+		{ label: copy.images, value: "7", foot: copy.imagesFoot },
+		{ label: copy.deployments, value: "127", delta: { text: copy.deploymentsFoot, tone: "negative" as const } },
+		{ label: copy.openBugs, value: "8", delta: { text: copy.highBugs, tone: "negative" as const } },
+		{ label: copy.featuresRequested, value: "15", foot: copy.featuresFoot },
+		{ label: copy.updatedThisWeek, value: "4", foot: copy.updatedFoot },
+	];
 	return (
-		<div className="dashboard-grid dashboard-grid--2-3">
-			<Card
-				title={c.allImages}
-				actions={
-					<div className="dashboard-table-tools">
+		<>
+			<div className="ts-stat-grid dashboard-stats dashboard-stats--images">
+				{stats.map((stat) => (
+					<StatTile key={stat.label} {...stat} />
+				))}
+			</div>
+			<div className="dashboard-grid dashboard-grid--3-2 dashboard-image-layout">
+				<Card
+					title={copy.allImagesCount
+						.replace("{visible}", numberText(visibleImages.length))
+						.replace("{total}", numberText(7))}
+					flush
+				>
+					<div className="dashboard-image-filters">
 						{[
 							["all", c.all],
 							["attention", c.needsAttention],
@@ -270,62 +408,164 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 							</Button>
 						))}
 					</div>
-				}
-				flush
-			>
-				<DataTable
-					caption={c.allImages}
-					selectedId={selected}
-					onRowSelect={setSelected}
-					columns={[
-						{ key: "path", label: c.image, mono: true },
-						{ key: "version", label: c.version },
-						{ key: "updated", label: c.lastUpdated },
-						{ key: "deployed", label: c.deployed },
-						{ key: "bugs", label: c.bugs, align: "end" },
-					]}
-					rows={visibleImages.map((row) => ({
-						id: row.id,
-						cells: {
-							path: row.path,
-							version: row.version,
-							updated: row.updated,
-							deployed: row.deployed,
-							bugs: row.bugs.length,
-						},
-					}))}
-				/>
-			</Card>
-			<div className="dashboard-stack">
-				<Card title={c.imageDetails}>
-					<dl className="dashboard-details">
-						<dt>{c.registryPath}</dt>
-						<dd>{selectedImage?.path}</dd>
-						<dt>{c.version}</dt>
-						<dd>{selectedImage?.version}</dd>
-						<dt>{c.lastUpdated}</dt>
-						<dd>{selectedImage?.updated}</dd>
-					</dl>
-					<div className="dashboard-actions">
-						<Button>{c.rollOut}</Button>
-						<Button variant="soft">{c.viewChangelog}</Button>
-					</div>
+					<DataTable
+						caption={c.allImages}
+						selectedId={selected}
+						onRowSelect={setSelected}
+						columns={[
+							{ key: "image", label: copy.imageName },
+							{ key: "version", label: copy.imageVersion, mono: true },
+							{ key: "updated", label: copy.lastUpdated },
+							{ key: "deployed", label: copy.deployed, align: "end" },
+							{ key: "bugs", label: copy.bugs, align: "end" },
+						]}
+						rows={visibleImages.map((image) => ({
+							id: image.id,
+							cells: {
+								image: (
+									<span
+										className="dashboard-image-cell"
+										style={{
+											display: "inline-flex",
+											alignItems: "center",
+											gap: "var(--ts-space-2)",
+											minInlineSize: 0,
+										}}
+									>
+										<span
+											className={`ts-data-table__tile ts-data-table__tile--${["support", "finance", "analytics"].includes(image.id) ? "success" : "primary"}`}
+											style={{ inlineSize: "28px", blockSize: "28px", minInlineSize: "28px", padding: 0 }}
+										>
+											<TemplateIcon id={image.id} />
+										</span>
+										<span className="dashboard-image-copy">
+											<strong>{locale === "ar" ? image.nameAr : image.name}</strong>
+											<small
+												dir="ltr"
+												style={{
+													display: "block",
+													maxInlineSize: "16rem",
+													fontFamily: "var(--ts-font-mono)",
+													fontSize: "var(--ts-text-xs-font-size)",
+													overflow: "hidden",
+													textOverflow: "ellipsis",
+													whiteSpace: "nowrap",
+												}}
+											>
+												{image.path}
+											</small>
+										</span>
+									</span>
+								),
+								version: image.version,
+								updated: locale === "ar" ? "منذ يومين" : image.updated,
+								deployed: <span className="dashboard-numeric">{image.deployed}</span>,
+								bugs: (
+									<span
+										className={image.bugs.length ? "dashboard-danger dashboard-numeric" : "dashboard-numeric"}
+									>
+										{image.bugs.length}
+									</span>
+								),
+							},
+						}))}
+					/>
 				</Card>
-				<Card title={c.openBugs}>
-					{selectedImage?.bugs.map((bug) => (
-						<p key={bug.id}>
-							{bug.title} <Badge tone="danger">{bug.severity}</Badge>
-						</p>
-					))}
-				</Card>
-				<Card title={c.featuresToAdd}>
-					{selectedImage?.requests.map((request) => (
-						<p key={request.id}>
-							{request.title} <Badge tone="default">{request.status}</Badge>
-						</p>
-					))}
-				</Card>
+				<div className="dashboard-stack">
+					<Card title={locale === "ar" ? selectedImage.nameAr : selectedImage.name}>
+						<div className="dashboard-image-detail-head">
+							<p>{locale === "ar" ? selectedImage.roleAr : selectedImage.role}</p>
+							{selectedImage.attention && <Badge tone="danger">{copy.needsAttention}</Badge>}
+						</div>
+						<dl className="dashboard-details">
+							<dt>{copy.imageName}</dt>
+							<dd dir="ltr">{selectedImage.path}</dd>
+							<dt>{copy.imageVersion}</dt>
+							<dd dir="ltr">{selectedImage.version}</dd>
+							<dt>{copy.lastUpdated}</dt>
+							<dd>{locale === "ar" ? "منذ يومين" : selectedImage.updated}</dd>
+							<dt>{copy.deployedTo}</dt>
+							<dd className="dashboard-numeric">{selectedImage.deployed}</dd>
+							<dt>{copy.onLatest}</dt>
+							<dd dir="ltr">{selectedImage.latest}</dd>
+						</dl>
+						<div className="dashboard-actions">
+							<Button>{copy.rollOut}</Button>
+							<Button variant="soft">{copy.viewChangelog}</Button>
+						</div>
+					</Card>
+					<Card title={c.openBugs} count={numberText(selectedImage.bugs.length)}>
+						{selectedImage.bugs.length ? (
+							selectedImage.bugs.map((bug) => (
+								<div
+									className="dashboard-inset-row"
+									key={bug.id}
+									style={{
+										display: "grid",
+										gap: "var(--ts-space-2)",
+										padding: "var(--ts-space-3)",
+										border: "1px solid var(--ts-border-subtle)",
+										borderRadius: "var(--ts-radius-lg)",
+									}}
+								>
+									<div className="dashboard-inset-title">
+										<Badge
+											tone={
+												bug.severity === "High"
+													? "danger"
+													: bug.severity === "Medium"
+														? "warning"
+														: "default"
+											}
+										>
+											{locale === "ar"
+												? ({ High: "عالية", Medium: "متوسطة", Low: "منخفضة" } as Record<string, string>)[
+														bug.severity
+													]
+												: bug.severity}
+										</Badge>
+										<strong>{locale === "ar" ? bug.titleAr : bug.title}</strong>
+									</div>
+									<small>
+										{copy.bugMeta
+											.replace("{id}", bug.id)
+											.replace("{age}", locale === "ar" ? bug.ageAr : bug.age)
+											.replace("{accounts}", String(bug.accounts))}
+									</small>
+								</div>
+							))
+						) : (
+							<p className="dashboard-empty-line">{copy.emptyBugs}</p>
+						)}
+					</Card>
+					<Card title={c.featuresToAdd} count={numberText(selectedImage.requests.length)}>
+						{selectedImage.requests.length ? (
+							selectedImage.requests.map((request) => (
+								<div
+									className="dashboard-inset-row"
+									key={request.id}
+									style={{
+										display: "grid",
+										gap: "var(--ts-space-2)",
+										padding: "var(--ts-space-3)",
+										border: "1px solid var(--ts-border-subtle)",
+										borderRadius: "var(--ts-radius-lg)",
+									}}
+								>
+									<div className="dashboard-inset-title">
+										<strong>{locale === "ar" ? request.titleAr : request.title}</strong>
+										<Badge tone={request.status === "Planned" ? "success" : "default"}>
+											{request.status === "Planned" ? copy.planned : copy.backlog}
+										</Badge>
+									</div>
+								</div>
+							))
+						) : (
+							<p className="dashboard-empty-line">{copy.emptyFeatures}</p>
+						)}
+					</Card>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }

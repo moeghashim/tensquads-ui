@@ -1,0 +1,172 @@
+[
+  {
+    "id": "orders",
+    "name": "Orders",
+    "role": "Order processing and fulfillment",
+    "path": "registry.agents.example/orders:1.8.2",
+    "version": "1.8.2",
+    "updated": "2 days ago",
+    "deployed": 34,
+    "latest": "22 of 34 (65%)",
+    "attention": true,
+    "bugs": [
+      {
+        "id": "B-430",
+        "title": "Retry can duplicate a shipment",
+        "severity": "High",
+        "age": "1 day",
+        "accounts": 5,
+        "ageAr": "يوم واحد"
+      },
+      {
+        "id": "B-418",
+        "title": "Status may lag after a refund",
+        "severity": "Medium",
+        "age": "3 days",
+        "accounts": 2,
+        "ageAr": "٣ أيام"
+      }
+    ],
+    "requests": [
+      {
+        "id": "F-102",
+        "title": "Add split shipment support",
+        "status": "Planned"
+      },
+      {
+        "id": "F-117",
+        "title": "Add gift order notes",
+        "status": "Backlog"
+      }
+    ]
+  },
+  {
+    "id": "support",
+    "name": "Support",
+    "role": "Customer support and triage",
+    "path": "registry.agents.example/support:1.6.0",
+    "version": "1.6.0",
+    "updated": "2 days ago",
+    "deployed": 21,
+    "latest": "18 of 21 (86%)",
+    "attention": true,
+    "bugs": [
+      {
+        "id": "B-422",
+        "title": "Escalation summary omits links",
+        "severity": "High",
+        "age": "2 days",
+        "accounts": 3,
+        "ageAr": "يومين"
+      }
+    ],
+    "requests": [
+      {
+        "id": "F-110",
+        "title": "Suggest related help articles",
+        "status": "Planned"
+      }
+    ]
+  },
+  {
+    "id": "marketing",
+    "name": "Marketing",
+    "role": "Campaign planning and reporting",
+    "path": "registry.agents.example/marketing:1.4.3",
+    "version": "1.4.3",
+    "updated": "2 days ago",
+    "deployed": 18,
+    "latest": "16 of 18 (89%)",
+    "attention": false,
+    "bugs": [
+      {
+        "id": "B-415",
+        "title": "Preview clips long subject lines",
+        "severity": "Low",
+        "age": "4 days",
+        "accounts": 1,
+        "ageAr": "٤ أيام"
+      }
+    ],
+    "requests": [
+      {
+        "id": "F-122",
+        "title": "Add campaign comparison view",
+        "status": "Backlog"
+      }
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Finance",
+    "role": "Payout reconciliation and reporting",
+    "path": "registry.agents.example/finance:1.3.1",
+    "version": "1.3.1",
+    "updated": "2 days ago",
+    "deployed": 15,
+    "latest": "14 of 15 (93%)",
+    "attention": false,
+    "bugs": [],
+    "requests": [
+      {
+        "id": "F-126",
+        "title": "Export monthly summaries",
+        "status": "Planned"
+      }
+    ]
+  },
+  {
+    "id": "inventory",
+    "name": "Inventory",
+    "role": "Stock monitoring and replenishment",
+    "path": "registry.agents.example/inventory:1.2.0",
+    "version": "1.2.0",
+    "updated": "2 days ago",
+    "deployed": 14,
+    "latest": "12 of 14 (86%)",
+    "attention": false,
+    "bugs": [
+      {
+        "id": "B-401",
+        "title": "Low stock alert repeats",
+        "severity": "Low",
+        "age": "6 days",
+        "accounts": 2,
+        "ageAr": "٦ أيام"
+      }
+    ],
+    "requests": []
+  },
+  {
+    "id": "analytics",
+    "name": "Analytics",
+    "role": "Store performance insights",
+    "path": "registry.agents.example/analytics:1.1.2",
+    "version": "1.1.2",
+    "updated": "2 days ago",
+    "deployed": 13,
+    "latest": "12 of 13 (92%)",
+    "attention": false,
+    "bugs": [],
+    "requests": [
+      {
+        "id": "F-132",
+        "title": "Add cohort breakdown",
+        "status": "Backlog"
+      }
+    ]
+  },
+  {
+    "id": "people",
+    "name": "People",
+    "role": "Hiring and team operations",
+    "path": "registry.agents.example/people:1.0.0",
+    "version": "1.0.0",
+    "updated": "2 days ago",
+    "deployed": 12,
+    "latest": "11 of 12 (92%)",
+    "attention": false,
+    "bugs": [],
+    "requests": []
+  }
+]
