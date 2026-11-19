@@ -100,6 +100,16 @@ describe("BarChart", () => {
 		}
 	});
 
+	it("labels every point through 14 and every fifth point beyond 14", () => {
+		const points = Array.from({ length: 15 }, (_, index) => ({ label: `Day ${index + 1}`, value: index + 1 }));
+		const { container, rerender } = render(<BarChart points={points.slice(0, 14)} />);
+		const tickLabels = () =>
+			Array.from(container.querySelectorAll(".ts-bar-chart__tick"), (tick) => tick.textContent);
+		expect(tickLabels()).toEqual(points.slice(0, 14).map(({ label }) => label));
+		rerender(<BarChart points={points} />);
+		expect(tickLabels()).toEqual(["Day 1", "", "", "", "", "Day 6", "", "", "", "", "Day 11", "", "", "", ""]);
+	});
+
 	it.each(["en", "ar"] as const)("allocates the full fractional stack in %s", (locale) => {
 		const { container, getByRole } = render(
 			<div dir={locale === "ar" ? "rtl" : "ltr"}>

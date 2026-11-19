@@ -1145,9 +1145,11 @@ ${menuContentsCode}
 	}
 	return (
 		<div className="gallery">
-			<Link to="/components" search={search as never}>
-				Back to gallery
-			</Link>
+			{!(["BarChart", "Bars", "Distribution"] as string[]).includes(name) && (
+				<Link to="/components" search={search as never}>
+					Back to gallery
+				</Link>
+			)}
 			<p className="eyebrow">Component preview</p>
 			<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
 				{stream ? (

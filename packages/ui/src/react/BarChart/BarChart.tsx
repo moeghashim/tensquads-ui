@@ -27,7 +27,8 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 				`${pointLabel}: ${value ?? segments?.reduce((sum, part) => sum + part.value, 0) ?? 0}`,
 		)
 		.join(", ");
-	const chartMinWidth = `calc(${points.length} * 2.25rem + 2rem)`;
+	const chartMinWidth = `calc(${points.length} * 2.75rem + 2rem)`;
+	const showTickLabel = (index: number) => points.length <= 14 || index % 5 === 0;
 	const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
 		const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
 		if (step) {
@@ -111,7 +112,7 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 				<div className="ts-bar-chart__ticks" aria-hidden="true" style={{ minInlineSize: chartMinWidth }}>
 					{points.map((point, index) => (
 						<span className="ts-bar-chart__tick" key={point.label}>
-							{points.length <= 14 || index % 5 === 0 ? point.label : null}
+							{showTickLabel(index) ? point.label : null}
 						</span>
 					))}
 				</div>
