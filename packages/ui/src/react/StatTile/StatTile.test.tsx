@@ -48,7 +48,7 @@ describe("StatTile", () => {
 				<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />,
 			);
 			expect(getByText(label)).toBeInTheDocument();
-			expect(getByRole("img", { name: label, exact: true })).toBeInTheDocument();
+			expect(getByRole("img", { name: label })).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);
 			cleanup();
 		}
