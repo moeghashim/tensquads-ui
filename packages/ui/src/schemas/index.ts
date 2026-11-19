@@ -1,6 +1,7 @@
 import { z } from "zod/v4";
 
 export type { ChatAction, ChatActionTurn, ChatTurn } from "./chat.js";
+export * from "./platform.js";
 
 export const LocaleSchema = z.enum(["en", "ar"]);
 export type Locale = z.infer<typeof LocaleSchema>;

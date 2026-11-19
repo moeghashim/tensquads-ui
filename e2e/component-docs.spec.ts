@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { getRegisteredComponents } from "../packages/ui/src/openui";
 import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
-const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
+const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "OwnerMessageView", "Chat", "ChatReply"];
 
 test("component index lists every documented component", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");
@@ -29,6 +29,8 @@ for (const locale of ["en", "ar"] as const) {
 				page.getByRole("heading", { name: locale === "ar" ? "أمثلة تفاعلية" : "Live examples" }),
 			).toBeVisible();
 			if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
+			else if (["ApprovalCard", "OwnerMessageView"].includes(name))
+				await expect(page.locator(".owner-message-preview")).toBeVisible();
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();

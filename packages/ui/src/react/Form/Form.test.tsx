@@ -187,7 +187,7 @@ describe("Form", () => {
 						locale={locale}
 						isStreaming={chat.busy}
 						locked={(id) => chat.locked.has(id)}
-						onAction={(event, id) => void chat.act(event, id)}
+						onAction={(event, id) => chat.act(event, id)}
 					/>
 					{chat.turns.map((turn) =>
 						turn.role === "action" ? (

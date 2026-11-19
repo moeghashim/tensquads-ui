@@ -16,6 +16,7 @@ import "../react/StatTile/StatTile.openui.js";
 import "../react/BarChart/BarChart.openui.js";
 import "../react/Bars/Bars.openui.js";
 import "../react/Distribution/Distribution.openui.js";
+import "../react/ApprovalCard/ApprovalCard.openui.js";
 import type { DefinedComponent } from "@openuidev/react-lang";
 import { getRegisteredDefinitions } from "./registration-store.js";
 

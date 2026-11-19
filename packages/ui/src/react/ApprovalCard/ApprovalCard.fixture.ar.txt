@@ -1,0 +1,1 @@
+root = ApprovalCard("approval_42", "refund", "استرداد قيمة الطلب ١٠٤٢", "sha256:42", "refund_limit", 20000000, {refund: "استرداد"}, "ar")

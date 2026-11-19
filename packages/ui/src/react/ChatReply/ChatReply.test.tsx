@@ -29,6 +29,16 @@ root = Button("Continue", "solid", "md", false, false)
 Use \`npm run deploy\` to continue.`;
 
 describe("ChatReply", () => {
+	it.each(["en", "ar"] as const)("preserves balanced plain-text URL parentheses in %s", (locale) => {
+		const reply = "See (https://en.wikipedia.org/wiki/Refund_(finance)). Next https://example.com/topic_(a_(b))!";
+		const { container } = render(<ChatReply reply={reply} locale={locale} plainText />);
+		expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+			"https://en.wikipedia.org/wiki/Refund_(finance)",
+			"https://example.com/topic_(a_(b))",
+		]);
+		expect(container.textContent).toBe(reply);
+	});
+
 	it("forwards OpenUI action events and keeps locked blocks mounted", () => {
 		const onAction = vi.fn();
 		const reply =

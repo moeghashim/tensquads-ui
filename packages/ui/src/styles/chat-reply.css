@@ -1,4 +1,5 @@
 .ts-chat-reply { min-inline-size: 0; color: var(--ts-text-emphasis); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); overflow-wrap: anywhere; }
+.ts-chat-reply__plain { white-space: pre-wrap; }
 .ts-chat-reply__markdown > :first-child { margin-block-start: 0; }
 .ts-chat-reply__markdown > :last-child { margin-block-end: 0; }
 .ts-chat-reply__markdown p, .ts-chat-reply__markdown ul, .ts-chat-reply__markdown ol { margin-block: var(--ts-space-3); }

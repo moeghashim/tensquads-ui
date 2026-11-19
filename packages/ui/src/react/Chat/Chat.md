@@ -29,7 +29,7 @@ const chat = useChat({ endpoint: "/api/chat", locale: "en" });
 <ChatReply
   reply={reply}
   isStreaming={chat.busy}
-  onAction={(event, blockId) => void chat.act(event, `${replyId}/${blockId}`)}
+  onAction={(event, blockId) => chat.act(event, `${replyId}/${blockId}`)}
   locked={(blockId) => chat.locked.has(`${replyId}/${blockId}`)}
 />;
 ```

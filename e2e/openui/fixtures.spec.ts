@@ -101,6 +101,14 @@ test("every component fixture parses and renders", async ({ page }) => {
 				});
 				await expect(sparkline).toBeVisible();
 				await expect(sparkline).toHaveCSS("transform", locale === "en" ? "none" : "matrix(-1, 0, 0, 1, 0, 0)");
+			} else if (component.name === "ApprovalCard") {
+				await expect(
+					fixtureRegion.getByRole("heading", { name: locale === "en" ? "Refund" : "استرداد" }),
+				).toBeVisible();
+				await expect(fixtureRegion.getByText("ApprovalDecision")).toHaveCount(0);
+				await expect(
+					fixtureRegion.getByRole("button", { name: locale === "en" ? "Approve" : "موافقة" }),
+				).toBeVisible();
 			} else if (["BarChart", "Bars", "Distribution"].includes(component.name)) {
 				const slot = component.name === "BarChart" ? "bar-chart" : component.name.toLowerCase();
 				await expect(fixtureRegion.locator(`[data-slot="${slot}"]`)).toBeVisible();

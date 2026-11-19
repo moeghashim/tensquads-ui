@@ -1,0 +1,6 @@
+reply: I received your request.
+question: Which priority should I use? Options: Standard, Urgent.
+approval_request: Refund order 1042. Limit $20.00.
+result: The order was updated. Evidence: https://example.com/order/42.
+status: Petra is checking the order, attempt 2.
+action_not_confirmed: The order service did not confirm the action.

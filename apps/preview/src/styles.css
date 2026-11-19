@@ -155,6 +155,7 @@
 	.markdown-document section > h3 { margin-block: 0 var(--ts-space-3); color: var(--ts-text-emphasis); font-family: var(--ts-panel-title-font-family); font-size: var(--ts-panel-title-font-size); }
 	.markdown-document h2, .markdown-document h3, .markdown-document h4, .markdown-document h5, .markdown-document h6 { color: var(--ts-text-emphasis); }
 	.markdown-document p, .markdown-document li { line-height: 1.7; overflow-wrap: anywhere; }
+	.component-doc-page__header h1, .component-doc-nav a { min-inline-size: 0; max-inline-size: 100%; overflow-wrap: anywhere; }
 	.markdown-document a { color: var(--ts-text-emphasis); }
 	.copyable-code { min-inline-size: 0; margin-block: var(--ts-space-5); overflow: hidden; border-radius: var(--ts-radius-lg); background: var(--ts-gray-1000); color: var(--ts-gray-200); }
 	.copyable-code__header { display: flex; align-items: center; justify-content: space-between; gap: var(--ts-space-3); padding-block: var(--ts-space-2); padding-inline: var(--ts-space-3); border-block-end: thin solid var(--ts-gray-800); font-size: var(--ts-text-xs-font-size); }
@@ -357,6 +358,11 @@
 }
 
 @layer tensquads {
+	.owner-message-preview { display: grid; gap: var(--ts-space-6); inline-size: min(100%, 42rem); min-inline-size: 0; }
+	.sent-commands { min-inline-size: 0; padding: var(--ts-space-4); border: thin solid var(--ts-border-subtle); border-radius: var(--ts-radius-xl); background: var(--ts-panel); }
+	.sent-commands h2 { margin: 0 0 var(--ts-space-3); color: var(--ts-text-emphasis); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); }
+	.sent-commands pre { max-inline-size: 100%; margin: 0; overflow: auto; color: var(--ts-text-secondary); font-family: var(--ts-font-mono); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); white-space: pre-wrap; overflow-wrap: anywhere; }
+	.owner-message-preview .ts-owner-messages { padding: var(--ts-space-5); border: thin solid var(--ts-border-subtle); border-radius: var(--ts-radius-xl); background: var(--ts-panel); }
 	.switch-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); align-items: start; gap: var(--ts-space-6); }
 	.switch-preview__example { min-inline-size: 0; display: grid; align-content: start; gap: var(--ts-space-3); }
 	.switch-preview__example > .ts-switch-field { display: flex; align-items: center; gap: var(--ts-space-3); }
