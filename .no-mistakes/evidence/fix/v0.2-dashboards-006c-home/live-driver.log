@@ -1,0 +1,274 @@
+[
+  {
+    "name": "metrics and approval identity en light",
+    "result": "pass",
+    "detail": {
+      "deltas": [
+        "+12% vs last week",
+        "+8% vs last week",
+        "+4% vs last week",
+        "-1 pt vs last week",
+        "This week",
+        "This week"
+      ],
+      "identities": [
+        "GizaTask: TASK-1042",
+        "KyotoTask: TASK-1043",
+        "RioTask: TASK-1044",
+        "PetraTask: TASK-1045"
+      ],
+      "errors": []
+    }
+  },
+  {
+    "name": "approve, keyboard disclosure and language switch en light",
+    "result": "pass",
+    "detail": {
+      "command": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1042",
+        "decision": "approve",
+        "contentHash": "sha256:request-1042"
+      },
+      "rejection": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1043",
+        "decision": "reject",
+        "contentHash": "sha256:request-1043"
+      },
+      "pending": [
+        "المهمة: TASK-1044",
+        "المهمة: TASK-1045"
+      ]
+    }
+  },
+  {
+    "name": "mobile clearance, empty approvals and chat navigation en light",
+    "result": "pass",
+    "detail": {
+      "launcher": {
+        "x": 204.96875,
+        "y": 788,
+        "width": 161.03125,
+        "height": 32
+      },
+      "lastActions": {
+        "x": 49,
+        "y": 707,
+        "width": 292,
+        "height": 32
+      },
+      "lastDeclineHitTest": true,
+      "dimensions": {
+        "viewport": 390,
+        "content": 390
+      },
+      "url": "http://127.0.0.1:5173/chat?locale=en&dir=ltr&theme=light",
+      "errors": []
+    }
+  },
+  {
+    "name": "metrics and approval identity en dark",
+    "result": "pass",
+    "detail": {
+      "deltas": [
+        "+12% vs last week",
+        "+8% vs last week",
+        "+4% vs last week",
+        "-1 pt vs last week",
+        "This week",
+        "This week"
+      ],
+      "identities": [
+        "GizaTask: TASK-1042",
+        "KyotoTask: TASK-1043",
+        "RioTask: TASK-1044",
+        "PetraTask: TASK-1045"
+      ],
+      "errors": []
+    }
+  },
+  {
+    "name": "approve, keyboard disclosure and language switch en dark",
+    "result": "pass",
+    "detail": {
+      "command": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1042",
+        "decision": "approve",
+        "contentHash": "sha256:request-1042"
+      },
+      "rejection": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1043",
+        "decision": "reject",
+        "contentHash": "sha256:request-1043"
+      },
+      "pending": [
+        "المهمة: TASK-1044",
+        "المهمة: TASK-1045"
+      ]
+    }
+  },
+  {
+    "name": "mobile clearance, empty approvals and chat navigation en dark",
+    "result": "pass",
+    "detail": {
+      "launcher": {
+        "x": 204.96875,
+        "y": 788,
+        "width": 161.03125,
+        "height": 32
+      },
+      "lastActions": {
+        "x": 49,
+        "y": 707,
+        "width": 292,
+        "height": 32
+      },
+      "lastDeclineHitTest": true,
+      "dimensions": {
+        "viewport": 390,
+        "content": 390
+      },
+      "url": "http://127.0.0.1:5173/chat?locale=en&dir=ltr&theme=dark",
+      "errors": []
+    }
+  },
+  {
+    "name": "metrics and approval identity ar light",
+    "result": "pass",
+    "detail": {
+      "deltas": [
+        "+١٢% مقارنة بالأسبوع السابق",
+        "+٨% مقارنة بالأسبوع السابق",
+        "+٤% مقارنة بالأسبوع السابق",
+        "-١ نقطة مقارنة بالأسبوع السابق",
+        "هذا الأسبوع",
+        "هذا الأسبوع"
+      ],
+      "identities": [
+        "الجيزةالمهمة: TASK-1042",
+        "كيوتوالمهمة: TASK-1043",
+        "ريوالمهمة: TASK-1044",
+        "بتراالمهمة: TASK-1045"
+      ],
+      "errors": []
+    }
+  },
+  {
+    "name": "approve, keyboard disclosure and language switch ar light",
+    "result": "pass",
+    "detail": {
+      "command": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1042",
+        "decision": "approve",
+        "contentHash": "sha256:request-1042"
+      },
+      "rejection": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1043",
+        "decision": "reject",
+        "contentHash": "sha256:request-1043"
+      },
+      "pending": [
+        "Task: TASK-1044",
+        "Task: TASK-1045"
+      ]
+    }
+  },
+  {
+    "name": "mobile clearance, empty approvals and chat navigation ar light",
+    "result": "pass",
+    "detail": {
+      "launcher": {
+        "x": 24,
+        "y": 788,
+        "width": 146.453125,
+        "height": 32
+      },
+      "lastActions": {
+        "x": 49,
+        "y": 707,
+        "width": 292,
+        "height": 32
+      },
+      "lastDeclineHitTest": true,
+      "dimensions": {
+        "viewport": 390,
+        "content": 390
+      },
+      "url": "http://127.0.0.1:5173/chat?locale=ar&dir=rtl&theme=light",
+      "errors": []
+    }
+  },
+  {
+    "name": "metrics and approval identity ar dark",
+    "result": "pass",
+    "detail": {
+      "deltas": [
+        "+١٢% مقارنة بالأسبوع السابق",
+        "+٨% مقارنة بالأسبوع السابق",
+        "+٤% مقارنة بالأسبوع السابق",
+        "-١ نقطة مقارنة بالأسبوع السابق",
+        "هذا الأسبوع",
+        "هذا الأسبوع"
+      ],
+      "identities": [
+        "الجيزةالمهمة: TASK-1042",
+        "كيوتوالمهمة: TASK-1043",
+        "ريوالمهمة: TASK-1044",
+        "بتراالمهمة: TASK-1045"
+      ],
+      "errors": []
+    }
+  },
+  {
+    "name": "approve, keyboard disclosure and language switch ar dark",
+    "result": "pass",
+    "detail": {
+      "command": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1042",
+        "decision": "approve",
+        "contentHash": "sha256:request-1042"
+      },
+      "rejection": {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1043",
+        "decision": "reject",
+        "contentHash": "sha256:request-1043"
+      },
+      "pending": [
+        "Task: TASK-1044",
+        "Task: TASK-1045"
+      ]
+    }
+  },
+  {
+    "name": "mobile clearance, empty approvals and chat navigation ar dark",
+    "result": "pass",
+    "detail": {
+      "launcher": {
+        "x": 24,
+        "y": 788,
+        "width": 146.453125,
+        "height": 32
+      },
+      "lastActions": {
+        "x": 49,
+        "y": 707,
+        "width": 292,
+        "height": 32
+      },
+      "lastDeclineHitTest": true,
+      "dimensions": {
+        "viewport": 390,
+        "content": 390
+      },
+      "url": "http://127.0.0.1:5173/chat?locale=ar&dir=rtl&theme=dark",
+      "errors": []
+    }
+  }
+]

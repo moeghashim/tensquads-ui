@@ -1,0 +1,27 @@
+
+Running 18 tests using 2 workers
+
+(node:51610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51611) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en light at 1440px (1.0s)
+  ✓   1 e2e/dashboard-demos.spec.ts:38:1 › store approvals send a command and launcher preserves URL state (1.2s)
+  ✓   3 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en light at 1180px (931ms)
+  ✓   4 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en light at 760px (913ms)
+  ✓   5 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en light at 390px (965ms)
+  ✓   6 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en dark at 1440px (933ms)
+  ✓   7 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en dark at 1180px (950ms)
+  ✓   8 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en dark at 760px (981ms)
+  ✓   9 e2e/dashboard-demos.spec.ts:63:5 › dashboard home en dark at 390px (852ms)
+  ✓  10 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar light at 1440px (819ms)
+  ✓  11 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar light at 1180px (1.1s)
+  ✓  12 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar light at 760px (986ms)
+  ✓  14 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar dark at 1440px (921ms)
+  ✓  13 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar light at 390px (1.0s)
+  ✓  15 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar dark at 1180px (787ms)
+  ✓  16 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar dark at 760px (865ms)
+  ✓  17 e2e/dashboard-demos.spec.ts:63:5 › dashboard home ar dark at 390px (698ms)
+  ✓  18 e2e/dashboard-demos.spec.ts:118:1 › approval decisions survive language changes while pending content is translated (1.0s)
+
+  18 passed (9.4s)
