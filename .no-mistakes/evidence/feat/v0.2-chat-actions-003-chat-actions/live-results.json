@@ -1,0 +1,34 @@
+[
+  {
+    "name": "HTTP button parameters, consecutive reply actions, persistent locks and reset",
+    "result": "pass"
+  },
+  {
+    "name": "HTTP form submit sends edited field values and action params, retains disabled fields",
+    "result": "pass"
+  },
+  {
+    "name": "Host veto keeps form editable and sends no HTTP action",
+    "result": "pass"
+  },
+  {
+    "name": "Pending host approval reserves operation; reset or stop invalidates stale approval",
+    "result": "pass"
+  },
+  {
+    "name": "HTTP Response and real-fetch AsyncIterable publish partial replies before completion and preserve on stop",
+    "result": "pass"
+  },
+  {
+    "name": "HTTP typed server error appears blocked and retry resends identical turns",
+    "result": "pass"
+  },
+  {
+    "name": "Broken HTTP stream retains partial reply and retry replaces it",
+    "result": "pass"
+  },
+  {
+    "name": "HTTP action normalization is localized and deterministic; 16 KiB, 12 turn and malformed action boundaries",
+    "result": "pass"
+  }
+]

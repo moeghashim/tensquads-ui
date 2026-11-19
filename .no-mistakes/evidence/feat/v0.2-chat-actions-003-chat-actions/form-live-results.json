@@ -1,0 +1,66 @@
+{
+  "results": [
+    {
+      "name": "Form Enter submission sends edited values and params then retains disabled fields",
+      "result": "pass",
+      "detail": {
+        "turns": [
+          {
+            "role": "action",
+            "action": {
+              "name": "SaveProject",
+              "source": "Project",
+              "values": {
+                "planId": "p1",
+                "owner": "parameter owner",
+                "Project": {
+                  "project": {
+                    "value": "Local launch",
+                    "componentType": "Field"
+                  },
+                  "owner": {
+                    "value": "Sarah",
+                    "componentType": "Input"
+                  }
+                }
+              },
+              "summary": "Save project"
+            }
+          },
+          {
+            "role": "assistant",
+            "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+          }
+        ],
+        "busy": false,
+        "locked": [
+          "form/fence-0"
+        ],
+        "observed": [
+          {
+            "type": "SaveProject",
+            "params": {
+              "planId": "p1",
+              "owner": "parameter owner"
+            },
+            "humanFriendlyMessage": "Save project",
+            "formState": {
+              "Project": {
+                "project": {
+                  "value": "Local launch",
+                  "componentType": "Field"
+                },
+                "owner": {
+                  "value": "Sarah",
+                  "componentType": "Input"
+                }
+              }
+            },
+            "formName": "Project"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

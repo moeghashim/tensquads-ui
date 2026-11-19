@@ -1,0 +1,11 @@
+Outer executor reported: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify — exit 1. Failure output was not supplied to this phase. Full suite and static checks were not rerun under the targeted-test boundary.
+
+Targeted production-preview browser run:
+MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test e2e/chat.spec.ts e2e/form.spec.ts --grep "Chat action|Form submits" --workers=1 --reporter=list
+Exit 0. Production preview build completed. Button action flow passed in English/light desktop and Arabic/dark mobile. Form submit passed in en/ar, light/dark, Enter and click. Axe accessibility and 390px overflow checks passed. Screenshots saved under screenshots/.
+
+Disposable real-product harness:
+MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- node .local-chat-validation/drive.mjs
+Final exit 0. See live-results.json. The harness imports the real source useChat, ChatReply, Form, Input, Field, Button, and readOpenUIRequest. Synthetic localhost HTTP responses supply deterministic OpenUI replies. AsyncIterable wraps a real HTTP fetch stream. No model or production service is used. Initial harness attempts encountered a non-unique status selector and a custom-transport-specific error-message expectation; both driver issues were corrected before the final successful run. Product source was unchanged.
+
+Teardown: Playwright children completed; browser closed in finally; disposable Vite server stopped and returned exit 130 after SIGINT. Preview build output, Wrangler state, test-results, and temporary harness removed. Installed preview dependencies retained.

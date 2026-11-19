@@ -1,0 +1,467 @@
+{
+  "results": [
+    {
+      "name": "Button actions become posted user turns; new reply actions work and historical controls remain locked after text sends",
+      "result": "pass",
+      "detail": [
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "Approve",
+                  "source": "Button",
+                  "values": {
+                    "planId": "p1"
+                  },
+                  "summary": "Approve plan"
+                }
+              }
+            ],
+            "locale": "en"
+          },
+          "normalized": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+              }
+            ]
+          }
+        },
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "Approve",
+                  "source": "Button",
+                  "values": {
+                    "planId": "p1"
+                  },
+                  "summary": "Approve plan"
+                }
+              },
+              {
+                "role": "assistant",
+                "content": "Approval received.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {stepId: \"s2\"}})\n```"
+              },
+              {
+                "role": "action",
+                "action": {
+                  "name": "Continue",
+                  "source": "Button",
+                  "values": {
+                    "stepId": "s2"
+                  },
+                  "summary": "Continue"
+                }
+              }
+            ],
+            "locale": "en"
+          },
+          "normalized": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+              },
+              {
+                "role": "assistant",
+                "content": "Approval received.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {stepId: \"s2\"}})\n```"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Continue” in the “Button” component. Action name: Continue. Values: {\"stepId\":\"s2\"}"
+              }
+            ]
+          }
+        },
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "Approve",
+                  "source": "Button",
+                  "values": {
+                    "planId": "p1"
+                  },
+                  "summary": "Approve plan"
+                }
+              },
+              {
+                "role": "assistant",
+                "content": "Approval received.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {stepId: \"s2\"}})\n```"
+              },
+              {
+                "role": "action",
+                "action": {
+                  "name": "Continue",
+                  "source": "Button",
+                  "values": {
+                    "stepId": "s2"
+                  },
+                  "summary": "Continue"
+                }
+              },
+              {
+                "role": "assistant",
+                "content": "Next step received."
+              },
+              {
+                "role": "user",
+                "content": "What happens next?"
+              }
+            ],
+            "locale": "en"
+          },
+          "normalized": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+              },
+              {
+                "role": "assistant",
+                "content": "Approval received.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {stepId: \"s2\"}})\n```"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Continue” in the “Button” component. Action name: Continue. Values: {\"stepId\":\"s2\"}"
+              },
+              {
+                "role": "assistant",
+                "content": "Next step received."
+              },
+              {
+                "role": "user",
+                "content": "What happens next?"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Edited forms submit current Field and Input values, preserve parameters, and lock retained values in EN and AR",
+      "result": "pass",
+      "detail": [
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "SaveProject",
+                  "source": "Project",
+                  "values": {
+                    "planId": "p1",
+                    "Project": {
+                      "project": {
+                        "value": "New project",
+                        "componentType": "Field"
+                      },
+                      "owner": {
+                        "value": "Sarah",
+                        "componentType": "Input"
+                      }
+                    }
+                  },
+                  "summary": "Save project"
+                }
+              }
+            ],
+            "locale": "en"
+          },
+          "normalized": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Project” component. Action name: SaveProject. Values: {\"Project\":{\"owner\":{\"componentType\":\"Input\",\"value\":\"Sarah\"},\"project\":{\"componentType\":\"Field\",\"value\":\"New project\"}},\"planId\":\"p1\"}"
+              }
+            ]
+          }
+        },
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "SaveProject",
+                  "source": "Project",
+                  "values": {
+                    "planId": "p1",
+                    "Project": {
+                      "project": {
+                        "value": "مشروع جديد",
+                        "componentType": "Field"
+                      },
+                      "owner": {
+                        "value": "سارة",
+                        "componentType": "Input"
+                      }
+                    }
+                  },
+                  "summary": "حفظ المشروع"
+                }
+              }
+            ],
+            "locale": "ar"
+          },
+          "normalized": {
+            "locale": "ar",
+            "turns": [
+              {
+                "role": "user",
+                "content": "اختار المستخدم الإجراء «حفظ المشروع» في مكوّن «Project». اسم الإجراء: SaveProject. القيم: {\"Project\":{\"owner\":{\"componentType\":\"Input\",\"value\":\"سارة\"},\"project\":{\"componentType\":\"Field\",\"value\":\"مشروع جديد\"}},\"planId\":\"p1\"}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Host veto observes the OpenUI action without posting, appending or locking it",
+      "result": "pass",
+      "detail": {
+        "turns": [],
+        "busy": false,
+        "locked": [],
+        "events": [
+          {
+            "type": "Approve",
+            "params": {
+              "planId": "p1"
+            },
+            "humanFriendlyMessage": "Approve plan",
+            "formState": {},
+            "formName": "Button"
+          }
+        ],
+        "aborted": false
+      }
+    },
+    {
+      "name": "Pending approval rejects competing work; reset or stop invalidates a late approval",
+      "result": "pass",
+      "detail": [
+        {
+          "cancel": "New chat",
+          "state": {
+            "turns": [],
+            "busy": false,
+            "locked": [],
+            "events": [
+              {
+                "type": "Approve",
+                "params": {
+                  "planId": "p1"
+                },
+                "humanFriendlyMessage": "Approve plan",
+                "formState": {},
+                "formName": "Button"
+              }
+            ],
+            "aborted": false
+          }
+        },
+        {
+          "cancel": "Stop operation",
+          "state": {
+            "turns": [],
+            "busy": false,
+            "locked": [],
+            "events": [
+              {
+                "type": "Approve",
+                "params": {
+                  "planId": "p1"
+                },
+                "humanFriendlyMessage": "Approve plan",
+                "formState": {},
+                "formName": "Button"
+              }
+            ],
+            "aborted": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Response and AsyncIterable streams publish partial replies before completion; Stop preserves partial text and prevents late updates",
+      "result": "pass",
+      "detail": [
+        {
+          "mode": "slow",
+          "state": {
+            "turns": [
+              {
+                "role": "user",
+                "content": "Stream a reply"
+              },
+              {
+                "role": "assistant",
+                "content": "First streamed fragment. "
+              }
+            ],
+            "busy": false,
+            "locked": [],
+            "events": [],
+            "aborted": false
+          }
+        },
+        {
+          "mode": "iterable",
+          "state": {
+            "turns": [
+              {
+                "role": "user",
+                "content": "Stream a reply"
+              },
+              {
+                "role": "assistant",
+                "content": "First iterable fragment. "
+              }
+            ],
+            "busy": false,
+            "locked": [],
+            "events": [],
+            "aborted": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Server errors show Blocked with Retry; retry reuses the action turn and preserves its lock",
+      "result": "pass",
+      "detail": [
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "Approve",
+                  "source": "Button",
+                  "values": {
+                    "planId": "p1"
+                  },
+                  "summary": "Approve plan"
+                }
+              }
+            ],
+            "locale": "en"
+          },
+          "normalized": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+              }
+            ]
+          }
+        },
+        {
+          "raw": {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "Approve",
+                  "source": "Button",
+                  "values": {
+                    "planId": "p1"
+                  },
+                  "summary": "Approve plan"
+                }
+              }
+            ],
+            "locale": "en"
+          },
+          "normalized": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Local server accepts exactly 16 KiB and 12 action turns, rejects excess and malformed actions, and normalizes deterministically in each locale",
+      "result": "pass",
+      "detail": [
+        {
+          "locale": "en",
+          "status": 200,
+          "body": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+              }
+            ]
+          }
+        },
+        {
+          "locale": "ar",
+          "status": 200,
+          "body": {
+            "locale": "ar",
+            "turns": [
+              {
+                "role": "user",
+                "content": "اختار المستخدم الإجراء «Approve plan» في مكوّن «Button». اسم الإجراء: Approve. القيم: {\"a\":1,\"z\":2}"
+              }
+            ]
+          }
+        },
+        {
+          "status": 400,
+          "body": {
+            "error": "too_many_turns"
+          }
+        },
+        {
+          "acceptedBytes": 16384,
+          "rejected": {
+            "status": 413,
+            "body": {
+              "error": "body_too_large"
+            }
+          },
+          "acceptedActionTurns": 12
+        },
+        {
+          "status": 400,
+          "body": {
+            "error": "invalid_request"
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:5174/api/chat?mode=slow",
+      "error": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ]
+}

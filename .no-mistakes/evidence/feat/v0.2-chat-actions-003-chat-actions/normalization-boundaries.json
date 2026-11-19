@@ -1,0 +1,109 @@
+[
+  {
+    "status": 200,
+    "body": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        }
+      ]
+    }
+  },
+  {
+    "status": 200,
+    "body": {
+      "locale": "ar",
+      "turns": [
+        {
+          "role": "user",
+          "content": "اختار المستخدم الإجراء «Approve plan» في مكوّن «Button». اسم الإجراء: Approve. القيم: {\"a\":1,\"z\":2}"
+        }
+      ]
+    }
+  },
+  {
+    "status": 200,
+    "body": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"a\":1,\"z\":2}"
+        }
+      ]
+    }
+  },
+  {
+    "status": 400,
+    "body": {
+      "error": "too_many_turns"
+    }
+  },
+  {
+    "bytes": 16384,
+    "status": 200
+  },
+  {
+    "bytes": 16385,
+    "status": 413,
+    "error": "body_too_large"
+  },
+  {
+    "status": 400,
+    "body": {
+      "error": "invalid_request"
+    }
+  },
+  {
+    "status": 400,
+    "body": {
+      "error": "invalid_request"
+    }
+  }
+]

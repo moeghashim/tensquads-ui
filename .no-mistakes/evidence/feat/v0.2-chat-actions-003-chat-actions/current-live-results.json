@@ -1,0 +1,498 @@
+{
+  "results": [
+    {
+      "name": "HTTP button action retains params, successive actions work, historical locks survive text",
+      "result": "pass",
+      "detail": {
+        "state": {
+          "turns": [
+            {
+              "role": "action",
+              "action": {
+                "name": "Approve",
+                "source": "Button",
+                "values": {
+                  "planId": "p1"
+                },
+                "summary": "Approve plan"
+              }
+            },
+            {
+              "role": "assistant",
+              "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+            },
+            {
+              "role": "action",
+              "action": {
+                "name": "Continue",
+                "source": "Button",
+                "values": {
+                  "stage": 2
+                },
+                "summary": "Continue"
+              }
+            },
+            {
+              "role": "assistant",
+              "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+            },
+            {
+              "role": "user",
+              "content": "A new text turn"
+            },
+            {
+              "role": "assistant",
+              "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+            }
+          ],
+          "busy": false,
+          "locked": [
+            "initial/fence-0",
+            "1/fence-2"
+          ],
+          "observed": [
+            {
+              "type": "Approve",
+              "params": {
+                "planId": "p1"
+              },
+              "humanFriendlyMessage": "Approve plan",
+              "formState": {},
+              "formName": "Button"
+            },
+            {
+              "type": "Continue",
+              "params": {
+                "stage": 2
+              },
+              "humanFriendlyMessage": "Continue",
+              "formState": {},
+              "formName": "Button"
+            }
+          ]
+        },
+        "requests": [
+          {
+            "raw": {
+              "turns": [
+                {
+                  "role": "action",
+                  "action": {
+                    "name": "Approve",
+                    "source": "Button",
+                    "values": {
+                      "planId": "p1"
+                    },
+                    "summary": "Approve plan"
+                  }
+                }
+              ],
+              "locale": "en"
+            },
+            "normalized": {
+              "locale": "en",
+              "turns": [
+                {
+                  "role": "user",
+                  "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+                }
+              ]
+            }
+          },
+          {
+            "raw": {
+              "turns": [
+                {
+                  "role": "action",
+                  "action": {
+                    "name": "Approve",
+                    "source": "Button",
+                    "values": {
+                      "planId": "p1"
+                    },
+                    "summary": "Approve plan"
+                  }
+                },
+                {
+                  "role": "assistant",
+                  "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+                },
+                {
+                  "role": "action",
+                  "action": {
+                    "name": "Continue",
+                    "source": "Button",
+                    "values": {
+                      "stage": 2
+                    },
+                    "summary": "Continue"
+                  }
+                }
+              ],
+              "locale": "en"
+            },
+            "normalized": {
+              "locale": "en",
+              "turns": [
+                {
+                  "role": "user",
+                  "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+                },
+                {
+                  "role": "assistant",
+                  "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+                },
+                {
+                  "role": "user",
+                  "content": "The user chose the action “Continue” in the “Button” component. Action name: Continue. Values: {\"stage\":2}"
+                }
+              ]
+            }
+          },
+          {
+            "raw": {
+              "turns": [
+                {
+                  "role": "action",
+                  "action": {
+                    "name": "Approve",
+                    "source": "Button",
+                    "values": {
+                      "planId": "p1"
+                    },
+                    "summary": "Approve plan"
+                  }
+                },
+                {
+                  "role": "assistant",
+                  "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+                },
+                {
+                  "role": "action",
+                  "action": {
+                    "name": "Continue",
+                    "source": "Button",
+                    "values": {
+                      "stage": 2
+                    },
+                    "summary": "Continue"
+                  }
+                },
+                {
+                  "role": "assistant",
+                  "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+                },
+                {
+                  "role": "user",
+                  "content": "A new text turn"
+                }
+              ],
+              "locale": "en"
+            },
+            "normalized": {
+              "locale": "en",
+              "turns": [
+                {
+                  "role": "user",
+                  "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+                },
+                {
+                  "role": "assistant",
+                  "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+                },
+                {
+                  "role": "user",
+                  "content": "The user chose the action “Continue” in the “Button” component. Action name: Continue. Values: {\"stage\":2}"
+                },
+                {
+                  "role": "assistant",
+                  "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+                },
+                {
+                  "role": "user",
+                  "content": "A new text turn"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Form Enter submission sends edited values and params then retains disabled fields",
+      "result": "pass",
+      "detail": {
+        "turns": [
+          {
+            "role": "action",
+            "action": {
+              "name": "SaveProject",
+              "source": "Project",
+              "values": {
+                "planId": "p1",
+                "owner": "parameter owner",
+                "Project": {
+                  "project": {
+                    "value": "Local launch",
+                    "componentType": "Field"
+                  },
+                  "owner": {
+                    "value": "Sarah",
+                    "componentType": "Input"
+                  }
+                }
+              },
+              "summary": "Save project"
+            }
+          },
+          {
+            "role": "assistant",
+            "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+          }
+        ],
+        "busy": false,
+        "locked": [
+          "form/fence-0"
+        ],
+        "observed": [
+          {
+            "type": "SaveProject",
+            "params": {
+              "planId": "p1",
+              "owner": "parameter owner"
+            },
+            "humanFriendlyMessage": "Save project",
+            "formState": {
+              "Project": {
+                "project": {
+                  "value": "Local launch",
+                  "componentType": "Field"
+                },
+                "owner": {
+                  "value": "Sarah",
+                  "componentType": "Input"
+                }
+              }
+            },
+            "formName": "Project"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Host veto prevents a turn; pending approval reserves operation and reset invalidates it",
+      "result": "pass",
+      "detail": {
+        "turns": [],
+        "busy": false,
+        "locked": [],
+        "observed": [
+          {
+            "type": "Approve",
+            "params": {
+              "planId": "p1"
+            },
+            "humanFriendlyMessage": "Approve plan",
+            "formState": {},
+            "formName": "Button"
+          },
+          {
+            "type": "Approve",
+            "params": {
+              "planId": "p1"
+            },
+            "humanFriendlyMessage": "Approve plan",
+            "formState": {},
+            "formName": "Button"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HTTP and iterator streaming publish partial reply and Stop retains it",
+      "result": "pass",
+      "detail": [
+        {
+          "turns": [
+            {
+              "role": "user",
+              "content": "A new text turn"
+            },
+            {
+              "role": "assistant",
+              "content": "Received "
+            }
+          ],
+          "busy": false,
+          "locked": [],
+          "observed": []
+        },
+        {
+          "turns": [
+            {
+              "role": "user",
+              "content": "A new text turn"
+            },
+            {
+              "role": "assistant",
+              "content": "Iterator partial"
+            }
+          ],
+          "busy": false,
+          "locked": [],
+          "observed": []
+        }
+      ]
+    },
+    {
+      "name": "Server error blocks action and retry sends exactly one action with lock retained",
+      "result": "pass",
+      "detail": {
+        "turns": [
+          {
+            "role": "action",
+            "action": {
+              "name": "Approve",
+              "source": "Button",
+              "values": {
+                "planId": "p1"
+              },
+              "summary": "Approve plan"
+            }
+          },
+          {
+            "role": "assistant",
+            "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
+          }
+        ],
+        "busy": false,
+        "locked": [
+          "initial/fence-0"
+        ],
+        "observed": [
+          {
+            "type": "Approve",
+            "params": {
+              "planId": "p1"
+            },
+            "humanFriendlyMessage": "Approve plan",
+            "formState": {},
+            "formName": "Button"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Local server accepts 16 KiB and twelve turns, rejects oversized and invalid actions, localizes stable values",
+      "result": "pass",
+      "detail": {
+        "twelve": {
+          "status": 200,
+          "body": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              },
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              }
+            ]
+          }
+        },
+        "thirteen": {
+          "status": 400,
+          "body": {
+            "error": "too_many_turns"
+          }
+        },
+        "atLimit": {
+          "status": 200,
+          "body": {
+            "locale": "en",
+            "turns": [
+              {
+                "role": "user",
+                "content": "The user chose the action “Save project” in the “Form” component. Action name: Save. Values: {\"a\":1,\"z\":2}"
+              }
+            ]
+          }
+        },
+        "overLimit": {
+          "status": 413,
+          "body": {
+            "error": "body_too_large"
+          }
+        },
+        "invalid": {
+          "status": 400,
+          "body": {
+            "error": "invalid_request"
+          }
+        },
+        "arabic": {
+          "status": 200,
+          "body": {
+            "locale": "ar",
+            "turns": [
+              {
+                "role": "user",
+                "content": "اختار المستخدم الإجراء «Save project» في مكوّن «Form». اسم الإجراء: Save. القيم: {\"a\":1,\"z\":2}"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "driver_correction": "Initial form assertion assumed flat values; corrected to documented Form.md upstream nested form state. Form-only rerun exited 0. No product failure.",
+  "executions": {
+    "targeted_preview": "exit 0; five selected browser tests; production preview build completed",
+    "initial_live_driver": "exit 1; form assertion shape mismatch",
+    "corrected_form_driver": "exit 0",
+    "configured_verify": "exit 1 reported by outer executor; not rerun in targeted phase"
+  }
+}

@@ -1,0 +1,213 @@
+[
+  {
+    "raw": {
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        }
+      ],
+      "locale": "en"
+    },
+    "normalized": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        }
+      ]
+    }
+  },
+  {
+    "raw": {
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Approve plan\", \"solid\", \"md\", false, false, {type: \"Approve\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "action",
+          "action": {
+            "name": "Approve",
+            "source": "Button",
+            "values": {
+              "planId": "p1"
+            },
+            "summary": "Approve plan"
+          }
+        }
+      ],
+      "locale": "en"
+    },
+    "normalized": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Approve plan\", \"solid\", \"md\", false, false, {type: \"Approve\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+        }
+      ]
+    }
+  },
+  {
+    "raw": {
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Approve plan\", \"solid\", \"md\", false, false, {type: \"Approve\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "action",
+          "action": {
+            "name": "Approve",
+            "source": "Button",
+            "values": {
+              "planId": "p1"
+            },
+            "summary": "Approve plan"
+          }
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "action",
+          "action": {
+            "name": "Continue",
+            "source": "Button",
+            "values": {
+              "planId": "p1"
+            },
+            "summary": "Continue"
+          }
+        }
+      ],
+      "locale": "en"
+    },
+    "normalized": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Approve plan\", \"solid\", \"md\", false, false, {type: \"Approve\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Continue” in the “Button” component. Action name: Continue. Values: {\"planId\":\"p1\"}"
+        }
+      ]
+    }
+  },
+  {
+    "raw": {
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Approve plan\", \"solid\", \"md\", false, false, {type: \"Approve\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "action",
+          "action": {
+            "name": "Approve",
+            "source": "Button",
+            "values": {
+              "planId": "p1"
+            },
+            "summary": "Approve plan"
+          }
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "action",
+          "action": {
+            "name": "Continue",
+            "source": "Button",
+            "values": {
+              "planId": "p1"
+            },
+            "summary": "Continue"
+          }
+        },
+        {
+          "role": "assistant",
+          "content": "Action complete."
+        },
+        {
+          "role": "user",
+          "content": "start"
+        }
+      ],
+      "locale": "en"
+    },
+    "normalized": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "start"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Approve plan\", \"solid\", \"md\", false, false, {type: \"Approve\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Approve plan” in the “Button” component. Action name: Approve. Values: {\"planId\":\"p1\"}"
+        },
+        {
+          "role": "assistant",
+          "content": "```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type: \"Continue\", params: {planId: \"p1\"}})\n```"
+        },
+        {
+          "role": "user",
+          "content": "The user chose the action “Continue” in the “Button” component. Action name: Continue. Values: {\"planId\":\"p1\"}"
+        },
+        {
+          "role": "assistant",
+          "content": "Action complete."
+        },
+        {
+          "role": "user",
+          "content": "start"
+        }
+      ]
+    }
+  }
+]

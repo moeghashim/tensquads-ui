@@ -1,0 +1,66 @@
+{
+  "production_build": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npm run build:preview",
+    "exit": 0
+  },
+  "preview_browser": {
+    "command": "CHAT_EVIDENCE=<evidence directory> MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx playwright test -c .local-chat-test/preview.config.ts e2e/chat.spec.ts e2e/form.spec.ts --grep 'Chat action advances|Form submits'",
+    "exit": 0
+  },
+  "consumer_browser": {
+    "command": "CHAT_EVIDENCE=<evidence directory> MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- node .local-chat-test/drive.mjs",
+    "exit": 0
+  },
+  "scenarios": [
+    {
+      "name": "Button actions become posted user turns; new reply actions work and historical controls remain locked after text sends",
+      "result": "pass"
+    },
+    {
+      "name": "Edited forms submit current Field and Input values, preserve parameters, and lock retained values in EN and AR",
+      "result": "pass"
+    },
+    {
+      "name": "Host veto observes the OpenUI action without posting, appending or locking it",
+      "result": "pass"
+    },
+    {
+      "name": "Pending approval rejects competing work; reset or stop invalidates a late approval",
+      "result": "pass"
+    },
+    {
+      "name": "Response and AsyncIterable streams publish partial replies before completion; Stop preserves partial text and prevents late updates",
+      "result": "pass"
+    },
+    {
+      "name": "Server errors show Blocked with Retry; retry reuses the action turn and preserves its lock",
+      "result": "pass"
+    },
+    {
+      "name": "Local server accepts exactly 16 KiB and 12 action turns, rejects excess and malformed actions, and normalizes deterministically in each locale",
+      "result": "pass"
+    }
+  ],
+  "setup_corrections": [
+    "Registered disposable API middleware before Vite SPA fallback.",
+    "Aligned form assertions with the upstream ActionEvent contract: form values are grouped by form name. Re-ran the complete targeted consumer driver successfully."
+  ],
+  "scope": "Real source components in Chromium and real built server request parser on localhost. Synthetic responses only; no external model or tenant services.",
+  "cleanup": {
+    "servers": [
+      {
+        "port": 5173,
+        "stopped": true
+      },
+      {
+        "port": 5174,
+        "stopped": true
+      }
+    ],
+    "consumerExit": 0,
+    "previewExit": 130,
+    "previewExitReason": "Stopped with SIGINT after successful browser run",
+    "disposableFilesRemoved": true,
+    "worktreeClean": true
+  }
+}

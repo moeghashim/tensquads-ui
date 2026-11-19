@@ -1,0 +1,39 @@
+[
+  {
+    "raw": {
+      "turns": [
+        {
+          "role": "action",
+          "action": {
+            "name": "SaveProject",
+            "source": "Project",
+            "values": {
+              "planId": "p1",
+              "Project": {
+                "project": {
+                  "value": "Release launch",
+                  "componentType": "Field"
+                },
+                "owner": {
+                  "value": "Sarah",
+                  "componentType": "Input"
+                }
+              }
+            },
+            "summary": "Save project"
+          }
+        }
+      ],
+      "locale": "en"
+    },
+    "normalized": {
+      "locale": "en",
+      "turns": [
+        {
+          "role": "user",
+          "content": "The user chose the action “Save project” in the “Project” component. Action name: SaveProject. Values: {\"Project\":{\"owner\":{\"componentType\":\"Input\",\"value\":\"Sarah\"},\"project\":{\"componentType\":\"Field\",\"value\":\"Release launch\"}},\"planId\":\"p1\"}"
+        }
+      ]
+    }
+  }
+]
