@@ -2,7 +2,7 @@
 
 `Sidebar` is app navigation and has no OpenUI definition because navigation belongs to application chrome, not streamed content. Import `Sidebar`, `SidebarBrand`, `SidebarItem`, `SidebarSection`, `SidebarUser`, and `SidebarAgent` from `@tensquads/ui/react`.
 
-Provide an accessible `label` and compose the navigation from the parts. `SidebarItem` accepts an icon node, optional `count`, `active`, and `current` props. Pass UI SDK's `render` prop to render a router link. Set `disabled` for unavailable items; they remain readable to assistive technology and are not focusable. `SidebarSection` labels a group. `SidebarUser` stays at the bottom when the sidebar has available height.
+Provide an accessible `label` and compose the navigation from the parts. `SidebarItem` accepts an icon node, optional `count`, and `active` props. Set `active` for the current page; it controls the selected style and `aria-current="page"`. Pass UI SDK's `render` prop to render a router link. Set `disabled` for unavailable items; they remain readable to assistive technology and are not focusable. `SidebarSection` labels a group. `SidebarUser` stays at the bottom when the sidebar has available height.
 
 Use `SidebarAgent` for squad rows. Pass `roleLabel` for the agent role and `status` as `online` or `idle`. It renders a localized `Squadmate` and a screen-reader status label. Set `featured` and `meta` for the lead row. `SidebarUser` takes `userRole` for the account role.
 

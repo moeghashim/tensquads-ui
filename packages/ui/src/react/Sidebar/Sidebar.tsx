@@ -76,16 +76,15 @@ export type SidebarItemProps = Omit<ComponentProps<typeof UiButton>, "render" | 
 	active?: boolean;
 	count?: string | number;
 	render?: ComponentProps<typeof UiButton>["render"];
-	current?: boolean;
 };
 export function SidebarItem({
 	children,
 	icon,
 	active = false,
-	current = active,
 	count,
 	render,
 	disabled,
+	className,
 	...props
 }: SidebarItemProps) {
 	const closeSheet = useContext(SidebarCloseContext);
@@ -103,12 +102,17 @@ export function SidebarItem({
 		<UiButton
 			{...props}
 			onClick={(...args) => {
-				props.onClick?.(...args);
+				const result = props.onClick?.(...args);
 				closeSheet();
+				return result;
 			}}
 			render={render}
-			aria-current={current ? "page" : undefined}
-			className={["ts-sidebar-item", active && "is-active", props.className].filter(Boolean).join(" ")}
+			aria-current={active ? "page" : undefined}
+			className={
+				typeof className === "function"
+					? (state) => ["ts-sidebar-item", className(state)].filter(Boolean).join(" ")
+					: ["ts-sidebar-item", className].filter(Boolean).join(" ")
+			}
 		>
 			<span className="ts-sidebar-item-icon" aria-hidden="true">
 				{icon}

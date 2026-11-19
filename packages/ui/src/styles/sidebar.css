@@ -23,7 +23,7 @@
 	.ts-sidebar-section > div { display: grid; gap: var(--ts-space-1); }
 	.ts-sidebar-item { box-sizing: border-box; min-inline-size: 0; inline-size: 100%; min-block-size: 40px; display: flex; align-items: center; gap: var(--ts-space-3); padding-block: var(--ts-space-2); padding-inline: var(--ts-space-3); border: 0; border-radius: var(--ts-radius-lg); background: transparent; color: var(--ts-text-secondary); text-align: start; text-decoration: none; font: inherit; font-size: var(--ts-text-sm-font-size); cursor: pointer; }
 	.ts-sidebar-item:hover { color: var(--ts-text-emphasis); background: var(--ts-ghost-hover); }
-	.ts-sidebar-item.is-active, .ts-sidebar-item[aria-current="page"] { background: var(--ts-alpha-08); color: var(--ts-text-emphasis); }
+	.ts-sidebar-item[aria-current="page"] { background: var(--ts-alpha-08); color: var(--ts-text-emphasis); }
 	.ts-sidebar-item:focus-visible, .ts-sidebar-menu:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.ts-sidebar-item-icon { inline-size: 16px; block-size: 16px; flex: none; display: grid; place-items: center; }
 	.ts-sidebar-item-icon svg { inline-size: 16px; block-size: 16px; }
