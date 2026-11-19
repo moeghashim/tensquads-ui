@@ -49,7 +49,7 @@
     },
     {
       "id": "v0.2-dashboards",
-      "status": "in-progress",
+      "status": "done",
       "tasks": [
         "001-card-pageheader-stattile",
         "002-charts",

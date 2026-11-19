@@ -7,6 +7,7 @@ import "@tensquads/ui/styles.css";
 import { SiteShell } from "../components/site-shell";
 import { getPreviewAttributes } from "../state";
 import "../styles.css";
+import faviconUrl from "../../../../design/logo/favicon.svg?url";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -15,6 +16,7 @@ export const Route = createRootRoute({
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
 			{ title: "tensquads ui" },
 		],
+		links: [{ rel: "icon", type: "image/svg+xml", href: faviconUrl }],
 	}),
 	component: RootPage,
 	shellComponent: Document,

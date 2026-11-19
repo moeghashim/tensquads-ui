@@ -1,5 +1,8 @@
 import { createElement } from "react";
-import logoSource from "../assets/tensquads-logo.svg?raw";
+import syncedWordmark from "../../../../design/logo/wordmark.svg?raw";
+
+// The synced wordmark draws its ink in near-black; the site recolours it so it follows the theme.
+const logoSource = syncedWordmark.replaceAll("#151515", "currentColor");
 
 const viewBox = /<svg\b[^>]*\bviewBox="([^"]+)"/.exec(logoSource)?.[1] ?? "0 0 281.2 64";
 const wordmarkShapes = [...logoSource.matchAll(/<(line|circle|rect|path)\b([^>]*)\/>/g)].flatMap((match, index) => {
