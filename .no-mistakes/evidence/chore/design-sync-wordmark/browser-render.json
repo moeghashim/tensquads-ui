@@ -1,0 +1,61 @@
+{
+  "surface": "HTTP-served actual design/logo files in Chromium",
+  "images": [
+    {
+      "src": "/logo/wordmark.svg",
+      "width": 281,
+      "height": 64,
+      "renderedWidth": 562
+    },
+    {
+      "src": "/logo/logo.svg",
+      "width": 64,
+      "height": 64,
+      "renderedWidth": 96
+    },
+    {
+      "src": "/logo/logo-512.png",
+      "width": 512,
+      "height": 512,
+      "renderedWidth": 96
+    },
+    {
+      "src": "/logo/favicon.svg",
+      "width": 32,
+      "height": 32,
+      "renderedWidth": 96
+    },
+    {
+      "src": "/logo/favicon-32.png",
+      "width": 32,
+      "height": 32,
+      "renderedWidth": 96
+    },
+    {
+      "src": "/logo/apple-touch-icon.png",
+      "width": 180,
+      "height": 180,
+      "renderedWidth": 96
+    },
+    {
+      "src": "/logo/wordmark-dark.svg",
+      "width": 281,
+      "height": 64,
+      "renderedWidth": 562
+    },
+    {
+      "src": "/logo/logo-dark.svg",
+      "width": 64,
+      "height": 64,
+      "renderedWidth": 96
+    },
+    {
+      "src": "/logo/logo-dark-512.png",
+      "width": 512,
+      "height": 512,
+      "renderedWidth": 96
+    }
+  ],
+  "errors": [],
+  "mobileOverflow": false
+}

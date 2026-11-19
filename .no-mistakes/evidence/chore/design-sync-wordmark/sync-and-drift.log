@@ -1,0 +1,23 @@
+$ ~/.local/share/mise/installs/node/26.13.1/bin/node {run-worktree}/scripts/sync-design.mjs 513505617794ee8bdb82cdc019b137910c60c52f
+Synced 185 files from 513505617794ee8bdb82cdc019b137910c60c52f.
+Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.
+
+exit 0
+$ git clone --filter=blob:none --no-checkout https://github.com/moeghashim/tensquads-design-system.git upstream
+
+exit 0
+$ git -C upstream checkout --detach 513505617794ee8bdb82cdc019b137910c60c52f
+
+exit 0
+wordmark.svg: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+wordmark-dark.svg: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+logo.svg: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+logo-dark.svg: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+favicon.svg: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+logo-512.png: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+logo-dark-512.png: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+favicon-32.png: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+apple-touch-icon.png: fresh sync and committed asset equal upstream bytes at 513505617794ee8bdb82cdc019b137910c60c52f
+Fresh sync accepted by real checkDesign: 185 files
+Modified wordmark rejected: Hash mismatch: logo/wordmark.svg
+Restored wordmark accepted: 185 files
