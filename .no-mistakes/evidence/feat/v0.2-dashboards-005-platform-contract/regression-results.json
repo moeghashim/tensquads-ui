@@ -1,0 +1,185 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.13.1_2/bin/node",
+      "{run-worktree}/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      ".review/regression.config.ts",
+      "--grep",
+      "ApprovalCard medium controls and spacing in en light"
+    ],
+    "configFile": "{run-worktree}/.review/regression.config.ts",
+    "rootDir": "{run-worktree}/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M7T7E7VP007R27FS1AE869ZH/regression",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "approval-sizing.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M7T7E7VP007R27FS1AE869ZH/regression",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "snapshotDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": "approval-sizing.spec.ts",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:5173",
+          "browserName": "chromium",
+          "headless": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "~/.no-mistakes/evidence/01M7T7E7VP007R27FS1AE869ZH/regression-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "cwd": "{run-worktree}",
+      "command": "WRANGLER_SEND_METRICS=false npm run build:preview && WRANGLER_SEND_METRICS=false npm --prefix apps/preview run preview",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "approval-sizing.spec.ts",
+      "file": "approval-sizing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ApprovalCard medium controls and spacing in en light",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 146,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m8\u001b[39m\nReceived: \u001b[31m12\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m8\u001b[39m\nReceived: \u001b[31m12\u001b[39m\n    at {run-worktree}/e2e/approval-sizing.spec.ts:34:26",
+                    "location": {
+                      "file": "{run-worktree}/e2e/approval-sizing.spec.ts",
+                      "column": 26,
+                      "line": 34
+                    },
+                    "snippet": "  32 | \t\t\t\t\t});\n  33 | \t\t\t\t\t// The header shares the body rhythm; the decision row has double separation.\n> 34 | \t\t\t\t\texpect(gaps.header).toBe(gaps.body);\n     | \t\t\t\t\t                    ^\n  35 | \t\t\t\t\texpect(gaps.footer).toBe(2 * gaps.body);\n  36 | \t\t\t\t}\n  37 | \t\t\t\tawait testInfo.attach(`${name}-${locale}-${theme}-${width}.png`, {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/approval-sizing.spec.ts",
+                        "column": 26,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m8\u001b[39m\nReceived: \u001b[31m12\u001b[39m\n\n  32 | \t\t\t\t\t});\n  33 | \t\t\t\t\t// The header shares the body rhythm; the decision row has double separation.\n> 34 | \t\t\t\t\texpect(gaps.header).toBe(gaps.body);\n     | \t\t\t\t\t                    ^\n  35 | \t\t\t\t\texpect(gaps.footer).toBe(2 * gaps.body);\n  36 | \t\t\t\t}\n  37 | \t\t\t\tawait testInfo.attach(`${name}-${locale}-${theme}-${width}.png`, {\n    at {run-worktree}/e2e/approval-sizing.spec.ts:34:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T15:45:00.490Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7T7E7VP007R27FS1AE869ZH/regression/approval-sizing-ApprovalCa-dfb45-ols-and-spacing-in-en-light/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/approval-sizing.spec.ts",
+                    "column": 26,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "07e4c26e1fdcddab0f68-e30216335d7eec4414f0",
+          "file": "approval-sizing.spec.ts",
+          "line": 12,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-19T15:44:58.339Z",
+    "duration": 2383.4049999999997,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

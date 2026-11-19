@@ -1,0 +1,32 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in en light (146ms)
+
+
+  1) e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in en light ───────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 8
+    Received: 12
+
+      32 | 					});
+      33 | 					// The header shares the body rhythm; the decision row has double separation.
+    > 34 | 					expect(gaps.header).toBe(gaps.body);
+         | 					                    ^
+      35 | 					expect(gaps.footer).toBe(2 * gaps.body);
+      36 | 				}
+      37 | 				await testInfo.attach(`${name}-${locale}-${theme}-${width}.png`, {
+        at {run-worktree}/e2e/approval-sizing.spec.ts:34:26
+
+    Error Context: ../../../evidence/01M7T7E7VP007R27FS1AE869ZH/regression/approval-sizing-ApprovalCa-dfb45-ols-and-spacing-in-en-light/error-context.md
+
+  1 failed
+    e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in en light ────────
+[WebServer] (node:62682) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:62731) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Exit: 1
