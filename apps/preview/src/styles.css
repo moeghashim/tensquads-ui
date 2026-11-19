@@ -411,5 +411,4 @@
 	@media (max-width: 60rem) { .dashboard-page { padding: var(--ts-space-4); } .dashboard-grid--3-2, .dashboard-grid--2-3 { grid-template-columns: minmax(0, 1fr); } .dashboard-panel { padding: var(--ts-space-4); } .dashboard-window { min-block-size: auto; } }
 	@media (max-width: 47.5rem) { .dashboard-page { padding: 0; } .dashboard-window { display: block; border: 0; border-radius: 0; } .dashboard-panel { padding: var(--ts-space-4); border-radius: 0; } .dashboard-table-tools { inline-size: 100%; } .dashboard-table-tools [data-slot="input"] { flex: 1 1 100%; inline-size: auto; } }
 	.dashboard-panel--home { padding-block-end: calc(var(--ts-control-md) + var(--ts-space-6)); }
-	@media (min-width: 60rem) { .dashboard-panel--home .ts-approval-card__content { padding-inline-end: calc(var(--ts-space-16) + var(--ts-space-16)); } }
 }

@@ -48,8 +48,9 @@ function StoreDashboard() {
 		{ text: `+${ar ? "٨" : "8"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
 		{ text: `+${ar ? "٤" : "4"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
 		{ text: `${ar ? "-١ نقطة" : "-1 pt"} ${homeCopy.vsLastWeek}`, tone: "negative" },
-		{ text: homeCopy.thisWeek, tone: "neutral" },
-		{ text: homeCopy.thisWeek, tone: "neutral" },
+		// The last two tiles have no prior period; their foot line says what the number covers.
+		null,
+		null,
 	] as const;
 	const [pendingIds, setPendingIds] = useState(() => requestsByLocale[locale].map((request) => request.approvalId));
 	const pending = requestsByLocale[locale].filter((request) => pendingIds.includes(request.approvalId));

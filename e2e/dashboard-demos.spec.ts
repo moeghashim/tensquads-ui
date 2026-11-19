@@ -88,7 +88,7 @@ for (const [locale, direction] of [
 							locale === "ar" ? "الأسبوع السابق" : "Previous week",
 							locale === "ar" ? "هذا الأسبوع" : "This week",
 						]);
-						await expect(page.locator(".ts-stat-tile__delta")).toHaveCount(6);
+						await expect(page.locator(".ts-stat-tile__delta")).toHaveCount(4);
 						if (width === 390) {
 							await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 							const [launcher, lastActions] = await Promise.all([
