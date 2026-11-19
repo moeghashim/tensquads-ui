@@ -2,7 +2,13 @@ import { expect, test } from "@playwright/test";
 import { getRegisteredComponents } from "../packages/ui/src/openui";
 import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
-const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "OwnerMessageView", "Chat", "ChatReply"];
+const registryOrder = [
+	...getRegisteredComponents().map(({ name }) => name),
+	"OwnerMessageView",
+	"Chat",
+	"ChatReply",
+	"Sidebar",
+];
 
 test("component index lists every documented component", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");
@@ -33,10 +39,11 @@ for (const locale of ["en", "ar"] as const) {
 				await expect(page.locator(".owner-message-preview")).toBeVisible();
 			else if (name === "DataTable") await expect(page.getByRole("table").first()).toBeVisible();
 			else if (name === "EmptyState") await expect(page.locator("[data-slot='empty-state']").first()).toBeVisible();
+			else if (name === "Sidebar") await expect(page.locator(".sidebar-preview")).toBeVisible();
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
-			} else {
+			} else if (name !== "Sidebar") {
 				await expect(page.locator(".fixture-source summary")).toHaveText(
 					locale === "ar" ? "عرض مصدر العينة" : "Show fixture source",
 				);

@@ -143,6 +143,15 @@ export {
 	SegmentedControlIndicator,
 	SegmentedControlItem,
 } from "./SegmentedControl/SegmentedControl.js";
+export type {
+	SidebarAgentProps,
+	SidebarBrandProps,
+	SidebarItemProps,
+	SidebarProps,
+	SidebarSectionProps,
+	SidebarUserProps,
+} from "./Sidebar/Sidebar.js";
+export { Sidebar, SidebarAgent, SidebarBrand, SidebarItem, SidebarSection, SidebarUser } from "./Sidebar/Sidebar.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
 export {
 	Squadmate,
