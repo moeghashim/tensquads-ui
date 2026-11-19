@@ -46,6 +46,18 @@
         "003-chat-actions",
         "004-chat-site-demo"
       ]
+    },
+    {
+      "id": "v0.2-dashboards",
+      "status": "in-progress",
+      "tasks": [
+        "001-card-pageheader-stattile",
+        "002-charts",
+        "003-datatable-emptystate",
+        "004-sidebar",
+        "005-approvalcard-chatlauncher",
+        "006-dashboard-demos"
+      ]
     }
   ]
 }
