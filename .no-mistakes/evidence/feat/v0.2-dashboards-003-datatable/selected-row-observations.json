@@ -1,0 +1,506 @@
+[
+  {
+    "label": "en-ltr-light initial selection",
+    "row": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-light selected hover",
+    "row": {
+      "background": "rgba(13, 13, 13, 0.08)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-light mouse selects success tile and neutral badge",
+    "row": {
+      "background": "rgba(13, 13, 13, 0.08)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "NSNorthstarOnline store / 3 team membersOmar Salehomar@example.com$79 / moBilled monthlyTrial"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "Trial"
+    }
+  },
+  {
+    "label": "en-ltr-light Space reselects primary tile",
+    "row": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-light Enter selects other row",
+    "row": {
+      "background": "rgba(13, 13, 13, 0.08)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "NSNorthstarOnline store / 3 team membersOmar Salehomar@example.com$79 / moBilled monthlyTrial"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "Trial"
+    }
+  },
+  {
+    "label": "en-ltr-light 390px selection",
+    "row": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-dark initial selection",
+    "row": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-dark selected hover",
+    "row": {
+      "background": "rgba(255, 255, 255, 0.12)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-dark mouse selects success tile and neutral badge",
+    "row": {
+      "background": "rgba(255, 255, 255, 0.12)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "NSNorthstarOnline store / 3 team membersOmar Salehomar@example.com$79 / moBilled monthlyTrial"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "Trial"
+    }
+  },
+  {
+    "label": "en-ltr-dark Space reselects primary tile",
+    "row": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "en-ltr-dark Enter selects other row",
+    "row": {
+      "background": "rgba(255, 255, 255, 0.12)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "NSNorthstarOnline store / 3 team membersOmar Salehomar@example.com$79 / moBilled monthlyTrial"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "Trial"
+    }
+  },
+  {
+    "label": "en-ltr-dark 390px selection",
+    "row": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme StudioDS / Demo store / Reach $1M in annual salesMaya Chenmaya@example.com$149 / moBilled monthlyActive"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "Active"
+    }
+  },
+  {
+    "label": "ar-rtl-light initial selection",
+    "row": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-light selected hover",
+    "row": {
+      "background": "rgba(13, 13, 13, 0.08)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-light mouse selects success tile and neutral badge",
+    "row": {
+      "background": "rgba(13, 13, 13, 0.08)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "NSNorthstarمتجر إلكتروني / ٣ أعضاء في الفريقOmar Salehomar@example.com٧٩ دولاراً / شهرياًالفوترة شهرياًتجربة"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "تجربة"
+    }
+  },
+  {
+    "label": "ar-rtl-light Space reselects primary tile",
+    "row": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-light Enter selects other row",
+    "row": {
+      "background": "rgba(13, 13, 13, 0.08)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "NSNorthstarمتجر إلكتروني / ٣ أعضاء في الفريقOmar Salehomar@example.com٧٩ دولاراً / شهرياًالفوترة شهرياًتجربة"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.08)",
+      "color": "rgb(0, 105, 42)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "تجربة"
+    }
+  },
+  {
+    "label": "ar-rtl-light 390px selection",
+    "row": {
+      "background": "rgb(237, 237, 237)",
+      "color": "rgb(40, 40, 40)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(24, 24, 24)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(255, 255, 255)",
+      "color": "rgb(93, 93, 93)",
+      "shadow": "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-dark initial selection",
+    "row": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-dark selected hover",
+    "row": {
+      "background": "rgba(255, 255, 255, 0.12)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-dark mouse selects success tile and neutral badge",
+    "row": {
+      "background": "rgba(255, 255, 255, 0.12)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "NSNorthstarمتجر إلكتروني / ٣ أعضاء في الفريقOmar Salehomar@example.com٧٩ دولاراً / شهرياًالفوترة شهرياًتجربة"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "تجربة"
+    }
+  },
+  {
+    "label": "ar-rtl-dark Space reselects primary tile",
+    "row": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "نشطة"
+    }
+  },
+  {
+    "label": "ar-rtl-dark Enter selects other row",
+    "row": {
+      "background": "rgba(255, 255, 255, 0.12)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "NSNorthstarمتجر إلكتروني / ٣ أعضاء في الفريقOmar Salehomar@example.com٧٩ دولاراً / شهرياًالفوترة شهرياًتجربة"
+    },
+    "tile": {
+      "background": "rgba(4, 184, 76, 0.15)",
+      "color": "rgb(4, 184, 76)",
+      "shadow": "none",
+      "text": "NS"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "تجربة"
+    }
+  },
+  {
+    "label": "ar-rtl-dark 390px selection",
+    "row": {
+      "background": "rgb(48, 48, 48)",
+      "color": "rgb(220, 220, 220)",
+      "shadow": "none",
+      "text": "ACAcme Studioمتجر تجريبي / الوصول إلى مليون دولار من المبيعات السنويةMaya Chenmaya@example.com١٤٩ دولاراً / شهرياًالفوترة شهرياًنشطة"
+    },
+    "tile": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(243, 243, 243)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "AC"
+    },
+    "badge": {
+      "background": "rgb(33, 33, 33)",
+      "color": "rgb(175, 175, 175)",
+      "shadow": "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
+      "text": "نشطة"
+    }
+  }
+]
