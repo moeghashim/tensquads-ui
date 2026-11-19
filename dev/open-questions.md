@@ -28,3 +28,14 @@
   2. Keep it as is.
 **Recommendation**: Option 1 in v0.2, plus one live smoke test against the API when the tensquads app adopts the server helpers.
 **Status**: open — v0.2
+
+## Q4 — Fields the UI needs that the platform message contract lacks
+
+**Context**: D26 maps the platform's owner messages (`moeghashim/tensquads-platform-amp`, commit `c5eaad4`) to library components. The UI restates the contract and must not invent fields. These gaps are known; the platform decides them.
+1. `approval_request` has no amount. It has only `limit` (millionths of a US dollar). The owner's reference cards show "$42" and "+$20/day". The card shows the limit, not the amount.
+2. `approval_request` has no `bot` and no `taskId`. ApprovalCard accepts both as optional and shows them when present.
+3. `action` is a tool id ("refund", "send_reply"). The owner app supplies localized labels through `actionLabels`. The contract has no human title.
+4. `status.bot` is an id. It is not confirmed that bot ids are squadmate slugs (petra, pisa, kyoto, rio, zurich, giza). The view shows a squadmate only when the id matches one.
+5. No message says that an approval was decided or a question was answered. The view locks a card locally after a decision; after a reload it cannot restore that state unless the host passes `decision`. An `approval_decided` message, or a decided field, would close this.
+6. It is not stated whether `reply.text` and `evidence` are plain text or Markdown. The view treats them as plain text and links URLs.
+**Status**: open — for the platform owner

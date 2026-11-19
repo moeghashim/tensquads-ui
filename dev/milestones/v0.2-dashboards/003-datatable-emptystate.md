@@ -7,7 +7,7 @@ priority: high
 files: ["packages/ui/src/react/DataTable/**", "packages/ui/src/react/EmptyState/**", "packages/ui/src/react/index.ts", "packages/ui/src/openui/**", "packages/ui/src/styles/**", "apps/preview/**", "e2e/**", "llms.txt"]
 ---
 
-Specs: `DataTable`, `EmptyState`. Starts after 002 merges.
+Specs: `DataTable`, `EmptyState`. Starts after 005 merges.
 
 ## Acceptance criteria
 - [ ] `DataTable`: a real `<table>` with `<caption>` (visually hidden is fine). Columns: `key`, `label`, `align` (`start` or `end`; numeric columns end-aligned with tabular numerals), optional `width`, optional `mono`. Cells take strings or React nodes. Rows keyed by an `id`, never by index.
