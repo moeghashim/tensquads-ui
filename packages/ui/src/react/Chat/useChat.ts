@@ -120,7 +120,7 @@ export function useChat({
 						name: event.type,
 						source:
 							(event as ActionEvent & { sourceComponent?: string }).sourceComponent ?? event.formName ?? "OpenUI",
-						values: event.formState ?? event.params,
+						values: { ...event.params, ...event.formState },
 						summary,
 					},
 				};

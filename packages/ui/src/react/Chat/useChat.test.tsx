@@ -1,6 +1,7 @@
 import type { ActionEvent } from "@openuidev/react-lang";
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { type OpenUIRequest, readOpenUIRequest } from "../../openui/server/request.js";
 import { useChat } from "./useChat.js";
 
 describe("useChat", () => {
@@ -38,6 +39,70 @@ describe("useChat", () => {
 			{ role: "assistant", content: "Next step" },
 		]);
 		expect(result.current.locked.has("approval")).toBe(true);
+	});
+
+	it.each(["en", "ar"] as const)("preserves action and form values in %s requests", async (locale) => {
+		const scenarios = [
+			{
+				formState: undefined,
+				values: { planId: "p1", approved: false },
+				json: '{"approved":false,"planId":"p1"}',
+			},
+			{ formState: {}, values: { planId: "p1", approved: false }, json: '{"approved":false,"planId":"p1"}' },
+			{
+				formState: { note: "Ready" },
+				values: { planId: "p1", approved: false, note: "Ready" },
+				json: '{"approved":false,"note":"Ready","planId":"p1"}',
+			},
+			{
+				formState: { approved: true },
+				values: { planId: "p1", approved: true },
+				json: '{"approved":true,"planId":"p1"}',
+			},
+		];
+		for (const scenario of scenarios) {
+			let requestBody: unknown;
+			let normalized: OpenUIRequest | undefined;
+			const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation(async (_input, init) => {
+				requestBody = JSON.parse(String(init?.body));
+				normalized = await readOpenUIRequest(new Request("https://example.com/chat", init));
+				return new Response("Next step");
+			});
+			const { result, unmount } = renderHook(() => useChat({ endpoint: "/chat", locale }));
+			const event: ActionEvent = {
+				type: "Approve",
+				params: { planId: "p1", approved: false },
+				formState: scenario.formState,
+				formName: "ApprovalCard",
+				humanFriendlyMessage: "Approve plan",
+			};
+			try {
+				await act(async () => {
+					expect(await result.current.act(event, "approval")).toBe(true);
+				});
+				const actionTurn = {
+					role: "action",
+					action: { name: "Approve", source: "ApprovalCard", values: scenario.values, summary: "Approve plan" },
+				};
+				expect(result.current.turns[0]).toEqual(actionTurn);
+				expect(requestBody).toEqual({ locale, turns: [actionTurn] });
+				expect(normalized).toEqual({
+					locale,
+					turns: [
+						{
+							role: "user",
+							content:
+								locale === "ar"
+									? `اختار المستخدم الإجراء «Approve plan» في مكوّن «ApprovalCard». اسم الإجراء: Approve. القيم: ${scenario.json}`
+									: `The user chose the action “Approve plan” in the “ApprovalCard” component. Action name: Approve. Values: ${scenario.json}`,
+						},
+					],
+				});
+			} finally {
+				fetchMock.mockRestore();
+				unmount();
+			}
+		}
 	});
 
 	it("lets the host veto an action", async () => {
