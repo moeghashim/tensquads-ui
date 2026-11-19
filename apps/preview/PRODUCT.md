@@ -19,7 +19,7 @@ One component set that both a coding agent (React) and a live server agent (Open
 Live at https://tensquads-ui-preview.mohanadgh.workers.dev (address kept; no custom domain). Deployed by hand from `main`. Agents read `llms.txt` and the `tensquads-ui` and `ui-sdk` skills. Locale, direction and theme live in the URL.
 
 ## Capabilities and Constraints
-- Eleven components today: Squadmate, Button, Badge, Chip, Input, Field, Switch, SegmentedControl, Menu, Dialog, Tooltip. The list comes from the registry; never hand-maintain it.
+- See [llms.txt](../../llms.txt) for the generated component documentation index.
 - Styles use Agent-UI tokens only (`--ts-*`), logical CSS properties, light and dark.
 - No OpenUI playground and no API key on the site (D21).
 - Built with the library's own components where one fits.

@@ -1,7 +1,22 @@
+export type { ChatAction, ChatActionTurn, ChatTurn } from "../schemas/index.js";
 export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
+export type {
+	ChatComposerProps,
+	ChatEmptyStateProps,
+	ChatHeaderProps,
+	ChatLogProps,
+	ChatProps,
+	ChatStepProps,
+	ChatUserMessageProps,
+} from "./Chat/Chat.js";
+export { Chat, ChatComposer, ChatEmptyState, ChatHeader, ChatLog, ChatStep, ChatUserMessage } from "./Chat/Chat.js";
+export type { ChatTransport, UseChatOptions, UseChatResult } from "./Chat/useChat.js";
+export { useChat } from "./Chat/useChat.js";
+export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
+export { ChatReply } from "./ChatReply/ChatReply.js";
 export type { ChipProps } from "./Chip/Chip.js";
 export { Chip } from "./Chip/Chip.js";
 export type {
@@ -42,6 +57,8 @@ export {
 	FieldLegend,
 	FieldSet,
 } from "./Field/Field.js";
+export type { FormProps } from "./Form/Form.js";
+export { Form } from "./Form/Form.js";
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
 export type {

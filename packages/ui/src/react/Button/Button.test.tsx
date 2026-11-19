@@ -178,7 +178,7 @@ describe("OpenUI round trips", () => {
 		}
 	});
 
-	it.each(["en", "ar"] as const)("reports excess fixture arguments for %s", (locale) => {
+	it.each(["en", "ar"] as const)("reports invalid action props for %s", (locale) => {
 		const onError = vi.fn();
 		const result = render(
 			<TensquadsRenderer
@@ -188,6 +188,8 @@ describe("OpenUI round trips", () => {
 			/>,
 		);
 		expect(result.getByRole("button", { name: "Save" })).toBeInTheDocument();
-		expect(onError).toHaveBeenCalledWith(expect.arrayContaining([expect.objectContaining({ code: "excess-args" })]));
+		expect(onError).toHaveBeenCalledWith(
+			expect.arrayContaining([expect.objectContaining({ code: "type-mismatch" })]),
+		);
 	});
 });

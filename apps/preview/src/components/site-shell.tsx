@@ -31,6 +31,9 @@ export function SiteShell() {
 					<Link to="/components" search={search as never}>
 						{copy.nav.components}
 					</Link>
+					<Link to="/chat" search={search as never}>
+						{copy.nav.chat}
+					</Link>
 					<Link to="/get-started" search={search as never}>
 						{copy.nav.getStarted}
 					</Link>

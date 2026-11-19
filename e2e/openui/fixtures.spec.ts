@@ -24,6 +24,17 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("button", { name: locale === "en" ? "Continue" : "متابعة" }),
 				).toBeVisible();
+			} else if (component.name === "Form") {
+				const form = page.getByRole("form", { name: locale === "en" ? "Project" : "المشروع", exact: true });
+				await expect(
+					form.getByRole("textbox", { name: locale === "en" ? "Project name" : "اسم المشروع" }),
+				).toHaveValue(locale === "en" ? "Northstar" : "بنّاء");
+				await expect(form.getByRole("textbox", { name: locale === "en" ? "Owner" : "المسؤول" })).toHaveValue(
+					locale === "en" ? "Moe" : "محمد",
+				);
+				await expect(
+					form.getByRole("button", { name: locale === "en" ? "Save project" : "حفظ المشروع" }),
+				).toBeVisible();
 			} else if (component.name === "Badge") {
 				const badge = fixtureRegion.getByText(locale === "en" ? "Ready" : "جاهز", { exact: true });
 				await expect(badge).toBeVisible();

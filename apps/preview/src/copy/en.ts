@@ -1,6 +1,14 @@
 const en = {
 	brand: "tensquads",
-	nav: { home: "Home", components: "Components", getStarted: "Get started" },
+	nav: { home: "Home", components: "Components", chat: "Chat demo", getStarted: "Get started" },
+	chat: {
+		eyebrow: "Chat with inline UI",
+		title: "See the conversation behind an agent-built screen.",
+		intro: "Petra routes the request to the squad, then returns an editable plan inside the chat.",
+		newChat: "Replay",
+		composer: "Try a message",
+		localOnly: "This site has no live model. The chat demo uses a scripted reply.",
+	},
 	localeLabel: "Language",
 	themeLabel: "Theme",
 	locale: { en: "English", ar: "العربية" },
@@ -14,6 +22,7 @@ const en = {
 	copyFailed: "Could not copy. Select and copy the command above.",
 	getStarted: "Get started",
 	browse: "Browse components",
+	openChat: "See the chat demo",
 	browseComponents: "Browse {count} components",
 	streamTitle: "OpenUI stream · Petra",
 	message: "Message",

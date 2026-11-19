@@ -17,6 +17,18 @@ import {
 } from "./index.js";
 
 describe("OpenUI server helpers", () => {
+	it.each(["en", "ar"] as const)("keeps the default %s prompt identical to explicit UI mode", (locale) => {
+		const input = { library: createTensquadsLibrary(locale), locale };
+		expect(buildSystemPrompt(input)).toBe(buildSystemPrompt({ ...input, mode: "ui" }));
+	});
+
+	it.each(["en", "ar"] as const)("teaches the %s chat reply format", (locale) => {
+		const prompt = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, mode: "chat" });
+		expect(prompt).toContain("```openui");
+		expect(prompt).toContain(locale === "en" ? "each UI moment" : "كتلة لكل لحظة واجهة");
+		expect(prompt).toContain(locale === "en" ? "Here is the current status." : "هذه هي الحالة الحالية.");
+	});
+
 	it.each(["en", "ar"] as const)("builds a live %s catalogue and locale example", (locale) => {
 		const prompt = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, persona: "Persona" });
 		for (const component of getRegisteredComponents()) {
@@ -70,6 +82,38 @@ describe("OpenUI server helpers", () => {
 		await expect(
 			readOpenUIRequest(new Request("https://worker.test", { method: "POST", body: "{" })),
 		).rejects.toMatchObject({ name: "OpenUIServerError", code: "invalid_json", status: 400 });
+	});
+
+	it("accepts the exact byte and turn limits with structured action turns", async () => {
+		const action = {
+			role: "action",
+			action: { name: "Approve", source: "ApprovalCard", values: { z: 1, a: "yes" }, summary: "Approve plan" },
+		};
+		const turns = [
+			action,
+			...Array.from({ length: MAX_TURNS - 1 }, (_, index) => ({
+				role: index % 2 ? "assistant" : "user",
+				content: "x",
+			})),
+		];
+		const body = JSON.stringify({ locale: "en", turns });
+		const padding = " ".repeat(MAX_BODY_BYTES - new TextEncoder().encode(body).byteLength);
+		const exact = `${body.slice(0, -1)}${padding}}`;
+		const parsed = await readOpenUIRequest(new Request("https://worker.test", { method: "POST", body: exact }));
+		expect(parsed.turns).toHaveLength(MAX_TURNS);
+		expect(parsed.turns[0]).toEqual({
+			role: "user",
+			content:
+				'The user chose the action “Approve plan” in the “ApprovalCard” component. Action name: Approve. Values: {"a":"yes","z":1}',
+		});
+	});
+
+	it("renders Arabic action turns in neutral Arabic", async () => {
+		const turns = [{ role: "action", action: { name: "Submit", source: "Form", values: {}, summary: "إرسال" } }];
+		const parsed = await readOpenUIRequest(
+			new Request("https://worker.test", { method: "POST", body: JSON.stringify({ locale: "ar", turns }) }),
+		);
+		expect(parsed.turns[0]?.content).toContain("اختار المستخدم الإجراء");
 	});
 
 	it("returns a plain text response from the provider seam without network access", async () => {

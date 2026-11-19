@@ -2,6 +2,16 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import {
+	Chat,
+	ChatComposer,
+	ChatHeader,
+	ChatLog,
+	ChatStep,
+	ChatUserMessage,
+} from "../../../../packages/ui/src/react/Chat/Chat";
+import { useChat } from "../../../../packages/ui/src/react/Chat/useChat";
+import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
 	Dialog,
@@ -57,7 +67,7 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = getRegisteredComponents().map(({ name }) => name);
+const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 
@@ -106,6 +116,12 @@ function ComponentPage() {
 				<h2 id="component-preview-heading">{copy.preview}</h2>
 				<ComponentExample />
 			</section>
+			{(name === "Chat" || name === "ChatReply") && (
+				<section className="component-doc-page__section" aria-labelledby="chat-action-example-heading">
+					<h2 id="chat-action-example-heading">{locale === "ar" ? "مثال الإجراء" : "Action turn example"}</h2>
+					<ChatActionExample locale={locale} />
+				</section>
+			)}
 			<div className="component-doc-page__section">
 				<h2 id="component-fixture-heading">{copy.fixture}</h2>
 				{!stream && <p>{noFixtureReason ?? copy.noFixture}</p>}
@@ -136,11 +152,179 @@ function ComponentPage() {
 	);
 }
 
+function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const chat = useChat({
+		endpoint: "mock://chat",
+		locale,
+		transport: async function* () {
+			yield ar ? "تم تسجيل موافقتك. سأبدأ بالخطوة التالية." : "Approval recorded. I will start the next step.";
+		},
+	});
+	return (
+		<div className="component-list" data-testid="chat-action-example">
+			<p>{ar ? "معاينة محلية؛ لا يتم إرسال أي طلب شبكة." : "Local mock; no network request is sent."}</p>
+			{chat.turns.length === 0 && (
+				<ChatReply locale={locale} reply={ar ? "الخطة جاهزة للمراجعة." : "The plan is ready for review."} />
+			)}
+			{chat.turns.map((turn, turnIndex) => {
+				if (turn.role === "action") {
+					return (
+						<div className="ts-chat__user-message" key={`action:${turn.action.name}:${turn.action.summary}`}>
+							{turn.action.summary}
+						</div>
+					);
+				}
+				if (turn.role === "assistant") {
+					return (
+						<ChatReply
+							key={`assistant:${turn.content}`}
+							locale={locale}
+							reply={turn.content}
+							locked={(blockId) => chat.locked.has(`${turnIndex}/${blockId}`)}
+							onAction={(event, blockId) => void chat.act(event, `${turnIndex}/${blockId}`)}
+						/>
+					);
+				}
+				return (
+					<div className="ts-chat__user-message" key={`user:${turn.content}`}>
+						{turn.content}
+					</div>
+				);
+			})}
+			{chat.error && <p role="status">{ar ? "تعذر إكمال الخطوة." : "The step is blocked."}</p>}
+			<div className="component-example">
+				<Button
+					disabled={chat.busy || chat.locked.has("plan")}
+					onClick={() => {
+						void chat.act(
+							{
+								type: "Approve",
+								params: {},
+								humanFriendlyMessage: ar ? "الموافقة على الخطة" : "Approve plan",
+								formName: "PlanCard",
+							},
+							"plan",
+						);
+					}}
+				>
+					{chat.locked.has("plan")
+						? ar
+							? "تمت الموافقة"
+							: "Approved"
+						: ar
+							? "الموافقة على الخطة"
+							: "Approve plan"}
+				</Button>
+				{chat.error && (
+					<Button variant="ghost" onClick={() => void chat.retry()}>
+						{ar ? "إعادة المحاولة" : "Retry"}
+					</Button>
+				)}
+			</div>
+		</div>
+	);
+}
+
+function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }) {
+	const ar = locale === "ar";
+	const chat = useChat({
+		endpoint: "mock://form",
+		locale,
+		transport: async function* () {
+			yield ar ? "تم حفظ المشروع." : "Project saved.";
+		},
+	});
+	return (
+		<div className="component-list" data-testid="form-example">
+			<ChatReply
+				reply={`\`\`\`openui\n${stream}\n\`\`\``}
+				locale={locale}
+				isStreaming={chat.busy}
+				locked={(id) => chat.locked.has(id)}
+				onAction={(event, id) => void chat.act(event, id)}
+			/>
+			{chat.turns.map((turn) =>
+				turn.role === "action" ? (
+					<ChatUserMessage key="action" data-values={JSON.stringify(turn.action.values)}>
+						{turn.action.summary}
+					</ChatUserMessage>
+				) : turn.role === "assistant" ? (
+					<p key="reply">{turn.content}</p>
+				) : null,
+			)}
+		</div>
+	);
+}
+
 function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Form" && stream) return <FormExample locale={locale} stream={stream} />;
+	if (name === "Chat") {
+		const ar = locale === "ar";
+		return (
+			<div className="gallery chat-preview">
+				<Chat className="chat-preview__surface">
+					<ChatHeader locale={locale}>{ar ? "محادثة الوكيل" : "Agent chat"}</ChatHeader>
+					<ChatLog>
+						<ChatUserMessage>{ar ? "ساعدني في تخطيط المشروع" : "Help me plan the project"}</ChatUserMessage>
+						<ChatStep
+							name={ar ? "المخطط" : "Planner"}
+							glyph={<span aria-hidden="true">◇</span>}
+							status={ar ? "تم التوجيه" : "Routed"}
+							responseId="resp_8f31"
+							reply={
+								<>
+									<p>{ar ? "سأقسّم العمل إلى خطوات واضحة." : "I will break the work into clear steps."}</p>
+									<ul>
+										<li>{ar ? "تحديد الهدف" : "Define the goal"}</li>
+										<li>{ar ? "ترتيب الخطوات" : "Order the steps"}</li>
+									</ul>
+								</>
+							}
+						/>
+						<ChatStep name={ar ? "البحث" : "Research"} glyph={<span aria-hidden="true">⌕</span>} running />
+					</ChatLog>
+					<ChatComposer
+						placeholder={ar ? "اكتب رسالة" : "Write a message"}
+						locale={locale}
+						sendLabel={ar ? "إرسال" : "Send"}
+						stopLabel={ar ? "إيقاف" : "Stop"}
+						onSend={() => undefined}
+						attach={
+							<Button variant="ghost" iconOnly aria-label={ar ? "إرفاق ملف" : "Attach file"}>
+								<svg
+									aria-hidden="true"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="1.7"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path d="m12 5-6.5 6.5a4 4 0 0 0 5.7 5.7l7.2-7.2a2.5 2.5 0 0 0-3.5-3.5l-7.1 7.1a1 1 0 0 0 1.4 1.4l6.4-6.4" />
+								</svg>
+							</Button>
+						}
+					/>
+				</Chat>
+			</div>
+		);
+	}
+	if (name === "ChatReply") {
+		return (
+			<div className="gallery">
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<section className="component-list" aria-label={locale === "ar" ? "معاينة الرد" : "Chat reply preview"}>
+					{stream && <ChatReply reply={stream} locale={locale} />}
+				</section>
+				{stream && <ExampleCodeBlock code={stream.trim()} />}
+			</div>
+		);
+	}
 	if (name === "Dialog") {
 		const ar = locale === "ar";
 		const copy = ar

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as ComponentsIndexRouteImport } from './routes/components.index'
 import { Route as ComponentsNameRouteImport } from './routes/components.$name'
@@ -17,6 +18,11 @@ import { Route as ComponentsNameRouteImport } from './routes/components.$name'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GetStartedRoute = GetStartedRouteImport.update({
@@ -37,12 +43,14 @@ const ComponentsNameRoute = ComponentsNameRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/get-started': typeof GetStartedRoute
   '/components/$name': typeof ComponentsNameRoute
   '/components/': typeof ComponentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/get-started': typeof GetStartedRoute
   '/components/$name': typeof ComponentsNameRoute
   '/components': typeof ComponentsIndexRoute
@@ -50,20 +58,29 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/get-started': typeof GetStartedRoute
   '/components/$name': typeof ComponentsNameRoute
   '/components/': typeof ComponentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/get-started' | '/components/$name' | '/components/'
+  fullPaths:
+    '/' | '/chat' | '/get-started' | '/components/$name' | '/components/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/get-started' | '/components/$name' | '/components'
-  id: '__root__' | '/' | '/get-started' | '/components/$name' | '/components/'
+  to: '/' | '/chat' | '/get-started' | '/components/$name' | '/components'
+  id:
+    | '__root__'
+    | '/'
+    | '/chat'
+    | '/get-started'
+    | '/components/$name'
+    | '/components/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChatRoute: typeof ChatRoute
   GetStartedRoute: typeof GetStartedRoute
   ComponentsNameRoute: typeof ComponentsNameRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
@@ -76,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/get-started': {
@@ -104,6 +128,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChatRoute: ChatRoute,
   GetStartedRoute: GetStartedRoute,
   ComponentsNameRoute: ComponentsNameRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,

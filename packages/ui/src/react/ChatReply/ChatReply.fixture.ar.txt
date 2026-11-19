@@ -1,0 +1,15 @@
+# حالة النشر
+
+النشر **جاهز**. راجع [دليل التشغيل](https://example.com/runbook).
+
+```openui
+root = Badge("جاهز", "success")
+```
+
+اجتازت الفحوصات:
+
+```openui
+root = Button("متابعة", "solid", "md", false, false)
+```
+
+استخدم `npm run deploy` للمتابعة.

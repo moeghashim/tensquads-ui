@@ -74,7 +74,7 @@ test("home works in both directions and themes", async ({ page }, testInfo) => {
 		await expect(
 			page.getByRole("navigation", { name: state.locale === "ar" ? "التنقل الرئيسي" : "Primary navigation" }),
 		).toBeVisible();
-		await expect(page.locator(".component-card")).toHaveCount(11);
+		await expect(page.locator(".component-card")).toHaveCount(12);
 		await expect(
 			page.getByRole("button", { name: state.locale === "ar" ? "اعتماد الخطة" : "Approve plan" }),
 		).toBeVisible({ timeout: 5000 });
@@ -217,7 +217,8 @@ test("homepage presents streamed messages and keeps previews readable", async ({
 	).toBe(true);
 	const actions = page.locator(".hero__links");
 	await expect(actions.getByRole("link", { name: "Get started", exact: true })).toBeVisible();
-	const browse = actions.getByRole("link", { name: "Browse 11 components", exact: true });
+	const componentCount = await page.locator(".component-card").count();
+	const browse = actions.getByRole("link", { name: `Browse ${componentCount} components`, exact: true });
 	await expect(browse).toBeVisible();
 	expect(await browse.evaluate((element) => getComputedStyle(element).textDecorationLine)).toBe("none");
 	await expect(page.getByRole("tooltip")).toContainText("Create a new item");

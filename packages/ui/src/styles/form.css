@@ -1,0 +1,4 @@
+@layer tensquads {
+	.ts-form [data-slot="segmented-control"] { justify-self: start; }
+	.ts-form > [data-slot="field-set"] > [data-slot="button"] { justify-self: start; }
+}
