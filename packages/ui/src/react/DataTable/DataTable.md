@@ -2,6 +2,8 @@
 
 Import `DataTable`, its column and row types, and the `EntityCell`, `PersonCell`, `StackCell`, and `StatusCell` helpers from `@tensquads/ui/react`. Provide an accessible `caption`, columns, and rows with stable string IDs. Cells accept text or React nodes. Set `align: "end"` for numeric columns and optionally set `width` or `mono`.
 
-Rows become keyboard-selectable when `onRowSelect` is provided. Use `selectedId` to show the selected record. Enter and Space select the focused row. The host owns filtering and search. Put the search input and filter controls in the containing `Card` actions.
+Rows become selectable by click and keyboard when `onRowSelect` is provided. Control selection with `selectedId` and update it from `onRowSelect(id)`. Enter and Space select the row when the row itself has focus. Keyboard events from controls inside cells keep their native behavior. The host owns filtering and search. Put the search input and filter controls in the containing `Card` actions. Render [EmptyState](../EmptyState/EmptyState.md) when no records match.
 
-The entity helper shows initials, a name, and a truncated detail line. Person and stack helpers show two text lines. Status uses a word label and a `Badge` tone. OpenUI rows accept string cells; use React for helper compositions.
+The entity helper shows initials, a name, and a truncated detail line. Person and stack helpers show two text lines. These helpers truncate their secondary line and keep its full text in `title`. Status uses a word label and a `Badge` tone. Wide tables scroll inside their wrapper on narrow screens.
+
+OpenUI accepts `caption`, `columns`, and `rows` with string cells. It does not expose `selectedId` or `onRowSelect`, so OpenUI tables are read-only. Use React for selection and helper compositions.
