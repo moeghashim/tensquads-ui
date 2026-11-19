@@ -1,581 +1,269 @@
 {
+  "surface": "Production-built preview on localhost:5173, scripted transport with synthetic store names",
+  "oracle": "Author intent: control groups match nav-link height; documented ChatReply sent record and README localized fallback contracts",
   "results": [
     {
-      "name": "Desktop local chat shows a separate app window and site page-title hierarchy",
-      "result": "pass",
-      "detail": {
-        "initial": {
-          "title": {
-            "size": "36px",
-            "lineHeight": "40px"
-          },
-          "frame": {
-            "border": "1px",
-            "radius": "20px",
-            "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-            "background": "rgb(255, 255, 255)"
-          },
-          "surface": {
-            "x": 48,
-            "y": 295,
-            "width": 1344,
-            "height": 672,
-            "right": 1392,
-            "bottom": 967
-          },
-          "intro": {
-            "x": 48,
-            "y": 112,
-            "width": 768,
-            "height": 151,
-            "right": 816,
-            "bottom": 263
-          },
-          "footer": {
-            "x": 48,
-            "y": 979,
-            "width": 1344,
-            "height": 28,
-            "right": 1392,
-            "bottom": 1007
-          },
-          "composer": {
-            "x": 336,
-            "y": 892,
-            "width": 768,
-            "height": 58,
-            "right": 1104,
-            "bottom": 950
-          },
-          "width": 1440,
-          "scrollWidth": 1440,
-          "lang": "en",
-          "dir": "ltr"
-        },
-        "otherSiteTitle": {
-          "size": "36px",
-          "lineHeight": "40px"
-        },
-        "navigation": "get-started and back"
-      }
-    },
-    {
-      "name": "390px local chat contains long input, approval, scrolling, and replay inside its frame",
-      "result": "pass",
-      "detail": {
-        "initial": {
-          "title": {
-            "size": "36px",
-            "lineHeight": "40px"
-          },
-          "frame": {
-            "border": "1px",
-            "radius": "20px",
-            "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-            "background": "rgb(255, 255, 255)"
-          },
-          "surface": {
-            "x": 12,
-            "y": 464,
-            "width": 366,
-            "height": 720,
-            "right": 378,
-            "bottom": 1184
-          },
-          "intro": {
-            "x": 12,
-            "y": 177,
-            "width": 366,
-            "height": 255,
-            "right": 378,
-            "bottom": 432
-          },
-          "footer": {
-            "x": 12,
-            "y": 1196,
-            "width": 366,
-            "height": 80,
-            "right": 378,
-            "bottom": 1276
-          },
-          "composer": {
-            "x": 29,
-            "y": 1109,
-            "width": 332,
-            "height": 58,
-            "right": 361,
-            "bottom": 1167
-          },
-          "width": 390,
-          "scrollWidth": 390,
-          "lang": "en",
-          "dir": "ltr"
-        },
-        "after": {
-          "title": {
-            "size": "36px",
-            "lineHeight": "40px"
-          },
-          "frame": {
-            "border": "1px",
-            "radius": "20px",
-            "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-            "background": "rgb(255, 255, 255)"
-          },
-          "surface": {
-            "x": 12,
-            "y": 140,
-            "width": 366,
-            "height": 720,
-            "right": 378,
-            "bottom": 860
-          },
-          "intro": {
-            "x": 12,
-            "y": -147,
-            "width": 366,
-            "height": 255,
-            "right": 378,
-            "bottom": 108
-          },
-          "footer": {
-            "x": 12,
-            "y": 872,
-            "width": 366,
-            "height": 80,
-            "right": 378,
-            "bottom": 952
-          },
-          "composer": {
-            "x": 29,
-            "y": 785,
-            "width": 332,
-            "height": 58,
-            "right": 361,
-            "bottom": 843
-          },
-          "width": 390,
-          "scrollWidth": 390,
-          "lang": "en",
-          "dir": "ltr"
-        },
-        "actions": [
-          "long store approval locks form",
-          "ten-line composer sends fixed local reply",
-          "Replay resets in same frame"
-        ]
-      }
-    },
-    {
-      "name": "Arabic RTL and English chat retain framing and readable titles across light and dark at desktop and mobile sizes",
+      "name": "Header groups match navigation height across desktop/mobile, English/Arabic and light/dark",
       "result": "pass",
       "detail": [
         {
           "locale": "en",
           "theme": "light",
-          "desktop": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-              "background": "rgb(255, 255, 255)"
-            },
-            "surface": {
-              "x": 48,
-              "y": 295,
-              "width": 1344,
-              "height": 672,
-              "right": 1392,
-              "bottom": 967
-            },
-            "intro": {
-              "x": 48,
-              "y": 112,
-              "width": 768,
-              "height": 151,
-              "right": 816,
-              "bottom": 263
-            },
-            "footer": {
-              "x": 48,
-              "y": 979,
-              "width": 1344,
-              "height": 28,
-              "right": 1392,
-              "bottom": 1007
-            },
-            "composer": {
-              "x": 336,
-              "y": 892,
-              "width": 768,
-              "height": 58,
-              "right": 1104,
-              "bottom": 950
-            },
-            "width": 1440,
-            "scrollWidth": 1440,
-            "lang": "en",
-            "dir": "ltr"
-          },
-          "mobile": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-              "background": "rgb(255, 255, 255)"
-            },
-            "surface": {
-              "x": 12,
-              "y": 464,
-              "width": 366,
-              "height": 720,
-              "right": 378,
-              "bottom": 1184
-            },
-            "intro": {
-              "x": 12,
-              "y": 177,
-              "width": 366,
-              "height": 255,
-              "right": 378,
-              "bottom": 432
-            },
-            "footer": {
-              "x": 12,
-              "y": 1196,
-              "width": 366,
-              "height": 80,
-              "right": 378,
-              "bottom": 1276
-            },
-            "composer": {
-              "x": 29,
-              "y": 1109,
-              "width": 332,
-              "height": 58,
-              "right": 361,
-              "bottom": 1167
-            },
-            "width": 390,
-            "scrollWidth": 390,
-            "lang": "en",
-            "dir": "ltr"
-          },
-          "footerNavigation": "components with locale and theme preserved"
+          "width": 1440,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "en",
+          "theme": "light",
+          "width": 390,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 390,
+          "content": 390
         },
         {
           "locale": "en",
           "theme": "dark",
-          "desktop": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.36) 0px 4px 8px -2px, rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
-              "background": "rgb(33, 33, 33)"
-            },
-            "surface": {
-              "x": 48,
-              "y": 295,
-              "width": 1344,
-              "height": 672,
-              "right": 1392,
-              "bottom": 967
-            },
-            "intro": {
-              "x": 48,
-              "y": 112,
-              "width": 768,
-              "height": 151,
-              "right": 816,
-              "bottom": 263
-            },
-            "footer": {
-              "x": 48,
-              "y": 979,
-              "width": 1344,
-              "height": 28,
-              "right": 1392,
-              "bottom": 1007
-            },
-            "composer": {
-              "x": 336,
-              "y": 892,
-              "width": 768,
-              "height": 58,
-              "right": 1104,
-              "bottom": 950
-            },
-            "width": 1440,
-            "scrollWidth": 1440,
-            "lang": "en",
-            "dir": "ltr"
-          },
-          "mobile": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.36) 0px 4px 8px -2px, rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
-              "background": "rgb(33, 33, 33)"
-            },
-            "surface": {
-              "x": 12,
-              "y": 464,
-              "width": 366,
-              "height": 720,
-              "right": 378,
-              "bottom": 1184
-            },
-            "intro": {
-              "x": 12,
-              "y": 177,
-              "width": 366,
-              "height": 255,
-              "right": 378,
-              "bottom": 432
-            },
-            "footer": {
-              "x": 12,
-              "y": 1196,
-              "width": 366,
-              "height": 80,
-              "right": 378,
-              "bottom": 1276
-            },
-            "composer": {
-              "x": 29,
-              "y": 1109,
-              "width": 332,
-              "height": 58,
-              "right": 361,
-              "bottom": 1167
-            },
-            "width": 390,
-            "scrollWidth": 390,
-            "lang": "en",
-            "dir": "ltr"
-          },
-          "footerNavigation": "components with locale and theme preserved"
+          "width": 1440,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "en",
+          "theme": "dark",
+          "width": 390,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 390,
+          "content": 390
         },
         {
           "locale": "ar",
           "theme": "light",
-          "desktop": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-              "background": "rgb(255, 255, 255)"
-            },
-            "surface": {
-              "x": 48,
-              "y": 255,
-              "width": 1344,
-              "height": 672,
-              "right": 1392,
-              "bottom": 927
-            },
-            "intro": {
-              "x": 624,
-              "y": 112,
-              "width": 768,
-              "height": 111,
-              "right": 1392,
-              "bottom": 223
-            },
-            "footer": {
-              "x": 48,
-              "y": 939,
-              "width": 1344,
-              "height": 28,
-              "right": 1392,
-              "bottom": 967
-            },
-            "composer": {
-              "x": 336,
-              "y": 852,
-              "width": 768,
-              "height": 58,
-              "right": 1104,
-              "bottom": 910
-            },
-            "width": 1440,
-            "scrollWidth": 1440,
-            "lang": "ar",
-            "dir": "rtl"
-          },
-          "mobile": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px -2px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-              "background": "rgb(255, 255, 255)"
-            },
-            "surface": {
-              "x": 12,
-              "y": 384,
-              "width": 366,
-              "height": 720,
-              "right": 378,
-              "bottom": 1104
-            },
-            "intro": {
-              "x": 12,
-              "y": 177,
-              "width": 366,
-              "height": 175,
-              "right": 378,
-              "bottom": 352
-            },
-            "footer": {
-              "x": 12,
-              "y": 1116,
-              "width": 366,
-              "height": 56,
-              "right": 378,
-              "bottom": 1172
-            },
-            "composer": {
-              "x": 29,
-              "y": 1029,
-              "width": 332,
-              "height": 58,
-              "right": 361,
-              "bottom": 1087
-            },
-            "width": 390,
-            "scrollWidth": 390,
-            "lang": "ar",
-            "dir": "rtl"
-          },
-          "footerNavigation": "components with locale and theme preserved"
+          "width": 1440,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "ar",
+          "theme": "light",
+          "width": 390,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 390,
+          "content": 390
         },
         {
           "locale": "ar",
           "theme": "dark",
-          "desktop": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.36) 0px 4px 8px -2px, rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
-              "background": "rgb(33, 33, 33)"
-            },
-            "surface": {
-              "x": 48,
-              "y": 255,
-              "width": 1344,
-              "height": 672,
-              "right": 1392,
-              "bottom": 927
-            },
-            "intro": {
-              "x": 624,
-              "y": 112,
-              "width": 768,
-              "height": 111,
-              "right": 1392,
-              "bottom": 223
-            },
-            "footer": {
-              "x": 48,
-              "y": 939,
-              "width": 1344,
-              "height": 28,
-              "right": 1392,
-              "bottom": 967
-            },
-            "composer": {
-              "x": 336,
-              "y": 852,
-              "width": 768,
-              "height": 58,
-              "right": 1104,
-              "bottom": 910
-            },
-            "width": 1440,
-            "scrollWidth": 1440,
-            "lang": "ar",
-            "dir": "rtl"
-          },
-          "mobile": {
-            "title": {
-              "size": "36px",
-              "lineHeight": "40px"
-            },
-            "frame": {
-              "border": "1px",
-              "radius": "20px",
-              "shadow": "rgba(0, 0, 0, 0.36) 0px 4px 8px -2px, rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px",
-              "background": "rgb(33, 33, 33)"
-            },
-            "surface": {
-              "x": 12,
-              "y": 384,
-              "width": 366,
-              "height": 720,
-              "right": 378,
-              "bottom": 1104
-            },
-            "intro": {
-              "x": 12,
-              "y": 177,
-              "width": 366,
-              "height": 175,
-              "right": 378,
-              "bottom": 352
-            },
-            "footer": {
-              "x": 12,
-              "y": 1116,
-              "width": 366,
-              "height": 56,
-              "right": 378,
-              "bottom": 1172
-            },
-            "composer": {
-              "x": 29,
-              "y": 1029,
-              "width": 332,
-              "height": 58,
-              "right": 361,
-              "bottom": 1087
-            },
-            "width": 390,
-            "scrollWidth": 390,
-            "lang": "ar",
-            "dir": "rtl"
-          },
-          "footerNavigation": "components with locale and theme preserved"
+          "width": 1440,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 1440,
+          "content": 1440
+        },
+        {
+          "locale": "ar",
+          "theme": "dark",
+          "width": 390,
+          "nav": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "controls": [
+            36,
+            36
+          ],
+          "viewport": 390,
+          "content": 390
+        }
+      ]
+    },
+    {
+      "name": "Header language/theme controls support keyboard changes and preserve settings through navigation",
+      "result": "pass",
+      "detail": {
+        "url": "http://localhost:5173/components?locale=ar&dir=rtl&theme=dark",
+        "heights": [
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "name": "Local chat approval trims values, retains sent records, prevents edits and replay restores the form in both locales/themes",
+      "result": "pass",
+      "detail": [
+        {
+          "locale": "en",
+          "theme": "light",
+          "text": "Plan approved for Northstar Goods. I will send Monthly updates. Email notifications are off.",
+          "style": {
+            "cursor": "default",
+            "color": "rgb(40, 40, 40)"
+          }
+        },
+        {
+          "locale": "en",
+          "theme": "dark",
+          "text": "Plan approved for Northstar Goods. I will send Monthly updates. Email notifications are off.",
+          "style": {
+            "cursor": "default",
+            "color": "rgb(220, 220, 220)"
+          }
+        },
+        {
+          "locale": "ar",
+          "theme": "light",
+          "text": "تم اعتماد خطة متجر الندى. سأرسل تحديثات شهري. إشعارات البريد غير مفعّلة.",
+          "style": {
+            "cursor": "default",
+            "color": "rgb(40, 40, 40)"
+          }
+        },
+        {
+          "locale": "ar",
+          "theme": "dark",
+          "text": "تم اعتماد خطة متجر الندى. سأرسل تحديثات شهري. إشعارات البريد غير مفعّلة.",
+          "style": {
+            "cursor": "default",
+            "color": "rgb(220, 220, 220)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empty, whitespace-only and markup-like store names produce safe localized follow-ups in the local chat",
+      "result": "pass",
+      "detail": [
+        {
+          "locale": "en",
+          "input": "",
+          "followup": "Plan approved for your store. I will send Weekly updates. Email notifications are on."
+        },
+        {
+          "locale": "en",
+          "input": "   ",
+          "followup": "Plan approved for your store. I will send Weekly updates. Email notifications are on."
+        },
+        {
+          "locale": "en",
+          "input": "  A **B** {frequency} [shop](https://example.com)  ",
+          "followup": "Plan approved for A **B** {frequency} [shop](https://example.com). I will send Weekly updates. Email notifications are on."
+        },
+        {
+          "locale": "ar",
+          "input": "",
+          "followup": "تم اعتماد خطة متجرك. سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة."
+        },
+        {
+          "locale": "ar",
+          "input": "   ",
+          "followup": "تم اعتماد خطة متجرك. سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة."
+        },
+        {
+          "locale": "ar",
+          "input": "  A **B** {frequency} [shop](https://example.com)  ",
+          "followup": "تم اعتماد خطة A **B** {frequency} [shop](https://example.com). سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة."
+        }
+      ]
+    },
+    {
+      "name": "Chat panel scrolls without an edge fade, keeps its reserved height on replay, and answers typed messages locally",
+      "result": "pass",
+      "detail": [
+        {
+          "locale": "en",
+          "panelHeight": 720,
+          "mask": "none",
+          "scroll": {
+            "start": 0,
+            "end": 514,
+            "height": 644,
+            "content": 1158
+          }
+        },
+        {
+          "locale": "ar",
+          "panelHeight": 720,
+          "mask": "none",
+          "scroll": {
+            "start": 0,
+            "end": 514,
+            "height": 644,
+            "content": 1158
+          }
         }
       ]
     }
   ],
-  "errors": []
+  "pageErrors": [],
+  "test_setup_notes": [
+    "Initial scroll check expected overflow from a fixture whose clientHeight and scrollHeight were both 644px. Corrected the driver to submit a long synthetic message through the real composer before checking scroll. Both locales then scrolled from 0 to 514px. No product changes were needed."
+  ]
 }
