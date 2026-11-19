@@ -1,274 +1,1364 @@
 [
   {
-    "name": "metrics and approval identity en light",
-    "result": "pass",
-    "detail": {
-      "deltas": [
-        "+12% vs last week",
-        "+8% vs last week",
-        "+4% vs last week",
-        "-1 pt vs last week",
-        "This week",
-        "This week"
-      ],
-      "identities": [
-        "GizaTask: TASK-1042",
-        "KyotoTask: TASK-1043",
-        "RioTask: TASK-1044",
-        "PetraTask: TASK-1045"
-      ],
-      "errors": []
-    }
+    "locale": "en",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "documentWidth": 1440,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
   },
   {
-    "name": "approve, keyboard disclosure and language switch en light",
-    "result": "pass",
-    "detail": {
-      "command": {
+    "locale": "en",
+    "theme": "light",
+    "width": 1180,
+    "viewport": 1180,
+    "documentWidth": 1180,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 760,
+    "viewport": 760,
+    "documentWidth": 760,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "documentWidth": 390,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "documentWidth": 1440,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1180,
+    "viewport": 1180,
+    "documentWidth": 1180,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 760,
+    "viewport": 760,
+    "documentWidth": 760,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "documentWidth": 390,
+    "approvals": [
+      {
+        "text": "Refund order 1042 for a damaged item",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Giza",
+        "task": "Task: TASK-1042"
+      },
+      {
+        "text": "Send the customer a replacement update",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Kyoto",
+        "task": "Task: TASK-1043"
+      },
+      {
+        "text": "Offer a 15% discount on the next order",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Rio",
+        "task": "Task: TASK-1044"
+      },
+      {
+        "text": "Refund order 1088 after duplicate payment",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "Petra",
+        "task": "Task: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "Revenue",
+        "footer": "+12% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Orders",
+        "footer": "+8% vs last week\nThis month",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Average order",
+        "footer": "+4% vs last week\nAcross all orders",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Profit margin",
+        "footer": "-1 pt vs last week\nAfter operating costs",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "Tasks done by squads",
+        "footer": "Across your squads",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "Hours saved",
+        "footer": "Estimated this week",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "documentWidth": 1440,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 1180,
+    "viewport": 1180,
+    "documentWidth": 1180,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 760,
+    "viewport": 760,
+    "documentWidth": 760,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "documentWidth": 390,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "documentWidth": 1440,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 352.390625,
+        "availableWidth": 352.390625,
+        "scrollWidth": 352,
+        "clientWidth": 352,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 1180,
+    "viewport": 1180,
+    "documentWidth": 1180,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 248.390625,
+        "availableWidth": 248.390625,
+        "scrollWidth": 248,
+        "clientWidth": 248,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 82
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 760,
+    "viewport": 760,
+    "documentWidth": 760,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 662,
+        "availableWidth": 662,
+        "scrollWidth": 662,
+        "clientWidth": 662,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "documentWidth": 390,
+    "approvals": [
+      {
+        "text": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "الجيزة",
+        "task": "المهمة: TASK-1042"
+      },
+      {
+        "text": "إبلاغ العميل بتحديث استبدال المنتج",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "كيوتو",
+        "task": "المهمة: TASK-1043"
+      },
+      {
+        "text": "تقديم خصم ١٥٪ على الطلب التالي",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "ريو",
+        "task": "المهمة: TASK-1044"
+      },
+      {
+        "text": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+        "width": 292,
+        "availableWidth": 292,
+        "scrollWidth": 292,
+        "clientWidth": 292,
+        "agent": "بترا",
+        "task": "المهمة: TASK-1045"
+      }
+    ],
+    "tiles": [
+      {
+        "label": "الإيرادات",
+        "footer": "+١٢% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "الطلبات",
+        "footer": "+٨% مقارنة بالأسبوع السابق\nهذا الشهر",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "متوسط الطلب",
+        "footer": "+٤% مقارنة بالأسبوع السابق\nلكل الطلبات",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "هامش الربح",
+        "footer": "-١ نقطة مقارنة بالأسبوع السابق\nبعد تكاليف التشغيل",
+        "deltaCount": 1,
+        "footCount": 1
+      },
+      {
+        "label": "المهام المنجزة بواسطة الفرق",
+        "footer": "على مستوى الفرق",
+        "deltaCount": 0,
+        "footCount": 1
+      },
+      {
+        "label": "الساعات الموفرة",
+        "footer": "تقديري هذا الأسبوع",
+        "deltaCount": 0,
+        "footCount": 1
+      }
+    ],
+    "clearance": 49
+  },
+  {
+    "scenario": "approve then decline remaining requests to zero",
+    "decisions": [
+      {
         "type": "ApprovalDecision",
         "approvalId": "approval-1042",
         "decision": "approve",
         "contentHash": "sha256:request-1042"
       },
-      "rejection": {
+      {
         "type": "ApprovalDecision",
-        "approvalId": "approval-1043",
+        "approvalId": "approval-1045",
         "decision": "reject",
-        "contentHash": "sha256:request-1043"
-      },
-      "pending": [
-        "المهمة: TASK-1044",
-        "المهمة: TASK-1045"
-      ]
-    }
-  },
-  {
-    "name": "mobile clearance, empty approvals and chat navigation en light",
-    "result": "pass",
-    "detail": {
-      "launcher": {
-        "x": 204.96875,
-        "y": 788,
-        "width": 161.03125,
-        "height": 32
-      },
-      "lastActions": {
-        "x": 49,
-        "y": 707,
-        "width": 292,
-        "height": 32
-      },
-      "lastDeclineHitTest": true,
-      "dimensions": {
-        "viewport": 390,
-        "content": 390
-      },
-      "url": "http://127.0.0.1:5173/chat?locale=en&dir=ltr&theme=light",
-      "errors": []
-    }
-  },
-  {
-    "name": "metrics and approval identity en dark",
-    "result": "pass",
-    "detail": {
-      "deltas": [
-        "+12% vs last week",
-        "+8% vs last week",
-        "+4% vs last week",
-        "-1 pt vs last week",
-        "This week",
-        "This week"
-      ],
-      "identities": [
-        "GizaTask: TASK-1042",
-        "KyotoTask: TASK-1043",
-        "RioTask: TASK-1044",
-        "PetraTask: TASK-1045"
-      ],
-      "errors": []
-    }
-  },
-  {
-    "name": "approve, keyboard disclosure and language switch en dark",
-    "result": "pass",
-    "detail": {
-      "command": {
-        "type": "ApprovalDecision",
-        "approvalId": "approval-1042",
-        "decision": "approve",
-        "contentHash": "sha256:request-1042"
-      },
-      "rejection": {
-        "type": "ApprovalDecision",
-        "approvalId": "approval-1043",
-        "decision": "reject",
-        "contentHash": "sha256:request-1043"
-      },
-      "pending": [
-        "المهمة: TASK-1044",
-        "المهمة: TASK-1045"
-      ]
-    }
-  },
-  {
-    "name": "mobile clearance, empty approvals and chat navigation en dark",
-    "result": "pass",
-    "detail": {
-      "launcher": {
-        "x": 204.96875,
-        "y": 788,
-        "width": 161.03125,
-        "height": 32
-      },
-      "lastActions": {
-        "x": 49,
-        "y": 707,
-        "width": 292,
-        "height": 32
-      },
-      "lastDeclineHitTest": true,
-      "dimensions": {
-        "viewport": 390,
-        "content": 390
-      },
-      "url": "http://127.0.0.1:5173/chat?locale=en&dir=ltr&theme=dark",
-      "errors": []
-    }
-  },
-  {
-    "name": "metrics and approval identity ar light",
-    "result": "pass",
-    "detail": {
-      "deltas": [
-        "+١٢% مقارنة بالأسبوع السابق",
-        "+٨% مقارنة بالأسبوع السابق",
-        "+٤% مقارنة بالأسبوع السابق",
-        "-١ نقطة مقارنة بالأسبوع السابق",
-        "هذا الأسبوع",
-        "هذا الأسبوع"
-      ],
-      "identities": [
-        "الجيزةالمهمة: TASK-1042",
-        "كيوتوالمهمة: TASK-1043",
-        "ريوالمهمة: TASK-1044",
-        "بتراالمهمة: TASK-1045"
-      ],
-      "errors": []
-    }
-  },
-  {
-    "name": "approve, keyboard disclosure and language switch ar light",
-    "result": "pass",
-    "detail": {
-      "command": {
-        "type": "ApprovalDecision",
-        "approvalId": "approval-1042",
-        "decision": "approve",
-        "contentHash": "sha256:request-1042"
-      },
-      "rejection": {
-        "type": "ApprovalDecision",
-        "approvalId": "approval-1043",
-        "decision": "reject",
-        "contentHash": "sha256:request-1043"
-      },
-      "pending": [
-        "Task: TASK-1044",
-        "Task: TASK-1045"
-      ]
-    }
-  },
-  {
-    "name": "mobile clearance, empty approvals and chat navigation ar light",
-    "result": "pass",
-    "detail": {
-      "launcher": {
-        "x": 24,
-        "y": 788,
-        "width": 146.453125,
-        "height": 32
-      },
-      "lastActions": {
-        "x": 49,
-        "y": 707,
-        "width": 292,
-        "height": 32
-      },
-      "lastDeclineHitTest": true,
-      "dimensions": {
-        "viewport": 390,
-        "content": 390
-      },
-      "url": "http://127.0.0.1:5173/chat?locale=ar&dir=rtl&theme=light",
-      "errors": []
-    }
-  },
-  {
-    "name": "metrics and approval identity ar dark",
-    "result": "pass",
-    "detail": {
-      "deltas": [
-        "+١٢% مقارنة بالأسبوع السابق",
-        "+٨% مقارنة بالأسبوع السابق",
-        "+٤% مقارنة بالأسبوع السابق",
-        "-١ نقطة مقارنة بالأسبوع السابق",
-        "هذا الأسبوع",
-        "هذا الأسبوع"
-      ],
-      "identities": [
-        "الجيزةالمهمة: TASK-1042",
-        "كيوتوالمهمة: TASK-1043",
-        "ريوالمهمة: TASK-1044",
-        "بتراالمهمة: TASK-1045"
-      ],
-      "errors": []
-    }
-  },
-  {
-    "name": "approve, keyboard disclosure and language switch ar dark",
-    "result": "pass",
-    "detail": {
-      "command": {
-        "type": "ApprovalDecision",
-        "approvalId": "approval-1042",
-        "decision": "approve",
-        "contentHash": "sha256:request-1042"
-      },
-      "rejection": {
-        "type": "ApprovalDecision",
-        "approvalId": "approval-1043",
-        "decision": "reject",
-        "contentHash": "sha256:request-1043"
-      },
-      "pending": [
-        "Task: TASK-1044",
-        "Task: TASK-1045"
-      ]
-    }
-  },
-  {
-    "name": "mobile clearance, empty approvals and chat navigation ar dark",
-    "result": "pass",
-    "detail": {
-      "launcher": {
-        "x": 24,
-        "y": 788,
-        "width": 146.453125,
-        "height": 32
-      },
-      "lastActions": {
-        "x": 49,
-        "y": 707,
-        "width": 292,
-        "height": 32
-      },
-      "lastDeclineHitTest": true,
-      "dimensions": {
-        "viewport": 390,
-        "content": 390
-      },
-      "url": "http://127.0.0.1:5173/chat?locale=ar&dir=rtl&theme=dark",
-      "errors": []
-    }
+        "contentHash": "sha256:request-1045"
+      }
+    ],
+    "remaining": 0
   }
 ]
