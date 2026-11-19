@@ -111,7 +111,9 @@ describe("useChat", () => {
 		});
 		const { result } = renderHook(() => useChat({ endpoint: "/chat", transport, onAction: () => false }));
 		await act(async () => {
-			expect(await result.current.act({ type: "Custom", params: {}, humanFriendlyMessage: "Continue" }, "continue")).toBe(false);
+			expect(
+				await result.current.act({ type: "Custom", params: {}, humanFriendlyMessage: "Continue" }, "continue"),
+			).toBe(false);
 		});
 		expect(result.current.turns).toEqual([]);
 		expect(transport).not.toHaveBeenCalled();
@@ -157,79 +159,96 @@ describe("useChat", () => {
 		expect(transport).toHaveBeenCalledTimes(2);
 	});
 
-	it.each(["iterable", "response"] as const)("publishes %s chunks before completion and retains them on stop", async (kind) => {
-		let release!: () => void;
-		const pending = new Promise<void>((resolve) => {
-			release = resolve;
-		});
-		const transport = () =>
-			kind === "iterable"
-			? (async function* () {
-				yield "Next ";
-				await pending;
-				yield "ignored";
-			})()
-			: Promise.resolve(new Response(new ReadableStream({
-				async start(controller) {
-					controller.enqueue(new TextEncoder().encode("Next "));
-					await pending;
-					controller.enqueue(new TextEncoder().encode("ignored"));
-					controller.close();
-				},
-			})));
-		const { result } = renderHook(() => useChat({ endpoint: "/chat", transport }));
-		let request!: Promise<void>;
-		act(() => {
-			request = result.current.send("hello");
-		});
-		await waitFor(() => expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Next " }));
-		expect(result.current.busy).toBe(true);
-		act(() => result.current.stop());
-		await act(async () => {
-			release();
-			await request;
-		});
-		expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Next " });
-		expect(result.current.busy).toBe(false);
-	});
+	it.each(["iterable", "response"] as const)(
+		"publishes %s chunks before completion and retains them on stop",
+		async (kind) => {
+			let release!: () => void;
+			const pending = new Promise<void>((resolve) => {
+				release = resolve;
+			});
+			const transport = () =>
+				kind === "iterable"
+					? (async function* () {
+							yield "Next ";
+							await pending;
+							yield "ignored";
+						})()
+					: Promise.resolve(
+							new Response(
+								new ReadableStream({
+									async start(controller) {
+										controller.enqueue(new TextEncoder().encode("Next "));
+										await pending;
+										controller.enqueue(new TextEncoder().encode("ignored"));
+										controller.close();
+									},
+								}),
+							),
+						);
+			const { result } = renderHook(() => useChat({ endpoint: "/chat", transport }));
+			let request!: Promise<void>;
+			act(() => {
+				request = result.current.send("hello");
+			});
+			await waitFor(() => expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Next " }));
+			expect(result.current.busy).toBe(true);
+			act(() => result.current.stop());
+			await act(async () => {
+				release();
+				await request;
+			});
+			expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Next " });
+			expect(result.current.busy).toBe(false);
+		},
+	);
 
-	it.each(["iterable", "response"] as const)("retains partial %s replies on error and replaces them on retry", async (kind) => {
-		let fail!: () => void;
-		const pending = new Promise<void>((resolve) => {
-			fail = resolve;
-		});
-		let attempts = 0;
-		const transport = () => {
-			if (++attempts > 1) return Promise.resolve(new Response("Recovered"));
-			return kind === "iterable"
-				? (async function* () {
-						yield "Partial";
-						await pending;
-						throw new Error("offline");
-					})()
-				: Promise.resolve(new Response(new ReadableStream({
-					async start(controller) {
-						controller.enqueue(new TextEncoder().encode("Partial"));
-						await pending;
-						controller.error(new Error("offline"));
-					},
-				})));
-		};
-		const { result } = renderHook(() => useChat({ endpoint: "/chat", transport }));
-		let request!: Promise<void>;
-		act(() => {
-			request = result.current.send("hello");
-		});
-		await waitFor(() => expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Partial" }));
-		await act(async () => {
-			fail();
-			await request;
-		});
-		expect(result.current.error?.message).toBe("offline");
-		expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Partial" });
-		await act(async () => result.current.retry());
-		expect(result.current.turns).toEqual([{ role: "user", content: "hello" }, { role: "assistant", content: "Recovered" }]);
-	});
+	it.each(["iterable", "response"] as const)(
+		"retains partial %s replies on error and replaces them on retry",
+		async (kind) => {
+			let fail!: () => void;
+			const pending = new Promise<void>((resolve) => {
+				fail = resolve;
+			});
+			let attempts = 0;
+			const transport = () => {
+				if (++attempts > 1) return Promise.resolve(new Response("Recovered"));
+				return kind === "iterable"
+					? (async function* () {
+							yield "Partial";
+							await pending;
+							throw new Error("offline");
+						})()
+					: Promise.resolve(
+							new Response(
+								new ReadableStream({
+									async start(controller) {
+										controller.enqueue(new TextEncoder().encode("Partial"));
+										await pending;
+										controller.error(new Error("offline"));
+									},
+								}),
+							),
+						);
+			};
+			const { result } = renderHook(() => useChat({ endpoint: "/chat", transport }));
+			let request!: Promise<void>;
+			act(() => {
+				request = result.current.send("hello");
+			});
+			await waitFor(() => expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Partial" }));
+			await act(async () => {
+				fail();
+				await request;
+			});
+			expect(result.current.error?.message).toBe("offline");
+			expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Partial" });
+			await act(async () => result.current.retry());
+			expect(result.current.turns).toEqual([
+				{ role: "user", content: "hello" },
+				{ role: "assistant", content: "Recovered" },
+			]);
+		},
+	);
 
 	it("keeps used elements locked across later actions and text turns", async () => {
 		const transport = vi.fn(async function* () {
@@ -253,49 +272,52 @@ describe("useChat", () => {
 		expect(result.current.locked.size).toBe(0);
 	});
 
-	it.each(["stop", "reset"] as const)("invalidates pending approval on %s without disturbing a new request", async (cancel) => {
-		let approve!: (approved: boolean) => void;
-		const onAction = () =>
-			new Promise<boolean>((resolve) => {
-				approve = resolve;
+	it.each(["stop", "reset"] as const)(
+		"invalidates pending approval on %s without disturbing a new request",
+		async (cancel) => {
+			let approve!: (approved: boolean) => void;
+			const onAction = () =>
+				new Promise<boolean>((resolve) => {
+					approve = resolve;
+				});
+			let finish!: (response: Response) => void;
+			const transport = vi.fn(
+				() =>
+					new Promise<Response>((resolve) => {
+						finish = resolve;
+					}),
+			);
+			const event: ActionEvent = { type: "Approve", params: {}, humanFriendlyMessage: "Approve" };
+			const { result } = renderHook(() => useChat({ endpoint: "/chat", transport, onAction }));
+			let approval!: Promise<boolean>;
+			act(() => {
+				approval = result.current.act(event, "old");
 			});
-		let finish!: (response: Response) => void;
-		const transport = vi.fn(
-			() =>
-				new Promise<Response>((resolve) => {
-					finish = resolve;
-				}),
-		);
-		const event: ActionEvent = { type: "Approve", params: {}, humanFriendlyMessage: "Approve" };
-		const { result } = renderHook(() => useChat({ endpoint: "/chat", transport, onAction }));
-		let approval!: Promise<boolean>;
-		act(() => {
-			approval = result.current.act(event, "old");
-		});
-		expect(result.current.busy).toBe(true);
-		await act(async () => {
-			expect(await result.current.act(event, "other")).toBe(false);
-			await result.current.send("blocked");
-			await result.current.retry();
-		});
-		expect(transport).not.toHaveBeenCalled();
-		act(() => result.current[cancel]());
-		let request!: Promise<void>;
-		act(() => {
-			request = result.current.send("new");
-		});
-		await act(async () => {
-			approve(true);
-			expect(await approval).toBe(false);
-		});
-		expect(result.current.busy).toBe(true);
-		expect(result.current.turns).toEqual([{ role: "user", content: "new" }]);
-		expect(result.current.locked.size).toBe(0);
-		await act(async () => {
-			finish(new Response("Reply"));
-			await request;
-		});
-		expect(transport).toHaveBeenCalledTimes(1);
-		expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Reply" });
-	});
+			expect(result.current.busy).toBe(true);
+			await act(async () => {
+				expect(await result.current.act(event, "other")).toBe(false);
+				await result.current.send("blocked");
+				await result.current.retry();
+			});
+			expect(transport).not.toHaveBeenCalled();
+			act(() => result.current[cancel]());
+			let request!: Promise<void>;
+			act(() => {
+				request = result.current.send("new");
+			});
+			await act(async () => {
+				approve(true);
+				expect(await approval).toBe(false);
+			});
+			expect(result.current.busy).toBe(true);
+			expect(result.current.turns).toEqual([{ role: "user", content: "new" }]);
+			expect(result.current.locked.size).toBe(0);
+			await act(async () => {
+				finish(new Response("Reply"));
+				await request;
+			});
+			expect(transport).toHaveBeenCalledTimes(1);
+			expect(result.current.turns.at(-1)).toEqual({ role: "assistant", content: "Reply" });
+		},
+	);
 });

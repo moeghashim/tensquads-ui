@@ -49,7 +49,8 @@ describe("ChatReply", () => {
 		expect(button).toBeDisabled();
 	});
 	it.each(["en", "ar"] as const)("locks only the originating block, including nested blocks in %s", (locale) => {
-		const button = (label: string) => `\`\`\`openui\nroot = Button("${label}", "solid", "md", false, false, {type: "Continue"})\n\`\`\``;
+		const button = (label: string) =>
+			`\`\`\`openui\nroot = Button("${label}", "solid", "md", false, false, {type: "Continue"})\n\`\`\``;
 		const reply = `${button("First")}\n\n- Parent\n\n  ${button("Nested").replaceAll("\n", "\n  ")}\n\n${button("Last")}`;
 		const onAction = vi.fn();
 		const { rerender } = render(<ChatReply reply={reply} locale={locale} onAction={onAction} />);
