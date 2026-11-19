@@ -58,7 +58,7 @@ describe("BarChart", () => {
 		expect(document.querySelector(".ts-visually-hidden")).toHaveTextContent("Oct 26: 2, Oct 27: 4, Oct 28: 3");
 	});
 
-	it.each(["ltr", "rtl"] as const)("keeps odd-maximum ticks on the column scale in %s", (dir) => {
+	it.each(["ltr", "rtl"] as const)("uses whole-number nice ticks for integer data in %s", (dir) => {
 		for (const points of [
 			[
 				{ label: "A", value: 2 },
@@ -87,17 +87,31 @@ describe("BarChart", () => {
 				</div>,
 			);
 			expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual([
-				"3",
-				"1.5",
+				"10",
+				"5",
 				"0",
 			]);
 			const smaller = getByRole("button", { name: "A: 2" }).querySelector<HTMLElement>(".ts-bar-chart__stack");
-			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(66.6667, 3);
+			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(20, 3);
 			expect(getByRole("button", { name: "B: 3" }).querySelector(".ts-bar-chart__stack")).toHaveStyle({
-				blockSize: "100%",
+				blockSize: "30%",
 			});
 			unmount();
 		}
+	});
+
+	it("formats axis and tooltip values", () => {
+		const formatValue = (value: number) => `$${value.toFixed(2)}`;
+		const { container, getByRole, getByText } = render(
+			<BarChart points={[{ label: "Today", value: 3 }]} formatValue={formatValue} />,
+		);
+		expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual([
+			"$10.00",
+			"$5.00",
+			"$0.00",
+		]);
+		fireEvent.focus(getByRole("button", { name: "Today: $3.00" }));
+		expect(getByText("Today: $3.00")).toBeInTheDocument();
 	});
 
 	it("labels every point through 14 and every fifth point beyond 14", () => {
@@ -207,7 +221,7 @@ describe("BarChart", () => {
 			expect(stack?.children).toHaveLength(0);
 		}
 		const mixed = getByRole("button", { name: "Mixed: 4" });
-		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "100%" });
+		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "40%" });
 		expect(mixed.querySelectorAll(".ts-bar-chart__segment")).toHaveLength(1);
 		fireEvent.focus(mixed);
 		expect(document.body).toHaveTextContent("a: 0");

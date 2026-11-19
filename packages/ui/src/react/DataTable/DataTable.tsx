@@ -11,13 +11,18 @@ export type DataTableProps = {
 	onRowSelect?: (id: string) => void;
 };
 
+function initialsFor(name: string) {
+	const words = name.trim().split(/\s+/).filter(Boolean);
+	const initials = words.length > 1 ? `${words[0]?.[0] ?? ""}${words[1]?.[0] ?? ""}` : (words[0] ?? "").slice(0, 2);
+	return initials.toLocaleUpperCase("en");
+}
+
 export function EntityCell({
-	initials,
 	name,
 	detail,
 	tint = "primary",
 }: {
-	initials: string;
+	initials?: string;
 	name: string;
 	detail: string;
 	tint?: "primary" | "success" | "warning" | "danger";
@@ -25,7 +30,7 @@ export function EntityCell({
 	return (
 		<span className="ts-data-table__entity">
 			<span className={`ts-data-table__tile ts-data-table__tile--${tint}`} aria-hidden="true">
-				{initials}
+				{initialsFor(name)}
 			</span>
 			<span className="ts-data-table__entity-copy">
 				<strong>{name}</strong>

@@ -25,6 +25,7 @@ const propsSchema = z.object({
 			task: z.string().min(1).optional(),
 		})
 		.optional(),
+	ruleLabels: z.record(z.string(), z.string()).optional(),
 });
 
 export const ApprovalCardOpenUI = defineComponent({
@@ -45,6 +46,7 @@ export const ApprovalCardOpenUI = defineComponent({
 			},
 			locale: props.locale,
 			actionLabels: props.actionLabels,
+			ruleLabels: props.ruleLabels,
 			labels: props.labels,
 			disabled: streaming,
 			onDecision: ({ type, approvalId, contentHash, decision }) => {

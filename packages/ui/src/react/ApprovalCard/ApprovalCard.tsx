@@ -19,6 +19,7 @@ export type ApprovalCardProps = {
 	request: Pick<PlatformApprovalRequest, "approvalId" | "action" | "content" | "contentHash" | "rule" | "limit">;
 	locale?: Locale;
 	actionLabels?: Record<string, string>;
+	ruleLabels?: Record<string, string>;
 	labels?: Partial<ApprovalCardLabels>;
 	disabled?: boolean;
 	bot?: string;
@@ -31,6 +32,7 @@ export function ApprovalCard({
 	request,
 	locale = "en",
 	actionLabels = {},
+	ruleLabels = {},
 	labels: labelOverrides,
 	disabled = false,
 	bot,
@@ -90,9 +92,9 @@ export function ApprovalCard({
 				</div>
 			)}
 			<p className="ts-approval-card__content">{request.content}</p>
-			{(request.rule !== null || request.limit !== null) && (
+			{((request.rule !== null && ruleLabels[request.rule] !== undefined) || request.limit !== null) && (
 				<p className="ts-approval-card__limit">
-					{request.rule && <span>{request.rule}</span>}
+					{request.rule && ruleLabels[request.rule] && <span>{ruleLabels[request.rule]}</span>}
 					{request.limit !== null && (
 						<span>
 							{labels.limit} {formatMillionths(request.limit, locale)}

@@ -11,7 +11,9 @@ for (const locale of ["en", "ar"] as const) {
 				await expect(examples).toBeVisible();
 				for (const [width, columns] of [
 					[1440, 2],
-					[390, 1],
+					[480, 2],
+					[390, 2],
+					[339, 1],
 				] as const) {
 					await page.setViewportSize({ width, height: 900 });
 					if (name === "Card" || name === "StatTile") {
@@ -106,6 +108,19 @@ for (const locale of ["en", "ar"] as const) {
 				for (const width of [1440, 390]) {
 					await page.setViewportSize({ width, height: 900 });
 					if (name === "BarChart") {
+						if (width === 1440) {
+							const last = await page.locator(".component-list .ts-bar-chart__column").last().boundingBox();
+							const plot = await page.locator(".component-list .ts-bar-chart__plot").boundingBox();
+							expect(last).not.toBeNull();
+							expect(plot).not.toBeNull();
+							if (last && plot) {
+								expect(last.x).toBeGreaterThanOrEqual(plot.x);
+								expect(last.x + last.width).toBeLessThanOrEqual(plot.x + plot.width);
+							}
+							await expect(page.locator(".component-list .ts-bar-chart__tick").last()).toHaveText(
+								locale === "ar" ? "٢٨ أكتوبر" : "Oct 28",
+							);
+						}
 						const positions = await page.locator(".component-list .ts-bar-chart").evaluate((chart) => {
 							const bounds = (selector: string) =>
 								Array.from(chart.querySelectorAll(selector), (element) => {
