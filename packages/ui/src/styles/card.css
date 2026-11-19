@@ -1,0 +1,22 @@
+@layer tensquads {
+	.ts-card { min-inline-size: 0; overflow: hidden; border: 0.5px solid var(--ts-panel-border); border-radius: var(--ts-radius-2xl); background: var(--ts-panel); }
+	.ts-card[data-variant="inset"] { border: 0; border-radius: var(--ts-radius-xl); padding: var(--ts-space-4); background: var(--ts-surface-secondary); }
+	.ts-card__header { min-inline-size: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ts-space-4); padding: var(--ts-space-5) var(--ts-space-5) 0; }
+	.ts-card__heading { min-inline-size: 0; }
+	.ts-card__title-row { display: flex; align-items: center; gap: var(--ts-space-2); }
+	.ts-card__title { margin: 0; color: var(--ts-text-emphasis); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); font-weight: 600; }
+	.ts-card__subtitle { margin: var(--ts-space-1) 0 0; color: var(--ts-text-secondary); font-size: var(--ts-text-xs-font-size); line-height: var(--ts-text-xs-line-height); }
+	.ts-card__count { display: inline-flex; min-inline-size: var(--ts-control-3xs); block-size: var(--ts-control-3xs); align-items: center; justify-content: center; padding-inline: var(--ts-space-1); border-radius: var(--ts-radius-full); background: var(--ts-surface-secondary); color: var(--ts-text-secondary); font-size: var(--ts-text-xs-font-size); font-variant-numeric: tabular-nums; }
+	.ts-card__head-end { min-inline-size: 0; display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: var(--ts-space-3); }
+	.ts-card__legend { display: flex; flex-wrap: wrap; gap: var(--ts-space-3); margin: 0; padding: 0; list-style: none; color: var(--ts-text-secondary); font-size: var(--ts-text-xs-font-size); }
+	.ts-card__legend li { display: inline-flex; align-items: center; gap: var(--ts-space-1); }
+	.ts-card__legend li > span { inline-size: 0.5rem; block-size: 0.5rem; border-radius: var(--ts-radius-full); background: var(--ts-alpha-50); }
+	.ts-card__legend strong { color: var(--ts-text); font-weight: 500; font-variant-numeric: tabular-nums; }
+	.ts-card__body { min-inline-size: 0; padding: var(--ts-space-5); }
+	.ts-card--flush .ts-card__body { padding: 0; }
+	.ts-card__footer { padding: var(--ts-space-3) var(--ts-space-5); border-block-start: thin solid var(--ts-border-subtle); color: var(--ts-text-secondary); font-size: var(--ts-text-xs-font-size); }
+	.ts-card[data-variant="inset"] .ts-card__header, .ts-card[data-variant="inset"] .ts-card__body { padding: 0; }
+	.ts-card[data-variant="inset"] .ts-card__body { padding-block-start: var(--ts-space-3); }
+	.ts-card[data-variant="inset"] .ts-card__footer { padding-inline: 0; }
+	@media (max-width: 40rem) { .ts-card__header { flex-direction: column; gap: var(--ts-space-3); } .ts-card__head-end { justify-content: flex-start; } }
+}

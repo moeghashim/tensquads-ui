@@ -85,6 +85,22 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("radiogroup", { name: locale === "en" ? "View" : "العرض" }),
 				).toBeVisible();
+			} else if (component.name === "Card") {
+				await expect(
+					fixtureRegion.getByRole("heading", { name: locale === "en" ? "Revenue" : "الإيرادات" }),
+				).toBeVisible();
+				await expect(fixtureRegion.getByText(locale === "en" ? "Orders" : "الطلبات")).toBeVisible();
+			} else if (component.name === "PageHeader") {
+				await expect(
+					fixtureRegion.getByRole("heading", { name: locale === "en" ? "Overview" : "نظرة عامة" }),
+				).toBeVisible();
+			} else if (component.name === "StatTile") {
+				await expect(fixtureRegion.getByText(locale === "en" ? "Revenue" : "الإيرادات")).toBeVisible();
+				const sparkline = fixtureRegion.getByRole("img", {
+					name: locale === "en" ? "Revenue trend" : "الإيرادات trend",
+				});
+				await expect(sparkline).toBeVisible();
+				await expect(sparkline).toHaveCSS("transform", locale === "en" ? "none" : "matrix(-1, 0, 0, 1, 0, 0)");
 			} else {
 				const label =
 					component.name === "Input"
