@@ -6,4 +6,4 @@ Use `defaultChecked` or controlled `checked` with `onCheckedChange(checked, deta
 
 The UI SDK implements switch semantics and keyboard handling. It does not use arrow navigation for a standalone switch. Track motion mirrors in RTL. Reduced-motion preferences disable the transition.
 
-The OpenUI definition accepts a label, initial checked state and disabled state. During streaming, arriving initial values update the checked state until the user interacts. The user's choice takes precedence over later initial values.
+The OpenUI definition accepts `label`, initial `checked` state, `disabled`, and an optional `name` as its last positional prop. See [Form](../Form/Form.md) for naming and submission behavior. Streaming and locked renderers disable interaction. Arriving initial values update the checked state until the user interacts. The user's choice takes precedence over later initial values.

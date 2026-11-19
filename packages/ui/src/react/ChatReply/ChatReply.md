@@ -16,4 +16,4 @@ import { ChatReply } from "@tensquads/ui/react";
 
 `onAction(event, blockId)` receives the upstream `ActionEvent` and the stable block ID within this reply, including nested list blocks. Pass `locked={(blockId) => consumed.has(blockId)}` after accepting an action to keep its form state visible while disabling that block. A boolean locks all blocks. See [Chat](../Chat/Chat.md) for wiring these callbacks to `useChat`, rendering action turns, transport, and retry usage.
 
-Use [Form](../Form/Form.md) inside an OpenUI block to submit current text-field values as the next action turn.
+Use [Form](../Form/Form.md) inside an OpenUI block to submit its supported controls as the next action turn. Its contract lists the supported controls and submitted value types.
