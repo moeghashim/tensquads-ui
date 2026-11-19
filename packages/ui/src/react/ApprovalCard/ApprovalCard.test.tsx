@@ -53,7 +53,14 @@ describe("ApprovalCard", () => {
 				request={request}
 				locale={locale}
 				taskId="t1"
-				labels={{ approve: "Allow", decline: "Deny", approved: "Allowed", declined: "Denied", limit: "Cap", task: "Job" }}
+				labels={{
+					approve: "Allow",
+					decline: "Deny",
+					approved: "Allowed",
+					declined: "Denied",
+					limit: "Cap",
+					task: "Job",
+				}}
 			/>,
 		);
 		expect(screen.getByText(/^Cap /)).toBeTruthy();
