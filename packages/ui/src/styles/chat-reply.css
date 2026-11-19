@@ -16,3 +16,8 @@
 .ts-chat-reply__openui:has(.ts-form) { box-sizing: border-box; max-inline-size: 30rem; padding: var(--ts-space-4); border: 1px solid var(--ts-border-subtle); border-radius: var(--ts-radius-xl); background: var(--ts-surface); box-shadow: var(--ts-shadow-hairline); }
 .ts-chat-reply__openui .ts-form > [data-slot="field-set"] { gap: var(--ts-space-4); }
 .ts-chat-reply__openui .ts-form [data-slot="button"][type="submit"] { margin-block-start: var(--ts-space-1); }
+/* A sent form stays readable as a record: no "not allowed" cursor, values in normal text, and a note that says why it no longer edits. */
+.ts-chat-reply__openui[data-locked] * { cursor: default; }
+.ts-chat-reply__openui[data-locked] [data-slot="field-control"], .ts-chat-reply__openui[data-locked] [data-slot="input"] { color: var(--ts-text); background: var(--ts-alpha-05); }
+.ts-chat-reply__locked-note { display: flex; align-items: center; gap: var(--ts-space-1-5); margin-block: var(--ts-space-4) 0; padding-block-start: var(--ts-space-3); border-block-start: 1px solid var(--ts-border-subtle); color: var(--ts-text-secondary); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); }
+.ts-chat-reply__locked-note > svg { flex: 0 0 auto; inline-size: 16px; block-size: 16px; color: var(--ts-text-secondary); }

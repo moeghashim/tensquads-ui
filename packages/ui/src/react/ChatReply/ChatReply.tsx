@@ -21,18 +21,37 @@ export function ChatReply({
 	locked = false,
 	...rendererProps
 }: ChatReplyProps) {
-	const blocks = renderBlocks(reply.replace(/\r\n?/g, "\n"), (stream, key) => (
-		<div className="ts-chat-reply__openui" key={key}>
-			<TensquadsRenderer
-				{...rendererProps}
-				stream={stream}
-				locale={locale}
-				onError={onError}
-				onAction={(event) => onAction?.(event, key)}
-				isStreaming={(typeof locked === "function" ? locked(key) : locked) || rendererProps.isStreaming}
-			/>
-		</div>
-	));
+	const blocks = renderBlocks(reply.replace(/\r\n?/g, "\n"), (stream, key) => {
+		const isLocked = typeof locked === "function" ? locked(key) : locked;
+		return (
+			<div className="ts-chat-reply__openui" key={key} data-locked={isLocked ? "" : undefined}>
+				<TensquadsRenderer
+					{...rendererProps}
+					stream={stream}
+					locale={locale}
+					onError={onError}
+					onAction={(event) => onAction?.(event, key)}
+					isStreaming={isLocked || rendererProps.isStreaming}
+				/>
+				{isLocked && (
+					<p className="ts-chat-reply__locked-note">
+						<svg
+							aria-hidden="true"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="1.6"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path d="m3.5 8.5 3 3 6-7" />
+						</svg>
+						{locale === "ar" ? "أُرسلت" : "Sent"}
+					</p>
+				)}
+			</div>
+		);
+	});
 	const groups: { kind: ReplyBlock["kind"]; values: ReactNode[] }[] = [];
 	for (const block of blocks) {
 		const previous = groups.at(-1);

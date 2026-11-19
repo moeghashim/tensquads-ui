@@ -44,9 +44,13 @@ describe("ChatReply", () => {
 			}),
 			"fence-0",
 		);
+		expect(screen.queryByText("Sent")).toBeNull();
 		rerender(<ChatReply reply={reply} onAction={onAction} locked />);
 		expect(screen.getByRole("button", { name: "Approve plan" })).toBe(button);
 		expect(button).toBeDisabled();
+		expect(screen.getByText("Sent")).toBeInTheDocument();
+		rerender(<ChatReply reply={reply} locale="ar" onAction={onAction} locked />);
+		expect(screen.getByText("أُرسلت")).toBeInTheDocument();
 	});
 	it.each(["en", "ar"] as const)("locks only the originating block, including nested blocks in %s", (locale) => {
 		const button = (label: string) =>
