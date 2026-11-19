@@ -1,5 +1,5 @@
 import type { ActionEvent } from "@openuidev/react-lang";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChatActionTurn, ChatTurn, Locale } from "../../schemas/index.js";
 
 export type ChatTransport = (
@@ -46,6 +46,14 @@ export function useChat({
 	const [locked, setLocked] = useState<ReadonlySet<string>>(new Set());
 	const abortRef = useRef<AbortController | null>(null);
 	const retryRef = useRef<ChatTurn[] | null>(null);
+	// Abandoned conversations stop their request and ignore late approvals.
+	useEffect(
+		() => () => {
+			abortRef.current?.abort();
+			abortRef.current = null;
+		},
+		[],
+	);
 	const run = useCallback(
 		async (nextTurns: ChatTurn[], controller = new AbortController()) => {
 			retryRef.current = nextTurns;
