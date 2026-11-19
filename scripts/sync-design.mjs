@@ -47,6 +47,8 @@ try {
 			"logo-dark-512.png",
 			"logo-dark.svg",
 			"logo.svg",
+			"wordmark.svg",
+			"wordmark-dark.svg",
 		].map((name) => [`logo/${name}`, `logo/${name}`]),
 	];
 	const hashes = {};
