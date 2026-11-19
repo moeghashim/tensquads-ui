@@ -41,6 +41,8 @@ export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
 export { ChatReply } from "./ChatReply/ChatReply.js";
 export type { ChipProps } from "./Chip/Chip.js";
 export { Chip } from "./Chip/Chip.js";
+export type { DataTableColumn, DataTableProps, DataTableRow } from "./DataTable/DataTable.js";
+export { DataTable, EntityCell, PersonCell, StackCell, StatusCell } from "./DataTable/DataTable.js";
 export type {
 	DialogBackdropProps,
 	DialogCloseProps,
@@ -61,6 +63,8 @@ export {
 } from "./Dialog/Dialog.js";
 export type { DistributionPart, DistributionProps } from "./Distribution/Distribution.js";
 export { Distribution } from "./Distribution/Distribution.js";
+export type { EmptyStateProps } from "./EmptyState/EmptyState.js";
+export { EmptyState } from "./EmptyState/EmptyState.js";
 export type {
 	FieldControlProps,
 	FieldDescriptionProps,

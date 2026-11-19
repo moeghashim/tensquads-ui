@@ -17,6 +17,13 @@ import { useChat } from "../../../../packages/ui/src/react/Chat/useChat";
 import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
+	DataTable,
+	EntityCell,
+	PersonCell,
+	StackCell,
+	StatusCell,
+} from "../../../../packages/ui/src/react/DataTable/DataTable";
+import {
 	Dialog,
 	DialogBackdrop,
 	DialogClose,
@@ -25,6 +32,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "../../../../packages/ui/src/react/Dialog/Dialog";
+import { EmptyState } from "../../../../packages/ui/src/react/EmptyState/EmptyState";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
 import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import {
@@ -268,7 +276,98 @@ function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
+	const [selectedId, setSelectedId] = useState("acme");
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "DataTable" || name === "EmptyState") {
+		const ar = locale === "ar";
+		const companies = [
+			{
+				id: "acme",
+				cells: {
+					company: (
+						<EntityCell
+							initials="AC"
+							name="Acme Studio"
+							detail="DS / Demo store / Reach $1M in annual sales"
+							tint="primary"
+						/>
+					),
+					owner: <PersonCell name="Maya Chen" email="maya@example.com" />,
+					plan: <StackCell primary="$149 / mo" secondary={ar ? "يُدفع شهرياً" : "Billed monthly"} />,
+					status: <StatusCell label={ar ? "نشطة" : "Active"} />,
+				},
+			},
+			{
+				id: "northstar",
+				cells: {
+					company: (
+						<EntityCell initials="NS" name="Northstar" detail="Online store / 3 team members" tint="success" />
+					),
+					owner: <PersonCell name="Omar Saleh" email="omar@example.com" />,
+					plan: <StackCell primary="$79 / mo" secondary={ar ? "يُدفع شهرياً" : "Billed monthly"} />,
+					status: <StatusCell label={ar ? "تجربة" : "Trial"} />,
+				},
+			},
+		];
+		return name === "EmptyState" ? (
+			<div className="gallery dashboard-component-preview component-list">
+				<Card title={ar ? "كل الشركات (٠ من ٩)" : "All companies (0 of 9)"}>
+					<EmptyState
+						title={ar ? "لا تطابق أي شركة البحث" : "No companies match"}
+						description={ar ? "امسح البحث لعرض جميع الشركات." : "Clear the search to see all companies."}
+						action={<Button pill>{ar ? "مسح البحث" : "Clear search"}</Button>}
+					/>
+				</Card>
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</div>
+		) : (
+			<div className="gallery dashboard-component-preview component-list">
+				<Card
+					flush
+					title={ar ? "كل الشركات (٢ من ٢)" : "All companies (2 of 2)"}
+					actions={
+						<div className="ts-data-table__toolbar">
+							<Input
+								aria-label={ar ? "البحث عن الشركات" : "Search companies"}
+								placeholder={ar ? "البحث عن الشركات" : "Search companies"}
+							/>
+							<div className="ts-data-table__filters">
+								{(ar ? ["الكل", "نشطة", "تجربة", "متوقفة"] : ["All", "Active", "Trial", "Paused"]).map(
+									(label) => (
+										<Button
+											key={label}
+											size="sm"
+											variant={label === (ar ? "الكل" : "All") ? "soft" : "ghost"}
+										>
+											{label}
+										</Button>
+									),
+								)}
+							</div>
+						</div>
+					}
+				>
+					<DataTable
+						caption={ar ? "الشركات" : "Companies"}
+						columns={[
+							{ key: "company", label: ar ? "الشركة" : "Company" },
+							{ key: "owner", label: ar ? "المالك" : "Owner" },
+							{ key: "plan", label: ar ? "الخطة" : "Plan", align: "end" },
+							{ key: "status", label: ar ? "الحالة" : "Status" },
+						]}
+						rows={companies}
+						selectedId={selectedId}
+						onRowSelect={setSelectedId}
+					/>
+				</Card>
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</div>
+		);
+	}
 	if (name === "ApprovalCard") return <ApprovalCardPreview locale={locale} stream={stream ?? null} />;
 	if (name === "OwnerMessageView") return <OwnerMessagePreview locale={locale} />;
 	if (["Card", "PageHeader", "StatTile"].includes(name)) {
