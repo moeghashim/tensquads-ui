@@ -28,8 +28,6 @@
 		overflow: auto;
 		padding: var(--ts-space-8) var(--ts-space-4) var(--ts-space-6);
 		scroll-padding-block: var(--ts-space-8);
-		/* Content fades out under the edges instead of being cut by a line. */
-		mask-image: linear-gradient(to bottom, transparent, currentColor var(--ts-space-6), currentColor calc(100% - var(--ts-space-6)), transparent);
 	}
 
 	.ts-chat__log-content {

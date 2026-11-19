@@ -115,6 +115,19 @@ for (const state of states) {
 		});
 	}
 
+	test(`chat approval with an empty store name shows no markdown markers in ${state.locale}`, async ({ page }) => {
+		await openPreview(page, { ...state, theme: "light" }, "/chat");
+		await page.getByRole("textbox", { name: state.storeLabel }).fill("   ");
+		await page.getByRole("button", { name: state.approve }).click();
+		const followup = page.locator(".ts-chat-reply__markdown").last();
+		await expect(followup).toHaveText(
+			state.locale === "en"
+				? "Plan approved for your store. I will send Weekly updates. Email notifications are on."
+				: "تم اعتماد خطة متجرك. سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة.",
+		);
+		await expect(followup.locator("strong")).toHaveCount(3);
+	});
+
 	test(`repeated opening requests keep one scripted opening in ${state.locale}`, async ({ page }) => {
 		await openPreview(page, { ...state, theme: "light" }, "/chat");
 		const field = page.getByRole("textbox", { name: state.storeLabel });
