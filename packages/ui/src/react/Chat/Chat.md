@@ -4,7 +4,7 @@ Import `Chat`, `ChatHeader`, `ChatLog`, `ChatUserMessage`, `ChatAssistantMessage
 
 `Chat` fills its container. `ChatHeader` accepts heading content as `children` and includes a ghost New chat button that calls `onNewChat`. The host resets the conversation. `ChatLog` scrolls and follows new entries and nested reply growth while the reader remains at the end. Scrolling up pauses following; returning to the end resumes it. `ChatUserMessage` is the only message bubble. `ChatStep` requires `name` and accepts `glyph`, `status`, `statusVariant="default" | "danger"`, `responseId`, `running`, and an arbitrary React `reply` node. While `running`, a spinner replaces the glyph and honours reduced motion. `ChatEmptyState` accepts `glyph`, `title`, and `description`. `ChatWorking` is a status line for the time before reply text arrives; it accepts `glyph` and `label` (default Working, Arabic جارٍ العمل). Its label shimmers, except under reduced motion. `ChatError` shows a failed turn with a 2px danger rule. It accepts `title` (default Something went wrong, Arabic حدث خطأ), the message as `children`, and `onRetry` with `retryLabel`.
 
-The log content and the composer share a centred column of at most 48rem. The log fades out under its top and bottom edges. `ChatUserMessage` is a solid primary pill. The composer is a floating pill with a round send button.
+The log content and the composer share a centred column of at most 48rem. `ChatUserMessage` is a solid primary pill. The composer is a floating pill with a round send button.
 
 `ChatLog` defaults to `tabIndex={0}` so readers can focus and scroll it with the keyboard. Pass `tabIndex` to override this default.
 

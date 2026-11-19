@@ -215,8 +215,9 @@ function playbackPause(signal: AbortSignal, delay = 320) {
 }
 
 function fillFollowup(template: string, turn: ChatActionTurn, locale: Locale) {
-	const store = findValue(turn.action.values, "storeName") ?? "Store";
-	const frequency = findValue(turn.action.values, "frequency") ?? "Weekly";
+	// An empty answer falls back to a plain phrase; an empty value would leave bare ** markers in the reply.
+	const store = textValue(findValue(turn.action.values, "storeName")) ?? (locale === "ar" ? "متجرك" : "your store");
+	const frequency = textValue(findValue(turn.action.values, "frequency")) ?? (locale === "ar" ? "أسبوعي" : "Weekly");
 	const email = findValue(turn.action.values, "emailUpdates");
 	const emailLabel =
 		email === true
@@ -232,6 +233,12 @@ function fillFollowup(template: string, turn: ChatActionTurn, locale: Locale) {
 	return template.replace(/\{(store|frequency|email)\}/g, (_, name: string) =>
 		String(values[name]).replace(/[\\`*_[\]{}()#+.!<>~|-]/g, "\\$&"),
 	);
+}
+
+function textValue(value: unknown): string | undefined {
+	if (value == null) return undefined;
+	const text = String(value).trim();
+	return text || undefined;
 }
 
 function findValue(value: unknown, name: string): unknown {
