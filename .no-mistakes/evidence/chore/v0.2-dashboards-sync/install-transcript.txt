@@ -1,0 +1,13 @@
+Initial state: node_modules and apps/preview/node_modules absent.
+$ MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- sh -c 'npm ci --no-audit --no-fund && npm run docs:check'
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+added 122 packages in 3s
+npm warned that @openuidev/lang-core and fsevents install scripts were not covered by allowScripts.
+> @tensquads/ui@0.1.0 docs:check
+> node scripts/build-llms.mjs --check
+llms.txt and README.md are current (20 component docs).
+Exit: 0
+Scope: actual dependency installation and prepare build, followed by targeted documentation validation. Full verify and lint were intentionally not invoked by this test phase.

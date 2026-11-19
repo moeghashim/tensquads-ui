@@ -1,0 +1,86 @@
+$ node scripts/build-llms.mjs 
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+Wrote llms.txt and the README.md component table (20 component docs).
+
+
+$ node scripts/build-llms.mjs --check
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+llms.txt and README.md are current (20 component docs).
+
+
+Current public corpus: regeneration is byte stable for both outputs; --check accepts it.
+
+$ node scripts/build-llms.mjs 
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+Wrote llms.txt and the README.md component table (2 component docs).
+
+
+Synthetic author inputs: two correct sorted rows, documentation/live links, OpenUI tagline, Markdown pipe escaping, docs-only fallback, preserved surrounding prose, and full index summaries. Oracle: README command contract plus handwritten expected public Markdown.
+
+$ node scripts/build-llms.mjs --check
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+llms.txt and README.md are current (2 component docs).
+
+
+$ node scripts/build-llms.mjs --check
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 1
+file://{run-worktree}/.docs-live-OmoeFd/scripts/build-llms.mjs:89
+	if (readme !== nextReadme) throw new Error("README.md component table is stale. Run npm run docs.");
+	                                 ^
+
+Error: README.md component table is stale. Run npm run docs.
+    at file://{run-worktree}/.docs-live-OmoeFd/scripts/build-llms.mjs:89:35
+
+Node.js v26.13.1
+
+
+$ node scripts/build-llms.mjs 
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+Wrote llms.txt and the README.md component table (2 component docs).
+
+
+$ node scripts/build-llms.mjs --check
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 1
+file://{run-worktree}/.docs-live-OmoeFd/scripts/build-llms.mjs:88
+	if (current !== generated) throw new Error("llms.txt is stale. Run npm run docs.");
+	                                 ^
+
+Error: llms.txt is stale. Run npm run docs.
+    at file://{run-worktree}/.docs-live-OmoeFd/scripts/build-llms.mjs:88:35
+
+Node.js v26.13.1
+
+
+$ node scripts/build-llms.mjs 
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+Wrote llms.txt and the README.md component table (2 component docs).
+
+
+$ node scripts/build-llms.mjs --check
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 0
+llms.txt and README.md are current (2 component docs).
+
+
+$ node scripts/build-llms.mjs 
+cwd: {run-worktree}/.docs-live-OmoeFd
+exit: 1
+file://{run-worktree}/.docs-live-OmoeFd/scripts/build-llms.mjs:78
+if (start < 0 || end < start) throw new Error("README.md has no components markers.");
+                                    ^
+
+Error: README.md has no components markers.
+    at file://{run-worktree}/.docs-live-OmoeFd/scripts/build-llms.mjs:78:37
+
+Node.js v26.13.1
+
+
+Adversarial guards: stale README and missing index rejected without silent rewriting; regeneration repairs both; missing README markers rejected without replacing document.
