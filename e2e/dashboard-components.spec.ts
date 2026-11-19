@@ -112,13 +112,22 @@ for (const locale of ["en", "ar"] as const) {
 									const { x, width } = element.getBoundingClientRect();
 									return { x, width };
 								});
-							return { columns: bounds(".ts-bar-chart__column"), ticks: bounds(".ts-bar-chart__tick") };
+							return {
+								columns: bounds(".ts-bar-chart__column"),
+								ticks: bounds(".ts-bar-chart__tick"),
+								marks: bounds(".ts-bar-chart__stack"),
+							};
 						});
 						expect(positions.columns).toHaveLength(14);
 						expect(positions.ticks).toHaveLength(14);
+						expect(positions.marks).toHaveLength(14);
 						for (const [index, column] of positions.columns.entries()) {
 							expect(column.x).toBeCloseTo(positions.ticks[index]!.x, 0);
 							expect(column.width).toBeCloseTo(positions.ticks[index]!.width, 0);
+							const mark = positions.marks[index]!;
+							expect(mark.width).toBeGreaterThan(0);
+							expect(mark.width).toBeLessThanOrEqual(28);
+							expect(mark.x + mark.width / 2).toBeCloseTo(column.x + column.width / 2, 0);
 						}
 						for (const chart of await page.locator(".ts-bar-chart").all()) {
 							const clearance = await chart.evaluate((element) => {
