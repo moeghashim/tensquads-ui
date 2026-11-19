@@ -35,19 +35,20 @@ describe("StatTile", () => {
 
 	it("round trips English and Arabic OpenUI fixtures", () => {
 		expect(getRegisteredComponents().map(({ name }) => name)).toContain("StatTile");
-		for (const [locale, label] of [
-			["en", "Revenue"],
-			["ar", "الإيرادات"],
+		for (const [locale, label, value, unit, foot, delta] of [
+			["en", "Revenue", "$24.8k", "USD", "Compared with last week", "+12% vs last week"],
+			["ar", "الإيرادات", "٢٤٫٨ ألف", "دولار", "مقارنة بالأسبوع الماضي", "+١٢٪ مقارنة بالأسبوع الماضي"],
 		] as const) {
 			const fixture = readFileSync(
 				join(process.cwd(), "packages/ui/src/react/StatTile", `StatTile.fixture.${locale}.txt`),
 				"utf8",
 			);
 			const onError = vi.fn();
-			const { getByText, getByRole } = render(
+			const { container, getByText, getByRole } = render(
 				<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />,
 			);
-			expect(getByText(label)).toBeInTheDocument();
+			for (const text of [label, value, unit, foot, delta]) expect(getByText(text)).toBeInTheDocument();
+			expect(container.querySelector(".ts-stat-tile__glyph")).toBeNull();
 			expect(getByRole("img", { name: label })).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);
 			cleanup();

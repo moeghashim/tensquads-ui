@@ -1,1 +1,1 @@
-root = StatTile("Revenue", "$24.8k", "◷", "USD", "Compared with last week", {text: "+12% vs last week", tone: "positive"}, [3, 5, 4, 8, 6, 9, 7])
+root = StatTile("Revenue", "$24.8k", null, "USD", "Compared with last week", {text: "+12% vs last week", tone: "positive"}, [3, 5, 4, 8, 6, 9, 7])
