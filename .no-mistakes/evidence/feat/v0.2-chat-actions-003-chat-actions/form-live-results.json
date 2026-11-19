@@ -1,66 +1,274 @@
-{
-  "results": [
-    {
-      "name": "Form Enter submission sends edited values and params then retains disabled fields",
-      "result": "pass",
-      "detail": {
-        "turns": [
-          {
-            "role": "action",
-            "action": {
-              "name": "SaveProject",
-              "source": "Project",
-              "values": {
-                "planId": "p1",
-                "owner": "parameter owner",
-                "Project": {
-                  "project": {
-                    "value": "Local launch",
-                    "componentType": "Field"
-                  },
-                  "owner": {
-                    "value": "Sarah",
-                    "componentType": "Input"
-                  }
-                }
-              },
-              "summary": "Save project"
-            }
-          },
-          {
-            "role": "assistant",
-            "content": "Received reply.\n\n```openui\nroot = Button(\"Continue\", \"solid\", \"md\", false, false, {type:\"Continue\", params:{stage:2}})\n```"
-          }
-        ],
-        "busy": false,
-        "locked": [
-          "form/fence-0"
-        ],
-        "observed": [
-          {
-            "type": "SaveProject",
-            "params": {
-              "planId": "p1",
-              "owner": "parameter owner"
-            },
-            "humanFriendlyMessage": "Save project",
-            "formState": {
-              "Project": {
-                "project": {
-                  "value": "Local launch",
-                  "componentType": "Field"
-                },
-                "owner": {
-                  "value": "Sarah",
-                  "componentType": "Input"
-                }
-              }
-            },
-            "formName": "Project"
-          }
-        ]
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "mode": "defaults",
+    "submission": "Enter",
+    "values": {
+      "planId": "p1",
+      "Project": {
+        "project": {
+          "value": "Northstar",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "Moe",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": true,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "List",
+          "componentType": "SegmentedControl"
+        }
       }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
     }
-  ],
-  "errors": []
-}
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "mode": "edited",
+    "submission": "Enter",
+    "values": {
+      "planId": "p1",
+      "Project": {
+        "project": {
+          "value": "New project",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "Sarah",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": false,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "Grid",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "mode": "defaults",
+    "submission": "button",
+    "values": {
+      "planId": "p1",
+      "Project": {
+        "project": {
+          "value": "Northstar",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "Moe",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": true,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "List",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "mode": "edited",
+    "submission": "button",
+    "values": {
+      "planId": "p1",
+      "Project": {
+        "project": {
+          "value": "New project",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "Sarah",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": false,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "Grid",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "mode": "defaults",
+    "submission": "Enter",
+    "values": {
+      "planId": "p1",
+      "المشروع": {
+        "project": {
+          "value": "بنّاء",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "محمد",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": true,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "قائمة",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "mode": "edited",
+    "submission": "Enter",
+    "values": {
+      "planId": "p1",
+      "المشروع": {
+        "project": {
+          "value": "مشروع جديد",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "سارة",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": false,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "شبكة",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "mode": "defaults",
+    "submission": "button",
+    "values": {
+      "planId": "p1",
+      "المشروع": {
+        "project": {
+          "value": "بنّاء",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "محمد",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": true,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "قائمة",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "mode": "edited",
+    "submission": "button",
+    "values": {
+      "planId": "p1",
+      "المشروع": {
+        "project": {
+          "value": "مشروع جديد",
+          "componentType": "Field"
+        },
+        "owner": {
+          "value": "سارة",
+          "componentType": "Input"
+        },
+        "emailUpdates": {
+          "value": false,
+          "componentType": "Switch"
+        },
+        "layout": {
+          "value": "شبكة",
+          "componentType": "SegmentedControl"
+        }
+      }
+    },
+    "lockedAfterAttemptedEdits": true,
+    "actionPills": 1,
+    "accessibilityViolations": [],
+    "mobileDimensions": {
+      "viewport": 390,
+      "content": 390
+    }
+  }
+]
