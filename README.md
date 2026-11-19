@@ -183,7 +183,7 @@ const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), loca
 
 ## Dashboard demos
 
-Open the [store owner dashboard](/dashboards/home) or [platform admin dashboard](/dashboards/admin) in the preview site. The pages use fictional demo data and include English and Arabic, light and dark views.
+Open the [store owner dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home) or [platform admin dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin) in the preview site. The pages use fictional demo data and include English and Arabic, light and dark views.
 
 Switch and SegmentedControl screenshots capture their default preview states before keyboard interaction. See [e2e/switch-segmented-control.spec.ts](e2e/switch-segmented-control.spec.ts) for the state assertions and capture order.
 

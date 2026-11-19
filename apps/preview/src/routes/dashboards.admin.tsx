@@ -20,7 +20,7 @@ import {
 } from "@tensquads/ui/react";
 import { useMemo, useState } from "react";
 import { getPreviewState } from "../state";
-import { DashboardFrame, DemoPill, demoCopy, demoStats, Icon } from "./-dashboards.shared";
+import { dashboardData, DashboardFrame, demoCopy, DemoPill, Icon } from "./-dashboards.shared";
 
 export const Route = createFileRoute("/dashboards/admin")({ component: AdminDashboard });
 
@@ -68,7 +68,13 @@ function AdminDashboard() {
 	const items = [copy.companies, copy.imagesTitle];
 	const setView = (next: "companies" | "images") =>
 		void navigate({ to: ".", search: { ...search, view: next } as never });
-	const stats = view === "companies" ? demoStats[locale].admin : demoStats[locale].images;
+	const data = dashboardData[locale];
+	const stats = view === "companies" ? data.stats.admin : data.stats.images;
+	const planCounts = new Map<string, number>();
+	for (const company of companiesByLocale[locale]) {
+		planCounts.set(company.plan, (planCounts.get(company.plan) ?? 0) + 1);
+	}
+	const plans = Array.from(planCounts, ([label, value]) => ({ label, value, display: String(value) }));
 	return (
 		<main className="dashboard-page" dir={direction}>
 			<DashboardFrame>
@@ -85,7 +91,7 @@ function AdminDashboard() {
 						<SidebarItem
 							icon={<Icon name="image" />}
 							active={view === "images"}
-							count={2}
+							count={data.attentionCount}
 							onClick={() => setView("images")}
 						>
 							{items[1]}
@@ -111,7 +117,7 @@ function AdminDashboard() {
 						meta={
 							<>
 								<DemoPill locale={locale} />
-								<Badge tone="success">{view === "companies" ? copy.squadsOnline : copy.imagesAttention}</Badge>
+								<Badge tone="success">{view === "companies" ? data.squadsOnline : data.imagesAttention}</Badge>
 							</>
 						}
 					/>
@@ -127,21 +133,11 @@ function AdminDashboard() {
 									<BarChart
 										locale={locale}
 										label={copy.companiesChartTitle}
-										points={[4, 5, 4, 7, 6, 8, 9, 11].map((value, index) => ({
-											label: `W${index + 1}`,
-											value,
-										}))}
+										points={data.companiesChart}
 									/>
 								</Card>
 								<Card title={copy.plansTitle} subtitle={copy.activePlans}>
-									<Bars
-										style="progress"
-										rows={[
-											{ label: "Growth", value: 5, display: "5" },
-											{ label: "Starter", value: 3, display: "3" },
-											{ label: "Scale", value: 1, display: "1" },
-										]}
-									/>
+									<Bars style="progress" rows={plans} />
 								</Card>
 							</div>
 							<Card
@@ -244,21 +240,17 @@ function AdminDashboard() {
 }
 
 function ImageView({ locale }: { locale: "en" | "ar" }) {
-	const ar = locale === "ar";
 	const [selected, setSelected] = useState("petra");
 	const [filter, setFilter] = useState("all");
 	const c = demoCopy[locale];
-	const images = [
-		{ id: "petra", path: "squad/petra.svg", version: "2.1.0", updated: "Nov 14, 2025", deployed: "Yes", bugs: "1" },
-		{ id: "pisa", path: "squad/pisa.svg", version: "2.0.4", updated: "Nov 12, 2025", deployed: "Yes", bugs: "0" },
-		{ id: "kyoto", path: "squad/kyoto.svg", version: "2.0.1", updated: "Nov 08, 2025", deployed: "Yes", bugs: "2" },
-	];
+	const images = dashboardData[locale].images;
+	const selectedImage = images.find((image) => image.id === selected);
 	const visibleImages = images.filter(
 		(image) =>
 			filter === "all" ||
-			(filter === "attention" && image.id !== "pisa") ||
-			(filter === "bugs" && Number(image.bugs) > 0) ||
-			(filter === "requests" && image.id === "kyoto"),
+			(filter === "attention" && (image.bugs.length > 0 || image.requests.length > 0)) ||
+			(filter === "bugs" && image.bugs.length > 0) ||
+			(filter === "requests" && image.requests.length > 0),
 	);
 	return (
 		<div className="dashboard-grid dashboard-grid--2-3">
@@ -302,8 +294,8 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 							path: row.path,
 							version: row.version,
 							updated: row.updated,
-							deployed: ar ? c.yes : row.deployed,
-							bugs: row.bugs,
+							deployed: row.deployed,
+							bugs: row.bugs.length,
 						},
 					}))}
 				/>
@@ -312,11 +304,11 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 				<Card title={c.imageDetails}>
 					<dl className="dashboard-details">
 						<dt>{c.registryPath}</dt>
-						<dd>{images.find((item) => item.id === selected)?.path}</dd>
+						<dd>{selectedImage?.path}</dd>
 						<dt>{c.version}</dt>
-						<dd>{images.find((item) => item.id === selected)?.version}</dd>
+						<dd>{selectedImage?.version}</dd>
 						<dt>{c.lastUpdated}</dt>
-						<dd>{images.find((item) => item.id === selected)?.updated}</dd>
+						<dd>{selectedImage?.updated}</dd>
 					</dl>
 					<div className="dashboard-actions">
 						<Button>{c.rollOut}</Button>
@@ -324,14 +316,18 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 					</div>
 				</Card>
 				<Card title={c.openBugs}>
-					<p>
-						{ar ? "خلل في تباين الرمز" : "Icon contrast on dark surfaces"} <Badge tone="danger">{c.high}</Badge>
-					</p>
+					{selectedImage?.bugs.map((bug) => (
+						<p key={bug.id}>
+							{bug.title} <Badge tone="danger">{bug.severity}</Badge>
+						</p>
+					))}
 				</Card>
 				<Card title={c.featuresToAdd}>
-					<p>
-						{ar ? "حركة أثناء التفكير" : "Thinking animation"} <Badge tone="default">{c.requested}</Badge>
-					</p>
+					{selectedImage?.requests.map((request) => (
+						<p key={request.id}>
+							{request.title} <Badge tone="default">{request.status}</Badge>
+						</p>
+					))}
 				</Card>
 			</div>
 		</div>

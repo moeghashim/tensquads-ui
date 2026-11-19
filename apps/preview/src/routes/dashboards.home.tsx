@@ -16,7 +16,7 @@ import {
 import type { PlatformApprovalRequest } from "@tensquads/ui/schemas";
 import { useState } from "react";
 import { getPreviewState } from "../state";
-import { DashboardFrame, DemoPill, demoCopy, demoStats, Icon } from "./-dashboards.shared";
+import { dashboardData, DashboardFrame, demoCopy, DemoPill, Icon } from "./-dashboards.shared";
 
 export const Route = createFileRoute("/dashboards/home")({ component: StoreDashboard });
 const approvalFixtures = import.meta.glob<string>("../fixtures/dashboard-approvals.fixture.*.json", {
@@ -38,7 +38,10 @@ function StoreDashboard() {
 	const { locale, direction } = getPreviewState(search);
 	const ar = locale === "ar";
 	const c = demoCopy[locale];
-	const [pending, setPending] = useState(requestsByLocale[locale]);
+	const [pendingIds, setPendingIds] = useState(() =>
+		requestsByLocale[locale].map((request) => request.approvalId),
+	);
+	const pending = requestsByLocale[locale].filter((request) => pendingIds.includes(request.approvalId));
 	const [sent, setSent] = useState<string>();
 	const agents = [
 		{
@@ -117,37 +120,21 @@ function StoreDashboard() {
 									{ar ? "جعل العناية بالبشرة أبسط" : "Make skincare feel simple"}
 								</span>
 								<DemoPill locale={locale} />
-								<Badge tone="success">{ar ? "٤ من ٥ فرق متصلة" : "4 of 5 squads online"}</Badge>
+								<Badge tone="success">{dashboardData[locale].ownerSquadsOnline}</Badge>
 							</>
 						}
 					/>
 					<div className="ts-stat-grid dashboard-stats">
-						{demoStats[locale].home.map((stat) => (
+						{dashboardData[locale].stats.home.map((stat) => (
 							<StatTile key={stat.label} {...stat} />
 						))}
 					</div>
 					<div className="dashboard-grid dashboard-grid--3-2">
-						<Card
-							title={c.revenueChartTitle}
-							subtitle={c.lastFourteenDays}
-							legend={[{ label: c.previousWeek }, { label: c.thisWeek }]}
-						>
+						<Card title={c.revenueChartTitle} subtitle={c.lastFourteenDays}>
 							<BarChart
 								locale={locale}
 								label={c.revenueChartTitle}
-								points={Array.from({ length: 14 }, (_, i) => ({
-									label: `${i + 1}`,
-									segments:
-										i < 7
-											? [
-													{ key: "previous", value: 700 + i * 38 },
-													{ key: "current", value: 0 },
-												]
-											: [
-													{ key: "previous", value: 0 },
-													{ key: "current", value: 850 + (i - 7) * 34 },
-												],
-								}))}
+								points={dashboardData[locale].revenueChart}
 								keys={[
 									{ key: "previous", label: c.previousWeek, tone: "subtle" },
 									{ key: "current", label: c.thisWeek, tone: "strong" },
@@ -165,9 +152,7 @@ function StoreDashboard() {
 										actionLabels={actionLabels}
 										onDecision={(command) => {
 											setSent(JSON.stringify(command, null, 2));
-											setPending((current) =>
-												current.filter((item) => item.approvalId !== command.approvalId),
-											);
+											setPendingIds((current) => current.filter((id) => id !== command.approvalId));
 										}}
 									/>
 								))}

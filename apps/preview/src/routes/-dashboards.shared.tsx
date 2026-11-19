@@ -1,6 +1,7 @@
-import type { StatTileProps } from "@tensquads/ui/react";
-import { Badge } from "@tensquads/ui/react";
+import { Badge, type BarChartPoint, type StatTileProps } from "@tensquads/ui/react";
 import type { ReactNode } from "react";
+import arData from "../fixtures/dashboard-data.fixture.ar.json";
+import enData from "../fixtures/dashboard-data.fixture.en.json";
 
 export function DashboardFrame({ children }: { children: ReactNode }) {
 	return <div className="dashboard-window">{children}</div>;
@@ -35,55 +36,17 @@ export function Icon({ name }: { name: string }) {
 }
 
 type Stat = Pick<StatTileProps, "label" | "value" | "foot" | "series" | "delta" | "unit">;
-const homeEn: Stat[] = [
-	{ label: "Revenue", value: "$24,680", foot: "This month", series: [4, 5, 5, 6, 7, 6, 8, 9] },
-	{ label: "Orders", value: "1,284", foot: "This month", series: [4, 5, 4, 6, 7, 8, 7, 9] },
-	{ label: "Average order", value: "$19.22", foot: "Across all orders", series: [5, 4, 6, 6, 7, 5, 8, 9] },
-	{ label: "Profit margin", value: "32.8%", foot: "After operating costs", series: [5, 6, 5, 7, 6, 8, 7, 9] },
-	{ label: "Tasks done", value: "186", foot: "Across your squads", series: [3, 5, 4, 6, 7, 6, 8, 9] },
-	{ label: "Hours saved", value: "42.5", unit: "h", foot: "Estimated this month", series: [2, 4, 4, 5, 7, 6, 8, 9] },
-];
-const homeAr: Stat[] = homeEn.map((item, i) => ({
-	...item,
-	label: ["الإيرادات", "الطلبات", "متوسط الطلب", "هامش الربح", "المهام المنجزة", "الساعات الموفرة"][i] ?? item.label,
-	foot:
-		["هذا الشهر", "هذا الشهر", "لكل الطلبات", "بعد تكاليف التشغيل", "على مستوى الفرق", "تقديري هذا الشهر"][i] ??
-		item.foot,
-}));
-const adminEn: Stat[] = [
-	{ label: "Companies", value: "9", foot: "Across all plans" },
-	{ label: "Active companies", value: "6", foot: "Currently subscribed" },
-	{ label: "Squads", value: "66", foot: "Across all companies" },
-	{ label: "Tasks done 7d", value: "4,765", foot: "In the last 7 days" },
-	{ label: "Monthly recurring", value: "$1,294", foot: "Current monthly value" },
-	{ label: "All-time value", value: "$14,568", foot: "Since launch" },
-];
-const adminAr: Stat[] = adminEn.map((item, i) => ({
-	...item,
-	label:
-		["الشركات", "الشركات النشطة", "الفرق", "المهام المنجزة ٧ أيام", "الإيراد الشهري", "القيمة الإجمالية"][i] ??
-		item.label,
-	foot:
-		["ضمن جميع الخطط", "اشتراك نشط", "في جميع الشركات", "خلال آخر ٧ أيام", "القيمة الشهرية الحالية", "منذ الإطلاق"][
-			i
-		] ?? item.foot,
-}));
-const imageEn: Stat[] = [
-	{ label: "Images", value: "18", foot: "In the registry" },
-	{ label: "Deployed", value: "16", foot: "In production" },
-	{ label: "Needs attention", value: "2", foot: "Review requested" },
-	{ label: "Open bugs", value: "3", foot: "Across all images" },
-	{ label: "Requests", value: "5", foot: "Waiting for review" },
-];
-const imageAr: Stat[] = imageEn.map((item, i) => ({
-	...item,
-	label: ["الصور", "المنشورة", "تحتاج إلى مراجعة", "الأخطاء المفتوحة", "الطلبات"][i] ?? item.label,
-	foot: ["في السجل", "في بيئة الإنتاج", "بحاجة إلى مراجعة", "في جميع الصور", "بانتظار المراجعة"][i] ?? item.foot,
-}));
-export const demoStats = {
-	en: { home: homeEn, admin: adminEn, images: imageEn },
-	ar: { home: homeAr, admin: adminAr, images: imageAr },
+type DashboardData = {
+	stats: { home: Stat[]; admin: Stat[]; images: Stat[] };
+	companiesChart: BarChartPoint[];
+	revenueChart: BarChartPoint[];
+	images: typeof enData.images;
+	imagesAttention: string;
+	squadsOnline: string;
+	ownerSquadsOnline: string;
+	attentionCount: number;
 };
+export const dashboardData: Record<"en" | "ar", DashboardData> = { en: enData, ar: arData };
 
 const en = {
 	openNavigation: "Open navigation",
@@ -98,8 +61,6 @@ const en = {
 	adminNav: "Admin navigation",
 	imagesTitle: "Squad images",
 	imagesSubtitle: "Squad artwork and registry health",
-	squadsOnline: "53 squads online now",
-	imagesAttention: "2 images need attention",
 	companiesChartTitle: "Companies created, last 8 weeks",
 	lastEightWeeks: "New company accounts",
 	plansTitle: "Companies by plan",
@@ -129,7 +90,6 @@ const en = {
 	version: "Version",
 	lastUpdated: "Last updated",
 	deployed: "Deployed",
-	yes: "Yes",
 	bugs: "Bugs",
 	imageDetails: "Image details",
 	registryPath: "Registry path",
@@ -137,8 +97,6 @@ const en = {
 	viewChangelog: "View changelog",
 	openBugs: "Open bugs",
 	featuresToAdd: "Features to add",
-	high: "High",
-	requested: "Requested",
 	squad: "Squad",
 	mission: "Mission",
 	revenueChartTitle: "Revenue, last 14 days",
@@ -163,8 +121,6 @@ const ar = {
 	adminNav: "التنقل الإداري",
 	imagesTitle: "صور الفرق",
 	imagesSubtitle: "صور الفرق وحالة السجل",
-	squadsOnline: "٥٣ فريقًا متصلًا الآن",
-	imagesAttention: "صورتان تحتاجان إلى مراجعة",
 	companiesChartTitle: "الشركات المضافة خلال ٨ أسابيع",
 	lastEightWeeks: "حسابات الشركات الجديدة",
 	plansTitle: "الشركات حسب الخطة",
@@ -194,7 +150,6 @@ const ar = {
 	version: "الإصدار",
 	lastUpdated: "آخر تحديث",
 	deployed: "منشورة",
-	yes: "نعم",
 	bugs: "الأخطاء",
 	imageDetails: "تفاصيل الصورة",
 	registryPath: "مسار السجل",
@@ -202,8 +157,6 @@ const ar = {
 	viewChangelog: "عرض سجل التغييرات",
 	openBugs: "الأخطاء المفتوحة",
 	featuresToAdd: "ميزات مقترحة",
-	high: "مرتفع",
-	requested: "مطلوبة",
 	squad: "الفريق",
 	mission: "المهمة",
 	revenueChartTitle: "الإيرادات خلال ١٤ يومًا",

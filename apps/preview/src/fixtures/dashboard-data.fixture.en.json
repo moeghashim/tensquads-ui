@@ -1,0 +1,450 @@
+{
+  "stats": {
+    "home": [
+      {
+        "label": "Revenue",
+        "value": "$24,680",
+        "foot": "This month",
+        "series": [
+          4,
+          5,
+          5,
+          6,
+          7,
+          6,
+          8,
+          9
+        ]
+      },
+      {
+        "label": "Orders",
+        "value": "1,284",
+        "foot": "This month",
+        "series": [
+          4,
+          5,
+          4,
+          6,
+          7,
+          8,
+          7,
+          9
+        ]
+      },
+      {
+        "label": "Average order",
+        "value": "$19.22",
+        "foot": "Across all orders",
+        "series": [
+          5,
+          4,
+          6,
+          6,
+          7,
+          5,
+          8,
+          9
+        ]
+      },
+      {
+        "label": "Profit margin",
+        "value": "32.8%",
+        "foot": "After operating costs",
+        "series": [
+          5,
+          6,
+          5,
+          7,
+          6,
+          8,
+          7,
+          9
+        ]
+      },
+      {
+        "label": "Tasks done",
+        "value": "186",
+        "foot": "Across your squads",
+        "series": [
+          3,
+          5,
+          4,
+          6,
+          7,
+          6,
+          8,
+          9
+        ]
+      },
+      {
+        "label": "Hours saved",
+        "value": "42.5",
+        "unit": "h",
+        "foot": "Estimated this month",
+        "series": [
+          2,
+          4,
+          4,
+          5,
+          7,
+          6,
+          8,
+          9
+        ]
+      }
+    ],
+    "admin": [
+      {
+        "label": "Companies",
+        "value": "9",
+        "foot": "Across all plans"
+      },
+      {
+        "label": "Active companies",
+        "value": "6",
+        "foot": "Currently subscribed"
+      },
+      {
+        "label": "Squads",
+        "value": "66",
+        "foot": "Across all companies"
+      },
+      {
+        "label": "Tasks done 7d",
+        "value": "4,765",
+        "foot": "In the last 7 days"
+      },
+      {
+        "label": "Monthly recurring",
+        "value": "$1,294",
+        "foot": "Current monthly value"
+      },
+      {
+        "label": "All-time value",
+        "value": "$14,568",
+        "foot": "Since launch"
+      }
+    ],
+    "images": [
+      {
+        "label": "Images",
+        "value": "18",
+        "foot": "In the registry"
+      },
+      {
+        "label": "Deployed",
+        "value": "16",
+        "foot": "In production"
+      },
+      {
+        "label": "Needs attention",
+        "value": "2",
+        "foot": "Review requested"
+      },
+      {
+        "label": "Open bugs",
+        "value": "3",
+        "foot": "Across all images"
+      },
+      {
+        "label": "Requests",
+        "value": "5",
+        "foot": "Waiting for review"
+      }
+    ]
+  },
+  "companiesChart": [
+    {
+      "label": "W1",
+      "value": 4
+    },
+    {
+      "label": "W2",
+      "value": 5
+    },
+    {
+      "label": "W3",
+      "value": 4
+    },
+    {
+      "label": "W4",
+      "value": 7
+    },
+    {
+      "label": "W5",
+      "value": 6
+    },
+    {
+      "label": "W6",
+      "value": 8
+    },
+    {
+      "label": "W7",
+      "value": 9
+    },
+    {
+      "label": "W8",
+      "value": 11
+    }
+  ],
+  "revenueChart": [
+    {
+      "label": "1",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 700
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 738
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 776
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 814
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "5",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 852
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 890
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "7",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 928
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "8",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 850
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 884
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 918
+        }
+      ]
+    },
+    {
+      "label": "11",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 952
+        }
+      ]
+    },
+    {
+      "label": "12",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 986
+        }
+      ]
+    },
+    {
+      "label": "13",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 1020
+        }
+      ]
+    },
+    {
+      "label": "14",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 1054
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "petra",
+      "path": "squad/petra.svg",
+      "version": "2.1.0",
+      "updated": "Nov 14, 2025",
+      "deployed": "Yes",
+      "bugs": [
+        {
+          "id": "contrast",
+          "title": "Icon contrast on dark surfaces",
+          "severity": "High"
+        }
+      ],
+      "requests": []
+    },
+    {
+      "id": "pisa",
+      "path": "squad/pisa.svg",
+      "version": "2.0.4",
+      "updated": "Nov 12, 2025",
+      "deployed": "Yes",
+      "bugs": [],
+      "requests": []
+    },
+    {
+      "id": "kyoto",
+      "path": "squad/kyoto.svg",
+      "version": "2.0.1",
+      "updated": "Nov 08, 2025",
+      "deployed": "Yes",
+      "bugs": [
+        {
+          "id": "contrast",
+          "title": "Icon contrast on dark surfaces",
+          "severity": "High"
+        },
+        {
+          "id": "outline",
+          "title": "Incomplete outline",
+          "severity": "High"
+        }
+      ],
+      "requests": [
+        {
+          "id": "0",
+          "title": "Thinking animation",
+          "status": "Requested"
+        },
+        {
+          "id": "1",
+          "title": "Idle animation",
+          "status": "Requested"
+        },
+        {
+          "id": "2",
+          "title": "Compact variant",
+          "status": "Requested"
+        },
+        {
+          "id": "3",
+          "title": "Loading pose",
+          "status": "Requested"
+        },
+        {
+          "id": "4",
+          "title": "Success pose",
+          "status": "Requested"
+        }
+      ]
+    }
+  ],
+  "imagesAttention": "2 images need attention",
+  "squadsOnline": "53 squads online now",
+  "ownerSquadsOnline": "4 of 5 squads online",
+  "attentionCount": 2
+}
