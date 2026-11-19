@@ -105,6 +105,22 @@ describe("useChat", () => {
 		}
 	});
 
+	it("aborts the active request on unmount", async () => {
+		let signal: AbortSignal | undefined;
+		const transport = vi.fn(async function* (_request: unknown, options: { signal: AbortSignal }) {
+			signal = options.signal;
+			yield "partial";
+			await new Promise(() => {});
+		});
+		const { result, unmount } = renderHook(() => useChat({ endpoint: "/chat", locale: "en", transport }));
+		act(() => {
+			void result.current.send("Hello");
+		});
+		await vi.waitFor(() => expect(signal).toBeDefined());
+		unmount();
+		expect(signal?.aborted).toBe(true);
+	});
+
 	it("lets the host veto an action", async () => {
 		const transport = vi.fn(async function* () {
 			yield "unused";
