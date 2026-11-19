@@ -39,7 +39,7 @@
     },
     {
       "id": "v0.2-chat",
-      "status": "in-progress",
+      "status": "done",
       "tasks": [
         "001-chat-components",
         "002-chat-reply-stream",
