@@ -1,0 +1,8 @@
+Targeted validation: npm test -- packages/ui/src/react/Chat/useChat.test.tsx exited 0.
+Live validation: node .local-unmount/run.mjs exited 0. Real React useChat hook ran in Chromium with a disposable localhost HTTP server and synthetic turns.
+Oracle: author intent requires abort on unmount. Server connection close before response completion proves actual fetch cancellation. Pending host approval after unmount must return false without posting a request. A fresh mount must have empty turns and complete its own request.
+Before-fix hook was loaded from git show e64164a8b900b4001282e56da46831f4ee369f32:packages/ui/src/react/Chat/useChat.ts. Its pending HTTP request remained open 350ms after unmount; browser-page closure subsequently ended that baseline connection.
+Streaming coverage also exercised the public custom AsyncIterable transport: abort event fired, a late chunk was offered, the send settled, and the fresh mount stayed empty and Ready.
+Captured images show the disposable consumer of the hook, not the full preview gallery. No presentation changes are in scope.
+The configured full verify command had previously exited 127; the test phase used direct Node/npm. No full suite, lint, or static analysis ran.
+Browser, Vite, and localhost HTTP server were awaited and closed in finally before script exit. Disposable worktree harness and tool caches were removed. No source files changed.

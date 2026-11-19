@@ -1,0 +1,29 @@
+import React, { StrictMode, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { useChat as current } from '../packages/ui/src/react/Chat/useChat.ts';
+import { useChat as before } from './useChat.before.ts';
+const params = new URLSearchParams(location.search);
+const useChat = params.has('baseline') ? before : current;
+const id = params.get('id');
+const mode = params.get('mode') || 'pending';
+const events = window.events = [];
+let approve;
+let release;
+const iterable = async function* (_request, { signal }) {
+  signal.addEventListener('abort', () => events.push('iterator aborted'));
+  yield 'Partial reply';
+  await new Promise(resolve => { release = resolve; });
+  events.push('late iterator chunk offered');
+  yield ' LATE';
+};
+function Conversation() {
+  const chat = useChat({ endpoint: `/api/chat?id=${id}&mode=${mode}`, ...(mode === 'iterable' ? { transport: iterable } : {}), onAction: () => new Promise(resolve => { approve = resolve; events.push('approval pending'); }) });
+  const settle = promise => promise.then(result => { events.push(`settled:${String(result)}`); });
+  return <section><h2>Conversation</h2><button onClick={() => void settle(chat.send('Synthetic hello'))}>Send</button><button onClick={() => void settle(chat.act({type:'Approve',params:{},humanFriendlyMessage:'Approve plan'}, 'plan'))}>Request approval</button><p data-testid="busy">{chat.busy ? 'Working' : 'Ready'}</p><p data-testid="error">{chat.error?.message || 'No error'}</p><pre data-testid="turns">{JSON.stringify(chat.turns, null, 2)}</pre></section>;
+}
+function App() {
+ const [shown, setShown] = useState(true);
+ const [version, setVersion] = useState(0);
+ return <main><h1>useChat lifecycle verification</h1><p>Local React consumer with synthetic input; {params.has('baseline') ? 'before fix' : 'target change'}; {mode}</p><button onClick={() => setShown(false)}>Leave conversation</button><button onClick={() => { setVersion(v => v+1); setShown(true); }}>Open new conversation</button><button onClick={() => { events.push('approval released'); approve?.(true); }}>Resolve old approval</button><button onClick={() => release?.()}>Release old iterator</button>{shown ? <Conversation key={version}/> : <p>Conversation unmounted</p>}<button onClick={() => document.querySelector('#events').textContent = JSON.stringify(events, null, 2)}>Show lifecycle events</button><pre id="events" /></main>;
+}
+createRoot(document.getElementById('root')).render(<StrictMode><App/></StrictMode>);

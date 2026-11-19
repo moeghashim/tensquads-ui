@@ -1,0 +1,190 @@
+{
+  "results": [
+    {
+      "name": "Before-fix regression",
+      "requestClosedOnUnmount": false
+    },
+    {
+      "name": "Unmount during pending",
+      "result": "pass",
+      "connection": [
+        {
+          "id": "pending",
+          "event": "request",
+          "body": {
+            "turns": [
+              {
+                "role": "user",
+                "content": "Synthetic hello"
+              }
+            ],
+            "locale": "en"
+          }
+        },
+        {
+          "id": "pending",
+          "event": "connection closed",
+          "completed": false
+        }
+      ],
+      "events": [
+        "settled:undefined"
+      ]
+    },
+    {
+      "name": "Unmount during stream",
+      "result": "pass",
+      "connection": [
+        {
+          "id": "stream",
+          "event": "request",
+          "body": {
+            "turns": [
+              {
+                "role": "user",
+                "content": "Synthetic hello"
+              }
+            ],
+            "locale": "en"
+          }
+        },
+        {
+          "id": "stream",
+          "event": "partial sent"
+        },
+        {
+          "id": "stream",
+          "event": "connection closed",
+          "completed": false
+        }
+      ],
+      "events": [
+        "settled:undefined"
+      ]
+    },
+    {
+      "name": "Streaming custom transport abort and late chunk",
+      "result": "pass",
+      "events": [
+        "iterator aborted",
+        "late iterator chunk offered",
+        "settled:undefined"
+      ]
+    },
+    {
+      "name": "Late approval after unmount",
+      "result": "pass",
+      "events": [
+        "approval pending",
+        "approval released",
+        "settled:false"
+      ],
+      "requests": 0
+    },
+    {
+      "name": "Fresh StrictMode mount completes independently",
+      "result": "pass",
+      "requests": 2,
+      "events": [
+        "settled:undefined",
+        "settled:undefined"
+      ]
+    }
+  ],
+  "log": [
+    {
+      "id": "baseline",
+      "event": "request",
+      "body": {
+        "turns": [
+          {
+            "role": "user",
+            "content": "Synthetic hello"
+          }
+        ],
+        "locale": "en"
+      }
+    },
+    {
+      "id": "baseline",
+      "event": "connection closed",
+      "completed": false
+    },
+    {
+      "id": "pending",
+      "event": "request",
+      "body": {
+        "turns": [
+          {
+            "role": "user",
+            "content": "Synthetic hello"
+          }
+        ],
+        "locale": "en"
+      }
+    },
+    {
+      "id": "pending",
+      "event": "connection closed",
+      "completed": false
+    },
+    {
+      "id": "stream",
+      "event": "request",
+      "body": {
+        "turns": [
+          {
+            "role": "user",
+            "content": "Synthetic hello"
+          }
+        ],
+        "locale": "en"
+      }
+    },
+    {
+      "id": "stream",
+      "event": "partial sent"
+    },
+    {
+      "id": "stream",
+      "event": "connection closed",
+      "completed": false
+    },
+    {
+      "id": "remount",
+      "event": "request",
+      "body": {
+        "turns": [
+          {
+            "role": "user",
+            "content": "Synthetic hello"
+          }
+        ],
+        "locale": "en"
+      }
+    },
+    {
+      "id": "remount",
+      "event": "connection closed",
+      "completed": true
+    },
+    {
+      "id": "remount",
+      "event": "request",
+      "body": {
+        "turns": [
+          {
+            "role": "user",
+            "content": "Synthetic hello"
+          }
+        ],
+        "locale": "en"
+      }
+    },
+    {
+      "id": "remount",
+      "event": "connection closed",
+      "completed": true
+    }
+  ]
+}

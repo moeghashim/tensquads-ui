@@ -1,0 +1,120 @@
+import { createServer as httpServer } from 'node:http';
+import { writeFile } from 'node:fs/promises';
+import { createServer } from 'vite';
+import { chromium, expect } from '@playwright/test';
+const evidence = '~/.no-mistakes/evidence/01M7RT04TNHHF045AA38W6ZPXP';
+const log = [];
+const results = [];
+let browser, server, vite;
+const active = new Set();
+const record = (id,event,data={}) => log.push({id,event,...data});
+try {
+ vite = await createServer({configFile:false,root:process.cwd()+'/.local-unmount',esbuild:{jsx:'automatic'},server:{middlewareMode:true,fs:{allow:[process.cwd()]}}});
+ server = httpServer((req,res) => {
+  if (!req.url.startsWith('/api/chat')) return vite.middlewares(req,res);
+  const url = new URL(req.url, 'http://localhost');
+  const id = url.searchParams.get('id');
+  const mode = url.searchParams.get('mode');
+  let body='';
+  req.on('data',chunk => body += chunk);
+  req.on('end',()=>{
+   record(id,'request',{body:JSON.parse(body)});
+   active.add(res);
+   res.on('close',()=>{active.delete(res);record(id,'connection closed',{completed:res.writableEnded});});
+   if(mode==='stream') {res.writeHead(200,{'content-type':'text/plain'});res.write('Partial reply');record(id,'partial sent');}
+   if(mode==='complete') {res.writeHead(200,{'content-type':'text/plain'});res.end('Complete reply');}
+  });
+ });
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ const origin = `http://127.0.0.1:${server.address().port}`;
+ browser = await chromium.launch();
+ async function open(id,mode,baseline=false) {
+  const page=await browser.newPage({viewport:{width:1000,height:700}});
+  page.on('pageerror',error=>record(id,'pageerror',{message:error.message}));
+  await page.goto(`${origin}/?id=${id}&mode=${mode}${baseline?'&baseline=1':''}`);
+  await expect(page.getByTestId('busy')).toHaveText('Ready');
+  return page;
+ }
+ async function screenshot(page,name) {
+  await page.getByRole('button',{name:'Show lifecycle events',exact:true}).click();
+  await page.screenshot({path:`${evidence}/${name}.png`,fullPage:true});
+ }
+ // Independent oracle: unmount must end the actual HTTP response before the server finishes it.
+ let page=await open('baseline','pending',true);
+ await page.getByRole('button',{name:'Send',exact:true}).click();
+ await expect.poll(()=>log.some(e=>e.id==='baseline'&&e.event==='request')).toBe(true);
+ await page.getByRole('button',{name:'Leave conversation',exact:true}).click();
+ await page.waitForTimeout(350);
+ const baselineClosed=log.some(e=>e.id==='baseline'&&e.event==='connection closed');
+ results.push({name:'Before-fix regression',requestClosedOnUnmount:baselineClosed});
+ expect(baselineClosed).toBe(false);
+ await screenshot(page,'baseline-request-left-open');
+ await page.close();
+ for (const mode of ['pending','stream']) {
+  page=await open(mode,mode);
+  await page.getByRole('button',{name:'Send',exact:true}).click();
+  await expect.poll(()=>log.some(e=>e.id===mode&&e.event==='request')).toBe(true);
+  await expect(page.getByTestId('busy')).toHaveText('Working');
+  if(mode==='stream') {await expect(page.getByTestId('turns')).toContainText('Partial reply');await screenshot(page,'stream-before-unmount');}
+  await page.getByRole('button',{name:'Leave conversation',exact:true}).click();
+  await expect.poll(()=>log.some(e=>e.id===mode&&e.event==='connection closed'&&!e.completed)).toBe(true);
+  await expect.poll(()=>page.evaluate(()=>window.events.includes('settled:undefined'))).toBe(true);
+  await screenshot(page,`${mode}-aborted-on-unmount`);
+  results.push({name:`Unmount during ${mode}`,result:'pass',connection:log.filter(e=>e.id===mode),events:await page.evaluate(()=>window.events)});
+  await page.close();
+ }
+ page=await open('iterable','iterable');
+ await page.getByRole('button',{name:'Send',exact:true}).click();
+ await expect(page.getByTestId('turns')).toContainText('Partial reply');
+ await page.getByRole('button',{name:'Leave conversation',exact:true}).click();
+ expect(await page.evaluate(()=>window.events)).toContain('iterator aborted');
+ await page.getByRole('button',{name:'Open new conversation',exact:true}).click();
+ await page.getByRole('button',{name:'Release old iterator',exact:true}).click();
+ await expect.poll(()=>page.evaluate(()=>window.events.includes('settled:undefined'))).toBe(true);
+ await expect(page.getByTestId('turns')).toHaveText('[]');
+ await expect(page.getByTestId('busy')).toHaveText('Ready');
+ await expect(page.getByTestId('error')).toHaveText('No error');
+ await screenshot(page,'late-iterator-ignored');
+ results.push({name:'Streaming custom transport abort and late chunk',result:'pass',events:await page.evaluate(()=>window.events)});
+ await page.close();
+ page=await open('approval','complete');
+ await page.getByRole('button',{name:'Request approval',exact:true}).click();
+ await expect(page.getByTestId('busy')).toHaveText('Working');
+ await page.getByRole('button',{name:'Leave conversation',exact:true}).click();
+ await page.getByRole('button',{name:'Open new conversation',exact:true}).click();
+ await page.getByRole('button',{name:'Resolve old approval',exact:true}).click();
+ await expect.poll(()=>page.evaluate(()=>window.events.includes('settled:false'))).toBe(true);
+ await page.waitForTimeout(200);
+ expect(log.filter(e=>e.id==='approval'&&e.event==='request')).toHaveLength(0);
+ await expect(page.getByTestId('turns')).toHaveText('[]');
+ await expect(page.getByTestId('busy')).toHaveText('Ready');
+ await screenshot(page,'late-approval-vetoed');
+ results.push({name:'Late approval after unmount',result:'pass',events:await page.evaluate(()=>window.events),requests:0});
+ await page.close();
+ page=await open('remount','complete');
+ for(let iteration=0;iteration<2;iteration++) {
+  await page.getByRole('button',{name:'Send',exact:true}).click();
+  await expect(page.getByTestId('turns')).toContainText('Complete reply');
+  await expect(page.getByTestId('busy')).toHaveText('Ready');
+  await expect(page.getByTestId('error')).toHaveText('No error');
+  if(iteration===0) {
+   await page.getByRole('button',{name:'Leave conversation',exact:true}).click();
+   await page.getByRole('button',{name:'Open new conversation',exact:true}).click();
+   await expect(page.getByTestId('turns')).toHaveText('[]');
+  }
+ }
+ expect(log.filter(e=>e.id==='remount'&&e.event==='request')).toHaveLength(2);
+ await screenshot(page,'strictmode-remount-completes');
+ results.push({name:'Fresh StrictMode mount completes independently',result:'pass',requests:2,events:await page.evaluate(()=>window.events)});
+ await page.close();
+ console.log(JSON.stringify({results,log},null,2));
+ await writeFile(`${evidence}/lifecycle-results.json`,JSON.stringify({results,log},null,2));
+} catch(error) {
+ await writeFile(`${evidence}/lifecycle-failure.json`,JSON.stringify({error:String(error),results,log},null,2));
+ throw error;
+} finally {
+ await browser?.close();
+ for(const res of active) res.destroy();
+ await vite?.close();
+ if(server) await new Promise(resolve=>server.close(resolve));
+}
