@@ -1,0 +1,50 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "axeViolations": [],
+    "firstLabel": "Oct 15: 12",
+    "visibleMark": {
+      "x": 98,
+      "y": 450.09375,
+      "width": 36,
+      "height": 88.5
+    }
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "axeViolations": [],
+    "firstLabel": "Oct 15: 12",
+    "visibleMark": {
+      "x": 98,
+      "y": 450.09375,
+      "width": 36,
+      "height": 88.5
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "axeViolations": [],
+    "firstLabel": "١٥ أكتوبر: 12",
+    "visibleMark": {
+      "x": 256,
+      "y": 450.09375,
+      "width": 36,
+      "height": 88.5
+    }
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "axeViolations": [],
+    "firstLabel": "١٥ أكتوبر: 12",
+    "visibleMark": {
+      "x": 256,
+      "y": 450.09375,
+      "width": 36,
+      "height": 88.5
+    }
+  }
+]

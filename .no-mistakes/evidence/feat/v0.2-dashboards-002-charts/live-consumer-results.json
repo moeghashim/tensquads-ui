@@ -1,0 +1,306 @@
+[
+  {
+    "name": "Inherited en direction, tooltip and dataset shrink (light)",
+    "result": "pass",
+    "data": {
+      "columnsAfterShrink": 7,
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "30-point label cadence and theme highlight (en light)",
+    "result": "pass",
+    "data": {
+      "visibleLabels": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ],
+      "strongColor": "rgb(19, 19, 19)"
+    }
+  },
+  {
+    "name": "Zero, fractional and odd-axis values (en light)",
+    "result": "pass",
+    "data": {
+      "fractional": [
+        {
+          "height": 177,
+          "segments": [],
+          "stack": 0
+        },
+        {
+          "height": 177,
+          "segments": [
+            44.25
+          ],
+          "stack": 44.25
+        },
+        {
+          "height": 177,
+          "segments": [
+            88.5
+          ],
+          "stack": 88.5
+        }
+      ],
+      "stacked": {
+        "column": 177,
+        "stack": 88.5,
+        "parts": [
+          17.296875,
+          69.203125
+        ]
+      },
+      "axis": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Ranked fractional Bars and localized folded Distribution key (en light)",
+    "result": "pass",
+    "data": {
+      "fillFractions": [
+        1,
+        0.5,
+        0
+      ],
+      "foldedCount": 3,
+      "total": 28
+    }
+  },
+  {
+    "name": "Inherited en direction, tooltip and dataset shrink (dark)",
+    "result": "pass",
+    "data": {
+      "columnsAfterShrink": 7,
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "30-point label cadence and theme highlight (en dark)",
+    "result": "pass",
+    "data": {
+      "visibleLabels": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ],
+      "strongColor": "rgb(243, 243, 243)"
+    }
+  },
+  {
+    "name": "Zero, fractional and odd-axis values (en dark)",
+    "result": "pass",
+    "data": {
+      "fractional": [
+        {
+          "height": 177,
+          "segments": [],
+          "stack": 0
+        },
+        {
+          "height": 177,
+          "segments": [
+            44.25
+          ],
+          "stack": 44.25
+        },
+        {
+          "height": 177,
+          "segments": [
+            88.5
+          ],
+          "stack": 88.5
+        }
+      ],
+      "stacked": {
+        "column": 177,
+        "stack": 88.5,
+        "parts": [
+          17.296875,
+          69.203125
+        ]
+      },
+      "axis": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Ranked fractional Bars and localized folded Distribution key (en dark)",
+    "result": "pass",
+    "data": {
+      "fillFractions": [
+        1,
+        0.5,
+        0
+      ],
+      "foldedCount": 3,
+      "total": 28
+    }
+  },
+  {
+    "name": "Inherited ar direction, tooltip and dataset shrink (light)",
+    "result": "pass",
+    "data": {
+      "columnsAfterShrink": 7,
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "30-point label cadence and theme highlight (ar light)",
+    "result": "pass",
+    "data": {
+      "visibleLabels": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ],
+      "strongColor": "rgb(19, 19, 19)"
+    }
+  },
+  {
+    "name": "Zero, fractional and odd-axis values (ar light)",
+    "result": "pass",
+    "data": {
+      "fractional": [
+        {
+          "height": 177,
+          "segments": [],
+          "stack": 0
+        },
+        {
+          "height": 177,
+          "segments": [
+            44.25
+          ],
+          "stack": 44.25
+        },
+        {
+          "height": 177,
+          "segments": [
+            88.5
+          ],
+          "stack": 88.5
+        }
+      ],
+      "stacked": {
+        "column": 177,
+        "stack": 88.5,
+        "parts": [
+          17.296875,
+          69.203125
+        ]
+      },
+      "axis": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Ranked fractional Bars and localized folded Distribution key (ar light)",
+    "result": "pass",
+    "data": {
+      "fillFractions": [
+        1,
+        0.5,
+        0
+      ],
+      "foldedCount": 3,
+      "total": 28
+    }
+  },
+  {
+    "name": "Inherited ar direction, tooltip and dataset shrink (dark)",
+    "result": "pass",
+    "data": {
+      "columnsAfterShrink": 7,
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "30-point label cadence and theme highlight (ar dark)",
+    "result": "pass",
+    "data": {
+      "visibleLabels": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ],
+      "strongColor": "rgb(243, 243, 243)"
+    }
+  },
+  {
+    "name": "Zero, fractional and odd-axis values (ar dark)",
+    "result": "pass",
+    "data": {
+      "fractional": [
+        {
+          "height": 177,
+          "segments": [],
+          "stack": 0
+        },
+        {
+          "height": 177,
+          "segments": [
+            44.25
+          ],
+          "stack": 44.25
+        },
+        {
+          "height": 177,
+          "segments": [
+            88.5
+          ],
+          "stack": 88.5
+        }
+      ],
+      "stacked": {
+        "column": 177,
+        "stack": 88.5,
+        "parts": [
+          17.296875,
+          69.203125
+        ]
+      },
+      "axis": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Ranked fractional Bars and localized folded Distribution key (ar dark)",
+    "result": "pass",
+    "data": {
+      "fillFractions": [
+        1,
+        0.5,
+        0
+      ],
+      "foldedCount": 3,
+      "total": 28
+    }
+  }
+]

@@ -1,0 +1,11 @@
+Production preview build: npm run build:preview — exit 0
+Browser: Chromium 156.0.8078.4
+Targeted browser driver: node .review/drive.mjs — exit 1 (bar width exceeds 28px)
+Initial-axis screenshot and axe check: node .review/capture.mjs — exit 0
+Production revenue chart: readable axes, date alignment, focus and internal scroll in both locales and themes: FAIL
+Production dark chart: highlighted week and legend retain distinct visible ink: PASS
+Live React consumer: 14/15/30 labels, inherited RTL arrows, and focus after reducing data: PASS
+Live React consumer: zero marks omitted and fractional chart and ranked bar scales stay proportional: PASS
+Production Distribution and Bars: compact readable keys, localized hover values and mobile layout: PASS
+Production component docs: all chart props render in English and Arabic pages beside live OpenUI examples: PASS
+Observed visible stack width: 36px in en/ar, light/dark, 1440/390px. Task 002 and BarChart design specification require at most 28px.

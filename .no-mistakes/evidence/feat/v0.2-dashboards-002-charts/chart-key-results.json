@@ -1,0 +1,217 @@
+[
+  {
+    "name": "Production Distribution and Bars: compact readable keys, localized hover values and mobile layout",
+    "checks": [
+      {
+        "label": "Bars en light accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Bars en light no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution en light accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution en light no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "en light counts stay beside labels",
+        "result": "pass"
+      },
+      {
+        "label": "en segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "en segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "en segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "Bars en dark accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Bars en dark no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution en dark accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution en dark no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "en dark counts stay beside labels",
+        "result": "pass"
+      },
+      {
+        "label": "en segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "en segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "en segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "Bars ar light accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Bars ar light no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution ar light accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution ar light no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "ar light counts stay beside labels",
+        "result": "pass"
+      },
+      {
+        "label": "ar segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "ar segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "ar segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "Bars ar dark accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Bars ar dark no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution ar dark accessible rendered page",
+        "result": "pass"
+      },
+      {
+        "label": "Distribution ar dark no document overflow",
+        "result": "pass"
+      },
+      {
+        "label": "ar dark counts stay beside labels",
+        "result": "pass"
+      },
+      {
+        "label": "ar segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "ar segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "ar segment hover has label and count",
+        "result": "pass"
+      },
+      {
+        "label": "en seventh category folds into localized Other",
+        "result": "pass"
+      },
+      {
+        "label": "ar seventh category folds into localized Other",
+        "result": "pass"
+      }
+    ],
+    "metrics": [
+      {
+        "locale": "en",
+        "theme": "light",
+        "layout": [
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          }
+        ]
+      },
+      {
+        "locale": "en",
+        "theme": "dark",
+        "layout": [
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          }
+        ]
+      },
+      {
+        "locale": "ar",
+        "theme": "light",
+        "layout": [
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          }
+        ]
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "layout": [
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          },
+          {
+            "gap": 8,
+            "baselineDelta": 0
+          }
+        ]
+      }
+    ]
+  }
+]
