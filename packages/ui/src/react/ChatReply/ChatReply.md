@@ -4,6 +4,8 @@ Import `ChatReply` and `ChatReplyProps` from `@tensquads/ui/react`. Pass a strea
 
 Text supports paragraphs, headings, ordered and unordered lists, inline code, fenced code, strong text, and safe `http`, `https`, and `mailto` links. Raw HTML is rendered as text. Code blocks always use left-to-right direction. An unfinished OpenUI fence is sent to the renderer as a live stream and its fence markers stay hidden.
 
+Backslash escapes render punctuation as literal text in plain inline text and inside strong text. For example, `A \*\*B\*\*` displays as `A **B**` without making B bold. Escape Markdown punctuation when inserting user values into reply text.
+
 ChatReply has no OpenUI definition because it renders the mixed Markdown and OpenUI reply protocol itself. It uses Agent-UI typography, spacing, color, and radius tokens and supports automatic text direction.
 
 ```tsx

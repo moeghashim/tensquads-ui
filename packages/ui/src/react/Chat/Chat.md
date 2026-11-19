@@ -4,6 +4,8 @@ Import `Chat`, `ChatHeader`, `ChatLog`, `ChatUserMessage`, `ChatStep`, `ChatEmpt
 
 `Chat` fills its container. `ChatHeader` accepts heading content as `children` and includes a ghost New chat button that calls `onNewChat`. The host resets the conversation. `ChatLog` scrolls and follows new entries and nested reply growth while the reader remains at the end. Scrolling up pauses following; returning to the end resumes it. `ChatUserMessage` is the only message bubble. `ChatStep` requires `name` and accepts `glyph`, `status`, `statusVariant="default" | "danger"`, `responseId`, `running`, and an arbitrary React `reply` node. While `running`, a spinner replaces the glyph and honours reduced motion. `ChatEmptyState` accepts `glyph`, `title`, and `description`.
 
+`ChatLog` defaults to `tabIndex={0}` so readers can focus and scroll it with the keyboard. Pass `tabIndex` to override this default.
+
 `ChatComposer` uses UI SDK Textarea and the library Button. Its textarea grows to 160px. Enter sends, Shift+Enter inserts a line, and IME composition does not send. `attach` accepts a React node. Send is disabled for empty or whitespace-only text. A send calls the required `onSend(message)` with trimmed text, then clears the draft. Use `defaultValue` for an initial draft, or control it with `value` and `onValueChange(value)`. In controlled mode, the host must apply value changes, including the empty string after sending. `textareaProps` accepts additional UI SDK textarea props, such as `aria-label` and focus handlers; the composer owns value, resizing, and submission.
 
 While `busy`, sending is blocked and the button becomes Stop. Stop calls `onStop` and preserves the draft. The host cancels the work and updates `busy`.

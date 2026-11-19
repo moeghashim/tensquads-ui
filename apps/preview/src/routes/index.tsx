@@ -110,6 +110,9 @@ function HomePage() {
 						<Button variant="soft" render={<Link to="/components" search={search as never} />}>
 							{copy.browseComponents.replace("{count}", String(components.length))}
 						</Button>
+						<Button variant="ghost" render={<Link to="/chat" search={search as never} />}>
+							{copy.openChat}
+						</Button>
 					</div>
 				</div>
 			</section>

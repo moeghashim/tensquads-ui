@@ -69,6 +69,20 @@ describe("ChatReply", () => {
 		}
 	});
 
+	it.each([
+		[String.raw`A \*\*B\*\*`, "A **B**"],
+		[String.raw`\[shop\]\(https://example\.com\) \`sale\` \\ end`, "[shop](https://example.com) `sale` \\ end"],
+		[String.raw`\{frequency\} \{email\}`, "{frequency} {email}"],
+	])("renders escaped Markdown as literal text: %s", (escaped, literal) => {
+		const { container, rerender } = render(<ChatReply reply={`Store: **${escaped}**.`} />);
+		expect(container.textContent).toBe(`Store: ${literal}.`);
+		expect(container.querySelector("strong")?.textContent).toBe(literal);
+		expect(container.querySelector("a, code")).toBeNull();
+		rerender(<ChatReply reply={`Store: ${escaped}.`} />);
+		expect(container.textContent).toBe(`Store: ${literal}.`);
+		expect(container.querySelector("strong, a, code")).toBeNull();
+	});
+
 	it("renders Markdown and OpenUI blocks in reading order", () => {
 		const { container } = render(<ChatReply reply={en} />);
 		expect(screen.getByRole("heading", { name: "Deployment status" })).toBeInTheDocument();

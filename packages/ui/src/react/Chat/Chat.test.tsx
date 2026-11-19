@@ -32,6 +32,7 @@ describe("Chat surface", () => {
 			</ChatLog>,
 		);
 		expect(getByRole("log")).toHaveAttribute("aria-live", "polite");
+		expect(getByRole("log")).toHaveAttribute("tabindex", "0");
 		expect(getByText("Help me plan")).toHaveClass("ts-chat__user-message");
 		expect(getByText("Here is a plan").parentElement).toHaveClass("ts-chat__reply");
 	});

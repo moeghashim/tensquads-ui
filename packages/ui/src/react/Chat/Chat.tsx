@@ -49,6 +49,7 @@ export function ChatLog({ children, className, ...props }: ChatLogProps) {
 			ref={ref}
 			role="log"
 			aria-live="polite"
+			tabIndex={props.tabIndex ?? 0}
 			className={["ts-chat__log", className].filter(Boolean).join(" ")}
 			onScroll={(event) => {
 				props.onScroll?.(event);

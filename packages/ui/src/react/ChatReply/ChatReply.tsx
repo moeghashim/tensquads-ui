@@ -247,11 +247,12 @@ function renderBlocks(
 
 function inline(source: string): ReactNode[] {
 	const nodes: ReactNode[] = [];
-	const token = /(`[^`]+`|\[([^\]]+)\]\(|\*\*([^*]+)\*\*)/g;
+	const token = /(\\[\\`*_[\]{}()#+.!<>~|-]|`[^`]+`|\[([^\]]+)\]\(|\*\*((?:\\.|[^*\\])+)\*\*)/g;
 	let cursor = 0;
 	for (let match = token.exec(source); match; match = token.exec(source)) {
 		if (match.index > cursor) nodes.push(source.slice(cursor, match.index));
-		if (match[1]?.startsWith("`")) nodes.push(<code key={match.index}>{match[1].slice(1, -1)}</code>);
+		if (match[1]?.startsWith("\\")) nodes.push(match[1].slice(1));
+		else if (match[1]?.startsWith("`")) nodes.push(<code key={match.index}>{match[1].slice(1, -1)}</code>);
 		else if (match[2]) {
 			const destination = linkDestination(source, token.lastIndex);
 			if (!destination) {
@@ -270,7 +271,11 @@ function inline(source: string): ReactNode[] {
 					match[2]
 				),
 			);
-		} else nodes.push(<strong key={match.index}>{match[3] ?? ""}</strong>);
+		} else {
+			nodes.push(
+				<strong key={match.index}>{(match[3] ?? "").replace(/\\([\\`*_[\]{}()#+.!<>~|-])/g, "$1")}</strong>,
+			);
+		}
 		cursor = token.lastIndex;
 	}
 	if (cursor < source.length) nodes.push(source.slice(cursor));
