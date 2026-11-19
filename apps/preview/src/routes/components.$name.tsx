@@ -10,6 +10,7 @@ import {
 	ChatStep,
 	ChatUserMessage,
 } from "../../../../packages/ui/src/react/Chat/Chat";
+import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
 	Dialog,
@@ -65,7 +66,7 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat"];
+const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 
@@ -197,6 +198,17 @@ function ComponentExample() {
 						}
 					/>
 				</Chat>
+			</div>
+		);
+	}
+	if (name === "ChatReply") {
+		return (
+			<div className="gallery">
+				<p className="eyebrow">{locale === "ar" ? "معاينة المكوّن" : "Component preview"}</p>
+				<section className="component-list" aria-label={locale === "ar" ? "معاينة الرد" : "Chat reply preview"}>
+					{stream && <ChatReply reply={stream} locale={locale} />}
+				</section>
+				{stream && <ExampleCodeBlock code={stream.trim()} />}
 			</div>
 		);
 	}

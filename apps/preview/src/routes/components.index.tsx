@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
+import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
@@ -12,6 +13,7 @@ const components = getRegisteredComponents()
 	.map(({ name }) => name)
 	.sort();
 if (!components.includes("Chat")) components.push("Chat");
+components.push("ChatReply");
 components.sort();
 
 export const Route = createFileRoute("/components/")({ component: ComponentsPage });
@@ -31,7 +33,15 @@ function ComponentsPage() {
 					return (
 						<div className="component-card" key={name}>
 							<div className="component-card__preview">
-								{fixture ? <TensquadsRenderer stream={fixture} locale={locale} /> : <span>{name}</span>}
+								{fixture ? (
+									name === "ChatReply" ? (
+										<ChatReply reply={fixture} locale={locale} />
+									) : (
+										<TensquadsRenderer stream={fixture} locale={locale} />
+									)
+								) : (
+									<span>{name}</span>
+								)}
 							</div>
 							<Link
 								className="component-card__link"

@@ -12,6 +12,8 @@ export type {
 	ChatUserMessageProps,
 } from "./Chat/Chat.js";
 export { Chat, ChatComposer, ChatEmptyState, ChatHeader, ChatLog, ChatStep, ChatUserMessage } from "./Chat/Chat.js";
+export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
+export { ChatReply } from "./ChatReply/ChatReply.js";
 export type { ChipProps } from "./Chip/Chip.js";
 export { Chip } from "./Chip/Chip.js";
 export type {
