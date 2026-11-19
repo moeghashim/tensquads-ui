@@ -143,6 +143,7 @@
 	.component-doc-page__header h1 { color: var(--ts-text-emphasis); }
 	.component-doc-page__section { min-inline-size: 0; margin-block-start: var(--ts-space-8); }
 	.component-doc-page__section .gallery { box-sizing: border-box; inline-size: 100%; max-inline-size: none; margin: 0; padding: 0; }
+	.component-doc-page__section .gallery > a { color: var(--ts-text-emphasis); }
 	.component-doc-page__section .gallery > .route-example,
 	.component-doc-page__section .gallery > .eyebrow,
 	.component-doc-page__section .gallery > h1 { display: none; }

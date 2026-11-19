@@ -1,0 +1,3 @@
+# Distribution
+
+Import `Distribution`, `DistributionProps`, and `DistributionPart` from `@tensquads/ui/react`. Pass parts with a label and non-negative count. Parts are sorted by count; when there are more than six, the first five remain and the rest are folded into `Other`. The stacked bar uses neutral greys, and the key shows each label and bold count. The whole and its parts are available in a screen-reader summary. Wrap it in `Card`.

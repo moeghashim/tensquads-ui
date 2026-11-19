@@ -69,3 +69,31 @@ for (const locale of ["en", "ar"] as const) {
 		}
 	}
 }
+
+for (const locale of ["en", "ar"] as const) {
+	for (const theme of ["light", "dark"] as const) {
+		for (const name of ["BarChart", "Bars", "Distribution"] as const) {
+			test(`${name} chart states in ${locale} ${theme}`, async ({ page }, testInfo) => {
+				const direction = locale === "ar" ? "rtl" : "ltr";
+				await openPreview(page, { locale, direction, theme }, `/components/${name}`);
+				await expect(page.locator(".component-list .ts-card")).toBeVisible();
+				if (name === "BarChart") {
+					const columns = page.locator(".component-list .ts-bar-chart__column");
+					await expect(columns).toHaveCount(14);
+					await columns.first().focus();
+					await page.keyboard.press(direction === "rtl" ? "ArrowLeft" : "ArrowRight");
+					await expect(columns.nth(1)).toBeFocused();
+				}
+				if (name === "Bars") await expect(page.locator(".component-list .ts-bars__row")).toHaveCount(2);
+				if (name === "Distribution")
+					await expect(page.locator(".component-list .ts-distribution__key li")).toHaveCount(3);
+				await expectAccessible(page);
+				for (const width of [1440, 390]) {
+					await page.setViewportSize({ width, height: 900 });
+					await capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);
+				}
+				await expectNoHorizontalScroll(page);
+			});
+		}
+	}
+}
