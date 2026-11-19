@@ -20,7 +20,7 @@ import {
 } from "@tensquads/ui/react";
 import { useMemo, useState } from "react";
 import { getPreviewState } from "../state";
-import { dashboardData, DashboardFrame, demoCopy, DemoPill, Icon } from "./-dashboards.shared";
+import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
 export const Route = createFileRoute("/dashboards/admin")({ component: AdminDashboard });
 

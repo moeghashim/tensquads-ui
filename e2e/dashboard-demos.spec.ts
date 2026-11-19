@@ -65,7 +65,9 @@ for (const [locale, direction] of [
 					);
 					if (view === "images") {
 						if (width <= 760) {
-							await page.getByRole("button", { name: locale === "ar" ? "فتح التنقل" : "Open navigation" }).click();
+							await page
+								.getByRole("button", { name: locale === "ar" ? "فتح التنقل" : "Open navigation" })
+								.click();
 						}
 						await page.getByRole("button", { name: locale === "ar" ? "صور الفرق" : "Squad images" }).click();
 						await expect(page).toHaveURL(/view=images/);

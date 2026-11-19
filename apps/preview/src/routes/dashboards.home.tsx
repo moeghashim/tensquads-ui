@@ -16,7 +16,7 @@ import {
 import type { PlatformApprovalRequest } from "@tensquads/ui/schemas";
 import { useState } from "react";
 import { getPreviewState } from "../state";
-import { dashboardData, DashboardFrame, demoCopy, DemoPill, Icon } from "./-dashboards.shared";
+import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
 export const Route = createFileRoute("/dashboards/home")({ component: StoreDashboard });
 const approvalFixtures = import.meta.glob<string>("../fixtures/dashboard-approvals.fixture.*.json", {
@@ -38,9 +38,7 @@ function StoreDashboard() {
 	const { locale, direction } = getPreviewState(search);
 	const ar = locale === "ar";
 	const c = demoCopy[locale];
-	const [pendingIds, setPendingIds] = useState(() =>
-		requestsByLocale[locale].map((request) => request.approvalId),
-	);
+	const [pendingIds, setPendingIds] = useState(() => requestsByLocale[locale].map((request) => request.approvalId));
 	const pending = requestsByLocale[locale].filter((request) => pendingIds.includes(request.approvalId));
 	const [sent, setSent] = useState<string>();
 	const agents = [
