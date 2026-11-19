@@ -1,6 +1,6 @@
 # ChatReply
 
-Import `ChatReply` and `ChatReplyProps` from `@tensquads/ui/react`. Pass a streaming reply string and its active locale. ChatReply renders Markdown text and fenced `openui` blocks in reading order. Each OpenUI block uses `TensquadsRenderer`; its renderer props, including error and action callbacks, pass through.
+Import `ChatReply` and `ChatReplyProps` from `@tensquads/ui/react`. Pass a streaming reply string and its active locale. ChatReply renders Markdown text and fenced `openui` blocks in reading order. Each OpenUI block uses `TensquadsRenderer`; renderer props pass through except for the action and locking adaptations described below.
 
 Text supports paragraphs, headings, ordered and unordered lists, inline code, fenced code, strong text, and safe `http`, `https`, and `mailto` links. Raw HTML is rendered as text. Code blocks always use left-to-right direction. An unfinished OpenUI fence is sent to the renderer as a live stream and its fence markers stay hidden.
 
@@ -14,6 +14,6 @@ import { ChatReply } from "@tensquads/ui/react";
 
 `reply` is required. Update it with the full accumulated string as tokens arrive. `locale` defaults to `"en"`; use `"ar"` for Arabic. The locale selects the OpenUI library and does not translate reply text. For server prompt setup, see [OpenUI server](../../../../../README.md#openui-server).
 
-`onAction(event, blockId)` receives the upstream `ActionEvent` and the stable block ID within this reply, including nested list blocks. Pass `locked={(blockId) => consumed.has(blockId)}` after accepting an action to keep its form state visible while disabling that block. A boolean locks all blocks. Combine the block ID with a stable reply ID when calling `useChat().act(event, elementId)`; the hook appends the readable user action pill and sends the structured turn. See [Chat](../Chat/Chat.md) for transport and retry usage.
+`onAction(event, blockId)` receives the upstream `ActionEvent` and the stable block ID within this reply, including nested list blocks. Pass `locked={(blockId) => consumed.has(blockId)}` after accepting an action to keep its form state visible while disabling that block. A boolean locks all blocks. See [Chat](../Chat/Chat.md) for wiring these callbacks to `useChat`, rendering action turns, transport, and retry usage.
 
 Use [Form](../Form/Form.md) inside an OpenUI block to submit current text-field values as the next action turn.

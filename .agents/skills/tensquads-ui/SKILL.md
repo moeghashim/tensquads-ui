@@ -124,7 +124,7 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
 }
 ```
 
-`readOpenUIRequest` caps the body at `MAX_BODY_BYTES` (16 KiB) and the history at `MAX_TURNS` (12). It accepts only user and assistant turns with string content. Handle `OpenUIServerError` to return its typed code and status. `streamOpenUIResponse` returns a plain text `Response` and closes the provider when the client cancels. `createAnthropicProvider` takes a server-side API key and defaults to `claude-haiku-5-5`. Implement `OpenUIStreamProvider` to use another provider. Keep credentials on the server.
+See [OpenUI server](../../../README.md#openui-server) for accepted turn formats, action conversion, and request caps. Handle `OpenUIServerError` to return its typed code and status. `streamOpenUIResponse` returns a plain text `Response` and closes the provider when the client cancels. `createAnthropicProvider` takes a server-side API key and defaults to `claude-haiku-5-5`. Implement `OpenUIStreamProvider` to use another provider. Keep credentials on the server.
 
 For Arabic output, use `locale: "ar"` for both prompt and renderer, and send Arabic user content. See [OpenUI server](../../../README.md#openui-server) for prompt mode selection and [ChatReply](../../../packages/ui/src/react/ChatReply/ChatReply.md) for rendering chat replies.
 
