@@ -69,3 +69,93 @@ for (const locale of ["en", "ar"] as const) {
 		}
 	}
 }
+
+for (const locale of ["en", "ar"] as const) {
+	for (const theme of ["light", "dark"] as const) {
+		for (const name of ["BarChart", "Bars", "Distribution"] as const) {
+			test(`${name} chart states in ${locale} ${theme}`, async ({ page }, testInfo) => {
+				const direction = locale === "ar" ? "rtl" : "ltr";
+				await openPreview(page, { locale, direction, theme }, `/components/${name}`);
+				await expect(page.locator(".component-list .ts-card")).toBeVisible();
+				if (name === "BarChart") {
+					const columns = page.locator(".component-list .ts-bar-chart__column");
+					await expect(columns).toHaveCount(14);
+					await columns.first().focus();
+					await page.keyboard.press(direction === "rtl" ? "ArrowLeft" : "ArrowRight");
+					await expect(columns.nth(1)).toBeFocused();
+					await page.keyboard.press(direction === "rtl" ? "ArrowRight" : "ArrowLeft");
+					await expect(columns.first()).toBeFocused();
+					await page.locator(".component-list .ts-bar-chart").evaluate(
+						(element, dir) => {
+							element.setAttribute("dir", dir);
+						},
+						direction === "rtl" ? "ltr" : "rtl",
+					);
+					await page.keyboard.press(direction === "rtl" ? "ArrowRight" : "ArrowLeft");
+					await expect(columns.nth(1)).toBeFocused();
+					await page.keyboard.press(direction === "rtl" ? "ArrowLeft" : "ArrowRight");
+					await expect(columns.first()).toBeFocused();
+					await page
+						.locator(".component-list .ts-bar-chart")
+						.evaluate((element) => element.removeAttribute("dir"));
+				}
+				if (name === "Bars") await expect(page.locator(".component-list .ts-bars__row")).toHaveCount(2);
+				if (name === "Distribution")
+					await expect(page.locator(".component-list .ts-distribution__key li")).toHaveCount(3);
+				await expectAccessible(page);
+				for (const width of [1440, 390]) {
+					await page.setViewportSize({ width, height: 900 });
+					if (name === "BarChart") {
+						const positions = await page.locator(".component-list .ts-bar-chart").evaluate((chart) => {
+							const bounds = (selector: string) =>
+								Array.from(chart.querySelectorAll(selector), (element) => {
+									const { x, width } = element.getBoundingClientRect();
+									return { x, width };
+								});
+							return {
+								columns: bounds(".ts-bar-chart__column"),
+								ticks: bounds(".ts-bar-chart__tick"),
+								marks: bounds(".ts-bar-chart__stack"),
+							};
+						});
+						expect(positions.columns).toHaveLength(14);
+						expect(positions.ticks).toHaveLength(14);
+						expect(positions.marks).toHaveLength(14);
+						for (const [index, column] of positions.columns.entries()) {
+							expect(column.x).toBeCloseTo(positions.ticks[index]!.x, 0);
+							expect(column.width).toBeCloseTo(positions.ticks[index]!.width, 0);
+							const mark = positions.marks[index]!;
+							expect(mark.width).toBeGreaterThan(0);
+							expect(mark.width).toBeLessThanOrEqual(28);
+							expect(mark.x + mark.width / 2).toBeCloseTo(column.x + column.width / 2, 0);
+						}
+						for (const chart of await page.locator(".ts-bar-chart").all()) {
+							const clearance = await chart.evaluate((element) => {
+								const viewport = element.querySelector<HTMLElement>(".ts-bar-chart__viewport")!;
+								viewport.scrollTop = 0;
+								const boundary = viewport.getBoundingClientRect();
+								return Array.from(
+									element.querySelectorAll(".ts-bar-chart__gridline > span, .ts-bar-chart__column"),
+									(mark) => {
+										const bounds = mark.getBoundingClientRect();
+										const ring = mark.matches("button") ? 4 : 0;
+										return {
+											top: bounds.top - ring - boundary.top,
+											bottom: boundary.bottom - bounds.bottom - ring,
+										};
+									},
+								);
+							});
+							for (const mark of clearance) {
+								expect(mark.top).toBeGreaterThanOrEqual(0);
+								expect(mark.bottom).toBeGreaterThanOrEqual(0);
+							}
+						}
+					}
+					await capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);
+				}
+				await expectNoHorizontalScroll(page);
+			});
+		}
+	}
+}

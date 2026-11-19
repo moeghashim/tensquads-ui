@@ -1,0 +1,1 @@
+root = Card("Run outcomes", "This week", null, [Distribution([{label: "Pass", value: 68}, {label: "Fail", value: 12}, {label: "Skipped", value: 5}], "Run outcomes")], null, false, "default")

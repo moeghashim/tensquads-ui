@@ -1,6 +1,10 @@
 export type { ChatAction, ChatActionTurn, ChatTurn } from "../schemas/index.js";
 export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
+export type { BarChartKey, BarChartPoint, BarChartProps, BarChartSegment } from "./BarChart/BarChart.js";
+export { BarChart } from "./BarChart/BarChart.js";
+export type { BarsProps, BarsRow } from "./Bars/Bars.js";
+export { Bars } from "./Bars/Bars.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
 export type { CardLegendItem, CardProps } from "./Card/Card.js";
@@ -53,6 +57,8 @@ export {
 	DialogTitle,
 	DialogTrigger,
 } from "./Dialog/Dialog.js";
+export type { DistributionPart, DistributionProps } from "./Distribution/Distribution.js";
+export { Distribution } from "./Distribution/Distribution.js";
 export type {
 	FieldControlProps,
 	FieldDescriptionProps,

@@ -101,6 +101,9 @@ test("every component fixture parses and renders", async ({ page }) => {
 				});
 				await expect(sparkline).toBeVisible();
 				await expect(sparkline).toHaveCSS("transform", locale === "en" ? "none" : "matrix(-1, 0, 0, 1, 0, 0)");
+			} else if (["BarChart", "Bars", "Distribution"].includes(component.name)) {
+				const slot = component.name === "BarChart" ? "bar-chart" : component.name.toLowerCase();
+				await expect(fixtureRegion.locator(`[data-slot="${slot}"]`)).toBeVisible();
 			} else {
 				const label =
 					component.name === "Input"

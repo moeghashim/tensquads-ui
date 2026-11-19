@@ -1,0 +1,6 @@
+# Bars
+
+Import `Bars`, `BarsProps`, and `BarsRow` from `@tensquads/ui/react`. Each row has a label, a non-negative numeric `value` used for scale, and a `display` string shown to the reader. The component sorts rows by value in descending order and shows up to eight. Fills scale to the largest value, including fractional values; an all-zero dataset has empty fills. The default `ranked` style shows horizontal magnitude bars. Use `style="progress"` for plan rows and pass a `caption` for the average or other context. Growth may use `tone="info"` for the blue fill shown in the store owner reference; all other rows use one neutral ink. Wrap the chart in `Card`.
+
+- `rows` is required. Each row has a `label`, numeric `value`, and display string.
+- `style` selects `ranked` or `progress`. `caption` adds supporting context.

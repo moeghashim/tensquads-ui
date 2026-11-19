@@ -1,0 +1,6 @@
+# Distribution
+
+Import `Distribution`, `DistributionProps`, and `DistributionPart` from `@tensquads/ui/react`. Pass parts with a label and non-negative count. Parts are sorted by count in descending order; when there are more than six, the first five remain and the rest are folded into `Other` (`أخرى` in Arabic). The stacked bar uses neutral greys, and the key shows each label and bold count. Hover a segment to see its label and count in a native title. The whole and its parts are available in a screen-reader summary. Wrap it in `Card`. Pass `locale="ar"` to localize generated labels and screen-reader copy; the default is English. OpenUI accepts the same `locale` prop.
+
+- `parts` is required. Each part has a label and non-negative count.
+- `label` sets the accessible name. `locale` selects generated English or Arabic copy.
