@@ -179,7 +179,7 @@ Tooltip artifacts use `tooltip-<locale>-<direction>-<theme>-<side>-<width>.png`.
 - `mise exec -- npm run check` runs lint, types, design and generated-file checks, unit tests, and package checks.
 - `mise exec -- npm run preview:install` installs the separate preview app dependencies.
 - `mise exec -- npm run verify` runs checks, preview checks, and browser tests.
-- `mise exec -- npm run docs` regenerates `llms.txt` from component docs.
+- `mise exec -- npm run docs` regenerates `llms.txt` and the component table above from component docs and OpenUI descriptions. Edit those sources rather than the generated output. `npm run docs:check` checks both outputs for drift.
 - `mise exec -- npm run dev` starts the site locally.
 
 See [PLAN.md](PLAN.md) for architecture and decisions.
