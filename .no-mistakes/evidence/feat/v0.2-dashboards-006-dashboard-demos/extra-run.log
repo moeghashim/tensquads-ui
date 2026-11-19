@@ -1,0 +1,21 @@
+[WebServer] (node:59363) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 4 workers
+
+(node:59490) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:59489) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:59491) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:59488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/.phase-extra.spec.ts:15:2 › ChatLauncher localized OpenUI count and keyboard focus ar (393ms)
+  ✓  2 e2e/.phase-extra.spec.ts:15:2 › ChatLauncher localized OpenUI count and keyboard focus en (421ms)
+  ✓  3 e2e/.phase-extra.spec.ts:6:2 › image population totals and filters agree ar (560ms)
+  ✓  4 e2e/.phase-extra.spec.ts:6:2 › image population totals and filters agree en (636ms)
+  ✓  6 e2e/.phase-extra.spec.ts:46:1 › home page dashboard links preserve selected URL settings (545ms)
+  ✓  5 e2e/.phase-extra.spec.ts:29:1 › owner can decide every approval then open chat by keyboard without overlay (803ms)
+
+  6 passed (4.6s)
