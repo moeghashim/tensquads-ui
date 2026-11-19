@@ -217,7 +217,8 @@ test("homepage presents streamed messages and keeps previews readable", async ({
 	).toBe(true);
 	const actions = page.locator(".hero__links");
 	await expect(actions.getByRole("link", { name: "Get started", exact: true })).toBeVisible();
-	const browse = actions.getByRole("link", { name: "Browse 11 components", exact: true });
+	const componentCount = await page.locator(".component-card").count();
+	const browse = actions.getByRole("link", { name: `Browse ${componentCount} components`, exact: true });
 	await expect(browse).toBeVisible();
 	expect(await browse.evaluate((element) => getComputedStyle(element).textDecorationLine)).toBe("none");
 	await expect(page.getByRole("tooltip")).toContainText("Create a new item");
