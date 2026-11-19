@@ -298,8 +298,8 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 				owner: <PersonCell name="Maya Chen" email="maya@example.com" />,
 				plan: (
 					<StackCell
-						primary={ar ? "١٤٩ دولاراً / شهر" : "$149 / mo"}
-						secondary={ar ? "يُدفع شهرياً" : "Billed monthly"}
+						primary={ar ? "١٤٩ دولاراً / شهرياً" : "$149 / mo"}
+						secondary={ar ? "الفوترة شهرياً" : "Billed monthly"}
 					/>
 				),
 				status: <StatusCell label={ar ? "نشطة" : "Active"} />,
@@ -321,8 +321,8 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 				owner: <PersonCell name="Omar Saleh" email="omar@example.com" />,
 				plan: (
 					<StackCell
-						primary={ar ? "٧٩ دولاراً / شهر" : "$79 / mo"}
-						secondary={ar ? "يُدفع شهرياً" : "Billed monthly"}
+						primary={ar ? "٧٩ دولاراً / شهرياً" : "$79 / mo"}
+						secondary={ar ? "الفوترة شهرياً" : "Billed monthly"}
 					/>
 				),
 				status: <StatusCell label={ar ? "تجربة" : "Trial"} />,

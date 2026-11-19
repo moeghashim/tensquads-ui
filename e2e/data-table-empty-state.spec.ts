@@ -48,9 +48,9 @@ for (const locale of ["en", "ar"] as const) {
 				await page.keyboard.press("Enter");
 				await expect(northstar).toHaveAttribute("aria-selected", "true");
 				await expect(acme).toHaveAttribute("aria-selected", "false");
-				await expect(acme.getByText(ar ? "يُدفع شهرياً" : "Billed monthly")).toHaveAttribute(
+				await expect(acme.getByText(ar ? "الفوترة شهرياً" : "Billed monthly")).toHaveAttribute(
 					"title",
-					ar ? "يُدفع شهرياً" : "Billed monthly",
+					ar ? "الفوترة شهرياً" : "Billed monthly",
 				);
 				await expect(acme.getByText("maya@example.com")).toHaveAttribute("title", "maya@example.com");
 				for (const [row, detail, price] of [
@@ -59,12 +59,12 @@ for (const locale of ["en", "ar"] as const) {
 						ar
 							? "متجر تجريبي / الوصول إلى مليون دولار من المبيعات السنوية"
 							: "DS / Demo store / Reach $1M in annual sales",
-						ar ? "١٤٩ دولاراً / شهر" : "$149 / mo",
+						ar ? "١٤٩ دولاراً / شهرياً" : "$149 / mo",
 					],
 					[
 						northstar,
 						ar ? "متجر إلكتروني / ٣ أعضاء في الفريق" : "Online store / 3 team members",
-						ar ? "٧٩ دولاراً / شهر" : "$79 / mo",
+						ar ? "٧٩ دولاراً / شهرياً" : "$79 / mo",
 					],
 				] as const) {
 					await expect(row.getByText(detail, { exact: true })).toHaveAttribute("title", detail);
@@ -104,6 +104,14 @@ for (const locale of ["en", "ar"] as const) {
 				await expect(card.getByRole("row")).toHaveCount(3);
 				await expect(count).toHaveText(ar ? /^كل الشركات \([2٢] من [2٢]\)$/ : "All companies (2 of 2)");
 				await expectNoHorizontalScroll(page);
+				if (name === "DataTable") {
+					await page.setViewportSize({ width: 390, height: 844 });
+					await expectNoHorizontalScroll(page);
+					const tableScroll = card.locator(".ts-data-table__scroll");
+					await expect
+						.poll(() => tableScroll.evaluate((element) => element.scrollWidth > element.clientWidth))
+						.toBe(true);
+				}
 			});
 		}
 	}

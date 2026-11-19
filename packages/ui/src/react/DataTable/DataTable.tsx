@@ -65,7 +65,8 @@ export function StatusCell({
 
 export function DataTable({ caption, columns, rows, selectedId, onRowSelect }: DataTableProps) {
 	return (
-		<div className="ts-data-table__scroll">
+		// biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard focus lets Safari users scroll the wide table.
+		<div className="ts-data-table__scroll" tabIndex={0} title={caption}>
 			<table className="ts-data-table">
 				<caption>{caption}</caption>
 				<thead>

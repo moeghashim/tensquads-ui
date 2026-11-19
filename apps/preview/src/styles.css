@@ -21,7 +21,8 @@
 	.chat-page { max-inline-size: 64rem; }
 	.chat-page__intro { max-inline-size: 48rem; margin-block-end: var(--ts-space-8); }
 	.chat-page__intro h1 { text-wrap: balance; }
-	.dashboard-component-preview { display: grid; gap: var(--ts-space-5); }
+	.dashboard-component-preview { min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ts-space-5); }
+	.dashboard-component-preview > .ts-card { box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; }
 	.dashboard-component-preview__cards { display: grid; gap: var(--ts-space-4); }
 	.dashboard-component-preview__body { min-block-size: 8rem; display: grid; place-items: center; color: var(--ts-text-secondary); }
 	.dashboard-component-preview .ts-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

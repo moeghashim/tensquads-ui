@@ -1,9 +1,10 @@
-.ts-data-table__scroll { max-inline-size: 100%; overflow-inline: auto; }
-.ts-data-table { inline-size: 100%; border-collapse: separate; border-spacing: 0; color: var(--ts-text); font-size: 0.875rem; text-align: start; }
+.ts-data-table__scroll { box-sizing: border-box; inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; overflow-x: auto; overscroll-behavior-inline: contain; }
+.ts-data-table__scroll:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+.ts-data-table { inline-size: max-content; min-inline-size: 100%; border-collapse: separate; border-spacing: 0; color: var(--ts-text); font-size: 0.875rem; text-align: start; }
 .ts-data-table caption { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .ts-data-table th { block-size: 40px; border-block-end: 1px solid var(--ts-border); color: var(--ts-text-secondary); font-size: 0.8125rem; font-weight: 500; padding-inline: var(--ts-space-3); text-align: start; white-space: nowrap; }
 .ts-data-table th.is-end { text-align: end; }
-.ts-data-table td { block-size: 56px; border-block-end: 1px solid var(--ts-border-subtle); padding-inline: var(--ts-space-3); }
+.ts-data-table td { block-size: 56px; border-block-end: 1px solid var(--ts-border-subtle); padding-inline: var(--ts-space-3); white-space: nowrap; }
 .ts-data-table th:first-child, .ts-data-table td:first-child { padding-inline-start: var(--ts-space-5); }
 .ts-data-table th:last-child, .ts-data-table td:last-child { padding-inline-end: var(--ts-space-5); }
 .ts-data-table td.is-end { text-align: end; font-variant-numeric: tabular-nums; }
@@ -13,9 +14,12 @@
 .ts-data-table tbody tr[tabindex]:hover td:first-child { border-start-start-radius: var(--ts-radius-lg); border-end-start-radius: var(--ts-radius-lg); }
 .ts-data-table tbody tr[tabindex]:hover td:last-child { border-start-end-radius: var(--ts-radius-lg); border-end-end-radius: var(--ts-radius-lg); }
 .ts-data-table tbody tr.is-selected { background: var(--ts-primary-soft); }
+.ts-data-table tbody tr.is-selected .ts-data-table__tile--primary { background: var(--ts-primary-soft); }
 .ts-data-table tbody tr[tabindex]:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
-.ts-data-table__toolbar { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--ts-space-2); }
-.ts-data-table__toolbar > [data-slot="input"] { inline-size: 12rem; block-size: calc(var(--ts-control-md) + 2 * var(--ts-space-0-5)); }
+.ts-data-table__toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--ts-space-2); }
+.ts-data-table__toolbar [data-slot="input"].ts-input { box-sizing: border-box; inline-size: 12rem; block-size: 32px; font-size: 14px; }
+.ts-data-table__toolbar [data-slot="segmented-control"] { block-size: 28px; }
+.ts-data-table__toolbar [data-slot="segmented-control-item"].ts-segmented-control__item { box-sizing: border-box; block-size: 28px; min-block-size: 28px; padding-block: 0; font-size: 14px; }
 .ts-data-table__entity { display: flex; align-items: center; gap: var(--ts-space-3); min-inline-size: 220px; }
 .ts-data-table__tile { display: grid; flex: 0 0 32px; inline-size: 32px; block-size: 32px; place-items: center; border-radius: var(--ts-radius-lg); font-size: 0.75rem; font-weight: 600; }
 .ts-data-table__tile--primary { background: var(--ts-primary-soft); color: var(--ts-primary-solid); }
@@ -24,7 +28,13 @@
 .ts-data-table__tile--danger { background: var(--ts-danger-surface); color: var(--ts-danger-text); }
 .ts-data-table__entity-copy, .ts-data-table__stack { display: grid; gap: 2px; min-inline-size: 0; }
 .ts-data-table__entity-copy strong, .ts-data-table__stack strong { color: var(--ts-text-emphasis); font-size: 0.875rem; font-weight: 600; }
-.ts-data-table__entity-copy > span, .ts-data-table__stack > span { max-inline-size: 280px; overflow: hidden; color: var(--ts-text-secondary); font-size: 0.8125rem; text-overflow: ellipsis; white-space: nowrap; }
+.ts-data-table__entity-copy > span, .ts-data-table__stack > span { inline-size: max-content; min-inline-size: 10rem; max-inline-size: 240px; overflow: hidden; color: var(--ts-text-secondary); font-size: 0.8125rem; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 40rem) {
+	.ts-card__header:has(.ts-data-table__toolbar) { align-items: stretch; }
+	.ts-card__header:has(.ts-data-table__toolbar) .ts-card__head-end { inline-size: 100%; justify-content: flex-start; }
+	.ts-data-table__toolbar { inline-size: 100%; justify-content: flex-start; }
+	.ts-data-table__toolbar [data-slot="input"].ts-input { inline-size: 100%; }
+}
 .ts-empty-state { display: grid; justify-items: center; gap: var(--ts-space-3); padding: var(--ts-space-8) var(--ts-space-4); text-align: center; }
 .ts-empty-state__glyph { display: grid; inline-size: 32px; block-size: 32px; place-items: center; border-radius: var(--ts-radius-lg); background: var(--ts-primary-soft); color: var(--ts-primary-solid); }
 .ts-empty-state__glyph svg { inline-size: 18px; block-size: 18px; }
