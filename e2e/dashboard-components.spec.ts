@@ -1,10 +1,5 @@
 import { expect, test } from "@playwright/test";
-import {
-	capturePreviewScreenshots,
-	expectAccessible,
-	expectNoHorizontalScroll,
-	openPreview,
-} from "./helpers/preview";
+import { capturePreviewScreenshots, expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	for (const theme of ["light", "dark"] as const) {
@@ -14,7 +9,10 @@ for (const locale of ["en", "ar"] as const) {
 				await openPreview(page, { locale, direction, theme }, `/components/${name}`);
 				const examples = page.locator(".dashboard-component-preview");
 				await expect(examples).toBeVisible();
-				for (const [width, columns] of [[1440, 2], [390, 1]] as const) {
+				for (const [width, columns] of [
+					[1440, 2],
+					[390, 1],
+				] as const) {
 					await page.setViewportSize({ width, height: 900 });
 					if (name === "Card" || name === "StatTile") {
 						const grid = examples.locator(".ts-stat-grid").first();
@@ -38,10 +36,7 @@ for (const locale of ["en", "ar"] as const) {
 					}
 					if (name === "Card") {
 						await expect(examples.locator('.ts-card[data-variant="inset"]')).toBeVisible();
-						await expect(examples.locator('.ts-card--flush [data-slot="card-body"]')).toHaveCSS(
-							"padding",
-							"0px",
-						);
+						await expect(examples.locator('.ts-card--flush [data-slot="card-body"]')).toHaveCSS("padding", "0px");
 					} else if (name === "StatTile") {
 						const tiles = examples.locator(".ts-stat-grid > article");
 						await expect(tiles).toHaveCount(6);
@@ -60,7 +55,10 @@ for (const locale of ["en", "ar"] as const) {
 							examples.getByRole("button", { name: locale === "ar" ? "تصدير التقرير" : "Export report" }),
 						).toBeVisible();
 						await expect(
-							examples.locator(".ts-page-header").first().getByText(locale === "ar" ? "بيانات تجريبية" : "Demo data"),
+							examples
+								.locator(".ts-page-header")
+								.first()
+								.getByText(locale === "ar" ? "بيانات تجريبية" : "Demo data"),
 						).toBeVisible();
 					}
 					await expectAccessible(page);

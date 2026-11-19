@@ -44,7 +44,9 @@ describe("StatTile", () => {
 				"utf8",
 			);
 			const onError = vi.fn();
-			const { getByText, getByRole } = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
+			const { getByText, getByRole } = render(
+				<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />,
+			);
 			expect(getByText(label)).toBeInTheDocument();
 			expect(getByRole("img", { name: label, exact: true })).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);

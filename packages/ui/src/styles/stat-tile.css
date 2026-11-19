@@ -15,6 +15,10 @@
 	.ts-stat-tile__delta { font-weight: 500; font-variant-numeric: tabular-nums; }
 	.ts-stat-tile__delta--positive { color: var(--ts-success-text); }
 	.ts-stat-tile__delta--negative { color: var(--ts-danger-text); }
+	[data-theme="dark"] .ts-stat-tile__delta--negative { color: var(--ts-red-300); }
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) .ts-stat-tile__delta--negative { color: var(--ts-red-300); }
+	}
 	.ts-stat-tile__delta--neutral, .ts-stat-tile__foot { color: var(--ts-text-secondary); }
 	.ts-stat-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--ts-space-4); }
 	@media (max-width: 73.75rem) { .ts-stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
