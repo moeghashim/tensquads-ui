@@ -478,7 +478,7 @@ function ComponentExample() {
 							<StatTile
 								key={label}
 								label={label}
-								value={["$24.8k", "1,284", "3.8%", "$68.40", "$14,568", "936"][index] ?? "0"}
+								value={["$14,568", "1,284", "3.8%", "$68.40", "14,568", "936"][index] ?? "0"}
 								delta={
 									index % 3 === 1
 										? { text: ar ? "−٢٫١٪ مقارنة بالأسبوع الماضي" : "−2.1% vs last week", tone: "negative" }

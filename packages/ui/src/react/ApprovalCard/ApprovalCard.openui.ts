@@ -14,7 +14,6 @@ const propsSchema = z.object({
 	rule: z.string().nullable().optional(),
 	limit: z.number().int().nonnegative().nullable().optional(),
 	actionLabels: z.record(z.string(), z.string()).optional(),
-	ruleLabels: z.record(z.string(), z.string()).optional(),
 	locale: z.enum(["en", "ar"]).default("en"),
 	labels: z
 		.object({
@@ -26,6 +25,7 @@ const propsSchema = z.object({
 			task: z.string().min(1).optional(),
 		})
 		.optional(),
+	ruleLabels: z.record(z.string(), z.string()).optional(),
 });
 
 export const ApprovalCardOpenUI = defineComponent({

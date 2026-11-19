@@ -94,7 +94,7 @@ describe("BarChart", () => {
 			const smaller = getByRole("button", { name: "A: 2" }).querySelector<HTMLElement>(".ts-bar-chart__stack");
 			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(20, 3);
 			expect(getByRole("button", { name: "B: 3" }).querySelector(".ts-bar-chart__stack")).toHaveStyle({
-				blockSize: "100%",
+				blockSize: "30%",
 			});
 			unmount();
 		}
@@ -221,7 +221,7 @@ describe("BarChart", () => {
 			expect(stack?.children).toHaveLength(0);
 		}
 		const mixed = getByRole("button", { name: "Mixed: 4" });
-		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "100%" });
+		expect(mixed.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "40%" });
 		expect(mixed.querySelectorAll(".ts-bar-chart__segment")).toHaveLength(1);
 		fireEvent.focus(mixed);
 		expect(document.body).toHaveTextContent("a: 0");

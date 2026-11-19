@@ -11,6 +11,7 @@ for (const locale of ["en", "ar"] as const) {
 				await expect(examples).toBeVisible();
 				for (const [width, columns] of [
 					[1440, 2],
+					[480, 2],
 					[390, 2],
 					[339, 1],
 				] as const) {

@@ -11,7 +11,7 @@ for (const locale of ["en", "ar"] as const) {
 				renderToStaticMarkup(
 					createElement(StatTile, {
 						label: locale === "ar" ? "الإيرادات" : "Revenue",
-				value: locale === "ar" ? "٢٤٬٨٦٠" : "$14,568",
+						value: locale === "ar" ? "٢٤٬٨٦٠" : "$14,568",
 						unit: index % 2 === 0 ? (locale === "ar" ? "ر.س" : "SAR") : undefined,
 						series: [3, 7, 4, 9],
 					}),
@@ -27,7 +27,7 @@ for (const locale of ["en", "ar"] as const) {
 				[1440, 6],
 				[1180, 3],
 				[760, 2],
-				[480, 1],
+				[480, 2],
 				[390, 2],
 				[339, 1],
 			] as const) {

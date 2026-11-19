@@ -33,7 +33,7 @@
 	.dashboard-component-preview__cards { display: grid; gap: var(--ts-space-4); }
 	.dashboard-component-preview__body { min-block-size: 8rem; display: grid; place-items: center; color: var(--ts-text-secondary); }
 	.dashboard-component-preview .ts-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-	@media (max-width: 30rem) { .dashboard-component-preview .ts-stat-grid { grid-template-columns: minmax(0, 1fr); } }
+	@media (max-width: 21.1875rem) { .dashboard-component-preview .ts-stat-grid { grid-template-columns: minmax(0, 1fr); } }
 	.chat-page__intro > p:last-child { max-inline-size: 42rem; margin-block: var(--ts-space-4) 0; color: var(--ts-text-secondary); }
 	.chat-demo { min-inline-size: 0; }
 	/* The demo is an app window on the page: its own surface, edge and depth, so the thread never reads as page copy. */
