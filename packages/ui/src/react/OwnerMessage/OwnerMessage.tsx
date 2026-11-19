@@ -3,7 +3,7 @@ import type { Locale } from "../../schemas/index.js";
 import { AgentSlugSchema } from "../../schemas/index.js";
 import type { PlatformOwnerCommandBody, PlatformOwnerMessage } from "../../schemas/platform.js";
 import { ownerAnswerCommand, PlatformOwnerMessageSchema } from "../../schemas/platform.js";
-import { ApprovalCard } from "../ApprovalCard/ApprovalCard.js";
+import { ApprovalCard, type ApprovalCardProps } from "../ApprovalCard/ApprovalCard.js";
 import { Button } from "../Button/Button.js";
 import { ChatAssistantMessage, ChatError, ChatWorking } from "../Chat/Chat.js";
 import { ChatReply } from "../ChatReply/ChatReply.js";
@@ -13,7 +13,9 @@ export type OwnerMessageViewProps = {
 	messages: readonly unknown[];
 	locale?: Locale;
 	actionLabels?: Record<string, string>;
-	approvalDecision?: "approve" | "reject";
+	approvalDecisions?: Readonly<Record<string, "approve" | "reject">>;
+	labels?: { answerHint?: string; attempt?: string; errorTitle?: string };
+	approvalLabels?: ApprovalCardProps["labels"];
 	onCommand?: (body: PlatformOwnerCommandBody) => void;
 	onUnknown?: (message: unknown) => void;
 };
@@ -36,7 +38,9 @@ export function OwnerMessageView({
 	messages,
 	locale = "en",
 	actionLabels,
-	approvalDecision,
+	approvalDecisions,
+	labels,
+	approvalLabels,
 	onCommand,
 	onUnknown,
 }: OwnerMessageViewProps) {
@@ -52,15 +56,19 @@ export function OwnerMessageView({
 	}, [messages, onUnknown]);
 	return (
 		<div className="ts-owner-messages" lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-			{sorted.map(({ index, parsed }) => {
+			{sorted.map(({ parsed }) => {
 				if (!parsed.success) return null;
 				return (
 					<OwnerMessageItem
-						key={`${parsed.data.seq}:${index}`}
+						key={parsed.data.seq}
 						message={parsed.data}
 						locale={locale}
 						actionLabels={actionLabels}
-						approvalDecision={approvalDecision}
+						approvalDecision={
+							parsed.data.type === "approval_request" ? approvalDecisions?.[parsed.data.approvalId] : undefined
+						}
+						labels={labels}
+						approvalLabels={approvalLabels}
 						onCommand={onCommand}
 					/>
 				);
@@ -74,12 +82,16 @@ function OwnerMessageItem({
 	locale,
 	actionLabels,
 	approvalDecision,
+	labels,
+	approvalLabels,
 	onCommand,
 }: {
 	message: PlatformOwnerMessage;
 	locale: Locale;
 	actionLabels?: Record<string, string>;
 	approvalDecision?: "approve" | "reject";
+	labels?: OwnerMessageViewProps["labels"];
+	approvalLabels?: ApprovalCardProps["labels"];
 	onCommand?: (body: PlatformOwnerCommandBody) => void;
 }) {
 	const [chosen, setChosen] = useState<string>();
@@ -114,7 +126,8 @@ function OwnerMessageItem({
 					</div>
 				) : (
 					<p className="ts-owner-message__hint">
-						{locale === "ar" ? "أرسل إجابتك في مربع الرسالة." : "Send your answer in the message box."}
+						{labels?.answerHint ??
+							(locale === "ar" ? "أرسل إجابتك في مربع الرسالة." : "Send your answer in the message box.")}
 					</p>
 				)}
 			</ChatAssistantMessage>
@@ -126,20 +139,19 @@ function OwnerMessageItem({
 				locale={locale}
 				actionLabels={actionLabels}
 				decision={approvalDecision}
+				labels={approvalLabels}
 				onDecision={onCommand}
 			/>
 		);
 	if (message.type === "result")
 		return (
 			<ChatAssistantMessage className="ts-owner-message">
-				<p>
-					<PlainTextLinks text={message.summary} />
-				</p>
+				<ChatReply reply={message.summary} locale={locale} plainText />
 				{message.evidence.length > 0 && (
 					<ul>
 						{message.evidence.map((item, index) => (
 							<li key={`${item}:${index}`}>
-								<PlainTextLinks text={item} />
+								<ChatReply reply={item} locale={locale} plainText />
 							</li>
 						))}
 					</ul>
@@ -152,7 +164,7 @@ function OwnerMessageItem({
 			<ChatWorking
 				className="ts-owner-message"
 				locale={locale}
-				label={`${message.step}${message.attempt > 1 ? ` · ${locale === "ar" ? `المحاولة ${message.attempt}` : `Attempt ${message.attempt}`}` : ""}`}
+				label={`${message.step}${message.attempt > 1 ? ` · ${labels?.attempt ?? (locale === "ar" ? "المحاولة" : "Attempt")} ${message.attempt}` : ""}`}
 				glyph={
 					agent.success ? <Squadmate agent={agent.data} state="running" size={20} locale={locale} /> : undefined
 				}
@@ -163,26 +175,9 @@ function OwnerMessageItem({
 		<ChatError
 			className="ts-owner-message"
 			locale={locale}
-			title={locale === "ar" ? "تعذّر تأكيد الإجراء" : "Action could not be confirmed"}
+			title={labels?.errorTitle ?? (locale === "ar" ? "تعذّر تأكيد الإجراء" : "Action could not be confirmed")}
 		>
 			{message.what}
 		</ChatError>
-	);
-}
-
-function PlainTextLinks({ text }: { text: string }) {
-	const parts = text.split(/(https?:\/\/[^\s<>()]+)/g);
-	return (
-		<>
-			{parts.map((part, index) =>
-				/^https?:\/\//.test(part) ? (
-					<a key={`${index}:${part}`} href={part} dir="ltr" rel="noreferrer">
-						{part}
-					</a>
-				) : (
-					part
-				),
-			)}
-		</>
 	);
 }

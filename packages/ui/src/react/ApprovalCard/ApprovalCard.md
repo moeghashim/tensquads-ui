@@ -7,3 +7,5 @@ The `onDecision` callback receives an `ApprovalDecision` command body without `c
 ## Platform contract
 
 This component restates `approval_request` and `ApprovalDecision` from `moeghashim/tensquads-platform-amp` commit `c5eaad4d69b4529c9a57b00b1066b39e60243fa8`. It does not add fields to either contract. Q4 notes that the request has no amount, bot, or task id; the card shows no amount. The host may pass bot, task id, and a prior decision as props. The contract also has no localized action label, so the host supplies `actionLabels`.
+
+Use `labels` to override `approve`, `decline`, `approved`, `declined`, `limit`, and `task` in React or OpenUI. Defaults follow `locale`. `disabled` blocks both controls. Returning `false` from `onDecision` leaves the card unlocked. The OpenUI adapter uses this behavior so D23 locks the reply block only after the host accepts the action.

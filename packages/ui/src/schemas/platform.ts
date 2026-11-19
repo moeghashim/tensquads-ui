@@ -124,7 +124,7 @@ export function ownerAnswerCommand(input: { questionId: string; text: string }):
 	return OwnerAnswerCommandSchema.omit({ commandId: true, at: true }).parse({ type: "OwnerAnswer", ...input });
 }
 export function approvalDecisionCommand(
-	request: PlatformApprovalRequest,
+	request: Pick<PlatformApprovalRequest, "approvalId" | "contentHash">,
 	decision: "approve" | "reject",
 ): ApprovalDecisionCommandBody {
 	return ApprovalDecisionCommandSchema.omit({ commandId: true, at: true }).parse({

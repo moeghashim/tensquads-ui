@@ -29,7 +29,7 @@ for (const directory of (await readdir(componentsRoot, { withFileTypes: true }))
 			: "";
 		const tagline = openui.match(/\n\tdescription:\s*"((?:[^"\\]|\\.)+)"/)?.[1];
 		entries.push({
-			name,
+			name: markdown.match(/^# (\w+)\s*$/m)?.[1] ?? name,
 			tagline,
 			summary: summary || "Component documentation.",
 			path: `packages/ui/src/react/${name}/${name}.md`,

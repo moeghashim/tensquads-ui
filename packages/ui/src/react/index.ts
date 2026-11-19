@@ -1,5 +1,5 @@
 export type { ChatAction, ChatActionTurn, ChatTurn } from "../schemas/index.js";
-export type { ApprovalCardProps } from "./ApprovalCard/ApprovalCard.js";
+export type { ApprovalCardLabels, ApprovalCardProps } from "./ApprovalCard/ApprovalCard.js";
 export { ApprovalCard } from "./ApprovalCard/ApprovalCard.js";
 export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
