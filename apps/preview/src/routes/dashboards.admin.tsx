@@ -20,6 +20,8 @@ import {
 } from "@tensquads/ui/react";
 import { useMemo, useState } from "react";
 import { siteCopy } from "../copy";
+import arImages from "../fixtures/dashboard-images.fixture.ar.json";
+import enImages from "../fixtures/dashboard-images.fixture.en.json";
 import { getPreviewState } from "../state";
 import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
@@ -47,11 +49,6 @@ const companiesByLocale = {
 	en: JSON.parse(companyFixtures["../fixtures/dashboard-companies.fixture.en.json"] ?? "[]") as Company[],
 	ar: JSON.parse(companyFixtures["../fixtures/dashboard-companies.fixture.ar.json"] ?? "[]") as Company[],
 };
-const imageFixtures = import.meta.glob<string>("../fixtures/dashboard-images.fixture.*.json", {
-	eager: true,
-	query: "?raw",
-	import: "default",
-});
 type ImageFixture = {
 	id: string;
 	name: string;
@@ -61,8 +58,11 @@ type ImageFixture = {
 	path: string;
 	version: string;
 	updated: string;
+	updatedAr: string;
+	updatedAgeHours: number;
+	lifecycle: string;
 	deployed: number;
-	latest: string;
+	latest: number;
 	attention: boolean;
 	bugs: {
 		id: string;
@@ -73,11 +73,11 @@ type ImageFixture = {
 		ageAr: string;
 		accounts: number;
 	}[];
-	requests: { id: string; title: string; titleAr: string; status: string }[];
+	requests: { id: string; title: string; titleAr: string; status: string; inProgress: boolean }[];
 };
 const imagesByLocale: Record<"en" | "ar", ImageFixture[]> = {
-	en: JSON.parse(imageFixtures["../fixtures/dashboard-images.fixture.en.json"] ?? "[]"),
-	ar: JSON.parse(imageFixtures["../fixtures/dashboard-images.fixture.ar.json"] ?? "[]"),
+	en: enImages,
+	ar: arImages,
 };
 
 function AdminDashboard() {
@@ -370,12 +370,47 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 			(filter === "bugs" && image.bugs.length > 0) ||
 			(filter === "requests" && image.requests.length > 0),
 	);
+	const bugs = images.flatMap((image) => image.bugs);
+	const requests = images.flatMap((image) => image.requests);
+	const deployments = images.reduce((sum, image) => sum + image.deployed, 0);
+	const behind = images.reduce((sum, image) => sum + image.deployed - image.latest, 0);
+	const highBugs = bugs.filter((bug) => bug.severity === "High").length;
 	const stats = [
-		{ label: copy.images, value: "7", foot: copy.imagesFoot },
-		{ label: copy.deployments, value: "127", delta: { text: copy.deploymentsFoot, tone: "negative" as const } },
-		{ label: copy.openBugs, value: "8", delta: { text: copy.highBugs, tone: "negative" as const } },
-		{ label: copy.featuresRequested, value: "15", foot: copy.featuresFoot },
-		{ label: copy.updatedThisWeek, value: "4", foot: copy.updatedFoot },
+		{
+			label: copy.images,
+			value: String(images.length),
+			foot: copy.imagesFoot
+				.replace("{stable}", numberText(images.filter((image) => image.lifecycle === "stable").length))
+				.replace(
+					"{preview}",
+					numberText(images.filter((image) => image.lifecycle === "beta" || image.lifecycle === "draft").length),
+				),
+		},
+		{
+			label: copy.deployments,
+			value: String(deployments),
+			delta: { text: copy.deploymentsFoot.replace("{count}", numberText(behind)), tone: "negative" as const },
+		},
+		{
+			label: copy.openBugs,
+			value: String(bugs.length),
+			delta: {
+				text: locale === "ar" && highBugs === 2
+					? copy.highBugsDual
+					: copy.highBugs.replace("{count}", numberText(highBugs)),
+				tone: "negative" as const,
+			},
+		},
+		{
+			label: copy.featuresRequested,
+			value: String(requests.length),
+			foot: copy.featuresFoot.replace("{count}", numberText(requests.filter((request) => request.inProgress).length)),
+		},
+		{
+			label: copy.updatedThisWeek,
+			value: String(images.filter((image) => image.updatedAgeHours < 7 * 24).length),
+			foot: copy.updatedFoot.replace("{count}", numberText(images.length)),
+		},
 	];
 	return (
 		<>
@@ -388,7 +423,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 				<Card
 					title={copy.allImagesCount
 						.replace("{visible}", numberText(visibleImages.length))
-						.replace("{total}", numberText(7))}
+						.replace("{total}", numberText(images.length))}
 					flush
 				>
 					<div className="dashboard-image-filters">
@@ -458,7 +493,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 									</span>
 								),
 								version: image.version,
-								updated: locale === "ar" ? "منذ يومين" : image.updated,
+								updated: locale === "ar" ? image.updatedAr : image.updated,
 								deployed: <span className="dashboard-numeric">{image.deployed}</span>,
 								bugs: (
 									<span
@@ -483,11 +518,11 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 							<dt>{copy.imageVersion}</dt>
 							<dd dir="ltr">{selectedImage.version}</dd>
 							<dt>{copy.lastUpdated}</dt>
-							<dd>{locale === "ar" ? "منذ يومين" : selectedImage.updated}</dd>
+							<dd>{locale === "ar" ? selectedImage.updatedAr : selectedImage.updated}</dd>
 							<dt>{copy.deployedTo}</dt>
 							<dd className="dashboard-numeric">{selectedImage.deployed}</dd>
 							<dt>{copy.onLatest}</dt>
-							<dd dir="ltr">{selectedImage.latest}</dd>
+							<dd dir="ltr">{`${selectedImage.latest} of ${selectedImage.deployed} (${Math.round((selectedImage.latest / selectedImage.deployed) * 100)}%)`}</dd>
 						</dl>
 						<div className="dashboard-actions">
 							<Button>{copy.rollOut}</Button>
