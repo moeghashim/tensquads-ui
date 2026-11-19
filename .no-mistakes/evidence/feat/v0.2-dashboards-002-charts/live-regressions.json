@@ -1,0 +1,198 @@
+{
+  "surface": "Real React library components in a disposable Vite consumer, Chromium",
+  "checks": [
+    {
+      "name": "Scalar zero and fractional revenue match the zero-baseline axis",
+      "values": [
+        {
+          "label": "Zero: 0",
+          "column": 192,
+          "stack": 0,
+          "width": 28,
+          "segments": []
+        },
+        {
+          "label": "Quarter: 0.25",
+          "column": 192,
+          "stack": 48,
+          "width": 28,
+          "segments": [
+            {
+              "height": 48,
+              "color": "rgb(185, 185, 185)"
+            }
+          ]
+        },
+        {
+          "label": "Half: 0.5",
+          "column": 192,
+          "stack": 96,
+          "width": 28,
+          "segments": [
+            {
+              "height": 96,
+              "color": "rgb(24, 24, 24)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stacked fractions consume full height; zero series has no mark or gap",
+      "values": [
+        {
+          "label": "Quarter: 0.25",
+          "column": 192,
+          "stack": 48,
+          "width": 28,
+          "segments": [
+            {
+              "height": 18.40625,
+              "color": "rgb(185, 185, 185)"
+            },
+            {
+              "height": 27.59375,
+              "color": "rgb(24, 24, 24)"
+            }
+          ]
+        },
+        {
+          "label": "Half: 0.5",
+          "column": 192,
+          "stack": 96,
+          "width": 28,
+          "segments": [
+            {
+              "height": 96,
+              "color": "rgb(24, 24, 24)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Odd count midpoint is 1.5 and inclusive highlight spans first two points",
+      "ticks": [
+        "3",
+        "1.5",
+        "0"
+      ],
+      "values": [
+        {
+          "label": "Two: 2",
+          "column": 192,
+          "stack": 128,
+          "width": 28,
+          "segments": [
+            {
+              "height": 128,
+              "color": "rgb(24, 24, 24)"
+            }
+          ]
+        },
+        {
+          "label": "Three: 3",
+          "column": 192,
+          "stack": 192,
+          "width": 28,
+          "segments": [
+            {
+              "height": 192,
+              "color": "rgb(24, 24, 24)"
+            }
+          ]
+        },
+        {
+          "label": "One: 1",
+          "column": 192,
+          "stack": 64,
+          "width": 28,
+          "segments": [
+            {
+              "height": 64,
+              "color": "rgb(185, 185, 185)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hover and focus reveal the scalar point label and total"
+    },
+    {
+      "name": "Nested RTL arrows respect inherited direction and endpoints; shrinking and empty/repopulated points retain Tab entry",
+      "ring": {
+        "width": "2px",
+        "offset": "2px",
+        "color": "rgb(1, 105, 204)"
+      },
+      "remainingPoints": 3
+    },
+    {
+      "name": "Bars rank fractional durations at 100%, 50%, zero; progress caps at eight and displays caption",
+      "ratios": [
+        {
+          "text": "Half0.5 s",
+          "ratio": 1,
+          "title": "Half: 0.5 s"
+        },
+        {
+          "text": "Quarter0.25 s",
+          "ratio": 0.5,
+          "title": "Quarter: 0.25 s"
+        },
+        {
+          "text": "Zero0 s",
+          "ratio": 0,
+          "title": "Zero: 0 s"
+        }
+      ]
+    },
+    {
+      "name": "Distribution en folds seven categories into six, preserves total 28, exposes localized totals and hover titles",
+      "key": [
+        "Part 17 of 28",
+        "Part 26 of 28",
+        "Part 35 of 28",
+        "Part 44 of 28",
+        "Part 53 of 28",
+        "Other3 of 28"
+      ],
+      "sizes": [
+        260,
+        222.859375,
+        185.71875,
+        148.578125,
+        111.421875,
+        111.421875
+      ]
+    },
+    {
+      "name": "Distribution ar folds seven categories into six, preserves total 28, exposes localized totals and hover titles",
+      "key": [
+        "جزء 17 من 28",
+        "جزء 26 من 28",
+        "جزء 35 من 28",
+        "جزء 44 من 28",
+        "جزء 53 من 28",
+        "أخرى3 من 28"
+      ],
+      "sizes": [
+        260,
+        222.859375,
+        185.71875,
+        148.578125,
+        111.421875,
+        111.421875
+      ]
+    },
+    {
+      "name": "Empty chart and all-zero data render without nonzero marks or runtime errors"
+    },
+    {
+      "name": "Synthetic regression examples stay within a 390px document"
+    }
+  ],
+  "errors": [],
+  "result": "pass"
+}

@@ -1,0 +1,423 @@
+{
+  "results": [
+    {
+      "name": "BarChart keyboard navigation and tooltips follow inherited RTL and remain reachable after shrinking or emptying data",
+      "result": "pass",
+      "live": true,
+      "observations": {
+        "ring": [
+          "2px",
+          "2px",
+          "rgb(1, 105, 204)"
+        ],
+        "nestedRTL": "ArrowLeft advances and ArrowRight returns",
+        "shrink": "index 13 -> one reachable tab stop at index 6",
+        "empty": "repopulate preserves tab stop"
+      }
+    },
+    {
+      "name": "BarChart zero, fractional, stacked and odd-maximum values match the zero-baseline axis and highlight range",
+      "result": "pass",
+      "live": true,
+      "observations": {
+        "scalar": {
+          "columns": [
+            {
+              "x": 143,
+              "y": 196.875,
+              "width": 28,
+              "height": 192
+            },
+            {
+              "x": 452,
+              "y": 196.875,
+              "width": 28,
+              "height": 192
+            },
+            {
+              "x": 761,
+              "y": 196.875,
+              "width": 28,
+              "height": 192
+            }
+          ],
+          "stacks": [
+            {
+              "x": 143,
+              "y": 388.875,
+              "width": 28,
+              "height": 0
+            },
+            {
+              "x": 452,
+              "y": 340.875,
+              "width": 28,
+              "height": 48
+            },
+            {
+              "x": 761,
+              "y": 292.875,
+              "width": 28,
+              "height": 96
+            }
+          ],
+          "marks": [
+            {
+              "x": 452,
+              "y": 340.875,
+              "width": 28,
+              "height": 48
+            },
+            {
+              "x": 761,
+              "y": 292.875,
+              "width": 28,
+              "height": 96
+            }
+          ]
+        },
+        "oddMaximum": {
+          "ticks": [
+            3,
+            1.5,
+            0
+          ],
+          "stacks": [
+            {
+              "x": 143,
+              "y": 260.875,
+              "width": 28,
+              "height": 128
+            },
+            {
+              "x": 761,
+              "y": 196.875,
+              "width": 28,
+              "height": 192
+            }
+          ]
+        },
+        "stacked": {
+          "stack": [
+            {
+              "x": 143,
+              "y": 331.28125,
+              "width": 28,
+              "height": 57.59375
+            }
+          ],
+          "segments": [
+            {
+              "x": 143,
+              "y": 370.34375,
+              "width": 28,
+              "height": 18.53125
+            },
+            {
+              "x": 143,
+              "y": 331.28125,
+              "width": 28,
+              "height": 37.0625
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Bars ranks and caps rows, scales fractional values to their actual maximum, and renders progress captions and zero data",
+      "result": "pass",
+      "live": true,
+      "observations": [
+        {
+          "style": "ranked",
+          "dir": "ltr",
+          "tracks": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 268.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 315.875,
+              "width": 678,
+              "height": 6
+            }
+          ],
+          "fills": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 268.875,
+              "width": 339,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 315.875,
+              "width": 0,
+              "height": 6
+            }
+          ]
+        },
+        {
+          "style": "ranked",
+          "dir": "rtl",
+          "tracks": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 268.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 315.875,
+              "width": 678,
+              "height": 6
+            }
+          ],
+          "fills": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 450,
+              "y": 268.875,
+              "width": 339,
+              "height": 6
+            },
+            {
+              "x": 789,
+              "y": 315.875,
+              "width": 0,
+              "height": 6
+            }
+          ]
+        },
+        {
+          "style": "progress",
+          "dir": "ltr",
+          "tracks": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 268.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 315.875,
+              "width": 678,
+              "height": 6
+            }
+          ],
+          "fills": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 268.875,
+              "width": 339,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 315.875,
+              "width": 0,
+              "height": 6
+            }
+          ]
+        },
+        {
+          "style": "progress",
+          "dir": "rtl",
+          "tracks": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 268.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 111,
+              "y": 315.875,
+              "width": 678,
+              "height": 6
+            }
+          ],
+          "fills": [
+            {
+              "x": 111,
+              "y": 221.875,
+              "width": 678,
+              "height": 6
+            },
+            {
+              "x": 450,
+              "y": 268.875,
+              "width": 339,
+              "height": 6
+            },
+            {
+              "x": 789,
+              "y": 315.875,
+              "width": 0,
+              "height": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Distribution sorts and folds seven parts into six, preserves totals and proportions, and localizes Arabic labels and hover information",
+      "result": "pass",
+      "live": true,
+      "observations": [
+        {
+          "locale": "en",
+          "parts": [
+            {
+              "x": 111,
+              "y": 196.875,
+              "width": 167,
+              "height": 10
+            },
+            {
+              "x": 280,
+              "y": 196.875,
+              "width": 143.140625,
+              "height": 10
+            },
+            {
+              "x": 425.140625,
+              "y": 196.875,
+              "width": 119.28125,
+              "height": 10
+            },
+            {
+              "x": 546.421875,
+              "y": 196.875,
+              "width": 95.421875,
+              "height": 10
+            },
+            {
+              "x": 643.84375,
+              "y": 196.875,
+              "width": 71.578125,
+              "height": 10
+            },
+            {
+              "x": 717.421875,
+              "y": 196.875,
+              "width": 71.578125,
+              "height": 10
+            }
+          ],
+          "hoverTitle": "Other: 3",
+          "total": 28
+        },
+        {
+          "locale": "ar",
+          "parts": [
+            {
+              "x": 622,
+              "y": 196.875,
+              "width": 167,
+              "height": 10
+            },
+            {
+              "x": 476.859375,
+              "y": 196.875,
+              "width": 143.140625,
+              "height": 10
+            },
+            {
+              "x": 355.578125,
+              "y": 196.875,
+              "width": 119.28125,
+              "height": 10
+            },
+            {
+              "x": 258.15625,
+              "y": 196.875,
+              "width": 95.421875,
+              "height": 10
+            },
+            {
+              "x": 184.578125,
+              "y": 196.875,
+              "width": 71.578125,
+              "height": 10
+            },
+            {
+              "x": 111,
+              "y": 196.875,
+              "width": 71.578125,
+              "height": 10
+            }
+          ],
+          "hoverTitle": "أخرى: 3",
+          "total": 28
+        }
+      ]
+    },
+    {
+      "name": "Bilingual OpenUI chart previews render in both themes at desktop and mobile widths with aligned RTL dates and no page overflow",
+      "result": "pass",
+      "live": true,
+      "observations": [
+        "BarChart en light: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "BarChart en dark: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "BarChart ar light: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "BarChart ar dark: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Bars en light: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Bars en dark: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Bars ar light: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Bars ar dark: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Distribution en light: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Distribution en dark: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Distribution ar light: OpenUI render, axe, 1440/390px screenshots and geometry passed",
+        "Distribution ar dark: OpenUI render, axe, 1440/390px screenshots and geometry passed"
+      ]
+    }
+  ],
+  "browserErrors": []
+}

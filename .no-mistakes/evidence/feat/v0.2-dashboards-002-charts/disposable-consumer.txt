@@ -1,0 +1,25 @@
+--- index.html ---
+<!doctype html><html lang="en" dir="ltr" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.jsx"></script></body></html>
+
+
+--- main.jsx ---
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {BarChart, Bars, Distribution, Card} from '../packages/ui/src/react/index.ts';
+import '../packages/ui/src/fonts.css';
+import '../packages/ui/src/tokens/tokens.css';
+import '../packages/ui/src/styles/styles.css';
+const root=createRoot(document.getElementById('root'));
+window.showChart=(name,props,{locale='en',dir='ltr',theme='light'}={})=>{
+ document.documentElement.lang=locale; document.documentElement.dir=dir;document.documentElement.dataset.theme=theme;
+ const C={BarChart,Bars,Distribution}[name];
+ root.render(<main style={{maxWidth:720,margin:'32px auto',padding:24}}><h1>Local chart validation</h1><Card title={name}><C {...props}/></Card></main>);
+};
+window.showChart('BarChart',{points:[]});
+
+
+--- vite.config.mjs ---
+import {createRequire} from 'node:module';
+const require=createRequire(new URL('../apps/preview/package.json',import.meta.url));
+const {default:react}=await import(require.resolve('@vitejs/plugin-react'));
+export default {root:new URL('./',import.meta.url).pathname,plugins:[react()],server:{host:'127.0.0.1',port:5174,strictPort:true,fs:{allow:[new URL('../',import.meta.url).pathname]}},resolve:{dedupe:['react','react-dom']}};

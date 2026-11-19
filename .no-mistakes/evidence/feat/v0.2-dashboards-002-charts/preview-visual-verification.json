@@ -1,0 +1,1474 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1440,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 668,
+        "content": 668
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 758,
+        "content": 758
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 274,
+        "content": 274
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 364,
+        "content": 364
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1440,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 418,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 464.765625,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 511.53125,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 558.3125,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 605.078125,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 651.84375,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 698.609375,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": 745.390625,
+        "width": 28,
+        "height": 136,
+        "inViewport": true
+      },
+      {
+        "x": 792.15625,
+        "width": 28,
+        "height": 160,
+        "inViewport": true
+      },
+      {
+        "x": 838.921875,
+        "width": 28,
+        "height": 152,
+        "inViewport": true
+      },
+      {
+        "x": 885.6875,
+        "width": 28,
+        "height": 176,
+        "inViewport": true
+      },
+      {
+        "x": 932.46875,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 979.234375,
+        "width": 28,
+        "height": 192,
+        "inViewport": true
+      },
+      {
+        "x": 1026,
+        "width": 28,
+        "height": 168,
+        "inViewport": true
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 90,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 129.078125,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 168.15625,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 207.234375,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 246.3125,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 285.390625,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 324.46875,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": 363.53125,
+        "width": 28,
+        "height": 136,
+        "inViewport": false
+      },
+      {
+        "x": 402.609375,
+        "width": 28,
+        "height": 160,
+        "inViewport": false
+      },
+      {
+        "x": 441.6875,
+        "width": 28,
+        "height": 152,
+        "inViewport": false
+      },
+      {
+        "x": 480.765625,
+        "width": 28,
+        "height": 176,
+        "inViewport": false
+      },
+      {
+        "x": 519.84375,
+        "width": 28,
+        "height": 144,
+        "inViewport": false
+      },
+      {
+        "x": 558.921875,
+        "width": 28,
+        "height": 192,
+        "inViewport": false
+      },
+      {
+        "x": 598,
+        "width": 28,
+        "height": 168,
+        "inViewport": false
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1440,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 668,
+        "content": 668
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 758,
+        "content": 758
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 274,
+        "content": 274
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 364,
+        "content": 364
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1440,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 418,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 464.765625,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 511.53125,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 558.3125,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 605.078125,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 651.84375,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 698.609375,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": 745.390625,
+        "width": 28,
+        "height": 136,
+        "inViewport": true
+      },
+      {
+        "x": 792.15625,
+        "width": 28,
+        "height": 160,
+        "inViewport": true
+      },
+      {
+        "x": 838.921875,
+        "width": 28,
+        "height": 152,
+        "inViewport": true
+      },
+      {
+        "x": 885.6875,
+        "width": 28,
+        "height": 176,
+        "inViewport": true
+      },
+      {
+        "x": 932.46875,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 979.234375,
+        "width": 28,
+        "height": 192,
+        "inViewport": true
+      },
+      {
+        "x": 1026,
+        "width": 28,
+        "height": 168,
+        "inViewport": true
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 90,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 129.078125,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 168.15625,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 207.234375,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 246.3125,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 285.390625,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 324.46875,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": 363.53125,
+        "width": 28,
+        "height": 136,
+        "inViewport": false
+      },
+      {
+        "x": 402.609375,
+        "width": 28,
+        "height": 160,
+        "inViewport": false
+      },
+      {
+        "x": 441.6875,
+        "width": 28,
+        "height": 152,
+        "inViewport": false
+      },
+      {
+        "x": 480.765625,
+        "width": 28,
+        "height": 176,
+        "inViewport": false
+      },
+      {
+        "x": 519.84375,
+        "width": 28,
+        "height": 144,
+        "inViewport": false
+      },
+      {
+        "x": 558.921875,
+        "width": 28,
+        "height": 192,
+        "inViewport": false
+      },
+      {
+        "x": 598,
+        "width": 28,
+        "height": 168,
+        "inViewport": false
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 1440,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 668,
+        "content": 668
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 758,
+        "content": 758
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 390,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 274,
+        "content": 274
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 364,
+        "content": 364
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 1440,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 994,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 947.234375,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 900.46875,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 853.6875,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 806.921875,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 760.15625,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 713.390625,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": 666.609375,
+        "width": 28,
+        "height": 136,
+        "inViewport": true
+      },
+      {
+        "x": 619.84375,
+        "width": 28,
+        "height": 160,
+        "inViewport": true
+      },
+      {
+        "x": 573.078125,
+        "width": 28,
+        "height": 152,
+        "inViewport": true
+      },
+      {
+        "x": 526.3125,
+        "width": 28,
+        "height": 176,
+        "inViewport": true
+      },
+      {
+        "x": 479.53125,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 432.765625,
+        "width": 28,
+        "height": 192,
+        "inViewport": true
+      },
+      {
+        "x": 386,
+        "width": 28,
+        "height": 168,
+        "inViewport": true
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "width": 390,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 272,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 232.921875,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 193.84375,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 154.765625,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 115.6875,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 76.609375,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 37.53125,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": -1.53125,
+        "width": 28,
+        "height": 136,
+        "inViewport": false
+      },
+      {
+        "x": -40.609375,
+        "width": 28,
+        "height": 160,
+        "inViewport": false
+      },
+      {
+        "x": -79.6875,
+        "width": 28,
+        "height": 152,
+        "inViewport": false
+      },
+      {
+        "x": -118.765625,
+        "width": 28,
+        "height": 176,
+        "inViewport": false
+      },
+      {
+        "x": -157.84375,
+        "width": 28,
+        "height": 144,
+        "inViewport": false
+      },
+      {
+        "x": -196.921875,
+        "width": 28,
+        "height": 192,
+        "inViewport": false
+      },
+      {
+        "x": -236,
+        "width": 28,
+        "height": 168,
+        "inViewport": false
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 1440,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 668,
+        "content": 668
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 708,
+        "content": 708
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 710,
+        "content": 710
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 758,
+        "content": 758
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 760,
+        "content": 760
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 1440,
+        "content": 1440
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 390,
+    "stage": "after-test-direction-mutation",
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "cls": "ts-bar-chart",
+        "scroll": 0,
+        "width": 274,
+        "content": 274
+      },
+      {
+        "tag": "DIV",
+        "cls": "ts-card__body",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "SECTION",
+        "cls": "ts-card",
+        "scroll": 0,
+        "width": 314,
+        "content": 314
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "scroll": 0,
+        "width": 316,
+        "content": 316
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-list",
+        "scroll": 0,
+        "width": 364,
+        "content": 364
+      },
+      {
+        "tag": "DIV",
+        "cls": "gallery",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "SECTION",
+        "cls": "component-doc-page__section",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "MAIN",
+        "cls": "component-doc-page",
+        "scroll": 0,
+        "width": 366,
+        "content": 366
+      },
+      {
+        "tag": "DIV",
+        "cls": "site-shell",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "BODY",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      },
+      {
+        "tag": "HTML",
+        "cls": "",
+        "scroll": 0,
+        "width": 390,
+        "content": 390
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 1440,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 994,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 947.234375,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 900.46875,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 853.6875,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 806.921875,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 760.15625,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 713.390625,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": 666.609375,
+        "width": 28,
+        "height": 136,
+        "inViewport": true
+      },
+      {
+        "x": 619.84375,
+        "width": 28,
+        "height": 160,
+        "inViewport": true
+      },
+      {
+        "x": 573.078125,
+        "width": 28,
+        "height": 152,
+        "inViewport": true
+      },
+      {
+        "x": 526.3125,
+        "width": 28,
+        "height": 176,
+        "inViewport": true
+      },
+      {
+        "x": 479.53125,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 432.765625,
+        "width": 28,
+        "height": 192,
+        "inViewport": true
+      },
+      {
+        "x": 386,
+        "width": 28,
+        "height": 168,
+        "inViewport": true
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "width": 390,
+    "stage": "fresh-navigation-keyboard-resize",
+    "rects": [
+      {
+        "x": 272,
+        "width": 28,
+        "height": 96,
+        "inViewport": true
+      },
+      {
+        "x": 232.921875,
+        "width": 28,
+        "height": 112,
+        "inViewport": true
+      },
+      {
+        "x": 193.84375,
+        "width": 28,
+        "height": 80,
+        "inViewport": true
+      },
+      {
+        "x": 154.765625,
+        "width": 28,
+        "height": 144,
+        "inViewport": true
+      },
+      {
+        "x": 115.6875,
+        "width": 28,
+        "height": 128,
+        "inViewport": true
+      },
+      {
+        "x": 76.609375,
+        "width": 28,
+        "height": 104,
+        "inViewport": true
+      },
+      {
+        "x": 37.53125,
+        "width": 28,
+        "height": 120,
+        "inViewport": true
+      },
+      {
+        "x": -1.53125,
+        "width": 28,
+        "height": 136,
+        "inViewport": false
+      },
+      {
+        "x": -40.609375,
+        "width": 28,
+        "height": 160,
+        "inViewport": false
+      },
+      {
+        "x": -79.6875,
+        "width": 28,
+        "height": 152,
+        "inViewport": false
+      },
+      {
+        "x": -118.765625,
+        "width": 28,
+        "height": 176,
+        "inViewport": false
+      },
+      {
+        "x": -157.84375,
+        "width": 28,
+        "height": 144,
+        "inViewport": false
+      },
+      {
+        "x": -196.921875,
+        "width": 28,
+        "height": 192,
+        "inViewport": false
+      },
+      {
+        "x": -236,
+        "width": 28,
+        "height": 168,
+        "inViewport": false
+      }
+    ]
+  }
+]
