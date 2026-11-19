@@ -1,0 +1,927 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.13.1_2/bin/node",
+      "{run-worktree}/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      ".phase-test/playwright.config.ts"
+    ],
+    "configFile": "{run-worktree}/.phase-test/playwright.config.ts",
+    "rootDir": "{run-worktree}/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "phase-dashboard-polish.spec.ts",
+          "bar-chart-layout.spec.ts",
+          "stat-tile-layout.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "snapshotDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "phase-dashboard-polish.spec.ts",
+          "bar-chart-layout.spec.ts",
+          "stat-tile-layout.spec.ts"
+        ],
+        "timeout": 90000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5173",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "cwd": "..",
+      "command": "WRANGLER_SEND_METRICS=false npm --prefix apps/preview run preview",
+      "url": "http://127.0.0.1:5173",
+      "timeout": 60000,
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "bar-chart-layout.spec.ts",
+      "file": "bar-chart-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "BarChart reserves formatted axis space in ltr",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:44.369Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "67b320ac92a97ff96560-e23332a4931f82f8f6a9",
+          "file": "bar-chart-layout.spec.ts",
+          "line": 8,
+          "column": 2
+        },
+        {
+          "title": "BarChart reserves formatted axis space in rtl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:44.671Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "67b320ac92a97ff96560-db8958f809f2d82314a8",
+          "file": "bar-chart-layout.spec.ts",
+          "line": 8,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "title": "phase-dashboard-polish.spec.ts",
+      "file": "phase-dashboard-polish.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "chart cards fit, align ticks and keep keyboard tooltips en-light",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 5587,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63",
+                    "location": {
+                      "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                      "column": 63,
+                      "line": 24
+                    },
+                    "snippet": "  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                        "column": 63,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n\n  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:44.360Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-65c29--keyboard-tooltips-en-light/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-65c29--keyboard-tooltips-en-light/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                    "column": 63,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-980dde982acc80bff682",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "dashboard tile numbers stay whole and within cards en-light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 685,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:50.242Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-66c435461b6c865f7c9c",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "title": "registry paths truncate and selected full path remains available en-light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:50.988Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-b5a8f5c1c93e3ac9d155",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 61,
+          "column": 2
+        },
+        {
+          "title": "chart cards fit, align ticks and keep keyboard tooltips en-dark",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5430,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63",
+                    "location": {
+                      "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                      "column": 63,
+                      "line": 24
+                    },
+                    "snippet": "  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                        "column": 63,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n\n  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:52.208Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-706bb-p-keyboard-tooltips-en-dark/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-706bb-p-keyboard-tooltips-en-dark/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                    "column": 63,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-31b41efa8fb607612b5e",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "dashboard tile numbers stay whole and within cards en-dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 677,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:57.852Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-dc2a6d486a5072b5bc97",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "title": "registry paths truncate and selected full path remains available en-dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:58.590Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-8effa559a1f8edae516a",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 61,
+          "column": 2
+        },
+        {
+          "title": "chart cards fit, align ticks and keep keyboard tooltips ar-light",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5497,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63",
+                    "location": {
+                      "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                      "column": 63,
+                      "line": 24
+                    },
+                    "snippet": "  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                        "column": 63,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n\n  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:59.722Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-38c88--keyboard-tooltips-ar-light/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-38c88--keyboard-tooltips-ar-light/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                    "column": 63,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-aecf92912a441ac6bd11",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "dashboard tile numbers stay whole and within cards ar-light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 742,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:23:05.434Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-431e9c8571a745bdaf88",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "title": "registry paths truncate and selected full path remains available ar-light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1233,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:23:06.237Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-5bf4213bd018d0091a3e",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 61,
+          "column": 2
+        },
+        {
+          "title": "chart cards fit, align ticks and keep keyboard tooltips ar-dark",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5601,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63",
+                    "location": {
+                      "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                      "column": 63,
+                      "line": 24
+                    },
+                    "snippet": "  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                        "column": 63,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m317\u001b[39m\nReceived:    \u001b[31m326\u001b[39m\n\n  22 |    });\n  23 |    expect(geometry.doc).toBeLessThanOrEqual(geometry.win);\n> 24 |    if(width===1440 || view==='admin') expect(geometry.scroll).toBeLessThanOrEqual(geometry.client+1);\n     |                                                               ^\n  25 |    geometry.columns.forEach((c,i)=>{\n  26 |     expect(Math.abs(c.x-geometry.ticks[i].x)).toBeLessThan(1);\n  27 |     expect(Math.abs(c.width-geometry.ticks[i].width)).toBeLessThan(1);\n    at {run-worktree}/e2e/phase-dashboard-polish.spec.ts:24:63"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:23:07.474Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-77728-p-keyboard-tooltips-ar-dark/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7TTSM5Y7Y1ZFJN1NP486SSS/test-output/phase-dashboard-polish-cha-77728-p-keyboard-tooltips-ar-dark/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/phase-dashboard-polish.spec.ts",
+                    "column": 63,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-5a04a9731c44a64a2a2c",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "dashboard tile numbers stay whole and within cards ar-dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 712,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:23:13.287Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-47b410394b323f5ed821",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "title": "registry paths truncate and selected full path remains available ar-dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:23:14.059Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-7ed3c7d5a4005c659793",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 61,
+          "column": 2
+        },
+        {
+          "title": "rule labels translate, null rule stays absent, and decisions retain command identity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 830,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:23:15.294Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d049731211f5620b17f1-abd3406415674d496bad",
+          "file": "phase-dashboard-polish.spec.ts",
+          "line": 77,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "stat-tile-layout.spec.ts",
+      "file": "stat-tile-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "StatTile values and trends stay separate in en light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 268,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:45.045Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "718cfca7c0b900d1f9e0-5fb8ada8224a79d48eef",
+          "file": "stat-tile-layout.spec.ts",
+          "line": 9,
+          "column": 3
+        },
+        {
+          "title": "StatTile values and trends stay separate in en dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 372,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:45.317Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "718cfca7c0b900d1f9e0-81885332f295e61bf123",
+          "file": "stat-tile-layout.spec.ts",
+          "line": 9,
+          "column": 3
+        },
+        {
+          "title": "StatTile values and trends stay separate in ar light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:45.693Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "718cfca7c0b900d1f9e0-bd8cce49d2a510bd2c71",
+          "file": "stat-tile-layout.spec.ts",
+          "line": 9,
+          "column": 3
+        },
+        {
+          "title": "StatTile values and trends stay separate in ar dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 246,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T21:22:46.068Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "718cfca7c0b900d1f9e0-904877a64cb3af523a25",
+          "file": "stat-tile-layout.spec.ts",
+          "line": 9,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-19T21:22:43.072Z",
+    "duration": 33088.714,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

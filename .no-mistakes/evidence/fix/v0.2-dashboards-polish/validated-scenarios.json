@@ -1,0 +1,130 @@
+{
+  "surface": "Production-built preview Worker on localhost:5173 and actual SSR library components rendered in Chromium",
+  "checks": [
+    {
+      "name": "BarChart reserves formatted axis space in ltr",
+      "file": "bar-chart-layout.spec.ts",
+      "duration_ms": 230,
+      "status": "passed"
+    },
+    {
+      "name": "BarChart reserves formatted axis space in rtl",
+      "file": "bar-chart-layout.spec.ts",
+      "duration_ms": 358,
+      "status": "passed"
+    },
+    {
+      "name": "dashboard tile numbers stay whole and within cards en-light",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 685,
+      "status": "passed"
+    },
+    {
+      "name": "registry paths truncate and selected full path remains available en-light",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 1215,
+      "status": "passed"
+    },
+    {
+      "name": "dashboard tile numbers stay whole and within cards en-dark",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 677,
+      "status": "passed"
+    },
+    {
+      "name": "registry paths truncate and selected full path remains available en-dark",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 1128,
+      "status": "passed"
+    },
+    {
+      "name": "dashboard tile numbers stay whole and within cards ar-light",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 742,
+      "status": "passed"
+    },
+    {
+      "name": "registry paths truncate and selected full path remains available ar-light",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 1233,
+      "status": "passed"
+    },
+    {
+      "name": "dashboard tile numbers stay whole and within cards ar-dark",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 712,
+      "status": "passed"
+    },
+    {
+      "name": "registry paths truncate and selected full path remains available ar-dark",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 1230,
+      "status": "passed"
+    },
+    {
+      "name": "rule labels translate, null rule stays absent, and decisions retain command identity",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 830,
+      "status": "passed"
+    },
+    {
+      "name": "StatTile values and trends stay separate in en light",
+      "file": "stat-tile-layout.spec.ts",
+      "duration_ms": 268,
+      "status": "passed"
+    },
+    {
+      "name": "StatTile values and trends stay separate in en dark",
+      "file": "stat-tile-layout.spec.ts",
+      "duration_ms": 372,
+      "status": "passed"
+    },
+    {
+      "name": "StatTile values and trends stay separate in ar light",
+      "file": "stat-tile-layout.spec.ts",
+      "duration_ms": 368,
+      "status": "passed"
+    },
+    {
+      "name": "StatTile values and trends stay separate in ar dark",
+      "file": "stat-tile-layout.spec.ts",
+      "duration_ms": 246,
+      "status": "passed"
+    },
+    {
+      "name": "chart cards fit, align ticks and keep keyboard tooltips en-light",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 5598,
+      "status": "passed"
+    },
+    {
+      "name": "chart cards fit, align ticks and keep keyboard tooltips en-dark",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 5812,
+      "status": "passed"
+    },
+    {
+      "name": "chart cards fit, align ticks and keep keyboard tooltips ar-light",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 5930,
+      "status": "passed"
+    },
+    {
+      "name": "chart cards fit, align ticks and keep keyboard tooltips ar-dark",
+      "file": "phase-dashboard-polish.spec.ts",
+      "duration_ms": 6068,
+      "status": "passed"
+    }
+  ],
+  "driver_corrections": [
+    "Waited for hydration and used keyboard navigation for tooltip focus.",
+    "Checked localized rule names separately from currency-formatted limits.",
+    "Allowed card-local scrolling on mobile, as required by the component contract."
+  ],
+  "final_exit_codes": {
+    "production_build": 0,
+    "focused_layout_rules_registry_run": 1,
+    "corrected_chart_run": 0
+  },
+  "note": "The focused run exit 1 was solely the overly strict mobile internal-scroll assertion. Its four chart cases passed in the corrected run. All other cases passed in the focused run."
+}

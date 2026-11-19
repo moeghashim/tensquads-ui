@@ -1,0 +1,6 @@
+{
+  "type": "ApprovalDecision",
+  "approvalId": "approval-1042",
+  "decision": "approve",
+  "contentHash": "sha256:request-1042"
+}
