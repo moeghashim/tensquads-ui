@@ -1,0 +1,802 @@
+[
+  {
+    "name": "14-day labels and 30-day cadence (en, light)",
+    "result": "pass",
+    "detail": {
+      "slots": 30,
+      "visible": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ]
+    }
+  },
+  {
+    "name": "Zero marks, fractional scalar and stacked heights, exact axis midpoint (en, light)",
+    "result": "pass",
+    "detail": {
+      "segments": [
+        [],
+        [
+          47.75
+        ],
+        [
+          95.5
+        ]
+      ],
+      "base": 191,
+      "split": [
+        47.078125,
+        94.171875
+      ],
+      "splitStack": 143.25,
+      "ticks": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Highlight range and default latest remain distinct in both themes (en, light)",
+    "result": "pass",
+    "detail": {
+      "range": [
+        "rgb(24, 24, 24)",
+        "rgb(24, 24, 24)",
+        "rgb(185, 185, 185)"
+      ],
+      "defaults": [
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(24, 24, 24)"
+      ]
+    }
+  },
+  {
+    "name": "Inherited RTL arrows, end clamping, tooltip and reachable chart after shrink (en, light)",
+    "result": "pass",
+    "detail": {
+      "lastReachable": "D7: 7",
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "Ranked Bars fractional widths (en, light)",
+    "result": "pass",
+    "detail": [
+      {
+        "label": "Half0.5 s",
+        "ratio": 1
+      },
+      {
+        "label": "Quarter0.25 s",
+        "ratio": 0.5
+      },
+      {
+        "label": "Zero0 s",
+        "ratio": 0
+      }
+    ]
+  },
+  {
+    "name": "Distribution folded total, localized hover and bold-count key layout (en, light)",
+    "result": "pass",
+    "detail": {
+      "counts": [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "3"
+      ],
+      "metrics": [
+        {
+          "a": {
+            "x": 33,
+            "y": 2242.59375,
+            "width": 70.671875,
+            "height": 17
+          },
+          "b": {
+            "x": 177.9375,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 203,
+            "y": 2242.59375,
+            "width": 73.515625,
+            "height": 17
+          },
+          "b": {
+            "x": 347.9375,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 33,
+            "y": 2267.59375,
+            "width": 73.625,
+            "height": 17
+          },
+          "b": {
+            "x": 177.9375,
+            "y": 2267.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 203,
+            "y": 2267.59375,
+            "width": 74.015625,
+            "height": 17
+          },
+          "b": {
+            "x": 347.9375,
+            "y": 2267.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 33,
+            "y": 2292.59375,
+            "width": 73.28125,
+            "height": 17
+          },
+          "b": {
+            "x": 177.9375,
+            "y": 2292.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 203,
+            "y": 2292.59375,
+            "width": 37,
+            "height": 17
+          },
+          "b": {
+            "x": 347.9375,
+            "y": 2292.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        }
+      ]
+    }
+  },
+  {
+    "name": "14-day labels and 30-day cadence (en, dark)",
+    "result": "pass",
+    "detail": {
+      "slots": 30,
+      "visible": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ]
+    }
+  },
+  {
+    "name": "Zero marks, fractional scalar and stacked heights, exact axis midpoint (en, dark)",
+    "result": "pass",
+    "detail": {
+      "segments": [
+        [],
+        [
+          47.75
+        ],
+        [
+          95.5
+        ]
+      ],
+      "base": 191,
+      "split": [
+        47.078125,
+        94.171875
+      ],
+      "splitStack": 143.25,
+      "ticks": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Highlight range and default latest remain distinct in both themes (en, dark)",
+    "result": "pass",
+    "detail": {
+      "range": [
+        "rgb(243, 243, 243)",
+        "rgb(243, 243, 243)",
+        "rgb(40, 40, 40)"
+      ],
+      "defaults": [
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(243, 243, 243)"
+      ]
+    }
+  },
+  {
+    "name": "Inherited RTL arrows, end clamping, tooltip and reachable chart after shrink (en, dark)",
+    "result": "pass",
+    "detail": {
+      "lastReachable": "D7: 7",
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "Ranked Bars fractional widths (en, dark)",
+    "result": "pass",
+    "detail": [
+      {
+        "label": "Half0.5 s",
+        "ratio": 1
+      },
+      {
+        "label": "Quarter0.25 s",
+        "ratio": 0.5
+      },
+      {
+        "label": "Zero0 s",
+        "ratio": 0
+      }
+    ]
+  },
+  {
+    "name": "Distribution folded total, localized hover and bold-count key layout (en, dark)",
+    "result": "pass",
+    "detail": {
+      "counts": [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "3"
+      ],
+      "metrics": [
+        {
+          "a": {
+            "x": 33,
+            "y": 2242.59375,
+            "width": 70.671875,
+            "height": 17
+          },
+          "b": {
+            "x": 177.9375,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 203,
+            "y": 2242.59375,
+            "width": 73.515625,
+            "height": 17
+          },
+          "b": {
+            "x": 347.9375,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 33,
+            "y": 2267.59375,
+            "width": 73.625,
+            "height": 17
+          },
+          "b": {
+            "x": 177.9375,
+            "y": 2267.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 203,
+            "y": 2267.59375,
+            "width": 74.015625,
+            "height": 17
+          },
+          "b": {
+            "x": 347.9375,
+            "y": 2267.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 33,
+            "y": 2292.59375,
+            "width": 73.28125,
+            "height": 17
+          },
+          "b": {
+            "x": 177.9375,
+            "y": 2292.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 203,
+            "y": 2292.59375,
+            "width": 37,
+            "height": 17
+          },
+          "b": {
+            "x": 347.9375,
+            "y": 2292.59375,
+            "width": 9.0625,
+            "height": 17
+          },
+          "weight": "700"
+        }
+      ]
+    }
+  },
+  {
+    "name": "14-day labels and 30-day cadence (ar, light)",
+    "result": "pass",
+    "detail": {
+      "slots": 30,
+      "visible": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ]
+    }
+  },
+  {
+    "name": "Zero marks, fractional scalar and stacked heights, exact axis midpoint (ar, light)",
+    "result": "pass",
+    "detail": {
+      "segments": [
+        [],
+        [
+          47.75
+        ],
+        [
+          95.5
+        ]
+      ],
+      "base": 191,
+      "split": [
+        47.078125,
+        94.171875
+      ],
+      "splitStack": 143.25,
+      "ticks": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Highlight range and default latest remain distinct in both themes (ar, light)",
+    "result": "pass",
+    "detail": {
+      "range": [
+        "rgb(24, 24, 24)",
+        "rgb(24, 24, 24)",
+        "rgb(185, 185, 185)"
+      ],
+      "defaults": [
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(185, 185, 185)",
+        "rgb(24, 24, 24)"
+      ]
+    }
+  },
+  {
+    "name": "Inherited RTL arrows, end clamping, tooltip and reachable chart after shrink (ar, light)",
+    "result": "pass",
+    "detail": {
+      "lastReachable": "D7: 7",
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "Ranked Bars fractional widths (ar, light)",
+    "result": "pass",
+    "detail": [
+      {
+        "label": "Half0.5 s",
+        "ratio": 1
+      },
+      {
+        "label": "Quarter0.25 s",
+        "ratio": 0.5
+      },
+      {
+        "label": "Zero0 s",
+        "ratio": 0
+      }
+    ]
+  },
+  {
+    "name": "Distribution folded total, localized hover and bold-count key layout (ar, light)",
+    "result": "pass",
+    "detail": {
+      "counts": [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "3"
+      ],
+      "metrics": [
+        {
+          "a": {
+            "x": 333.640625,
+            "y": 2242.59375,
+            "width": 23.359375,
+            "height": 20
+          },
+          "b": {
+            "x": 203,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 160.796875,
+            "y": 2242.59375,
+            "width": 26.203125,
+            "height": 20
+          },
+          "b": {
+            "x": 33,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 330.6875,
+            "y": 2270.59375,
+            "width": 26.3125,
+            "height": 20
+          },
+          "b": {
+            "x": 203,
+            "y": 2270.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 160.296875,
+            "y": 2270.59375,
+            "width": 26.703125,
+            "height": 20
+          },
+          "b": {
+            "x": 33,
+            "y": 2270.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 331.03125,
+            "y": 2298.59375,
+            "width": 25.96875,
+            "height": 20
+          },
+          "b": {
+            "x": 203,
+            "y": 2298.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 159.625,
+            "y": 2298.59375,
+            "width": 27.375,
+            "height": 20
+          },
+          "b": {
+            "x": 33,
+            "y": 2298.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        }
+      ]
+    }
+  },
+  {
+    "name": "14-day labels and 30-day cadence (ar, dark)",
+    "result": "pass",
+    "detail": {
+      "slots": 30,
+      "visible": [
+        "D1",
+        "D6",
+        "D11",
+        "D16",
+        "D21",
+        "D26"
+      ]
+    }
+  },
+  {
+    "name": "Zero marks, fractional scalar and stacked heights, exact axis midpoint (ar, dark)",
+    "result": "pass",
+    "detail": {
+      "segments": [
+        [],
+        [
+          47.75
+        ],
+        [
+          95.5
+        ]
+      ],
+      "base": 191,
+      "split": [
+        47.078125,
+        94.171875
+      ],
+      "splitStack": 143.25,
+      "ticks": [
+        "3",
+        "1.5",
+        "0"
+      ]
+    }
+  },
+  {
+    "name": "Highlight range and default latest remain distinct in both themes (ar, dark)",
+    "result": "pass",
+    "detail": {
+      "range": [
+        "rgb(243, 243, 243)",
+        "rgb(243, 243, 243)",
+        "rgb(40, 40, 40)"
+      ],
+      "defaults": [
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(40, 40, 40)",
+        "rgb(243, 243, 243)"
+      ]
+    }
+  },
+  {
+    "name": "Inherited RTL arrows, end clamping, tooltip and reachable chart after shrink (ar, dark)",
+    "result": "pass",
+    "detail": {
+      "lastReachable": "D7: 7",
+      "tabStops": 1
+    }
+  },
+  {
+    "name": "Ranked Bars fractional widths (ar, dark)",
+    "result": "pass",
+    "detail": [
+      {
+        "label": "Half0.5 s",
+        "ratio": 1
+      },
+      {
+        "label": "Quarter0.25 s",
+        "ratio": 0.5
+      },
+      {
+        "label": "Zero0 s",
+        "ratio": 0
+      }
+    ]
+  },
+  {
+    "name": "Distribution folded total, localized hover and bold-count key layout (ar, dark)",
+    "result": "pass",
+    "detail": {
+      "counts": [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "3"
+      ],
+      "metrics": [
+        {
+          "a": {
+            "x": 333.640625,
+            "y": 2242.59375,
+            "width": 23.359375,
+            "height": 20
+          },
+          "b": {
+            "x": 203,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 160.796875,
+            "y": 2242.59375,
+            "width": 26.203125,
+            "height": 20
+          },
+          "b": {
+            "x": 33,
+            "y": 2242.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 330.6875,
+            "y": 2270.59375,
+            "width": 26.3125,
+            "height": 20
+          },
+          "b": {
+            "x": 203,
+            "y": 2270.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 160.296875,
+            "y": 2270.59375,
+            "width": 26.703125,
+            "height": 20
+          },
+          "b": {
+            "x": 33,
+            "y": 2270.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 331.03125,
+            "y": 2298.59375,
+            "width": 25.96875,
+            "height": 20
+          },
+          "b": {
+            "x": 203,
+            "y": 2298.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        },
+        {
+          "a": {
+            "x": 159.625,
+            "y": 2298.59375,
+            "width": 27.375,
+            "height": 20
+          },
+          "b": {
+            "x": 33,
+            "y": 2298.59375,
+            "width": 9.0625,
+            "height": 20
+          },
+          "weight": "700"
+        }
+      ]
+    }
+  }
+]
