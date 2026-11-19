@@ -1,5 +1,7 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
+import { useState } from "react";
+import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
 import { Card } from "../../../../packages/ui/src/react/Card/Card";
@@ -33,6 +35,7 @@ import {
 	MenuSeparator,
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
+import { OwnerMessageView } from "../../../../packages/ui/src/react/OwnerMessage/OwnerMessage";
 import { PageHeader } from "../../../../packages/ui/src/react/PageHeader/PageHeader";
 import {
 	SegmentedControl,
@@ -70,7 +73,7 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
+const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "OwnerMessageView", "Chat", "ChatReply"];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 
@@ -79,8 +82,9 @@ function ComponentPage() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale].componentPage;
-	const markdown = documents[`../../../../packages/ui/src/react/${name}/${name}.md`];
-	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	const sourceName = name === "OwnerMessageView" ? "OwnerMessage" : name;
+	const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`];
+	const stream = fixtures[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.fixture.${locale}.txt`];
 	const index = componentOrder.indexOf(name);
 	const previous = index > 0 ? componentOrder[index - 1] : undefined;
 	const next = index >= 0 ? componentOrder[index + 1] : undefined;
@@ -265,6 +269,8 @@ function ComponentExample() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "ApprovalCard") return <ApprovalCardPreview locale={locale} stream={stream ?? null} />;
+	if (name === "OwnerMessageView") return <OwnerMessagePreview locale={locale} />;
 	if (["Card", "PageHeader", "StatTile"].includes(name)) {
 		const ar = locale === "ar";
 		const tileLabels = ar
@@ -1159,6 +1165,122 @@ ${menuContentsCode}
 				)}
 			</section>
 		</div>
+	);
+}
+
+function ApprovalCardPreview({ locale, stream }: { locale: "en" | "ar"; stream: string | null }) {
+	const ar = locale === "ar";
+	const [commands, setCommands] = useState<unknown[]>([]);
+	return (
+		<div className="owner-message-preview">
+			<ApprovalCard
+				locale={locale}
+				actionLabels={{ refund: ar ? "استرداد" : "Refund" }}
+				bot="petra"
+				taskId="task_42"
+				request={{
+					seq: 3,
+					at: "2026-11-19T12:00:00.000Z",
+					type: "approval_request",
+					approvalId: "approval_42",
+					action: "refund",
+					content: ar ? "استرداد قيمة الطلب ١٠٤٢" : "Refund order 1042",
+					contentHash: "sha256:42",
+					rule: "refund_limit",
+					limit: 20_000_000,
+				}}
+				onDecision={(command) => setCommands((sent) => [...sent, command])}
+			/>
+			<SentCommands commands={commands} locale={locale} />
+			<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+				<TensquadsRenderer
+					stream={stream}
+					locale={locale}
+					onAction={(event) => setCommands((sent) => [...sent, event])}
+				/>
+			</section>
+		</div>
+	);
+}
+
+function OwnerMessagePreview({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const [commands, setCommands] = useState<unknown[]>([]);
+	const at = "2026-11-19T12:00:00.000Z";
+	const messages = [
+		{
+			seq: 1,
+			at,
+			type: "reply",
+			text: ar
+				? "تم استلام طلبك. https://example.com/order/42"
+				: "I received your request. https://example.com/order/42",
+		},
+		{
+			seq: 2,
+			at,
+			type: "question",
+			questionId: "question_42",
+			text: ar ? "ما أولوية معالجة الطلب؟" : "Which priority should I use?",
+			options: ar ? ["عادي", "عاجل"] : ["Standard", "Urgent"],
+		},
+		{
+			seq: 3,
+			at,
+			type: "approval_request",
+			approvalId: "approval_42",
+			action: "refund",
+			content: ar ? "استرداد قيمة الطلب ١٠٤٢" : "Refund order 1042",
+			contentHash: "sha256:42",
+			rule: "refund_limit",
+			limit: 20_000_000,
+		},
+		{
+			seq: 4,
+			at,
+			type: "result",
+			taskId: "task_42",
+			summary: ar ? "تم تحديث الطلب." : "The order was updated.",
+			evidence: [ar ? "https://example.com/order/42" : "https://example.com/order/42"],
+		},
+		{
+			seq: 5,
+			at,
+			type: "status",
+			taskId: "task_42",
+			bot: "petra",
+			attempt: 2,
+			step: ar ? "التحقق من الطلب" : "Checking the order",
+			since: at,
+		},
+		{
+			seq: 6,
+			at,
+			type: "action_not_confirmed",
+			taskId: "task_42",
+			actionId: "action_42",
+			what: ar ? "لم يصل تأكيد من خدمة الطلبات." : "The order service did not confirm the action.",
+		},
+	] as const;
+	return (
+		<div className="owner-message-preview">
+			<OwnerMessageView
+				messages={messages}
+				locale={locale}
+				actionLabels={{ refund: ar ? "استرداد" : "Refund" }}
+				onCommand={(command) => setCommands((sent) => [...sent, command])}
+			/>
+			<SentCommands commands={commands} locale={locale} />
+		</div>
+	);
+}
+
+function SentCommands({ commands, locale }: { commands: unknown[]; locale: "en" | "ar" }) {
+	return (
+		<section className="sent-commands" aria-label={locale === "ar" ? "الأوامر المرسلة" : "Sent commands"}>
+			<h2>{locale === "ar" ? "الأوامر المرسلة" : "Sent commands"}</h2>
+			<pre>{JSON.stringify(commands, null, 2)}</pre>
+		</section>
 	);
 }
 

@@ -14,6 +14,7 @@ const components = getRegisteredComponents()
 	.sort();
 if (!components.includes("Chat")) components.push("Chat");
 components.push("ChatReply");
+components.push("OwnerMessageView");
 components.sort();
 
 export const Route = createFileRoute("/components/")({ component: ComponentsPage });

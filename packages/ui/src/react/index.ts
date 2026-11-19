@@ -1,4 +1,6 @@
 export type { ChatAction, ChatActionTurn, ChatTurn } from "../schemas/index.js";
+export type { ApprovalCardProps } from "./ApprovalCard/ApprovalCard.js";
+export { ApprovalCard } from "./ApprovalCard/ApprovalCard.js";
 export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
 export type { BarChartKey, BarChartPoint, BarChartProps, BarChartSegment } from "./BarChart/BarChart.js";
@@ -123,6 +125,8 @@ export {
 	MenuSubTrigger,
 	MenuTrigger,
 } from "./Menu/Menu.js";
+export type { OwnerMessageViewProps } from "./OwnerMessage/OwnerMessage.js";
+export { OwnerMessageView, pendingQuestion } from "./OwnerMessage/OwnerMessage.js";
 export type { PageHeaderProps } from "./PageHeader/PageHeader.js";
 export { PageHeader } from "./PageHeader/PageHeader.js";
 export type {

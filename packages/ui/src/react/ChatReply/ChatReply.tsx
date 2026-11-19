@@ -8,6 +8,7 @@ type ReplyBlock = { kind: "markdown" | "openui"; value: ReactNode };
 export type ChatReplyProps = {
 	reply: string;
 	locale?: Locale;
+	plainText?: boolean;
 	onError?: TensquadsRendererProps["onError"];
 	onAction?: (event: ActionEvent, blockId: string) => void;
 	locked?: boolean | ((blockId: string) => boolean);
@@ -16,11 +17,19 @@ export type ChatReplyProps = {
 export function ChatReply({
 	reply,
 	locale = "en",
+	plainText = false,
 	onError,
 	onAction,
 	locked = false,
 	...rendererProps
 }: ChatReplyProps) {
+	if (plainText) {
+		return (
+			<div className="ts-chat-reply" dir="auto">
+				<div className="ts-chat-reply__plain">{plainTextLinks(reply)}</div>
+			</div>
+		);
+	}
 	const blocks = renderBlocks(reply.replace(/\r\n?/g, "\n"), (stream, key) => {
 		const isLocked = typeof locked === "function" ? locked(key) : locked;
 		return (
@@ -71,6 +80,25 @@ export function ChatReply({
 			)}
 		</div>
 	);
+}
+
+function plainTextLinks(text: string): ReactNode[] {
+	const nodes: ReactNode[] = [];
+	const pattern = /(https?:\/\/[^\s<>()]+[^\s<>().,!?:;])/g;
+	let cursor = 0;
+	for (const match of text.matchAll(pattern)) {
+		const value = match[0];
+		const start = match.index ?? 0;
+		if (start > cursor) nodes.push(text.slice(cursor, start));
+		nodes.push(
+			<a key={`${start}:${value}`} href={value} dir="ltr" rel="noreferrer">
+				{value}
+			</a>,
+		);
+		cursor = start + value.length;
+	}
+	if (cursor < text.length) nodes.push(text.slice(cursor));
+	return nodes;
 }
 
 type Fence = { marker: string; info: string };

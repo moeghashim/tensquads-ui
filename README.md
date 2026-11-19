@@ -12,6 +12,7 @@ The library ships these components today. Each row links to its reference and it
 
 | Component | What it is | Live |
 |---|---|---|
+| [ApprovalCard](packages/ui/src/react/ApprovalCard/ApprovalCard.md) | An approval request with approve and decline actions. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ApprovalCard) |
 | [Badge](packages/ui/src/react/Badge/Badge.md) | A non-interactive label that names a state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Badge) |
 | [BarChart](packages/ui/src/react/BarChart/BarChart.md) | A vertical chart of values over time, with optional stacked series. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/BarChart) |
 | [Bars](packages/ui/src/react/Bars/Bars.md) | Ranked horizontal bars or compact progress rows. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Bars) |
@@ -26,6 +27,7 @@ The library ships these components today. Each row links to its reference and it
 | [Form](packages/ui/src/react/Form/Form.md) | A named form of text fields, switches, segmented controls, and optional action buttons. Submit sends their current values as a chat action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form) |
 | [Input](packages/ui/src/react/Input/Input.md) | A named single-line text input. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Input) |
 | [Menu](packages/ui/src/react/Menu/Menu.md) | A button menu with up to six serializable actions. Each action has a label and value, with optional danger and disabled states. A destructive action is placed last after a separator. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Menu) |
+| [OwnerMessage](packages/ui/src/react/OwnerMessage/OwnerMessage.md) | Pass the owner messages as `messages`. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/OwnerMessage) |
 | [PageHeader](packages/ui/src/react/PageHeader/PageHeader.md) | A page heading with a title, one subtitle, optional metadata and actions. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/PageHeader) |
 | [SegmentedControl](packages/ui/src/react/SegmentedControl/SegmentedControl.md) | An accessible exclusive selection control for two or more modes. Inside a Form it submits its selected value by name. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/SegmentedControl) |
 | [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md) | An accessible image of a tensquads agent in a loop state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Squadmate) |
