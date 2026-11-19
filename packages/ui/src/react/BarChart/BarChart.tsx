@@ -109,9 +109,9 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 					</div>
 				</div>
 				<div className="ts-bar-chart__ticks" aria-hidden="true" style={{ minInlineSize: chartMinWidth }}>
-					{points.map((point) => (
+					{points.map((point, index) => (
 						<span className="ts-bar-chart__tick" key={point.label}>
-							{point.label}
+							{points.length <= 14 || index % 5 === 0 ? point.label : null}
 						</span>
 					))}
 				</div>

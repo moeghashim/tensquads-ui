@@ -120,6 +120,28 @@ for (const locale of ["en", "ar"] as const) {
 							expect(column.x).toBeCloseTo(positions.ticks[index]!.x, 0);
 							expect(column.width).toBeCloseTo(positions.ticks[index]!.width, 0);
 						}
+						for (const chart of await page.locator(".ts-bar-chart").all()) {
+							const clearance = await chart.evaluate((element) => {
+								const viewport = element.querySelector<HTMLElement>(".ts-bar-chart__viewport")!;
+								viewport.scrollTop = 0;
+								const boundary = viewport.getBoundingClientRect();
+								return Array.from(
+									element.querySelectorAll(".ts-bar-chart__gridline > span, .ts-bar-chart__column"),
+									(mark) => {
+										const bounds = mark.getBoundingClientRect();
+										const ring = mark.matches("button") ? 4 : 0;
+										return {
+											top: bounds.top - ring - boundary.top,
+											bottom: boundary.bottom - bounds.bottom - ring,
+										};
+									},
+								);
+							});
+							for (const mark of clearance) {
+								expect(mark.top).toBeGreaterThanOrEqual(0);
+								expect(mark.bottom).toBeGreaterThanOrEqual(0);
+							}
+						}
 					}
 					await capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);
 				}

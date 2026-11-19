@@ -8,6 +8,34 @@ import { BarChart } from "./BarChart.js";
 afterEach(cleanup);
 
 describe("BarChart", () => {
+	it.each(["en", "ar"] as const)("keeps date slots and thins long-series labels in %s", (locale) => {
+		for (const length of [14, 15, 30]) {
+			const points = Array.from({ length }, (_, index) => ({ label: `Day ${index + 1}`, value: 1 }));
+			const stream = `root = BarChart(${JSON.stringify(points)}, [], null, null, "${locale}")`;
+			for (const chart of [
+				<BarChart key="react" points={points} locale={locale} />,
+				<TensquadsRenderer key="openui" stream={stream} locale={locale} />,
+			]) {
+				const { container, getAllByRole, unmount } = render(
+					<div dir={locale === "ar" ? "rtl" : "ltr"}>{chart}</div>,
+				);
+				const ticks = Array.from(container.querySelectorAll(".ts-bar-chart__tick"));
+				expect(ticks).toHaveLength(length);
+				expect(ticks.filter((tick) => tick.textContent).map((tick) => tick.textContent)).toEqual(
+					length === 14
+						? points.map((point) => point.label)
+						: length === 15
+							? ["Day 1", "Day 6", "Day 11"]
+							: ["Day 1", "Day 6", "Day 11", "Day 16", "Day 21", "Day 26"],
+				);
+				expect(getAllByRole("button").map((column) => column.getAttribute("aria-label"))).toEqual(
+					points.map((point) => `${point.label}: 1`),
+				);
+				unmount();
+			}
+		}
+	});
+
 	it("scales marks from zero, highlights a range, and moves focus with arrows", () => {
 		const { getByRole, getAllByRole } = render(
 			<BarChart
