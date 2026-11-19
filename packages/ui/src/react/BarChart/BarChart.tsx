@@ -86,7 +86,7 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en" }:
 												<span
 													key={part.key}
 													className={`ts-bar-chart__segment ts-bar-chart__segment--${keys.find((item) => item.key === part.key)?.tone ?? (isHighlighted ? "strong" : "muted")}`}
-													style={{ flexGrow: part.value }}
+													style={{ flexGrow: (part.value / total) * 100 }}
 												/>
 											))}
 										</span>

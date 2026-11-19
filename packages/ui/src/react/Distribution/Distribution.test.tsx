@@ -27,6 +27,23 @@ describe("Distribution", () => {
 		expect(getByText("Other").parentElement?.querySelector("strong")).toHaveTextContent("3");
 	});
 
+	it.each(["en", "ar"] as const)("fills the distribution proportionally for fractional %s values", (locale) => {
+		const { container, rerender } = render(
+			<div dir={locale === "ar" ? "rtl" : "ltr"}>
+				<Distribution locale={locale} parts={[{ label: "A", value: 0.125 }, { label: "B", value: 0.375 }]} />
+			</div>,
+		);
+		const weights = Array.from(container.querySelectorAll(".ts-distribution__segment"), (part) =>
+			Number(getComputedStyle(part).flexGrow),
+		);
+		expect(weights[0]! + weights[1]!).toBeGreaterThanOrEqual(1);
+		expect(weights[0]! / weights[1]!).toBeCloseTo(3);
+		rerender(<Distribution locale={locale} parts={[{ label: "Zero", value: 0 }]} />);
+		expect(container.querySelector(".ts-distribution__segment")).toHaveStyle({ flexGrow: "0" });
+		rerender(<Distribution locale={locale} parts={[]} />);
+		expect(container.querySelectorAll(".ts-distribution__segment")).toHaveLength(0);
+	});
+
 	it.each(["en", "ar"] as const)("localizes generated %s copy in React and OpenUI", (locale) => {
 		const parts = [
 			{ label: "A", value: 1 },

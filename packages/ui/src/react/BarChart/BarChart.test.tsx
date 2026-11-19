@@ -60,6 +60,39 @@ describe("BarChart", () => {
 		}
 	});
 
+	it.each(["en", "ar"] as const)("allocates the full fractional stack in %s", (locale) => {
+		const { container, getByRole } = render(
+			<div dir={locale === "ar" ? "rtl" : "ltr"}>
+				<BarChart
+					locale={locale}
+					points={[
+						{ label: "Quarter", value: 0.25 },
+						{ label: "Half", value: 0.5 },
+						{ label: "Stacked", segments: [{ key: "a", value: 0.125 }, { key: "b", value: 0.375 }] },
+						{ label: "Zero", value: 0 },
+					]}
+				/>
+			</div>,
+		);
+		for (const [name, height] of [
+			["Quarter: 0.25", "25%"],
+			["Half: 0.5", "50%"],
+		] as const) {
+			const stack = getByRole("button", { name }).querySelector<HTMLElement>(".ts-bar-chart__stack")!;
+			expect(stack).toHaveStyle({ blockSize: height });
+			expect(Number(getComputedStyle(stack.firstElementChild!).flexGrow)).toBeGreaterThanOrEqual(1);
+		}
+		const stacked = getByRole("button", { name: "Stacked: 0.5" });
+		expect(stacked.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "50%" });
+		const weights = Array.from(stacked.querySelectorAll(".ts-bar-chart__segment"), (part) =>
+			Number(getComputedStyle(part).flexGrow),
+		);
+		expect(weights[0]! + weights[1]!).toBeGreaterThanOrEqual(1);
+		expect(weights[1]! / weights[0]!).toBeCloseTo(3);
+		expect(getByRole("button", { name: "Zero: 0" }).querySelectorAll(".ts-bar-chart__segment")).toHaveLength(0);
+		expect(container.querySelectorAll(".ts-bar-chart__segment")).toHaveLength(4);
+	});
+
 	it("shows tooltip label and total on focus", () => {
 		const { getByRole, getByText } = render(<BarChart points={[{ label: "Oct 26", value: 3 }]} />);
 		fireEvent.focus(getByRole("button", { name: "Oct 26: 3" }));
