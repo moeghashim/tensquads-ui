@@ -296,6 +296,11 @@ function ComponentExample() {
 						>
 							<div className="dashboard-component-preview__body">{ar ? "محتوى البطاقة" : "Card body"}</div>
 						</Card>
+						<Card flush title={ar ? "تفاصيل الطلبات" : "Order details"}>
+							<div className="dashboard-component-preview__body">
+								{ar ? "محتوى بعرض البطاقة" : "Edge-to-edge content"}
+							</div>
+						</Card>
 						<Card variant="inset" title={ar ? "عنصر موافقة" : "Approval item"}>
 							<p>{ar ? "تم تحديث تفاصيل الطلب" : "Order details were updated"}</p>
 						</Card>
@@ -310,10 +315,10 @@ function ComponentExample() {
 								value={["$24.8k", "1,284", "3.8%", "$68.40", "18.2k", "936"][index] ?? "0"}
 								delta={
 									index % 3 === 1
-										? { text: "−2.1% vs last week", tone: "negative" }
-										: { text: "+12% vs last week", tone: "positive" }
+										? { text: ar ? "−٢٫١٪ مقارنة بالأسبوع الماضي" : "−2.1% vs last week", tone: "negative" }
+										: { text: ar ? "+١٢٪ مقارنة بالأسبوع الماضي" : "+12% vs last week", tone: "positive" }
 								}
-								series={[3, 5, 4, 8, 6, 9, 7]}
+								series={index === 5 ? null : [3, 5, 4, 8, 6, 9, 7]}
 							/>
 						))}
 					</div>

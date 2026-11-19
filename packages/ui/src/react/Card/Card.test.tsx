@@ -37,6 +37,16 @@ describe("Card", () => {
 		expect(getByTestId("card")).toHaveClass("ts-card--flush");
 	});
 
+	it("keeps an ordinary OpenUI body without a tile grid", () => {
+		const onError = vi.fn();
+		const { getByText, container } = render(
+			<TensquadsRenderer stream={'root = Card("Report", null, null, ["Report body"])'} onError={onError} />,
+		);
+		expect(getByText("Report body")).toBeInTheDocument();
+		expect(container.querySelector(".ts-stat-grid")).toBeNull();
+		expect(onError).toHaveBeenCalledWith([]);
+	});
+
 	it("round trips English and Arabic OpenUI fixtures", () => {
 		expect(getRegisteredComponents().map(({ name }) => name)).toContain("Card");
 		for (const [locale, label, metric] of [
@@ -53,6 +63,7 @@ describe("Card", () => {
 			);
 			expect(getByRole("heading", { name: label })).toBeInTheDocument();
 			expect(getByText(metric)).toBeInTheDocument();
+			expect(getByText(metric).closest(".ts-stat-grid")).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);
 			cleanup();
 		}

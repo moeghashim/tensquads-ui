@@ -97,7 +97,7 @@ test("every component fixture parses and renders", async ({ page }) => {
 			} else if (component.name === "StatTile") {
 				await expect(fixtureRegion.getByText(locale === "en" ? "Revenue" : "الإيرادات")).toBeVisible();
 				const sparkline = fixtureRegion.getByRole("img", {
-					name: locale === "en" ? "Revenue trend" : "الإيرادات trend",
+					name: locale === "en" ? "Revenue" : "الإيرادات",
 				});
 				await expect(sparkline).toBeVisible();
 				await expect(sparkline).toHaveCSS("transform", locale === "en" ? "none" : "matrix(-1, 0, 0, 1, 0, 0)");

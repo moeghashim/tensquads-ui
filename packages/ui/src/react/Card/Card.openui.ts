@@ -16,11 +16,20 @@ export const CardOpenUI = defineComponent({
 		footer: z.string().optional(),
 		flush: z.boolean().default(false),
 		variant: z.enum(["default", "inset"]).default("default"),
+		layout: z
+			.enum(["default", "stat-grid"])
+			.default("default")
+			.describe("Use stat-grid for a responsive row of StatTiles"),
 	}),
 	component: function OpenUICard({ props }) {
 		const renderNode = useRenderNode();
-		const { children, ...cardProps } = props;
-		return createElement(Card, cardProps, renderNode(children));
+		const { children, layout, ...cardProps } = props;
+		const body = renderNode(children);
+		return createElement(
+			Card,
+			cardProps,
+			layout === "stat-grid" ? createElement("div", { className: "ts-stat-grid" }, body) : body,
+		);
 	},
 });
 

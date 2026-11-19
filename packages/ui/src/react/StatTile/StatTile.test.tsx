@@ -22,7 +22,7 @@ describe("StatTile", () => {
 		);
 		for (const text of ["Revenue", "$24.8k", "USD", "+12% vs last week", "Compared with last week"])
 			expect(getByText(text)).toBeInTheDocument();
-		expect(getByRole("img", { name: "Revenue trend" })).toBeInTheDocument();
+		expect(getByRole("img", { name: "Revenue" })).toBeInTheDocument();
 	});
 
 	it.each(["positive", "negative", "neutral"] as const)("styles %s delta text", (tone) => {
@@ -44,8 +44,9 @@ describe("StatTile", () => {
 				"utf8",
 			);
 			const onError = vi.fn();
-			const { getByText } = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
+			const { getByText, getByRole } = render(<TensquadsRenderer stream={fixture} locale={locale} onError={onError} />);
 			expect(getByText(label)).toBeInTheDocument();
+			expect(getByRole("img", { name: label, exact: true })).toBeInTheDocument();
 			expect(onError).toHaveBeenCalledWith([]);
 			cleanup();
 		}

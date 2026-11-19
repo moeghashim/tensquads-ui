@@ -51,7 +51,7 @@ export function StatTile({ label, value, glyph, unit, foot, delta, series, class
 					<span className="ts-stat-tile__value">{value}</span>
 					{unit && <span className="ts-stat-tile__unit">{unit}</span>}
 				</div>
-				{series && series.length > 1 && <Sparkline series={series} label={`${label} trend`} />}
+				{series && series.length > 1 && <Sparkline series={series} label={label} />}
 			</div>
 			{(delta || foot) && (
 				<div className="ts-stat-tile__footer">
