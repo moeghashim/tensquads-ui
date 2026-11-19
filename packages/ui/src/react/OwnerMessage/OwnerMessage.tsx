@@ -111,7 +111,7 @@ function OwnerMessageItem({
 							<Button
 								key={option}
 								pill
-								size="sm"
+								size="md"
 								variant="soft"
 								disabled={chosen !== undefined}
 								aria-pressed={chosen === option}

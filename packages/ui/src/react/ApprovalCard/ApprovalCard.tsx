@@ -119,7 +119,7 @@ export function ApprovalCard({
 				)}
 				<Button
 					pill
-					size="sm"
+					size="md"
 					disabled={disabled || pending || selected !== undefined}
 					onClick={() => choose("approve")}
 				>
@@ -127,7 +127,7 @@ export function ApprovalCard({
 				</Button>
 				<Button
 					pill
-					size="sm"
+					size="md"
 					variant="soft"
 					disabled={disabled || pending || selected !== undefined}
 					onClick={() => choose("reject")}
