@@ -1,3 +1,4 @@
+import type { ActionEvent } from "@openuidev/react-lang";
 import type { ElementType, ReactNode } from "react";
 import { TensquadsRenderer, type TensquadsRendererProps } from "../../openui/TensquadsRenderer.js";
 import type { Locale } from "../../schemas/index.js";
@@ -8,12 +9,28 @@ export type ChatReplyProps = {
 	reply: string;
 	locale?: Locale;
 	onError?: TensquadsRendererProps["onError"];
+	onAction?: (event: ActionEvent) => void;
+	locked?: boolean;
 } & Omit<TensquadsRendererProps, "stream" | "locale" | "onError">;
 
-export function ChatReply({ reply, locale = "en", onError, ...rendererProps }: ChatReplyProps) {
+export function ChatReply({
+	reply,
+	locale = "en",
+	onError,
+	onAction,
+	locked = false,
+	...rendererProps
+}: ChatReplyProps) {
 	const blocks = renderBlocks(reply.replace(/\r\n?/g, "\n"), (stream, key) => (
 		<div className="ts-chat-reply__openui" key={key}>
-			<TensquadsRenderer {...rendererProps} stream={stream} locale={locale} onError={onError} />
+			<TensquadsRenderer
+				{...rendererProps}
+				stream={stream}
+				locale={locale}
+				onError={onError}
+				onAction={onAction}
+				isStreaming={locked || rendererProps.isStreaming}
+			/>
 		</div>
 	));
 	const groups: { kind: ReplyBlock["kind"]; values: ReactNode[] }[] = [];

@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { cleanup, render, screen, within } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import type { ActionEvent } from "@openuidev/react-lang";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { ChatReply } from "./ChatReply.js";
 
 afterEach(cleanup);
@@ -28,6 +29,24 @@ root = Button("Continue", "solid", "md", false, false)
 Use \`npm run deploy\` to continue.`;
 
 describe("ChatReply", () => {
+	it("forwards OpenUI action events and keeps locked blocks mounted", () => {
+		const onAction = vi.fn();
+		const reply =
+			'```openui\nroot = Button("Approve plan", "solid", "md", false, false, {type: "Approve", params: {ok: true}})\n```';
+		const { rerender } = render(<ChatReply reply={reply} onAction={onAction} />);
+		const button = screen.getByRole("button", { name: "Approve plan" });
+		fireEvent.click(button);
+		expect(onAction).toHaveBeenCalledWith(
+			expect.objectContaining<ActionEvent>({
+				type: "Approve",
+				params: { ok: true },
+				humanFriendlyMessage: "Approve plan",
+			}),
+		);
+		rerender(<ChatReply reply={reply} onAction={onAction} locked />);
+		expect(screen.getByRole("button", { name: "Approve plan" })).toBe(button);
+		expect(button).toBeDisabled();
+	});
 	it("renders Markdown and OpenUI blocks in reading order", () => {
 		const { container } = render(<ChatReply reply={en} />);
 		expect(screen.getByRole("heading", { name: "Deployment status" })).toBeInTheDocument();

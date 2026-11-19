@@ -76,6 +76,8 @@ export type ChatStepProps = ComponentProps<"article"> & {
 	responseId?: string;
 	running?: boolean;
 	reply?: ReactNode;
+	onRetry?: () => void;
+	retryLabel?: string;
 };
 export function ChatStep({
 	name,
@@ -85,6 +87,8 @@ export function ChatStep({
 	responseId,
 	running = false,
 	reply,
+	onRetry,
+	retryLabel,
 	className,
 	...props
 }: ChatStepProps) {
@@ -97,6 +101,11 @@ export function ChatStep({
 				<div className="ts-chat__step-heading">
 					<strong>{name}</strong>
 					{status && <span className={`ts-chat__status ts-chat__status--${statusVariant}`}>{status}</span>}
+					{onRetry && (
+						<Button type="button" variant="ghost" size="sm" onClick={onRetry}>
+							{retryLabel ?? "Retry"}
+						</Button>
+					)}
 				</div>
 				{responseId && <div className="ts-chat__response-id">{responseId}</div>}
 				{reply != null && <div className="ts-chat__reply">{reply}</div>}

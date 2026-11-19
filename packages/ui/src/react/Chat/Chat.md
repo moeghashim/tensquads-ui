@@ -10,4 +10,11 @@ While `busy`, sending is blocked and the button becomes Stop. Stop calls `onStop
 
 Set `locale="ar"` on `ChatHeader`, `ChatEmptyState`, and `ChatComposer` for their Arabic defaults; each defaults to English. Override copy with `newChatLabel`, `title`, `description`, `sendLabel`, `stopLabel`, `placeholder`, and `textareaProps["aria-label"]`. English control labels are New chat, Send, Stop, and Message. The English textarea has no default placeholder. Arabic defaults use neutral wording. Set document language, direction, and theme as described in the [README](../../../../../README.md#styles-locale-and-theme). The send arrow points right in LTR and left in RTL, including when disabled. It follows the composer's effective `dir`, including local overrides, independently of `locale`.
 
-The chat surface has no OpenUI definition because it hosts replies and inline OpenUI content rather than being streamed as a component. These parts do not parse markdown or OpenUI blocks, call a model, or convert inline actions into turns. The host supplies the rendered `reply` and manages conversation state. Use [ChatReply](../ChatReply/ChatReply.md) to render a streamed reply inside `ChatStep`. Action-to-turn integration remains defined by PLAN.md D23.
+The chat surface has no OpenUI definition because it hosts replies and inline OpenUI content rather than being streamed as a component. Use [ChatReply](../ChatReply/ChatReply.md) to render a streamed reply inside `ChatStep`.
+
+`useChat({ endpoint, locale, transport, onAction })` owns `turns`, `busy`, `error`, and `locked`, and returns `send(text)`, `act(event)`, `stop()`, `reset()`, and `retry()`. The default transport posts `{ locale, turns }` as JSON to `endpoint` and reads a plain text response stream. A transport can instead return an `AsyncIterable<string>` for deterministic mocks. `onAction` receives the OpenUI `ActionEvent`; return `false` to veto it. Accepted actions append a `ChatActionTurn` with its name, source, form values, and readable summary, then send it as the next turn. `ChatReply` accepts `locked={chat.locked}` so the used UI stays rendered and disabled. Render `chat.error` as a blocked `ChatStep` and wire its retry button to `chat.retry()`.
+
+```tsx
+const chat = useChat({ endpoint: "/api/chat", locale: "en" });
+<ChatReply reply={reply} onAction={chat.act} locked={chat.locked} />;
+```

@@ -8,4 +8,4 @@ The danger variant uses `gray-0` text in light mode and maps its component text 
 
 All other props follow the UI SDK Button API. It supports native button props, pending async actions, focusable disabled state, and rendering a link through `render`. Use a clear text label unless the button contains only an icon.
 
-The OpenUI definition accepts a visible `label`, `variant`, `size`, `pill`, and `disabled`. It does not accept arbitrary icon nodes because OpenUI props are serializable.
+The OpenUI definition accepts a visible `label`, `variant`, `size`, `pill`, `disabled`, and optional `action: { type, params }`. Pressing an enabled action button emits an OpenUI `ActionEvent`; streaming and locked renderers disable it. The current form values and form name are included when the button is inside a form. It does not accept arbitrary icon nodes because OpenUI props are serializable.
