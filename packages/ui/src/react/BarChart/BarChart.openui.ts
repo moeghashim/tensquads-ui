@@ -20,7 +20,7 @@ export const BarChartOpenUI = defineComponent({
 				z.object({
 					key: z.string(),
 					label: z.string(),
-					tone: z.enum(["muted", "strong", "success", "danger"]),
+					tone: z.enum(["muted", "subtle", "strong", "success", "danger"]),
 				}),
 			)
 			.optional(),

@@ -4,7 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip.js";
 
 export type BarChartSegment = { key: string; value: number };
 export type BarChartPoint = { label: string; value?: number; segments?: BarChartSegment[] };
-export type BarChartKey = { key: string; label: string; tone: "muted" | "strong" | "success" | "danger" };
+export type BarChartKey = { key: string; label: string; tone: "muted" | "subtle" | "strong" | "success" | "danger" };
 export type BarChartProps = {
 	points: BarChartPoint[];
 	keys?: BarChartKey[];

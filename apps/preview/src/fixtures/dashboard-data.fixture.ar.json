@@ -1,0 +1,450 @@
+{
+  "stats": {
+    "home": [
+      {
+        "label": "الإيرادات",
+        "value": "$24,680",
+        "foot": "هذا الشهر",
+        "series": [
+          4,
+          5,
+          5,
+          6,
+          7,
+          6,
+          8,
+          9
+        ]
+      },
+      {
+        "label": "الطلبات",
+        "value": "1,284",
+        "foot": "هذا الشهر",
+        "series": [
+          4,
+          5,
+          4,
+          6,
+          7,
+          8,
+          7,
+          9
+        ]
+      },
+      {
+        "label": "متوسط الطلب",
+        "value": "$19.22",
+        "foot": "لكل الطلبات",
+        "series": [
+          5,
+          4,
+          6,
+          6,
+          7,
+          5,
+          8,
+          9
+        ]
+      },
+      {
+        "label": "هامش الربح",
+        "value": "32.8%",
+        "foot": "بعد تكاليف التشغيل",
+        "series": [
+          5,
+          6,
+          5,
+          7,
+          6,
+          8,
+          7,
+          9
+        ]
+      },
+      {
+        "label": "المهام المنجزة",
+        "value": "186",
+        "foot": "على مستوى الفرق",
+        "series": [
+          3,
+          5,
+          4,
+          6,
+          7,
+          6,
+          8,
+          9
+        ]
+      },
+      {
+        "label": "الساعات الموفرة",
+        "value": "42.5",
+        "unit": "h",
+        "foot": "تقديري هذا الشهر",
+        "series": [
+          2,
+          4,
+          4,
+          5,
+          7,
+          6,
+          8,
+          9
+        ]
+      }
+    ],
+    "admin": [
+      {
+        "label": "الشركات",
+        "value": "9",
+        "foot": "ضمن جميع الخطط"
+      },
+      {
+        "label": "الشركات النشطة",
+        "value": "6",
+        "foot": "اشتراك نشط"
+      },
+      {
+        "label": "الفرق",
+        "value": "66",
+        "foot": "في جميع الشركات"
+      },
+      {
+        "label": "المهام المنجزة ٧ أيام",
+        "value": "4,765",
+        "foot": "خلال آخر ٧ أيام"
+      },
+      {
+        "label": "الإيراد الشهري",
+        "value": "$1,294",
+        "foot": "القيمة الشهرية الحالية"
+      },
+      {
+        "label": "القيمة الإجمالية",
+        "value": "$14,568",
+        "foot": "منذ الإطلاق"
+      }
+    ],
+    "images": [
+      {
+        "label": "الصور",
+        "value": "3",
+        "foot": "في السجل"
+      },
+      {
+        "label": "المنشورة",
+        "value": "3",
+        "foot": "في بيئة الإنتاج"
+      },
+      {
+        "label": "تحتاج إلى مراجعة",
+        "value": "2",
+        "foot": "بحاجة إلى مراجعة"
+      },
+      {
+        "label": "الأخطاء المفتوحة",
+        "value": "3",
+        "foot": "في جميع الصور"
+      },
+      {
+        "label": "الطلبات",
+        "value": "5",
+        "foot": "بانتظار المراجعة"
+      }
+    ]
+  },
+  "companiesChart": [
+    {
+      "label": "الأسبوع 1",
+      "value": 4
+    },
+    {
+      "label": "الأسبوع 2",
+      "value": 5
+    },
+    {
+      "label": "الأسبوع 3",
+      "value": 4
+    },
+    {
+      "label": "الأسبوع 4",
+      "value": 7
+    },
+    {
+      "label": "الأسبوع 5",
+      "value": 6
+    },
+    {
+      "label": "الأسبوع 6",
+      "value": 8
+    },
+    {
+      "label": "الأسبوع 7",
+      "value": 9
+    },
+    {
+      "label": "الأسبوع 8",
+      "value": 11
+    }
+  ],
+  "revenueChart": [
+    {
+      "label": "١",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 700
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٢",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 738
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٣",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 776
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٤",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 814
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٥",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 852
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٦",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 890
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٧",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 928
+        },
+        {
+          "key": "current",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "label": "٨",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 850
+        }
+      ]
+    },
+    {
+      "label": "٩",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 884
+        }
+      ]
+    },
+    {
+      "label": "١٠",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 918
+        }
+      ]
+    },
+    {
+      "label": "١١",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 952
+        }
+      ]
+    },
+    {
+      "label": "١٢",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 986
+        }
+      ]
+    },
+    {
+      "label": "١٣",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 1020
+        }
+      ]
+    },
+    {
+      "label": "١٤",
+      "segments": [
+        {
+          "key": "previous",
+          "value": 0
+        },
+        {
+          "key": "current",
+          "value": 1054
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "petra",
+      "path": "squad/petra.svg",
+      "version": "2.1.0",
+      "updated": "١٤ نوفمبر ٢٠٢٥",
+      "deployed": "نعم",
+      "bugs": [
+        {
+          "id": "contrast",
+          "title": "خلل في تباين الرمز",
+          "severity": "مرتفع"
+        }
+      ],
+      "requests": []
+    },
+    {
+      "id": "pisa",
+      "path": "squad/pisa.svg",
+      "version": "2.0.4",
+      "updated": "١٢ نوفمبر ٢٠٢٥",
+      "deployed": "نعم",
+      "bugs": [],
+      "requests": []
+    },
+    {
+      "id": "kyoto",
+      "path": "squad/kyoto.svg",
+      "version": "2.0.1",
+      "updated": "٨ نوفمبر ٢٠٢٥",
+      "deployed": "نعم",
+      "bugs": [
+        {
+          "id": "contrast",
+          "title": "خلل في تباين الرمز",
+          "severity": "مرتفع"
+        },
+        {
+          "id": "outline",
+          "title": "حدود غير مكتملة",
+          "severity": "مرتفع"
+        }
+      ],
+      "requests": [
+        {
+          "id": "0",
+          "title": "حركة أثناء التفكير",
+          "status": "مطلوبة"
+        },
+        {
+          "id": "1",
+          "title": "حركة أثناء الاستراحة",
+          "status": "مطلوبة"
+        },
+        {
+          "id": "2",
+          "title": "نسخة مصغرة",
+          "status": "مطلوبة"
+        },
+        {
+          "id": "3",
+          "title": "وضعية التحميل",
+          "status": "مطلوبة"
+        },
+        {
+          "id": "4",
+          "title": "وضعية النجاح",
+          "status": "مطلوبة"
+        }
+      ]
+    }
+  ],
+  "imagesAttention": "صورتان تحتاجان إلى مراجعة",
+  "squadsOnline": "٥٣ فريقًا متصلًا الآن",
+  "ownerSquadsOnline": "٤ من ٥ فرق متصلة",
+  "attentionCount": 2
+}

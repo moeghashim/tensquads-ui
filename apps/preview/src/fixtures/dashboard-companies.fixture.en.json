@@ -1,0 +1,11 @@
+[
+  {"id":"northstar","name":"Northstar Goods","mission":"Everyday outdoor essentials","owner":"Amira Haddad","email":"amira@example.com","plan":"Growth","subscription":"Active","started":"Oct 18, 2025","value":"$3,420","squads":"8","online":"7"},
+  {"id":"cedar","name":"Cedar & Stone","mission":"Thoughtful home objects","owner":"Lina Rahman","email":"lina@example.com","plan":"Starter","subscription":"Trial","started":"Nov 02, 2025","value":"$1,860","squads":"5","online":"4"},
+  {"id":"golden-hour","name":"Golden Hour","mission":"Small batch skincare","owner":"Nadia Saleh","email":"nadia@example.com","plan":"Scale","subscription":"Active","started":"Aug 11, 2025","value":"$4,105","squads":"12","online":"11"},
+  {"id":"field-notes","name":"Field Notes Co.","mission":"Paper goods for curious minds","owner":"Sami Nasser","email":"sami@example.com","plan":"Growth","subscription":"Paused","started":"Jun 21, 2025","value":"$2,018","squads":"9","online":"2"},
+  {"id":"morrow","name":"Morrow Supply","mission":"Low waste kitchen tools","owner":"Dalia Faris","email":"dalia@example.com","plan":"Growth","subscription":"Active","started":"Oct 03, 2025","value":"$1,208","squads":"7","online":"6"},
+  {"id":"bluebird","name":"Bluebird Press","mission":"Independent books and journals","owner":"Rami Khalil","email":"rami@example.com","plan":"Starter","subscription":"Active","started":"Sep 16, 2025","value":"$964","squads":"4","online":"4"},
+  {"id":"good-form","name":"Good Form Studio","mission":"Daily movement essentials","owner":"Hana Nabil","email":"hana@example.com","plan":"Scale","subscription":"Trial","started":"Nov 05, 2025","value":"$612","squads":"10","online":"9"},
+  {"id":"wildfern","name":"Wildfern Pantry","mission":"Seasonal pantry staples","owner":"Yara Mansour","email":"yara@example.com","plan":"Starter","subscription":"Active","started":"Jul 08, 2025","value":"$271","squads":"6","online":"5"},
+  {"id":"orbit","name":"Orbit Cycle","mission":"Repairable city bicycles","owner":"Karim Odeh","email":"karim@example.com","plan":"Growth","subscription":"Active","started":"May 12, 2025","value":"$110","squads":"5","online":"5"}
+]
