@@ -130,11 +130,7 @@ function AdminDashboard() {
 						<>
 							<div className="dashboard-grid dashboard-grid--3-2">
 								<Card title={copy.companiesChartTitle} subtitle={copy.lastEightWeeks}>
-									<BarChart
-										locale={locale}
-										label={copy.companiesChartTitle}
-										points={data.companiesChart}
-									/>
+									<BarChart locale={locale} label={copy.companiesChartTitle} points={data.companiesChart} />
 								</Card>
 								<Card title={copy.plansTitle} subtitle={copy.activePlans}>
 									<Bars style="progress" rows={plans} />

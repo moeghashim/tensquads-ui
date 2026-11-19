@@ -70,14 +70,20 @@ for (const [locale, direction] of [
 						await page.getByRole("button", { name: locale === "ar" ? "صور الفرق" : "Squad images" }).click();
 						await expect(page).toHaveURL(/view=images/);
 						await expect(page.getByRole("dialog")).toHaveCount(0);
-						await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? "١٤ نوفمبر ٢٠٢٥" : "Nov 14, 2025");
+						await expect(page.locator(".dashboard-details")).toContainText(
+							locale === "ar" ? "١٤ نوفمبر ٢٠٢٥" : "Nov 14, 2025",
+						);
 					}
 					await expect(page.locator(".dashboard-panel h1")).toBeVisible();
 					if (view === "companies") {
 						await expect(page.locator(".ts-bars__labels")).toHaveText(["Growth4", "Starter3", "Scale2"]);
 					} else if (view === "home") {
-						await expect(page.getByText(locale === "ar" ? "الأسبوع السابق" : "Previous week", { exact: true })).toHaveCount(1);
-						await expect(page.getByText(locale === "ar" ? "هذا الأسبوع" : "This week", { exact: true })).toHaveCount(1);
+						await expect(
+							page.getByText(locale === "ar" ? "الأسبوع السابق" : "Previous week", { exact: true }),
+						).toHaveCount(1);
+						await expect(
+							page.getByText(locale === "ar" ? "هذا الأسبوع" : "This week", { exact: true }),
+						).toHaveCount(1);
 					}
 					await expectAccessible(page);
 					const dimensions = await page.evaluate(() => ({
