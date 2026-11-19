@@ -311,7 +311,6 @@ function ComponentExample() {
 							<StatTile
 								key={label}
 								label={label}
-								glyph={["◷", "▤", "↗", "◉", "⌁", "♙"][index]}
 								value={["$24.8k", "1,284", "3.8%", "$68.40", "18.2k", "936"][index] ?? "0"}
 								delta={
 									index % 3 === 1
