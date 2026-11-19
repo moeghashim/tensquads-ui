@@ -4,10 +4,16 @@ import { capturePreviewScreenshots, expectAccessible, expectNoHorizontalScroll, 
 test("admin dashboard filters companies and selects image details", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/dashboards/admin");
 	await expect(page.getByRole("row")).toHaveCount(10);
-	await expect(page.locator(".ts-bars__labels")).toHaveText(["Growth4", "Starter3", "Scale2"]);
+	await expect(page.locator(".ts-bars__labels")).toContainText([
+		"Growth4 companies · 27 squads",
+		"Starter3 companies · 17 squads",
+		"Scale2 companies · 22 squads",
+	]);
+	await expect(page.locator(".ts-bar-chart__segment").first()).toHaveClass(/segment--subtle/);
+	await expect(page.locator(".ts-bar-chart__segment").last()).toHaveClass(/segment--strong/);
 	const online = await page.getByRole("row").all();
-	const onlineCounts = await Promise.all(online.slice(1).map((row) => row.getByRole("cell").last().innerText()));
-	expect(onlineCounts.reduce((sum, value) => sum + Number(value), 0)).toBe(53);
+	const onlineCounts = await Promise.all(online.slice(1).map((row) => row.getByRole("cell").last().textContent()));
+	expect(onlineCounts.reduce((sum, value) => sum + Number.parseInt(value ?? "0", 10), 0)).toBe(53);
 	await page.getByRole("button", { name: "Trial", exact: true }).click();
 	await expect(page.getByRole("row")).toHaveCount(3);
 	await page.getByRole("button", { name: "All", exact: true }).click();
@@ -19,21 +25,186 @@ test("admin dashboard filters companies and selects image details", async ({ pag
 	await page.getByRole("button", { name: "Squad images" }).click();
 	await expect(page).toHaveURL(/view=images/);
 	await page.getByRole("button", { name: "With bugs" }).click();
-	await expect(page.getByRole("row")).toHaveCount(3);
+	await expect(page.getByRole("row")).toHaveCount(5);
 	await page.getByRole("button", { name: "All", exact: true }).click();
-	await page.getByRole("row", { name: /squad\/pisa.svg/ }).click();
-	await expect(page.locator(".dashboard-details")).toContainText("pisa.svg");
-	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator("p")).toHaveCount(0);
-	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator("p")).toHaveCount(0);
+	await page.getByRole("row", { name: /registry\.agents\.example\/orders:1\.8\.2/ }).click();
+	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/orders:1.8.2");
+	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator(".dashboard-inset-row")).toHaveCount(2);
+	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(2);
 	await page.getByRole("button", { name: "With requests" }).click();
-	await expect(page.getByRole("row")).toHaveCount(2);
-	await page.getByRole("row", { name: /squad\/kyoto.svg/ }).click();
-	await expect(page.locator(".dashboard-details")).toContainText("kyoto.svg");
-	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator("p")).toHaveCount(2);
-	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator("p")).toHaveCount(5);
+	await expect(page.getByRole("row")).toHaveCount(6);
+	await page.getByRole("row", { name: /registry\.agents\.example\/analytics:1\.1\.2/ }).click();
+	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/analytics:1.1.2");
+	await expect(page.locator(".dashboard-stack .ts-card").nth(1)).toContainText("No open bugs");
+	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(4);
 	await expectAccessible(page);
 	await expectNoHorizontalScroll(page);
 });
+
+for (const locale of ["en", "ar"] as const) {
+	test(`admin image records and reference totals agree in ${locale}`, async ({ page }) => {
+		await openPreview(
+			page,
+			{ locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "light" },
+			"/dashboards/admin",
+		);
+		await page.getByRole("button", { name: locale === "ar" ? "صور الفرق" : "Squad images" }).click();
+		await expect(page.locator(".ts-stat-tile__value")).toHaveText(["7", "127", "8", "15", "4"]);
+		await expect(page.locator(".ts-stat-tile__footer")).toHaveText(
+			locale === "ar"
+				? [
+						"٣ مستقرة · ٢ تجريبية أو مسودة",
+						"١٦ متأخرة عن أحدث إصدار",
+						"خطآن بدرجة خطورة عالية",
+						"٣ قيد التنفيذ",
+						"من أصل ٧ صور",
+					]
+				: [
+						"3 stable · 2 beta or draft",
+						"16 behind the latest version",
+						"2 high severity",
+						"3 in progress",
+						"of 7 images",
+					],
+		);
+		const records = [
+			[
+				"orders",
+				"Orders",
+				"الطلبات",
+				"Order processing and fulfillment",
+				"معالجة الطلبات وتنفيذها",
+				"6 hours ago",
+				"منذ ٦ ساعات",
+				34,
+				2,
+				2,
+				"22 of 34 (65%)",
+				"22 من 34 (65%)",
+			],
+			[
+				"support",
+				"Support",
+				"الدعم",
+				"Customer support and triage",
+				"دعم العملاء وفرز الاستفسارات",
+				"1 day ago",
+				"منذ يوم واحد",
+				21,
+				2,
+				3,
+				"20 of 21 (95%)",
+				"20 من 21 (95%)",
+			],
+			[
+				"marketing",
+				"Marketing",
+				"التسويق",
+				"Campaign planning and reporting",
+				"تخطيط الحملات وإعداد التقارير",
+				"2 days ago",
+				"منذ يومين",
+				18,
+				2,
+				3,
+				"17 of 18 (94%)",
+				"17 من 18 (94%)",
+			],
+			[
+				"finance",
+				"Finance",
+				"المالية",
+				"Payout reconciliation and reporting",
+				"تسوية المدفوعات وإعداد التقارير",
+				"5 days ago",
+				"منذ ٥ أيام",
+				15,
+				0,
+				3,
+				"14 of 15 (93%)",
+				"14 من 15 (93%)",
+			],
+			[
+				"inventory",
+				"Inventory",
+				"المخزون",
+				"Stock monitoring and replenishment",
+				"مراقبة المخزون وتجديده",
+				"9 days ago",
+				"منذ ٩ أيام",
+				14,
+				2,
+				0,
+				"13 of 14 (93%)",
+				"13 من 14 (93%)",
+			],
+			[
+				"analytics",
+				"Analytics",
+				"التحليلات",
+				"Store performance insights",
+				"تحليل أداء المتجر",
+				"16 days ago",
+				"منذ ١٦ يوماً",
+				13,
+				0,
+				4,
+				"13 of 13 (100%)",
+				"13 من 13 (100%)",
+			],
+			[
+				"people",
+				"People",
+				"الموارد البشرية",
+				"Hiring and team operations",
+				"التوظيف وعمليات الفريق",
+				"21 days ago",
+				"منذ ٢١ يوماً",
+				12,
+				0,
+				0,
+				"12 of 12 (100%)",
+				"12 من 12 (100%)",
+			],
+		] as const;
+		for (const [id, name, nameAr, role, roleAr, age, ageAr, deployed, bugs, requests, latest, latestAr] of records) {
+			const row = page.getByRole("row").filter({ hasText: `registry.agents.example/${id}:` });
+			await expect(row.locator("strong")).toHaveText(locale === "ar" ? nameAr : name);
+			await expect(row.getByRole("cell").nth(2)).toHaveText(locale === "ar" ? ageAr : age);
+			await expect(row.getByRole("cell").nth(3)).toHaveText(String(deployed));
+			await expect(row.getByRole("cell").nth(4)).toHaveText(String(bugs));
+			await row.click();
+			const cards = page.locator(".dashboard-stack .ts-card");
+			await expect(cards.first().getByRole("heading")).toHaveText(locale === "ar" ? nameAr : name);
+			await expect(cards.first().locator("p")).toHaveText(locale === "ar" ? roleAr : role);
+			await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? ageAr : age);
+			await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? latestAr : latest);
+			await expect(cards.nth(1).locator(".dashboard-inset-row")).toHaveCount(bugs);
+			await expect(cards.nth(2).locator(".dashboard-inset-row")).toHaveCount(requests);
+			if (!bugs) await expect(cards.nth(1).locator(".dashboard-empty-line")).toBeVisible();
+			if (!requests) await expect(cards.nth(2).locator(".dashboard-empty-line")).toBeVisible();
+			for (const title of await cards.locator(".dashboard-inset-title strong").allTextContents()) {
+				expect(title).toMatch(locale === "ar" ? /[\u0600-\u06ff]/ : /[A-Za-z]/);
+			}
+		}
+		await page.getByRole("row").filter({ hasText: "registry.agents.example/orders:" }).click();
+		await expect(page.locator(".dashboard-inset-title strong")).toHaveText(
+			locale === "ar"
+				? [
+						"قد تؤدي إعادة المحاولة إلى تكرار الشحنة",
+						"قد يتأخر تحديث الحالة بعد استرداد المبلغ",
+						"إضافة دعم تقسيم الشحنات",
+						"إضافة ملاحظات طلبات الهدايا",
+					]
+				: [
+						"Retry can duplicate a shipment",
+						"Status may lag after a refund",
+						"Add split shipment support",
+						"Add gift order notes",
+					],
+		);
+	});
+}
 
 test("store approvals send a command and launcher preserves URL state", async ({ page }) => {
 	await openPreview(page, { locale: "ar", direction: "rtl", theme: "dark" }, "/dashboards/home");
@@ -65,6 +236,7 @@ for (const [locale, direction] of [
 					);
 					if (view === "images") {
 						if (width <= 760) {
+							await expect(page.locator(".ts-sidebar-mobile-bar")).toContainText("Platform admin");
 							await page
 								.getByRole("button", { name: locale === "ar" ? "فتح التنقل" : "Open navigation" })
 								.click();
@@ -73,12 +245,12 @@ for (const [locale, direction] of [
 						await expect(page).toHaveURL(/view=images/);
 						await expect(page.getByRole("dialog")).toHaveCount(0);
 						await expect(page.locator(".dashboard-details")).toContainText(
-							locale === "ar" ? "١٤ نوفمبر ٢٠٢٥" : "Nov 14, 2025",
+							locale === "ar" ? "منذ ٦ ساعات" : "6 hours ago",
 						);
 					}
 					await expect(page.locator(".dashboard-panel h1")).toBeVisible();
 					if (view === "companies") {
-						await expect(page.locator(".ts-bars__labels")).toHaveText(["Growth4", "Starter3", "Scale2"]);
+						await expect(page.locator(".ts-bars__labels")).toContainText(["Growth4", "Starter3", "Scale2"]);
 					} else if (view === "home") {
 						await expect(
 							page.getByText(locale === "ar" ? "الأسبوع السابق" : "Previous week", { exact: true }),
