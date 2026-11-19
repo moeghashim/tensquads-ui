@@ -1,0 +1,133 @@
+{
+  "results": [
+    {
+      "state": "en/light/1440",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "en/light/390",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "en/dark/1440",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "en/dark/390",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "ar/light/1440",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "ar/light/390",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "ar/dark/1440",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "state": "ar/dark/390",
+      "metrics": {
+        "mask": "none",
+        "overflow": true
+      }
+    },
+    {
+      "name": "Scroll chat without edge fading; desktop/mobile, English/Arabic, light/dark",
+      "result": "pass"
+    },
+    {
+      "locale": "en",
+      "input": "\"\"",
+      "reply": "Plan approved for your store. I will send Weekly updates. Email notifications are on."
+    },
+    {
+      "locale": "en",
+      "input": "\"   \"",
+      "reply": "Plan approved for your store. I will send Weekly updates. Email notifications are on."
+    },
+    {
+      "locale": "en",
+      "input": "\"  \"",
+      "reply": "Plan approved for your store. I will send Weekly updates. Email notifications are on."
+    },
+    {
+      "locale": "ar",
+      "input": "\"\"",
+      "reply": "تم اعتماد خطة متجرك. سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة."
+    },
+    {
+      "locale": "ar",
+      "input": "\"   \"",
+      "reply": "تم اعتماد خطة متجرك. سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة."
+    },
+    {
+      "locale": "ar",
+      "input": "\"  \"",
+      "reply": "تم اعتماد خطة متجرك. سأرسل تحديثات أسبوعي. إشعارات البريد مفعّلة."
+    },
+    {
+      "name": "Empty and whitespace-only store approvals produce localized readable fallback",
+      "result": "pass"
+    },
+    {
+      "name": "Submit normal and markdown-like names; retain literal values and show locked Sent record; replay unlocks",
+      "result": "pass"
+    },
+    {
+      "header": {
+        "links": [
+          36,
+          36,
+          36,
+          36
+        ],
+        "controls": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "headerControls": [
+        "English",
+        "العربية",
+        "Light",
+        "Dark",
+        "System"
+      ]
+    },
+    {
+      "name": "Header language/theme controls match nav sizing and remain operable on mobile",
+      "result": "pass"
+    }
+  ],
+  "errors": []
+}
