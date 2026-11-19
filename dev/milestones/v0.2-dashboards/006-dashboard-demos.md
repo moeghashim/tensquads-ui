@@ -7,7 +7,7 @@ priority: high
 files: ["apps/preview/**", "e2e/**", "README.md"]
 ---
 
-Starts after 005 merges. Build both pages only from library components; any missing piece is a gap to report, not page CSS to invent. All figures are demo data from fixture files in `apps/preview/src/fixtures/`, in English and Arabic, and each page shows a "Demo data" pill. Add "Dashboards" to the site nav.
+Starts after 004 merges. This task also builds `ChatLauncher` in the `Chat` folder: a floating pill fixed at the inline-end bottom (`space-6` from the edges), `primary-solid` fill, `shadow-300`, a 32px Squadmate on a light circle, a label ("Ask Petra") and an optional count badge in `danger-solid`. It is a button; `onOpen` belongs to the host; its accessible name includes the count ("Ask Petra, 4 waiting"); it respects safe areas and never covers an open chat's composer. Give it the four component files and a preview page. The approvals list on `/dashboards/home` uses `ApprovalCard` built from `approval_request` fixtures (D26), with actions labels and the limit; approving or rejecting shows the sent command. Build both pages only from library components; any missing piece is a gap to report, not page CSS to invent. All figures are demo data from fixture files in `apps/preview/src/fixtures/`, in English and Arabic, and each page shows a "Demo data" pill. Add "Dashboards" to the site nav.
 
 ## Acceptance criteria
 - [ ] `/dashboards/admin` (super admin): Sidebar with brand "Platform admin", items Companies and Squad images (count 2), section "Coming next" with Usage and billing, Platform health, Admin users (disabled), user "Moe Ghashim, Super admin". Two views switched by the sidebar (`?view=companies|images`), each keeping locale, direction and theme in the URL.
