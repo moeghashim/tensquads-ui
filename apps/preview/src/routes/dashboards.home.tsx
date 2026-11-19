@@ -104,6 +104,9 @@ function StoreDashboard() {
 	const actionLabels = ar
 		? { refund: "استرداد", send_reply: "إرسال رد", discount: "خصم" }
 		: { refund: "Refund", send_reply: "Send a reply", discount: "Discount" };
+	const ruleLabels = ar
+		? { refund_limit: "حد الاسترداد", discount_limit: "حد الخصم" }
+		: { refund_limit: "Refund limit", discount_limit: "Discount limit" };
 	const chatSearch = { ...search };
 	return (
 		<main className="dashboard-page" dir={direction}>
@@ -171,6 +174,7 @@ function StoreDashboard() {
 											]?.taskId
 										}
 										actionLabels={actionLabels}
+										ruleLabels={ruleLabels}
 										onDecision={(command) => {
 											setSent(JSON.stringify(command, null, 2));
 											setPendingIds((current) => current.filter((id) => id !== command.approvalId));

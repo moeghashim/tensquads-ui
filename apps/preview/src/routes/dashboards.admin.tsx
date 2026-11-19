@@ -483,7 +483,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 												dir="ltr"
 												style={{
 													display: "block",
-													maxInlineSize: "16rem",
+													maxInlineSize: "11rem",
 													fontFamily: "var(--ts-font-mono)",
 													fontSize: "var(--ts-text-xs-font-size)",
 													overflow: "hidden",
