@@ -69,6 +69,58 @@ export function ChatUserMessage({ className, ...props }: ChatUserMessageProps) {
 	return <div {...props} className={["ts-chat__user-message", className].filter(Boolean).join(" ")} />;
 }
 
+export type ChatAssistantMessageProps = ComponentProps<"div">;
+/** An agent reply in the thread: the content alone, with no avatar or name row. */
+export function ChatAssistantMessage({ className, ...props }: ChatAssistantMessageProps) {
+	return <div {...props} className={["ts-chat__assistant", className].filter(Boolean).join(" ")} />;
+}
+
+export type ChatWorkingProps = ComponentProps<"div"> & { glyph?: ReactNode; label?: string; locale?: Locale };
+/** The status line shown while the agent works and before its reply text arrives. */
+export function ChatWorking({ glyph, label, locale = "en", className, ...props }: ChatWorkingProps) {
+	return (
+		<div {...props} role="status" className={["ts-chat__working", className].filter(Boolean).join(" ")}>
+			{glyph != null && (
+				<span className="ts-chat__working-glyph" aria-hidden="true">
+					{glyph}
+				</span>
+			)}
+			<span className="ts-chat__working-label">{label ?? (locale === "ar" ? "جارٍ العمل" : "Working")}</span>
+		</div>
+	);
+}
+
+export type ChatErrorProps = ComponentProps<"div"> & {
+	title?: string;
+	onRetry?: () => void;
+	retryLabel?: string;
+	locale?: Locale;
+};
+/** A failed turn: what went wrong, and a retry when the host offers one. */
+export function ChatError({
+	title,
+	onRetry,
+	retryLabel,
+	locale = "en",
+	children,
+	className,
+	...props
+}: ChatErrorProps) {
+	return (
+		<div {...props} role="alert" className={["ts-chat__error", className].filter(Boolean).join(" ")}>
+			<strong className="ts-chat__error-title">
+				{title ?? (locale === "ar" ? "حدث خطأ" : "Something went wrong")}
+			</strong>
+			{children != null && <div className="ts-chat__error-message">{children}</div>}
+			{onRetry && (
+				<Button type="button" variant="ghost" size="sm" onClick={onRetry} className="ts-chat__error-retry">
+					{retryLabel ?? (locale === "ar" ? "إعادة المحاولة" : "Retry")}
+				</Button>
+			)}
+		</div>
+	);
+}
+
 export type ChatStepProps = ComponentProps<"article"> & {
 	name: string;
 	glyph?: ReactNode;
@@ -197,7 +249,7 @@ export function ChatComposer({
 				autoResize
 				submitShortcut="enter"
 				onSubmit={send}
-				placeholder={placeholder ?? (locale === "ar" ? "اكتب رسالة" : undefined)}
+				placeholder={placeholder ?? (locale === "ar" ? "اكتب رسالة" : "Ask anything")}
 			/>
 			<div className="ts-chat__composer-actions">
 				<div className="ts-chat__attach">{attach}</div>
@@ -216,7 +268,7 @@ export function ChatComposer({
 						className="ts-chat__send"
 					>
 						<svg aria-hidden="true" viewBox="0 0 12 12" fill="currentColor">
-							<rect x="1" y="1" width="10" height="10" rx="1" />
+							<rect x="2" y="2" width="8" height="8" rx="1.5" />
 						</svg>
 					</Button>
 				) : (
@@ -234,11 +286,11 @@ export function ChatComposer({
 							viewBox="0 0 24 24"
 							fill="none"
 							stroke="currentColor"
-							strokeWidth="1.7"
+							strokeWidth="2"
 							strokeLinecap="round"
 							strokeLinejoin="round"
 						>
-							<path d="M4 12h15M13 5l7 7-7 7" />
+							<path d="M12 19V5M5 12l7-7 7 7" />
 						</svg>
 					</Button>
 				)}
