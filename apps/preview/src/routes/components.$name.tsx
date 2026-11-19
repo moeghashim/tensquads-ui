@@ -1368,11 +1368,7 @@ function SidebarPreview({ locale }: { locale: "en" | "ar" }) {
 						{ar ? "الفوترة" : "Billing"}
 					</SidebarItem>
 				</SidebarSection>
-				<SidebarUser
-					initials="MG"
-					name={ar ? "محمد غاشم" : "Moe Ghashim"}
-					userRole={ar ? "مدير المنصة" : "Platform admin"}
-				/>
+				<SidebarUser initials="MG" name="Moe Ghashim" userRole={ar ? "مدير المنصة" : "Platform admin"} />
 			</Sidebar>
 			<div className="sidebar-preview__content">
 				<div className="sidebar-preview__squad">
