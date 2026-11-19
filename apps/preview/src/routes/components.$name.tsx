@@ -1179,9 +1179,6 @@ function ApprovalCardPreview({ locale, stream }: { locale: "en" | "ar"; stream: 
 				bot="petra"
 				taskId="task_42"
 				request={{
-					seq: 3,
-					at: "2026-11-19T12:00:00.000Z",
-					type: "approval_request",
 					approvalId: "approval_42",
 					action: "refund",
 					content: ar ? "استرداد قيمة الطلب ١٠٤٢" : "Refund order 1042",
