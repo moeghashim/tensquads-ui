@@ -1,0 +1,10 @@
+Target: 62c6a81f9f950475b03bc74ad65edbeb6280dd49
+Baseline: configured npm run verify reported successful by outer executor.
+Live command: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test --config .gate-live/playwright.config.ts
+Exit: 0
+Production preview built and served through Wrangler on localhost:5173.
+Disposable consumer of real DataTable served through Vite on localhost:5174.
+14 browser checks passed. See results.json for retained assertions and test results.
+Preview scenarios use existing e2e/data-table-empty-state.spec.ts behavior with screenshots redirected to this evidence directory.
+Initial harness launch failed due to config-relative server cwd; corrected to worktree cwd before live execution.
+Screenshots inspected: DataTable-ar-dark-390.png, DataTable-en-light-1440.png, EmptyState-en-light-1440.png.

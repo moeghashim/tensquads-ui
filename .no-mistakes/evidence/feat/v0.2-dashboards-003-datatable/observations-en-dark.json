@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "en",
+    "theme": "dark",
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)"
+    },
+    "dimensions": {
+      "viewport": 390,
+      "page": 390,
+      "client": 362,
+      "content": 463
+    },
+    "scrollLeft": 101,
+    "fixture": "Companies\nCompany\tOwner\tPlan\tStatus\nAcme\tMaya Chen\t$149 / mo\tActive"
+  },
+  {
+    "emptyFixture": "No companies yet\n\nAdd a company to see it listed here."
+  }
+]

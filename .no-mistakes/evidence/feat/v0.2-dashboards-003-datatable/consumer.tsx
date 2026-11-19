@@ -1,0 +1,6 @@
+import React, {useState} from 'react';
+import {createRoot} from 'react-dom/client';
+import {DataTable, StackCell} from '../packages/ui/src/react/DataTable/DataTable';
+import '../packages/ui/src/tokens/tokens.css';
+import '../packages/ui/src/styles/styles.css';
+function Consumer(){const [selected,setSelected]=useState('other');const [activated,setActivated]=useState(0);return <main><h1>Interactive table cells</h1><output aria-label="Activated">{activated}</output><output aria-label="Selected">{selected}</output><DataTable caption="Control boundary" columns={[{key:'control',label:'Control'},{key:'note',label:'Note'},{key:'billing',label:'Billing',align:'end'}]} rows={[{id:'controls',cells:{control:<button onClick={()=>setActivated(n=>n+1)}>Open company</button>,note:<input aria-label="Company note"/>,billing:<StackCell primary="$149 / mo" secondary="Billed monthly under the company subscription with a very long description that must remain available in its title"/>}},{id:'other',cells:{control:'Other company',note:'Read only'}}]} selectedId={selected} onRowSelect={setSelected}/></main>};createRoot(document.getElementById('root')!).render(<Consumer/>);

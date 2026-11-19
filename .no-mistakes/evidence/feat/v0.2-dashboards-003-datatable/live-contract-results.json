@@ -1,0 +1,66 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "buttonActivations": 2,
+    "note": "a b",
+    "rowKeyboardSelection": "passed",
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "truncatedHelpers": 3,
+    "openuiTable": "rendered one record",
+    "openuiEmpty": "rendered localized title and description",
+    "browserErrors": []
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "buttonActivations": 2,
+    "note": "a b",
+    "rowKeyboardSelection": "passed",
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)"
+    },
+    "truncatedHelpers": 3,
+    "openuiTable": "rendered one record",
+    "openuiEmpty": "rendered localized title and description",
+    "browserErrors": []
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "buttonActivations": 2,
+    "note": "a b",
+    "rowKeyboardSelection": "passed",
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "truncatedHelpers": 3,
+    "openuiTable": "rendered one record",
+    "openuiEmpty": "rendered localized title and description",
+    "browserErrors": []
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "buttonActivations": 2,
+    "note": "a b",
+    "rowKeyboardSelection": "passed",
+    "focusRing": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(2, 133, 255)"
+    },
+    "truncatedHelpers": 3,
+    "openuiTable": "rendered one record",
+    "openuiEmpty": "rendered localized title and description",
+    "browserErrors": []
+  }
+]

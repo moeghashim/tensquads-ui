@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "ar",
+    "theme": "light",
+    "ring": {
+      "width": "2px",
+      "offset": "2px",
+      "color": "rgb(1, 105, 204)"
+    },
+    "dimensions": {
+      "viewport": 390,
+      "page": 390,
+      "client": 362,
+      "content": 449
+    },
+    "scrollLeft": -86,
+    "fixture": "الشركات\nالشركة\tالمالك\tالخطة\tالحالة\nأكمي\tمايا تشن\t١٤٩ دولاراً / شهرياً\tنشطة"
+  },
+  {
+    "emptyFixture": "لا توجد شركات بعد\n\nأضف شركة لتظهر في هذه القائمة."
+  }
+]
