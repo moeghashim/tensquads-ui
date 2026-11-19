@@ -153,7 +153,6 @@ function StoreDashboard() {
 							/>
 						</Card>
 						<Card title={c.needsApproval} count={pending.length}>
-							{/* TODO: pass ruleLabels when ApprovalCard exposes that prop. */}
 							<div className="approval-list">
 								{pending.map((request) => (
 									<ApprovalCard

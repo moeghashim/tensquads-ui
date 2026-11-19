@@ -185,7 +185,7 @@ Open the [store owner dashboard](https://tensquads-ui-preview.mohanadgh.workers.
 
 The admin sidebar switches between Companies and Squad images with `view=companies|images` in the URL. Search and subscription filters narrow the company table. Image filters narrow the registry table; selecting an image updates its details, bugs, and feature requests. Roll out and View changelog are display-only demo controls.
 
-On the store owner dashboard, approving or declining a request removes it from the list, lowers the count, and displays the command body locally. Changing the site language translates pending requests and preserves those decisions. Ask Petra opens `/chat` with the current URL settings. These dashboards do not send commands to a backend.
+On the store owner dashboard, metric tiles show weekly comparisons or a This week label. Approval cards show the requesting agent and task from demo fixtures. Approving or declining a request removes it from the list and lowers both the approval count and the Ask Petra waiting count. Expand Sent commands inside the approval panel to inspect the latest command body locally. Changing the site language translates pending requests and preserves those decisions. Ask Petra opens `/chat` with the current URL settings. The page reserves space so the launcher clears the approval controls. These dashboards do not send commands to a backend.
 
 ## Browser verification
 
