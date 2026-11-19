@@ -1,0 +1,228 @@
+{
+  "oracle": "Task 005 and platform contracts c5eaad4d69b4529c9a57b00b1066b39e60243fa8; literal expected command bodies and destinations",
+  "results": [
+    {
+      "name": "React approval exact commands, acceptance, veto, pending, restoration and copy overrides",
+      "result": "pass",
+      "detail": {
+        "acceptedCommand": {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-local-17",
+          "contentHash": "sha256:synthetic-17",
+          "decision": "approve"
+        },
+        "pendingVeto": "controls re-enabled with no outcome",
+        "rejectedCallback": "retry possible",
+        "restored": "Refused, controls disabled"
+      }
+    },
+    {
+      "name": "Owner sequence, question lock, approval isolation, removal stability, unknown and free-text routing",
+      "result": "pass",
+      "detail": {
+        "commands": [
+          {
+            "type": "OwnerAnswer",
+            "questionId": "question-local-17",
+            "text": "Urgent"
+          },
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval-local-17",
+            "decision": "approve",
+            "contentHash": "sha256:synthetic-17"
+          }
+        ],
+        "pendingQuestion": {
+          "seq": 8,
+          "at": "2026-11-19T12:00:00.000Z",
+          "type": "question",
+          "questionId": "newest",
+          "text": "Order number?",
+          "options": []
+        },
+        "unknownReported": [
+          {
+            "seq": 6,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "payload": "hidden"
+          }
+        ],
+        "order": [
+          "reply",
+          "question",
+          "A",
+          "B",
+          "free"
+        ],
+        "locksRetained": true
+      }
+    },
+    {
+      "name": "Owner plain text preserves markup and balanced URL destinations in English and Arabic",
+      "result": "pass",
+      "detail": {
+        "renderedLiteral": "**literal** <img src=x onerror=alert(1)>\n```openui\nroot = Button(\"Injected\")\n```\nSee (https://en.wikipedia.org/wiki/Refund_(finance)). Also https://example.com/order/42.",
+        "links": [
+          "https://en.wikipedia.org/wiki/Refund_(finance)",
+          "https://example.com/order/42"
+        ],
+        "surfaces": [
+          "reply",
+          "summary",
+          "evidence"
+        ],
+        "locales": [
+          "en",
+          "ar"
+        ]
+      }
+    },
+    {
+      "name": "Streamed ApprovalDecision acceptance, host veto, pending guard and ChatReply outcomes",
+      "result": "pass",
+      "detail": {
+        "streamEvents": [
+          {
+            "type": "ApprovalDecision",
+            "params": {
+              "approvalId": "stream-17",
+              "contentHash": "sha256:stream-17",
+              "decision": "approve"
+            },
+            "humanFriendlyMessage": "Approve",
+            "formName": "ApprovalCard",
+            "formState": {}
+          },
+          {
+            "type": "ApprovalDecision",
+            "params": {
+              "approvalId": "stream-17",
+              "contentHash": "sha256:stream-17",
+              "decision": "reject"
+            },
+            "humanFriendlyMessage": "Decline",
+            "formName": "ApprovalCard",
+            "formState": {}
+          }
+        ],
+        "streaming": "disabled",
+        "veto": "no outcome, retry allowed",
+        "pending": "disabled until host resolves",
+        "chat": "veto then accepted Approved with both controls disabled"
+      }
+    },
+    {
+      "name": "Public platform schemas, command builders, retry metadata and money formatting run in browser consumer",
+      "result": "pass",
+      "detail": {
+        "bodies": [
+          {
+            "type": "OwnerMessage",
+            "messageId": "m17",
+            "channel": "web",
+            "text": "Synthetic message"
+          },
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q17",
+            "text": "Urgent"
+          },
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval-local-17",
+            "decision": "reject",
+            "contentHash": "sha256:synthetic-17"
+          },
+          {
+            "type": "CancelTask",
+            "taskId": "t17"
+          }
+        ],
+        "commands": [
+          {
+            "commandId": "retry-stable-17",
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "OwnerMessage",
+            "messageId": "m17",
+            "channel": "web",
+            "text": "Synthetic message"
+          },
+          {
+            "commandId": "retry-stable-17",
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "OwnerAnswer",
+            "questionId": "q17",
+            "text": "Urgent"
+          },
+          {
+            "commandId": "retry-stable-17",
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "ApprovalDecision",
+            "approvalId": "approval-local-17",
+            "decision": "reject",
+            "contentHash": "sha256:synthetic-17"
+          },
+          {
+            "commandId": "retry-stable-17",
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "CancelTask",
+            "taskId": "t17"
+          }
+        ],
+        "retry": {
+          "commandId": "retry-stable-17",
+          "at": "2026-11-19T12:00:00.000Z",
+          "type": "ApprovalDecision",
+          "approvalId": "approval-local-17",
+          "decision": "reject",
+          "contentHash": "sha256:synthetic-17"
+        },
+        "validMessages": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "extraMessages": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "extraCommands": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "badDecision": false,
+        "badLimit": false,
+        "money": [
+          [
+            "$0.00",
+            "‏٠٫٠٠ US$"
+          ],
+          [
+            "$20.00",
+            "‏٢٠٫٠٠ US$"
+          ],
+          [
+            "$1.23",
+            "‏١٫٢٣ US$"
+          ],
+          [
+            "$987,654.32",
+            "‏٩٨٧٬٦٥٤٫٣٢ US$"
+          ]
+        ]
+      }
+    }
+  ],
+  "browserErrors": []
+}

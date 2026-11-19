@@ -1,0 +1,129 @@
+{
+  "surface": "Built public @tensquads/ui/schemas SDK with synthetic localhost HTTP platform",
+  "oracle": "Task 005 and platform commit c5eaad4d69b4529c9a57b00b1066b39e60243fa8",
+  "incoming": [
+    {
+      "seq": 1,
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "reply",
+      "text": "Hello"
+    },
+    {
+      "seq": 2,
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "question",
+      "questionId": "q2",
+      "text": "Priority?",
+      "options": []
+    },
+    {
+      "seq": 3,
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "approval_request",
+      "approvalId": "approval_C",
+      "action": "refund",
+      "content": "Refund order C",
+      "contentHash": "sha256:C",
+      "rule": null,
+      "limit": null
+    },
+    {
+      "seq": 4,
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "result",
+      "taskId": "t1",
+      "summary": "Done",
+      "evidence": [
+        "https://example.com"
+      ]
+    },
+    {
+      "seq": 5,
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "status",
+      "taskId": "t1",
+      "bot": "petra",
+      "attempt": 1,
+      "step": "Running",
+      "since": "2026-11-19T12:00:00.000Z"
+    },
+    {
+      "seq": 6,
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "action_not_confirmed",
+      "taskId": "t1",
+      "actionId": "a1",
+      "what": "Could not confirm"
+    }
+  ],
+  "received": [
+    {
+      "commandId": "c0",
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "OwnerMessage",
+      "messageId": "m1",
+      "channel": "web",
+      "text": "Hello"
+    },
+    {
+      "commandId": "c1",
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "OwnerAnswer",
+      "questionId": "q2",
+      "text": "Urgent"
+    },
+    {
+      "commandId": "c2",
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "ApprovalDecision",
+      "approvalId": "approval_C",
+      "decision": "approve",
+      "contentHash": "sha256:C"
+    },
+    {
+      "commandId": "c3",
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "ApprovalDecision",
+      "approvalId": "approval_C",
+      "decision": "reject",
+      "contentHash": "sha256:C"
+    },
+    {
+      "commandId": "c4",
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "CancelTask",
+      "taskId": "t1"
+    },
+    {
+      "commandId": "c2",
+      "at": "2026-11-19T12:00:00.000Z",
+      "type": "ApprovalDecision",
+      "approvalId": "approval_C",
+      "decision": "approve",
+      "contentHash": "sha256:C"
+    }
+  ],
+  "money": [
+    {
+      "value": 0,
+      "en": "$0.00",
+      "ar": "‏٠٫٠٠ US$"
+    },
+    {
+      "value": 1250000,
+      "en": "$1.25",
+      "ar": "‏١٫٢٥ US$"
+    },
+    {
+      "value": 20000000,
+      "en": "$20.00",
+      "ar": "‏٢٠٫٠٠ US$"
+    },
+    {
+      "value": 1000000000,
+      "en": "$1,000.00",
+      "ar": "‏١٬٠٠٠٫٠٠ US$"
+    }
+  ],
+  "guards": "Wrong literals, extra fields, fractional/negative limits, invalid metadata and decline literal rejected; identical retry metadata preserved."
+}

@@ -1,0 +1,20 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {ApprovalCard, OwnerMessageView, pendingQuestion, ChatReply} from '../packages/ui/src/react/index.ts';
+import {TensquadsRenderer} from '../packages/ui/src/openui/index.ts';
+import * as schemas from '../packages/ui/src/schemas/index.ts';
+import '../packages/ui/src/fonts.css';
+import '../packages/ui/src/tokens/tokens.css';
+import '../packages/ui/src/styles/styles.css';
+const root=createRoot(document.getElementById('root')!);
+const api:any={events:[],unknown:[],schemas,pendingQuestion,mode:'accept'};
+const handler=(event:any)=>{api.events.push(event); if(api.mode==='veto')return false; if(api.mode==='throw')throw Error('Host failure'); if(api.mode==='pending')return new Promise(resolve=>api.resolve=resolve); return true;};
+api.render=(kind:string,props:any)=>{
+ document.documentElement.lang=props.locale??'en'; document.documentElement.dir=props.locale==='ar'?'rtl':'ltr';
+ if(kind==='approval')root.render(<ApprovalCard {...props} onDecision={handler}/>);
+ if(kind==='owner')root.render(<OwnerMessageView {...props} onCommand={handler} onUnknown={message=>api.unknown.push(message)}/>);
+ if(kind==='stream')root.render(<TensquadsRenderer {...props} onAction={handler}/>);
+ if(kind==='chat')root.render(<ChatReply {...props} onAction={handler}/>);
+};
+api.reset=()=>{api.events=[];api.unknown=[];api.mode='accept';root.render(null);};
+(window as any).consumer=api;

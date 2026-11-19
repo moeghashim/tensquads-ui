@@ -1,0 +1,181 @@
+{
+  "surface": "Real React library and OpenUI renderer in disposable Vite consumer; synthetic input and local useChat transport",
+  "results": [
+    {
+      "name": "All six messages sort by seq; unknown is reported; reply, summary and evidence preserve literal text and balanced URL destinations",
+      "ordered": [
+        "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```\n<script>window.injected=true</script> javascript:alert(1)",
+        "Choose sizeSmallLarge",
+        "refundRefund order 42daily_limitLimit $20.00ApproveDecline",
+        "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```\n<script>window.injected=true</script> javascript:alert(1)See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```\n<script>window.injected=true</script> javascript:alert(1)",
+        "Checking order · Attempt 2",
+        "Action could not be confirmedRefund unverified",
+        "New free questionSend your answer in the message box."
+      ],
+      "links": [
+        "https://en.wikipedia.org/wiki/Refund_(finance)",
+        "https://en.wikipedia.org/wiki/Refund_(finance)",
+        "https://en.wikipedia.org/wiki/Refund_(finance)"
+      ]
+    },
+    {
+      "name": "Keyboard answer and approve emit literal command bodies and stay locked after earlier message removal; host clears pending free-text question",
+      "commands": [
+        {
+          "type": "OwnerAnswer",
+          "questionId": "q1",
+          "text": "Small"
+        },
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "a1",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ]
+    },
+    {
+      "name": "Restoring a1 leaves a2 actionable; decline locks a2; custom copy and zero limit render",
+      "outcomes": [
+        "Approved",
+        "Declined"
+      ]
+    },
+    {
+      "name": "Streamed host veto, thrown rejection, pending acceptance and accepted decline preserve D23 action and outcome locks",
+      "events": [
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "stream-a",
+            "contentHash": "stream-hash",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "stream-a",
+            "contentHash": "stream-hash",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "stream-a",
+            "contentHash": "stream-hash",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "stream-a",
+            "contentHash": "stream-hash",
+            "decision": "reject"
+          },
+          "humanFriendlyMessage": "Decline",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ],
+      "turns": [
+        {
+          "role": "action",
+          "action": {
+            "name": "ApprovalDecision",
+            "source": "ApprovalCard",
+            "values": {
+              "approvalId": "stream-a",
+              "contentHash": "stream-hash",
+              "decision": "reject"
+            },
+            "summary": "Decline"
+          }
+        },
+        {
+          "role": "assistant",
+          "content": "Recorded by local synthetic transport"
+        }
+      ]
+    },
+    {
+      "name": "Consumer builds all four platform commands, supplies deterministic retry metadata, rejects invalid contract input and formats millionths",
+      "bodies": [
+        {
+          "type": "OwnerMessage",
+          "messageId": "m-9",
+          "channel": "web",
+          "text": "Hello"
+        },
+        {
+          "type": "OwnerAnswer",
+          "questionId": "q-9",
+          "text": "Yes"
+        },
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "a-9",
+          "decision": "reject",
+          "contentHash": "hash-9"
+        },
+        {
+          "type": "CancelTask",
+          "taskId": "t-9"
+        }
+      ],
+      "full": [
+        {
+          "commandId": "c-0",
+          "at": "2026-11-19T12:00:00.000Z",
+          "type": "OwnerMessage",
+          "messageId": "m-9",
+          "channel": "web",
+          "text": "Hello"
+        },
+        {
+          "commandId": "c-1",
+          "at": "2026-11-19T12:00:00.000Z",
+          "type": "OwnerAnswer",
+          "questionId": "q-9",
+          "text": "Yes"
+        },
+        {
+          "commandId": "c-2",
+          "at": "2026-11-19T12:00:00.000Z",
+          "type": "ApprovalDecision",
+          "approvalId": "a-9",
+          "decision": "reject",
+          "contentHash": "hash-9"
+        },
+        {
+          "commandId": "c-3",
+          "at": "2026-11-19T12:00:00.000Z",
+          "type": "CancelTask",
+          "taskId": "t-9"
+        }
+      ],
+      "invalidDecision": false,
+      "extraField": false,
+      "money": [
+        "$0.00",
+        "$1.25",
+        "$20.00",
+        "$1,000.00"
+      ],
+      "arabic": "‏٢٠٫٠٠ US$",
+      "badMoney": true
+    }
+  ],
+  "errors": []
+}

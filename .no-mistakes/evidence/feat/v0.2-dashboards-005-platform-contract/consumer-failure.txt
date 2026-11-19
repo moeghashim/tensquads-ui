@@ -1,0 +1,17 @@
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('#owner').getByRole('status')
+Expected substring: "attempt 2"
+Received string:    "Checking order · Attempt 2"
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" locator('#owner').getByRole('status') with timeout 5000ms
+  - waiting for locator('#owner').getByRole('status')
+    14 × locator resolved to <div role="status" class="ts-chat__working ts-owner-message">…</div>
+       - unexpected value "Checking order · Attempt 2"
+
+    at captureRawStack ({run-worktree}/node_modules/playwright/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toContainText ({run-worktree}/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at {run-worktree}/.local-validation/drive.mjs:16:41

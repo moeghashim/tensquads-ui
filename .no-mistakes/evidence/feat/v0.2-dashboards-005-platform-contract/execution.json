@@ -1,0 +1,38 @@
+{
+  "baseline": "Outer configured mise exec -- npm run verify reported exit 127. Not rerun: assigned phase forbids full-suite and static analysis.",
+  "commands": [
+    {
+      "command": "npm ci",
+      "exit": 0
+    },
+    {
+      "command": "npm --prefix apps/preview ci",
+      "exit": 0
+    },
+    {
+      "command": "PLAYWRIGHT_HTML_OUTPUT_DIR=<evidence>/playwright-report npx playwright test e2e/platform-messages.spec.ts --workers=2 --reporter=line,html",
+      "exit": 0,
+      "includes": "Production preview build, eight live preview checks, axe and mobile overflow, 16 screenshots"
+    },
+    {
+      "command": "npx vitest run packages/ui/src/schemas/platform.test.ts packages/ui/src/react/ApprovalCard/ApprovalCard.test.tsx packages/ui/src/react/OwnerMessage/OwnerMessage.test.tsx packages/ui/src/react/ChatReply/ChatReply.test.tsx",
+      "exit": 0
+    },
+    {
+      "command": "node .local-validation/drive.mjs",
+      "exit": 0,
+      "setup": "Vite real-library disposable host at 127.0.0.1:5174; earlier harness selector scope error corrected"
+    },
+    {
+      "command": "node .local-validation/sdk-consumer.mjs",
+      "exit": 0,
+      "setup": "Built public SDK consumer and isolated localhost HTTP endpoint"
+    },
+    {
+      "command": "stop disposable Vite server via SIGINT",
+      "exit": 130,
+      "expected": true
+    }
+  ],
+  "limits": "Local synthetic validation only; no deployed platform or tenant was exercised. No source fixes were required. Browser children closed and servers stopped."
+}

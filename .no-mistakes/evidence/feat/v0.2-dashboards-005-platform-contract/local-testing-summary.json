@@ -1,0 +1,24 @@
+{
+  "configured_baseline": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npm run verify",
+    "exit": 1,
+    "source": "supplied by outer executor; failure output unavailable in phase prompt"
+  },
+  "targeted_production_browser": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx playwright test e2e/platform-messages.spec.ts --workers=2 --reporter=list",
+    "exit": 0,
+    "build": "production Vite build and Wrangler preview awaited by Playwright"
+  },
+  "disposable_consumer": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- node .local-validation/drive.mjs",
+    "exit": 0,
+    "setup_corrections": [
+      "Restricted literal-markup selector to the plain-text region; the error title intentionally uses strong.",
+      "Corrected expected English status copy to Attempt 2."
+    ]
+  },
+  "targeted_unit": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx vitest run packages/ui/src/schemas/platform.test.ts packages/ui/src/react/ApprovalCard/ApprovalCard.test.tsx packages/ui/src/react/OwnerMessage/OwnerMessage.test.tsx packages/ui/src/react/ChatReply/ChatReply.test.tsx",
+    "exit": 0
+  }
+}

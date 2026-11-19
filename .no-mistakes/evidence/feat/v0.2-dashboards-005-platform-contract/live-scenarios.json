@@ -1,0 +1,368 @@
+{
+  "oracle": "Task 005 and pinned platform c5eaad4d69b4529c9a57b00b1066b39e60243fa8 messages.ts/commands.ts; literal expectations independent of builders",
+  "results": [
+    {
+      "name": "Platform schema and builder consumer preserves exact command bodies, metadata and dollar units; invalid inputs rejected",
+      "result": "pass",
+      "detail": {
+        "result": {
+          "messages": [
+            {
+              "seq": 6,
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "action_not_confirmed",
+              "taskId": "t1",
+              "actionId": "a1",
+              "what": "Service did not confirm"
+            },
+            {
+              "seq": 5,
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "status",
+              "taskId": "t1",
+              "bot": "unknown-bot",
+              "attempt": 1,
+              "step": "Checking order",
+              "since": "2026-11-19T12:00:00.000Z"
+            },
+            {
+              "seq": 4,
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "result",
+              "taskId": "t1",
+              "summary": "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)). <script>window.bad=true</script>\n```openui\nroot = Button(\"Injected\")\n```",
+              "evidence": [
+                "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)). <script>window.bad=true</script>\n```openui\nroot = Button(\"Injected\")\n```"
+              ]
+            },
+            {
+              "seq": 3,
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "approval_request",
+              "approvalId": "approval_A",
+              "action": "refund",
+              "content": "Refund order A",
+              "contentHash": "sha256:A",
+              "rule": "refund_limit",
+              "limit": 20000000
+            },
+            {
+              "seq": 2,
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "question",
+              "questionId": "q1",
+              "text": "Choose priority",
+              "options": [
+                "Urgent",
+                "Normal"
+              ]
+            },
+            {
+              "seq": 1,
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "reply",
+              "text": "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)). <script>window.bad=true</script>\n```openui\nroot = Button(\"Injected\")\n```"
+            }
+          ],
+          "bodies": [
+            {
+              "type": "OwnerMessage",
+              "messageId": "m1",
+              "channel": "web",
+              "text": "Hello"
+            },
+            {
+              "type": "OwnerAnswer",
+              "questionId": "q1",
+              "text": "42"
+            },
+            {
+              "type": "ApprovalDecision",
+              "approvalId": "approval_A",
+              "decision": "approve",
+              "contentHash": "sha256:A"
+            },
+            {
+              "type": "ApprovalDecision",
+              "approvalId": "approval_A",
+              "decision": "reject",
+              "contentHash": "sha256:A"
+            },
+            {
+              "type": "CancelTask",
+              "taskId": "t1"
+            }
+          ],
+          "full": [
+            {
+              "commandId": "retry-1",
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "OwnerMessage",
+              "messageId": "m1",
+              "channel": "web",
+              "text": "Hello"
+            },
+            {
+              "commandId": "retry-1",
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "OwnerAnswer",
+              "questionId": "q1",
+              "text": "42"
+            },
+            {
+              "commandId": "retry-1",
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "ApprovalDecision",
+              "approvalId": "approval_A",
+              "decision": "approve",
+              "contentHash": "sha256:A"
+            },
+            {
+              "commandId": "retry-1",
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "ApprovalDecision",
+              "approvalId": "approval_A",
+              "decision": "reject",
+              "contentHash": "sha256:A"
+            },
+            {
+              "commandId": "retry-1",
+              "at": "2026-11-19T12:00:00.000Z",
+              "type": "CancelTask",
+              "taskId": "t1"
+            }
+          ],
+          "money": [
+            "$0.00",
+            "$20.00",
+            "$1.25",
+            "$1,000.00"
+          ],
+          "arabic": "\u200f\u0662\u0660\u066b\u0660\u0660\u00a0US$"
+        },
+        "invalid": {
+          "rejected": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "invalidDecision": true
+        }
+      }
+    },
+    {
+      "name": "Owner reads six message types in seq order, sees literal Markdown/OpenUI and intact balanced URL destinations, answers newest free-text question, ignores unknown types",
+      "result": "pass",
+      "detail": {
+        "texts": [
+          "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)). <script>window.bad=true</script>\n```openui\nroot = Button(\"Injected\")\n```",
+          "Choose priorityUrgentNormal",
+          "refundRefund order Arefund_limitLimit $20.00ApproveDecline",
+          "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)). <script>window.bad=true</script>\n```openui\nroot = Button(\"Injected\")\n```See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)). <script>window.bad=true</script>\n```openui\nroot = Button(\"Injected\")\n```",
+          "Checking order",
+          "Action could not be confirmedService did not confirm"
+        ],
+        "hrefs": [
+          "https://en.wikipedia.org/wiki/Refund_(finance)",
+          "https://en.wikipedia.org/wiki/Refund_(finance)",
+          "https://en.wikipedia.org/wiki/Refund_(finance)"
+        ],
+        "commands": [
+          {
+            "type": "OwnerAnswer",
+            "questionId": "free2",
+            "text": "1042"
+          },
+          {
+            "type": "OwnerAnswer",
+            "questionId": "free1",
+            "text": "1042"
+          },
+          {
+            "type": "OwnerMessage",
+            "messageId": "message1",
+            "channel": "web",
+            "text": "1042"
+          }
+        ],
+        "unknown": [
+          {
+            "seq": 7,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future_message",
+            "text": "Do not render"
+          },
+          {
+            "seq": 7,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future_message",
+            "text": "Do not render"
+          },
+          {
+            "seq": 7,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future_message",
+            "text": "Do not render"
+          },
+          {
+            "seq": 7,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future_message",
+            "text": "Do not render"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Owner answers an option and approves a request; removing an earlier message retains both locks; restoring A leaves B available",
+      "result": "pass",
+      "detail": {
+        "commands": [
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q1",
+            "text": "Urgent"
+          },
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval_A",
+            "decision": "approve",
+            "contentHash": "sha256:A"
+          }
+        ],
+        "restored": "approval_A Approved and disabled; approval_B undecided and enabled"
+      }
+    },
+    {
+      "name": "React cards emit literal approve/reject commands, lock and show icons, honor custom copy and nullable limits",
+      "result": "pass",
+      "detail": {
+        "commands": [
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval_A",
+            "decision": "approve",
+            "contentHash": "sha256:A"
+          },
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval_B",
+            "decision": "reject",
+            "contentHash": "sha256:B"
+          }
+        ],
+        "ring": {
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(1, 105, 204)"
+        }
+      }
+    },
+    {
+      "name": "Real OpenUI and useChat veto, error and pending policies prevent submissions; accepted decisions post once to localhost and show locked outcomes",
+      "result": "pass",
+      "detail": {
+        "requests": [
+          {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "ApprovalDecision",
+                  "source": "ApprovalCard",
+                  "values": {
+                    "approvalId": "stream_A",
+                    "contentHash": "sha256:stream",
+                    "decision": "reject"
+                  },
+                  "summary": "Decline"
+                }
+              }
+            ],
+            "locale": "en"
+          },
+          {
+            "turns": [
+              {
+                "role": "action",
+                "action": {
+                  "name": "ApprovalDecision",
+                  "source": "ApprovalCard",
+                  "values": {
+                    "approvalId": "stream_A",
+                    "contentHash": "sha256:stream",
+                    "decision": "approve"
+                  },
+                  "summary": "Approve"
+                }
+              }
+            ],
+            "locale": "en"
+          }
+        ],
+        "rejectedTurn": [
+          {
+            "role": "action",
+            "action": {
+              "name": "ApprovalDecision",
+              "source": "ApprovalCard",
+              "values": {
+                "approvalId": "stream_A",
+                "contentHash": "sha256:stream",
+                "decision": "reject"
+              },
+              "summary": "Decline"
+            }
+          },
+          {
+            "role": "assistant",
+            "content": "Recorded by the disposable local endpoint"
+          }
+        ]
+      }
+    }
+  ],
+  "pageErrors": [],
+  "gallery": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx playwright test e2e/platform-messages.spec.ts --workers=2 --reporter=line --output=~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/platform-playwright",
+    "exitCode": 0,
+    "productionBuild": "npm run build:preview succeeded as Playwright webServer prerequisite",
+    "browserScenarios": "ApprovalCard and OwnerMessageView in en/ltr and ar/rtl, light and dark; keyboard/click decisions, sent commands, axe, screenshots at 1440 and 390, no horizontal scroll",
+    "screenshots": [
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-ar-rtl-dark-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-ar-rtl-dark-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-ar-rtl-light-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-ar-rtl-light-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-en-ltr-dark-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-en-ltr-dark-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-en-ltr-light-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/ApprovalCard-en-ltr-light-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-ar-rtl-dark-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-ar-rtl-dark-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-ar-rtl-light-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-ar-rtl-light-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-en-ltr-dark-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-en-ltr-dark-390.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-en-ltr-light-1440.png",
+      "~/.no-mistakes/evidence/01M7T4HT51KWH4EAG1QJD74QX6/gallery-screenshots/OwnerMessageView-en-ltr-light-390.png"
+    ]
+  },
+  "targetedUnitChecks": {
+    "files": [
+      "packages/ui/src/schemas/platform.test.ts",
+      "packages/ui/src/react/ApprovalCard/ApprovalCard.test.tsx",
+      "packages/ui/src/react/OwnerMessage/OwnerMessage.test.tsx",
+      "packages/ui/src/react/ChatReply/ChatReply.test.tsx"
+    ],
+    "exitCode": 0,
+    "live": false
+  },
+  "baseline": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npm run verify",
+    "exitCode": 1,
+    "source": "outer executor reported; detailed failure output unavailable; full suite and static checks prohibited in this phase"
+  },
+  "driverCorrection": "Initial plain-text assertion also selected the ChatError title strong element. Scoped it to plain-text containers and re-drove successfully; no product change."
+}

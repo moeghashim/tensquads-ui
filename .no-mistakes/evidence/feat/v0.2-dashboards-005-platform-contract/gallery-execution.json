@@ -1,0 +1,14 @@
+{
+  "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx playwright test e2e/platform-messages.spec.ts --reporter=line --workers=2",
+  "exitCode": 0,
+  "server": "Production preview: vite build followed by wrangler dev, managed and stopped by Playwright",
+  "routes": ["/components/ApprovalCard", "/components/OwnerMessageView"],
+  "states": ["en/ltr/light", "en/ltr/dark", "ar/rtl/light", "ar/rtl/dark"],
+  "widths": [1440,390],
+  "observed": "Real clicks emitted ApprovalDecision and OwnerAnswer into Sent commands; approved outcomes rendered; all six owner message types rendered; axe and horizontal overflow checks passed",
+  "screenshots": "16 full-page PNGs named ApprovalCard-* and OwnerMessageView-*",
+  "visualReview": "Inspected Arabic RTL dark mobile ApprovalCard and owner locks after removal screenshots",
+  "consumerCommand": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- node .local-test/drive.mjs",
+  "consumerExitCode": 0,
+  "consumerSetup": "Disposable Vite app imported the real library React, OpenUI and schema public source entries; synthetic messages only. Evidence retains drive.mjs, consumer.tsx, vite.config.mjs and index.html; recreate them under .local-test to reproduce."
+}

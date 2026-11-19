@@ -1,0 +1,385 @@
+{
+  "reports": [
+    {
+      "name": "keyboard decisions en",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval_A",
+          "decision": "reject",
+          "contentHash": "sha256:A"
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ]
+    },
+    {
+      "name": "streaming veto rejection pending acceptance en",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "Approve",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "reject"
+          },
+          "humanFriendlyMessage": "Decline",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ]
+    },
+    {
+      "name": "useChat veto and accepted action en",
+      "details": [
+        {
+          "role": "action",
+          "action": {
+            "name": "ApprovalDecision",
+            "source": "ApprovalCard",
+            "values": {
+              "approvalId": "approval_A",
+              "contentHash": "sha256:A",
+              "decision": "reject"
+            },
+            "summary": "Decline"
+          }
+        },
+        {
+          "role": "assistant",
+          "content": "Recorded locally"
+        }
+      ]
+    },
+    {
+      "name": "restore scopes approval by id en",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval_B",
+          "decision": "reject",
+          "contentHash": "sha256:A"
+        }
+      ]
+    },
+    {
+      "name": "message order literal URLs unknown callback locks removal composer en",
+      "details": {
+        "ordered": [
+          "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```",
+          "Choose priorityNormalUrgent",
+          "refundRefund order Arefund_limitLimit $20.00ApproveDecline",
+          "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```",
+          "Checking",
+          "Action could not be confirmedNo service confirmation",
+          "Latest free textSend your answer in the message box.",
+          "Older by sequence?Send your answer in the message box."
+        ],
+        "commands": [
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q-options",
+            "text": "Urgent"
+          },
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval_A",
+            "decision": "approve",
+            "contentHash": "sha256:A"
+          },
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q-old",
+            "text": "Typed answer"
+          },
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q-new",
+            "text": "Typed answer"
+          }
+        ],
+        "unknown": [
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          },
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          },
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          },
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          }
+        ]
+      }
+    },
+    {
+      "name": "copy overrides React and OpenUI en",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval_A",
+          "decision": "reject",
+          "contentHash": "sha256:A"
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_B",
+            "contentHash": "hash:B",
+            "decision": "reject"
+          },
+          "humanFriendlyMessage": "Deny",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ]
+    },
+    {
+      "name": "keyboard decisions ar",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval_A",
+          "decision": "reject",
+          "contentHash": "sha256:A"
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "موافقة",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ]
+    },
+    {
+      "name": "streaming veto rejection pending acceptance ar",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "موافقة",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "موافقة",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "approve"
+          },
+          "humanFriendlyMessage": "موافقة",
+          "formName": "ApprovalCard",
+          "formState": {}
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_A",
+            "contentHash": "sha256:A",
+            "decision": "reject"
+          },
+          "humanFriendlyMessage": "رفض",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ]
+    },
+    {
+      "name": "useChat veto and accepted action ar",
+      "details": [
+        {
+          "role": "action",
+          "action": {
+            "name": "ApprovalDecision",
+            "source": "ApprovalCard",
+            "values": {
+              "approvalId": "approval_A",
+              "contentHash": "sha256:A",
+              "decision": "reject"
+            },
+            "summary": "رفض"
+          }
+        },
+        {
+          "role": "assistant",
+          "content": "Recorded locally"
+        }
+      ]
+    },
+    {
+      "name": "restore scopes approval by id ar",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval_B",
+          "decision": "reject",
+          "contentHash": "sha256:A"
+        }
+      ]
+    },
+    {
+      "name": "message order literal URLs unknown callback locks removal composer ar",
+      "details": {
+        "ordered": [
+          "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```",
+          "Choose priorityNormalUrgent",
+          "refundRefund order Arefund_limitالحد ‏٢٠٫٠٠ US$موافقةرفض",
+          "See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```See **literal** (https://en.wikipedia.org/wiki/Refund_(finance)).\n```openui\nroot = Button(\"Injected\")\n```",
+          "Checking",
+          "تعذّر تأكيد الإجراءNo service confirmation",
+          "Latest free textأرسل إجابتك في مربع الرسالة.",
+          "Older by sequence?أرسل إجابتك في مربع الرسالة."
+        ],
+        "commands": [
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q-options",
+            "text": "Urgent"
+          },
+          {
+            "type": "ApprovalDecision",
+            "approvalId": "approval_A",
+            "decision": "approve",
+            "contentHash": "sha256:A"
+          },
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q-old",
+            "text": "Typed answer"
+          },
+          {
+            "type": "OwnerAnswer",
+            "questionId": "q-new",
+            "text": "Typed answer"
+          }
+        ],
+        "unknown": [
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          },
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          },
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          },
+          {
+            "seq": 8,
+            "at": "2026-11-19T12:00:00.000Z",
+            "type": "future",
+            "text": "hidden future"
+          }
+        ]
+      }
+    },
+    {
+      "name": "copy overrides React and OpenUI ar",
+      "details": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval_A",
+          "decision": "reject",
+          "contentHash": "sha256:A"
+        },
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "approval_B",
+            "contentHash": "hash:B",
+            "decision": "reject"
+          },
+          "humanFriendlyMessage": "Deny",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
