@@ -395,9 +395,10 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 			label: copy.openBugs,
 			value: String(bugs.length),
 			delta: {
-				text: locale === "ar" && highBugs === 2
-					? copy.highBugsDual
-					: copy.highBugs.replace("{count}", numberText(highBugs)),
+				text:
+					locale === "ar" && highBugs === 2
+						? copy.highBugsDual
+						: copy.highBugs.replace("{count}", numberText(highBugs)),
 				tone: "negative" as const,
 			},
 		},
