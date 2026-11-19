@@ -5,7 +5,7 @@
 	.ts-bar-chart__plot { position: relative; display: flex; flex-direction: column; justify-content: space-between; block-size: 12rem; padding-inline-start: 2rem; border-block-end: thin solid var(--ts-border-strong); }
 	.ts-bar-chart__gridline { position: relative; block-size: 0; border-block-start: thin solid var(--ts-border); }
 	.ts-bar-chart__gridline > span { position: absolute; inset-inline-end: calc(100% + var(--ts-space-2)); transform: translateY(-50%); color: var(--ts-text-secondary); font-size: 11px; font-variant-numeric: tabular-nums; }
-	.ts-bar-chart__columns { position: absolute; inset: 0 0 0 2rem; display: flex; align-items: stretch; justify-content: space-between; gap: var(--ts-space-2); }
+	.ts-bar-chart__columns { position: absolute; inset-block: 0; inset-inline: 2rem 0; display: flex; align-items: stretch; justify-content: space-between; gap: var(--ts-space-2); }
 	.ts-bar-chart__column { position: relative; flex: 1 0 min(28px, 8%); max-inline-size: 28px; min-inline-size: 14px; display: flex; align-items: flex-end; justify-content: center; padding: 0; border: 0; background: transparent; cursor: pointer; }
 	.ts-bar-chart__column:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.ts-bar-chart__stack { inline-size: 100%; max-block-size: 100%; display: flex; flex-direction: column-reverse; gap: 2px; overflow: hidden; border-radius: var(--ts-radius-sm) var(--ts-radius-sm) 0 0; }

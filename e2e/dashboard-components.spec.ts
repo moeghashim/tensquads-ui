@@ -100,6 +100,22 @@ for (const locale of ["en", "ar"] as const) {
 				await expectAccessible(page);
 				for (const width of [1440, 390]) {
 					await page.setViewportSize({ width, height: 900 });
+					if (name === "BarChart") {
+						const positions = await page.locator(".component-list .ts-bar-chart").evaluate((chart) => {
+							const bounds = (selector: string) =>
+								Array.from(chart.querySelectorAll(selector), (element) => {
+									const { x, width } = element.getBoundingClientRect();
+									return { x, width };
+								});
+							return { columns: bounds(".ts-bar-chart__column"), ticks: bounds(".ts-bar-chart__tick") };
+						});
+						expect(positions.columns).toHaveLength(14);
+						expect(positions.ticks).toHaveLength(14);
+						for (const [index, column] of positions.columns.entries()) {
+							expect(column.x).toBeCloseTo(positions.ticks[index]!.x, 0);
+							expect(column.width).toBeCloseTo(positions.ticks[index]!.width, 0);
+						}
+					}
 					await capturePreviewScreenshots(page, testInfo, `${name}-${locale}-${direction}-${theme}`, [width]);
 				}
 				await expectNoHorizontalScroll(page);
