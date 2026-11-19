@@ -1,7 +1,10 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
+import { useState } from "react";
+import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import { Card } from "../../../../packages/ui/src/react/Card/Card";
 import {
 	Chat,
 	ChatComposer,
@@ -14,6 +17,13 @@ import { useChat } from "../../../../packages/ui/src/react/Chat/useChat";
 import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
 import {
+	DataTable,
+	EntityCell,
+	PersonCell,
+	StackCell,
+	StatusCell,
+} from "../../../../packages/ui/src/react/DataTable/DataTable";
+import {
 	Dialog,
 	DialogBackdrop,
 	DialogClose,
@@ -22,6 +32,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "../../../../packages/ui/src/react/Dialog/Dialog";
+import { EmptyState } from "../../../../packages/ui/src/react/EmptyState/EmptyState";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
 import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import {
@@ -32,16 +43,27 @@ import {
 	MenuSeparator,
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
+import { OwnerMessageView } from "../../../../packages/ui/src/react/OwnerMessage/OwnerMessage";
+import { PageHeader } from "../../../../packages/ui/src/react/PageHeader/PageHeader";
 import {
 	SegmentedControl,
 	SegmentedControlIndicator,
 	SegmentedControlItem,
 } from "../../../../packages/ui/src/react/SegmentedControl/SegmentedControl";
 import {
+	Sidebar,
+	SidebarAgent,
+	SidebarBrand,
+	SidebarItem,
+	SidebarSection,
+	SidebarUser,
+} from "../../../../packages/ui/src/react/Sidebar/Sidebar";
+import {
 	Squadmate,
 	squadmateCharacterName,
 	squadmateStateLabel,
 } from "../../../../packages/ui/src/react/Squadmate/Squadmate";
+import { StatTile } from "../../../../packages/ui/src/react/StatTile/StatTile";
 import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
 import {
 	Tooltip,
@@ -67,7 +89,13 @@ const documents = import.meta.glob<string>("../../../../packages/ui/src/react/*/
 	query: "?raw",
 	import: "default",
 });
-const componentOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
+const componentOrder = [
+	...getRegisteredComponents().map(({ name }) => name),
+	"OwnerMessageView",
+	"Chat",
+	"ChatReply",
+	"Sidebar",
+];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
 
@@ -76,8 +104,9 @@ function ComponentPage() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale].componentPage;
-	const markdown = documents[`../../../../packages/ui/src/react/${name}/${name}.md`];
-	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	const sourceName = name === "OwnerMessageView" ? "OwnerMessage" : name;
+	const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`];
+	const stream = fixtures[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.fixture.${locale}.txt`];
 	const index = componentOrder.indexOf(name);
 	const previous = index > 0 ? componentOrder[index - 1] : undefined;
 	const next = index >= 0 ? componentOrder[index + 1] : undefined;
@@ -122,16 +151,18 @@ function ComponentPage() {
 					<ChatActionExample locale={locale} />
 				</section>
 			)}
-			<div className="component-doc-page__section">
-				<h2 id="component-fixture-heading">{copy.fixture}</h2>
-				{!stream && <p>{noFixtureReason ?? copy.noFixture}</p>}
-				{stream && (
-					<details className="fixture-source">
-						<summary>{copy.fixtureSource}</summary>
-						<ExampleCodeBlock code={stream.trim()} />
-					</details>
-				)}
-			</div>
+			{name !== "Sidebar" && (
+				<div className="component-doc-page__section">
+					<h2 id="component-fixture-heading">{copy.fixture}</h2>
+					{!stream && <p>{noFixtureReason ?? copy.noFixture}</p>}
+					{stream && (
+						<details className="fixture-source">
+							<summary>{copy.fixtureSource}</summary>
+							<ExampleCodeBlock code={stream.trim()} />
+						</details>
+					)}
+				</div>
+			)}
 			<nav className="component-doc-nav" aria-label={copy.pageNavigation}>
 				{previous ? (
 					<Link to="/components/$name" params={{ name: previous }} search={search as never} rel="prev">
@@ -182,7 +213,7 @@ function ChatActionExample({ locale }: { locale: "en" | "ar" }) {
 							locale={locale}
 							reply={turn.content}
 							locked={(blockId) => chat.locked.has(`${turnIndex}/${blockId}`)}
-							onAction={(event, blockId) => void chat.act(event, `${turnIndex}/${blockId}`)}
+							onAction={(event, blockId) => chat.act(event, `${turnIndex}/${blockId}`)}
 						/>
 					);
 				}
@@ -242,7 +273,7 @@ function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }
 				locale={locale}
 				isStreaming={chat.busy}
 				locked={(id) => chat.locked.has(id)}
-				onAction={(event, id) => void chat.act(event, id)}
+				onAction={(event, id) => chat.act(event, id)}
 			/>
 			{chat.turns.map((turn) =>
 				turn.role === "action" ? (
@@ -257,11 +288,213 @@ function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }
 	);
 }
 
+function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stream: string | null; empty: boolean }) {
+	const [selectedId, setSelectedId] = useState("acme");
+	const [query, setQuery] = useState(empty ? (locale === "ar" ? "شركة غير موجودة" : "Unmatched company") : "");
+	const [filter, setFilter] = useState<string | null>("all");
+	const ar = locale === "ar";
+	const companies = [
+		{
+			id: "acme",
+			name: "Acme Studio",
+			status: "active",
+			cells: {
+				company: (
+					<EntityCell
+						initials="AC"
+						name="Acme Studio"
+						detail={
+							ar
+								? "متجر تجريبي / الوصول إلى مليون دولار من المبيعات السنوية"
+								: "DS / Demo store / Reach $1M in annual sales"
+						}
+						tint="primary"
+					/>
+				),
+				owner: <PersonCell name="Maya Chen" email="maya@example.com" />,
+				plan: (
+					<StackCell
+						primary={ar ? "١٤٩ دولاراً / شهرياً" : "$149 / mo"}
+						secondary={ar ? "الفوترة شهرياً" : "Billed monthly"}
+					/>
+				),
+				status: <StatusCell label={ar ? "نشطة" : "Active"} />,
+			},
+		},
+		{
+			id: "northstar",
+			name: "Northstar",
+			status: "trial",
+			cells: {
+				company: (
+					<EntityCell
+						initials="NS"
+						name="Northstar"
+						detail={ar ? "متجر إلكتروني / ٣ أعضاء في الفريق" : "Online store / 3 team members"}
+						tint="success"
+					/>
+				),
+				owner: <PersonCell name="Omar Saleh" email="omar@example.com" />,
+				plan: (
+					<StackCell
+						primary={ar ? "٧٩ دولاراً / شهرياً" : "$79 / mo"}
+						secondary={ar ? "الفوترة شهرياً" : "Billed monthly"}
+					/>
+				),
+				status: <StatusCell label={ar ? "تجربة" : "Trial"} />,
+			},
+		},
+	];
+	const visibleCompanies = companies.filter(
+		(company) =>
+			(filter === "all" || company.status === filter) &&
+			company.name.toLowerCase().includes(query.trim().toLowerCase()),
+	);
+	const number = new Intl.NumberFormat(locale);
+	return (
+		<div className="gallery dashboard-component-preview component-list">
+			<Card
+				flush
+				title={
+					ar
+						? `كل الشركات (${number.format(visibleCompanies.length)} من ${number.format(companies.length)})`
+						: `All companies (${visibleCompanies.length} of ${companies.length})`
+				}
+				actions={
+					<div className="ts-data-table__toolbar">
+						<Input
+							value={query}
+							onValueChange={setQuery}
+							aria-label={ar ? "البحث عن الشركات" : "Search companies"}
+							placeholder={ar ? "البحث عن الشركات" : "Search companies"}
+						/>
+						<SegmentedControl
+							aria-label={ar ? "حالة الشركة" : "Company status"}
+							value={filter}
+							onValueChange={setFilter}
+						>
+							<SegmentedControlIndicator />
+							{["all", "active", "trial", "paused"].map((value, index) => (
+								<SegmentedControlItem key={value} value={value}>
+									{(ar ? ["الكل", "نشطة", "تجربة", "متوقفة"] : ["All", "Active", "Trial", "Paused"])[index]}
+								</SegmentedControlItem>
+							))}
+						</SegmentedControl>
+					</div>
+				}
+			>
+				{visibleCompanies.length === 0 ? (
+					<EmptyState
+						title={ar ? "لا تطابق أي شركة البحث" : "No companies match"}
+						description={ar ? "امسح البحث لعرض جميع الشركات." : "Clear the search to see all companies."}
+						action={
+							<Button
+								pill
+								onClick={() => {
+									setQuery("");
+									setFilter("all");
+								}}
+							>
+								{ar ? "مسح البحث" : "Clear search"}
+							</Button>
+						}
+					/>
+				) : (
+					<DataTable
+						caption={ar ? "الشركات" : "Companies"}
+						columns={[
+							{ key: "company", label: ar ? "الشركة" : "Company" },
+							{ key: "owner", label: ar ? "المالك" : "Owner" },
+							{ key: "plan", label: ar ? "الخطة" : "Plan", align: "end" },
+							{ key: "status", label: ar ? "الحالة" : "Status" },
+						]}
+						rows={visibleCompanies}
+						selectedId={selectedId}
+						onRowSelect={setSelectedId}
+					/>
+				)}
+			</Card>
+			<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+				<TensquadsRenderer stream={stream} locale={locale} />
+			</section>
+		</div>
+	);
+}
+
 function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
+	if (name === "DataTable" || name === "EmptyState") {
+		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
+	}
+	if (name === "ApprovalCard") return <ApprovalCardPreview locale={locale} stream={stream ?? null} />;
+	if (name === "OwnerMessageView") return <OwnerMessagePreview locale={locale} />;
+	if (["Card", "PageHeader", "StatTile"].includes(name)) {
+		const ar = locale === "ar";
+		const tileLabels = ar
+			? ["الإيرادات", "الطلبات", "التحويل", "متوسط الطلب", "الزيارات", "العملاء"]
+			: ["Revenue", "Orders", "Conversion", "Avg. order", "Visits", "Customers"];
+		return (
+			<div className="gallery dashboard-component-preview">
+				{name === "PageHeader" ? (
+					<PageHeader
+						headingLevel={2}
+						title={ar ? "نظرة عامة" : "Overview"}
+						subtitle={ar ? "ملخص نشاط المتجر خلال هذا الأسبوع" : "A summary of store activity this week"}
+						actions={<Button pill>{ar ? "تصدير التقرير" : "Export report"}</Button>}
+						meta={
+							<>
+								<Badge tone="info">{ar ? "بيانات تجريبية" : "Demo data"}</Badge>
+								<span>{ar ? "٥٣ متجراً متصلاً الآن" : "53 stores online now"}</span>
+							</>
+						}
+					/>
+				) : name === "Card" ? (
+					<div className="dashboard-component-preview__cards">
+						<Card
+							title={ar ? "الطلبات المفتوحة" : "Open orders"}
+							subtitle={ar ? "خلال آخر ٧ أيام" : "Over the last 7 days"}
+							count="3"
+							legend={[{ label: ar ? "مكتمل" : "Complete" }, { label: ar ? "قيد الانتظار" : "Pending" }]}
+							footer={ar ? "عرض كل الطلبات" : "View all orders"}
+						>
+							<div className="dashboard-component-preview__body">{ar ? "محتوى البطاقة" : "Card body"}</div>
+						</Card>
+						<Card flush title={ar ? "تفاصيل الطلبات" : "Order details"}>
+							<div className="dashboard-component-preview__body">
+								{ar ? "محتوى بعرض البطاقة" : "Edge-to-edge content"}
+							</div>
+						</Card>
+						<Card variant="inset" title={ar ? "عنصر موافقة" : "Approval item"}>
+							<p>{ar ? "تم تحديث تفاصيل الطلب" : "Order details were updated"}</p>
+						</Card>
+					</div>
+				) : (
+					<div className="ts-stat-grid">
+						{tileLabels.map((label, index) => (
+							<StatTile
+								key={label}
+								label={label}
+								value={["$14,568", "1,284", "3.8%", "$68.40", "14,568", "936"][index] ?? "0"}
+								delta={
+									index % 3 === 1
+										? { text: ar ? "−٢٫١٪ مقارنة بالأسبوع الماضي" : "−2.1% vs last week", tone: "negative" }
+										: { text: ar ? "+١٢٪ مقارنة بالأسبوع الماضي" : "+12% vs last week", tone: "positive" }
+								}
+								series={index === 5 ? null : [3, 5, 4, 8, 6, 9, 7]}
+							/>
+						))}
+					</div>
+				)}
+				<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+					<TensquadsRenderer stream={stream ?? null} locale={locale} />
+				</section>
+			</div>
+		);
+	}
 	if (name === "Form" && stream) return <FormExample locale={locale} stream={stream} />;
 	if (name === "Chat") {
 		const ar = locale === "ar";
@@ -1079,9 +1312,11 @@ ${menuContentsCode}
 	}
 	return (
 		<div className="gallery">
-			<Link to="/components" search={search as never}>
-				Back to gallery
-			</Link>
+			{!(["BarChart", "Bars", "Distribution"] as string[]).includes(name) && (
+				<Link to="/components" search={search as never}>
+					Back to gallery
+				</Link>
+			)}
 			<p className="eyebrow">Component preview</p>
 			<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>
 				{stream ? (
@@ -1091,6 +1326,198 @@ ${menuContentsCode}
 				)}
 			</section>
 		</div>
+	);
+}
+
+function SidebarPreview({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const icon = (path: string) => (
+		<svg
+			aria-hidden="true"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="1.7"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<path d={path} />
+		</svg>
+	);
+	return (
+		<div className="sidebar-preview">
+			<Sidebar label={ar ? "التنقل الجانبي" : "Main navigation"} mobileLabel={ar ? "فتح التنقل" : "Open navigation"}>
+				<SidebarBrand
+					icon={icon("M4 5h16v14H4z M8 9h8 M8 13h5")}
+					title={ar ? "منصة الإدارة" : "Platform admin"}
+					subtitle={ar ? "حساب شركتك" : "Your company account"}
+				/>
+				<SidebarSection label={ar ? "المساحة" : "Workspace"}>
+					<SidebarItem icon={icon("M3 10.5 12 3l9 7.5v9H3z M9 19v-6h6v6")} active>
+						{ar ? "نظرة عامة" : "Overview"}
+					</SidebarItem>
+					<SidebarItem icon={icon("M4 5h16v14H4z M8 9h8 M8 13h5")} count={8}>
+						{ar ? "الشركات" : "Companies"}
+					</SidebarItem>
+					<SidebarItem icon={icon("M5 19V9l7-5 7 5v10 M9 19v-5h6v5")} render={<a href="#squads" />}>
+						{ar ? "الفرق" : "Squads"}
+					</SidebarItem>
+				</SidebarSection>
+				<SidebarSection label={ar ? "قريباً" : "Coming next"}>
+					<SidebarItem icon={icon("M4 5h16v14H4z")} disabled>
+						{ar ? "الفوترة" : "Billing"}
+					</SidebarItem>
+				</SidebarSection>
+				<SidebarUser initials="MG" name="Moe Ghashim" userRole={ar ? "مدير المنصة" : "Platform admin"} />
+			</Sidebar>
+			<div className="sidebar-preview__content">
+				<div className="sidebar-preview__squad">
+					<SidebarAgent
+						agent="petra"
+						state="planning"
+						name={ar ? "بترا" : "Petra"}
+						roleLabel=""
+						status="online"
+						featured
+						meta={ar ? "تدير ٥ فرق · متجر تجريبي" : "Runs 5 squads · Demo store"}
+						locale={locale}
+					/>
+					<SidebarAgent
+						agent="pisa"
+						state="running"
+						name={ar ? "بيزا" : "Pisa"}
+						roleLabel={ar ? "الطلبات" : "Orders"}
+						status="online"
+						locale={locale}
+					/>
+					<SidebarAgent
+						agent="kyoto"
+						state="idle"
+						name={ar ? "كيوتو" : "Kyoto"}
+						roleLabel={ar ? "المخزون" : "Inventory"}
+						status="idle"
+						locale={locale}
+					/>
+				</div>
+				<div className="sidebar-preview__placeholder">
+					<h2>{ar ? "نظرة عامة" : "Overview"}</h2>
+					<p>{ar ? "محتوى لوحة التحكم" : "Dashboard content"}</p>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function ApprovalCardPreview({ locale, stream }: { locale: "en" | "ar"; stream: string | null }) {
+	const ar = locale === "ar";
+	const [commands, setCommands] = useState<unknown[]>([]);
+	return (
+		<div className="owner-message-preview">
+			<ApprovalCard
+				locale={locale}
+				actionLabels={{ refund: ar ? "استرداد" : "Refund" }}
+				bot="petra"
+				taskId="task_42"
+				request={{
+					approvalId: "approval_42",
+					action: "refund",
+					content: ar ? "استرداد قيمة الطلب ١٠٤٢" : "Refund order 1042",
+					contentHash: "sha256:42",
+					rule: "refund_limit",
+					limit: 20_000_000,
+				}}
+				onDecision={(command) => setCommands((sent) => [...sent, command])}
+			/>
+			<SentCommands commands={commands} locale={locale} />
+			<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
+				<TensquadsRenderer
+					stream={stream}
+					locale={locale}
+					onAction={(event) => setCommands((sent) => [...sent, event])}
+				/>
+			</section>
+		</div>
+	);
+}
+
+function OwnerMessagePreview({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const [commands, setCommands] = useState<unknown[]>([]);
+	const at = "2026-11-19T12:00:00.000Z";
+	const messages = [
+		{
+			seq: 1,
+			at,
+			type: "reply",
+			text: ar
+				? "تم استلام طلبك. https://example.com/order/42"
+				: "I received your request. https://example.com/order/42",
+		},
+		{
+			seq: 2,
+			at,
+			type: "question",
+			questionId: "question_42",
+			text: ar ? "ما أولوية معالجة الطلب؟" : "Which priority should I use?",
+			options: ar ? ["عادي", "عاجل"] : ["Standard", "Urgent"],
+		},
+		{
+			seq: 3,
+			at,
+			type: "approval_request",
+			approvalId: "approval_42",
+			action: "refund",
+			content: ar ? "استرداد قيمة الطلب ١٠٤٢" : "Refund order 1042",
+			contentHash: "sha256:42",
+			rule: "refund_limit",
+			limit: 20_000_000,
+		},
+		{
+			seq: 4,
+			at,
+			type: "result",
+			taskId: "task_42",
+			summary: ar ? "تم تحديث الطلب." : "The order was updated.",
+			evidence: [ar ? "https://example.com/order/42" : "https://example.com/order/42"],
+		},
+		{
+			seq: 5,
+			at,
+			type: "status",
+			taskId: "task_42",
+			bot: "petra",
+			attempt: 2,
+			step: ar ? "التحقق من الطلب" : "Checking the order",
+			since: at,
+		},
+		{
+			seq: 6,
+			at,
+			type: "action_not_confirmed",
+			taskId: "task_42",
+			actionId: "action_42",
+			what: ar ? "لم يصل تأكيد من خدمة الطلبات." : "The order service did not confirm the action.",
+		},
+	] as const;
+	return (
+		<div className="owner-message-preview">
+			<OwnerMessageView
+				messages={messages}
+				locale={locale}
+				actionLabels={{ refund: ar ? "استرداد" : "Refund" }}
+				onCommand={(command) => setCommands((sent) => [...sent, command])}
+			/>
+			<SentCommands commands={commands} locale={locale} />
+		</div>
+	);
+}
+
+function SentCommands({ commands, locale }: { commands: unknown[]; locale: "en" | "ar" }) {
+	return (
+		<section className="sent-commands" aria-label={locale === "ar" ? "الأوامر المرسلة" : "Sent commands"}>
+			<h2>{locale === "ar" ? "الأوامر المرسلة" : "Sent commands"}</h2>
+			<pre>{JSON.stringify(commands, null, 2)}</pre>
+		</section>
 	);
 }
 

@@ -2,16 +2,24 @@ import { expect, test } from "@playwright/test";
 import { getRegisteredComponents } from "../packages/ui/src/openui";
 import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
-const registryOrder = [...getRegisteredComponents().map(({ name }) => name), "Chat", "ChatReply"];
+const registryOrder = [
+	...getRegisteredComponents().map(({ name }) => name),
+	"OwnerMessageView",
+	"Chat",
+	"ChatReply",
+	"Sidebar",
+];
 
-test("component docs load in English and Arabic with localized fixtures", async ({ page }) => {
+test("component index lists every documented component", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");
 	const names = await page.locator(".component-card__link strong").allTextContents();
-	expect(names.length).toBeGreaterThan(0);
+	expect(names).toEqual([...registryOrder].sort());
+});
 
-	for (const locale of ["en", "ar"] as const) {
-		const direction = locale === "ar" ? "rtl" : "ltr";
-		for (const name of names) {
+for (const locale of ["en", "ar"] as const) {
+	const direction = locale === "ar" ? "rtl" : "ltr";
+	for (const name of registryOrder) {
+		test(`${name} docs load in ${locale} with localized fixtures`, async ({ page }) => {
 			await openPreview(page, { locale, direction, theme: "light" }, `/components/${name}`);
 			await expect(page.locator(".component-doc-page__header h1")).toHaveText(name);
 			const docs = page.locator(".markdown-document");
@@ -27,10 +35,15 @@ test("component docs load in English and Arabic with localized fixtures", async 
 				page.getByRole("heading", { name: locale === "ar" ? "أمثلة تفاعلية" : "Live examples" }),
 			).toBeVisible();
 			if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
+			else if (["ApprovalCard", "OwnerMessageView"].includes(name))
+				await expect(page.locator(".owner-message-preview")).toBeVisible();
+			else if (name === "DataTable") await expect(page.getByRole("table").first()).toBeVisible();
+			else if (name === "EmptyState") await expect(page.locator("[data-slot='empty-state']").first()).toBeVisible();
+			else if (name === "Sidebar") await expect(page.locator(".sidebar-preview")).toBeVisible();
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
-			} else {
+			} else if (name !== "Sidebar") {
 				await expect(page.locator(".fixture-source summary")).toHaveText(
 					locale === "ar" ? "عرض مصدر العينة" : "Show fixture source",
 				);
@@ -52,9 +65,9 @@ test("component docs load in English and Arabic with localized fixtures", async 
 			}
 			await expectAccessible(page);
 			await expectNoHorizontalScroll(page);
-		}
+		});
 	}
-});
+}
 
 test("component code examples copy and show confirmation", async ({ page }) => {
 	await openPreview(page, { locale: "ar", direction: "rtl", theme: "dark" }, "/components/Dialog");

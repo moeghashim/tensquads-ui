@@ -1,0 +1,1 @@
+root = Card("Companies by plan", "Active companies and squads", null, [Bars([{label: "Growth", value: 4, display: "4 companies, 27 squads", tone: "info"}, {label: "Starter", value: 2, display: "2 companies, 5 squads"}], "progress", "Average of 7.3 squads per company")], null, false, "default")

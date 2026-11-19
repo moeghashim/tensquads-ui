@@ -85,6 +85,43 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(
 					fixtureRegion.getByRole("radiogroup", { name: locale === "en" ? "View" : "العرض" }),
 				).toBeVisible();
+			} else if (component.name === "Card") {
+				await expect(
+					fixtureRegion.getByRole("heading", { name: locale === "en" ? "Revenue" : "الإيرادات" }),
+				).toBeVisible();
+				await expect(fixtureRegion.getByText(locale === "en" ? "Orders" : "الطلبات")).toBeVisible();
+			} else if (component.name === "PageHeader") {
+				await expect(
+					fixtureRegion.getByRole("heading", { name: locale === "en" ? "Overview" : "نظرة عامة" }),
+				).toBeVisible();
+			} else if (component.name === "StatTile") {
+				await expect(fixtureRegion.getByText(locale === "en" ? "Revenue" : "الإيرادات")).toBeVisible();
+				const sparkline = fixtureRegion.getByRole("img", {
+					name: locale === "en" ? "Revenue" : "الإيرادات",
+				});
+				await expect(sparkline).toBeVisible();
+				await expect(sparkline).toHaveCSS("transform", locale === "en" ? "none" : "matrix(-1, 0, 0, 1, 0, 0)");
+			} else if (component.name === "ApprovalCard") {
+				await expect(
+					fixtureRegion.getByRole("heading", { name: locale === "en" ? "Refund" : "استرداد" }),
+				).toBeVisible();
+				await expect(fixtureRegion.getByText("ApprovalDecision")).toHaveCount(0);
+				await expect(
+					fixtureRegion.getByRole("button", { name: locale === "en" ? "Approve" : "موافقة" }),
+				).toBeVisible();
+			} else if (["BarChart", "Bars", "Distribution"].includes(component.name)) {
+				const slot = component.name === "BarChart" ? "bar-chart" : component.name.toLowerCase();
+				await expect(fixtureRegion.locator(`[data-slot="${slot}"]`)).toBeVisible();
+			} else if (component.name === "DataTable") {
+				await expect(fixtureRegion.getByRole("table")).toBeVisible();
+			} else if (component.name === "EmptyState") {
+				await expect(fixtureRegion.locator("[data-slot='empty-state']")).toBeVisible();
+			} else if (component.name === "ChatLauncher") {
+				await expect(
+					fixtureRegion.getByRole("button", {
+						name: locale === "en" ? /Ask Petra.*4 waiting/ : /اسأل بيترا.*٤ بانتظارك/,
+					}),
+				).toBeVisible();
 			} else {
 				const label =
 					component.name === "Input"

@@ -12,18 +12,30 @@ The library ships these components today. Each row links to its reference and it
 
 | Component | What it is | Live |
 |---|---|---|
+| [ApprovalCard](packages/ui/src/react/ApprovalCard/ApprovalCard.md) | An approval request with approve and decline actions. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ApprovalCard) |
 | [Badge](packages/ui/src/react/Badge/Badge.md) | A non-interactive label that names a state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Badge) |
+| [BarChart](packages/ui/src/react/BarChart/BarChart.md) | A vertical chart of values over time, with optional stacked series. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/BarChart) |
+| [Bars](packages/ui/src/react/Bars/Bars.md) | Ranked horizontal bars or compact progress rows. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Bars) |
 | [Button](packages/ui/src/react/Button/Button.md) | An accessible button that runs an action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Button) |
+| [Card](packages/ui/src/react/Card/Card.md) | A dashboard panel with a title, one body, optional count and footer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Card) |
 | [Chat](packages/ui/src/react/Chat/Chat.md) | Chat parts build a chat surface: a scrolling log, user messages, agent replies, working and error lines, and a composer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chat) |
+| [ChatLauncher](packages/ui/src/react/ChatLauncher/ChatLauncher.md) | A floating button that opens the assistant chat. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatLauncher) |
 | [ChatReply](packages/ui/src/react/ChatReply/ChatReply.md) | ChatReply renders Markdown text and fenced `openui` blocks in reading order. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatReply) |
 | [Chip](packages/ui/src/react/Chip/Chip.md) | A pill that opens an attached object such as an output schema or tool. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chip) |
+| [DataTable](packages/ui/src/react/DataTable/DataTable.md) | A selectable table of records with labelled columns. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/DataTable) |
 | [Dialog](packages/ui/src/react/Dialog/Dialog.md) | A focused modal window that explains a task and offers a clear action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Dialog) |
+| [Distribution](packages/ui/src/react/Distribution/Distribution.md) | A whole split into ranked grey parts. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Distribution) |
+| [EmptyState](packages/ui/src/react/EmptyState/EmptyState.md) | A quiet empty view that explains what will fill the space. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/EmptyState) |
 | [Field](packages/ui/src/react/Field/Field.md) | A labeled text input with optional description and validation message. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Field) |
 | [Form](packages/ui/src/react/Form/Form.md) | A named form of text fields, switches, segmented controls, and optional action buttons. Submit sends their current values as a chat action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form) |
 | [Input](packages/ui/src/react/Input/Input.md) | A named single-line text input. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Input) |
 | [Menu](packages/ui/src/react/Menu/Menu.md) | A button menu with up to six serializable actions. Each action has a label and value, with optional danger and disabled states. A destructive action is placed last after a separator. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Menu) |
+| [OwnerMessageView](packages/ui/src/react/OwnerMessage/OwnerMessage.md) | Pass the owner messages as `messages`. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/OwnerMessageView) |
+| [PageHeader](packages/ui/src/react/PageHeader/PageHeader.md) | A page heading with a title, one subtitle, optional metadata and actions. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/PageHeader) |
 | [SegmentedControl](packages/ui/src/react/SegmentedControl/SegmentedControl.md) | An accessible exclusive selection control for two or more modes. Inside a Form it submits its selected value by name. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/SegmentedControl) |
+| [Sidebar](packages/ui/src/react/Sidebar/Sidebar.md) | `Sidebar` is app navigation and has no OpenUI definition because navigation belongs to application chrome, not streamed content. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Sidebar) |
 | [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md) | An accessible image of a tensquads agent in a loop state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Squadmate) |
+| [StatTile](packages/ui/src/react/StatTile/StatTile.md) | A headline metric with an optional delta, unit, footnote and trend sparkline. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/StatTile) |
 | [Switch](packages/ui/src/react/Switch/Switch.md) | An accessible switch for turning a setting on or off. Inside a Form it submits its named boolean value. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch) |
 | [Tooltip](packages/ui/src/react/Tooltip/Tooltip.md) | A short hint shown when a control receives focus or hover. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Tooltip) |
 
@@ -37,7 +49,7 @@ Browse the component gallery at `/components` and select a component name to ope
 
 Open `/chat` to see a scripted Petra conversation routed through squadmates. The inline OpenUI form becomes an action turn, locks after approval, and the follow-up uses the submitted values. The follow-up trims the store name and update frequency. Missing, empty, or whitespace-only values fall back to “your store” and “Weekly” in English, or “متجرك” and “أسبوعي” in Arabic. Replay, below the chat, restarts the conversation. Typed messages receive a fixed reply because the site has no live model or API key.
 
-Each component page displays its reference from `packages/ui/src/react/<name>/<name>.md` and live examples. OpenUI components also show a fixture in the selected language. ChatReply uses a mixed Markdown and OpenUI fixture. `/components/Chat` shows a React conversation. Chat and ChatReply pages also include a local action-turn example; the Form page includes a local submission example. These examples use mock replies without network requests. See the [Chat contract](packages/ui/src/react/Chat/Chat.md) for its surface API and OpenUI boundary. Section labels follow the site language; the reference text remains in English and reads left to right, including on Arabic pages. The Usage section appears only when the reference document contains code samples. Use Copy beside a code block and wait for the visible confirmation. Expand Show fixture source to read or copy the OpenUI source where available. Previous and Next links follow component registry order, with Chat and then ChatReply appended after the registered components.
+Each component page displays its reference from `packages/ui/src/react/<name>/<name>.md` and live examples. OwnerMessageView uses the reference in the `OwnerMessage` folder. OpenUI components also show a fixture in the selected language. ChatReply uses a mixed Markdown and OpenUI fixture. `/components/Chat` shows a React conversation. Chat and ChatReply pages also include a local action-turn example; the Form page includes a local submission example. `/components/OwnerMessageView` shows all six platform message types. Its controls and those on `/components/ApprovalCard` record their output in a Sent commands panel. These examples run without network requests. See the [Chat contract](packages/ui/src/react/Chat/Chat.md) for its surface API and OpenUI boundary, and [OwnerMessageView](packages/ui/src/react/OwnerMessage/OwnerMessage.md) for platform command integration. Section labels follow the site language; the reference text remains in English and reads left to right, including on Arabic pages. The Usage section appears only when the reference document contains code samples. Use Copy beside a code block and wait for the visible confirmation. Expand Show fixture source to read or copy the OpenUI source where available. Previous and Next links follow component registry order, followed by OwnerMessageView, Chat, ChatReply, and Sidebar.
 
 ## Requirements
 
@@ -166,6 +178,14 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
 ```ts
 const system = buildSystemPrompt({ library: createTensquadsLibrary(locale), locale, mode: "chat" });
 ```
+
+## Dashboard demos
+
+Open the [store owner dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home) or [platform admin dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin) in the preview site. The pages use fictional demo data and include English and Arabic, light and dark views.
+
+The admin sidebar switches between Companies and Squad images with `view=companies|images` in the URL. Search and subscription filters narrow the company table. Image filters narrow the registry table; selecting an image updates its details, bugs, and feature requests. Roll out and View changelog are display-only demo controls.
+
+On the store owner dashboard, the first four metric tiles show weekly comparisons. Tasks done by squads and Hours saved use footnotes without comparison lines; Hours saved is an estimate for this week. Approval cards show the requesting agent and task from demo fixtures, with refund and discount rule labels in the selected language. Approving or declining a request removes it from the list and lowers both the approval count and the Ask Petra waiting count. Expand Sent commands inside the approval panel to inspect the latest command body locally. Changing the site language translates pending requests and preserves those decisions. Ask Petra opens `/chat` with the current URL settings. The page reserves space so the launcher clears the approval controls. These dashboards do not send commands to a backend.
 
 ## Browser verification
 

@@ -1,0 +1,1 @@
+root = Card("الشركات حسب الخطة", "الشركات والفرق النشطة", null, [Bars([{label: "النمو", value: 4, display: "٤ شركات، ٢٧ فريقًا", tone: "info"}, {label: "الأساسية", value: 2, display: "شركتان، ٥ فرق"}], "progress", "متوسط ٧٫٣ فرق لكل شركة")], null, false, "default")

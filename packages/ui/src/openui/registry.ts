@@ -10,6 +10,16 @@ import "../react/Menu/Menu.openui.js";
 import "../react/Switch/Switch.openui.js";
 import "../react/SegmentedControl/SegmentedControl.openui.js";
 import "../react/Tooltip/Tooltip.openui.js";
+import "../react/Card/Card.openui.js";
+import "../react/PageHeader/PageHeader.openui.js";
+import "../react/StatTile/StatTile.openui.js";
+import "../react/BarChart/BarChart.openui.js";
+import "../react/Bars/Bars.openui.js";
+import "../react/Distribution/Distribution.openui.js";
+import "../react/DataTable/DataTable.openui.js";
+import "../react/EmptyState/EmptyState.openui.js";
+import "../react/ApprovalCard/ApprovalCard.openui.js";
+import "../react/ChatLauncher/ChatLauncher.openui.js";
 import type { DefinedComponent } from "@openuidev/react-lang";
 import { getRegisteredDefinitions } from "./registration-store.js";
 

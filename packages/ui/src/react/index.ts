@@ -1,8 +1,16 @@
 export type { ChatAction, ChatActionTurn, ChatTurn } from "../schemas/index.js";
+export type { ApprovalCardLabels, ApprovalCardProps } from "./ApprovalCard/ApprovalCard.js";
+export { ApprovalCard } from "./ApprovalCard/ApprovalCard.js";
 export type { BadgeProps, BadgeTone } from "./Badge/Badge.js";
 export { Badge } from "./Badge/Badge.js";
+export type { BarChartKey, BarChartPoint, BarChartProps, BarChartSegment } from "./BarChart/BarChart.js";
+export { BarChart } from "./BarChart/BarChart.js";
+export type { BarsProps, BarsRow } from "./Bars/Bars.js";
+export { Bars } from "./Bars/Bars.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
+export type { CardLegendItem, CardProps } from "./Card/Card.js";
+export { Card } from "./Card/Card.js";
 export type {
 	ChatAssistantMessageProps,
 	ChatComposerProps,
@@ -29,10 +37,14 @@ export {
 } from "./Chat/Chat.js";
 export type { ChatTransport, UseChatOptions, UseChatResult } from "./Chat/useChat.js";
 export { useChat } from "./Chat/useChat.js";
+export type { ChatLauncherProps } from "./ChatLauncher/ChatLauncher.js";
+export { ChatLauncher } from "./ChatLauncher/ChatLauncher.js";
 export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
 export { ChatReply } from "./ChatReply/ChatReply.js";
 export type { ChipProps } from "./Chip/Chip.js";
 export { Chip } from "./Chip/Chip.js";
+export type { DataTableColumn, DataTableProps, DataTableRow } from "./DataTable/DataTable.js";
+export { DataTable, EntityCell, PersonCell, StackCell, StatusCell } from "./DataTable/DataTable.js";
 export type {
 	DialogBackdropProps,
 	DialogCloseProps,
@@ -51,6 +63,10 @@ export {
 	DialogTitle,
 	DialogTrigger,
 } from "./Dialog/Dialog.js";
+export type { DistributionPart, DistributionProps } from "./Distribution/Distribution.js";
+export { Distribution } from "./Distribution/Distribution.js";
+export type { EmptyStateProps } from "./EmptyState/EmptyState.js";
+export { EmptyState } from "./EmptyState/EmptyState.js";
 export type {
 	FieldControlProps,
 	FieldDescriptionProps,
@@ -115,6 +131,10 @@ export {
 	MenuSubTrigger,
 	MenuTrigger,
 } from "./Menu/Menu.js";
+export type { OwnerMessageViewProps } from "./OwnerMessage/OwnerMessage.js";
+export { OwnerMessageView, pendingQuestion } from "./OwnerMessage/OwnerMessage.js";
+export type { PageHeaderProps } from "./PageHeader/PageHeader.js";
+export { PageHeader } from "./PageHeader/PageHeader.js";
 export type {
 	SegmentedControlIndicatorProps,
 	SegmentedControlItemProps,
@@ -125,6 +145,15 @@ export {
 	SegmentedControlIndicator,
 	SegmentedControlItem,
 } from "./SegmentedControl/SegmentedControl.js";
+export type {
+	SidebarAgentProps,
+	SidebarBrandProps,
+	SidebarItemProps,
+	SidebarProps,
+	SidebarSectionProps,
+	SidebarUserProps,
+} from "./Sidebar/Sidebar.js";
+export { Sidebar, SidebarAgent, SidebarBrand, SidebarItem, SidebarSection, SidebarUser } from "./Sidebar/Sidebar.js";
 export type { SquadmateProps } from "./Squadmate/Squadmate.js";
 export {
 	Squadmate,
@@ -132,6 +161,8 @@ export {
 	squadmateCharacterName,
 	squadmateStateLabel,
 } from "./Squadmate/Squadmate.js";
+export type { StatTileDelta, StatTileProps } from "./StatTile/StatTile.js";
+export { StatTile } from "./StatTile/StatTile.js";
 export type { SwitchProps, SwitchThumbProps } from "./Switch/Switch.js";
 export { Switch, SwitchThumb } from "./Switch/Switch.js";
 export type {

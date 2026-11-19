@@ -1,6 +1,8 @@
 commands:
-  test: 'MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npm run verify'
-  lint: "npm run check"
+  # The gate's checkout has no node_modules, so install them first (exit 127 "biome: command not found" otherwise).
+  test: 'MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- sh -c "npm ci --no-audit --no-fund && npm run verify"'
+  lint: 'MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- sh -c "npm ci --no-audit --no-fund && npm run check"'
+
 
 # no-mistakes appends these trailers to commits made by its agent steps.
 commit:
@@ -25,7 +27,7 @@ document:
 # Open every PR against the milestone branch, never main (a PR against main
 # makes the DCO app check the whole milestone history). Change at each milestone.
 pr:
-  base_branch: feat/v0.1-foundation
+  base_branch: v0.2-dashboards
 
 # Rewriting a commit strands the branch in gate custody (tasks 003 and 006).
 review:

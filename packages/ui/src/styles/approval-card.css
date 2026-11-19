@@ -1,0 +1,17 @@
+@layer tensquads {
+	.ts-approval-card { display: grid; }
+	/* Even rhythm inside the card: who and what, the content, the limit, then the decision. */
+	.ts-approval-card[data-variant="inset"] .ts-card__body { display: grid; gap: var(--ts-space-2); padding-block-start: var(--ts-space-2); }
+	.ts-approval-card .ts-card__title { font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); }
+	.ts-approval-card__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-3); color: var(--ts-text-secondary); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); }
+	.ts-approval-card__agent { display: inline-flex; align-items: center; gap: var(--ts-space-2); }
+	.ts-approval-card__agent img { border-radius: var(--ts-radius-full); }
+	.ts-approval-card__task, .ts-approval-card__limit { font-variant-numeric: tabular-nums; }
+	.ts-approval-card__content { margin: 0; color: var(--ts-text-emphasis); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); overflow-wrap: anywhere; }
+	.ts-approval-card__limit { display: flex; flex-wrap: wrap; gap: var(--ts-space-3); margin: 0; color: var(--ts-text-secondary); font-size: var(--ts-text-sm-font-size); line-height: var(--ts-text-sm-line-height); }
+	.ts-approval-card__footer { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-2); margin-block-start: var(--ts-space-2); }
+	.ts-approval-card__outcome { display: inline-flex; align-items: center; gap: var(--ts-space-2); color: var(--ts-text-secondary); font-size: var(--ts-text-md-font-size); line-height: var(--ts-text-md-line-height); }
+	.ts-approval-card__outcome[data-decision="approve"] { color: var(--ts-success-text); }
+	.ts-approval-card__outcome[data-decision="reject"] { color: var(--ts-danger-text); }
+	.ts-approval-card__outcome svg { inline-size: 16px; block-size: 16px; }
+}

@@ -53,9 +53,9 @@
       "tasks": [
         "001-card-pageheader-stattile",
         "002-charts",
+        "005-platform-contract-approvalcard",
         "003-datatable-emptystate",
         "004-sidebar",
-        "005-approvalcard-chatlauncher",
         "006-dashboard-demos"
       ]
     }

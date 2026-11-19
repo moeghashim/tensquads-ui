@@ -111,7 +111,7 @@ function ChatExperience({
 										reply={turn.content}
 										locale={locale}
 										isStreaming={chat.busy}
-										onAction={(event, blockId) => void chat.act(event, `${turnId}/${blockId}`)}
+										onAction={(event, blockId) => chat.act(event, `${turnId}/${blockId}`)}
 										locked={(blockId) => chat.locked.has(`${turnId}/${blockId}`)}
 									/>
 								</ChatAssistantMessage>

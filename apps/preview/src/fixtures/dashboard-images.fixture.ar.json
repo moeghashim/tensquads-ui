@@ -1,0 +1,314 @@
+[
+  {
+    "id": "orders",
+    "name": "Orders",
+    "role": "Order processing and fulfillment",
+    "path": "registry.agents.example/orders:1.8.2",
+    "version": "1.8.2",
+    "updated": "6 hours ago",
+    "deployed": 34,
+    "latest": 22,
+    "attention": true,
+    "bugs": [
+      {
+        "id": "B-430",
+        "title": "Retry can duplicate a shipment",
+        "severity": "High",
+        "age": "1 day",
+        "accounts": 5,
+        "ageAr": "يوم واحد",
+        "titleAr": "قد تؤدي إعادة المحاولة إلى تكرار الشحنة"
+      },
+      {
+        "id": "B-418",
+        "title": "Status may lag after a refund",
+        "severity": "Medium",
+        "age": "3 days",
+        "accounts": 2,
+        "ageAr": "٣ أيام",
+        "titleAr": "قد يتأخر تحديث الحالة بعد استرداد المبلغ"
+      }
+    ],
+    "requests": [
+      {
+        "id": "F-102",
+        "title": "Add split shipment support",
+        "status": "Planned",
+        "titleAr": "إضافة دعم تقسيم الشحنات",
+        "inProgress": true
+      },
+      {
+        "id": "F-117",
+        "title": "Add gift order notes",
+        "status": "Backlog",
+        "titleAr": "إضافة ملاحظات طلبات الهدايا",
+        "inProgress": false
+      }
+    ],
+    "nameAr": "الطلبات",
+    "roleAr": "معالجة الطلبات وتنفيذها",
+    "updatedAr": "منذ ٦ ساعات",
+    "updatedAgeHours": 6,
+    "lifecycle": "stable"
+  },
+  {
+    "id": "support",
+    "name": "Support",
+    "role": "Customer support and triage",
+    "path": "registry.agents.example/support:1.6.0",
+    "version": "1.6.0",
+    "updated": "1 day ago",
+    "deployed": 21,
+    "latest": 20,
+    "attention": true,
+    "bugs": [
+      {
+        "id": "B-422",
+        "title": "Escalation summary omits links",
+        "severity": "High",
+        "age": "2 days",
+        "accounts": 3,
+        "ageAr": "يومين",
+        "titleAr": "ملخص التصعيد لا يتضمن الروابط"
+      },
+      {
+        "id": "B-435",
+        "title": "Reply draft loses formatting",
+        "titleAr": "مسودة الرد تفقد التنسيق",
+        "severity": "Medium",
+        "age": "2 days",
+        "ageAr": "يومين",
+        "accounts": 1
+      }
+    ],
+    "requests": [
+      {
+        "id": "F-110",
+        "title": "Suggest related help articles",
+        "status": "Planned",
+        "titleAr": "اقتراح مقالات مساعدة ذات صلة",
+        "inProgress": true
+      },
+      {
+        "id": "F-140",
+        "title": "Add support queue routing",
+        "titleAr": "إضافة توجيه طابور الدعم",
+        "status": "Backlog",
+        "inProgress": false
+      },
+      {
+        "id": "F-141",
+        "title": "Export support conversations",
+        "titleAr": "تصدير محادثات الدعم",
+        "status": "Backlog",
+        "inProgress": false
+      }
+    ],
+    "nameAr": "الدعم",
+    "roleAr": "دعم العملاء وفرز الاستفسارات",
+    "updatedAr": "منذ يوم واحد",
+    "updatedAgeHours": 24,
+    "lifecycle": "stable"
+  },
+  {
+    "id": "marketing",
+    "name": "Marketing",
+    "role": "Campaign planning and reporting",
+    "path": "registry.agents.example/marketing:1.4.3",
+    "version": "1.4.3",
+    "updated": "2 days ago",
+    "deployed": 18,
+    "latest": 17,
+    "attention": false,
+    "bugs": [
+      {
+        "id": "B-415",
+        "title": "Preview clips long subject lines",
+        "severity": "Low",
+        "age": "4 days",
+        "accounts": 1,
+        "ageAr": "٤ أيام",
+        "titleAr": "معاينة الرسالة تقتطع العناوين الطويلة"
+      },
+      {
+        "id": "B-436",
+        "title": "Campaign report omits totals",
+        "titleAr": "تقرير الحملة لا يتضمن الإجماليات",
+        "severity": "Medium",
+        "age": "2 days",
+        "ageAr": "يومين",
+        "accounts": 1
+      }
+    ],
+    "requests": [
+      {
+        "id": "F-122",
+        "title": "Add campaign comparison view",
+        "status": "Backlog",
+        "titleAr": "إضافة عرض مقارنة الحملات",
+        "inProgress": false
+      },
+      {
+        "id": "F-142",
+        "title": "Schedule campaign reports",
+        "titleAr": "جدولة تقارير الحملات",
+        "status": "Backlog",
+        "inProgress": false
+      },
+      {
+        "id": "F-143",
+        "title": "Compare audience segments",
+        "titleAr": "مقارنة شرائح الجمهور",
+        "status": "Backlog",
+        "inProgress": false
+      }
+    ],
+    "nameAr": "التسويق",
+    "roleAr": "تخطيط الحملات وإعداد التقارير",
+    "updatedAr": "منذ يومين",
+    "updatedAgeHours": 48,
+    "lifecycle": "stable"
+  },
+  {
+    "id": "finance",
+    "name": "Finance",
+    "role": "Payout reconciliation and reporting",
+    "path": "registry.agents.example/finance:1.3.1",
+    "version": "1.3.1",
+    "updated": "5 days ago",
+    "deployed": 15,
+    "latest": 14,
+    "attention": false,
+    "bugs": [],
+    "requests": [
+      {
+        "id": "F-126",
+        "title": "Export monthly summaries",
+        "status": "Planned",
+        "titleAr": "تصدير الملخصات الشهرية",
+        "inProgress": true
+      },
+      {
+        "id": "F-144",
+        "title": "Group payouts by store",
+        "titleAr": "تجميع المدفوعات حسب المتجر",
+        "status": "Backlog",
+        "inProgress": false
+      },
+      {
+        "id": "F-145",
+        "title": "Add reconciliation filters",
+        "titleAr": "إضافة مرشحات التسوية",
+        "status": "Backlog",
+        "inProgress": false
+      }
+    ],
+    "nameAr": "المالية",
+    "roleAr": "تسوية المدفوعات وإعداد التقارير",
+    "updatedAr": "منذ ٥ أيام",
+    "updatedAgeHours": 120,
+    "lifecycle": "beta"
+  },
+  {
+    "id": "inventory",
+    "name": "Inventory",
+    "role": "Stock monitoring and replenishment",
+    "path": "registry.agents.example/inventory:1.2.0",
+    "version": "1.2.0",
+    "updated": "9 days ago",
+    "deployed": 14,
+    "latest": 13,
+    "attention": false,
+    "bugs": [
+      {
+        "id": "B-401",
+        "title": "Low stock alert repeats",
+        "severity": "Low",
+        "age": "6 days",
+        "accounts": 2,
+        "ageAr": "٦ أيام",
+        "titleAr": "يتكرر تنبيه انخفاض المخزون"
+      },
+      {
+        "id": "B-437",
+        "title": "Stock sync skips a variant",
+        "titleAr": "مزامنة المخزون تتخطى أحد الخيارات",
+        "severity": "Medium",
+        "age": "2 days",
+        "ageAr": "يومين",
+        "accounts": 1
+      }
+    ],
+    "requests": [],
+    "nameAr": "المخزون",
+    "roleAr": "مراقبة المخزون وتجديده",
+    "updatedAr": "منذ ٩ أيام",
+    "updatedAgeHours": 216,
+    "lifecycle": "draft"
+  },
+  {
+    "id": "analytics",
+    "name": "Analytics",
+    "role": "Store performance insights",
+    "path": "registry.agents.example/analytics:1.1.2",
+    "version": "1.1.2",
+    "updated": "16 days ago",
+    "deployed": 13,
+    "latest": 13,
+    "attention": false,
+    "bugs": [],
+    "requests": [
+      {
+        "id": "F-132",
+        "title": "Add cohort breakdown",
+        "status": "Backlog",
+        "titleAr": "إضافة تحليل المجموعات",
+        "inProgress": false
+      },
+      {
+        "id": "F-146",
+        "title": "Export cohort reports",
+        "titleAr": "تصدير تقارير المجموعات",
+        "status": "Backlog",
+        "inProgress": false
+      },
+      {
+        "id": "F-147",
+        "title": "Compare store performance",
+        "titleAr": "مقارنة أداء المتاجر",
+        "status": "Backlog",
+        "inProgress": false
+      },
+      {
+        "id": "F-148",
+        "title": "Save report views",
+        "titleAr": "حفظ طرق عرض التقارير",
+        "status": "Backlog",
+        "inProgress": false
+      }
+    ],
+    "nameAr": "التحليلات",
+    "roleAr": "تحليل أداء المتجر",
+    "updatedAr": "منذ ١٦ يوماً",
+    "updatedAgeHours": 384,
+    "lifecycle": "retired"
+  },
+  {
+    "id": "people",
+    "name": "People",
+    "role": "Hiring and team operations",
+    "path": "registry.agents.example/people:1.0.0",
+    "version": "1.0.0",
+    "updated": "21 days ago",
+    "deployed": 12,
+    "latest": 12,
+    "attention": false,
+    "bugs": [],
+    "requests": [],
+    "nameAr": "الموارد البشرية",
+    "roleAr": "التوظيف وعمليات الفريق",
+    "updatedAr": "منذ ٢١ يوماً",
+    "updatedAgeHours": 504,
+    "lifecycle": "retired"
+  }
+]
