@@ -62,7 +62,7 @@
         ]
       },
       {
-        "label": "Tasks done",
+        "label": "Tasks done by squads",
         "value": "186",
         "foot": "Across your squads",
         "series": [
@@ -80,7 +80,7 @@
         "label": "Hours saved",
         "value": "42.5",
         "unit": "h",
-        "foot": "Estimated this month",
+        "foot": "Estimated this week",
         "series": [
           2,
           4,

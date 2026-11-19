@@ -51,6 +51,12 @@ const en = {
 		dashboards: "Dashboards",
 		getStarted: "Get started",
 	},
+	dashboardHome: {
+		vsLastWeek: "vs last week",
+		thisWeek: "This week",
+		runsSquads: "Runs 5 squads · Demo store",
+		sentCommands: "Sent commands",
+	},
 	chat: {
 		eyebrow: "Chat with inline UI",
 		title: "See the conversation behind an agent-built screen.",
