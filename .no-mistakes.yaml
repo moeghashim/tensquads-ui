@@ -27,7 +27,7 @@ document:
 # Open every PR against the milestone branch, never main (a PR against main
 # makes the DCO app check the whole milestone history). Change at each milestone.
 pr:
-  base_branch: v0.2-platform
+  base_branch: v0.2-tools
 
 # Rewriting a commit strands the branch in gate custody (tasks 003 and 006).
 review:
