@@ -38,4 +38,11 @@
 4. `status.bot` is an id. It is not confirmed that bot ids are squadmate slugs (petra, pisa, kyoto, rio, zurich, giza). The view shows a squadmate only when the id matches one.
 5. No message says that an approval was decided or a question was answered. The view locks a card locally after a decision; after a reload it cannot restore that state unless the host passes `decision`. An `approval_decided` message, or a decided field, would close this.
 6. It is not stated whether `reply.text` and `evidence` are plain text or Markdown. The view treats them as plain text and links URLs.
-**Status**: open — for the platform owner
+**Answer** (platform commit `b09e197`, PR #19, 2026-11-20; D27):
+1. `approval_request.amount` exists: millionths of a US dollar, null when the action has no amount. `limit` is unchanged.
+2. `approval_request.bot` and `taskId` exist and are always present.
+3. No title. `action` stays a tool id; the app passes `actionLabels`.
+4. Bot ids are bot definition ids (for example `test-bot`), not squadmate names. The app passes a map from bot id to squadmate.
+5. `approval_decided { approvalId, decision }` is sent once, when a decision is applied. `question_answered { questionId }` is sent when an answer is applied; it has no answer text.
+6. `reply.text`, `result.summary` and `evidence` are plain text.
+**Status**: answered — task `v0.2-platform/001`
