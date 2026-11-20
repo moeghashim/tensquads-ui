@@ -81,6 +81,26 @@
       "tasks": [
         "001-anthropic-subpath"
       ]
+    },
+    {
+      "id": "v0.3-workflow",
+      "status": "active",
+      "tasks": [
+        "001-icon-sync",
+        "002-node-and-graph-schema",
+        "003-canvas",
+        "004-palette-and-inspector",
+        "005-minimap-and-workflowcard",
+        "006-builder-demo"
+      ]
+    },
+    {
+      "id": "v0.3-agent",
+      "status": "planned",
+      "tasks": [
+        "001-agent-ready-components",
+        "002-site-agent-tools"
+      ]
     }
   ]
 }
