@@ -77,7 +77,7 @@
     },
     {
       "id": "v0.2-server",
-      "status": "active",
+      "status": "done",
       "tasks": [
         "001-anthropic-subpath"
       ]
