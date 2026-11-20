@@ -1,0 +1,1 @@
+Apps that use the Anthropic provider install @anthropic-ai/sdk themselves. This example uses version 1.10.0.
