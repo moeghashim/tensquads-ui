@@ -1,0 +1,237 @@
+{
+  "config": {
+    "argv": [
+      "~/.local/share/mise/installs/node/26.13.1/bin/node",
+      "{run-worktree}/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      ".phase-playwright.config.ts",
+      "e2e/phase-contract-live.spec.ts"
+    ],
+    "configFile": "{run-worktree}/.phase-playwright.config.ts",
+    "rootDir": "{run-worktree}/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/supplemental-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/supplemental-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "snapshotDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:5173",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "browserName": "chromium",
+          "locale": "en-US",
+          "colorScheme": "light",
+          "launchOptions": {
+            "args": [
+              "--disable-lcd-text",
+              "--font-render-hinting=none"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "~/.no-mistakes/evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/supplemental-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "command": "npm run build:preview && npm --prefix apps/preview run preview",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "phase-contract-live.spec.ts",
+      "file": "phase-contract-live.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "phase approval details and dashboard persistence en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1602,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-20T07:20:16.531Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "acc4833643157cdef56e-2f75fcee96ec1eb8e1d5",
+          "file": "phase-contract-live.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "phase approval details and dashboard persistence ar",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 5188,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.ts-approval-card').first().locator('.ts-approval-card__agent')\nExpected substring: \u001b[32m\"ب\u001b[7mي\u001b[27mترا\"\u001b[39m\nReceived string:    \u001b[31m\"بترا\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.ts-approval-card').first().locator('.ts-approval-card__agent') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.ts-approval-card').first().locator('.ts-approval-card__agent')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"ts-approval-card__agent\">…</span>\u001b[22m\n\u001b[2m       - unexpected value \"بترا\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.ts-approval-card').first().locator('.ts-approval-card__agent')\nExpected substring: \u001b[32m\"ب\u001b[7mي\u001b[27mترا\"\u001b[39m\nReceived string:    \u001b[31m\"بترا\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.ts-approval-card').first().locator('.ts-approval-card__agent') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.ts-approval-card').first().locator('.ts-approval-card__agent')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"ts-approval-card__agent\">…</span>\u001b[22m\n\u001b[2m       - unexpected value \"بترا\"\u001b[22m\n\n    at {run-worktree}/e2e/phase-contract-live.spec.ts:10:69",
+                    "location": {
+                      "file": "{run-worktree}/e2e/phase-contract-live.spec.ts",
+                      "column": 69,
+                      "line": 10
+                    },
+                    "snippet": "   8 |     const cards = page.locator('.ts-approval-card');\n   9 |     await expect(cards.first().locator('.ts-approval-card__amount')).toHaveText(locale === 'en' ? '$42.00' : '\\u200f٤٢٫٠٠ US$');\n> 10 |     await expect(cards.first().locator('.ts-approval-card__agent')).toContainText(locale === 'en' ? 'Petra' : 'بيترا');\n     |                                                                     ^\n  11 |     await expect(cards.first().locator('.ts-approval-card__task')).toContainText('task_42');\n  12 |     await expect(cards.nth(1).locator('.ts-approval-card__agent')).toHaveCount(0);\n  13 |     await expect(cards.nth(1).locator('.ts-approval-card__task')).toContainText('task-1042');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/e2e/phase-contract-live.spec.ts",
+                        "column": 69,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.ts-approval-card').first().locator('.ts-approval-card__agent')\nExpected substring: \u001b[32m\"ب\u001b[7mي\u001b[27mترا\"\u001b[39m\nReceived string:    \u001b[31m\"بترا\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.ts-approval-card').first().locator('.ts-approval-card__agent') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.ts-approval-card').first().locator('.ts-approval-card__agent')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"ts-approval-card__agent\">…</span>\u001b[22m\n\u001b[2m       - unexpected value \"بترا\"\u001b[22m\n\n\n   8 |     const cards = page.locator('.ts-approval-card');\n   9 |     await expect(cards.first().locator('.ts-approval-card__amount')).toHaveText(locale === 'en' ? '$42.00' : '\\u200f٤٢٫٠٠ US$');\n> 10 |     await expect(cards.first().locator('.ts-approval-card__agent')).toContainText(locale === 'en' ? 'Petra' : 'بيترا');\n     |                                                                     ^\n  11 |     await expect(cards.first().locator('.ts-approval-card__task')).toContainText('task_42');\n  12 |     await expect(cards.nth(1).locator('.ts-approval-card__agent')).toHaveCount(0);\n  13 |     await expect(cards.nth(1).locator('.ts-approval-card__task')).toContainText('task-1042');\n    at {run-worktree}/e2e/phase-contract-live.spec.ts:10:69"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-20T07:20:16.531Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/supplemental-results/phase-contract-live-phase--bc01f-nd-dashboard-persistence-ar/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/e2e/phase-contract-live.spec.ts",
+                    "column": 69,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "acc4833643157cdef56e-d3f0abd281b2adc8ffe2",
+          "file": "phase-contract-live.spec.ts",
+          "line": 5,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-20T07:20:13.322Z",
+    "duration": 8510.595,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

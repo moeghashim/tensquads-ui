@@ -1,0 +1,154 @@
+[
+  {
+    "name": "Zero amount accepted",
+    "accepted": true,
+    "issues": []
+  },
+  {
+    "name": "Null amount accepted",
+    "accepted": true,
+    "issues": []
+  },
+  {
+    "name": "Missing amount rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [
+          "amount"
+        ],
+        "code": "invalid_type"
+      }
+    ]
+  },
+  {
+    "name": "Missing bot rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [
+          "bot"
+        ],
+        "code": "invalid_type"
+      }
+    ]
+  },
+  {
+    "name": "Missing taskId rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [
+          "taskId"
+        ],
+        "code": "invalid_type"
+      }
+    ]
+  },
+  {
+    "name": "Invalid amount -1 rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [
+          "amount"
+        ],
+        "code": "too_small"
+      }
+    ]
+  },
+  {
+    "name": "Invalid amount 0.5 rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [
+          "amount"
+        ],
+        "code": "invalid_type"
+      }
+    ]
+  },
+  {
+    "name": "Unexpected request key rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [],
+        "code": "unrecognized_keys"
+      }
+    ]
+  },
+  {
+    "name": "Decision message accepted",
+    "accepted": true,
+    "issues": []
+  },
+  {
+    "name": "Answered message accepted",
+    "accepted": true,
+    "issues": []
+  },
+  {
+    "name": "Non-contract decision rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [
+          "decision"
+        ],
+        "code": "invalid_value"
+      }
+    ]
+  },
+  {
+    "name": "Unexpected approval_decided key rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [],
+        "code": "unrecognized_keys"
+      }
+    ]
+  },
+  {
+    "name": "Unexpected question_answered key rejected",
+    "accepted": false,
+    "issues": [
+      {
+        "path": [],
+        "code": "unrecognized_keys"
+      }
+    ]
+  },
+  {
+    "name": "Out-of-order decisions",
+    "decisions": {
+      "approval-runtime": "reject"
+    },
+    "renderedOutcome": "Declined",
+    "hostProp": "approve",
+    "agentShownForUnmappedSlug": false
+  },
+  {
+    "name": "Answered newest free-text question",
+    "pending": {
+      "seq": 5,
+      "at": "2026-11-20T12:00:00.000Z",
+      "type": "question",
+      "questionId": "q-old",
+      "text": "Old question",
+      "options": []
+    },
+    "allAnswered": null
+  },
+  {
+    "name": "Command body retained",
+    "command": {
+      "type": "ApprovalDecision",
+      "approvalId": "approval-runtime",
+      "decision": "reject",
+      "contentHash": "sha256:disposable"
+    }
+  }
+]

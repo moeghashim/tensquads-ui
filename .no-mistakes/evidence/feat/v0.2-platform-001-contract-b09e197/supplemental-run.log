@@ -1,0 +1,47 @@
+[WebServer] (node:24072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+(node:24155) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:24156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence ar
+[2/2] e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence en
+  1) e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence ar ─────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.ts-approval-card').first().locator('.ts-approval-card__agent')
+    Expected substring: "بيترا"
+    Received string:    "بترا"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('.ts-approval-card').first().locator('.ts-approval-card__agent') with timeout 5000ms
+      - waiting for locator('.ts-approval-card').first().locator('.ts-approval-card__agent')
+        14 × locator resolved to <span class="ts-approval-card__agent">…</span>
+           - unexpected value "بترا"
+
+
+       8 |     const cards = page.locator('.ts-approval-card');
+       9 |     await expect(cards.first().locator('.ts-approval-card__amount')).toHaveText(locale === 'en' ? '$42.00' : '\u200f٤٢٫٠٠ US$');
+    > 10 |     await expect(cards.first().locator('.ts-approval-card__agent')).toContainText(locale === 'en' ? 'Petra' : 'بيترا');
+         |                                                                     ^
+      11 |     await expect(cards.first().locator('.ts-approval-card__task')).toContainText('task_42');
+      12 |     await expect(cards.nth(1).locator('.ts-approval-card__agent')).toHaveCount(0);
+      13 |     await expect(cards.nth(1).locator('.ts-approval-card__task')).toContainText('task-1042');
+        at {run-worktree}/e2e/phase-contract-live.spec.ts:10:69
+
+    Error Context: ../../../evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/supplemental-results/phase-contract-live-phase--bc01f-nd-dashboard-persistence-ar/error-context.md
+
+
+  1 failed
+    e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence ar ──────
+  1 passed (8.5s)

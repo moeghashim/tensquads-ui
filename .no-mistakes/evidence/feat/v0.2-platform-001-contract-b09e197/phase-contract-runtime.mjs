@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+import { PlatformOwnerMessageSchema, PlatformApprovalRequestSchema, approvalDecisionCommand, PLATFORM_OWNER_MESSAGE_TYPES } from '@tensquads/ui/schemas';
+import { approvalDecisions, pendingQuestion, OwnerMessageView } from '@tensquads/ui/react';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+const at = '2026-11-20T12:00:00.000Z';
+const request = {seq:1, at, type:'approval_request', approvalId:'approval-runtime', action:'refund', content:'Refund disposable order', contentHash:'sha256:disposable', rule:null, limit:null, amount:0, bot:'petra', taskId:'task-runtime'};
+const observations = [];
+function parse(input, expected, name) {
+  const result = PlatformOwnerMessageSchema.safeParse(input);
+  assert.equal(result.success, expected, name);
+  observations.push({name, accepted:result.success, issues:result.success ? [] : result.error.issues.map(({path,code})=>({path,code}))});
+}
+parse(request,true,'Zero amount accepted');
+parse({...request,amount:null},true,'Null amount accepted');
+for (const key of ['amount','bot','taskId']) { const bad={...request}; delete bad[key]; parse(bad,false,`Missing ${key} rejected`); }
+for (const amount of [-1,0.5]) parse({...request,amount},false,`Invalid amount ${amount} rejected`);
+parse({...request,extra:true},false,'Unexpected request key rejected');
+const decided = {seq:10, at, type:'approval_decided', approvalId:request.approvalId, decision:'reject'};
+const answered = {seq:12, at, type:'question_answered', questionId:'q-new'};
+parse(decided,true,'Decision message accepted');
+parse(answered,true,'Answered message accepted');
+parse({...decided,decision:'decline'},false,'Non-contract decision rejected');
+for (const msg of [decided,answered]) parse({...msg,extra:true},false,`Unexpected ${msg.type} key rejected`);
+const older = {...decided,seq:3,decision:'approve'};
+assert.deepEqual(approvalDecisions([decided,older]),{'approval-runtime':'reject'});
+assert.deepEqual(approvalDecisions([older,decided]),{'approval-runtime':'reject'});
+const question = {seq:5,at,type:'question',questionId:'q-old',text:'Old question',options:[]};
+const newer = {...question,seq:6,questionId:'q-new',text:'New question'};
+assert.equal(pendingQuestion([newer,question,answered]).questionId,'q-old');
+assert.equal(pendingQuestion([newer,answered]),undefined);
+assert.deepEqual(approvalDecisionCommand(request,'reject'),{type:'ApprovalDecision', approvalId:request.approvalId,contentHash:request.contentHash,decision:'reject'});
+assert.deepEqual(PLATFORM_OWNER_MESSAGE_TYPES,['reply','question','approval_request','result','status','action_not_confirmed','approval_decided','question_answered']);
+const html = renderToStaticMarkup(createElement(OwnerMessageView,{messages:[decided,request,older], approvalDecisions:{[request.approvalId]:'approve'}}));
+assert.match(html,/Declined/);
+assert.doesNotMatch(html,/ts-approval-card__agent/);
+observations.push({name:'Out-of-order decisions', decisions:approvalDecisions([decided,older]),renderedOutcome:'Declined',hostProp:'approve',agentShownForUnmappedSlug:false});
+observations.push({name:'Answered newest free-text question',pending:pendingQuestion([newer,question,answered]),allAnswered:pendingQuestion([newer,answered])??null});
+observations.push({name:'Command body retained',command:approvalDecisionCommand(request,'reject')});
+console.log(JSON.stringify(observations,null,2));
+writeFileSync('~/.no-mistakes/evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/runtime-contract-results.json',JSON.stringify(observations,null,2));

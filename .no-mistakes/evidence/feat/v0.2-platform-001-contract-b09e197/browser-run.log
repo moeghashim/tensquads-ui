@@ -1,0 +1,92 @@
+[WebServer] (node:21797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 19 tests using 2 workers
+
+(node:21910) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:21909) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/19] e2e/approval-sizing.spec.ts:12:3 › OwnerMessageView medium controls and spacing in en light
+[2/19] e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in en light
+[3/19] e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in en dark
+[4/19] e2e/approval-sizing.spec.ts:12:3 › OwnerMessageView medium controls and spacing in en dark
+[5/19] e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in ar light
+[6/19] e2e/approval-sizing.spec.ts:12:3 › OwnerMessageView medium controls and spacing in ar light
+[7/19] e2e/approval-sizing.spec.ts:12:3 › ApprovalCard medium controls and spacing in ar dark
+[8/19] e2e/approval-sizing.spec.ts:12:3 › OwnerMessageView medium controls and spacing in ar dark
+[9/19] e2e/dashboard-demos.spec.ts:209:1 › store approvals send a command and launcher preserves URL state
+[10/19] e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence en
+[11/19] e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence ar
+  1) e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence en ─────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    Expected: [{"approvalId": "approval-1042", "contentHash": "sha256:request-1042", "decision": "approve", "type": "ApprovalDecision"}, {"approvalId": "approval-1043", "contentHash": "sha256:request-1043", "decision": "reject", "type": "ApprovalDecision"}]
+    Received: {"approvalId": "approval-1043", "contentHash": "sha256:request-1043", "decision": "reject", "type": "ApprovalDecision"}
+
+      26 |     await page.locator('.sent-commands summary').click();
+      27 |     const commands = JSON.parse((await page.locator('.sent-commands pre').textContent())!);
+    > 28 |     expect(commands).toEqual([
+         |                      ^
+      29 |       {type:'ApprovalDecision', approvalId:'approval-1042', contentHash:'sha256:request-1042', decision:'approve'},
+      30 |       {type:'ApprovalDecision', approvalId:'approval-1043', contentHash:'sha256:request-1043', decision:'reject'},
+      31 |     ]);
+        at {run-worktree}/e2e/phase-contract-live.spec.ts:28:22
+
+    Error Context: ../../../evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/browser-results/phase-contract-live-phase--ec083-nd-dashboard-persistence-en/error-context.md
+
+
+(node:22136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[12/19] e2e/platform-messages.spec.ts:11:3 › ApprovalCard platform contract preview in en light
+[13/19] e2e/platform-messages.spec.ts:11:3 › OwnerMessageView platform contract preview in en light
+[14/19] e2e/platform-messages.spec.ts:11:3 › ApprovalCard platform contract preview in en dark
+[15/19] e2e/platform-messages.spec.ts:11:3 › OwnerMessageView platform contract preview in en dark
+[16/19] e2e/platform-messages.spec.ts:11:3 › ApprovalCard platform contract preview in ar light
+  2) e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence ar ─────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.ts-approval-card').first().locator('.ts-approval-card__amount')
+    Expected: "٤٢٫٠٠ US$"
+    Received: "‏٤٢٫٠٠ US$"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.ts-approval-card').first().locator('.ts-approval-card__amount') with timeout 5000ms
+      - waiting for locator('.ts-approval-card').first().locator('.ts-approval-card__amount')
+        14 × locator resolved to <strong class="ts-approval-card__amount">‏٤٢٫٠٠ US$</strong>
+           - unexpected value "‏٤٢٫٠٠ US$"
+
+
+       7 |     await openPreview(page, state, '/components/ApprovalCard');
+       8 |     const cards = page.locator('.ts-approval-card');
+    >  9 |     await expect(cards.first().locator('.ts-approval-card__amount')).toHaveText(locale === 'en' ? '$42.00' : '٤٢٫٠٠ US$');
+         |                                                                      ^
+      10 |     await expect(cards.first().locator('.ts-approval-card__agent')).toContainText(locale === 'en' ? 'Petra' : 'بيترا');
+      11 |     await expect(cards.first().locator('.ts-approval-card__task')).toContainText('task_42');
+      12 |     await expect(cards.nth(1).locator('.ts-approval-card__agent')).toHaveCount(0);
+        at {run-worktree}/e2e/phase-contract-live.spec.ts:9:70
+
+    Error Context: ../../../evidence/01M7VWXNB6F1BKSS2D1T6BMTKF/browser-results/phase-contract-live-phase--bc01f-nd-dashboard-persistence-ar/error-context.md
+
+
+(node:22376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[17/19] e2e/platform-messages.spec.ts:11:3 › OwnerMessageView platform contract preview in ar light
+[18/19] e2e/platform-messages.spec.ts:11:3 › ApprovalCard platform contract preview in ar dark
+[19/19] e2e/platform-messages.spec.ts:11:3 › OwnerMessageView platform contract preview in ar dark
+  2 failed
+    e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence en ──────
+    e2e/phase-contract-live.spec.ts:5:3 › phase approval details and dashboard persistence ar ──────
+  17 passed (17.2s)

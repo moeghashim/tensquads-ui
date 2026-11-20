@@ -1,0 +1,7 @@
+Baseline supplied by outer executor: npm ci --no-audit --no-fund && npm run verify exited 0.
+Targeted browser run: 17 existing checks passed; two supplemental driver checks initially had incorrect expectations.
+Driver corrections: latest-command object (documented), Arabic Intl direction mark, and localized character name. No product change was needed.
+Final supplemental browser run: exit 0. Real built Worker preview, Chromium, synthetic demo records; English and Arabic.
+Public package runtime API driver: exit 0; no mocks, direct schemas/React exports and React SSR. Task 001 and D27 provide the oracle.
+Screenshots were visually reviewed for approval details, settled owner messages, and the dashboard after decisions and locale switching.
+No source changes retained. Playwright awaited production builds and shut down its browser/server children.
