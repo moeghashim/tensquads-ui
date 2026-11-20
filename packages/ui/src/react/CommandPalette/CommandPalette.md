@@ -8,7 +8,9 @@ Control visibility with `open` and `onOpenChange(nextOpen)`. Pass `groups` as `{
 
 Pass all six strings in `labels`: `title` names the dialog, `placeholder` names the search input and supplies its placeholder, `empty` supplies the no-results message, and `navigate`, `select` and `close` label the footer hints. `locale` defaults to `"en"`; use `"ar"` for right-to-left command layout. The host supplies localized labels and group and item text. `className` is added to the dialog content. The entry also exports `CommandPaletteProps`, `CommandPaletteGroup`, `CommandPaletteItem` and `CommandPaletteLabels`.
 
-Search matches substrings in item labels and keywords, ignoring case and diacritics. Groups with no matches disappear. With no matching items, the palette shows `labels.empty`. The query resets each time the palette opens.
+Search matches substrings in item labels and keywords, ignoring case and diacritics. Within each group, label prefixes rank first, followed by other label matches, then keyword-only matches. Groups rank by their highest item score and remain intact. Ties preserve the supplied order. An empty query preserves the supplied group and item order. Groups with no matches disappear. With no matching items, the palette shows `labels.empty`; otherwise, the empty message reserves no space. The query resets each time the palette opens.
+
+A group reserves an icon column only when at least one of its supplied items has an icon. In that group, rows without icons keep the same label alignment. Groups without icons omit the column.
 
 The palette uses UI SDK `Dialog` and `Command` for focus management, dismissal, filtering and keyboard selection. Arrow keys move the highlight and wrap at the ends. Enter runs the highlighted item's callback, then requests closure through `onOpenChange(false)`. Escape closes the palette even when the query is nonempty. Clicking the backdrop also closes it. Focus returns to the previously focused element.
 
