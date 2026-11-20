@@ -12,18 +12,21 @@ export type ApprovalCardLabels = {
 	approved: string;
 	declined: string;
 	limit: string;
+	amount: string;
 	task: string;
 };
 
 export type ApprovalCardProps = {
-	request: Pick<PlatformApprovalRequest, "approvalId" | "action" | "content" | "contentHash" | "rule" | "limit">;
+	request: Pick<
+		PlatformApprovalRequest,
+		"approvalId" | "action" | "content" | "contentHash" | "rule" | "limit" | "amount" | "bot" | "taskId"
+	>;
 	locale?: Locale;
 	actionLabels?: Record<string, string>;
 	ruleLabels?: Record<string, string>;
 	labels?: Partial<ApprovalCardLabels>;
 	disabled?: boolean;
-	bot?: string;
-	taskId?: string;
+	squadmates?: Readonly<Record<string, import("../../schemas/index.js").AgentSlug>>;
 	decision?: "approve" | "reject";
 	onDecision?: (command: ReturnType<typeof approvalDecisionCommand>) => void | boolean | Promise<void | boolean>;
 };
@@ -35,15 +38,14 @@ export function ApprovalCard({
 	ruleLabels = {},
 	labels: labelOverrides,
 	disabled = false,
-	bot,
-	taskId,
+	squadmates,
 	decision,
 	onDecision,
 }: ApprovalCardProps) {
 	const [localDecision, setLocalDecision] = useState<"approve" | "reject">();
 	const [pending, setPending] = useState(false);
 	const selected = decision ?? localDecision;
-	const agent = AgentSlugSchema.safeParse(bot);
+	const agent = AgentSlugSchema.safeParse(squadmates?.[request.bot]);
 	const choose = async (next: "approve" | "reject") => {
 		if (selected || disabled || pending) return;
 		setPending(true);
@@ -63,6 +65,7 @@ export function ApprovalCard({
 					approved: "تمت الموافقة",
 					declined: "تم الرفض",
 					limit: "الحد",
+					amount: "المبلغ",
 					task: "المهمة",
 				}
 			: {
@@ -71,12 +74,13 @@ export function ApprovalCard({
 					approved: "Approved",
 					declined: "Declined",
 					limit: "Limit",
+					amount: "Amount",
 					task: "Task",
 				};
 	const labels = { ...defaults, ...labelOverrides };
 	return (
 		<Card className="ts-approval-card" variant="inset" title={actionLabels[request.action] ?? request.action}>
-			{(agent.success || taskId) && (
+			{agent.success || request.taskId ? (
 				<div className="ts-approval-card__meta">
 					{agent.success && (
 						<span className="ts-approval-card__agent">
@@ -84,16 +88,24 @@ export function ApprovalCard({
 							{squadmateCharacterName(agent.data, locale)}
 						</span>
 					)}
-					{taskId && (
+					{request.taskId && (
 						<span className="ts-approval-card__task">
-							{labels.task}: <bdi>{taskId}</bdi>
+							{labels.task}: <bdi>{request.taskId}</bdi>
 						</span>
 					)}
 				</div>
-			)}
+			) : null}
 			<p className="ts-approval-card__content">{request.content}</p>
-			{((request.rule !== null && ruleLabels[request.rule] !== undefined) || request.limit !== null) && (
+			{(request.amount !== null ||
+				(request.rule !== null && ruleLabels[request.rule] !== undefined) ||
+				request.limit !== null) && (
 				<p className="ts-approval-card__limit">
+					{request.amount !== null && (
+						<span>
+							<span>{labels.amount} </span>
+							<strong className="ts-approval-card__amount">{formatMillionths(request.amount, locale)}</strong>
+						</span>
+					)}
 					{request.rule && ruleLabels[request.rule] && <span>{ruleLabels[request.rule]}</span>}
 					{request.limit !== null && (
 						<span>

@@ -1416,8 +1416,7 @@ function ApprovalCardPreview({ locale, stream }: { locale: "en" | "ar"; stream: 
 			<ApprovalCard
 				locale={locale}
 				actionLabels={{ refund: ar ? "استرداد" : "Refund" }}
-				bot="petra"
-				taskId="task_42"
+				squadmates={{ "support-bot": "petra" }}
 				request={{
 					approvalId: "approval_42",
 					action: "refund",
@@ -1425,6 +1424,9 @@ function ApprovalCardPreview({ locale, stream }: { locale: "en" | "ar"; stream: 
 					contentHash: "sha256:42",
 					rule: "refund_limit",
 					limit: 20_000_000,
+					amount: 42_000_000,
+					bot: "support-bot",
+					taskId: "task_42",
 				}}
 				onDecision={(command) => setCommands((sent) => [...sent, command])}
 			/>
@@ -1471,6 +1473,9 @@ function OwnerMessagePreview({ locale }: { locale: "en" | "ar" }) {
 			contentHash: "sha256:42",
 			rule: "refund_limit",
 			limit: 20_000_000,
+			amount: 42_000_000,
+			bot: "support-bot",
+			taskId: "task_42",
 		},
 		{
 			seq: 4,
@@ -1485,7 +1490,7 @@ function OwnerMessagePreview({ locale }: { locale: "en" | "ar" }) {
 			at,
 			type: "status",
 			taskId: "task_42",
-			bot: "petra",
+			bot: "support-bot",
 			attempt: 2,
 			step: ar ? "التحقق من الطلب" : "Checking the order",
 			since: at,
@@ -1498,12 +1503,15 @@ function OwnerMessagePreview({ locale }: { locale: "en" | "ar" }) {
 			actionId: "action_42",
 			what: ar ? "لم يصل تأكيد من خدمة الطلبات." : "The order service did not confirm the action.",
 		},
+		{ seq: 7, at, type: "approval_decided", approvalId: "approval_42", decision: "approve" },
+		{ seq: 8, at, type: "question_answered", questionId: "question_42" },
 	] as const;
 	return (
 		<div className="owner-message-preview">
 			<OwnerMessageView
 				messages={messages}
 				locale={locale}
+				squadmates={{ "support-bot": "petra" }}
 				actionLabels={{ refund: ar ? "استرداد" : "Refund" }}
 				onCommand={(command) => setCommands((sent) => [...sent, command])}
 			/>

@@ -216,7 +216,7 @@ test("store approvals send a command and launcher preserves URL state", async ({
 	await expect(page.locator(".sent-commands")).not.toHaveAttribute("open", "");
 	await page.getByText("الأوامر المُرسلة", { exact: true }).click();
 	await expect(page.locator(".sent-commands pre")).toContainText('"type": "ApprovalDecision"');
-	await expect(page.locator(".ts-approval-card__agent").first()).toContainText("كيوتو");
+	await expect(page.locator(".ts-approval-card__agent").first()).toContainText("ريو");
 	await expectAccessible(page);
 	await expectNoHorizontalScroll(page);
 	await expect(page.getByRole("button", { name: /اسأل بيترا.*٣ بانتظارك/ })).toBeVisible();

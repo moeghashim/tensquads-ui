@@ -19,6 +19,9 @@ const request: PlatformApprovalRequest = {
 	contentHash: "hash-42",
 	rule: "daily_limit",
 	limit: 20_000_000,
+	amount: 42_000_000,
+	bot: "support-bot",
+	taskId: "task-42",
 };
 
 describe("ApprovalCard", () => {
@@ -52,22 +55,37 @@ describe("ApprovalCard", () => {
 			<ApprovalCard
 				request={request}
 				locale={locale}
-				taskId="t1"
 				labels={{
 					approve: "Allow",
 					decline: "Deny",
 					approved: "Allowed",
 					declined: "Denied",
 					limit: "Cap",
+					amount: "Total",
 					task: "Job",
 				}}
 			/>,
 		);
-		expect(screen.getByText(/^Cap /)).toBeTruthy();
+		expect(screen.getByText("Total")).toBeTruthy();
 		expect(screen.getByText(/Job:/)).toBeTruthy();
 		fireEvent.click(screen.getByRole("button", { name: "Deny" }));
 		expect(await screen.findByText("Denied")).toBeInTheDocument();
 		expect(screen.getByRole("button", { name: "Allow" })).toBeDisabled();
+	});
+	it("shows amount and task, and resolves agents only through the bot map", () => {
+		const { rerender } = render(<ApprovalCard request={request} squadmates={{ "support-bot": "petra" }} />);
+		expect(screen.getByText("Amount")).toBeInTheDocument();
+		expect(screen.getByText("Task:").parentElement).toHaveTextContent("task-42");
+		expect(screen.getByText("Petra")).toBeInTheDocument();
+		rerender(<ApprovalCard request={request} />);
+		expect(screen.queryByText("Petra")).toBeNull();
+		expect(screen.queryByText("support-bot")).toBeNull();
+		rerender(<ApprovalCard request={{ ...request, bot: "petra" }} />);
+		expect(screen.queryByText("petra")).toBeNull();
+	});
+	it("hides a null amount", () => {
+		render(<ApprovalCard request={{ ...request, amount: null }} />);
+		expect(screen.queryByText("Amount")).toBeNull();
 	});
 	it.each([
 		["Allow", "approve", "Approved"],
