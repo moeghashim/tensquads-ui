@@ -1,0 +1,1 @@
+CommandPalette preview uses three groups: Pages, Actions and Help.

@@ -16,6 +16,7 @@ import {
 import { useChat } from "../../../../packages/ui/src/react/Chat/useChat";
 import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
+import { CommandPalette } from "../../../../packages/ui/src/react/CommandPalette/CommandPalette";
 import {
 	DataTable,
 	EntityCell,
@@ -99,6 +100,7 @@ const componentOrder = [
 	"Sidebar",
 	"ThemeToggle",
 	"Toolbar",
+	"CommandPalette",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -433,6 +435,7 @@ function ComponentExample() {
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
+	if (name === "CommandPalette") return <CommandPalettePreview locale={locale} />;
 	if (name === "DataTable" || name === "EmptyState") {
 		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
 	}
@@ -1650,6 +1653,67 @@ function ToolbarPreview({ locale }: { locale: "en" | "ar" }) {
 		<div className="toolbar-preview">
 			<div className="toolbar-preview__canvas" />
 			<Toolbar label={copy.label} items={items} />
+		</div>
+	);
+}
+
+function CommandPalettePreview({ locale }: { locale: "en" | "ar" }) {
+	const [open, setOpen] = useState(false);
+	const ar = locale === "ar";
+	const labels = ar
+		? {
+				placeholder: "ابحث في الأوامر…",
+				empty: "لا توجد نتائج",
+				navigate: "تنقّل",
+				select: "اختيار",
+				close: "إغلاق",
+				title: "لوحة الأوامر",
+			}
+		: {
+				placeholder: "Search commands…",
+				empty: "No matches",
+				navigate: "navigate",
+				select: "select",
+				close: "close",
+				title: "Command palette",
+			};
+	return (
+		<div className="component-list">
+			<Button onClick={() => setOpen(true)}>{ar ? "افتح البحث" : "Open search"}</Button>
+			<CommandPalette
+				open={open}
+				onOpenChange={setOpen}
+				locale={locale}
+				labels={labels}
+				groups={[
+					{
+						id: "pages",
+						label: ar ? "الصفحات" : "Pages",
+						items: [
+							{ id: "home", label: ar ? "الرئيسية" : "Home", onSelect: () => setOpen(false) },
+							{ id: "components", label: ar ? "المكوّنات" : "Components", onSelect: () => setOpen(false) },
+						],
+					},
+					{
+						id: "actions",
+						label: ar ? "الإجراءات" : "Actions",
+						items: [
+							{
+								id: "theme",
+								label: ar ? "تغيير السمة" : "Change theme",
+								keywords: ["dark", "light"],
+								hint: ["⌘", "D"],
+								onSelect: () => setOpen(false),
+							},
+						],
+					},
+					{
+						id: "help",
+						label: ar ? "المساعدة" : "Help",
+						items: [{ id: "docs", label: ar ? "التوثيق" : "Documentation", onSelect: () => setOpen(false) }],
+					},
+				]}
+			/>
 		</div>
 	);
 }

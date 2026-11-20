@@ -10,6 +10,7 @@ const registryOrder = [
 	"Sidebar",
 	"ThemeToggle",
 	"Toolbar",
+	"CommandPalette",
 ];
 
 test("component index lists every documented component", async ({ page }) => {

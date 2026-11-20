@@ -43,6 +43,13 @@ export type { ChatReplyProps } from "./ChatReply/ChatReply.js";
 export { ChatReply } from "./ChatReply/ChatReply.js";
 export type { ChipProps } from "./Chip/Chip.js";
 export { Chip } from "./Chip/Chip.js";
+export type {
+	CommandPaletteGroup,
+	CommandPaletteItem,
+	CommandPaletteLabels,
+	CommandPaletteProps,
+} from "./CommandPalette/CommandPalette.js";
+export { CommandPalette, useCommandPaletteShortcut } from "./CommandPalette/CommandPalette.js";
 export type { DataTableColumn, DataTableProps, DataTableRow } from "./DataTable/DataTable.js";
 export { DataTable, EntityCell, PersonCell, StackCell, StatusCell } from "./DataTable/DataTable.js";
 export type {

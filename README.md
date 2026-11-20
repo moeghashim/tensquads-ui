@@ -22,6 +22,7 @@ The library ships these components today. Each row links to its reference and it
 | [ChatLauncher](packages/ui/src/react/ChatLauncher/ChatLauncher.md) | A floating button that opens the assistant chat. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatLauncher) |
 | [ChatReply](packages/ui/src/react/ChatReply/ChatReply.md) | ChatReply renders Markdown text and fenced `openui` blocks in reading order. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatReply) |
 | [Chip](packages/ui/src/react/Chip/Chip.md) | A pill that opens an attached object such as an output schema or tool. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chip) |
+| [CommandPalette](packages/ui/src/react/CommandPalette/CommandPalette.md) | Provide flat groups, labels and an `onSelect` callback for each item. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/CommandPalette) |
 | [DataTable](packages/ui/src/react/DataTable/DataTable.md) | A selectable table of records with labelled columns. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/DataTable) |
 | [Dialog](packages/ui/src/react/Dialog/Dialog.md) | A focused modal window that explains a task and offers a clear action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Dialog) |
 | [Distribution](packages/ui/src/react/Distribution/Distribution.md) | A whole split into ranked grey parts. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Distribution) |
