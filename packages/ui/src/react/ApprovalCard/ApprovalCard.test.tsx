@@ -187,6 +187,7 @@ describe("ApprovalCard", () => {
 		expect(screen.queryByText("daily_limit")).toBeNull();
 		expect(screen.getByText("Limit $20.00")).toBeInTheDocument();
 		rerender(<ApprovalCard request={request} ruleLabels={{ daily_limit: "Daily refund limit" }} />);
-		expect(screen.getByText("Daily refund limit")).toBeInTheDocument();
+		expect(screen.getByText("Daily refund limit $20.00")).toBeInTheDocument();
+		expect(screen.queryByText(/Limit \$20\.00/)).toBeNull();
 	});
 });

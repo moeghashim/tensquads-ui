@@ -1,6 +1,6 @@
 # ApprovalCard
 
-Import `ApprovalCard` and `ApprovalCardProps` from `@tensquads/ui/react`. Pass a platform `approval_request` as `request`. The card displays its action, content, amount, optional labeled rule and limit, and approve or decline controls. `actionLabels` localizes action ids. `ruleLabels` maps rule ids to human-readable labels; an unmapped rule id is hidden. The amount, rule label, and limit appear in that order when present. The task id comes from the request.
+Import `ApprovalCard` and `ApprovalCardProps` from `@tensquads/ui/react`. Pass a platform `approval_request` as `request`. The card displays its action, content, amount, optional labeled rule and limit, and approve or decline controls. `actionLabels` localizes action ids. `ruleLabels` maps rule ids to human-readable labels; an unmapped rule id is hidden. The amount appears first. A labelled rule names the limit, so it replaces the word "Limit" ("Refund limit $42.00"). Without a label the card shows "Limit $42.00"; a labelled rule with no limit shows the label alone. The task id comes from the request.
 
 Pass `squadmates` using the [OwnerMessageView mapping rules](../OwnerMessage/OwnerMessage.md).
 
