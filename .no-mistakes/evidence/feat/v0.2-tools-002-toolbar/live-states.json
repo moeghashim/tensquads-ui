@@ -1,0 +1,248 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "pressed": {
+      "bg": "rgb(237, 237, 237)",
+      "image": "none",
+      "color": "rgb(40, 40, 40)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "unpressed": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(93, 93, 93)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "hover": {
+      "bg": "rgba(13, 13, 13, 0.08)",
+      "image": "none",
+      "color": "rgb(40, 40, 40)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "pressedHover": {
+      "bg": "rgb(223, 223, 223)",
+      "image": "none",
+      "color": "rgb(40, 40, 40)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "disabled": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(143, 143, 143)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "result": "pass",
+    "actions": "hover unpressed/pressed/disabled; tooltip; disabled click; select; undo; reading-direction arrow; Space; Home; End; disabled Enter; enabled Enter; Tab exit; mobile overflow"
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "pressed": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "unpressed": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(175, 175, 175)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "hover": {
+      "bg": "rgba(255, 255, 255, 0.12)",
+      "image": "none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "pressedHover": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "disabled": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(143, 143, 143)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "result": "pass",
+    "actions": "hover unpressed/pressed/disabled; tooltip; disabled click; select; undo; reading-direction arrow; Space; Home; End; disabled Enter; enabled Enter; Tab exit; mobile overflow"
+  },
+  {
+    "locale": "en",
+    "theme": "system",
+    "pressed": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "unpressed": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(175, 175, 175)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "hover": {
+      "bg": "rgba(255, 255, 255, 0.12)",
+      "image": "none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "pressedHover": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "disabled": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(143, 143, 143)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "result": "pass",
+    "actions": "hover unpressed/pressed/disabled; tooltip; disabled click; select; undo; reading-direction arrow; Space; Home; End; disabled Enter; enabled Enter; Tab exit; mobile overflow"
+  },
+  {
+    "locale": "ar",
+    "theme": "light",
+    "pressed": {
+      "bg": "rgb(237, 237, 237)",
+      "image": "none",
+      "color": "rgb(40, 40, 40)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "unpressed": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(93, 93, 93)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "hover": {
+      "bg": "rgba(13, 13, 13, 0.08)",
+      "image": "none",
+      "color": "rgb(40, 40, 40)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "pressedHover": {
+      "bg": "rgb(223, 223, 223)",
+      "image": "none",
+      "color": "rgb(40, 40, 40)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "disabled": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(143, 143, 143)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "result": "pass",
+    "actions": "hover unpressed/pressed/disabled; tooltip; disabled click; select; undo; reading-direction arrow; Space; Home; End; disabled Enter; enabled Enter; Tab exit; mobile overflow"
+  },
+  {
+    "locale": "ar",
+    "theme": "dark",
+    "pressed": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "unpressed": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(175, 175, 175)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "hover": {
+      "bg": "rgba(255, 255, 255, 0.12)",
+      "image": "none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "pressedHover": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "disabled": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(143, 143, 143)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "result": "pass",
+    "actions": "hover unpressed/pressed/disabled; tooltip; disabled click; select; undo; reading-direction arrow; Space; Home; End; disabled Enter; enabled Enter; Tab exit; mobile overflow"
+  },
+  {
+    "locale": "ar",
+    "theme": "system",
+    "pressed": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "unpressed": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(175, 175, 175)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "hover": {
+      "bg": "rgba(255, 255, 255, 0.12)",
+      "image": "none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "pressedHover": {
+      "bg": "rgb(48, 48, 48)",
+      "image": "linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), none",
+      "color": "rgb(220, 220, 220)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "disabled": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "image": "none",
+      "color": "rgb(143, 143, 143)",
+      "width": "40px",
+      "height": "40px"
+    },
+    "result": "pass",
+    "actions": "hover unpressed/pressed/disabled; tooltip; disabled click; select; undo; reading-direction arrow; Space; Home; End; disabled Enter; enabled Enter; Tab exit; mobile overflow"
+  }
+]
