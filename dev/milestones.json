@@ -74,6 +74,13 @@
         "002-toolbar",
         "003-commandpalette"
       ]
+    },
+    {
+      "id": "v0.2-server",
+      "status": "active",
+      "tasks": [
+        "001-anthropic-subpath"
+      ]
     }
   ]
 }
