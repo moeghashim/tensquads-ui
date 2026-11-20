@@ -106,9 +106,7 @@ function GetStartedPage() {
 					</div>
 				</div>
 				<CopyableCode code={workerExample} label={copy.workerCodeLabel} copy={copy} language="ts" />
-				<p className="get-started-note">
-					Apps using the Anthropic provider install @anthropic-ai/sdk themselves; this example uses version 1.10.0.
-				</p>
+				<p className="get-started-note">{copy.sdkNote}</p>
 				<p className="get-started-note">{copy.serverNote}</p>
 			</section>
 		</main>

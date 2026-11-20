@@ -40,9 +40,7 @@ test("getting started covers agent setup in both locales, directions, and themes
 		await expect(page.locator(".get-started-code code").last()).toContainText(
 			"@tensquads/ui/openui/server/anthropic",
 		);
-		await expect(page.locator(".get-started-note").filter({ hasText: "install @anthropic-ai/sdk" })).toContainText(
-			"install @anthropic-ai/sdk themselves; this example uses version 1.10.0",
-		);
+		await expect(page.locator(".get-started-note").filter({ hasText: "@anthropic-ai/sdk" })).toContainText("1.10.0");
 		await capturePreviewScreenshots(page, testInfo, `get-started-${state.locale}-${state.direction}-${state.theme}`);
 		await expectNoHorizontalScroll(page);
 		await expectAccessible(page);
@@ -69,5 +67,5 @@ test("getting started code blocks copy their content", async ({ page }) => {
 	await expect(workerBlock.getByRole("status")).toHaveText("Copied");
 	const workerCode = await page.evaluate(() => sessionStorage.getItem("copied-code"));
 	expect(workerCode).toContain("@tensquads/ui/openui/server/anthropic");
-	expect(workerCode).not.toContain("Apps using the Anthropic provider install");
+	expect(workerCode).not.toContain("1.10.0");
 });
