@@ -37,6 +37,12 @@ test("getting started covers agent setup in both locales, directions, and themes
 		await expect(page.locator(".get-started-code code").last()).toContainText(
 			"createAnthropicProvider(env.ANTHROPIC_API_KEY)",
 		);
+		await expect(page.locator(".get-started-code code").last()).toContainText(
+			"@tensquads/ui/openui/server/anthropic",
+		);
+		await expect(page.locator(".get-started-code").last()).toContainText(
+			"install @anthropic-ai/sdk themselves; this example uses version 1.10.0",
+		);
 		await capturePreviewScreenshots(page, testInfo, `get-started-${state.locale}-${state.direction}-${state.theme}`);
 		await expectNoHorizontalScroll(page);
 		await expectAccessible(page);

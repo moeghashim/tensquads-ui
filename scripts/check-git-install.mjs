@@ -23,15 +23,25 @@ try {
 	const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8"));
 	const distPath = join(fixture, "node_modules/@tensquads/ui/packages/ui/dist");
 	await stat(distPath);
+	const sdkList = spawnSync("npm", ["ls", "@anthropic-ai/sdk", "--all", "--json", "--long"], {
+		cwd: fixture,
+		encoding: "utf8",
+		env: process.env,
+	});
+	const sdkTree = JSON.parse(sdkList.stdout);
+	if (sdkTree.dependencies?.["@anthropic-ai/sdk"]) throw new Error("The optional Anthropic peer was installed.");
 	for (const [subpath, target] of Object.entries(packageJson.exports)) {
 		const moduleSpecifier = subpath === "." ? "@tensquads/ui" : `@tensquads/ui/${subpath.slice(2)}`;
 		const entry = typeof target === "string" ? target : (target.import ?? target.default);
 		const path = join(fixture, "node_modules/@tensquads/ui", entry);
 		await stat(path);
 		if (!entry.endsWith(".css")) {
+			if (subpath === "./openui/server/anthropic") continue;
 			run(process.execPath, ["--input-type=module", "-e", `await import(${JSON.stringify(moduleSpecifier)});`]);
 		}
 	}
+	run("npm", ["install", "@anthropic-ai/sdk@1.10.0"]);
+	run(process.execPath, ["--input-type=module", "-e", 'await import("@tensquads/ui/openui/server/anthropic");']);
 	console.log("Git dependency install built dist and resolved every public subpath.");
 } finally {
 	await rm(fixture, { recursive: true, force: true });

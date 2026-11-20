@@ -98,11 +98,11 @@ Import backend helpers from `@tensquads/ui/openui/server`. Validate the request,
 import { createTensquadsLibrary } from "@tensquads/ui/openui";
 import {
   buildSystemPrompt,
-  createAnthropicProvider,
   OpenUIServerError,
   readOpenUIRequest,
   streamOpenUIResponse,
 } from "@tensquads/ui/openui/server";
+import { createAnthropicProvider } from "@tensquads/ui/openui/server/anthropic";
 
 export async function handleOpenUI(request: Request, apiKey: string): Promise<Response> {
   try {
@@ -123,6 +123,8 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
   }
 }
 ```
+
+Apps using the Anthropic provider install `@anthropic-ai/sdk` themselves at the tested version `1.10.0`.
 
 See [OpenUI server](../../../README.md#openui-server) for accepted turn formats, action conversion, and request caps. Handle `OpenUIServerError` to return its typed code and status. `streamOpenUIResponse` returns a plain text `Response` and closes the provider when the client cancels. `createAnthropicProvider` takes a server-side API key and defaults to `claude-haiku-5-5`. Implement `OpenUIStreamProvider` to use another provider. Keep credentials on the server.
 

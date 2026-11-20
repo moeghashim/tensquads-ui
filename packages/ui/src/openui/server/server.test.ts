@@ -170,7 +170,7 @@ describe("OpenUI server helpers", () => {
 		expect(close).toHaveBeenCalledOnce();
 	});
 
-	it("keeps the server bundle limited to the React DOM modules required by UI SDK Menu", async () => {
+	it("keeps the provider-neutral server bundle free of the Anthropic SDK and limits React DOM imports", async () => {
 		const sdkImporters = new Set<string>();
 		const result = await build({
 			configFile: false,
@@ -193,7 +193,7 @@ describe("OpenUI server helpers", () => {
 				rollupOptions: { external: isBuiltin },
 			},
 		});
-		expect([...sdkImporters]).toEqual([join(process.cwd(), "packages/ui/src/openui/server/providers/anthropic.ts")]);
+		expect([...sdkImporters]).toEqual([]);
 		const bundles = Array.isArray(result) ? result : [result];
 		const modules = bundles.flatMap((bundle) =>
 			"output" in bundle

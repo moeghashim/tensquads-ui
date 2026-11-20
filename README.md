@@ -149,11 +149,11 @@ Use the server entry in a Worker route. It provides request validation and caps,
 import { createTensquadsLibrary } from "@tensquads/ui/openui";
 import {
   buildSystemPrompt,
-  createAnthropicProvider,
   OpenUIServerError,
   readOpenUIRequest,
   streamOpenUIResponse,
 } from "@tensquads/ui/openui/server";
+import { createAnthropicProvider } from "@tensquads/ui/openui/server/anthropic";
 
 export async function handleOpenUI(request: Request, apiKey: string): Promise<Response> {
   try {
@@ -173,6 +173,8 @@ export async function handleOpenUI(request: Request, apiKey: string): Promise<Re
   }
 }
 ```
+
+Apps using the Anthropic provider install `@anthropic-ai/sdk` themselves at the tested version `1.10.0`.
 
 `readOpenUIRequest` limits the body to 16 KiB and the conversation to 12 turns. It accepts user and assistant turns with string content, plus structured `ChatActionTurn` entries. It converts each action into user text in the request locale, including its summary, source, name, and values. Values use JSON with sorted object keys for deterministic output. The server entry exports `ChatTurn` and `ChatActionTurn`; see [Chat](packages/ui/src/react/Chat/Chat.md) for client integration.
 
