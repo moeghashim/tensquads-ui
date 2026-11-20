@@ -29,7 +29,15 @@ try {
 		env: process.env,
 	});
 	const sdkTree = JSON.parse(sdkList.stdout);
-	if (sdkTree.dependencies?.["@anthropic-ai/sdk"]) throw new Error("The optional Anthropic peer was installed.");
+	const assertNoAnthropic = (node) => {
+		for (const [name, dependency] of Object.entries(node.dependencies ?? {})) {
+			if (name === "@anthropic-ai/sdk") {
+				throw new Error("The optional Anthropic peer was installed without an explicit request.");
+			}
+			assertNoAnthropic(dependency);
+		}
+	};
+	assertNoAnthropic(sdkTree);
 	for (const [subpath, target] of Object.entries(packageJson.exports)) {
 		const moduleSpecifier = subpath === "." ? "@tensquads/ui" : `@tensquads/ui/${subpath.slice(2)}`;
 		const entry = typeof target === "string" ? target : (target.import ?? target.default);

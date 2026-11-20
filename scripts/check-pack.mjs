@@ -30,9 +30,15 @@ try {
 		encoding: "utf8",
 	});
 	const sdkTree = JSON.parse(sdkList.stdout);
-	if (sdkTree.dependencies?.["@anthropic-ai/sdk"]) {
-		throw new Error("The optional Anthropic peer was installed without an explicit request.");
-	}
+	const assertNoAnthropic = (node) => {
+		for (const [name, dependency] of Object.entries(node.dependencies ?? {})) {
+			if (name === "@anthropic-ai/sdk") {
+				throw new Error("The optional Anthropic peer was installed without an explicit request.");
+			}
+			assertNoAnthropic(dependency);
+		}
+	};
+	assertNoAnthropic(sdkTree);
 	for (const packageName of ["@ui-sdk/core", "@ui-sdk/react"]) {
 		await readFile(join(fixture, "node_modules", packageName, "package.json"), "utf8");
 		const npmTree = JSON.parse(
