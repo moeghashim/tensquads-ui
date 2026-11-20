@@ -68,7 +68,7 @@
     },
     {
       "id": "v0.2-tools",
-      "status": "active",
+      "status": "done",
       "tasks": [
         "001-themetoggle",
         "002-toolbar",
