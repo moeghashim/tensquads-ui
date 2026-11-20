@@ -6,7 +6,7 @@ The `onDecision` callback receives an `ApprovalDecision` command body without `c
 
 ## Platform contract
 
-The card uses `approval_request` and `ApprovalDecision` from `moeghashim/tensquads-platform-amp` commit `c5eaad4d69b4529c9a57b00b1066b39e60243fa8`. See [OwnerMessageView's platform contract](../OwnerMessage/OwnerMessage.md#platform-contract) for schemas, command builders, money formatting, and the Q4 gaps. The card shows no amount.
+See [OwnerMessageView's platform contract](../OwnerMessage/OwnerMessage.md#platform-contract) for the supported contract revision, schemas, command builders, money formatting, and the planned update. The card currently shows no amount.
 
 The OpenUI definition uses the same React card. It accepts `approvalId`, `action`, `content`, and `contentHash` directly, with optional nullable `rule` and `limit`, plus `actionLabels`, `locale`, `labels`, and `ruleLabels` in that positional order. `ruleLabels` is the final prop, so existing positional calls keep their meaning. Its controls emit actions named `ApprovalDecision` with params `{ approvalId, contentHash, decision }`. Decline sends `"reject"`. Controls are disabled while streaming.
 
