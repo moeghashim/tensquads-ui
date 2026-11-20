@@ -436,3 +436,10 @@
 	}
 	[dir="rtl"] .ts-toolbar [data-mirror="true"] { transform: scaleX(-1); }
 }
+.site-search-button { display: inline-flex; align-items: center; gap: var(--ts-space-2); block-size: 36px; min-block-size: 36px; padding-inline: var(--ts-space-3); }
+.site-search-button svg { inline-size: 16px; block-size: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+.site-search-button kbd { margin-inline-start: var(--ts-space-1); padding-inline: var(--ts-space-1); border: 1px solid var(--ts-border); border-radius: var(--ts-radius-sm); color: var(--ts-text-secondary); font: inherit; font-size: var(--ts-text-xs-font-size); line-height: 18px; }
+@media (max-width: 639px) {
+	.site-search-button { inline-size: 36px; padding: 0; justify-content: center; }
+	.site-search-button span, .site-search-button kbd { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}

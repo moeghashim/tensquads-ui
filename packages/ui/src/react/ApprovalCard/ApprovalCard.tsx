@@ -28,6 +28,7 @@ export type ApprovalCardProps = {
 	disabled?: boolean;
 	squadmates?: Readonly<Record<string, AgentSlug>>;
 	decision?: "approve" | "reject";
+	// biome-ignore lint/suspicious/noConfusingVoidType: Preserve support for async handlers that return no value or a boolean veto.
 	onDecision?: (command: ReturnType<typeof approvalDecisionCommand>) => void | boolean | Promise<void | boolean>;
 };
 
