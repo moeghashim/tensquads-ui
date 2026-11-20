@@ -43,6 +43,30 @@ function searchText(value: string) {
 	return value.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase();
 }
 
+// Label matches rank above keyword matches. Zero hides the item.
+function matchScore(item: { label: string; keywords?: readonly string[] }, query: string) {
+	const needle = searchText(query);
+	if (!needle) return 1;
+	const label = searchText(item.label);
+	if (label.startsWith(needle)) return 3;
+	if (label.includes(needle)) return 2;
+	return (item.keywords ?? []).some((text) => searchText(text).includes(needle)) ? 1 : 0;
+}
+
+// Composed commands keep their markup order, so sort them here: the best match comes first and is highlighted.
+function rankGroups(groups: readonly CommandPaletteGroup[], query: string) {
+	if (!searchText(query)) return groups;
+	const ranked = groups.map((group, index) => {
+		const items = group.items
+			.map((item, order) => ({ item, order, score: matchScore(item, query) }))
+			.sort((a, b) => b.score - a.score || a.order - b.order)
+			.map(({ item }) => item);
+		const best = Math.max(0, ...group.items.map((item) => matchScore(item, query)));
+		return { group: { ...group, items }, index, best };
+	});
+	return ranked.sort((a, b) => b.best - a.best || a.index - b.index).map(({ group }) => group);
+}
+
 export function CommandPalette({ open, onOpenChange, groups, locale = "en", labels, className }: CommandPaletteProps) {
 	const [query, setQuery] = useState("");
 	const openRef = useRef(open);
@@ -72,9 +96,7 @@ export function CommandPalette({ open, onOpenChange, groups, locale = "en", labe
 				<Command
 					query={query}
 					onQueryChange={setQuery}
-					filter={(item, query) =>
-						[item.label, ...(item.keywords ?? [])].some((text) => searchText(text).includes(searchText(query)))
-					}
+					filter={(item, query) => matchScore(item, query)}
 					onKeyDown={(event) => {
 						if (event.key === "Escape") {
 							event.preventDefault();
@@ -101,31 +123,37 @@ export function CommandPalette({ open, onOpenChange, groups, locale = "en", labe
 					</div>
 					<CommandEmpty>{labels.empty}</CommandEmpty>
 					<CommandList className="ts-command-palette__list">
-						{groups.map((group) => (
-							<CommandGroup key={group.id}>
-								<CommandGroupLabel>{group.label}</CommandGroupLabel>
-								{group.items.map((item) => (
-									<CommandItem
-										key={item.id}
-										value={item.id}
-										label={item.label}
-										keywords={[...(item.keywords ?? [])]}
-									>
-										<span className="ts-command-palette__icon-slot">
-											{item.icon && <CommandItemIcon>{item.icon}</CommandItemIcon>}
-										</span>
-										<span className="ts-command-palette__item-label">{item.label}</span>
-										{item.hint && (
-											<span className="ts-command-palette__hint">
-												{item.hint.map((key) => (
-													<kbd key={key}>{key}</kbd>
-												))}
-											</span>
-										)}
-									</CommandItem>
-								))}
-							</CommandGroup>
-						))}
+						{rankGroups(groups, query).map((group) => {
+							// A group without icons drops the icon column, so its labels align with the group label.
+							const hasIcons = group.items.some((item) => item.icon);
+							return (
+								<CommandGroup key={group.id}>
+									<CommandGroupLabel>{group.label}</CommandGroupLabel>
+									{group.items.map((item) => (
+										<CommandItem
+											key={item.id}
+											value={item.id}
+											label={item.label}
+											keywords={[...(item.keywords ?? [])]}
+										>
+											{hasIcons && (
+												<span className="ts-command-palette__icon-slot">
+													{item.icon && <CommandItemIcon>{item.icon}</CommandItemIcon>}
+												</span>
+											)}
+											<span className="ts-command-palette__item-label">{item.label}</span>
+											{item.hint && (
+												<span className="ts-command-palette__hint">
+													{item.hint.map((key) => (
+														<kbd key={key}>{key}</kbd>
+													))}
+												</span>
+											)}
+										</CommandItem>
+									))}
+								</CommandGroup>
+							);
+						})}
 					</CommandList>
 					<div className="ts-command-palette__footer">
 						<span>

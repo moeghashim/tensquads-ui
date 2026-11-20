@@ -27,6 +27,7 @@
 	.ts-command-palette [data-slot="command-group-label"],
 	.ts-command-palette [data-slot="command-item"],
 	.ts-command-palette__footer { opacity: 1; }
+	.ts-command-palette [data-slot="command-empty"]:empty { display: none; }
 	.ts-command-palette [data-slot="command-empty"] { padding: var(--ts-space-6); color: var(--ts-text-secondary); text-align: center; }
 	.ts-command-palette__list { max-block-size: 60vh; overflow-y: auto; padding: var(--ts-space-2); }
 	.ts-command-palette [data-slot="command-group"] { padding-block: var(--ts-space-1); }

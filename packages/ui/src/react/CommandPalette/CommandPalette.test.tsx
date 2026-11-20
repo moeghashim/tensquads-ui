@@ -93,6 +93,44 @@ describe("CommandPalette", () => {
 		expect(screen.getByRole("option", { name: "Keyword match" })).toBeVisible();
 	});
 
+	it("ranks a label match before an earlier keyword-only match", async () => {
+		render(
+			<CommandPalette
+				open
+				onOpenChange={vi.fn()}
+				labels={labels}
+				groups={[
+					{
+						id: "components",
+						label: "Components",
+						items: [
+							{ id: "field", label: "Field", keywords: ["form data"], onSelect: vi.fn() },
+							{ id: "table", label: "DataTable", onSelect: vi.fn() },
+						],
+					},
+				]}
+			/>,
+		);
+		const input = await screen.findByRole("combobox", { name: "Search" });
+		fireEvent.change(input, { target: { value: "dat" } });
+		await screen.findByRole("option", { name: "DataTable" });
+		expect(screen.getAllByRole("option").map((option) => option.textContent)).toEqual(["DataTable", "Field"]);
+	});
+
+	it("hides the empty message and the icon column when they have nothing to show", async () => {
+		render(
+			<CommandPalette
+				open
+				onOpenChange={vi.fn()}
+				labels={labels}
+				groups={[{ id: "pages", label: "Pages", items: [{ id: "home", label: "Home", onSelect: vi.fn() }] }]}
+			/>,
+		);
+		const option = await screen.findByRole("option", { name: "Home" });
+		expect(option.querySelector(".ts-command-palette__icon-slot")).toBeNull();
+		expect(screen.queryByText("No matches")).not.toBeInTheDocument();
+	});
+
 	it("runs the highlighted command and closes, then returns focus on Escape", async () => {
 		const action = vi.fn();
 		render(<Harness action={action} />);
