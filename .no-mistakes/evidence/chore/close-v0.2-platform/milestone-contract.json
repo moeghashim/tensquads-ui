@@ -1,0 +1,16 @@
+{
+  "contract": "Persisted project milestone registry dev/milestones.json",
+  "oracle": "Author intent: Mark milestone v0.2-platform done in dev/milestones.json",
+  "milestone": {
+    "id": "v0.2-platform",
+    "status": "done",
+    "tasks": [
+      "001-contract-b09e197"
+    ]
+  },
+  "previous_status": "active",
+  "semantic_check": "Exactly one v0.2-platform entry has status done; all other registry data is unchanged; working file matches target commit.",
+  "rejects": "Wrong milestone, unchanged active status, duplicate target entry, or unrelated metadata changes.",
+  "runtime_surface": "None: repository reference search found no consumer of milestones.json.",
+  "live_validation": false
+}
