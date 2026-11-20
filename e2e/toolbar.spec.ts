@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { expectAccessible, openPreview } from "./helpers/preview";
+import { capturePreviewScreenshots, expectAccessible, openPreview } from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	const direction = locale === "ar" ? "rtl" : "ltr";
 	for (const theme of ["light", "dark"] as const) {
-		test(`Toolbar preview ${locale} ${theme}`, async ({ page }) => {
+		test(`Toolbar preview ${locale} ${theme}`, async ({ page }, testInfo) => {
 			await openPreview(page, { locale, direction, theme }, "/components/Toolbar");
 			const toolbar = page.getByRole("toolbar");
 			await expect(toolbar).toBeVisible();
@@ -17,6 +17,7 @@ for (const locale of ["en", "ar"] as const) {
 				"true",
 			);
 			await expectAccessible(page);
+			await capturePreviewScreenshots(page, testInfo, `Toolbar-${locale}-${direction}-${theme}`);
 		});
 	}
 }
