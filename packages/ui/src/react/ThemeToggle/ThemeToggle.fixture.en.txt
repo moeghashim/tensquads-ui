@@ -1,0 +1,1 @@
+ThemeToggle is application chrome with a host-controlled callback. It has no OpenUI definition.

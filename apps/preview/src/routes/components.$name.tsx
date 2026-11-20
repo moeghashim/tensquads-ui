@@ -1,6 +1,6 @@
-import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
@@ -16,6 +16,7 @@ import {
 import { useChat } from "../../../../packages/ui/src/react/Chat/useChat";
 import { ChatReply } from "../../../../packages/ui/src/react/ChatReply/ChatReply";
 import { Chip } from "../../../../packages/ui/src/react/Chip/Chip";
+import { CommandPalette } from "../../../../packages/ui/src/react/CommandPalette/CommandPalette";
 import {
 	DataTable,
 	EntityCell,
@@ -65,6 +66,8 @@ import {
 } from "../../../../packages/ui/src/react/Squadmate/Squadmate";
 import { StatTile } from "../../../../packages/ui/src/react/StatTile/StatTile";
 import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
+import { ThemeToggle } from "../../../../packages/ui/src/react/ThemeToggle/ThemeToggle";
+import { Toolbar, type ToolbarItem } from "../../../../packages/ui/src/react/Toolbar/Toolbar";
 import {
 	Tooltip,
 	TooltipArrow,
@@ -95,6 +98,9 @@ const componentOrder = [
 	"Chat",
 	"ChatReply",
 	"Sidebar",
+	"ThemeToggle",
+	"Toolbar",
+	"CommandPalette",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -427,6 +433,9 @@ function ComponentExample() {
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
+	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
+	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
+	if (name === "CommandPalette") return <CommandPalettePreview locale={locale} />;
 	if (name === "DataTable" || name === "EmptyState") {
 		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
 	}
@@ -1542,6 +1551,169 @@ function ExampleCodeBlock({ code }: { code: string }) {
 			<pre>
 				<code>{code}</code>
 			</pre>
+		</div>
+	);
+}
+
+function ThemeTogglePreview({ locale }: { locale: "en" | "ar" }) {
+	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
+	const navigate = useNavigate();
+	const [systemDark, setSystemDark] = useState(false);
+	useEffect(() => {
+		const media = window.matchMedia("(prefers-color-scheme: dark)");
+		const update = () => setSystemDark(media.matches);
+		update();
+		media.addEventListener("change", update);
+		return () => media.removeEventListener("change", update);
+	}, []);
+	const { theme: setting } = getPreviewState(search);
+	const theme = setting === "system" ? (systemDark ? "dark" : "light") : setting;
+	return (
+		<div className="component-list">
+			<ThemeToggle
+				locale={locale}
+				value={theme}
+				onValueChange={(next) => void navigate({ to: ".", search: { ...search, theme: next } as never })}
+			/>
+		</div>
+	);
+}
+
+function ToolbarPreview({ locale }: { locale: "en" | "ar" }) {
+	const [mode, setMode] = useState<"pan" | "select">("pan");
+	const [changed, setChanged] = useState(false);
+	const copy =
+		locale === "ar"
+			? { label: "أدوات اللوحة", pan: "تحريك اللوحة", select: "تحديد", undo: "تراجع", redo: "إعادة" }
+			: { label: "Canvas tools", pan: "Pan", select: "Select", undo: "Undo", redo: "Redo" };
+	const glyph = (kind: "pan" | "select" | "undo" | "redo") => {
+		if (kind === "pan")
+			return (
+				<svg aria-hidden="true" viewBox="0 0 24 24">
+					<path d="M8 11V5a1.5 1.5 0 0 1 3 0v5-7a1.5 1.5 0 0 1 3 0v7-6a1.5 1.5 0 0 1 3 0v7-4a1.5 1.5 0 0 1 3 0v8c0 4-2 7-6 7h-2c-2 0-3-1-4-3l-3-5a1.5 1.5 0 0 1 2-2l2 2" />
+				</svg>
+			);
+		if (kind === "select")
+			return (
+				<svg aria-hidden="true" viewBox="0 0 24 24">
+					<path d="M5 3v17l5-5 4 6 3-2-4-6h7L5 3Z" />
+				</svg>
+			);
+		return kind === "undo" ? (
+			<svg aria-hidden="true" viewBox="0 0 24 24" data-mirror="true">
+				<path d="M9 14 4 9l5-5" />
+				<path d="M4 9h9a6 6 0 0 1 0 12h-2" />
+			</svg>
+		) : (
+			<svg aria-hidden="true" viewBox="0 0 24 24" data-mirror="true">
+				<path d="m15 14 5-5-5-5" />
+				<path d="M20 9h-9a6 6 0 0 0 0 12h2" />
+			</svg>
+		);
+	};
+	const items: ToolbarItem[] = [
+		{
+			type: "toggle",
+			id: "pan",
+			label: copy.pan,
+			icon: glyph("pan"),
+			pressed: mode === "pan",
+			onPressedChange: (pressed) => {
+				if (pressed) {
+					setMode("pan");
+					setChanged(true);
+				}
+			},
+		},
+		{
+			type: "toggle",
+			id: "select",
+			label: copy.select,
+			icon: glyph("select"),
+			pressed: mode === "select",
+			onPressedChange: (pressed) => {
+				if (pressed) {
+					setMode("select");
+					setChanged(true);
+				}
+			},
+		},
+		{ type: "separator", id: "history" },
+		{
+			type: "button",
+			id: "undo",
+			label: copy.undo,
+			icon: glyph("undo"),
+			disabled: !changed,
+			onClick: () => setMode("pan"),
+		},
+		{ type: "button", id: "redo", label: copy.redo, icon: glyph("redo"), disabled: true, onClick: () => undefined },
+	];
+	return (
+		<div className="toolbar-preview">
+			<div className="toolbar-preview__canvas" />
+			<Toolbar label={copy.label} items={items} />
+		</div>
+	);
+}
+
+function CommandPalettePreview({ locale }: { locale: "en" | "ar" }) {
+	const [open, setOpen] = useState(false);
+	const ar = locale === "ar";
+	const labels = ar
+		? {
+				placeholder: "ابحث في الأوامر…",
+				empty: "لا توجد نتائج",
+				navigate: "تنقّل",
+				select: "اختيار",
+				close: "إغلاق",
+				title: "لوحة الأوامر",
+			}
+		: {
+				placeholder: "Search commands…",
+				empty: "No matches",
+				navigate: "navigate",
+				select: "select",
+				close: "close",
+				title: "Command palette",
+			};
+	return (
+		<div className="component-list">
+			<Button onClick={() => setOpen(true)}>{ar ? "افتح البحث" : "Open search"}</Button>
+			<CommandPalette
+				open={open}
+				onOpenChange={setOpen}
+				locale={locale}
+				labels={labels}
+				groups={[
+					{
+						id: "pages",
+						label: ar ? "الصفحات" : "Pages",
+						items: [
+							{ id: "home", label: ar ? "الرئيسية" : "Home", onSelect: () => setOpen(false) },
+							{ id: "components", label: ar ? "المكوّنات" : "Components", onSelect: () => setOpen(false) },
+						],
+					},
+					{
+						id: "actions",
+						label: ar ? "الإجراءات" : "Actions",
+						items: [
+							{
+								id: "theme",
+								label: ar ? "تغيير السمة" : "Change theme",
+								keywords: ["dark", "light"],
+								hint: ["⌘", "D"],
+								onSelect: () => setOpen(false),
+							},
+						],
+					},
+					{
+						id: "help",
+						label: ar ? "المساعدة" : "Help",
+						items: [{ id: "docs", label: ar ? "التوثيق" : "Documentation", onSelect: () => setOpen(false) }],
+					},
+				]}
+			/>
 		</div>
 	);
 }

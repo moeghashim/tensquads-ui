@@ -8,6 +8,9 @@ const registryOrder = [
 	"Chat",
 	"ChatReply",
 	"Sidebar",
+	"ThemeToggle",
+	"Toolbar",
+	"CommandPalette",
 ];
 
 test("component index lists every documented component", async ({ page }) => {
@@ -27,7 +30,8 @@ for (const locale of ["en", "ar"] as const) {
 			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الخصائص" : "Props" })).toBeVisible();
 			// Usage shows only when the component doc has code samples.
 			const usage = docs.getByRole("heading", { name: locale === "ar" ? "الاستخدام" : "Usage" });
-			if (["Field", "Input", "Chat", "ChatReply"].includes(name)) await expect(usage).toBeVisible();
+			if (["Field", "Input", "Chat", "ChatReply", "ThemeToggle", "Toolbar"].includes(name))
+				await expect(usage).toBeVisible();
 			else await expect(usage).toHaveCount(0);
 			// English doc text stays left-to-right on Arabic pages.
 			await expect(docs.locator("p[lang='en'][dir='ltr']").first()).toBeVisible();
@@ -40,6 +44,7 @@ for (const locale of ["en", "ar"] as const) {
 			else if (name === "DataTable") await expect(page.getByRole("table").first()).toBeVisible();
 			else if (name === "EmptyState") await expect(page.locator("[data-slot='empty-state']").first()).toBeVisible();
 			else if (name === "Sidebar") await expect(page.locator(".sidebar-preview")).toBeVisible();
+			else if (name === "Toolbar") await expect(page.locator(".toolbar-preview").getByRole("toolbar")).toBeVisible();
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
