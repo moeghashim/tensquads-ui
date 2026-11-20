@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
@@ -1552,7 +1552,16 @@ function ExampleCodeBlock({ code }: { code: string }) {
 function ThemeTogglePreview({ locale }: { locale: "en" | "ar" }) {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const navigate = useNavigate();
-	const theme = search.theme === "dark" ? "dark" : "light";
+	const [systemDark, setSystemDark] = useState(false);
+	useEffect(() => {
+		const media = window.matchMedia("(prefers-color-scheme: dark)");
+		const update = () => setSystemDark(media.matches);
+		update();
+		media.addEventListener("change", update);
+		return () => media.removeEventListener("change", update);
+	}, []);
+	const { theme: setting } = getPreviewState(search);
+	const theme = setting === "system" ? (systemDark ? "dark" : "light") : setting;
 	return (
 		<div className="component-list">
 			<ThemeToggle
