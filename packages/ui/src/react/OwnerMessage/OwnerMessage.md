@@ -4,7 +4,7 @@ Import `OwnerMessageView`, `OwnerMessageViewProps`, `pendingQuestion`, and `appr
 
 Replies, result summaries, and result evidence are plain text with linked URLs. Evidence follows the summary as a list. A free text question includes a note to use the host message box. Use `pendingQuestion(messages)` to find the newest valid unanswered free text question by `seq` and send the next composer value as an `OwnerAnswer`. Option questions lock after a selection and mark the chosen option. A matching `question_answered` message disables its options. It preserves a local selection but does not identify a chosen option after a reload.
 
-Approval requests use [ApprovalCard](../ApprovalCard/ApprovalCard.md), with `actionLabels` passed through. Pass `squadmates` as a map from bot ids to `AgentSlug` values. Approval and status messages show a Squadmate only through this map. Status messages show an attempt label only above attempt 1. An `action_not_confirmed` message uses ChatError with `what` as its body. The view sets language and direction from `locale`, which defaults to English.
+Approval requests use [ApprovalCard](../ApprovalCard/ApprovalCard.md), with `actionLabels` passed through. Pass `squadmates` as a map from bot ids to `AgentSlug` values. ApprovalCard and status messages show a Squadmate only when the bot id is an own property of this map and its value is a valid `AgentSlug`. Inherited properties, including prototype keys such as `constructor`, are ignored. Missing or invalid mappings show no agent. Status messages show an attempt label only above attempt 1. An `action_not_confirmed` message uses ChatError with `what` as its body. The view sets language and direction from `locale`, which defaults to English.
 
 ## Platform contract
 

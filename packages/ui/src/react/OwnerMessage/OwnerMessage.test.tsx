@@ -158,6 +158,26 @@ describe("OwnerMessageView", () => {
 		expect(screen.getByText("Unconfirmed")).toBeInTheDocument();
 	});
 
+	it("ignores bot ids that match object prototype keys", () => {
+		render(
+			<OwnerMessageView
+				squadmates={{ "support-bot": "petra" }}
+				messages={["constructor", "toString", "__proto__"].map((bot, index) => ({
+					seq: index + 1,
+					at,
+					type: "status",
+					taskId: "t1",
+					bot,
+					attempt: 1,
+					step: `Step ${bot}`,
+					since: at,
+				}))}
+			/>,
+		);
+		expect(screen.getAllByRole("status")).toHaveLength(3);
+		expect(screen.queryByRole("img")).not.toBeInTheDocument();
+	});
+
 	it("selects newest free text question and reports an unknown message", async () => {
 		const free = [{ seq: 1, at, type: "question", questionId: "q2", text: "What is the order number?", options: [] }];
 		expect(pendingQuestion(free)?.questionId).toBe("q2");
