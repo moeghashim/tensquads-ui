@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { AgentSlug, Locale } from "../../schemas/index.js";
+import { type AgentSlug, AgentSlugSchema, type Locale } from "../../schemas/index.js";
 import type { PlatformOwnerCommandBody, PlatformOwnerMessage } from "../../schemas/platform.js";
 import { ownerAnswerCommand, PlatformOwnerMessageSchema } from "../../schemas/platform.js";
 import { ApprovalCard, type ApprovalCardProps } from "../ApprovalCard/ApprovalCard.js";
@@ -191,13 +191,15 @@ function OwnerMessageItem({
 			</ChatAssistantMessage>
 		);
 	if (message.type === "status") {
-		const agent = squadmates?.[message.bot];
+		const agent = AgentSlugSchema.safeParse(
+			squadmates && Object.hasOwn(squadmates, message.bot) ? squadmates[message.bot] : undefined,
+		);
 		return (
 			<ChatWorking
 				className="ts-owner-message"
 				locale={locale}
 				label={`${message.step}${message.attempt > 1 ? ` · ${labels?.attempt ?? (locale === "ar" ? "المحاولة" : "Attempt")} ${message.attempt}` : ""}`}
-				glyph={agent ? <Squadmate agent={agent} state="running" size={20} locale={locale} /> : undefined}
+				glyph={agent.success ? <Squadmate agent={agent.data} state="running" size={20} locale={locale} /> : undefined}
 			/>
 		);
 	}

@@ -45,7 +45,9 @@ export function ApprovalCard({
 	const [localDecision, setLocalDecision] = useState<"approve" | "reject">();
 	const [pending, setPending] = useState(false);
 	const selected = decision ?? localDecision;
-	const agent = AgentSlugSchema.safeParse(squadmates?.[request.bot]);
+	const agent = AgentSlugSchema.safeParse(
+		squadmates && Object.hasOwn(squadmates, request.bot) ? squadmates[request.bot] : undefined,
+	);
 	const choose = async (next: "approve" | "reject") => {
 		if (selected || disabled || pending) return;
 		setPending(true);
