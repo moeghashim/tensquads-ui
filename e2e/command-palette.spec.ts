@@ -54,7 +54,9 @@ test("CommandPalette closes on a backdrop press and returns focus", async ({ pag
 	await expect(trigger).toBeFocused();
 });
 
-test("CommandPalette filters keywords, handles no matches and closes a search on the first Escape", async ({ page }) => {
+test("CommandPalette filters keywords, handles no matches and closes a search on the first Escape", async ({
+	page,
+}) => {
 	for (const locale of ["en", "ar"] as const) {
 		await openPreview(
 			page,
@@ -68,7 +70,9 @@ test("CommandPalette filters keywords, handles no matches and closes a search on
 		await expect(input).toBeFocused();
 		await input.fill("dark");
 		await expect(dialog.getByRole("group")).toHaveCount(1);
-		await expect(dialog.getByRole("option", { name: locale === "ar" ? "تغيير السمة" : "Change theme" })).toBeVisible();
+		await expect(
+			dialog.getByRole("option", { name: locale === "ar" ? "تغيير السمة" : "Change theme" }),
+		).toBeVisible();
 		await input.fill("zzq-no-such-command-9876");
 		await expect(dialog.getByRole("option")).toHaveCount(0);
 		await expect(dialog.getByRole("group")).toHaveCount(0);
