@@ -1,0 +1,101 @@
+{
+  "surface": "Production-built local consumer of @tensquads/ui/react",
+  "oracle": "User intent and PLAN D27: only explicit valid host mappings show squadmates; unmapped bots retain usable status and approval controls.",
+  "results": [
+    {
+      "mode": "inherited",
+      "locale": "en",
+      "statusRows": 5,
+      "images": 0,
+      "command": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-0",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "mode": "inherited",
+      "locale": "ar",
+      "statusRows": 5,
+      "images": 0,
+      "command": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-0",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "mode": "owned",
+      "locale": "en",
+      "statusRows": 3,
+      "images": 6,
+      "command": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-0",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "mode": "owned",
+      "locale": "ar",
+      "statusRows": 3,
+      "images": 6,
+      "command": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-0",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "mode": "fallback",
+      "locale": "en",
+      "statusRows": 3,
+      "images": 0,
+      "command": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-0",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "mode": "fallback",
+      "locale": "ar",
+      "statusRows": 3,
+      "images": 0,
+      "command": [
+        {
+          "type": "ApprovalDecision",
+          "approvalId": "approval-0",
+          "decision": "approve",
+          "contentHash": "hash-42"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "mode": "absent-map",
+      "result": "pass"
+    }
+  ],
+  "browserErrors": []
+}

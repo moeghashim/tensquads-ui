@@ -1,0 +1,428 @@
+[
+  {
+    "mode": "prototype",
+    "locale": "en",
+    "viewport": 1100,
+    "observations": [
+      {
+        "bot": "constructor",
+        "mascotImages": 0,
+        "status": "Checking constructor · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "toString",
+        "mascotImages": 0,
+        "status": "Checking toString · Attempt 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "__proto__",
+        "mascotImages": 0,
+        "status": "Checking __proto__ · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "hasOwnProperty",
+        "mascotImages": 0,
+        "status": "Checking hasOwnProperty · Attempt 2",
+        "decision": "reject"
+      }
+    ],
+    "commands": [
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-0",
+        "decision": "approve",
+        "contentHash": "hash-0"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1",
+        "decision": "reject",
+        "contentHash": "hash-1"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-2",
+        "decision": "approve",
+        "contentHash": "hash-2"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-3",
+        "decision": "reject",
+        "contentHash": "hash-3"
+      }
+    ],
+    "browserErrors": [],
+    "result": "pass"
+  },
+  {
+    "mode": "prototype",
+    "locale": "ar",
+    "viewport": 390,
+    "observations": [
+      {
+        "bot": "constructor",
+        "mascotImages": 0,
+        "status": "Checking constructor · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "toString",
+        "mascotImages": 0,
+        "status": "Checking toString · المحاولة 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "__proto__",
+        "mascotImages": 0,
+        "status": "Checking __proto__ · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "hasOwnProperty",
+        "mascotImages": 0,
+        "status": "Checking hasOwnProperty · المحاولة 2",
+        "decision": "reject"
+      }
+    ],
+    "commands": [
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-0",
+        "decision": "approve",
+        "contentHash": "hash-0"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1",
+        "decision": "reject",
+        "contentHash": "hash-1"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-2",
+        "decision": "approve",
+        "contentHash": "hash-2"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-3",
+        "decision": "reject",
+        "contentHash": "hash-3"
+      }
+    ],
+    "browserErrors": [],
+    "result": "pass"
+  },
+  {
+    "mode": "inherited",
+    "locale": "en",
+    "viewport": 1100,
+    "observations": [
+      {
+        "bot": "constructor",
+        "mascotImages": 0,
+        "status": "Checking constructor · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "toString",
+        "mascotImages": 0,
+        "status": "Checking toString · Attempt 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "__proto__",
+        "mascotImages": 0,
+        "status": "Checking __proto__ · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "inherited-bot",
+        "mascotImages": 0,
+        "status": "Checking inherited-bot · Attempt 2",
+        "decision": "reject"
+      }
+    ],
+    "commands": [
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-0",
+        "decision": "approve",
+        "contentHash": "hash-0"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1",
+        "decision": "reject",
+        "contentHash": "hash-1"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-2",
+        "decision": "approve",
+        "contentHash": "hash-2"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-3",
+        "decision": "reject",
+        "contentHash": "hash-3"
+      }
+    ],
+    "browserErrors": [],
+    "result": "pass"
+  },
+  {
+    "mode": "inherited",
+    "locale": "ar",
+    "viewport": 390,
+    "observations": [
+      {
+        "bot": "constructor",
+        "mascotImages": 0,
+        "status": "Checking constructor · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "toString",
+        "mascotImages": 0,
+        "status": "Checking toString · المحاولة 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "__proto__",
+        "mascotImages": 0,
+        "status": "Checking __proto__ · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "inherited-bot",
+        "mascotImages": 0,
+        "status": "Checking inherited-bot · المحاولة 2",
+        "decision": "reject"
+      }
+    ],
+    "commands": [
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-0",
+        "decision": "approve",
+        "contentHash": "hash-0"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1",
+        "decision": "reject",
+        "contentHash": "hash-1"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-2",
+        "decision": "approve",
+        "contentHash": "hash-2"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-3",
+        "decision": "reject",
+        "contentHash": "hash-3"
+      }
+    ],
+    "browserErrors": [],
+    "result": "pass"
+  },
+  {
+    "mode": "explicit",
+    "locale": "en",
+    "viewport": 1100,
+    "observations": [
+      {
+        "bot": "support-bot",
+        "mascotImages": 2,
+        "status": "Checking support-bot · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "constructor",
+        "mascotImages": 2,
+        "status": "Checking constructor · Attempt 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "toString",
+        "mascotImages": 2,
+        "status": "Checking toString · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "__proto__",
+        "mascotImages": 2,
+        "status": "Checking __proto__ · Attempt 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "invalid-bot",
+        "mascotImages": 0,
+        "status": "Checking invalid-bot · Attempt 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "missing-bot",
+        "mascotImages": 0,
+        "status": "Checking missing-bot · Attempt 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "petra",
+        "mascotImages": 0,
+        "status": "Checking petra · Attempt 2",
+        "decision": "approve"
+      }
+    ],
+    "commands": [
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-0",
+        "decision": "approve",
+        "contentHash": "hash-0"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1",
+        "decision": "reject",
+        "contentHash": "hash-1"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-2",
+        "decision": "approve",
+        "contentHash": "hash-2"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-3",
+        "decision": "reject",
+        "contentHash": "hash-3"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-4",
+        "decision": "approve",
+        "contentHash": "hash-4"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-5",
+        "decision": "reject",
+        "contentHash": "hash-5"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-6",
+        "decision": "approve",
+        "contentHash": "hash-6"
+      }
+    ],
+    "browserErrors": [],
+    "result": "pass"
+  },
+  {
+    "mode": "explicit",
+    "locale": "ar",
+    "viewport": 390,
+    "observations": [
+      {
+        "bot": "support-bot",
+        "mascotImages": 2,
+        "status": "Checking support-bot · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "constructor",
+        "mascotImages": 2,
+        "status": "Checking constructor · المحاولة 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "toString",
+        "mascotImages": 2,
+        "status": "Checking toString · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "__proto__",
+        "mascotImages": 2,
+        "status": "Checking __proto__ · المحاولة 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "invalid-bot",
+        "mascotImages": 0,
+        "status": "Checking invalid-bot · المحاولة 2",
+        "decision": "approve"
+      },
+      {
+        "bot": "missing-bot",
+        "mascotImages": 0,
+        "status": "Checking missing-bot · المحاولة 2",
+        "decision": "reject"
+      },
+      {
+        "bot": "petra",
+        "mascotImages": 0,
+        "status": "Checking petra · المحاولة 2",
+        "decision": "approve"
+      }
+    ],
+    "commands": [
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-0",
+        "decision": "approve",
+        "contentHash": "hash-0"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-1",
+        "decision": "reject",
+        "contentHash": "hash-1"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-2",
+        "decision": "approve",
+        "contentHash": "hash-2"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-3",
+        "decision": "reject",
+        "contentHash": "hash-3"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-4",
+        "decision": "approve",
+        "contentHash": "hash-4"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-5",
+        "decision": "reject",
+        "contentHash": "hash-5"
+      },
+      {
+        "type": "ApprovalDecision",
+        "approvalId": "approval-6",
+        "decision": "approve",
+        "contentHash": "hash-6"
+      }
+    ],
+    "browserErrors": [],
+    "result": "pass"
+  }
+]
