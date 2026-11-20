@@ -1,0 +1,54 @@
+@layer tensquads {
+	[data-slot="toolbar"].ts-toolbar {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		gap: var(--ts-space-2);
+		min-block-size: 56px;
+		padding: var(--ts-space-2);
+		border-radius: var(--ts-radius-full);
+		background: var(--ts-toolbar-bg);
+		box-shadow: var(--ts-shadow-toolbar);
+	}
+	.ts-toolbar__control {
+		display: inline-grid;
+		place-items: center;
+		inline-size: 40px;
+		block-size: 40px;
+		padding: 0;
+		border: 0;
+		border-radius: var(--ts-radius-full);
+		background: transparent;
+		color: var(--ts-text-secondary);
+		cursor: pointer;
+	}
+	.ts-toolbar__control svg {
+		inline-size: 20px;
+		block-size: 20px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.7;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.ts-toolbar__control:hover:not(:disabled, [aria-disabled="true"]) { background: var(--ts-ghost-hover); color: var(--ts-text); }
+	.ts-toolbar__control[data-pressed] { background: var(--ts-primary-soft); color: var(--ts-primary); }
+	.ts-toolbar__control[data-pressed]:hover { background: var(--ts-primary-soft-hover); color: var(--ts-primary); }
+	/* In dark the soft fill sits too close to the toolbar; lift it with the ghost overlay. */
+	[data-theme="dark"] .ts-toolbar__control[data-pressed] {
+		background: linear-gradient(var(--ts-ghost-active), var(--ts-ghost-active)), var(--ts-primary-soft);
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) .ts-toolbar__control[data-pressed] {
+			background: linear-gradient(var(--ts-ghost-active), var(--ts-ghost-active)), var(--ts-primary-soft);
+		}
+	}
+	.ts-toolbar__control:disabled,
+	.ts-toolbar__control[aria-disabled="true"] { color: var(--ts-text-tertiary); cursor: default; }
+	.ts-toolbar [data-slot="toolbar-separator"] {
+		inline-size: 1px;
+		block-size: 24px;
+		margin-inline: var(--ts-space-1);
+		border-inline-start: 1px solid var(--ts-border);
+	}
+}

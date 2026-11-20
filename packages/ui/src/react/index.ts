@@ -167,6 +167,8 @@ export type { SwitchProps, SwitchThumbProps } from "./Switch/Switch.js";
 export { Switch, SwitchThumb } from "./Switch/Switch.js";
 export type { ThemeToggleLabels, ThemeToggleProps } from "./ThemeToggle/ThemeToggle.js";
 export { ThemeToggle, themeInitScript, themePreference } from "./ThemeToggle/ThemeToggle.js";
+export type { ToolbarItem, ToolbarProps } from "./Toolbar/Toolbar.js";
+export { Toolbar } from "./Toolbar/Toolbar.js";
 export type {
 	TooltipArrowProps,
 	TooltipContentProps,
