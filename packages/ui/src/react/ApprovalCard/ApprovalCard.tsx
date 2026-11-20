@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AgentSlugSchema, type Locale } from "../../schemas/index.js";
+import { type AgentSlug, AgentSlugSchema, type Locale } from "../../schemas/index.js";
 import type { PlatformApprovalRequest } from "../../schemas/platform.js";
 import { approvalDecisionCommand, formatMillionths } from "../../schemas/platform.js";
 import { Button } from "../Button/Button.js";
@@ -26,7 +26,7 @@ export type ApprovalCardProps = {
 	ruleLabels?: Record<string, string>;
 	labels?: Partial<ApprovalCardLabels>;
 	disabled?: boolean;
-	squadmates?: Readonly<Record<string, import("../../schemas/index.js").AgentSlug>>;
+	squadmates?: Readonly<Record<string, AgentSlug>>;
 	decision?: "approve" | "reject";
 	onDecision?: (command: ReturnType<typeof approvalDecisionCommand>) => void | boolean | Promise<void | boolean>;
 };
