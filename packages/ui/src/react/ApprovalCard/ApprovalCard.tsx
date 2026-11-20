@@ -80,6 +80,8 @@ export function ApprovalCard({
 					task: "Task",
 				};
 	const labels = { ...defaults, ...labelOverrides };
+	// A labelled rule names the limit, so it replaces the generic "Limit" word.
+	const ruleLabel = request.rule === null ? undefined : ruleLabels[request.rule];
 	return (
 		<Card className="ts-approval-card" variant="inset" title={actionLabels[request.action] ?? request.action}>
 			{agent.success || request.taskId ? (
@@ -98,9 +100,7 @@ export function ApprovalCard({
 				</div>
 			) : null}
 			<p className="ts-approval-card__content">{request.content}</p>
-			{(request.amount !== null ||
-				(request.rule !== null && ruleLabels[request.rule] !== undefined) ||
-				request.limit !== null) && (
+			{(request.amount !== null || ruleLabel !== undefined || request.limit !== null) && (
 				<p className="ts-approval-card__limit">
 					{request.amount !== null && (
 						<span>
@@ -108,10 +108,11 @@ export function ApprovalCard({
 							<strong className="ts-approval-card__amount">{formatMillionths(request.amount, locale)}</strong>
 						</span>
 					)}
-					{request.rule && ruleLabels[request.rule] && <span>{ruleLabels[request.rule]}</span>}
-					{request.limit !== null && (
+					{(ruleLabel !== undefined || request.limit !== null) && (
 						<span>
-							{labels.limit} {formatMillionths(request.limit, locale)}
+							{request.limit === null
+								? ruleLabel
+								: `${ruleLabel ?? labels.limit} ${formatMillionths(request.limit, locale)}`}
 						</span>
 					)}
 				</p>
