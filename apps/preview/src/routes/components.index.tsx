@@ -16,6 +16,7 @@ if (!components.includes("Chat")) components.push("Chat");
 components.push("ChatReply");
 components.push("OwnerMessageView");
 components.push("Sidebar");
+components.push("ThemeToggle");
 components.sort();
 
 export const Route = createFileRoute("/components/")({ component: ComponentsPage });
@@ -35,7 +36,7 @@ function ComponentsPage() {
 					return (
 						<div className="component-card" key={name}>
 							<div className="component-card__preview">
-								{name === "Sidebar" ? (
+								{name === "Sidebar" || name === "ThemeToggle" ? (
 									<span>{locale === "ar" ? "معاينة التنقل" : "Navigation preview"}</span>
 								) : fixture ? (
 									name === "ChatReply" ? (

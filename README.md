@@ -37,6 +37,7 @@ The library ships these components today. Each row links to its reference and it
 | [Squadmate](packages/ui/src/react/Squadmate/Squadmate.md) | An accessible image of a tensquads agent in a loop state. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Squadmate) |
 | [StatTile](packages/ui/src/react/StatTile/StatTile.md) | A headline metric with an optional delta, unit, footnote and trend sparkline. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/StatTile) |
 | [Switch](packages/ui/src/react/Switch/Switch.md) | An accessible switch for turning a setting on or off. Inside a Form it submits its named boolean value. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch) |
+| [ThemeToggle](packages/ui/src/react/ThemeToggle/ThemeToggle.md) | It switches between light and dark themes. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ThemeToggle) |
 | [Tooltip](packages/ui/src/react/Tooltip/Tooltip.md) | A short hint shown when a control receives focus or hover. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Tooltip) |
 
 <!-- components:end -->
