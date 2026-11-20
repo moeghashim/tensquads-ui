@@ -1,0 +1,2 @@
+import config from './playwright.config';
+export default { ...config, testMatch: ['command-palette.spec.ts', '.local-palette.spec.ts'], reporter: [['line'], ['json', {outputFile:'~/.no-mistakes/evidence/01M7W9TK1DS74ZRGPNE3QA1PSM/browser-results.json'}]], outputDir: '~/.no-mistakes/evidence/01M7W9TK1DS74ZRGPNE3QA1PSM/results', workers: 1, webServer: { ...config.webServer, command: 'npm --prefix apps/preview run preview' } };
