@@ -148,7 +148,7 @@ function ThemeToggleButton({
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			>
-				<path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
+				<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
 			</svg>
 		</Button>
 	);
