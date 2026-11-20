@@ -4,12 +4,17 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import type { Locale } from "../../schemas/index.js";
 import { Button } from "../Button/Button.js";
 
+let themeInitialized = false;
+
 export const themePreference = createPreference({
 	values: ["light", "dark"] as const,
 	defaultValue: "light",
 	attribute: "data-theme",
 	global: true,
 	storage: createLocalStorage("tensquads.theme"),
+	onValueChange: () => {
+		themeInitialized = true;
+	},
 });
 
 export const themeInitScript = `(()=>{try{const t=localStorage.getItem("tensquads.theme");document.documentElement.setAttribute("data-theme",t==="light"||t==="dark"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch{document.documentElement.setAttribute("data-theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}})()`;
@@ -58,17 +63,20 @@ function UncontrolledThemeToggle({
 		() => "light",
 	);
 	useEffect(() => {
-		let stored: string | null = null;
-		try {
-			stored = localStorage.getItem("tensquads.theme");
-		} catch {
-			stored = null;
-		}
-		if (stored !== "light" && stored !== "dark") {
-			const systemTheme: "light" | "dark" = window.matchMedia?.("(prefers-color-scheme: dark)").matches
-				? "dark"
-				: "light";
-			if (themePreference.get().value !== systemTheme) themePreference.set(systemTheme);
+		if (!themeInitialized) {
+			themeInitialized = true;
+			let stored: string | null = null;
+			try {
+				stored = localStorage.getItem("tensquads.theme");
+			} catch {
+				stored = null;
+			}
+			if (stored !== "light" && stored !== "dark") {
+				const systemTheme: "light" | "dark" = window.matchMedia?.("(prefers-color-scheme: dark)").matches
+					? "dark"
+					: "light";
+				if (themePreference.get().value !== systemTheme) themePreference.set(systemTheme);
+			}
 		}
 		setMounted(true);
 	}, []);

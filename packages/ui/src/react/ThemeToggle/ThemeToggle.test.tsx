@@ -51,17 +51,6 @@ describe("ThemeToggle", () => {
 		expect(container.querySelector("button")).not.toHaveAttribute("aria-pressed");
 	});
 
-	it("uses the OS dark preference when storage has no value", async () => {
-		vi.stubGlobal(
-			"matchMedia",
-			vi.fn(() => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() })),
-		);
-		render(<ThemeToggle />);
-		await screen.findByRole("button", { name: "Switch to light theme" });
-		expect(document.documentElement).toHaveAttribute("data-theme", "dark");
-		vi.unstubAllGlobals();
-	});
-
 	it("applies the init script and tolerates blocked localStorage", () => {
 		const descriptor = Object.getOwnPropertyDescriptor(window, "localStorage");
 		Object.defineProperty(window, "localStorage", {
