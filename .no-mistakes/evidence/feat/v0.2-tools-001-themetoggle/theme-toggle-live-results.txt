@@ -1,0 +1,8 @@
+Command: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test e2e/theme-toggle.spec.ts --reporter=list --output=~/.no-mistakes/evidence/01M7W5C4S19RE3AH8ZJ5YRWNPB/theme-toggle-results
+Exit: 0
+Production preview build and Wrangler localhost server managed by Playwright webServer.
+PASS: ThemeToggle screenshots en light, en dark, ar light, ar dark (1440 and 390 px); localized button visible, document theme/locale/direction correct, no mobile horizontal overflow.
+PASS: no theme parameter and theme=system follow emulated OS dark/light changes; clicking from OS dark selects light and subsequent OS changes do not override selection.
+PASS: clicking from explicit light selects dark in URL and document; localized action changes to light, 36x36 control, later OS changes preserve explicit dark.
+Visual inspection: fuller closed crescent is recognizable as a moon in captured dark desktop and RTL mobile surfaces; sun remains visible in light mobile surface.
+Playwright completed all seven targeted browser tests and shut down its browser/server children.
