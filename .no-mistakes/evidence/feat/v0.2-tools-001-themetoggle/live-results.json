@@ -1,0 +1,144 @@
+{
+  "oracle": "dev/milestones/v0.2-tools/001-themetoggle.md acceptance criteria, PLAN D28, recorded R1/R5 decisions",
+  "results": [
+    {
+      "name": "Preview: English/LTR and Arabic/RTL render light/dark at 1440 and 390 px, without overflow or axe violations",
+      "result": "pass"
+    },
+    {
+      "name": "Preview: system and omitted settings track OS changes, then keyboard selection fixes theme in the URL",
+      "result": "pass"
+    },
+    {
+      "name": "Isolated real component: OS fallback, click persistence across reload, multiple controls and exported host preference stay synchronized",
+      "result": "pass"
+    },
+    {
+      "name": "Isolated real component: controlled callbacks, custom labels, disabled guard, focus ring and reduced motion without storage/document writes",
+      "result": "pass"
+    },
+    {
+      "name": "Isolated SSR consumer: initial light markup hydrates without warnings; init script resolves saved, invalid, missing and blocked storage before mount",
+      "result": "pass"
+    },
+    {
+      "name": "Isolated real component with blocked storage and OS dark: choosing light survives second mount and full remount",
+      "result": "pass"
+    }
+  ],
+  "observations": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "axeViolations": 0
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "axeViolations": 0
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "axeViolations": 0
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "axeViolations": 0
+    },
+    {
+      "query": "",
+      "url": "http://localhost:5173/components/ThemeToggle?theme=dark"
+    },
+    {
+      "query": "?theme=system",
+      "url": "http://localhost:5173/components/ThemeToggle?theme=dark"
+    },
+    {
+      "persisted": "light",
+      "labels": [
+        "Switch to dark theme",
+        "التبديل إلى المظهر الداكن"
+      ]
+    },
+    {
+      "ssr": {
+        "os": "dark",
+        "saved": "light",
+        "init": true,
+        "expected": "light"
+      },
+      "before": {
+        "theme": "light",
+        "label": "Switch to dark theme"
+      },
+      "after": "light"
+    },
+    {
+      "ssr": {
+        "os": "light",
+        "saved": "dark",
+        "init": true,
+        "expected": "dark"
+      },
+      "before": {
+        "theme": "dark",
+        "label": "Switch to dark theme"
+      },
+      "after": "dark"
+    },
+    {
+      "ssr": {
+        "os": "dark",
+        "saved": "invalid",
+        "init": true,
+        "expected": "dark"
+      },
+      "before": {
+        "theme": "dark",
+        "label": "Switch to dark theme"
+      },
+      "after": "dark"
+    },
+    {
+      "ssr": {
+        "os": "dark",
+        "init": true,
+        "expected": "dark"
+      },
+      "before": {
+        "theme": "dark",
+        "label": "Switch to dark theme"
+      },
+      "after": "dark"
+    },
+    {
+      "ssr": {
+        "os": "dark",
+        "blocked": true,
+        "init": true,
+        "expected": "dark"
+      },
+      "before": {
+        "theme": "dark",
+        "label": "Switch to dark theme"
+      },
+      "after": "dark"
+    },
+    {
+      "ssr": {
+        "os": "dark",
+        "expected": "dark"
+      },
+      "before": {
+        "theme": null,
+        "label": "Switch to dark theme"
+      },
+      "after": "dark"
+    },
+    {
+      "blockedStorage": "choice retained across mounts, host updates work"
+    }
+  ]
+}
