@@ -26,6 +26,9 @@ for (const [locale, direction, theme] of [
 					.click();
 			} else {
 				await expect(page.locator(".ts-owner-messages > *")).toHaveCount(6);
+				const status = page.locator(".ts-owner-messages").getByRole("status");
+				await expect(status).toContainText(locale === "ar" ? "التحقق من الطلب" : "Checking the order");
+				await expect(status.getByRole("img", { includeHidden: true })).toHaveCount(0);
 				await expect(page.getByRole("button", { name: locale === "ar" ? "عاجل" : "Urgent" })).toBeDisabled();
 				await expect(page.locator(".ts-approval-card__outcome")).toHaveText(
 					locale === "ar" ? "تمت الموافقة" : "Approved",

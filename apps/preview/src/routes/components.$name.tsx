@@ -1490,7 +1490,7 @@ function OwnerMessagePreview({ locale }: { locale: "en" | "ar" }) {
 			at,
 			type: "status",
 			taskId: "task_42",
-			bot: "support-bot",
+			bot: "inventory-bot",
 			attempt: 2,
 			step: ar ? "التحقق من الطلب" : "Checking the order",
 			since: at,

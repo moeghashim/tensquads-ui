@@ -2,7 +2,7 @@ reply: I received your request.
 question: Which priority should I use? Options: Standard, Urgent.
 approval_request: Refund order 1042. Amount $42.00. Limit $20.00. Bot support-bot. Task task-1042.
 result: The order was updated. Evidence: https://example.com/order/42.
-status: Petra is checking the order, attempt 2 (support-bot).
+status: Checking the order, attempt 2 (inventory-bot; no mapped agent).
 action_not_confirmed: The order service did not confirm the action.
 approval_decided: (no visible content)
 question_answered: (no visible content)
