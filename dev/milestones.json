@@ -65,6 +65,15 @@
       "tasks": [
         "001-contract-b09e197"
       ]
+    },
+    {
+      "id": "v0.2-tools",
+      "status": "active",
+      "tasks": [
+        "001-themetoggle",
+        "002-toolbar",
+        "003-commandpalette"
+      ]
     }
   ]
 }
