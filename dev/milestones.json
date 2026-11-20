@@ -58,6 +58,13 @@
         "004-sidebar",
         "006-dashboard-demos"
       ]
+    },
+    {
+      "id": "v0.2-platform",
+      "status": "active",
+      "tasks": [
+        "001-contract-b09e197"
+      ]
     }
   ]
 }
