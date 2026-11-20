@@ -1,0 +1,111 @@
+[
+  {
+    "name": "Public SDK schema contract (oracle: task 001 and platform b09e197)",
+    "output": {
+      "accepted": {
+        "seq": 1,
+        "at": "2026-11-20T12:00:00.000Z",
+        "type": "approval_request",
+        "approvalId": "a",
+        "action": "refund",
+        "content": "Refund",
+        "contentHash": "sha256:test",
+        "rule": null,
+        "limit": null,
+        "amount": 42000000,
+        "bot": "support-bot",
+        "taskId": "t"
+      },
+      "rejected": [
+        "missing amount",
+        "missing bot",
+        "missing taskId",
+        "amount -1",
+        "amount 1.5",
+        {
+          "seq": 1,
+          "at": "2026-11-20T12:00:00.000Z",
+          "type": "approval_request",
+          "approvalId": "a",
+          "action": "refund",
+          "content": "Refund",
+          "contentHash": "sha256:test",
+          "rule": null,
+          "limit": null,
+          "amount": 42000000,
+          "bot": "support-bot",
+          "taskId": "t",
+          "extra": true
+        },
+        {
+          "seq": 2,
+          "at": "2026-11-20T12:00:00.000Z",
+          "type": "approval_decided",
+          "approvalId": "a",
+          "decision": "maybe"
+        },
+        {
+          "seq": 2,
+          "at": "2026-11-20T12:00:00.000Z",
+          "type": "question_answered",
+          "questionId": "q",
+          "text": "invented"
+        }
+      ],
+      "command": {
+        "type": "ApprovalDecision",
+        "approvalId": "a",
+        "decision": "reject",
+        "contentHash": "sha256:test"
+      }
+    }
+  },
+  {
+    "name": "Browser consumer: out-of-order seq overrides stale host approval; answered questions stay unselected and inert",
+    "output": {
+      "decision": "{\"disposable-approval\":\"reject\"}",
+      "pendingQuestion": "{\"seq\":6,\"at\":\"2026-11-20T12:00:00.000Z\",\"type\":\"question\",\"questionId\":\"open\",\"text\":\"Open free text\",\"options\":[]}",
+      "commands": [
+        {
+          "type": "ApprovalDecision",
+          "params": {
+            "approvalId": "minimal",
+            "contentHash": "hash",
+            "decision": "reject"
+          },
+          "humanFriendlyMessage": "Decline",
+          "formName": "ApprovalCard",
+          "formState": {}
+        }
+      ],
+      "unknown": "[{\"seq\":13,\"at\":\"2026-11-20T12:00:00.000Z\",\"type\":\"future_message\",\"payload\":\"Invalid message must be omitted\"}]"
+    }
+  },
+  {
+    "name": "Browser consumer: explicit bot mapping, null/zero amounts, labels, plain URLs and minimal OpenUI",
+    "output": {
+      "amountStyle": {
+        "weight": "600",
+        "figures": "tabular-nums",
+        "color": "rgb(40, 40, 40)",
+        "token": ""
+      },
+      "statusImages": [
+        1,
+        0
+      ],
+      "zeroAmount": "Requested $0.00Refund policyLimit $20.00",
+      "minimalOpenUICommand": {
+        "type": "ApprovalDecision",
+        "params": {
+          "approvalId": "minimal",
+          "contentHash": "hash",
+          "decision": "reject"
+        },
+        "humanFriendlyMessage": "Decline",
+        "formName": "ApprovalCard",
+        "formState": {}
+      }
+    }
+  }
+]
