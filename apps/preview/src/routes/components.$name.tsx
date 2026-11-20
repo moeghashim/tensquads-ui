@@ -66,6 +66,7 @@ import {
 import { StatTile } from "../../../../packages/ui/src/react/StatTile/StatTile";
 import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
 import { ThemeToggle } from "../../../../packages/ui/src/react/ThemeToggle/ThemeToggle";
+import { Toolbar, type ToolbarItem } from "../../../../packages/ui/src/react/Toolbar/Toolbar";
 import {
 	Tooltip,
 	TooltipArrow,
@@ -97,6 +98,7 @@ const componentOrder = [
 	"ChatReply",
 	"Sidebar",
 	"ThemeToggle",
+	"Toolbar",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -430,6 +432,7 @@ function ComponentExample() {
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
+	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
 	if (name === "DataTable" || name === "EmptyState") {
 		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
 	}
@@ -1569,6 +1572,84 @@ function ThemeTogglePreview({ locale }: { locale: "en" | "ar" }) {
 				value={theme}
 				onValueChange={(next) => void navigate({ to: ".", search: { ...search, theme: next } as never })}
 			/>
+		</div>
+	);
+}
+
+function ToolbarPreview({ locale }: { locale: "en" | "ar" }) {
+	const [mode, setMode] = useState<"pan" | "select">("pan");
+	const [changed, setChanged] = useState(false);
+	const copy =
+		locale === "ar"
+			? { label: "أدوات اللوحة", pan: "تحريك اللوحة", select: "تحديد", undo: "تراجع", redo: "إعادة" }
+			: { label: "Canvas tools", pan: "Pan", select: "Select", undo: "Undo", redo: "Redo" };
+	const glyph = (kind: "pan" | "select" | "undo" | "redo") => {
+		if (kind === "pan")
+			return (
+				<svg aria-hidden="true" viewBox="0 0 24 24">
+					<path d="M8 11V5a1.5 1.5 0 0 1 3 0v5-7a1.5 1.5 0 0 1 3 0v7-6a1.5 1.5 0 0 1 3 0v7-4a1.5 1.5 0 0 1 3 0v8c0 4-2 7-6 7h-2c-2 0-3-1-4-3l-3-5a1.5 1.5 0 0 1 2-2l2 2" />
+				</svg>
+			);
+		if (kind === "select")
+			return (
+				<svg aria-hidden="true" viewBox="0 0 24 24">
+					<path d="M5 3v17l5-5 4 6 3-2-4-6h7L5 3Z" />
+				</svg>
+			);
+		return kind === "undo" ? (
+			<svg aria-hidden="true" viewBox="0 0 24 24" data-mirror="true">
+				<path d="M9 14 4 9l5-5" />
+				<path d="M4 9h9a6 6 0 0 1 0 12h-2" />
+			</svg>
+		) : (
+			<svg aria-hidden="true" viewBox="0 0 24 24" data-mirror="true">
+				<path d="m15 14 5-5-5-5" />
+				<path d="M20 9h-9a6 6 0 0 0 0 12h2" />
+			</svg>
+		);
+	};
+	const items: ToolbarItem[] = [
+		{
+			type: "toggle",
+			id: "pan",
+			label: copy.pan,
+			icon: glyph("pan"),
+			pressed: mode === "pan",
+			onPressedChange: (pressed) => {
+				if (pressed) {
+					setMode("pan");
+					setChanged(true);
+				}
+			},
+		},
+		{
+			type: "toggle",
+			id: "select",
+			label: copy.select,
+			icon: glyph("select"),
+			pressed: mode === "select",
+			onPressedChange: (pressed) => {
+				if (pressed) {
+					setMode("select");
+					setChanged(true);
+				}
+			},
+		},
+		{ type: "separator", id: "history" },
+		{
+			type: "button",
+			id: "undo",
+			label: copy.undo,
+			icon: glyph("undo"),
+			disabled: !changed,
+			onClick: () => setMode("pan"),
+		},
+		{ type: "button", id: "redo", label: copy.redo, icon: glyph("redo"), disabled: true, onClick: () => undefined },
+	];
+	return (
+		<div className="toolbar-preview">
+			<div className="toolbar-preview__canvas" />
+			<Toolbar label={copy.label} items={items} />
 		</div>
 	);
 }

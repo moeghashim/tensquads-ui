@@ -38,6 +38,7 @@ The library ships these components today. Each row links to its reference and it
 | [StatTile](packages/ui/src/react/StatTile/StatTile.md) | A headline metric with an optional delta, unit, footnote and trend sparkline. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/StatTile) |
 | [Switch](packages/ui/src/react/Switch/Switch.md) | An accessible switch for turning a setting on or off. Inside a Form it submits its named boolean value. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch) |
 | [ThemeToggle](packages/ui/src/react/ThemeToggle/ThemeToggle.md) | It switches between light and dark themes. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ThemeToggle) |
+| [Toolbar](packages/ui/src/react/Toolbar/Toolbar.md) | It groups up to six icon controls in a floating toolbar. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Toolbar) |
 | [Tooltip](packages/ui/src/react/Tooltip/Tooltip.md) | A short hint shown when a control receives focus or hover. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Tooltip) |
 
 <!-- components:end -->
