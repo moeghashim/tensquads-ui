@@ -56,19 +56,6 @@ export function CommandPalette({ open, onOpenChange, groups, locale = "en", labe
 		document.addEventListener("focusin", rememberFocus);
 		return () => document.removeEventListener("focusin", rememberFocus);
 	}, []);
-	const normalizedQuery = query.trim().toLocaleLowerCase(locale === "ar" ? "ar" : "en");
-	const visibleGroups = normalizedQuery
-		? groups
-				.map((group) => ({
-					...group,
-					items: group.items.filter((item) =>
-						[item.label, ...(item.keywords ?? [])].some((term) =>
-							term.toLocaleLowerCase(locale === "ar" ? "ar" : "en").includes(normalizedQuery),
-						),
-					),
-				}))
-				.filter((group) => group.items.length > 0)
-		: groups;
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
@@ -102,7 +89,7 @@ export function CommandPalette({ open, onOpenChange, groups, locale = "en", labe
 					</div>
 					<CommandEmpty>{labels.empty}</CommandEmpty>
 					<CommandList className="ts-command-palette__list">
-						{visibleGroups.map((group) => (
+						{groups.map((group) => (
 							<CommandGroup key={group.id}>
 								<CommandGroupLabel>{group.label}</CommandGroupLabel>
 								{group.items.map((item) => (

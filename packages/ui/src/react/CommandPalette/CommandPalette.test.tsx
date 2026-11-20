@@ -61,9 +61,36 @@ describe("CommandPalette", () => {
 		const input = await screen.findByRole("combobox", { name: "Search" });
 		fireEvent.change(input, { target: { value: "start" } });
 		expect(await screen.findByText("Home")).toBeInTheDocument();
-		expect(screen.queryByText("Settings")).not.toBeInTheDocument();
+		expect(screen.queryByRole("group", { name: "Settings" })).not.toBeInTheDocument();
 		fireEvent.change(input, { target: { value: "absent" } });
 		expect(await screen.findByText("No matches")).toBeInTheDocument();
+	});
+
+	it.each([
+		{ locale: "en" as const, term: "Résumé", query: "resume" },
+		{ locale: "ar" as const, term: "المكوّنات", query: "المكونات" },
+	])("matches $locale labels and keywords without diacritics", async ({ locale, term, query }) => {
+		const action = vi.fn();
+		render(
+			<CommandPalette
+				open
+				onOpenChange={vi.fn()}
+				locale={locale}
+				labels={labels}
+				groups={[
+					{ id: "labels", label: "Labels", items: [{ id: "label", label: term, onSelect: action }] },
+					{
+						id: "keywords",
+						label: "Keywords",
+						items: [{ id: "keyword", label: "Keyword match", keywords: [term], onSelect: action }],
+					},
+				]}
+			/>,
+		);
+		const input = await screen.findByRole("combobox", { name: "Search" });
+		fireEvent.change(input, { target: { value: query } });
+		expect(await screen.findByRole("option", { name: term })).toBeVisible();
+		expect(screen.getByRole("option", { name: "Keyword match" })).toBeVisible();
 	});
 
 	it("runs the highlighted command and closes, then returns focus on Escape", async () => {

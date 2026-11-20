@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { capturePreviewScreenshots, openPreview } from "./helpers/preview";
+import { capturePreviewScreenshots, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
 test("CommandPalette opens, filters, selects and passes axe in both locales and themes", async ({ page }) => {
 	for (const locale of ["en", "ar"] as const) {
@@ -18,9 +18,11 @@ test("CommandPalette opens, filters, selects and passes axe in both locales and 
 			expect(paletteTop).toBeLessThan(120);
 			const audit = await new AxeBuilder({ page }).include('[data-slot="dialog-content"]').analyze();
 			expect(audit.violations).toEqual([]);
-			await capturePreviewScreenshots(page, test.info(), `CommandPalette-${locale}-${theme}`, [1440]);
+			await capturePreviewScreenshots(page, test.info(), `CommandPalette-${locale}-${theme}`);
+			await expectNoHorizontalScroll(page);
+			await expect(dialog).toBeVisible();
 			const input = dialog.getByRole("combobox");
-			await input.fill(locale === "ar" ? "المكوّنات" : "Components");
+			await input.fill(locale === "ar" ? "المكونات" : "Components");
 			await expect(dialog.getByText(locale === "ar" ? "المكوّنات" : "Components", { exact: true })).toBeVisible();
 			await page.keyboard.press("ArrowDown");
 			await page.keyboard.press("Enter");
