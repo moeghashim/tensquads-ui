@@ -1,0 +1,23 @@
+Pinned Git consumer from disposable snapshot of target 8d29456b27e0525bd9e0495c5af7643fc03f1df2: 5d8b49c682cb21602f278e099274d9d2bb127744
+
+added 13 packages in 6s
+
+Consumer: {run-worktree}/.phase-test/git-consumer
+Installed SDK peer contract: {"peer":"1.10.0","optional":true}
+Loaded SDK-free public subpath: ./tokens 1 exports
+Loaded SDK-free public subpath: ./react 95 exports
+Loaded SDK-free public subpath: ./squadmates 9 exports
+Loaded SDK-free public subpath: ./openui 4 exports
+Loaded SDK-free public subpath: ./openui/server 6 exports
+Loaded SDK-free public subpath: ./schemas 28 exports
+Anthropic subpath cannot load without an explicit SDK install.
+Provider-neutral request → custom provider → HTTP 200 text/plain response: root = Badge("Ready", "success")
+
+
+added 8 packages in 546ms
+
+Consumer: {run-worktree}/.phase-test/git-consumer
+Installed SDK peer contract: {"peer":"1.10.0","optional":true}
+Real SDK 1.10.0 → localhost Anthropic SSE emulator request: {"method":"POST","url":"/v1/messages","body":{"model":"claude-haiku-5-5","max_tokens":1024,"system":"Local integration smoke","messages":[{"role":"user","content":"Show local SDK status"}],"thinking":{"type":"disabled"},"output_config":{"effort":"low"},"stream":true}}
+New public subpath → provider → HTTP response: 200 root = Badge("Local SDK stream", "success")
+

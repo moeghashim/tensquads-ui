@@ -1,0 +1,10 @@
+Consumer: {run-worktree}/.phase-test/consumer
+Installed SDK peer contract: {"peer":"1.10.0","optional":true}
+Loaded SDK-free public subpath: ./tokens 1 exports
+Loaded SDK-free public subpath: ./react 95 exports
+Loaded SDK-free public subpath: ./squadmates 9 exports
+Loaded SDK-free public subpath: ./openui 4 exports
+Loaded SDK-free public subpath: ./openui/server 6 exports
+Loaded SDK-free public subpath: ./schemas 28 exports
+Anthropic subpath cannot load without an explicit SDK install.
+Provider-neutral request → custom provider → HTTP 200 text/plain response: root = Badge("Ready", "success")

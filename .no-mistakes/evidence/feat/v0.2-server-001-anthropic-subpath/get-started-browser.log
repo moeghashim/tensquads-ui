@@ -1,0 +1,6 @@
+(node:29870) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Rendered en/ltr/light at 1440 and 390 px: SDK 1.10.0 note outside code; actual clipboard uses new subpath and excludes prose; no overflow or axe violations.
+Rendered en/ltr/dark at 1440 and 390 px: SDK 1.10.0 note outside code; actual clipboard uses new subpath and excludes prose; no overflow or axe violations.
+Rendered ar/rtl/light at 1440 and 390 px: SDK 1.10.0 note outside code; actual clipboard uses new subpath and excludes prose; no overflow or axe violations.
+Rendered ar/rtl/dark at 1440 and 390 px: SDK 1.10.0 note outside code; actual clipboard uses new subpath and excludes prose; no overflow or axe violations.

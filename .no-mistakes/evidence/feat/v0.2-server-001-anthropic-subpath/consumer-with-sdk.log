@@ -1,0 +1,6 @@
+
+added 8 packages in 550ms
+Consumer: {run-worktree}/.phase-test/consumer
+Installed SDK peer contract: {"peer":"1.10.0","optional":true}
+Real SDK 1.10.0 → localhost Anthropic SSE emulator request: {"method":"POST","url":"/v1/messages","body":{"model":"claude-haiku-5-5","max_tokens":1024,"system":"Local integration smoke","messages":[{"role":"user","content":"Show local SDK status"}],"thinking":{"type":"disabled"},"output_config":{"effort":"low"},"stream":true}}
+New public subpath → provider → HTTP response: 200 root = Badge("Local SDK stream", "success")

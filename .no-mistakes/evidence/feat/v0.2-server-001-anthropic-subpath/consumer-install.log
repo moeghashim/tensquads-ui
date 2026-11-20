@@ -1,0 +1,10 @@
+
+> @tensquads/ui@0.1.0 prepare
+> npm run build
+
+
+> @tensquads/ui@0.1.0 build
+> node scripts/build.mjs
+
+
+added 13 packages in 953ms
