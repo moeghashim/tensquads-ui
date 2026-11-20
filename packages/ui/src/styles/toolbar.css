@@ -31,8 +31,18 @@
 		stroke-linecap: round;
 		stroke-linejoin: round;
 	}
-	.ts-toolbar__control:hover:not(:disabled, [aria-disabled="true"]) { background: var(--ts-primary-soft-hover); }
+	.ts-toolbar__control:hover:not(:disabled, [aria-disabled="true"]) { background: var(--ts-ghost-hover); color: var(--ts-text); }
 	.ts-toolbar__control[data-pressed] { background: var(--ts-primary-soft); color: var(--ts-primary); }
+	.ts-toolbar__control[data-pressed]:hover { background: var(--ts-primary-soft-hover); color: var(--ts-primary); }
+	/* In dark the soft fill sits too close to the toolbar; lift it with the ghost overlay. */
+	[data-theme="dark"] .ts-toolbar__control[data-pressed] {
+		background: linear-gradient(var(--ts-ghost-active), var(--ts-ghost-active)), var(--ts-primary-soft);
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) .ts-toolbar__control[data-pressed] {
+			background: linear-gradient(var(--ts-ghost-active), var(--ts-ghost-active)), var(--ts-primary-soft);
+		}
+	}
 	.ts-toolbar__control:disabled,
 	.ts-toolbar__control[aria-disabled="true"] { color: var(--ts-text-tertiary); cursor: default; }
 	.ts-toolbar [data-slot="toolbar-separator"] {
