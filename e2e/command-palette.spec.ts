@@ -53,3 +53,34 @@ test("CommandPalette closes on a backdrop press and returns focus", async ({ pag
 	await expect(page.getByRole("dialog")).toHaveCount(0);
 	await expect(trigger).toBeFocused();
 });
+
+test("CommandPalette filters keywords, handles no matches and closes a search on the first Escape", async ({ page }) => {
+	for (const locale of ["en", "ar"] as const) {
+		await openPreview(
+			page,
+			{ locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "dark" },
+			"/components/CommandPalette",
+		);
+		const trigger = page.getByRole("button", { name: locale === "ar" ? "افتح البحث" : "Open search" });
+		await trigger.click();
+		const dialog = page.getByRole("dialog");
+		const input = dialog.getByRole("combobox");
+		await expect(input).toBeFocused();
+		await input.fill("dark");
+		await expect(dialog.getByRole("group")).toHaveCount(1);
+		await expect(dialog.getByRole("option", { name: locale === "ar" ? "تغيير السمة" : "Change theme" })).toBeVisible();
+		await input.fill("zzq-no-such-command-9876");
+		await expect(dialog.getByRole("option")).toHaveCount(0);
+		await expect(dialog.getByRole("group")).toHaveCount(0);
+		await expect(dialog.getByText(locale === "ar" ? "لا توجد نتائج" : "No matches", { exact: true })).toBeVisible();
+		await page.keyboard.press("Enter");
+		await expect(dialog).toBeVisible();
+		await page.keyboard.press("Escape");
+		await expect(dialog).toHaveCount(0);
+		await expect(trigger).toBeFocused();
+		await trigger.click();
+		await expect(input).toHaveValue("");
+		await expect(dialog.getByRole("option")).toHaveCount(4);
+		await page.keyboard.press("Escape");
+	}
+});

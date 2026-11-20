@@ -39,6 +39,10 @@ export type CommandPaletteProps = {
 	className?: string;
 };
 
+function searchText(value: string) {
+	return value.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase();
+}
+
 export function CommandPalette({ open, onOpenChange, groups, locale = "en", labels, className }: CommandPaletteProps) {
 	const [query, setQuery] = useState("");
 	const openRef = useRef(open);
@@ -68,7 +72,15 @@ export function CommandPalette({ open, onOpenChange, groups, locale = "en", labe
 				<Command
 					query={query}
 					onQueryChange={setQuery}
-					filter="contains"
+					filter={(item, query) =>
+						[item.label, ...(item.keywords ?? [])].some((text) => searchText(text).includes(searchText(query)))
+					}
+					onKeyDown={(event) => {
+						if (event.key === "Escape") {
+							event.preventDefault();
+							onOpenChange(false);
+						}
+					}}
 					loop
 					dir={locale === "ar" ? "rtl" : "ltr"}
 					onAction={(id) => {

@@ -107,8 +107,10 @@ describe("CommandPalette", () => {
 		expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 		expect(trigger).toHaveFocus();
 		fireEvent.click(trigger);
-		const dialog = await screen.findByRole("dialog", { name: "Search" });
-		fireEvent.keyDown(dialog, { key: "Escape" });
+		await screen.findByRole("dialog", { name: "Search" });
+		const reopenedInput = screen.getByRole("combobox", { name: "Search" });
+		fireEvent.change(reopenedInput, { target: { value: "home" } });
+		fireEvent.keyDown(reopenedInput, { key: "Escape" });
 		await act(async () => Promise.resolve());
 		expect(trigger).toHaveFocus();
 	});
