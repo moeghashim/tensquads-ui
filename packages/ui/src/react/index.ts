@@ -132,7 +132,7 @@ export {
 	MenuTrigger,
 } from "./Menu/Menu.js";
 export type { OwnerMessageViewProps } from "./OwnerMessage/OwnerMessage.js";
-export { OwnerMessageView, pendingQuestion } from "./OwnerMessage/OwnerMessage.js";
+export { approvalDecisions, OwnerMessageView, pendingQuestion } from "./OwnerMessage/OwnerMessage.js";
 export type { PageHeaderProps } from "./PageHeader/PageHeader.js";
 export { PageHeader } from "./PageHeader/PageHeader.js";
 export type {

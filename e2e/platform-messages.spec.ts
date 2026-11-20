@@ -26,15 +26,20 @@ for (const [locale, direction, theme] of [
 					.click();
 			} else {
 				await expect(page.locator(".ts-owner-messages > *")).toHaveCount(6);
-				await page.getByRole("button", { name: locale === "ar" ? "عاجل" : "Urgent" }).click();
+				const status = page.locator(".ts-owner-messages").getByRole("status");
+				await expect(status).toContainText(locale === "ar" ? "التحقق من الطلب" : "Checking the order");
+				await expect(status.getByRole("img", { includeHidden: true })).toHaveCount(0);
+				await expect(page.getByRole("button", { name: locale === "ar" ? "عاجل" : "Urgent" })).toBeDisabled();
+				await expect(page.locator(".ts-approval-card__outcome")).toHaveText(
+					locale === "ar" ? "تمت الموافقة" : "Approved",
+				);
 			}
-			await expect(
-				page.getByRole("region", { name: locale === "ar" ? "الأوامر المرسلة" : "Sent commands" }),
-			).toContainText(name === "ApprovalCard" ? "ApprovalDecision" : "OwnerAnswer");
+			const sentCommands = page.getByRole("region", { name: locale === "ar" ? "الأوامر المرسلة" : "Sent commands" });
 			if (name === "ApprovalCard") {
-				await expect(
-					page.getByRole("region", { name: locale === "ar" ? "الأوامر المرسلة" : "Sent commands" }),
-				).toContainText("contentHash");
+				await expect(sentCommands).toContainText("ApprovalDecision");
+				await expect(sentCommands).toContainText("contentHash");
+			} else {
+				await expect(sentCommands.locator("pre")).toHaveText("[]");
 			}
 			await expectAccessible(page);
 			for (const width of [1440, 390]) {

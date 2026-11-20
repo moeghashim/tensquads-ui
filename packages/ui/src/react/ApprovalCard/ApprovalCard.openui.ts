@@ -22,10 +22,14 @@ const propsSchema = z.object({
 			approved: z.string().min(1).optional(),
 			declined: z.string().min(1).optional(),
 			limit: z.string().min(1).optional(),
+			amount: z.string().min(1).optional(),
 			task: z.string().min(1).optional(),
 		})
 		.optional(),
 	ruleLabels: z.record(z.string(), z.string()).optional(),
+	amount: z.number().int().nonnegative().nullable().optional(),
+	bot: z.string().min(1).optional(),
+	taskId: z.string().min(1).optional(),
 });
 
 export const ApprovalCardOpenUI = defineComponent({
@@ -43,6 +47,9 @@ export const ApprovalCardOpenUI = defineComponent({
 				contentHash: props.contentHash,
 				rule: props.rule ?? null,
 				limit: props.limit ?? null,
+				amount: props.amount ?? null,
+				bot: props.bot ?? "",
+				taskId: props.taskId ?? "",
 			},
 			locale: props.locale,
 			actionLabels: props.actionLabels,

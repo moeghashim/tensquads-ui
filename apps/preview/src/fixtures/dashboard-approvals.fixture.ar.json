@@ -1,6 +1,58 @@
 [
-  {"seq":1,"at":"2025-11-19T12:00:00.000Z","type":"approval_request","approvalId":"approval-1042","action":"refund","content":"استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج","contentHash":"sha256:request-1042","rule":"refund_limit","limit":42000000},
-  {"seq":2,"at":"2025-11-19T12:01:00.000Z","type":"approval_request","approvalId":"approval-1043","action":"send_reply","content":"إبلاغ العميل بتحديث استبدال المنتج","contentHash":"sha256:request-1043","rule":null,"limit":null},
-  {"seq":3,"at":"2025-11-19T12:02:00.000Z","type":"approval_request","approvalId":"approval-1044","action":"discount","content":"تقديم خصم ١٥٪ على الطلب التالي","contentHash":"sha256:request-1044","rule":"discount_limit","limit":20000000},
-  {"seq":4,"at":"2025-11-19T12:03:00.000Z","type":"approval_request","approvalId":"approval-1045","action":"refund","content":"استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع","contentHash":"sha256:request-1045","rule":"refund_limit","limit":55000000}
+  {
+    "seq": 1,
+    "at": "2025-11-19T12:00:00.000Z",
+    "type": "approval_request",
+    "approvalId": "approval-1042",
+    "action": "refund",
+    "content": "استرداد قيمة الطلب ١٠٤٢ بسبب تلف المنتج",
+    "contentHash": "sha256:request-1042",
+    "rule": "refund_limit",
+    "limit": 42000000,
+    "amount": 12500000,
+    "bot": "support-bot",
+    "taskId": "task-1042"
+  },
+  {
+    "seq": 2,
+    "at": "2025-11-19T12:01:00.000Z",
+    "type": "approval_request",
+    "approvalId": "approval-1043",
+    "action": "send_reply",
+    "content": "إبلاغ العميل بتحديث استبدال المنتج",
+    "contentHash": "sha256:request-1043",
+    "rule": null,
+    "limit": null,
+    "amount": null,
+    "bot": "pricing-bot",
+    "taskId": "task-1043"
+  },
+  {
+    "seq": 3,
+    "at": "2025-11-19T12:02:00.000Z",
+    "type": "approval_request",
+    "approvalId": "approval-1044",
+    "action": "discount",
+    "content": "تقديم خصم ١٥٪ على الطلب التالي",
+    "contentHash": "sha256:request-1044",
+    "rule": "discount_limit",
+    "limit": 20000000,
+    "amount": 15000000,
+    "bot": "inventory-bot",
+    "taskId": "task-1044"
+  },
+  {
+    "seq": 4,
+    "at": "2025-11-19T12:03:00.000Z",
+    "type": "approval_request",
+    "approvalId": "approval-1045",
+    "action": "refund",
+    "content": "استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
+    "contentHash": "sha256:request-1045",
+    "rule": "refund_limit",
+    "limit": 55000000,
+    "amount": 42000000,
+    "bot": "unmapped-bot",
+    "taskId": "task-1088"
+  }
 ]

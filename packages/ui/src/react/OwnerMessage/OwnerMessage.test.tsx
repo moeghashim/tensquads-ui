@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { OwnerMessageView, pendingQuestion } from "./OwnerMessage.js";
+import { approvalDecisions, OwnerMessageView, pendingQuestion } from "./OwnerMessage.js";
 
 afterEach(cleanup);
 
@@ -19,6 +19,9 @@ const messages = [
 		contentHash: "hash",
 		rule: null,
 		limit: null,
+		amount: null,
+		bot: "support-bot",
+		taskId: "t1",
 	},
 	{ seq: 2, at, type: "question", questionId: "q1", text: "Choose a size", options: ["Small", "Large"] },
 	{ seq: 1, at, type: "reply", text: "See **literal** https://example.com" },
@@ -41,6 +44,43 @@ describe("OwnerMessageView", () => {
 			"https://en.wikipedia.org/wiki/Refund_(finance)",
 			"https://en.wikipedia.org/wiki/Refund_(finance)",
 		]);
+	});
+	it("applies the newest approval decision and overrides host state", () => {
+		const decided = [
+			messages[3],
+			{ seq: 7, at, type: "approval_decided", approvalId: "a1", decision: "reject" },
+			{ seq: 8, at, type: "approval_decided", approvalId: "a1", decision: "approve" },
+		] as const;
+		expect(approvalDecisions(decided)).toEqual({ a1: "approve" });
+		render(<OwnerMessageView messages={decided} approvalDecisions={{ a1: "reject" }} />);
+		expect(screen.getByText("Approved")).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: "Decline" })).toBeDisabled();
+	});
+	it("closes answered questions without choosing an option", () => {
+		const question = { seq: 1, at, type: "question", questionId: "q1", text: "Choose", options: ["A", "B"] } as const;
+		const answered = { seq: 2, at, type: "question_answered", questionId: "q1" } as const;
+		expect(
+			pendingQuestion([
+				{ seq: 1, at, type: "question", questionId: "q2", text: "Answer?", options: [] },
+				{ ...answered, questionId: "q2" },
+			]),
+		).toBeUndefined();
+		render(<OwnerMessageView messages={[question, answered]} />);
+		expect(screen.getByRole("button", { name: "A" })).toBeDisabled();
+		expect(screen.getByRole("button", { name: "A" })).toHaveAttribute("aria-pressed", "false");
+		expect(screen.getByRole("button", { name: "B" })).toHaveAttribute("aria-pressed", "false");
+		expect(document.querySelectorAll(".ts-owner-messages > *")).toHaveLength(1);
+	});
+	it("renders decision and answer messages without visible content", () => {
+		render(
+			<OwnerMessageView
+				messages={[
+					{ seq: 1, at, type: "approval_decided", approvalId: "a1", decision: "approve" },
+					{ seq: 2, at, type: "question_answered", questionId: "q1" },
+				]}
+			/>,
+		);
+		expect(document.querySelector(".ts-owner-messages")?.children).toHaveLength(0);
 	});
 
 	it("renders all six messages in sequence and emits answer commands", () => {
