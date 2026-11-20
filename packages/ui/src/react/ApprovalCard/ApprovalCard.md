@@ -1,6 +1,8 @@
 # ApprovalCard
 
-Import `ApprovalCard` and `ApprovalCardProps` from `@tensquads/ui/react`. Pass a platform `approval_request` as `request`. The card displays its action, content, amount, optional labeled rule and limit, and approve or decline controls. `actionLabels` localizes action ids. `ruleLabels` maps rule ids to human-readable labels; an unmapped rule id is hidden. The amount, rule label, and limit appear in that order when present. Pass `squadmates` as a map from platform bot ids to `AgentSlug` values. The card shows an agent only when the request bot is in that map. The task id comes from the request.
+Import `ApprovalCard` and `ApprovalCardProps` from `@tensquads/ui/react`. Pass a platform `approval_request` as `request`. The card displays its action, content, amount, optional labeled rule and limit, and approve or decline controls. `actionLabels` localizes action ids. `ruleLabels` maps rule ids to human-readable labels; an unmapped rule id is hidden. The amount, rule label, and limit appear in that order when present. The task id comes from the request.
+
+Pass `squadmates` using the [OwnerMessageView mapping rules](../OwnerMessage/OwnerMessage.md).
 
 The `onDecision` callback receives an `ApprovalDecision` command body without `commandId` and `at`. The host adds those values and can retain the same id for a retry. `decision` restores the locked state after loading saved host state.
 
