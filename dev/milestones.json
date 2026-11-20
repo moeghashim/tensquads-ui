@@ -61,7 +61,7 @@
     },
     {
       "id": "v0.2-platform",
-      "status": "active",
+      "status": "done",
       "tasks": [
         "001-contract-b09e197"
       ]
