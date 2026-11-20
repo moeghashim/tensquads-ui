@@ -1,0 +1,447 @@
+{
+  "oracle": "dev/milestones/v0.2-tools/002-toolbar.md, design Toolbar spec, PLAN.md section 12",
+  "results": [
+    {
+      "name": "layout en light",
+      "result": "pass"
+    },
+    {
+      "name": "modes and history en light",
+      "result": "pass"
+    },
+    {
+      "name": "keyboard en light",
+      "result": "pass"
+    },
+    {
+      "name": "tooltips and disabled guard en light",
+      "result": "pass"
+    },
+    {
+      "name": "layout en dark",
+      "result": "pass"
+    },
+    {
+      "name": "modes and history en dark",
+      "result": "pass"
+    },
+    {
+      "name": "keyboard en dark",
+      "result": "pass"
+    },
+    {
+      "name": "tooltips and disabled guard en dark",
+      "result": "pass"
+    },
+    {
+      "name": "layout ar light",
+      "result": "pass"
+    },
+    {
+      "name": "modes and history ar light",
+      "result": "pass"
+    },
+    {
+      "name": "keyboard ar light",
+      "result": "pass"
+    },
+    {
+      "name": "tooltips and disabled guard ar light",
+      "result": "pass"
+    },
+    {
+      "name": "layout ar dark",
+      "result": "pass"
+    },
+    {
+      "name": "modes and history ar dark",
+      "result": "pass"
+    },
+    {
+      "name": "keyboard ar dark",
+      "result": "pass"
+    },
+    {
+      "name": "tooltips and disabled guard ar dark",
+      "result": "pass"
+    }
+  ],
+  "observations": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "height": 56,
+      "center": 720,
+      "canvasCenter": 720,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "height": 56,
+      "center": 195,
+      "canvasCenter": 195,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "keyboard": "reading-direction arrows, Home, End, Tab exit/reentry",
+      "ring": {
+        "width": "2px",
+        "offset": "2px",
+        "color": "rgb(1, 105, 204)"
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "tooltipLabels": [
+        "Pan",
+        "Select",
+        "Undo",
+        "Redo"
+      ],
+      "disabledActions": "Undo/Redo remain disabled after Enter and Space",
+      "pageErrors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "height": 56,
+      "center": 720,
+      "canvasCenter": 720,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "height": 56,
+      "center": 195,
+      "canvasCenter": 195,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "keyboard": "reading-direction arrows, Home, End, Tab exit/reentry",
+      "ring": {
+        "width": "2px",
+        "offset": "2px",
+        "color": "rgb(2, 133, 255)"
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "tooltipLabels": [
+        "Pan",
+        "Select",
+        "Undo",
+        "Redo"
+      ],
+      "disabledActions": "Undo/Redo remain disabled after Enter and Space",
+      "pageErrors": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "height": 56,
+      "center": 720,
+      "canvasCenter": 720,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "height": 56,
+      "center": 195,
+      "canvasCenter": 195,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "keyboard": "reading-direction arrows, Home, End, Tab exit/reentry",
+      "ring": {
+        "width": "2px",
+        "offset": "2px",
+        "color": "rgb(1, 105, 204)"
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "tooltipLabels": [
+        "تحريك اللوحة",
+        "تحديد",
+        "تراجع",
+        "إعادة"
+      ],
+      "disabledActions": "Undo/Redo remain disabled after Enter and Space",
+      "pageErrors": []
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "height": 56,
+      "center": 720,
+      "canvasCenter": 720,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "height": 56,
+      "center": 195,
+      "canvasCenter": 195,
+      "canvasWidth": 320,
+      "gap": "8px",
+      "padding": "8px",
+      "bottom": 24,
+      "overflow": false,
+      "buttons": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 40,
+          "h": 40
+        }
+      ],
+      "separator": {
+        "line": "1px",
+        "height": 24
+      },
+      "axeViolations": []
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "keyboard": "reading-direction arrows, Home, End, Tab exit/reentry",
+      "ring": {
+        "width": "2px",
+        "offset": "2px",
+        "color": "rgb(2, 133, 255)"
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "tooltipLabels": [
+        "تحريك اللوحة",
+        "تحديد",
+        "تراجع",
+        "إعادة"
+      ],
+      "disabledActions": "Undo/Redo remain disabled after Enter and Space",
+      "pageErrors": []
+    }
+  ]
+}
