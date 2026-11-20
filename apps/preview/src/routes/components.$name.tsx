@@ -1,6 +1,6 @@
-import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
@@ -65,6 +65,7 @@ import {
 } from "../../../../packages/ui/src/react/Squadmate/Squadmate";
 import { StatTile } from "../../../../packages/ui/src/react/StatTile/StatTile";
 import { Switch, SwitchThumb } from "../../../../packages/ui/src/react/Switch/Switch";
+import { ThemeToggle } from "../../../../packages/ui/src/react/ThemeToggle/ThemeToggle";
 import {
 	Tooltip,
 	TooltipArrow,
@@ -95,6 +96,7 @@ const componentOrder = [
 	"Chat",
 	"ChatReply",
 	"Sidebar",
+	"ThemeToggle",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -427,6 +429,7 @@ function ComponentExample() {
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
+	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "DataTable" || name === "EmptyState") {
 		return <CompaniesPreview key={name} locale={locale} stream={stream ?? null} empty={name === "EmptyState"} />;
 	}
@@ -1542,6 +1545,30 @@ function ExampleCodeBlock({ code }: { code: string }) {
 			<pre>
 				<code>{code}</code>
 			</pre>
+		</div>
+	);
+}
+
+function ThemeTogglePreview({ locale }: { locale: "en" | "ar" }) {
+	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
+	const navigate = useNavigate();
+	const [systemDark, setSystemDark] = useState(false);
+	useEffect(() => {
+		const media = window.matchMedia("(prefers-color-scheme: dark)");
+		const update = () => setSystemDark(media.matches);
+		update();
+		media.addEventListener("change", update);
+		return () => media.removeEventListener("change", update);
+	}, []);
+	const { theme: setting } = getPreviewState(search);
+	const theme = setting === "system" ? (systemDark ? "dark" : "light") : setting;
+	return (
+		<div className="component-list">
+			<ThemeToggle
+				locale={locale}
+				value={theme}
+				onValueChange={(next) => void navigate({ to: ".", search: { ...search, theme: next } as never })}
+			/>
 		</div>
 	);
 }

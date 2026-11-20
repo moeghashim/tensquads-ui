@@ -1,0 +1,19 @@
+@layer tensquads {
+	[data-slot="button"].ts-theme-toggle {
+		position: relative;
+		inline-size: var(--ts-control-lg);
+		block-size: var(--ts-control-lg);
+		border-radius: var(--ts-radius-full);
+	}
+	.ts-theme-toggle__icon {
+		position: absolute;
+		inline-size: 20px;
+		block-size: 20px;
+		transition: opacity 120ms ease, transform 120ms ease;
+	}
+	.ts-theme-toggle__icon[data-visible="false"] { opacity: 0; transform: rotate(-45deg); }
+	.ts-theme-toggle__icon[data-visible="true"] { opacity: 1; transform: rotate(0); }
+	@media (prefers-reduced-motion: reduce) {
+		.ts-theme-toggle__icon { transition: none; }
+	}
+}
