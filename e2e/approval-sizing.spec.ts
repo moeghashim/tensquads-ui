@@ -45,16 +45,21 @@ for (const [locale, direction, theme] of [
 			});
 			if (name === "OwnerMessageView") {
 				const options = preview.locator(".ts-owner-message__options button");
-				await options.nth(1).focus();
-				await page.keyboard.press("Enter");
-				await expect(options.nth(1)).toHaveAttribute("aria-pressed", "true");
+				await expect(options.nth(1)).toBeDisabled();
+				await expect(options.nth(1)).toHaveAttribute("aria-pressed", "false");
 				for (const option of await options.all()) await expect(option).toBeDisabled();
-				await expect(commands).toContainText('"type": "OwnerAnswer"');
-				await expect(commands).toContainText('"questionId": "question_42"');
+				await expect(commands).not.toContainText('"type": "OwnerAnswer"');
 			}
 			for (const [index, card] of (await cards.all()).entries()) {
 				const buttons = card.getByRole("button");
-				const reject = index === 1 || name === "OwnerMessageView";
+				if (name === "OwnerMessageView") {
+					await expect(card.locator(".ts-approval-card__outcome")).toHaveText(
+						locale === "ar" ? "تمت الموافقة" : "Approved",
+					);
+					for (const button of await buttons.all()) await expect(button).toBeDisabled();
+					continue;
+				}
+				const reject = index === 1;
 				await buttons.nth(reject ? 1 : 0).focus();
 				await page.keyboard.press("Space");
 				await expect(card.locator(".ts-approval-card__outcome")).toHaveText(

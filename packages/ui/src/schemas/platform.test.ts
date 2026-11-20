@@ -9,7 +9,9 @@ import {
 	ownerAnswerCommand,
 	ownerMessageCommand,
 	PlatformActionNotConfirmedSchema,
+	PlatformApprovalDecidedSchema,
 	PlatformApprovalRequestSchema,
+	PlatformQuestionAnsweredSchema,
 	PlatformQuestionSchema,
 	PlatformReplySchema,
 	PlatformResultSchema,
@@ -32,6 +34,9 @@ const messages = [
 			contentHash: "hash",
 			rule: null,
 			limit: null,
+			amount: null,
+			bot: "support-bot",
+			taskId: "t1",
 		},
 		PlatformApprovalRequestSchema,
 	],
@@ -44,6 +49,8 @@ const messages = [
 		{ seq: 1, at, type: "action_not_confirmed", taskId: "t1", actionId: "a1", what: "Unknown" },
 		PlatformActionNotConfirmedSchema,
 	],
+	[{ seq: 1, at, type: "approval_decided", approvalId: "a1", decision: "approve" }, PlatformApprovalDecidedSchema],
+	[{ seq: 1, at, type: "question_answered", questionId: "q1" }, PlatformQuestionAnsweredSchema],
 ] as const;
 
 describe("platform message and command contracts", () => {
@@ -53,6 +60,25 @@ describe("platform message and command contracts", () => {
 			expect(schema.safeParse({ ...example, extra: true }).success).toBe(false);
 			expect(schema.safeParse({ ...example, type: "wrong" }).success).toBe(false);
 		}
+	});
+	it("requires the new approval fields and validates whole nonnegative amounts", () => {
+		const example = messages[2][0];
+		for (const field of ["amount", "bot", "taskId"] as const) {
+			const missing = { ...example } as Record<string, unknown>;
+			delete missing[field];
+			expect(PlatformApprovalRequestSchema.safeParse(missing).success).toBe(false);
+		}
+		for (const amount of [-1, 1.5])
+			expect(PlatformApprovalRequestSchema.safeParse({ ...example, amount }).success).toBe(false);
+		expect(
+			PlatformApprovalDecidedSchema.safeParse({
+				seq: 1,
+				at,
+				type: "approval_decided",
+				approvalId: "a1",
+				decision: "maybe",
+			}).success,
+		).toBe(false);
 	});
 	it("builds exact command bodies and validates host metadata", () => {
 		const request = messages[2][0];

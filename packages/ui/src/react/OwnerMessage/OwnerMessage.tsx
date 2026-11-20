@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Locale } from "../../schemas/index.js";
-import { AgentSlugSchema } from "../../schemas/index.js";
+import { type AgentSlug, AgentSlugSchema, type Locale } from "../../schemas/index.js";
 import type { PlatformOwnerCommandBody, PlatformOwnerMessage } from "../../schemas/platform.js";
 import { ownerAnswerCommand, PlatformOwnerMessageSchema } from "../../schemas/platform.js";
 import { ApprovalCard, type ApprovalCardProps } from "../ApprovalCard/ApprovalCard.js";
@@ -16,6 +15,7 @@ export type OwnerMessageViewProps = {
 	approvalDecisions?: Readonly<Record<string, "approve" | "reject">>;
 	labels?: { answerHint?: string; attempt?: string; errorTitle?: string };
 	approvalLabels?: ApprovalCardProps["labels"];
+	squadmates?: Readonly<Record<string, AgentSlug>>;
 	onCommand?: (body: PlatformOwnerCommandBody) => void;
 	onUnknown?: (message: unknown) => void;
 };
@@ -31,19 +31,41 @@ export function pendingQuestion(
 		(message): message is Extract<PlatformOwnerMessage, { type: "question" }> =>
 			message.type === "question" && message.options.length === 0,
 	);
-	return unanswered.sort((a, b) => b.seq - a.seq)[0];
+	const answered = new Set(
+		parsed.filter((message) => message.type === "question_answered").map((message) => message.questionId),
+	);
+	return unanswered.filter((question) => !answered.has(question.questionId)).sort((a, b) => b.seq - a.seq)[0];
+}
+
+export function approvalDecisions(messages: readonly unknown[]): Record<string, "approve" | "reject"> {
+	const newest = new Map<string, Extract<PlatformOwnerMessage, { type: "approval_decided" }>>();
+	for (const raw of messages) {
+		const parsed = PlatformOwnerMessageSchema.safeParse(raw);
+		if (!parsed.success || parsed.data.type !== "approval_decided") continue;
+		const previous = newest.get(parsed.data.approvalId);
+		if (!previous || parsed.data.seq > previous.seq) newest.set(parsed.data.approvalId, parsed.data);
+	}
+	return Object.fromEntries([...newest].map(([id, message]) => [id, message.decision]));
 }
 
 export function OwnerMessageView({
 	messages,
 	locale = "en",
 	actionLabels,
-	approvalDecisions,
+	approvalDecisions: approvalDecisionsProp,
 	labels,
 	approvalLabels,
+	squadmates,
 	onCommand,
 	onUnknown,
 }: OwnerMessageViewProps) {
+	const messageDecisions = approvalDecisions(messages);
+	const answeredQuestionIds = new Set(
+		messages.flatMap((raw) => {
+			const parsed = PlatformOwnerMessageSchema.safeParse(raw);
+			return parsed.success && parsed.data.type === "question_answered" ? [parsed.data.questionId] : [];
+		}),
+	);
 	const sorted = messages
 		.map((raw, index) => ({ raw, index, parsed: PlatformOwnerMessageSchema.safeParse(raw) }))
 		.sort((a, b) => {
@@ -65,8 +87,12 @@ export function OwnerMessageView({
 						locale={locale}
 						actionLabels={actionLabels}
 						approvalDecision={
-							parsed.data.type === "approval_request" ? approvalDecisions?.[parsed.data.approvalId] : undefined
+							parsed.data.type === "approval_request"
+								? (messageDecisions[parsed.data.approvalId] ?? approvalDecisionsProp?.[parsed.data.approvalId])
+								: undefined
 						}
+						squadmates={squadmates}
+						answeredQuestionIds={answeredQuestionIds}
 						labels={labels}
 						approvalLabels={approvalLabels}
 						onCommand={onCommand}
@@ -84,6 +110,8 @@ function OwnerMessageItem({
 	approvalDecision,
 	labels,
 	approvalLabels,
+	squadmates,
+	answeredQuestionIds,
 	onCommand,
 }: {
 	message: PlatformOwnerMessage;
@@ -92,6 +120,8 @@ function OwnerMessageItem({
 	approvalDecision?: "approve" | "reject";
 	labels?: OwnerMessageViewProps["labels"];
 	approvalLabels?: ApprovalCardProps["labels"];
+	squadmates?: Readonly<Record<string, AgentSlug>>;
+	answeredQuestionIds: ReadonlySet<string>;
 	onCommand?: (body: PlatformOwnerCommandBody) => void;
 }) {
 	const [chosen, setChosen] = useState<string>();
@@ -101,6 +131,7 @@ function OwnerMessageItem({
 				<ChatReply reply={message.text} locale={locale} plainText />
 			</ChatAssistantMessage>
 		);
+	if (message.type === "approval_decided" || message.type === "question_answered") return null;
 	if (message.type === "question")
 		return (
 			<ChatAssistantMessage className="ts-owner-message">
@@ -113,7 +144,7 @@ function OwnerMessageItem({
 								pill
 								size="md"
 								variant="soft"
-								disabled={chosen !== undefined}
+								disabled={chosen !== undefined || answeredQuestionIds.has(message.questionId)}
 								aria-pressed={chosen === option}
 								onClick={() => {
 									setChosen(option);
@@ -136,6 +167,7 @@ function OwnerMessageItem({
 		return (
 			<ApprovalCard
 				request={message}
+				squadmates={squadmates}
 				locale={locale}
 				actionLabels={actionLabels}
 				decision={approvalDecision}
@@ -159,7 +191,9 @@ function OwnerMessageItem({
 			</ChatAssistantMessage>
 		);
 	if (message.type === "status") {
-		const agent = AgentSlugSchema.safeParse(message.bot);
+		const agent = AgentSlugSchema.safeParse(
+			squadmates && Object.hasOwn(squadmates, message.bot) ? squadmates[message.bot] : undefined,
+		);
 		return (
 			<ChatWorking
 				className="ts-owner-message"

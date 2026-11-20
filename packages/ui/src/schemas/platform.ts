@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-// Restated from tensquads-platform-amp at c5eaad4d69b4529c9a57b00b1066b39e60243fa8.
+// Restated from tensquads-platform-amp at b09e197ae4578995d3c3d1a5be9330e1a7da600e.
 const id = z.string().min(1);
 const messageMeta = { seq: z.int().positive(), at: z.iso.datetime() };
 const commandMeta = { commandId: id, at: z.iso.datetime() };
@@ -27,6 +27,9 @@ export const PlatformApprovalRequestSchema = z
 		contentHash: id,
 		rule: id.nullable(),
 		limit: z.int().nonnegative().nullable(),
+		amount: z.int().nonnegative().nullable(),
+		bot: id,
+		taskId: id,
 	})
 	.strict();
 export const PlatformResultSchema = z
@@ -58,6 +61,17 @@ export const PlatformActionNotConfirmedSchema = z
 		what: z.string().min(1),
 	})
 	.strict();
+export const PlatformApprovalDecidedSchema = z
+	.object({
+		...messageMeta,
+		type: z.literal("approval_decided"),
+		approvalId: id,
+		decision: z.enum(["approve", "reject"]),
+	})
+	.strict();
+export const PlatformQuestionAnsweredSchema = z
+	.object({ ...messageMeta, type: z.literal("question_answered"), questionId: id })
+	.strict();
 
 export const PlatformOwnerMessageSchema = z.discriminatedUnion("type", [
 	PlatformReplySchema,
@@ -66,6 +80,8 @@ export const PlatformOwnerMessageSchema = z.discriminatedUnion("type", [
 	PlatformResultSchema,
 	PlatformStatusSchema,
 	PlatformActionNotConfirmedSchema,
+	PlatformApprovalDecidedSchema,
+	PlatformQuestionAnsweredSchema,
 ]);
 export type PlatformReply = z.infer<typeof PlatformReplySchema>;
 export type PlatformQuestion = z.infer<typeof PlatformQuestionSchema>;
@@ -73,7 +89,20 @@ export type PlatformApprovalRequest = z.infer<typeof PlatformApprovalRequestSche
 export type PlatformResult = z.infer<typeof PlatformResultSchema>;
 export type PlatformStatus = z.infer<typeof PlatformStatusSchema>;
 export type PlatformActionNotConfirmed = z.infer<typeof PlatformActionNotConfirmedSchema>;
+export type PlatformApprovalDecided = z.infer<typeof PlatformApprovalDecidedSchema>;
+export type PlatformQuestionAnswered = z.infer<typeof PlatformQuestionAnsweredSchema>;
 export type PlatformOwnerMessage = z.infer<typeof PlatformOwnerMessageSchema>;
+
+export const PLATFORM_OWNER_MESSAGE_TYPES = [
+	"reply",
+	"question",
+	"approval_request",
+	"result",
+	"status",
+	"action_not_confirmed",
+	"approval_decided",
+	"question_answered",
+] as const;
 
 export const OwnerMessageCommandSchema = z
 	.object({ ...commandMeta, type: z.literal("OwnerMessage"), messageId: id, channel: id, text: z.string().min(1) })

@@ -16,8 +16,6 @@ import {
 import type { PlatformApprovalRequest } from "@tensquads/ui/schemas";
 import { useState } from "react";
 import { siteCopy } from "../copy";
-import arHome from "../fixtures/dashboard-home.fixture.ar.json";
-import enHome from "../fixtures/dashboard-home.fixture.en.json";
 import { getPreviewState } from "../state";
 import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
@@ -35,8 +33,6 @@ const requestsByLocale = {
 		approvalFixtures["../fixtures/dashboard-approvals.fixture.ar.json"] ?? "[]",
 	) as PlatformApprovalRequest[],
 };
-const homeData = { en: enHome, ar: arHome };
-
 function StoreDashboard() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
@@ -163,16 +159,7 @@ function StoreDashboard() {
 										key={request.approvalId}
 										request={request}
 										locale={locale}
-										bot={
-											homeData[locale].approvalDetails[
-												request.approvalId as keyof typeof homeData.en.approvalDetails
-											]?.agent
-										}
-										taskId={
-											homeData[locale].approvalDetails[
-												request.approvalId as keyof typeof homeData.en.approvalDetails
-											]?.taskId
-										}
+										squadmates={{ "support-bot": "petra", "pricing-bot": "rio", "inventory-bot": "kyoto" }}
 										actionLabels={actionLabels}
 										ruleLabels={ruleLabels}
 										onDecision={(command) => {
