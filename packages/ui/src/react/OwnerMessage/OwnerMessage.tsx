@@ -199,7 +199,9 @@ function OwnerMessageItem({
 				className="ts-owner-message"
 				locale={locale}
 				label={`${message.step}${message.attempt > 1 ? ` · ${labels?.attempt ?? (locale === "ar" ? "المحاولة" : "Attempt")} ${message.attempt}` : ""}`}
-				glyph={agent.success ? <Squadmate agent={agent.data} state="running" size={20} locale={locale} /> : undefined}
+				glyph={
+					agent.success ? <Squadmate agent={agent.data} state="running" size={20} locale={locale} /> : undefined
+				}
 			/>
 		);
 	}
