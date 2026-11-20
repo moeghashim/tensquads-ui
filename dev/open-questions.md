@@ -27,7 +27,8 @@
   1. Move the provider to its own subpath `@tensquads/ui/openui/server/anthropic` and make the SDK an optional peer dependency.
   2. Keep it as is.
 **Recommendation**: Option 1 in v0.2, plus one live smoke test against the API when the tensquads app adopts the server helpers.
-**Status**: open — v0.2
+**Status**: answered
+**Resolution** (Opus, 2026-11-20): Option 1. Recorded as PLAN.md D29; task `v0.2-server/001`. The live smoke test waits for the tensquads app adoption.
 
 ## Q4 — Fields the UI needs that the platform message contract lacks
 
