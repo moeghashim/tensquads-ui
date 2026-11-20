@@ -1,11 +1,11 @@
 import { createTensquadsLibrary, TensquadsRenderer } from "../packages/ui/src/openui/index.js";
 import {
 	buildSystemPrompt,
-	createAnthropicProvider,
 	OpenUIServerError,
 	readOpenUIRequest,
 	streamOpenUIResponse,
 } from "../packages/ui/src/openui/server/index.js";
+import { createAnthropicProvider } from "../packages/ui/src/openui/server/anthropic.js";
 import { Button, Field, FieldLabel, Input } from "../packages/ui/src/react/index.js";
 import { Squadmate } from "../packages/ui/src/squadmates/index.js";
 

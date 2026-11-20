@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { createTensquadsLibrary } from "../../../../packages/ui/src/openui/index";
+import { createAnthropicProvider } from "../../../../packages/ui/src/openui/server/anthropic";
 import {
 	buildSystemPrompt,
-	createAnthropicProvider,
 	OpenUIServerError,
 	readOpenUIRequest,
 	streamOpenUIResponse,

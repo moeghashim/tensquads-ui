@@ -143,6 +143,8 @@ const en = {
 		serverLead:
 			"A server agent can validate turns, build the locale-specific prompt, and stream OpenUI Lang as plain text.",
 		workerCodeLabel: "Worker entry",
+		sdkNote:
+			"Apps that use the Anthropic provider install @anthropic-ai/sdk themselves. This example uses version 1.10.0.",
 		serverNote:
 			"Store ANTHROPIC_API_KEY as a Worker secret and pass it from the server environment. Keep credentials out of browser code. The example does not expose a live endpoint.",
 		copy: "Copy",

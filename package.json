@@ -39,6 +39,10 @@
 			"types": "./packages/ui/dist/openui/server/index.d.ts",
 			"import": "./packages/ui/dist/openui/server/index.js"
 		},
+		"./openui/server/anthropic": {
+			"types": "./packages/ui/dist/openui/server/anthropic.d.ts",
+			"import": "./packages/ui/dist/openui/server/anthropic.js"
+		},
 		"./schemas": {
 			"types": "./packages/ui/dist/schemas/index.d.ts",
 			"import": "./packages/ui/dist/schemas/index.js"
@@ -70,7 +74,6 @@
 		"docs:check": "node scripts/build-llms.mjs --check"
 	},
 	"dependencies": {
-		"@anthropic-ai/sdk": "1.10.0",
 		"@openuidev/lang-core": "1.1.1",
 		"@openuidev/react-lang": "1.1.1",
 		"@ui-sdk/core": "0.1.0-beta.10",
@@ -78,10 +81,17 @@
 		"zod": "4.6.7"
 	},
 	"peerDependencies": {
+		"@anthropic-ai/sdk": "1.10.0",
 		"react": ">=19.0.0 <20",
 		"react-dom": ">=19.0.0 <20"
 	},
+	"peerDependenciesMeta": {
+		"@anthropic-ai/sdk": {
+			"optional": true
+		}
+	},
 	"devDependencies": {
+		"@anthropic-ai/sdk": "1.10.0",
 		"@axe-core/playwright": "4.14.0",
 		"@biomejs/biome": "2.6.4",
 		"@playwright/test": "1.64.1",
