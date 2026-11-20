@@ -4,7 +4,6 @@ import { getRegisteredComponents } from "../registry.js";
 import type { OpenUIStreamInput } from "./types.js";
 
 export type { ChatActionTurn, ChatTurn } from "../../schemas/index.js";
-export { createAnthropicProvider, DEFAULT_ANTHROPIC_MODEL } from "./providers/anthropic.js";
 export type { OpenUIRequest, OpenUIRequestTurn } from "./request.js";
 export { MAX_BODY_BYTES, MAX_TURNS, OpenUIServerError, readOpenUIRequest } from "./request.js";
 export type { OpenUIStreamInput, OpenUIStreamProvider } from "./types.js";

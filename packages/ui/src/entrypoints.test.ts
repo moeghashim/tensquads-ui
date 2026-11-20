@@ -6,6 +6,7 @@ const entrypoints = [
 	"./squadmates/index.ts",
 	"./openui/index.ts",
 	"./openui/server/index.ts",
+	"./openui/server/anthropic.ts",
 	"./schemas/index.ts",
 ];
 

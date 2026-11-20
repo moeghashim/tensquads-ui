@@ -1,4 +1,4 @@
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { mkdtemp, readFile, realpath, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
@@ -25,6 +25,20 @@ try {
 
 	const packageJson = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
 	const installedPackage = join(fixture, "node_modules/@tensquads/ui");
+	const sdkList = spawnSync("npm", ["ls", "@anthropic-ai/sdk", "--all", "--json", "--long"], {
+		cwd: fixture,
+		encoding: "utf8",
+	});
+	const sdkTree = JSON.parse(sdkList.stdout);
+	const assertNoAnthropic = (node) => {
+		for (const [name, dependency] of Object.entries(node.dependencies ?? {})) {
+			if (name === "@anthropic-ai/sdk") {
+				throw new Error("The optional Anthropic peer was installed without an explicit request.");
+			}
+			assertNoAnthropic(dependency);
+		}
+	};
+	assertNoAnthropic(sdkTree);
 	for (const packageName of ["@ui-sdk/core", "@ui-sdk/react"]) {
 		await readFile(join(fixture, "node_modules", packageName, "package.json"), "utf8");
 		const npmTree = JSON.parse(
@@ -56,9 +70,18 @@ try {
 			}
 			continue;
 		}
+		if (path === "./openui/server/anthropic") continue;
 		imports.push(`import(${JSON.stringify(`@tensquads/ui${path.slice(1)}`)})`);
 	}
 	execFileSync("node", ["--input-type=module", "-e", `await Promise.all([${imports.join(",")}]);`], {
+		cwd: fixture,
+		stdio: "inherit",
+	});
+	execFileSync("npm", ["install", "--ignore-scripts", "@anthropic-ai/sdk@1.10.0"], {
+		cwd: fixture,
+		stdio: "inherit",
+	});
+	execFileSync("node", ["--input-type=module", "-e", 'await import("@tensquads/ui/openui/server/anthropic");'], {
 		cwd: fixture,
 		stdio: "inherit",
 	});
