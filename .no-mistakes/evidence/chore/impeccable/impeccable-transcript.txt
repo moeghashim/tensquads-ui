@@ -1,0 +1,9 @@
+Isolated HOME=.test-local/home and IMPECCABLE_HOME=.test-local/impeccable
+$ sh .agents/skills/impeccable/scripts/impeccable engine-probe
+impeccable-engine 0.1.27
+Exit: 0
+
+$ sh .agents/skills/impeccable/scripts/impeccable context --target apps/preview/src/styles.css
+Exit: 0
+Loaded apps/preview/PRODUCT.md and resolved the target to apps/preview/src/styles.css.
+Reported existing hook-not-installed setup status; no hook configuration was changed.

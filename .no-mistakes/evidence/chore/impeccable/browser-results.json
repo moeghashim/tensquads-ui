@@ -1,0 +1,130 @@
+[
+  {
+    "name": "Gallery tiles contain ChatLauncher, StatTile and PageHeader in en light at desktop and mobile widths",
+    "result": "pass"
+  },
+  {
+    "measurement": {
+      "locale": "en",
+      "theme": "light",
+      "statusContrast": {
+        "foreground": "rgb(64, 201, 119)",
+        "background": "rgb(13, 13, 13)",
+        "ratio": 9.106051694090052
+      },
+      "countContrast": {
+        "foreground": "rgb(255, 255, 255)",
+        "background": "rgb(224, 46, 42)",
+        "ratio": 4.571488087867345
+      }
+    }
+  },
+  {
+    "name": "Home stream status and dashboard waiting count meet 4.5:1 text contrast in en light",
+    "result": "pass"
+  },
+  {
+    "name": "StatTile grid keeps metrics separate as its container narrows in en light",
+    "result": "pass"
+  },
+  {
+    "name": "PageHeader moves actions below copy in narrow desktop containers and on mobile in en light",
+    "result": "pass"
+  },
+  {
+    "name": "Gallery tiles contain ChatLauncher, StatTile and PageHeader in en dark at desktop and mobile widths",
+    "result": "pass"
+  },
+  {
+    "measurement": {
+      "locale": "en",
+      "theme": "dark",
+      "statusContrast": {
+        "foreground": "rgb(64, 201, 119)",
+        "background": "rgb(13, 13, 13)",
+        "ratio": 9.106051694090052
+      },
+      "countContrast": {
+        "foreground": "rgb(255, 255, 255)",
+        "background": "rgb(224, 46, 42)",
+        "ratio": 4.571488087867345
+      }
+    }
+  },
+  {
+    "name": "Home stream status and dashboard waiting count meet 4.5:1 text contrast in en dark",
+    "result": "pass"
+  },
+  {
+    "name": "StatTile grid keeps metrics separate as its container narrows in en dark",
+    "result": "pass"
+  },
+  {
+    "name": "PageHeader moves actions below copy in narrow desktop containers and on mobile in en dark",
+    "result": "pass"
+  },
+  {
+    "name": "Gallery tiles contain ChatLauncher, StatTile and PageHeader in ar light at desktop and mobile widths",
+    "result": "pass"
+  },
+  {
+    "measurement": {
+      "locale": "ar",
+      "theme": "light",
+      "statusContrast": {
+        "foreground": "rgb(64, 201, 119)",
+        "background": "rgb(13, 13, 13)",
+        "ratio": 9.106051694090052
+      },
+      "countContrast": {
+        "foreground": "rgb(255, 255, 255)",
+        "background": "rgb(224, 46, 42)",
+        "ratio": 4.571488087867345
+      }
+    }
+  },
+  {
+    "name": "Home stream status and dashboard waiting count meet 4.5:1 text contrast in ar light",
+    "result": "pass"
+  },
+  {
+    "name": "StatTile grid keeps metrics separate as its container narrows in ar light",
+    "result": "pass"
+  },
+  {
+    "name": "PageHeader moves actions below copy in narrow desktop containers and on mobile in ar light",
+    "result": "pass"
+  },
+  {
+    "name": "Gallery tiles contain ChatLauncher, StatTile and PageHeader in ar dark at desktop and mobile widths",
+    "result": "pass"
+  },
+  {
+    "measurement": {
+      "locale": "ar",
+      "theme": "dark",
+      "statusContrast": {
+        "foreground": "rgb(64, 201, 119)",
+        "background": "rgb(13, 13, 13)",
+        "ratio": 9.106051694090052
+      },
+      "countContrast": {
+        "foreground": "rgb(255, 255, 255)",
+        "background": "rgb(224, 46, 42)",
+        "ratio": 4.571488087867345
+      }
+    }
+  },
+  {
+    "name": "Home stream status and dashboard waiting count meet 4.5:1 text contrast in ar dark",
+    "result": "pass"
+  },
+  {
+    "name": "StatTile grid keeps metrics separate as its container narrows in ar dark",
+    "result": "pass"
+  },
+  {
+    "name": "PageHeader moves actions below copy in narrow desktop containers and on mobile in ar dark",
+    "result": "pass"
+  }
+]
