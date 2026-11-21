@@ -3,5 +3,10 @@
 	[dir="rtl"] .ts-chat-launcher { inset-inline-end: max(var(--ts-space-6), env(safe-area-inset-left)); }
 	.ts-chat-launcher:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.ts-chat-launcher__avatar { display: grid; inline-size: 2rem; block-size: 2rem; flex: none; place-items: center; overflow: hidden; border-radius: var(--ts-radius-full); background: var(--ts-surface-primary); }
-	.ts-chat-launcher__count { background: var(--ts-danger-solid); color: var(--ts-on-danger); font-variant-numeric: tabular-nums; }
+	/* The count sits on the solid launcher, so it uses the solid danger pair, as the danger Button does. */
+	[data-slot="badge"].ts-chat-launcher__count { --ts-chat-launcher-count-text: var(--ts-gray-0); color: var(--ts-chat-launcher-count-text); background: var(--ts-danger-solid); font-variant-numeric: tabular-nums; }
+	[data-theme="dark"] [data-slot="badge"].ts-chat-launcher__count { --ts-chat-launcher-count-text: var(--ts-gray-1000); color: var(--ts-chat-launcher-count-text); }
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) [data-slot="badge"].ts-chat-launcher__count { --ts-chat-launcher-count-text: var(--ts-gray-1000); color: var(--ts-chat-launcher-count-text); }
+	}
 }

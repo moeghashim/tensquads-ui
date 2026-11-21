@@ -10,6 +10,7 @@
 		font-synthesis: none;
 		text-rendering: optimizeLegibility;
 	}
+	p { text-wrap: pretty; }
 
 	body { margin-block: 0; margin-inline: 0; }
 	button { font: inherit; letter-spacing: inherit; }
@@ -93,7 +94,8 @@
 	.stream-code__header, .stream-code__footer { display: flex; align-items: center; justify-content: space-between; gap: var(--ts-space-2); color: var(--ts-gray-200); font-family: var(--ts-text-sm-font-family); font-size: var(--ts-text-xs-font-size); }
 	.stream-code__header > div { display: flex; align-items: center; gap: var(--ts-space-2); }
 	.stream-code__dot { inline-size: 0.5rem; aspect-ratio: 1; border-radius: var(--ts-radius-full); background: var(--ts-success-solid); }
-	.stream-code__status { color: var(--ts-success-text); }
+	/* The code panel is dark in both themes, so the status uses a light green. */
+	.stream-code__status { color: var(--ts-green-300); }
 	.stream-code__footer [data-slot="button"] { color: var(--ts-gray-200); }
 	.stream-code pre { flex: 1; min-inline-size: 0; display: grid; align-content: start; gap: var(--ts-space-2); margin: var(--ts-space-6) 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: var(--ts-text-xs-font-size); line-height: 1.8; }
 	.stream-code__line { min-inline-size: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); align-items: start; column-gap: var(--ts-space-3); color: var(--ts-yellow-300); }
@@ -128,6 +130,10 @@
 	.component-card__preview > * { max-inline-size: 140%; transform: scale(0.9); transform-origin: center; }
 	.component-card__preview [data-slot="input"], .component-card__preview [data-slot="field"] { max-inline-size: 100%; }
 	.component-card__preview .ts-chip__name { white-space: nowrap; }
+	/* Wide components fill the tile instead of shrinking to their narrowest content. */
+	.component-card__preview > :has(.ts-stat-tile, .ts-page-header) { inline-size: 100%; }
+	/* The launcher is fixed to the viewport in apps. In a tile it sits in the flow. */
+	.component-card__preview .ts-chat-launcher { position: static; }
 	.component-card__link { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: var(--ts-space-3); color: var(--ts-text-emphasis); text-decoration: none; }
 	.component-card__arrow { color: var(--ts-text-secondary); }
 	.path-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ts-space-4); }

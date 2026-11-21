@@ -21,8 +21,9 @@
 		:root:not([data-theme="light"]) .ts-stat-tile__delta--negative { color: var(--ts-red-300); }
 	}
 	.ts-stat-tile__delta--neutral, .ts-stat-tile__foot { color: var(--ts-text-secondary); }
-	.ts-stat-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--ts-space-4); }
-	@media (max-width: 73.75rem) { .ts-stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-	@media (max-width: 47.5rem) { .ts-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-	@media (max-width: 21.1875rem) { .ts-stat-grid { grid-template-columns: minmax(0, 1fr); } }
+	/* The viewport sets the most columns. A narrow container, such as a Card, drops columns so no tile goes below 8rem. */
+	.ts-stat-grid { --ts-stat-grid-columns: 6; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, max(8rem, (100% - var(--ts-stat-grid-columns) * var(--ts-space-4)) / var(--ts-stat-grid-columns))), 1fr)); gap: var(--ts-space-4); }
+	@media (max-width: 73.75rem) { .ts-stat-grid { --ts-stat-grid-columns: 3; } }
+	@media (max-width: 47.5rem) { .ts-stat-grid { --ts-stat-grid-columns: 2; } }
+	@media (max-width: 21.1875rem) { .ts-stat-grid { --ts-stat-grid-columns: 1; } }
 }
