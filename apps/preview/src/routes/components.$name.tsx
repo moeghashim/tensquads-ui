@@ -1406,7 +1406,7 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 					kind="if-else"
 					title={locale === "ar" ? "هل الطلب متاح؟" : "Is the order available?"}
 					meta={locale === "ar" ? "شرطان" : "Two conditions"}
-					branches={locale === "ar" ? ["متاح", "وإلا"] : ["In stock", "Else"]}
+					branches={locale === "ar" ? ["متاح", "طلب مسبق", "وإلا"] : ["In stock", "Preorder", "Else"]}
 					selected
 				/>
 				<Node

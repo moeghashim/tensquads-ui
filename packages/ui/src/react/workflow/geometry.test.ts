@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { WorkflowGraphSchema } from "../../schemas/workflow.js";
-import { edgePath, NODE_METRICS, portPosition } from "./geometry.js";
+import { edgePath, portPosition } from "./geometry.js";
 
 const node = (id: string, kind: "agent" | "start" | "end" | "if-else" = "agent", branches?: string[]) => ({
 	id,
@@ -61,16 +61,11 @@ describe("workflow graph schema", () => {
 describe("workflow geometry", () => {
 	it("matches the smooth-step connector path", () =>
 		expect(edgePath(10, 20, 90, 60)).toBe("M10,20 C50,20 50,60 90,60"));
-	it("places head and branch ports at their centres", () => {
+	it("matches Canvas guide head and branch port centres", () => {
 		const branch = { ...node("if", "if-else", ["A", "B"]), position: { x: 12, y: 30 } };
-		expect(portPosition(branch, "in", 200)).toEqual({ x: 12, y: 30 + NODE_METRICS.headRowHeight / 2 });
-		expect(portPosition(branch, { out: 1 }, 200).y).toBe(
-			30 +
-				NODE_METRICS.headRowHeight +
-				NODE_METRICS.headBranchGap +
-				NODE_METRICS.branchRowHeight * 1.5 +
-				NODE_METRICS.branchGap,
-		);
+		expect(portPosition(branch, "in", 200)).toEqual({ x: 12, y: 54 });
+		expect(portPosition(branch, { out: 0 }, 200)).toEqual({ x: 212, y: 100 });
+		expect(portPosition(branch, { out: 1 }, 200)).toEqual({ x: 212, y: 132 });
 		expect(portPosition({ ...node("a"), position: { x: 12, y: 30 } }, { out: 0 }, 200)).toEqual({ x: 212, y: 54 });
 	});
 });

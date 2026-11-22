@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { WorkflowGraph } from "../../schemas/workflow.js";
+import { WorkflowGraphSchema, type WorkflowGraph } from "../../schemas/workflow.js";
 import { tidyLayout } from "./tidy.js";
 
 const make = (
@@ -83,6 +83,75 @@ describe("tidyLayout", () => {
 		const output = tidyLayout(input);
 		expect(output.quiet!.y).toBe(output.solo!.y);
 		expect(output.quiet!.x).toBeLessThan(output.solo!.x);
+	});
+	it("centres split-and-join columns and places the loose row below their bounds", () => {
+		const input: WorkflowGraph = {
+			nodes: [make("s", "start"), make("a"), make("b"), make("join", "end"), make("note", "note")],
+			edges: [
+				{ id: "sa", from: "s", to: "a" },
+				{ id: "sb", from: "s", to: "b" },
+				{ id: "aj", from: "a", to: "join" },
+				{ id: "bj", from: "b", to: "join" },
+			],
+		};
+		const sizes = Object.fromEntries(input.nodes.map((node) => [node.id, { width: 180, height: 80 }]));
+		const positions = tidyLayout(input, sizes);
+		expect(positions.s!.y).toBe(80);
+		expect(positions.a!.y).toBe(20);
+		expect(positions.b!.y).toBe(140);
+		expect(positions.join!.y).toBe(80);
+		expect(positions.note!.y).toBe(260);
+		expect(
+			tidyLayout({ ...input, nodes: input.nodes.map((node) => ({ ...node, position: positions[node.id]! })) }, sizes),
+		).toEqual(positions);
+	});
+	it("orders final columns by their furthest parents rather than discovery or node order", () => {
+		const input: WorkflowGraph = {
+			nodes: [
+				make("R", "if-else", ["A", "B"]),
+				make("B", "if-else", ["K", "J"]),
+				make("A"),
+				make("J"),
+				make("K"),
+				make("X"),
+				make("U"),
+				make("V"),
+			],
+			edges: [
+				{ id: "ra", from: "R", fromPort: 0, to: "A" },
+				{ id: "rb", from: "R", fromPort: 1, to: "B" },
+				{ id: "ax", from: "A", to: "X" },
+				{ id: "bk", from: "B", fromPort: 0, to: "K" },
+				{ id: "bj", from: "B", fromPort: 1, to: "J" },
+				{ id: "xu", from: "X", to: "U" },
+				{ id: "kj", from: "K", to: "J" },
+				{ id: "xv", from: "X", to: "V" },
+			],
+		};
+		const result = tidyLayout(input);
+		expect(result.A!.y).toBeLessThan(result.B!.y);
+		expect(result.X!.y).toBeLessThan(result.K!.y);
+		expect(result.U!.y).toBeLessThan(result.V!.y);
+		expect(result.V!.y).toBeLessThan(result.J!.y);
+		expect(result.U!.x).toBe(result.J!.x);
+	});
+	it.each([true, false])("preserves prototype-named IDs in flow and loose results (connected: %s)", (connected) => {
+		const input = WorkflowGraphSchema.parse({
+			nodes: [make("__proto__"), make("constructor"), make("toString")],
+			edges: connected
+				? [
+						{ id: "a", from: "__proto__", to: "constructor" },
+						{ id: "b", from: "constructor", to: "toString" },
+					]
+				: [],
+		});
+		const result = tidyLayout(input);
+		expect(Object.keys(result).sort()).toEqual(["__proto__", "constructor", "toString"]);
+		const restored = JSON.parse(JSON.stringify(result));
+		for (const node of input.nodes) {
+			expect(Object.hasOwn(result, node.id)).toBe(true);
+			expect(restored[node.id]).toEqual(result[node.id]);
+		}
 	});
 	it("is empty for an empty graph", () => expect(tidyLayout({ nodes: [], edges: [] })).toEqual({}));
 	it("uses supplied dimensions without overlap, remains idempotent, and preserves input", () => {

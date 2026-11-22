@@ -26,8 +26,7 @@
 .ts-node__branch { position: relative; display: flex; align-items: center; justify-content: flex-end; block-size: 28px; padding-inline: var(--ts-space-2); border-radius: var(--ts-radius-md); background: var(--ts-branch-bg); }
 .ts-node__branch-label { color: var(--ts-text-secondary); font-size: var(--ts-branch-label-font-size); font-weight: var(--ts-branch-label-font-weight); letter-spacing: var(--ts-branch-label-letter-spacing); line-height: var(--ts-branch-label-line-height); }
 .ts-node__port { position: absolute; z-index: 1; inline-size: var(--ts-handle-size); block-size: var(--ts-handle-size); border-radius: var(--ts-radius-full); background: var(--ts-handle); box-shadow: var(--ts-shadow-handle); }
-.ts-node__port--in { inset-inline-start: calc(var(--ts-handle-size) / -2); inset-block-start: 24px; }
-.ts-node__port--out { inset-inline-end: calc(var(--ts-handle-size) / -2); inset-block-start: 24px; }
+.ts-node__port--in { inset-inline-start: calc(var(--ts-handle-size) / -2); inset-block-start: calc(24px - var(--ts-handle-size) / 2); }
+.ts-node__port--out { inset-inline-end: calc(var(--ts-handle-size) / -2); inset-block-start: calc(24px - var(--ts-handle-size) / 2); }
 .ts-node[data-kind="end"] .ts-node__port--out { display: none; }
-.ts-node:has(.ts-node__branches) > .ts-node__port--in { inset-block-start: 24px; }
-.ts-node__branch .ts-node__port--out { inset-block-start: 10px; }
+.ts-node__branch .ts-node__port--out { inset-inline-end: calc(-1 * var(--ts-space-4) - var(--ts-handle-size) / 2); inset-block-start: calc((28px - var(--ts-handle-size)) / 2); }

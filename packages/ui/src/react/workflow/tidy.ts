@@ -64,12 +64,9 @@ export function tidyLayout(
 	const activeEdges = graph.edges.filter((edge, index) => !loopEdges.has(edgeKey(edge.from, edge.to, index)));
 	const predecessors = new Map(graph.nodes.map((node) => [node.id, [] as { id: string; port: number }[]]));
 	for (const edge of activeEdges) predecessors.get(edge.to)?.push({ id: edge.from, port: edge.fromPort ?? -1 });
-	for (const items of predecessors.values())
-		items.sort((a, b) => nodeOrder.get(a.id)! - nodeOrder.get(b.id)! || a.port - b.port);
 	const columns = new Map<string, number>();
 	const pending = new Set(graph.nodes.map((node) => node.id));
 	while (pending.size) {
-		let progressed = false;
 		for (const node of graph.nodes) {
 			if (!pending.has(node.id)) continue;
 			const parents = predecessors.get(node.id) ?? [];
@@ -79,14 +76,6 @@ export function tidyLayout(
 				parents.length ? Math.max(...parents.map((parent) => (columns.get(parent.id) ?? 0) + 1)) : 0,
 			);
 			pending.delete(node.id);
-			progressed = true;
-		}
-		if (!progressed) {
-			const first = graph.nodes.find((node) => pending.has(node.id));
-			if (first) {
-				columns.set(first.id, 0);
-				pending.delete(first.id);
-			}
 		}
 	}
 	const connected = new Set<string>();
@@ -96,24 +85,6 @@ export function tidyLayout(
 	}
 	const flowNodes = graph.nodes.filter((node) => connected.has(node.id));
 	const looseNodes = graph.nodes.filter((node) => !connected.has(node.id));
-	const children = new Map(graph.nodes.map((node) => [node.id, [] as { id: string; port: number }[]]));
-	for (const edge of activeEdges) children.get(edge.from)?.push({ id: edge.to, port: edge.fromPort ?? -1 });
-	for (const list of children.values())
-		list.sort((a, b) => a.port - b.port || nodeOrder.get(a.id)! - nodeOrder.get(b.id)!);
-	const orderRank = new Map<string, number>();
-	let nextRank = 0;
-	for (const root of flowNodes.filter((node) => !predecessors.get(node.id)?.length)) {
-		const queue = [root.id];
-		const seen = new Set<string>();
-		while (queue.length) {
-			const id = queue.shift()!;
-			if (seen.has(id)) continue;
-			seen.add(id);
-			if (!orderRank.has(id)) orderRank.set(id, nextRank++);
-			queue.push(...(children.get(id) ?? []).map((item) => item.id));
-		}
-	}
-	for (const node of flowNodes) if (!orderRank.has(node.id)) orderRank.set(node.id, nextRank++);
 	const groups = new Map<number, WorkflowNode[]>();
 	for (const node of flowNodes) {
 		const col = columns.get(node.id) ?? 0;
@@ -121,8 +92,31 @@ export function tidyLayout(
 		group.push(node);
 		groups.set(col, group);
 	}
-	for (const group of groups.values())
-		group.sort((a, b) => orderRank.get(a.id)! - orderRank.get(b.id)! || nodeOrder.get(a.id)! - nodeOrder.get(b.id)!);
+	const orderRank = new Map<string, number>();
+	const orderedColumns = [...groups.keys()].sort((a, b) => a - b);
+	for (const col of orderedColumns) {
+		const group = groups.get(col)!;
+		const parentOrder = new Map(
+			group.map((node) => [
+				node.id,
+				(predecessors.get(node.id) ?? [])
+					.filter((parent) => columns.get(parent.id) === col - 1)
+					.sort((a, b) => orderRank.get(a.id)! - orderRank.get(b.id)! || a.port - b.port),
+			]),
+		);
+		group.sort((a, b) => {
+			const aParents = parentOrder.get(a.id)!;
+			const bParents = parentOrder.get(b.id)!;
+			for (let index = 0; index < Math.min(aParents.length, bParents.length); index++) {
+				const ap = aParents[index]!;
+				const bp = bParents[index]!;
+				const difference = orderRank.get(ap.id)! - orderRank.get(bp.id)! || ap.port - bp.port;
+				if (difference) return difference;
+			}
+			return aParents.length - bParents.length || nodeOrder.get(a.id)! - nodeOrder.get(b.id)!;
+		});
+		for (const [index, node] of group.entries()) orderRank.set(node.id, index);
+	}
 	const originX = snap(Math.min(...graph.nodes.map((node) => node.position.x)));
 	const originY = snap(Math.min(...graph.nodes.map((node) => node.position.y)));
 	const maxColumn = Math.max(0, ...groups.keys());
@@ -133,18 +127,26 @@ export function tidyLayout(
 		const widest = Math.max(0, ...(groups.get(col) ?? []).map((node) => sizes[node.id]?.width ?? DEFAULT_NODE_WIDTH));
 		x = atLeastGap(x + widest, COLUMN_GAP);
 	}
-	const positions: Record<string, { x: number; y: number }> = {};
-	let flowBottom = originY;
+	const columnHeights = new Map<number, number>();
 	for (const [col, group] of groups) {
-		let y = originY;
+		let height = 0;
+		for (const [index, node] of group.entries()) {
+			height += heightOf(node, sizes[node.id]);
+			if (index < group.length - 1) height = atLeastGap(height, NODE_GAP);
+		}
+		columnHeights.set(col, height);
+	}
+	const flowHeight = Math.max(0, ...columnHeights.values());
+	const positions: Record<string, { x: number; y: number }> = Object.create(null);
+	for (const [col, group] of groups) {
+		let y = originY + snap((flowHeight - columnHeights.get(col)!) / 2);
 		for (const node of group) {
 			positions[node.id] = { x: columnX.get(col) ?? originX, y };
 			y = atLeastGap(y + heightOf(node, sizes[node.id]), NODE_GAP);
 		}
-		flowBottom = Math.max(flowBottom, y);
 	}
 	let looseX = originX;
-	const looseY = flowNodes.length ? atLeastGap(flowBottom, NODE_GAP) : originY;
+	const looseY = flowNodes.length ? atLeastGap(originY + flowHeight, NODE_GAP) : originY;
 	for (const node of looseNodes) {
 		const width = sizes[node.id]?.width ?? DEFAULT_NODE_WIDTH;
 		positions[node.id] = { x: looseX, y: looseY };
