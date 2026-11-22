@@ -1,0 +1,5 @@
+@layer tensquads {
+	.node-preview { display: grid; gap: var(--ts-space-6); padding: var(--ts-space-5); overflow: auto; background-color: var(--ts-canvas); background-image: radial-gradient(var(--ts-dot-grid) 1px, transparent 1px); background-position: 10px 10px; background-size: 20px 20px; }
+	.node-preview__grid { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--ts-space-5); }
+	.node-preview__branches { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--ts-space-5); }
+}

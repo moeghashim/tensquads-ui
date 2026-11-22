@@ -44,6 +44,7 @@ import {
 	MenuSeparator,
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
+import { Node } from "../../../../packages/ui/src/react/Node/Node";
 import { OwnerMessageView } from "../../../../packages/ui/src/react/OwnerMessage/OwnerMessage";
 import { PageHeader } from "../../../../packages/ui/src/react/PageHeader/PageHeader";
 import {
@@ -101,6 +102,7 @@ const componentOrder = [
 	"ThemeToggle",
 	"Toolbar",
 	"CommandPalette",
+	"Node",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -432,6 +434,7 @@ function ComponentExample() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Node") return <NodePreview locale={locale} />;
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
@@ -1334,6 +1337,85 @@ ${menuContentsCode}
 					<p className="empty-state">No {locale} OpenUI fixture is registered for this component.</p>
 				)}
 			</section>
+		</div>
+	);
+}
+
+function NodePreview({ locale }: { locale: "en" | "ar" }) {
+	const labels =
+		locale === "ar"
+			? [
+					"وكيل",
+					"تصنيف",
+					"إذا / وإلا",
+					"أثناء",
+					"موافقة المستخدم",
+					"البداية",
+					"النهاية",
+					"ملاحظة",
+					"البحث عن الملفات",
+					"ضوابط الحماية",
+					"MCP",
+					"تحويل",
+					"تعيين الحالة",
+				]
+			: [
+					"Agent",
+					"Classify",
+					"If/else",
+					"While",
+					"User approval",
+					"Start",
+					"End",
+					"Note",
+					"File search",
+					"Guardrails",
+					"MCP",
+					"Transform",
+					"Set state",
+				];
+	const kinds = [
+		"agent",
+		"classify",
+		"if-else",
+		"while",
+		"user-approval",
+		"start",
+		"end",
+		"note",
+		"file-search",
+		"guardrails",
+		"mcp",
+		"transform",
+		"set-state",
+	] as const;
+	return (
+		<div className="node-preview">
+			<div className="node-preview__grid">
+				{kinds.map((kind, index) => (
+					<Node
+						key={kind}
+						kind={kind}
+						title={labels[index]!}
+						meta={locale === "ar" ? "خطوة سير العمل" : "Workflow step"}
+					/>
+				))}
+			</div>
+			<div className="node-preview__branches">
+				<Node
+					kind="if-else"
+					title={locale === "ar" ? "هل الطلب متاح؟" : "Is the order available?"}
+					meta={locale === "ar" ? "شرطان" : "Two conditions"}
+					branches={locale === "ar" ? ["متاح", "طلب مسبق", "وإلا"] : ["In stock", "Preorder", "Else"]}
+					selected
+				/>
+				<Node
+					kind="guardrails"
+					title={locale === "ar" ? "فحص السياسات" : "Check policies"}
+					meta={locale === "ar" ? "فحصان" : "Two checks"}
+					branches={locale === "ar" ? ["اجتياز", "إخفاق"] : ["Pass", "Fail"]}
+				/>
+			</div>
 		</div>
 	);
 }

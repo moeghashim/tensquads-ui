@@ -11,6 +11,7 @@ const registryOrder = [
 	"ThemeToggle",
 	"Toolbar",
 	"CommandPalette",
+	"Node",
 ];
 
 test("component index lists every documented component", async ({ page }) => {
@@ -30,7 +31,7 @@ for (const locale of ["en", "ar"] as const) {
 			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الخصائص" : "Props" })).toBeVisible();
 			// Usage shows only when the component doc has code samples.
 			const usage = docs.getByRole("heading", { name: locale === "ar" ? "الاستخدام" : "Usage" });
-			if (["Field", "Input", "Chat", "ChatReply", "ThemeToggle", "Toolbar"].includes(name))
+			if (["Field", "Input", "Chat", "ChatReply", "ThemeToggle", "Toolbar", "Node"].includes(name))
 				await expect(usage).toBeVisible();
 			else await expect(usage).toHaveCount(0);
 			// English doc text stays left-to-right on Arabic pages.
@@ -38,7 +39,8 @@ for (const locale of ["en", "ar"] as const) {
 			await expect(
 				page.getByRole("heading", { name: locale === "ar" ? "أمثلة تفاعلية" : "Live examples" }),
 			).toBeVisible();
-			if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
+			if (name === "Node") await expect(page.locator(".node-preview")).toBeVisible();
+			else if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
 			else if (["ApprovalCard", "OwnerMessageView"].includes(name))
 				await expect(page.locator(".owner-message-preview")).toBeVisible();
 			else if (name === "DataTable") await expect(page.getByRole("table").first()).toBeVisible();
@@ -48,6 +50,8 @@ for (const locale of ["en", "ar"] as const) {
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
+			} else if (name === "Node") {
+				await expect(page.getByText(/without an OpenUI definition/i)).toBeVisible();
 			} else if (name !== "Sidebar") {
 				await expect(page.locator(".fixture-source summary")).toHaveText(
 					locale === "ar" ? "عرض مصدر العينة" : "Show fixture source",

@@ -1,0 +1,36 @@
+@layer tensquads {
+	.ts-node {
+		/* NODE_METRICS in workflow/geometry.ts uses the same values. */
+		--ts-node-head: calc(var(--ts-node-title-line-height) + var(--ts-node-meta-line-height));
+		--ts-node-port-start: calc(var(--ts-space-2-5) + (var(--ts-node-head) - var(--ts-handle-size)) / 2);
+		position: relative;
+		display: inline-flex;
+		flex-direction: column;
+		padding-block: var(--ts-space-2-5);
+		padding-inline: var(--ts-space-2-5) var(--ts-space-4);
+		border-radius: var(--ts-radius-2xl);
+		background: var(--ts-node-surface);
+		box-shadow: var(--ts-shadow-node);
+		color: var(--ts-text-emphasis);
+	}
+	.ts-node[data-selected="true"] { box-shadow: var(--ts-shadow-node-selected); }
+	.ts-node[data-family="agent"] { --ts-node-tint: var(--ts-tint-agent); }
+	.ts-node[data-family="logic"] { --ts-node-tint: var(--ts-tint-logic); }
+	.ts-node[data-family="end"] { --ts-node-tint: var(--ts-tint-end); }
+	.ts-node[data-family="note"] { --ts-node-tint: var(--ts-tint-note); }
+	.ts-node[data-family="tool"] { --ts-node-tint: var(--ts-tint-tool); }
+	.ts-node[data-family="data"] { --ts-node-tint: var(--ts-tint-data); }
+	.ts-node__head { display: flex; align-items: center; gap: var(--ts-space-2); block-size: var(--ts-node-head); }
+	.ts-node__icon { display: grid; flex: none; place-items: center; inline-size: var(--ts-control-sm); block-size: var(--ts-control-sm); border-radius: var(--ts-radius-md); background: var(--ts-node-tint); color: var(--ts-node-ink); }
+	.ts-node__copy { display: flex; min-inline-size: 0; flex-direction: column; }
+	.ts-node__title { color: var(--ts-text-emphasis); font-size: var(--ts-node-title-font-size); font-weight: var(--ts-node-title-font-weight); letter-spacing: var(--ts-node-title-letter-spacing); line-height: var(--ts-node-title-line-height); white-space: nowrap; }
+	.ts-node__meta { color: var(--ts-text-secondary); font-size: var(--ts-node-meta-font-size); font-weight: var(--ts-node-meta-font-weight); letter-spacing: var(--ts-node-meta-letter-spacing); line-height: var(--ts-node-meta-line-height); white-space: nowrap; }
+	.ts-node__branches { display: flex; flex-direction: column; gap: var(--ts-space-1); margin-block-start: var(--ts-space-2); }
+	.ts-node__branch { position: relative; display: flex; align-items: center; justify-content: flex-end; block-size: var(--ts-control-sm); padding-inline: var(--ts-space-2); border-radius: var(--ts-radius-md); background: var(--ts-branch-bg); }
+	/* The spec uses text-tertiary for meta and branch text. It fails AA contrast here, so both use text-secondary. */
+	.ts-node__branch-label { color: var(--ts-text-secondary); font-size: var(--ts-branch-label-font-size); font-weight: var(--ts-branch-label-font-weight); letter-spacing: var(--ts-branch-label-letter-spacing); line-height: var(--ts-branch-label-line-height); }
+	.ts-node__port { position: absolute; z-index: 1; inline-size: var(--ts-handle-size); block-size: var(--ts-handle-size); border-radius: var(--ts-radius-full); background: var(--ts-handle); box-shadow: var(--ts-shadow-handle); }
+	.ts-node__port--in { inset-inline-start: calc(var(--ts-handle-size) / -2); inset-block-start: var(--ts-node-port-start); }
+	.ts-node__port--out { inset-inline-end: calc(var(--ts-handle-size) / -2); inset-block-start: var(--ts-node-port-start); }
+	.ts-node__branch .ts-node__port--out { inset-inline-end: calc(-1 * var(--ts-space-4) - var(--ts-handle-size) / 2); inset-block-start: calc((var(--ts-control-sm) - var(--ts-handle-size)) / 2); }
+}

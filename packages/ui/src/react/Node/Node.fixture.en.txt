@@ -1,0 +1,1 @@
+# Node is application chrome and is not registered with OpenUI.
