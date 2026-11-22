@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Inspector } from "./Inspector.js";
 
 afterEach(cleanup);
+Object.defineProperty(Element.prototype, "getAnimations", { configurable: true, value: () => [] });
 
 const fields = [
 	{
@@ -84,6 +85,97 @@ describe("Inspector", () => {
 		expect(fields[2]!.actions![0]!.onPress).toHaveBeenCalledOnce();
 	});
 
+	it("supports select, connections, and chips", async () => {
+		const changeModel = vi.fn();
+		const changeTargets = vi.fn();
+		const remove = vi.fn();
+		const add = vi.fn();
+		render(
+			<Inspector
+				title="Agent"
+				description="Workflow agent"
+				fields={[
+					{
+						type: "select",
+						id: "model",
+						label: "Model",
+						value: "fast",
+						options: [
+							{ value: "fast", label: "Fast" },
+							{ value: "balanced", label: "Balanced" },
+						],
+						onValueChange: changeModel,
+					},
+					{
+						type: "connections",
+						id: "links",
+						label: "Connects to",
+						targets: [
+							{ id: "a", title: "Draft reply" },
+							{ id: "b", title: "Review" },
+						],
+						value: ["a", "outside"],
+						onValueChange: changeTargets,
+					},
+					{
+						type: "chips",
+						id: "schema",
+						label: "Output schema",
+						items: [{ id: "schema", label: "response_schema", icon: "schema" }],
+						onAdd: add,
+						onRemove: remove,
+					},
+				]}
+			/>,
+		);
+		const model = screen.getByRole("combobox", { name: "Model" });
+		expect(model).toHaveTextContent("Fast");
+		fireEvent.keyDown(model, { key: "ArrowDown" });
+		fireEvent.click(await screen.findByText("Balanced"));
+		expect(changeModel).toHaveBeenCalledWith("balanced");
+		const connection = screen.getByRole("combobox", { name: "Connects to" });
+		expect(connection).toHaveTextContent("Draft reply");
+		expect(connection).toHaveTextContent("+1");
+		expect(screen.getByRole("list", { name: "Output schema" })).toBeVisible();
+		expect(screen.getByRole("button", { name: "Remove response_schema" })).toBeVisible();
+		fireEvent.click(screen.getByRole("button", { name: "Remove response_schema" }));
+		expect(remove).toHaveBeenCalledWith("schema");
+		fireEvent.click(screen.getByRole("button", { name: "Add Output schema" }));
+		expect(add).toHaveBeenCalledOnce();
+	});
+
+	it("keeps unknown connection values, supports empty fields, and does not make static chips buttons", () => {
+		const changeTargets = vi.fn();
+		render(
+			<Inspector
+				title="Agent"
+				description="Workflow agent"
+				fields={[
+					{
+						type: "connections",
+						id: "links",
+						label: "Connects to",
+						targets: [{ id: "a", title: "Draft reply" }],
+						value: ["outside", "a"],
+						onValueChange: changeTargets,
+					},
+					{
+						type: "connections",
+						id: "empty",
+						label: "Empty links",
+						targets: [],
+						value: [],
+						onValueChange: changeTargets,
+					},
+					{ type: "chips", id: "static", label: "Tags", items: [{ id: "one", label: "One" }] },
+				]}
+			/>,
+		);
+		expect(screen.getByRole("combobox", { name: "Empty links" })).toBeDisabled();
+		expect(screen.getByRole("combobox", { name: "Empty links" })).toHaveTextContent("None");
+		expect(screen.queryByRole("button", { name: "One" })).not.toBeInTheDocument();
+	});
+
 	it("localizes built-in action labels and server renders", () => {
 		render(
 			<Inspector title="وكيل" description="وصف" fields={[]} locale="ar" onDuplicate={vi.fn()} onMore={vi.fn()} />,
@@ -97,5 +189,23 @@ describe("Inspector", () => {
 		expect(markup).toContain("aria-labelledby=");
 		expect(markup).toContain('data-slot="input"');
 		expect(markup).toContain("Name");
+		expect(
+			renderToStaticMarkup(
+				<Inspector
+					title="Agent"
+					description="Workflow agent"
+					fields={[
+						{
+							type: "select",
+							id: "model",
+							label: "Model",
+							value: "fast",
+							options: [{ value: "fast", label: "Fast" }],
+							onValueChange: vi.fn(),
+						},
+					]}
+				/>,
+			),
+		).toContain("Model");
 	});
 });

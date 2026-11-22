@@ -1483,12 +1483,33 @@ function PalettePreview({ locale, direction }: { locale: "en" | "ar"; direction:
 	);
 }
 
-type InspectorValues = { name: string; instructions: string; reasoning: boolean };
+type InspectorValues = {
+	name: string;
+	instructions: string;
+	reasoning: boolean;
+	model: string;
+	schemas: string[];
+	targets: string[];
+};
 
 function InspectorPreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
 	const [values, setValues] = useState<Record<"en" | "ar", InspectorValues>>({
-		en: { name: "Petra", instructions: "Help customers with their orders.", reasoning: true },
-		ar: { name: "بترا", instructions: "ساعد العملاء في طلباتهم.", reasoning: true },
+		en: {
+			name: "Petra",
+			instructions: "Help customers with their orders.",
+			reasoning: true,
+			model: "balanced",
+			schemas: ["response_schema"],
+			targets: ["draft"],
+		},
+		ar: {
+			name: "بترا",
+			instructions: "ساعد العملاء في طلباتهم.",
+			reasoning: true,
+			model: "balanced",
+			schemas: ["response_schema"],
+			targets: ["draft"],
+		},
 	});
 	const [status, setStatus] = useState("");
 	const ar = locale === "ar";
@@ -1511,6 +1532,18 @@ function InspectorPreview({ locale, direction }: { locale: "en" | "ar"; directio
 						label: ar ? "الاسم" : "Name",
 						value: current.name,
 						onValueChange: (name) => update({ name }),
+					},
+					{
+						type: "select",
+						id: "model",
+						label: ar ? "النموذج" : "Model",
+						value: current.model,
+						options: [
+							{ value: "fast", label: ar ? "سريع" : "Fast" },
+							{ value: "balanced", label: ar ? "متوازن" : "Balanced" },
+							{ value: "thorough", label: ar ? "دقيق" : "Thorough" },
+						],
+						onValueChange: (model) => update({ model }),
 					},
 					{
 						type: "longtext",
@@ -1538,6 +1571,27 @@ function InspectorPreview({ locale, direction }: { locale: "en" | "ar"; directio
 						label: ar ? "الاستدلال" : "Reasoning",
 						checked: current.reasoning,
 						onCheckedChange: (reasoning) => update({ reasoning }),
+					},
+					{
+						type: "chips",
+						id: "schema",
+						label: ar ? "مخطط الإخراج" : "Output schema",
+						items: current.schemas.map((id) => ({ id, label: id, icon: "schema" as const })),
+						onAdd: () => update({ schemas: [...current.schemas, "response_schema"] }),
+						onRemove: (id) => update({ schemas: current.schemas.filter((item) => item !== id) }),
+					},
+					{
+						type: "connections",
+						id: "connections",
+						label: ar ? "يتصل بـ" : "Connects to",
+						targets: [
+							{ id: "draft", title: ar ? "صياغة الرد" : "Draft reply" },
+							{ id: "review", title: ar ? "مراجعة" : "Review" },
+							{ id: "send", title: ar ? "إرسال الرد" : "Send reply" },
+							{ id: "archive", title: ar ? "أرشفة" : "Archive" },
+						],
+						value: current.targets,
+						onValueChange: (targets) => update({ targets }),
 					},
 				]}
 				onDuplicate={() => setStatus(ar ? "تم تكرار الوكيل" : "Agent duplicated")}
