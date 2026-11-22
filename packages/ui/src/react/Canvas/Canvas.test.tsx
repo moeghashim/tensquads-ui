@@ -1,4 +1,5 @@
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
+import { createAgent } from "@ui-sdk/react/agent";
 import { Profiler } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -38,6 +39,47 @@ beforeEach(() => {
 });
 
 describe("Canvas", () => {
+	it("exposes agent selection, movement, and connection actions with cancellation", async () => {
+		const onSelectionChange = vi.fn();
+		const onNodeMove = vi.fn((_id: string, _position: { x: number; y: number }, details: { cancel(): void }) =>
+			details.cancel(),
+		);
+		const onConnect = vi.fn((_connection: unknown, details: { cancel(): void }) => details.cancel());
+		render(
+			<Canvas
+				graph={{ ...graph, edges: [] }}
+				label="Workflow"
+				onSelectionChange={onSelectionChange}
+				onNodeMove={onNodeMove}
+				onConnect={onConnect}
+			/>,
+		);
+		const agent = createAgent();
+		const [component] = agent.snapshot();
+		expect(component?.actions).toEqual(["select", "move", "connect"]);
+		const selected = await agent.act({
+			steps: [{ ref: component!.ref, action: "select", args: [["start", "missing"], ["edge"]] }],
+		});
+		expect(selected.ok).toBe(true);
+		expect(onSelectionChange).toHaveBeenCalledWith(
+			{ nodes: ["start"], edges: [] },
+			expect.objectContaining({ reason: "imperative", source: "agent" }),
+		);
+		const moved = await agent.act({ steps: [{ ref: component!.ref, action: "move", args: ["start", 1.7, 2.2] }] });
+		expect(moved.ok).toBe(true);
+		expect(moved.steps[0]?.result).toBe(false);
+		expect(onNodeMove).toHaveBeenCalledWith("start", { x: 2, y: 2 }, expect.objectContaining({ source: "agent" }));
+		const connected = await agent.act({
+			steps: [{ ref: component!.ref, action: "connect", args: ["start", "end"] }],
+		});
+		expect(connected.ok).toBe(true);
+		expect(connected.steps[0]?.result).toBe(false);
+		expect(onConnect).toHaveBeenCalledWith(
+			{ from: "start", to: "end" },
+			expect.objectContaining({ source: "agent" }),
+		);
+	});
+
 	it("gives the first selected node the single server tab stop", () => {
 		for (const selection of [undefined, { nodes: ["end"], edges: [] }]) {
 			const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" selection={selection} />);

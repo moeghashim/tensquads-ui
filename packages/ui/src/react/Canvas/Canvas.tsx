@@ -75,6 +75,7 @@ type CanvasOptions = {
 	direction?: "ltr" | "rtl";
 	graph?: WorkflowGraph;
 	onConnect?: CanvasProps["onConnect"];
+	onNodeMove?: CanvasProps["onNodeMove"];
 };
 
 const canvas = definePrimitive({
@@ -93,6 +94,7 @@ const canvas = definePrimitive({
 		locale: "string",
 		direction: "string",
 		onConnect: "callback",
+		onNodeMove: "callback",
 		graph: "value",
 	},
 	controlled: ["viewport", "selected", "positions"],
@@ -142,7 +144,7 @@ const canvas = definePrimitive({
 				);
 			},
 		};
-		const connect = createConnect(
+		const connecting = createConnect(
 			{ store: connectStore, onDestroy: context.onDestroy, parts: context.parts },
 			{
 				slot: "node",
@@ -205,7 +207,7 @@ const canvas = definePrimitive({
 				return { ...state, positions: mirror(state.positions) };
 			},
 		};
-		const move = createMove(
+		const moving = createMove(
 			{ store: physicalStore, onDestroy: context.onDestroy },
 			{
 				key: "positions",
@@ -263,9 +265,49 @@ const canvas = definePrimitive({
 				set: (value, details) => change("viewport", toLogical(value, width(), rtl()), details),
 			},
 		);
+		const select = (nodes: string[], edges: string[] = []) => {
+			const graph = context.options().graph;
+			if (!graph) return false;
+			const nodeIds = new Set(graph.nodes.map(({ id }) => id));
+			const edgeIds = new Set(graph.edges.map(({ id }) => id));
+			change(
+				"selected",
+				[
+					...nodes.filter((id) => nodeIds.has(id)).map((id) => `node:${id}`),
+					...edges.filter((id) => edgeIds.has(id)).map((id) => `edge:${id}`),
+				],
+				{ reason: "imperative" },
+			);
+			return true;
+		};
+		const move = (id: string, x: number, y: number) => {
+			const node = nodeOf(id);
+			if (!node || !Number.isFinite(x) || !Number.isFinite(y) || !context.options().onNodeMove) return false;
+			const positions = { ...context.store.get().positions, [id]: { x: Math.round(x), y: Math.round(y) } };
+			const canceled = dispatch(context, "onPositionsChange", positions, { reason: "imperative" });
+			return !canceled;
+		};
+		const connect = (from: string, to: string, port?: number) => {
+			const graph = context.options().graph;
+			const source = graph?.nodes.find((node) => node.id === from);
+			if (!graph || !source || !nodeOf(to) || !context.options().onConnect || !canConnect(graph, from, port, to))
+				return false;
+			if (
+				source.branches
+					? !Number.isInteger(port) || port! < 0 || port! >= source.branches.length
+					: port !== undefined
+			)
+				return false;
+			const value: CanvasConnection = { from, ...(port === undefined ? {} : { fromPort: port }), to };
+			const canceled = dispatch(context, "onConnect", value, { reason: "imperative" });
+			return !canceled;
+		};
 		return {
+			select,
 			move,
 			connect,
+			moving,
+			connecting,
 			connectable: () => !!context.options().onConnect,
 			connectionPath: (draft: ConnectDraft | null) => {
 				const from = draft && nodeOf(draft.from);
@@ -294,14 +336,14 @@ const canvas = definePrimitive({
 					pressHandled = true;
 					fromPort = nodeOf(key)?.branches ? Number(output.dataset.portIndex ?? 0) : undefined;
 					fromWidth = el.offsetWidth;
-					connect.pointerdown(event, key, el);
+					connecting.pointerdown(event, key, el);
 					return;
 				}
 				if (!context.store.get().selected.includes(`node:${key}`)) {
 					pressHandled = true;
 					selectItem(selection, `node:${key}`, event);
 				}
-				move.pointerdown(event, key, el);
+				moving.pointerdown(event, key, el);
 			},
 			nodePress: (key: string, event?: Event) => {
 				const down = pointerDown;
@@ -425,7 +467,7 @@ const canvas = definePrimitive({
 			props: { value: "string", description: "string" },
 			role: "option",
 			direct: direct(["style", "data-dragging"]),
-			live: live((state, { api, key }) => ({ "data-connect": api.connect.role(state, key) })),
+			live: live((state, { api, key }) => ({ "data-connect": api.connecting.role(state, key) })),
 			focus: "roving",
 			press: ({ api, key }, event) => api.nodePress(key, event),
 			keys: ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"],
@@ -450,7 +492,7 @@ const canvas = definePrimitive({
 											? [-20, 0]
 											: [20, 0];
 							event.preventDefault();
-							api.move.moveBy(api.groupFor(key), delta[0] ?? 0, delta[1] ?? 0, { reason: "move-key", event });
+							api.moving.moveBy(api.groupFor(key), delta[0] ?? 0, delta[1] ?? 0, { reason: "move-key", event });
 							// The host passes the new place back first, then a node that left the view comes back into it.
 							requestAnimationFrame(() => {
 								if (el.isConnected)
@@ -487,8 +529,8 @@ const canvas = definePrimitive({
 				tabindex: api.roving.tabIndex(state, { key, props }),
 				"aria-selected": String(state.selected.includes(`node:${key}`)),
 				"aria-description": props.description,
-				"data-dragging": api.move.dragging(state, key) ? "" : undefined,
-				style: `inset-inline-start:${state.positions[key]?.x ?? 0}px;inset-block-start:${state.positions[key]?.y ?? 0}px;${api.move.style(state, key) ?? ""}`,
+				"data-dragging": api.moving.dragging(state, key) ? "" : undefined,
+				style: `inset-inline-start:${state.positions[key]?.x ?? 0}px;inset-block-start:${state.positions[key]?.y ?? 0}px;${api.moving.style(state, key) ?? ""}`,
 			}),
 		}),
 		path: slot<{
@@ -535,6 +577,7 @@ const canvas = definePrimitive({
 			}),
 		}),
 	}),
+	agent: { actions: ["select", "move", "connect"] },
 });
 
 const {
@@ -667,6 +710,7 @@ export function Canvas({
 			titles={titles}
 			graph={graph}
 			onConnect={onConnect}
+			onNodeMove={onNodeMove}
 			movable={onNodeMove !== undefined}
 			onPositionsChange={(next, details) => {
 				for (const node of graph.nodes) {
