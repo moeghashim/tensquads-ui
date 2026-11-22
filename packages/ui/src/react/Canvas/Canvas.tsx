@@ -5,6 +5,7 @@ import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import type { WorkflowGraph } from "../../schemas/workflow.js";
 import { Node } from "../Node/Node.js";
 import { edgePath, portPosition } from "../workflow/geometry.js";
+import { connectionsLabel, nodeLabel } from "../workflow/labels.js";
 import { DEFAULT_NODE_WIDTH, type NodeSize } from "../workflow/tidy.js";
 import { type CanvasViewport, toLogical, toPhysical } from "../workflow/viewport.js";
 
@@ -82,10 +83,10 @@ const canvas = definePrimitive({
 	slots: (slot) => ({
 		root: slot<{ label: string; mode: string }>({
 			props: { label: "string", mode: "string" },
+			role: "region",
 			// Panning writes the style to the element. It renders nothing, and the server markup has it too.
 			direct: direct(["style"]),
 			attrs: (state, { props, api }) => ({
-				role: "region",
 				dir: api.rtl() ? "rtl" : "ltr",
 				"aria-label": props.label,
 				tabindex: "0",
@@ -117,13 +118,18 @@ const canvas = definePrimitive({
 				},
 			},
 		}),
-		world: slot({
+		world: slot<{ label: string }>({
+			props: { label: "string" },
+			role: "listbox",
+			keys: { none: "Added with selection and focus." },
 			// In RTL the world starts at the right edge, so its place needs no measured width.
 			direct: direct(["style"]),
-			attrs: (state, { api }) => {
+			attrs: (state, { api, props }) => {
 				const { x, y, zoom } = state.viewport;
 				const rtl = api.rtl();
 				return {
+					"aria-label": props.label,
+					"aria-multiselectable": "true",
 					style: css({
 						left: rtl ? "100%" : "0",
 						transform: `translate(${rtl ? -x : x}px, ${y}px) scale(${zoom})`,
@@ -132,10 +138,21 @@ const canvas = definePrimitive({
 				};
 			},
 		}),
+		node: slot<{ value: string; name: string; description: string | undefined }>({
+			props: { value: "string", name: "string", description: "string" },
+			role: "option",
+			focus: { none: "Added with selection and focus." },
+			press: { none: "Added with selection and focus." },
+			attrs: (_state, { props }) => ({
+				"aria-selected": "false",
+				"aria-label": props.name,
+				"aria-description": props.description,
+			}),
+		}),
 	}),
 });
 
-const { Root, World } = createParts(canvas, { root: "div", world: "div" });
+const { Root, World, Node: NodePart } = createParts(canvas, { root: "div", world: "div", node: "div" });
 
 function isIgnored(target: EventTarget | null, root: HTMLElement) {
 	if (!(target instanceof Element)) return false;
@@ -207,7 +224,7 @@ export function Canvas({
 			mode={mode}
 			className={["ts-canvas", props.className].filter(Boolean).join(" ")}
 		>
-			<World className="ts-canvas__world">
+			<World label={label} className="ts-canvas__world">
 				<svg data-canvas-edge-layer="" aria-hidden="true" className="ts-canvas__edges">
 					<g transform={resolvedDir === "rtl" ? "scale(-1 1)" : undefined}>
 						{graph.edges.map((edge) => {
@@ -236,8 +253,11 @@ export function Canvas({
 					</g>
 				</svg>
 				{graph.nodes.map((node) => (
-					<div
+					<NodePart
 						key={node.id}
+						value={node.id}
+						name={nodeLabel(node, locale)}
+						description={connectionsLabel(node, graph, locale)}
 						data-node-id={node.id}
 						ref={(element) => {
 							if (element) nodeElements.current.set(node.id, element);
@@ -247,7 +267,7 @@ export function Canvas({
 						style={{ insetInlineStart: node.position.x, insetBlockStart: node.position.y }}
 					>
 						<Node kind={node.kind} title={node.title} meta={node.meta} branches={node.branches} />
-					</div>
+					</NodePart>
 				))}
 			</World>
 			{children && (

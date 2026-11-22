@@ -40,11 +40,25 @@ beforeEach(() => {
 describe("Canvas", () => {
 	it.each(["ltr", "rtl"] as const)("renders nodes and edges on the server in %s", (dir) => {
 		const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" dir={dir} />);
+		expect(markup).toContain('role="listbox"');
+		expect(markup).toContain('role="option"');
 		expect(markup).toContain("Start");
 		expect(markup).toContain("End");
 		expect(markup).toContain('data-canvas-edge-layer=""');
 		expect(markup).toContain("M200,");
 		if (dir === "rtl") expect(markup).toContain('transform="scale(-1 1)"');
+	});
+
+	it.each([
+		{ locale: "en" as const, canvasName: "Workflow", firstName: "Start", firstDescription: "Connects to End" },
+		{ locale: "ar" as const, canvasName: "سير العمل", firstName: "بداية: Start", firstDescription: "يتصل بـ: End" },
+	])("names the listbox and its options in $locale", ({ locale, canvasName, firstName, firstDescription }) => {
+		const { getByRole } = render(<Canvas graph={graph} label={canvasName} locale={locale} />);
+		const listbox = getByRole("listbox", { name: canvasName });
+		const option = getByRole("option", { name: firstName });
+		expect(listbox).toHaveAttribute("aria-multiselectable", "true");
+		expect(option).toHaveAttribute("aria-description", firstDescription);
+		expect(option).toHaveAttribute("aria-selected", "false");
 	});
 
 	it("places the world from the inline-start edge without a measured width", () => {
