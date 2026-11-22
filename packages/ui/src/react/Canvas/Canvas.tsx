@@ -5,7 +5,7 @@ import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import type { WorkflowGraph } from "../../schemas/workflow.js";
 import { Node } from "../Node/Node.js";
 import { edgePath, portPosition } from "../workflow/geometry.js";
-import { connectionsLabel, nodeLabel } from "../workflow/labels.js";
+import { connectionsLabel, hiddenKind } from "../workflow/labels.js";
 import { DEFAULT_NODE_WIDTH, type NodeSize } from "../workflow/tidy.js";
 import { type CanvasViewport, toLogical, toPhysical } from "../workflow/viewport.js";
 
@@ -138,14 +138,14 @@ const canvas = definePrimitive({
 				};
 			},
 		}),
-		node: slot<{ value: string; name: string; description: string | undefined }>({
-			props: { value: "string", name: "string", description: "string" },
+		node: slot<{ value: string; description: string | undefined }>({
+			props: { value: "string", description: "string" },
 			role: "option",
 			focus: { none: "Added with selection and focus." },
 			press: { none: "Added with selection and focus." },
+			// The name is the card's own text, so it always holds what people see (WCAG 2.5.3).
 			attrs: (_state, { props }) => ({
 				"aria-selected": "false",
-				"aria-label": props.name,
 				"aria-description": props.description,
 			}),
 		}),
@@ -252,23 +252,26 @@ export function Canvas({
 						})}
 					</g>
 				</svg>
-				{graph.nodes.map((node) => (
-					<NodePart
-						key={node.id}
-						value={node.id}
-						name={nodeLabel(node, locale)}
-						description={connectionsLabel(node, graph, locale)}
-						data-node-id={node.id}
-						ref={(element) => {
-							if (element) nodeElements.current.set(node.id, element);
-							else nodeElements.current.delete(node.id);
-						}}
-						className="ts-canvas__node"
-						style={{ insetInlineStart: node.position.x, insetBlockStart: node.position.y }}
-					>
-						<Node kind={node.kind} title={node.title} meta={node.meta} branches={node.branches} />
-					</NodePart>
-				))}
+				{graph.nodes.map((node) => {
+					const kind = hiddenKind(node, locale);
+					return (
+						<NodePart
+							key={node.id}
+							value={node.id}
+							description={connectionsLabel(node, graph, locale)}
+							data-node-id={node.id}
+							ref={(element) => {
+								if (element) nodeElements.current.set(node.id, element);
+								else nodeElements.current.delete(node.id);
+							}}
+							className="ts-canvas__node"
+							style={{ insetInlineStart: node.position.x, insetBlockStart: node.position.y }}
+						>
+							{kind && <span className="ts-visually-hidden">{`${kind}: `}</span>}
+							<Node kind={node.kind} title={node.title} meta={node.meta} branches={node.branches} />
+						</NodePart>
+					);
+				})}
 			</World>
 			{children && (
 				<div data-canvas-overlay="" className="ts-canvas__overlay">

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { WorkflowGraph, WorkflowNode } from "../../schemas/workflow.js";
-import { connectionsLabel, kindLabel, nodeLabel } from "./labels.js";
+import { connectionsLabel, hiddenKind, kindLabel } from "./labels.js";
 
 const node = (kind: WorkflowNode["kind"], title: string, id = "node"): WorkflowNode => ({
 	id,
@@ -47,8 +47,8 @@ describe("workflow labels", () => {
 			"شرط",
 			"تكرار",
 			"موافقة المستخدم",
-			"بداية",
-			"نهاية",
+			"البداية",
+			"النهاية",
 			"ملاحظة",
 			"بحث في الملفات",
 			"ضوابط",
@@ -58,11 +58,14 @@ describe("workflow labels", () => {
 		]);
 	});
 
-	it("combines kind and title while avoiding duplicate or empty labels", () => {
-		expect(nodeLabel(node("agent", "Draft reply"), "en")).toBe("Agent: Draft reply");
-		expect(nodeLabel(node("agent", "Agent"), "en")).toBe("Agent");
-		expect(nodeLabel(node("agent", "  "), "en")).toBe("Agent");
-		expect(nodeLabel(node("agent", "وكيل"), "ar")).toBe("وكيل");
+	it("hides the kind only when the card already shows it", () => {
+		expect(hiddenKind(node("agent", "Draft reply"), "en")).toBe("Agent");
+		expect(hiddenKind(node("agent", "Agent"), "en")).toBeUndefined();
+		expect(hiddenKind(node("agent", "  "), "en")).toBe("Agent");
+		expect(hiddenKind(node("agent", "وكيل"), "ar")).toBeUndefined();
+		expect(hiddenKind({ ...node("agent", "Draft reply"), meta: "Agent" }, "en")).toBeUndefined();
+		// A note shows no meta line, so its meta never stands in for the kind.
+		expect(hiddenKind({ ...node("note", "Later"), meta: "Note" }, "en")).toBe("Note");
 	});
 
 	it("lists distinct existing outgoing targets in edge order", () => {
@@ -77,7 +80,7 @@ describe("workflow labels", () => {
 			],
 		};
 		expect(connectionsLabel(source, graph, "en")).toBe("Connects to Draft reply, End");
-		expect(connectionsLabel(source, graph, "ar")).toBe("يتصل بـ: Draft reply، نهاية");
+		expect(connectionsLabel(source, graph, "ar")).toBe("يتصل بـ: Draft reply، النهاية");
 		expect(connectionsLabel(graph.nodes[1]!, graph, "en")).toBeUndefined();
 	});
 });

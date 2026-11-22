@@ -22,8 +22,8 @@ const labels = {
 		"if-else": "شرط",
 		while: "تكرار",
 		"user-approval": "موافقة المستخدم",
-		start: "بداية",
-		end: "نهاية",
+		start: "البداية",
+		end: "النهاية",
 		note: "ملاحظة",
 		"file-search": "بحث في الملفات",
 		guardrails: "ضوابط",
@@ -37,11 +37,11 @@ export function kindLabel(kind: WorkflowNodeKind, locale: "en" | "ar") {
 	return labels[locale][kind];
 }
 
-export function nodeLabel(node: WorkflowNode, locale: "en" | "ar") {
+/** The kind for assistive technology, or undefined when the card's own text already shows it. */
+export function hiddenKind(node: WorkflowNode, locale: "en" | "ar") {
 	const kind = kindLabel(node.kind, locale);
-	const title = node.title.trim();
-	if (!title || title === kind) return kind;
-	return `${kind}: ${title}`;
+	const meta = node.kind === "note" ? undefined : node.meta;
+	return [node.title, meta].some((text) => text?.trim() === kind) ? undefined : kind;
 }
 
 export function connectionsLabel(node: WorkflowNode, graph: WorkflowGraph, locale: "en" | "ar"): string | undefined {

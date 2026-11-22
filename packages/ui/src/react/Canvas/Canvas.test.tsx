@@ -51,7 +51,7 @@ describe("Canvas", () => {
 
 	it.each([
 		{ locale: "en" as const, canvasName: "Workflow", firstName: "Start", firstDescription: "Connects to End" },
-		{ locale: "ar" as const, canvasName: "سير العمل", firstName: "بداية: Start", firstDescription: "يتصل بـ: End" },
+		{ locale: "ar" as const, canvasName: "سير العمل", firstName: "البداية: Start", firstDescription: "يتصل بـ: End" },
 	])("names the listbox and its options in $locale", ({ locale, canvasName, firstName, firstDescription }) => {
 		const { getByRole } = render(<Canvas graph={graph} label={canvasName} locale={locale} />);
 		const listbox = getByRole("listbox", { name: canvasName });
