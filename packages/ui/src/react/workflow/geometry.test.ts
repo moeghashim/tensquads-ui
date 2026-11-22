@@ -63,9 +63,12 @@ describe("workflow geometry", () => {
 		expect(edgePath(10, 20, 90, 60)).toBe("M10,20 C50,20 50,60 90,60"));
 	it("matches Canvas guide head and branch port centres", () => {
 		const branch = { ...node("if", "if-else", ["A", "B"]), position: { x: 12, y: 30 } };
-		expect(portPosition(branch, "in", 200)).toEqual({ x: 12, y: 54 });
-		expect(portPosition(branch, { out: 0 }, 200)).toEqual({ x: 212, y: 100 });
-		expect(portPosition(branch, { out: 1 }, 200)).toEqual({ x: 212, y: 132 });
-		expect(portPosition({ ...node("a"), position: { x: 12, y: 30 } }, { out: 0 }, 200)).toEqual({ x: 212, y: 54 });
+		expect(portPosition(branch, "in", 200)).toEqual({ x: 12, y: 56.5 });
+		expect(portPosition(branch, { out: 0 }, 200)).toEqual({ x: 212, y: 95 });
+		expect(portPosition(branch, { out: 1 }, 200)).toEqual({ x: 212, y: 127 });
+		expect(portPosition({ ...node("a"), position: { x: 12, y: 30 } }, { out: 0 }, 200)).toEqual({
+			x: 212,
+			y: 56.5,
+		});
 	});
 });

@@ -2,7 +2,7 @@
 
 `Node` displays one workflow step. Pass its `kind`, `title`, optional `meta`, and optional `branches`. Set `selected` to show the selected ring. The component draws its input and output ports. A `start` node has no input, an `end` node has no output, and a branch node has one output for each branch row. Use `Node` with `branches` for BranchNode; there is no separate `BranchNode` export.
 
-Node is without an OpenUI definition because it is application chrome. Import `Node` and `NodeProps` from `@tensquads/ui/react`. It forwards div props and has no positioning, selection events, dragging, or keyboard behavior of its own. The host supplies placement and interaction. Notes hide `meta`. Ports are decorative and hidden from assistive technology; the host provides accessible connection information and controls. Direction follows the document, with inputs at inline start and outputs at inline end.
+Node is without an OpenUI definition because it is application chrome. Import `Node` and `NodeProps` from `@tensquads/ui/react`. It forwards div props and has no positioning, selection events, dragging, or keyboard behavior of its own. The host supplies placement and interaction. Notes hide `meta`. Meta and branch text use `text-secondary`, because the spec's `text-tertiary` fails AA contrast. Ports are decorative and hidden from assistive technology; the host provides accessible connection information and controls. Direction follows the document, with inputs at inline start and outputs at inline end.
 
 ```tsx
 import { Node } from "@tensquads/ui/react";

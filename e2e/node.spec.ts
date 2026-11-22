@@ -50,7 +50,7 @@ for (const locale of ["en", "ar"] as const) {
 					const input = port.type === "in";
 					const expected = portPosition(node, input ? "in" : { out: port.index }, rendered.width);
 					expect(port.x).toBeCloseTo(input ? 0 : rendered.width, 4);
-					expect(port.y).toBeCloseTo(!input && node.branches ? 70 + 32 * port.index : 24, 4);
+					expect(port.y).toBeCloseTo(!input && node.branches ? 65 + 32 * port.index : 26.5, 4);
 					expect(port.x).toBeCloseTo(expected.x, 4);
 					expect(port.y).toBeCloseTo(expected.y, 4);
 				}

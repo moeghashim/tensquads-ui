@@ -1354,7 +1354,7 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 					"النهاية",
 					"ملاحظة",
 					"البحث عن الملفات",
-					"الحواجز",
+					"ضوابط الحماية",
 					"MCP",
 					"تحويل",
 					"تعيين الحالة",
@@ -1412,8 +1412,8 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 				<Node
 					kind="guardrails"
 					title={locale === "ar" ? "فحص السياسات" : "Check policies"}
-					meta={locale === "ar" ? "حارسان" : "Two checks"}
-					branches={["Pass", "Fail"]}
+					meta={locale === "ar" ? "فحصان" : "Two checks"}
+					branches={locale === "ar" ? ["اجتياز", "إخفاق"] : ["Pass", "Fail"]}
 				/>
 			</div>
 		</div>

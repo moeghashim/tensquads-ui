@@ -20,7 +20,7 @@ function heightOf(node: WorkflowNode, size?: NodeSize) {
 					node.branches.length * NODE_METRICS.branchRowHeight +
 					Math.max(0, node.branches.length - 1) * NODE_METRICS.branchGap
 				: 0) +
-			NODE_METRICS.cardBlockEndPadding
+			2 * NODE_METRICS.cardBlockPadding
 	);
 }
 
