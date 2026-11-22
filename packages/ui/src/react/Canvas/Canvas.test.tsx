@@ -135,6 +135,125 @@ describe("Canvas", () => {
 		expect(onRender).not.toHaveBeenCalled();
 	});
 
+	it("chooses nodes, toggles with Shift, and reports item presses", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />);
+		const start = getByRole("option", { name: "Start" });
+		const end = getByRole("option", { name: "End" });
+		fireEvent.click(start);
+		expect(start).toHaveAttribute("aria-selected", "true");
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: ["start"], edges: [] },
+			expect.objectContaining({ reason: "item-press" }),
+		);
+		fireEvent.click(end, { shiftKey: true });
+		expect(start).toHaveAttribute("aria-selected", "true");
+		expect(end).toHaveAttribute("aria-selected", "true");
+		fireEvent.click(start, { shiftKey: true });
+		expect(start).toHaveAttribute("aria-selected", "false");
+		expect(end).toHaveAttribute("aria-selected", "true");
+	});
+
+	it("selects a node from a virtual element click", () => {
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" />);
+		const start = getByRole("option", { name: "Start" });
+		act(() => start.click());
+		expect(start).toHaveAttribute("aria-selected", "true");
+	});
+
+	it("toggles an edge with Shift", () => {
+		const onSelectionChange = vi.fn();
+		const { container } = render(<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />);
+		const hitPath = container.querySelector(".ts-canvas__edge-hit")!;
+		const edge = container.querySelector("[data-edge-id='edge']");
+		fireEvent.click(hitPath);
+		expect(edge).toHaveAttribute("data-selected", "true");
+		fireEvent.click(hitPath, { shiftKey: true });
+		expect(edge).not.toHaveAttribute("data-selected", "true");
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: [], edges: [] },
+			expect.objectContaining({ reason: "item-press" }),
+		);
+	});
+
+	it("chooses an edge and clears the selection once from the ground", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole, container } = render(
+			<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />,
+		);
+		fireEvent.click(getByRole("option", { name: "Start" }));
+		fireEvent.click(container.querySelector(".ts-canvas__edge-hit")!);
+		expect(getByRole("option", { name: "Start" })).toHaveAttribute("aria-selected", "false");
+		expect(container.querySelector("[data-edge-id='edge']")).toHaveAttribute("data-selected", "true");
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: [], edges: ["edge"] },
+			expect.objectContaining({ reason: "item-press" }),
+		);
+		const root = getByRole("region");
+		fireEvent.click(root);
+		expect(onSelectionChange).toHaveBeenCalledTimes(3);
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: [], edges: [] },
+			expect.objectContaining({ reason: "clear-press" }),
+		);
+		fireEvent.click(root);
+		expect(onSelectionChange).toHaveBeenCalledTimes(3);
+	});
+
+	it("does not change selection from ground drags or in pan mode", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole, rerender } = render(
+			<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />,
+		);
+		const root = getByRole("region");
+		fireEvent.click(getByRole("option", { name: "Start" }));
+		onSelectionChange.mockClear();
+		fireEvent.pointerDown(root, { clientX: 10, clientY: 10 });
+		fireEvent.pointerMove(root, { clientX: 20, clientY: 10 });
+		fireEvent.click(root, { clientX: 20, clientY: 10 });
+		expect(getByRole("option", { name: "Start" })).toHaveAttribute("aria-selected", "true");
+		expect(onSelectionChange).not.toHaveBeenCalled();
+		rerender(<Canvas graph={graph} label="Workflow" mode="pan" onSelectionChange={onSelectionChange} />);
+		fireEvent.click(getByRole("option", { name: "End" }));
+		fireEvent.click(root);
+		expect(getByRole("option", { name: "Start" })).toHaveAttribute("aria-selected", "true");
+		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
+	it("keeps controlled selection when the host refuses a request", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(
+			<Canvas
+				graph={graph}
+				label="Workflow"
+				selection={{ nodes: ["start"], edges: [] }}
+				onSelectionChange={onSelectionChange}
+			/>,
+		);
+		fireEvent.click(getByRole("option", { name: "End" }));
+		expect(onSelectionChange).toHaveBeenCalledWith(
+			{ nodes: ["end"], edges: [] },
+			expect.objectContaining({ reason: "item-press" }),
+		);
+		expect(getByRole("option", { name: "Start" })).toHaveAttribute("aria-selected", "true");
+		expect(getByRole("option", { name: "End" })).toHaveAttribute("aria-selected", "false");
+	});
+
+	it("round-trips ids with colons and ignores selections missing from the graph", () => {
+		const colonGraph: WorkflowGraph = {
+			nodes: [{ id: "start:one", kind: "start", title: "Colon node", position: { x: 20, y: 30 } }],
+			edges: [],
+		};
+		const onSelectionChange = vi.fn();
+		const { getByRole, rerender } = render(
+			<Canvas graph={colonGraph} label="Workflow" onSelectionChange={onSelectionChange} />,
+		);
+		fireEvent.click(getByRole("option", { name: "Start: Colon node" }));
+		expect(onSelectionChange).toHaveBeenCalledWith({ nodes: ["start:one"], edges: [] }, expect.anything());
+		rerender(<Canvas graph={graph} label="Workflow" selection={{ nodes: ["missing"], edges: ["missing-edge"] }} />);
+		expect(getByRole("option", { name: "Start" })).toHaveAttribute("aria-selected", "false");
+	});
+
 	it("returns a copy of node sizes and prunes removed nodes", () => {
 		const ref = { current: null } as React.RefObject<CanvasHandle | null>;
 		const { rerender } = render(<Canvas ref={ref} graph={graph} label="Workflow" />);

@@ -11,6 +11,33 @@ for (const locale of ["en", "ar"] as const) {
 			await expect(root.locator(".ts-canvas__edge")).toHaveCount(8);
 			await expect.poll(() => edgeErrors(root)).toEqual([]);
 			await expectAccessible(page);
+
+			const startNode = root.locator('[data-node-id="start"]');
+			await startNode.click();
+			await expect(startNode).toHaveAttribute("aria-selected", "true");
+			const hitPath = root.locator(".ts-canvas__edge-hit").first();
+			const edge = hitPath.locator("xpath=..");
+			const midpoint = await hitPath.evaluate((element) => {
+				const path = element as SVGPathElement;
+				const point = path.getPointAtLength(path.getTotalLength() / 2);
+				const matrix = path.getScreenCTM();
+				if (!matrix) throw new Error("Edge hit path has no screen transform");
+				const screen = new DOMPoint(point.x, point.y).matrixTransform(matrix);
+				return { x: screen.x, y: screen.y };
+			});
+			await page.mouse.click(midpoint.x, midpoint.y);
+			await expect(edge).toHaveAttribute("data-selected", "true");
+			const groundPoint = await root.evaluate((element) => {
+				const rect = element.getBoundingClientRect();
+				return { x: rect.right - 24, y: rect.bottom - 24 };
+			});
+			await page.mouse.move(groundPoint.x, groundPoint.y);
+			await page.mouse.down();
+			await page.mouse.move(groundPoint.x + 8, groundPoint.y + 1, { steps: 2 });
+			await page.mouse.up();
+			await expect(edge).toHaveAttribute("data-selected", "true");
+			await page.mouse.click(groundPoint.x, groundPoint.y);
+			await expect(edge).not.toHaveAttribute("data-selected", "true");
 			if (direction === "rtl") {
 				const start = await root.locator('[data-kind="start"]').boundingBox();
 				const end = await root.locator('[data-kind="end"]').boundingBox();

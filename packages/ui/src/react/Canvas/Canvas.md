@@ -4,6 +4,8 @@
 
 The viewport starts at `{ x: 0, y: 0, zoom: 1 }`. Pass `viewport` and `onViewportChange` to control it, or use `defaultViewport`. Zoom is limited to 50–200%. Drag the empty surface or use the wheel to pan. Hold Ctrl or ⌘ while scrolling to zoom at the pointer. Focus the surface and press `+`, `-`, or `0` to zoom.
 
+Click a node or edge to select it. Hold Shift to toggle an item in the selection. Click empty space to clear it. Pass `selection` and `onSelectionChange` to control selection; omit `selection` to let Canvas manage it. `CanvasSelection` contains node and edge ID arrays.
+
 Use `ref` with `CanvasHandle` to read measured node sizes for `tidyLayout`. Before a node is measured, its edge uses the shared 180px estimate.
 
 Canvas is used without an OpenUI definition because it is interactive application chrome, not streamed content.

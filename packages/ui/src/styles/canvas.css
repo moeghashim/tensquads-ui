@@ -31,6 +31,7 @@
 		pointer-events: none;
 	}
 	.ts-canvas__edge { fill: none; stroke: var(--ts-edge); stroke-width: 1.5px; }
+	.ts-canvas [data-selected="true"] > .ts-canvas__edge { stroke: var(--ts-edge-selected); }
 	.ts-canvas__edge-hit { fill: none; stroke: transparent; stroke-width: 12px; pointer-events: stroke; }
 	.ts-canvas__node {
 		position: absolute;
