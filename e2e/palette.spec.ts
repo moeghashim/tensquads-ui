@@ -18,7 +18,12 @@ for (const locale of ["en", "ar"] as const) {
 			await page.keyboard.press("Enter");
 			await expect(page.getByRole("status")).toHaveText(locale === "ar" ? "تمت إضافة: النهاية" : "Added: End");
 			await expect(page.locator(".palette-preview")).toHaveAttribute("data-last-source", "keyboard");
+			await page.keyboard.press("Space");
+			await page.keyboard.press("ArrowDown");
+			await page.keyboard.press("Space");
+			await expect(page.getByRole("status")).toHaveText(locale === "ar" ? "تمت إضافة: ملاحظة" : "Added: Note");
 			await expectAccessible(page);
+			await page.setViewportSize({ width: 390, height: 844 });
 			await expectNoHorizontalScroll(page);
 		});
 	}

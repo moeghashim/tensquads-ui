@@ -47,7 +47,11 @@ export function Palette({ label, sections, onInsert, className, ...props }: Pale
 			aria-label={label}
 			orientation="vertical"
 			loop={false}
-			className={["ts-palette", className].filter(Boolean).join(" ")}
+			className={
+				typeof className === "function"
+					? (state) => ["ts-palette", className(state)].filter(Boolean).join(" ")
+					: ["ts-palette", className].filter(Boolean).join(" ")
+			}
 		>
 			{sections.map((section) => {
 				const headingId = `${id}-${section.id}`;
@@ -59,7 +63,6 @@ export function Palette({ label, sections, onInsert, className, ...props }: Pale
 						{section.items.map(({ kind, label: itemLabel }) => (
 							<ToolbarButton
 								key={kind}
-								aria-label={itemLabel}
 								className="ts-palette__item"
 								render={<UiButton onClick={(_event, { source }) => onInsert(kind, { source })} />}
 							>

@@ -1,6 +1,6 @@
 # Palette
 
-`Palette` lists workflow node kinds in named sections. Press a row to ask the host to insert that kind. It does not position itself. A host can float it at `page-gutter` from the inline start of the canvas and align it with the Inspector.
+`Palette` lists workflow node kinds in named sections. Press a row to ask the host to insert that kind. It does not position itself. A host can float it at `page-gutter` from the inline start of the canvas, aligned at the top with the Inspector.
 
 Import `Palette`, `PaletteProps`, `PaletteSection`, `PaletteItem`, `PaletteInsertDetails`, and `DEFAULT_PALETTE_SECTIONS` from `@tensquads/ui/react`. Supply localized `label`, `sections`, and `onInsert`. The default sections contain Core, Tools, Logic, and Data in order for English and Arabic. Start is omitted.
 
