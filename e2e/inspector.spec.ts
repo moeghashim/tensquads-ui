@@ -1,10 +1,5 @@
 import { expect, type Locator, type Page, test } from "@playwright/test";
-import {
-	capturePreviewScreenshots,
-	expectAccessible,
-	expectNoHorizontalScroll,
-	openPreview,
-} from "./helpers/preview";
+import { capturePreviewScreenshots, expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	for (const theme of ["light", "dark"] as const) {
