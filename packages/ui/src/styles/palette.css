@@ -40,6 +40,26 @@
 	.ts-palette__item:hover:not([aria-disabled="true"]) { background: var(--ts-ghost-hover); }
 	.ts-palette__item:active:not([aria-disabled="true"]) { background: var(--ts-ghost-active); }
 	.ts-palette__item[aria-disabled="true"] { color: var(--ts-text-disabled); cursor: default; }
+	.ts-palette__item[data-dragging] { cursor: grabbing; }
+	.ts-palette__ghost {
+		position: fixed;
+		inset-block-start: 0;
+		inset-inline-start: 0;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		gap: var(--ts-space-2);
+		min-inline-size: var(--ts-palette-width);
+		block-size: var(--ts-control-xl);
+		padding-inline: var(--ts-space-2);
+		border: 0.5px solid var(--ts-panel-border);
+		border-radius: var(--ts-radius-md);
+		background: var(--ts-panel);
+		color: var(--ts-text-emphasis);
+		box-shadow: var(--ts-shadow-overlay);
+		pointer-events: none;
+		translate: 0 0;
+	}
 	.ts-palette__item:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: -2px; }
 	.ts-palette__tile {
 		display: grid;

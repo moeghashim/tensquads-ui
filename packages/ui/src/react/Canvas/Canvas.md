@@ -20,7 +20,7 @@ Pass `onDelete` to handle Delete or Backspace on a focused node or the canvas ro
 
 The Canvas agent bridge offers `select(nodes, edges?)`, `move(id, x, y)`, and `connect(from, to, fromPort?)`. Selection ignores IDs outside the graph. Movement rounds logical positions and works in pan mode. Movement and connection return `false` when the host has no matching callback, their input is invalid, or the host cancels the change. The bridge reports change details with the source `agent` to host callbacks.
 
-Use `ref` with `CanvasHandle` and call `getNodeSizes()` to read measured node sizes for `tidyLayout`. Before a node is measured, its edge uses the shared width estimate from the [layout implementation](../workflow/tidy.ts).
+Use `ref` with `CanvasHandle` and call `getNodeSizes()` to read measured node sizes for `tidyLayout`. `pointAt(clientX, clientY)` returns the rounded logical graph position under a client point, or `null` outside the Canvas, on an overlay, or when another element is topmost there. Before a node is measured, its edge uses the shared width estimate from the [layout implementation](../workflow/tidy.ts).
 
 ## Keyboard
 

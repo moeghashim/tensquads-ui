@@ -36,6 +36,83 @@ describe("Palette", () => {
 		expect(onInsert).toHaveBeenCalledWith("agent", { source: "programmatic" });
 	});
 
+	it("drops a mouse drag on Canvas once with its graph position", () => {
+		const onInsert = vi.fn();
+		const canvas = { current: { getNodeSizes: vi.fn(() => ({})), pointAt: vi.fn(() => ({ x: 120, y: 80 })) } };
+		render(
+			<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={onInsert} canvas={canvas} />,
+		);
+		const button = screen.getByRole("button", { name: "Agent" });
+		fireEvent.pointerDown(button, {
+			pointerId: 1,
+			pointerType: "mouse",
+			button: 0,
+			isPrimary: true,
+			clientX: 10,
+			clientY: 10,
+		});
+		fireEvent.pointerMove(document, { pointerId: 1, pointerType: "mouse", buttons: 1, clientX: 40, clientY: 50 });
+		fireEvent.pointerUp(document, { pointerId: 1, pointerType: "mouse", button: 0, clientX: 40, clientY: 50 });
+		expect(canvas.current.pointAt).toHaveBeenCalledWith(40, 50);
+		expect(onInsert).toHaveBeenCalledTimes(1);
+		expect(onInsert).toHaveBeenCalledWith("agent", { source: "mouse", position: { x: 120, y: 80 } });
+	});
+
+	it("cancels an Escape drag and does not drag touch presses", () => {
+		const onInsert = vi.fn();
+		const canvas = { current: { getNodeSizes: vi.fn(() => ({})), pointAt: vi.fn(() => ({ x: 0, y: 0 })) } };
+		render(
+			<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={onInsert} canvas={canvas} />,
+		);
+		const button = screen.getByRole("button", { name: "Agent" });
+		fireEvent.pointerDown(button, {
+			pointerId: 2,
+			pointerType: "mouse",
+			button: 0,
+			isPrimary: true,
+			clientX: 10,
+			clientY: 10,
+		});
+		fireEvent.pointerMove(document, { pointerId: 2, pointerType: "mouse", buttons: 1, clientX: 40, clientY: 50 });
+		fireEvent.keyDown(document, { key: "Escape" });
+		expect(onInsert).not.toHaveBeenCalled();
+		fireEvent.pointerDown(button, {
+			pointerId: 3,
+			pointerType: "touch",
+			button: 0,
+			isPrimary: true,
+			clientX: 10,
+			clientY: 10,
+		});
+		fireEvent.pointerMove(document, { pointerId: 3, pointerType: "touch", buttons: 1, clientX: 40, clientY: 50 });
+		fireEvent.pointerUp(document, { pointerId: 3, pointerType: "touch", button: 0, clientX: 40, clientY: 50 });
+		expect(canvas.current.pointAt).not.toHaveBeenCalled();
+		expect(onInsert).not.toHaveBeenCalled();
+	});
+
+	it("does not start a drag below the threshold and stops tracking on unmount", () => {
+		const onInsert = vi.fn();
+		const canvas = { current: { getNodeSizes: vi.fn(() => ({})), pointAt: vi.fn(() => ({ x: 0, y: 0 })) } };
+		const view = render(
+			<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={onInsert} canvas={canvas} />,
+		);
+		const button = screen.getByRole("button", { name: "Agent" });
+		fireEvent.pointerDown(button, {
+			pointerId: 4,
+			pointerType: "mouse",
+			button: 0,
+			isPrimary: true,
+			clientX: 10,
+			clientY: 10,
+		});
+		fireEvent.pointerMove(document, { pointerId: 4, pointerType: "mouse", buttons: 1, clientX: 11, clientY: 11 });
+		expect(screen.queryByLabelText("Agent")).toBeNull();
+		view.unmount();
+		fireEvent.pointerUp(document, { pointerId: 4, pointerType: "mouse", button: 0, clientX: 11, clientY: 11 });
+		expect(onInsert).not.toHaveBeenCalled();
+		expect(canvas.current.pointAt).not.toHaveBeenCalled();
+	});
+
 	it("moves focus with vertical toolbar keys without wrapping", () => {
 		render(<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={vi.fn()} />);
 		const agent = screen.getByRole("button", { name: "Agent" });

@@ -16,6 +16,7 @@ const graph: WorkflowGraph = {
 
 afterEach(cleanup);
 afterEach(() => vi.unstubAllGlobals());
+afterEach(() => Reflect.deleteProperty(document, "elementFromPoint"));
 
 let observers: Array<{ callback: ResizeObserverCallback; targets: Element[] }>;
 beforeEach(() => {
@@ -39,6 +40,55 @@ beforeEach(() => {
 });
 
 describe("Canvas", () => {
+	it("maps points through the live viewport and rejects outside and overlay points", () => {
+		const handle = { current: null as CanvasHandle | null };
+		const { container, rerender } = render(<Canvas ref={handle} graph={graph} label="Workflow" />);
+		const root = container.querySelector("[data-slot='workflow-canvas']") as HTMLElement;
+		vi.spyOn(root, "getBoundingClientRect").mockReturnValue({
+			x: 10,
+			y: 20,
+			left: 10,
+			top: 20,
+			right: 210,
+			bottom: 120,
+			width: 200,
+			height: 100,
+			toJSON() {},
+		});
+		Object.defineProperty(root.ownerDocument, "elementFromPoint", { configurable: true, value: vi.fn(() => root) });
+		expect(handle.current?.pointAt(9, 30)).toBeNull();
+		expect(handle.current?.pointAt(30, 40)).toEqual({ x: 20, y: 20 });
+		rerender(<Canvas ref={handle} graph={graph} label="Workflow" viewport={{ x: 5, y: 6, zoom: 2 }} />);
+		expect(handle.current?.pointAt(30, 40)).toEqual({ x: 8, y: 7 });
+		const overlay = document.createElement("div");
+		overlay.dataset.canvasOverlay = "";
+		root.append(overlay);
+		Object.defineProperty(root.ownerDocument, "elementFromPoint", {
+			configurable: true,
+			value: vi.fn(() => overlay),
+		});
+		expect(handle.current?.pointAt(30, 40)).toBeNull();
+	});
+
+	it("mirrors pointAt positions in RTL", () => {
+		const handle = { current: null as CanvasHandle | null };
+		const { container } = render(<Canvas ref={handle} graph={graph} label="Workflow" dir="rtl" />);
+		const root = container.querySelector("[data-slot='workflow-canvas']") as HTMLElement;
+		vi.spyOn(root, "getBoundingClientRect").mockReturnValue({
+			x: 0,
+			y: 0,
+			left: 0,
+			top: 0,
+			right: 200,
+			bottom: 100,
+			width: 200,
+			height: 100,
+			toJSON() {},
+		});
+		Object.defineProperty(root.ownerDocument, "elementFromPoint", { configurable: true, value: vi.fn(() => root) });
+		expect(handle.current?.pointAt(22, 8)).toEqual({ x: 178, y: 8 });
+	});
+
 	it("exposes agent selection, movement, and connection actions with cancellation", async () => {
 		const onSelectionChange = vi.fn();
 		const onNodeMove = vi.fn((_id: string, _position: { x: number; y: number }, details: { cancel(): void }) =>

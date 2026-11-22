@@ -1,10 +1,10 @@
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
-import { Canvas } from "../../../../packages/ui/src/react/Canvas/Canvas";
+import { Canvas, type CanvasHandle } from "../../../../packages/ui/src/react/Canvas/Canvas";
 import { Card } from "../../../../packages/ui/src/react/Card/Card";
 import {
 	Chat,
@@ -441,7 +441,7 @@ function ComponentExample() {
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Node") return <NodePreview locale={locale} />;
 	if (name === "Canvas") return <CanvasPreview locale={locale} direction={direction} />;
-	if (name === "Palette") return <PalettePreview locale={locale} />;
+	if (name === "Palette") return <PalettePreview locale={locale} direction={direction} />;
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
@@ -1427,20 +1427,59 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 	);
 }
 
-function PalettePreview({ locale }: { locale: "en" | "ar" }) {
+function PalettePreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
 	const ar = locale === "ar";
 	const [lastInserted, setLastInserted] = useState<string | null>(null);
 	const [lastSource, setLastSource] = useState<string | null>(null);
+	const [nodes, setNodes] = useState<WorkflowGraph["nodes"]>([
+		{ id: "palette-anchor", kind: "agent", title: ar ? "وكيل" : "Agent", position: { x: 270, y: 80 } },
+	]);
+	const canvas = useRef<CanvasHandle | null>(null);
+	const graph: WorkflowGraph = { nodes, edges: [] };
 	return (
-		<div className="component-list palette-preview" data-last-source={lastSource ?? undefined}>
-			<Palette
-				label={ar ? "عُقد سير العمل" : "Workflow nodes"}
-				sections={DEFAULT_PALETTE_SECTIONS[locale]}
-				onInsert={(kind, details) => {
-					setLastInserted(kind);
-					setLastSource(details.source);
-				}}
-			/>
+		<div className="component-list palette-preview" data-last-source={lastSource ?? undefined} dir={direction}>
+			<div className="canvas-preview__surface palette-preview__surface">
+				<Canvas
+					ref={canvas}
+					dir={direction}
+					locale={locale}
+					label={ar ? "منشئ سير العمل" : "Workflow builder"}
+					graph={graph}
+				>
+					<div className="palette-preview__overlay">
+						<Palette
+							canvas={canvas}
+							label={ar ? "عُقد سير العمل" : "Workflow nodes"}
+							sections={DEFAULT_PALETTE_SECTIONS[locale]}
+							onInsert={(kind, details) => {
+								setLastInserted(kind);
+								setLastSource(details.source);
+								const nodeWidth = canvas.current?.getNodeSizes()["palette-anchor"]?.width ?? 84;
+								setNodes((current) => [
+									...current,
+									{
+										id: `palette-${current.length}`,
+										kind,
+										title:
+											DEFAULT_PALETTE_SECTIONS[locale]
+												.flatMap((section) => section.items)
+												.find((item) => item.kind === kind)?.label ?? kind,
+										position: details.position
+											? {
+													x: direction === "rtl" ? details.position.x - nodeWidth : details.position.x,
+													y: details.position.y,
+												}
+											: {
+													x: 280 + current.length * 20,
+													y: 250 + current.length * 20,
+												},
+									},
+								]);
+							}}
+						/>
+					</div>
+				</Canvas>
+			</div>
 			<p role="status">
 				{lastInserted
 					? ar

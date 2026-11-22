@@ -31,7 +31,10 @@ import { type CanvasViewport, toLogical, toPhysical } from "../workflow/viewport
 export type { CanvasViewport } from "../workflow/viewport.js";
 export type CanvasSelection = { nodes: string[]; edges: string[] };
 export type CanvasConnection = { from: string; fromPort?: number; to: string };
-export type CanvasHandle = { getNodeSizes(): Record<string, NodeSize> };
+export type CanvasHandle = {
+	getNodeSizes(): Record<string, NodeSize>;
+	pointAt(clientX: number, clientY: number): { x: number; y: number } | null;
+};
 export type CanvasProps = Omit<
 	PartProps<"div">,
 	"children" | "dir" | "defaultViewport" | "viewport" | "onViewportChange" | "ref"
@@ -668,6 +671,7 @@ export function Canvas({
 	...props
 }: CanvasProps) {
 	const sizes = useRef<Record<string, NodeSize>>({});
+	const rootElement = useRef<HTMLDivElement | null>(null);
 	const nodeElements = useRef(new Map<string, HTMLElement>());
 	const [internalSelection, setInternalSelection] = useState<CanvasSelection>({ nodes: [], edges: [] });
 	const activeSelection = selection ?? internalSelection;
@@ -683,12 +687,37 @@ export function Canvas({
 		[graph.nodes, locale],
 	);
 	const [, setSizeVersion] = useState(0);
+	const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
 	useImperativeHandle(
 		ref,
 		() => ({
 			getNodeSizes: () => Object.fromEntries(Object.entries(sizes.current).map(([id, size]) => [id, { ...size }])),
+			pointAt: (clientX, clientY) => {
+				const root = rootElement.current;
+				if (!root) return null;
+				const rect = root.getBoundingClientRect();
+				if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return null;
+				const hit = root.ownerDocument.elementFromPoint?.(clientX, clientY);
+				if (!hit || !root.contains(hit) || hit.closest("[data-canvas-overlay]")) return null;
+				const world = root.querySelector<HTMLElement>('[data-slot="workflow-canvas-world"]');
+				if (!world) return null;
+				const transform = getComputedStyle(world).transform || world.style.transform;
+				const matrix = transform
+					.match(/^matrix\(([^)]+)\)$/)?.[1]
+					?.split(",")
+					.map(Number);
+				const translated = transform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*scale\(([-\d.]+)\)/);
+				const translateX = matrix?.[4] ?? Number(translated?.[1] ?? 0);
+				const translateY = matrix?.[5] ?? Number(translated?.[2] ?? 0);
+				const zoomX = matrix?.[0] ?? Number(translated?.[3] ?? 1);
+				const zoomY = matrix?.[3] ?? zoomX;
+				const x =
+					(resolvedDir === "rtl" ? rect.right + translateX - clientX : clientX - rect.left - translateX) / zoomX;
+				const y = (clientY - rect.top - translateY) / zoomY;
+				return { x: Math.round(x) + 0, y: Math.round(y) + 0 };
+			},
 		}),
-		[],
+		[resolvedDir],
 	);
 	useEffect(() => {
 		const ids = new Map<Element, string>();
@@ -713,9 +742,9 @@ export function Canvas({
 		for (const id of nodeElements.current.keys()) if (!valid.has(id)) nodeElements.current.delete(id);
 	}, [graph.nodes]);
 	const nodeById = new Map(graph.nodes.map((node) => [node.id, node]));
-	const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
 	return (
 		<Root
+			ref={rootElement}
 			{...props}
 			label={label}
 			nodeCount={graph.nodes.length}
