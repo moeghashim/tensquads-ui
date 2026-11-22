@@ -6,7 +6,7 @@ Import `Palette`, `PaletteProps`, `PaletteSection`, `PaletteItem`, `PaletteInser
 
 `onInsert(kind, details)` reports the node kind and UI SDK `source`. A pointer press reports its pointer source; Enter or Space reports `keyboard`. Pass the `CanvasHandle` ref as `canvas` to enable drag and drop. Mouse and pen drags that end over the canvas call `onInsert` once with `position` in logical graph coordinates; the host decides how to center the node. Drops outside the canvas and drops on Canvas overlays do nothing. Escape and pointer cancellation also do nothing. Without `canvas`, rows only insert by press or keyboard. Touch never starts a drag, so touch remains available for scrolling and pressing.
 
-Keyboard and assistive technology use the same row press action as before.
+A row press inserts the same kind without a pointer drag, so keyboard and assistive technology need no drag. The host chooses the place of a pressed row.
 
 ## Keyboard
 

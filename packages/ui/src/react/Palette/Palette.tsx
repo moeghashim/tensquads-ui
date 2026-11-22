@@ -44,34 +44,38 @@ export const DEFAULT_PALETTE_SECTIONS: Record<"en" | "ar", readonly PaletteSecti
 
 export function Palette({ label, sections, onInsert, className, canvas, ...props }: PaletteProps) {
 	const id = useId();
-	const [drag, setDrag] = useState<{ kind: WorkflowNodeKind; label: string; family: string } | null>(null);
+	const [drag, setDrag] = useState<PaletteItem | null>(null);
 	const ghost = useRef<HTMLDivElement | null>(null);
+	const ghostPlace = useRef({ x: 0, y: 0 });
 	const stopDrag = useRef<(() => void) | null>(null);
-	const swallowClick = useRef(false);
 	useEffect(() => () => stopDrag.current?.(), []);
-	const startDrag = (event: PointerEvent, element: HTMLElement, kind: WorkflowNodeKind, itemLabel: string) => {
+	const placeGhost = () => {
+		const { x, y } = ghostPlace.current;
+		if (ghost.current) ghost.current.style.translate = `${x}px ${y}px`;
+	};
+	const startDrag = (event: PointerEvent, row: HTMLElement, item: PaletteItem) => {
 		if (!canvas || props.disabled || event.pointerType === "touch" || event.button !== 0) return;
 		stopDrag.current?.();
-		let started = false;
-		stopDrag.current = bindDrag(element, event, {
+		// The ghost keeps the place under the pointer where the row was pressed.
+		const box = row.getBoundingClientRect();
+		const grab = { x: event.clientX - box.left, y: event.clientY - box.top };
+		let dragged = false;
+		stopDrag.current = bindDrag(row, event, {
 			threshold: dragThreshold,
 			cancelOnEscape: true,
-			onStart: () => {
-				started = true;
-				swallowClick.current = true;
-				setDrag({ kind, label: itemLabel, family: WORKFLOW_KIND_FAMILY[kind] });
-			},
 			onMove: ({ x, y }) => {
-				if (ghost.current)
-					ghost.current.style.translate = `${document.documentElement.dir === "rtl" ? -x : x}px ${y}px`;
+				ghostPlace.current = { x: x - grab.x, y: y - grab.y };
+				placeGhost();
+				if (dragged) return;
+				dragged = true;
+				setDrag(item);
 			},
-			onEnd: (endEvent, canceled) => {
+			onEnd: (end, canceled) => {
 				stopDrag.current = null;
 				setDrag(null);
-				if (canceled) swallowClick.current = false;
-				if (!started || canceled) return;
-				const position = canvas.current?.pointAt(endEvent.clientX, endEvent.clientY);
-				if (position) onInsert(kind, { source: endEvent.pointerType as "mouse" | "pen", position });
+				if (!dragged || canceled) return;
+				const position = canvas.current?.pointAt(end.clientX, end.clientY);
+				if (position) onInsert(item.kind, { source: end.pointerType === "pen" ? "pen" : "mouse", position });
 			},
 		});
 	};
@@ -95,61 +99,46 @@ export function Palette({ label, sections, onInsert, className, canvas, ...props
 							<div id={headingId} className="ts-palette__heading">
 								{section.label}
 							</div>
-							{section.items.map(({ kind, label: itemLabel }) => (
+							{section.items.map((item) => (
 								<ToolbarButton
-									key={kind}
-									data-palette-kind={kind}
-									data-palette-label={itemLabel}
-									ref={(element) => {
-										if (!element) return;
-										const pointerDown = (event: PointerEvent) => startDrag(event, element, kind, itemLabel);
-										element.addEventListener("pointerdown", pointerDown);
-										return () => element.removeEventListener("pointerdown", pointerDown);
-									}}
-									className={`ts-palette__item${drag?.kind === kind ? " ts-palette__item--dragging" : ""}`}
-									data-dragging={drag?.kind === kind ? "" : undefined}
-									render={
-										<UiButton
-											onClick={(_event, { source }) => {
-												if (swallowClick.current) {
-													swallowClick.current = false;
-													return;
-												}
-												onInsert(kind, { source });
-											}}
-										/>
-									}
+									key={item.kind}
+									className="ts-palette__item"
+									data-dragging={drag?.kind === item.kind ? "" : undefined}
+									onPointerDown={(event) => startDrag(event.nativeEvent, event.currentTarget, item)}
+									render={<UiButton onClick={(_event, { source }) => onInsert(item.kind, { source })} />}
 								>
-									<span
-										className="ts-palette__tile"
-										data-family={WORKFLOW_KIND_FAMILY[kind]}
-										aria-hidden="true"
-									>
-										<Icon name={WORKFLOW_KIND_ICON[kind]} size={14} />
-									</span>
-									<span className="ts-palette__name">{itemLabel}</span>
+									<PaletteRow {...item} />
 								</ToolbarButton>
 							))}
 						</ToolbarGroup>
 					);
 				})}
 			</UiToolbar>
-			{drag && typeof document !== "undefined"
-				? createPortal(
-						<div
-							ref={ghost}
-							className="ts-palette__ghost"
-							aria-hidden="true"
-							dir={typeof document !== "undefined" ? document.documentElement.dir : undefined}
-						>
-							<span className="ts-palette__tile" data-family={drag.family}>
-								<Icon name={WORKFLOW_KIND_ICON[drag.kind]} size={14} />
-							</span>
-							<span className="ts-palette__name">{drag.label}</span>
-						</div>,
-						document.body,
-					)
-				: null}
+			{drag &&
+				createPortal(
+					<div
+						ref={(element) => {
+							ghost.current = element;
+							placeGhost();
+						}}
+						className="ts-palette__ghost"
+						aria-hidden="true"
+					>
+						<PaletteRow {...drag} />
+					</div>,
+					document.body,
+				)}
+		</>
+	);
+}
+
+function PaletteRow({ kind, label }: PaletteItem) {
+	return (
+		<>
+			<span className="ts-palette__tile" data-family={WORKFLOW_KIND_FAMILY[kind]} aria-hidden="true">
+				<Icon name={WORKFLOW_KIND_ICON[kind]} size={14} />
+			</span>
+			<span className="ts-palette__name">{label}</span>
 		</>
 	);
 }

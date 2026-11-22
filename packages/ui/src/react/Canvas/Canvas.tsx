@@ -3,6 +3,7 @@ import {
 	type ConnectDraft,
 	createChange,
 	createConnect,
+	createController,
 	createFocusRecovery,
 	createMove,
 	createRovingFocus,
@@ -65,7 +66,9 @@ type CanvasState = {
 	moving: MoveDraft | null;
 	connecting: ConnectDraft | null;
 };
+type CanvasController = { pointAt(clientX: number, clientY: number): { x: number; y: number } | null };
 type CanvasOptions = {
+	controller?: ReturnType<typeof createController<CanvasController>>;
 	viewport?: CanvasViewport;
 	defaultViewport?: CanvasViewport;
 	onViewportChange?: CanvasProps["onViewportChange"];
@@ -86,6 +89,7 @@ type CanvasOptions = {
 const canvas = definePrimitive({
 	name: "workflow-canvas",
 	options: {
+		controller: "value",
 		viewport: "value",
 		defaultViewport: "value",
 		onViewportChange: "callback",
@@ -160,8 +164,7 @@ const canvas = definePrimitive({
 				},
 				point: (x, y) => {
 					pointerPoint = { x, y };
-					const point = viewport.toCanvas(x, y);
-					return { ...point, x: rtl() ? -point.x + 0 : point.x };
+					return toGraph(x, y);
 				},
 				radius: () => 0,
 				label: (id) => context.options().titles?.[id] ?? id,
@@ -270,6 +273,17 @@ const canvas = definePrimitive({
 				set: (value, details) => change("viewport", toLogical(value, width(), rtl()), details),
 			},
 		);
+		const toGraph = (clientX: number, clientY: number) => {
+			const point = viewport.toCanvas(clientX, clientY);
+			return { x: rtl() ? -point.x + 0 : point.x, y: point.y };
+		};
+		const pointAt = (clientX: number, clientY: number) => {
+			const root = context.element("root");
+			const hit = root?.ownerDocument.elementFromPoint(clientX, clientY);
+			if (!root || !hit || !root.contains(hit) || hit.closest("[data-canvas-overlay]")) return null;
+			const { x, y } = toGraph(clientX, clientY);
+			return { x: Math.round(x) + 0, y: Math.round(y) + 0 };
+		};
 		// What an agent can call. Its arguments come from a model, so each one is checked. Every change goes through the
 		// same callback as a person's, which can cancel it.
 		const select = (nodes: string[], edges: string[] = []) => {
@@ -308,6 +322,7 @@ const canvas = definePrimitive({
 			},
 		});
 		return {
+			pointAt,
 			select,
 			move,
 			connect,
@@ -671,7 +686,7 @@ export function Canvas({
 	...props
 }: CanvasProps) {
 	const sizes = useRef<Record<string, NodeSize>>({});
-	const rootElement = useRef<HTMLDivElement | null>(null);
+	const [controller] = useState(() => createController<CanvasController>());
 	const nodeElements = useRef(new Map<string, HTMLElement>());
 	const [internalSelection, setInternalSelection] = useState<CanvasSelection>({ nodes: [], edges: [] });
 	const activeSelection = selection ?? internalSelection;
@@ -687,37 +702,13 @@ export function Canvas({
 		[graph.nodes, locale],
 	);
 	const [, setSizeVersion] = useState(0);
-	const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
 	useImperativeHandle(
 		ref,
 		() => ({
 			getNodeSizes: () => Object.fromEntries(Object.entries(sizes.current).map(([id, size]) => [id, { ...size }])),
-			pointAt: (clientX, clientY) => {
-				const root = rootElement.current;
-				if (!root) return null;
-				const rect = root.getBoundingClientRect();
-				if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return null;
-				const hit = root.ownerDocument.elementFromPoint?.(clientX, clientY);
-				if (!hit || !root.contains(hit) || hit.closest("[data-canvas-overlay]")) return null;
-				const world = root.querySelector<HTMLElement>('[data-slot="workflow-canvas-world"]');
-				if (!world) return null;
-				const transform = getComputedStyle(world).transform || world.style.transform;
-				const matrix = transform
-					.match(/^matrix\(([^)]+)\)$/)?.[1]
-					?.split(",")
-					.map(Number);
-				const translated = transform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*scale\(([-\d.]+)\)/);
-				const translateX = matrix?.[4] ?? Number(translated?.[1] ?? 0);
-				const translateY = matrix?.[5] ?? Number(translated?.[2] ?? 0);
-				const zoomX = matrix?.[0] ?? Number(translated?.[3] ?? 1);
-				const zoomY = matrix?.[3] ?? zoomX;
-				const x =
-					(resolvedDir === "rtl" ? rect.right + translateX - clientX : clientX - rect.left - translateX) / zoomX;
-				const y = (clientY - rect.top - translateY) / zoomY;
-				return { x: Math.round(x) + 0, y: Math.round(y) + 0 };
-			},
+			pointAt: (clientX, clientY) => controller.pointAt(clientX, clientY) ?? null,
 		}),
-		[resolvedDir],
+		[controller],
 	);
 	useEffect(() => {
 		const ids = new Map<Element, string>();
@@ -742,9 +733,10 @@ export function Canvas({
 		for (const id of nodeElements.current.keys()) if (!valid.has(id)) nodeElements.current.delete(id);
 	}, [graph.nodes]);
 	const nodeById = new Map(graph.nodes.map((node) => [node.id, node]));
+	const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
 	return (
 		<Root
-			ref={rootElement}
+			controller={controller}
 			{...props}
 			label={label}
 			nodeCount={graph.nodes.length}

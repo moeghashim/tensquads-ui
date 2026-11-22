@@ -1429,16 +1429,19 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 
 function PalettePreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
 	const ar = locale === "ar";
-	const [lastInserted, setLastInserted] = useState<string | null>(null);
+	const [lastInserted, setLastInserted] = useState<WorkflowGraph["nodes"][number]["kind"] | null>(null);
 	const [lastSource, setLastSource] = useState<string | null>(null);
-	const [nodes, setNodes] = useState<WorkflowGraph["nodes"]>([
-		{ id: "palette-anchor", kind: "agent", title: ar ? "وكيل" : "Agent", position: { x: 270, y: 80 } },
+	const [nodes, setNodes] = useState<Omit<WorkflowGraph["nodes"][number], "title">[]>([
+		{ id: "palette-0", kind: "agent", position: { x: 270, y: 80 } },
 	]);
+	const titleOf = (kind: WorkflowGraph["nodes"][number]["kind"]) =>
+		DEFAULT_PALETTE_SECTIONS[locale].flatMap((section) => section.items).find((item) => item.kind === kind)?.label ??
+		kind;
 	const canvas = useRef<CanvasHandle | null>(null);
-	const graph: WorkflowGraph = { nodes, edges: [] };
+	const graph: WorkflowGraph = { nodes: nodes.map((node) => ({ ...node, title: titleOf(node.kind) })), edges: [] };
 	return (
 		<div className="component-list palette-preview" data-last-source={lastSource ?? undefined} dir={direction}>
-			<div className="canvas-preview__surface palette-preview__surface">
+			<div className="canvas-preview__surface">
 				<Canvas
 					ref={canvas}
 					dir={direction}
@@ -1454,25 +1457,15 @@ function PalettePreview({ locale, direction }: { locale: "en" | "ar"; direction:
 							onInsert={(kind, details) => {
 								setLastInserted(kind);
 								setLastSource(details.source);
-								const nodeWidth = canvas.current?.getNodeSizes()["palette-anchor"]?.width ?? 84;
 								setNodes((current) => [
 									...current,
 									{
 										id: `palette-${current.length}`,
 										kind,
-										title:
-											DEFAULT_PALETTE_SECTIONS[locale]
-												.flatMap((section) => section.items)
-												.find((item) => item.kind === kind)?.label ?? kind,
-										position: details.position
-											? {
-													x: direction === "rtl" ? details.position.x - nodeWidth : details.position.x,
-													y: details.position.y,
-												}
-											: {
-													x: 280 + current.length * 20,
-													y: 250 + current.length * 20,
-												},
+										position: details.position ?? {
+											x: 280 + current.length * 20,
+											y: 250 + current.length * 20,
+										},
 									},
 								]);
 							}}
@@ -1481,11 +1474,7 @@ function PalettePreview({ locale, direction }: { locale: "en" | "ar"; direction:
 				</Canvas>
 			</div>
 			<p role="status">
-				{lastInserted
-					? ar
-						? `تمت إضافة: ${DEFAULT_PALETTE_SECTIONS.ar.flatMap((section) => section.items).find((item) => item.kind === lastInserted)?.label}`
-						: `Added: ${DEFAULT_PALETTE_SECTIONS.en.flatMap((section) => section.items).find((item) => item.kind === lastInserted)?.label}`
-					: ""}
+				{lastInserted ? (ar ? `تمت إضافة: ${titleOf(lastInserted)}` : `Added: ${titleOf(lastInserted)}`) : ""}
 			</p>
 		</div>
 	);

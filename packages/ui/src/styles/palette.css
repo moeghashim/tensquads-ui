@@ -43,9 +43,11 @@
 	.ts-palette__item[data-dragging] { cursor: grabbing; }
 	.ts-palette__ghost {
 		position: fixed;
-		inset-block-start: 0;
-		inset-inline-start: 0;
+		/* The place is physical: the pointer's own coordinates, in both directions. */
+		left: 0;
+		top: 0;
 		z-index: 1000;
+		box-sizing: border-box;
 		display: flex;
 		align-items: center;
 		gap: var(--ts-space-2);
@@ -58,7 +60,6 @@
 		color: var(--ts-text-emphasis);
 		box-shadow: var(--ts-shadow-overlay);
 		pointer-events: none;
-		translate: 0 0;
 	}
 	.ts-palette__item:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: -2px; }
 	.ts-palette__tile {

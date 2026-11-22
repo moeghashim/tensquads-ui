@@ -36,81 +36,106 @@ describe("Palette", () => {
 		expect(onInsert).toHaveBeenCalledWith("agent", { source: "programmatic" });
 	});
 
-	it("drops a mouse drag on Canvas once with its graph position", () => {
-		const onInsert = vi.fn();
-		const canvas = { current: { getNodeSizes: vi.fn(() => ({})), pointAt: vi.fn(() => ({ x: 120, y: 80 })) } };
-		render(
-			<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={onInsert} canvas={canvas} />,
-		);
-		const button = screen.getByRole("button", { name: "Agent" });
-		fireEvent.pointerDown(button, {
-			pointerId: 1,
-			pointerType: "mouse",
-			button: 0,
-			isPrimary: true,
-			clientX: 10,
-			clientY: 10,
-		});
-		fireEvent.pointerMove(document, { pointerId: 1, pointerType: "mouse", buttons: 1, clientX: 40, clientY: 50 });
-		fireEvent.pointerUp(document, { pointerId: 1, pointerType: "mouse", button: 0, clientX: 40, clientY: 50 });
-		expect(canvas.current.pointAt).toHaveBeenCalledWith(40, 50);
-		expect(onInsert).toHaveBeenCalledTimes(1);
-		expect(onInsert).toHaveBeenCalledWith("agent", { source: "mouse", position: { x: 120, y: 80 } });
-	});
+	describe("dragging", () => {
+		const setup = (position: { x: number; y: number } | null = { x: 120, y: 80 }, withCanvas = true) => {
+			const onInsert = vi.fn();
+			const pointAt = vi.fn(() => position);
+			const canvas = { current: { getNodeSizes: () => ({}), pointAt } };
+			const view = render(
+				<Palette
+					label="Node palette"
+					sections={DEFAULT_PALETTE_SECTIONS.en}
+					onInsert={onInsert}
+					canvas={withCanvas ? canvas : undefined}
+				/>,
+			);
+			const row = screen.getByRole("button", { name: "Agent" });
+			const send = (
+				type: "pointerDown" | "pointerMove" | "pointerUp",
+				at: number,
+				pointerType = "mouse",
+				button = 0,
+			) =>
+				fireEvent[type](type === "pointerDown" ? row : document, {
+					pointerId: 1,
+					pointerType,
+					button,
+					buttons: type === "pointerUp" ? 0 : 1,
+					isPrimary: true,
+					clientX: at,
+					clientY: at,
+				});
+			const ghost = () => document.querySelector<HTMLElement>(".ts-palette__ghost");
+			return { onInsert, pointAt, row, send, ghost, view };
+		};
 
-	it("cancels an Escape drag and does not drag touch presses", () => {
-		const onInsert = vi.fn();
-		const canvas = { current: { getNodeSizes: vi.fn(() => ({})), pointAt: vi.fn(() => ({ x: 0, y: 0 })) } };
-		render(
-			<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={onInsert} canvas={canvas} />,
-		);
-		const button = screen.getByRole("button", { name: "Agent" });
-		fireEvent.pointerDown(button, {
-			pointerId: 2,
-			pointerType: "mouse",
-			button: 0,
-			isPrimary: true,
-			clientX: 10,
-			clientY: 10,
+		it.each(["mouse", "pen"])("inserts once where a %s drag ends", (pointerType) => {
+			const { onInsert, pointAt, row, send, ghost } = setup();
+			send("pointerDown", 10, pointerType);
+			send("pointerMove", 40, pointerType);
+			send("pointerUp", 40, pointerType);
+			expect(pointAt).toHaveBeenCalledWith(40, 40);
+			expect(onInsert).toHaveBeenCalledTimes(1);
+			expect(onInsert).toHaveBeenCalledWith("agent", { source: pointerType, position: { x: 120, y: 80 } });
+			expect(ghost()).toBeNull();
+			expect(row).not.toHaveAttribute("data-dragging");
 		});
-		fireEvent.pointerMove(document, { pointerId: 2, pointerType: "mouse", buttons: 1, clientX: 40, clientY: 50 });
-		fireEvent.keyDown(document, { key: "Escape" });
-		expect(onInsert).not.toHaveBeenCalled();
-		fireEvent.pointerDown(button, {
-			pointerId: 3,
-			pointerType: "touch",
-			button: 0,
-			isPrimary: true,
-			clientX: 10,
-			clientY: 10,
-		});
-		fireEvent.pointerMove(document, { pointerId: 3, pointerType: "touch", buttons: 1, clientX: 40, clientY: 50 });
-		fireEvent.pointerUp(document, { pointerId: 3, pointerType: "touch", button: 0, clientX: 40, clientY: 50 });
-		expect(canvas.current.pointAt).not.toHaveBeenCalled();
-		expect(onInsert).not.toHaveBeenCalled();
-	});
 
-	it("does not start a drag below the threshold and stops tracking on unmount", () => {
-		const onInsert = vi.fn();
-		const canvas = { current: { getNodeSizes: vi.fn(() => ({})), pointAt: vi.fn(() => ({ x: 0, y: 0 })) } };
-		const view = render(
-			<Palette label="Node palette" sections={DEFAULT_PALETTE_SECTIONS.en} onInsert={onInsert} canvas={canvas} />,
-		);
-		const button = screen.getByRole("button", { name: "Agent" });
-		fireEvent.pointerDown(button, {
-			pointerId: 4,
-			pointerType: "mouse",
-			button: 0,
-			isPrimary: true,
-			clientX: 10,
-			clientY: 10,
+		it("inserts again on the press after a drop", async () => {
+			const { onInsert, row, send } = setup();
+			send("pointerDown", 10);
+			send("pointerMove", 40);
+			send("pointerUp", 40);
+			await new Promise((resolve) => setTimeout(resolve));
+			fireEvent.click(row);
+			expect(onInsert).toHaveBeenCalledTimes(2);
+			expect(onInsert.mock.calls[1]?.[1]).not.toHaveProperty("position");
 		});
-		fireEvent.pointerMove(document, { pointerId: 4, pointerType: "mouse", buttons: 1, clientX: 11, clientY: 11 });
-		expect(screen.queryByLabelText("Agent")).toBeNull();
-		view.unmount();
-		fireEvent.pointerUp(document, { pointerId: 4, pointerType: "mouse", button: 0, clientX: 11, clientY: 11 });
-		expect(onInsert).not.toHaveBeenCalled();
-		expect(canvas.current.pointAt).not.toHaveBeenCalled();
+
+		it("inserts nothing when the canvas refuses the point", () => {
+			const { onInsert, pointAt, send } = setup(null);
+			send("pointerDown", 10);
+			send("pointerMove", 40);
+			send("pointerUp", 40);
+			expect(pointAt).toHaveBeenCalledTimes(1);
+			expect(onInsert).not.toHaveBeenCalled();
+		});
+
+		it("cancels on Escape", () => {
+			const { onInsert, pointAt, send, ghost } = setup();
+			send("pointerDown", 10);
+			send("pointerMove", 40);
+			fireEvent.keyDown(document, { key: "Escape" });
+			send("pointerUp", 40);
+			expect(pointAt).not.toHaveBeenCalled();
+			expect(onInsert).not.toHaveBeenCalled();
+			expect(ghost()).toBeNull();
+		});
+
+		it.each([
+			["touch", "touch", 0, 40, true],
+			["a secondary button", "mouse", 2, 40, true],
+			["a move below the threshold", "mouse", 0, 11, true],
+			["no canvas", "mouse", 0, 40, false],
+		] as const)("does not drag with %s", (_name, pointerType, button, to, withCanvas) => {
+			const { onInsert, pointAt, send, ghost } = setup(undefined, withCanvas);
+			send("pointerDown", 10, pointerType, button);
+			send("pointerMove", to, pointerType, button);
+			expect(ghost()).toBeNull();
+			send("pointerUp", to, pointerType, button);
+			expect(pointAt).not.toHaveBeenCalled();
+			expect(onInsert).not.toHaveBeenCalled();
+		});
+
+		it("stops when it unmounts during a drag", () => {
+			const { onInsert, pointAt, send, view } = setup();
+			send("pointerDown", 10);
+			send("pointerMove", 40);
+			view.unmount();
+			send("pointerUp", 40);
+			expect(pointAt).not.toHaveBeenCalled();
+			expect(onInsert).not.toHaveBeenCalled();
+		});
 	});
 
 	it("moves focus with vertical toolbar keys without wrapping", () => {

@@ -55,18 +55,22 @@ describe("Canvas", () => {
 			height: 100,
 			toJSON() {},
 		});
-		Object.defineProperty(root.ownerDocument, "elementFromPoint", { configurable: true, value: vi.fn(() => root) });
+		const hit = vi.fn((): Element | null => document.body);
+		Object.defineProperty(root.ownerDocument, "elementFromPoint", { configurable: true, value: hit });
 		expect(handle.current?.pointAt(9, 30)).toBeNull();
+		hit.mockReturnValue(null);
+		expect(handle.current?.pointAt(-1, 30)).toBeNull();
+		hit.mockReturnValue(root);
 		expect(handle.current?.pointAt(30, 40)).toEqual({ x: 20, y: 20 });
+		// The host does not control this viewport, so a pan reaches it only through the canvas's own state.
+		fireEvent.wheel(root, { deltaX: 0, deltaY: 15 });
+		expect(handle.current?.pointAt(30, 40)).toEqual({ x: 20, y: 35 });
 		rerender(<Canvas ref={handle} graph={graph} label="Workflow" viewport={{ x: 5, y: 6, zoom: 2 }} />);
 		expect(handle.current?.pointAt(30, 40)).toEqual({ x: 8, y: 7 });
 		const overlay = document.createElement("div");
 		overlay.dataset.canvasOverlay = "";
 		root.append(overlay);
-		Object.defineProperty(root.ownerDocument, "elementFromPoint", {
-			configurable: true,
-			value: vi.fn(() => overlay),
-		});
+		hit.mockReturnValue(overlay);
 		expect(handle.current?.pointAt(30, 40)).toBeNull();
 	});
 
