@@ -6,7 +6,7 @@ Import `Inspector`, `InspectorProps`, `InspectorField`, and `InspectorAction` fr
 
 Connections use a multiple Select as the keyboard path for connecting nodes. A node with branches has one connections field for each branch. The host offers only targets that can be connected: no self-connection, Start nodes, or connections from End nodes. The host maps changes to its edges. `onValueChange` receives every connected id in the order of `targets`; connected ids that are not in `targets` stay at the end.
 
-Use `onDuplicate` and `onDelete` to show the corresponding head actions. `locale` selects the built-in labels in English or Arabic; it does not translate field labels. The default footer shows More and Evaluate when either callback is supplied. `footer` replaces that footer. Set `footer={null}` to hide it.
+Use `onDuplicate` and `onDelete` to show the corresponding head actions. `locale` selects the built-in labels in English or Arabic; it does not translate field labels. The default footer shows More when `onMore` is supplied and Evaluate when `onEvaluate` is supplied. It is hidden when neither callback is supplied. `footer` replaces that footer. Set `footer={null}` to hide it.
 
 ## Keyboard
 
