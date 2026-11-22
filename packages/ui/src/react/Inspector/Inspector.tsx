@@ -7,11 +7,10 @@ import {
 	SelectValue,
 } from "@ui-sdk/react/select";
 import { Textarea } from "@ui-sdk/react/textarea";
-import { type ComponentProps, type ReactNode, useId } from "react";
+import { type ComponentProps, type ReactNode, useEffect, useId, useRef } from "react";
 import { Icon } from "../../icons/Icon.js";
 import type { IconName } from "../../icons/icons.js";
 import { Button } from "../Button/Button.js";
-import { Chip } from "../Chip/Chip.js";
 import { Field, FieldLabel } from "../Field/Field.js";
 import { Input } from "../Input/Input.js";
 import { Switch, SwitchThumb } from "../Switch/Switch.js";
@@ -146,45 +145,10 @@ export function Inspector({
 			</header>
 			<div className="ts-inspector__fields">
 				{fields.map((field) => {
-					if (field.type === "select")
-						return <InspectorSelect key={field.id} field={field} placeholder={copy.none} />;
+					if (field.type === "select") return <InspectorSelect key={field.id} field={field} none={copy.none} />;
 					if (field.type === "connections")
-						return <InspectorConnections key={field.id} field={field} placeholder={copy.none} />;
-					if (field.type === "chips") {
-						return (
-							<div key={field.id} className="ts-inspector__chips-field">
-								<div className="ts-inspector__chips-head">
-									<span className="ts-inspector__label">{field.label}</span>
-									{field.onAdd && (
-										<IconAction label={`${copy.add} ${field.label}`} icon="plus" onPress={field.onAdd} />
-									)}
-								</div>
-								{field.items.length ? (
-									<ul aria-label={field.label} className="ts-inspector__chips-list">
-										{field.items.map((item) => (
-											<li key={item.id}>
-												{field.onRemove ? (
-													<Chip
-														name={item.label}
-														icon={<Icon name={item.icon ?? "schema"} size={14} />}
-														aria-label={`${copy.remove} ${item.label}`}
-														onClick={() => field.onRemove?.(item.id)}
-													/>
-												) : (
-													<span className="ts-inspector__static-chip">
-														<Icon name={item.icon ?? "schema"} size={14} />
-														<span>{item.label}</span>
-													</span>
-												)}
-											</li>
-										))}
-									</ul>
-								) : !field.onAdd ? (
-									<span className="ts-inspector__empty">{copy.none}</span>
-								) : null}
-							</div>
-						);
-					}
+						return <InspectorConnections key={field.id} field={field} none={copy.none} locale={locale} />;
+					if (field.type === "chips") return <InspectorChips key={field.id} field={field} copy={copy} />;
 					if (field.type === "text") {
 						return (
 							<Field key={field.id} className="ts-inspector__row">
@@ -263,25 +227,22 @@ function IconAction({ label, icon, onPress }: Pick<InspectorAction, "label" | "i
 	);
 }
 
-function InspectorSelect({
-	field,
-	placeholder,
-}: {
-	field: Extract<InspectorField, { type: "select" }>;
-	placeholder: string;
-}) {
+type FieldOf<Type extends InspectorField["type"]> = Extract<InspectorField, { type: Type }>;
+
+function InspectorSelect({ field, none }: { field: FieldOf<"select">; none: string }) {
 	return (
 		<Field className="ts-inspector__row ts-inspector__select-row">
 			<FieldLabel className="ts-inspector__label">{field.label}</FieldLabel>
 			<Select
 				items={[...field.options]}
 				value={field.value}
+				placeholder={none}
 				onValueChange={(value) => {
 					if (typeof value === "string") field.onValueChange(value);
 				}}
 			>
 				<SelectTrigger className="ts-inspector__select-trigger">
-					<SelectValue placeholder={placeholder} />
+					<SelectValue />
 					<Icon name="updown" size={14} />
 				</SelectTrigger>
 				<InspectorSelectContent items={field.options} />
@@ -292,32 +253,45 @@ function InspectorSelect({
 
 function InspectorConnections({
 	field,
-	placeholder,
+	none,
+	locale,
 }: {
-	field: Extract<InspectorField, { type: "connections" }>;
-	placeholder: string;
+	field: FieldOf<"connections">;
+	none: string;
+	locale: "en" | "ar";
 }) {
 	const items = field.targets.map((target) => ({ value: target.id, label: target.title }));
+	const selected = items.filter((item) => field.value.includes(item.value));
+	// The host may offer only some targets. The connections it does not offer stay.
+	const kept = field.value.filter((id) => !items.some((item) => item.value === id));
+	const comma = locale === "ar" ? "، " : ", ";
+	const [first, ...rest] = selected.map((item) => item.label);
 	return (
 		<Field className="ts-inspector__row ts-inspector__select-row">
 			<FieldLabel className="ts-inspector__label">{field.label}</FieldLabel>
 			<Select
-				items={items}
-				value={[...field.value]}
 				multiple
+				items={items}
+				value={selected.map((item) => item.value)}
 				disabled={items.length === 0}
 				onValueChange={(value) => {
-					const ordered = field.targets.map((target) => target.id).filter((id) => value.includes(id));
-					field.value
-						.filter((id) => !field.targets.some((target) => target.id === id) && value.includes(id))
-						.forEach((id) => {
-							ordered.push(id);
-						});
-					field.onValueChange(ordered);
+					const next = items.map((item) => item.value).filter((id) => value.includes(id));
+					field.onValueChange([...next, ...kept]);
 				}}
 			>
 				<SelectTrigger className="ts-inspector__select-trigger">
-					<SelectValue placeholder={placeholder} maxLabels={1} getMoreLabel={(count) => `, +${count}`} />{" "}
+					<SelectValue>
+						{() =>
+							rest.length ? (
+								<>
+									<span aria-hidden="true">{`${first}${comma}+${rest.length}`}</span>
+									<span className="ts-visually-hidden">{[first, ...rest].join(comma)}</span>
+								</>
+							) : (
+								(first ?? none)
+							)
+						}
+					</SelectValue>
 					<Icon name="updown" size={14} />
 				</SelectTrigger>
 				<InspectorSelectContent items={items} />
@@ -338,5 +312,59 @@ function InspectorSelectContent({ items }: { items: readonly { value: string; la
 				</SelectItem>
 			))}
 		</SelectContent>
+	);
+}
+
+function InspectorChips({ field, copy }: { field: FieldOf<"chips">; copy: (typeof labels)[keyof typeof labels] }) {
+	const root = useRef<HTMLDivElement>(null);
+	const removed = useRef<{ id: string; index: number } | null>(null);
+	const { items } = field;
+	// A removed chip that held focus passes it to the chip that takes its place, the last chip, or the add button.
+	useEffect(() => {
+		const last = removed.current;
+		if (!last || !root.current || items.some((item) => item.id === last.id)) return;
+		removed.current = null;
+		const active = root.current.ownerDocument.activeElement;
+		if (active && active !== root.current.ownerDocument.body) return;
+		const buttons = root.current.querySelectorAll<HTMLElement>(".ts-inspector__chip-remove");
+		const next = buttons[Math.min(last.index, buttons.length - 1)];
+		(next ?? root.current.querySelector<HTMLElement>(".ts-inspector__icon-button"))?.focus();
+	}, [items]);
+	return (
+		<div ref={root} className="ts-inspector__chips">
+			<div className="ts-inspector__longtext-head">
+				<span className="ts-inspector__label">{field.label}</span>
+				{field.onAdd ? (
+					<IconAction label={`${copy.add} ${field.label}`} icon="plus" onPress={field.onAdd} />
+				) : (
+					items.length === 0 && <span className="ts-inspector__empty">{copy.none}</span>
+				)}
+			</div>
+			{items.length > 0 && (
+				<ul aria-label={field.label} className="ts-inspector__chips-list">
+					{items.map((item, index) => (
+						<li key={item.id} className="ts-inspector__chip" data-removable={field.onRemove ? "" : undefined}>
+							{item.icon && <Icon name={item.icon} />}
+							<span className="ts-inspector__chip-name">{item.label}</span>
+							{field.onRemove && (
+								<Button
+									className="ts-inspector__chip-remove"
+									variant="ghost"
+									size="sm"
+									iconOnly
+									aria-label={`${copy.remove} ${item.label}`}
+									onClick={() => {
+										removed.current = { id: item.id, index };
+										field.onRemove?.(item.id);
+									}}
+								>
+									<Icon name="close" size={14} />
+								</Button>
+							)}
+						</li>
+					))}
+				</ul>
+			)}
+		</div>
 	);
 }

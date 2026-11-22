@@ -1,4 +1,5 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Inspector } from "./Inspector.js";
@@ -85,95 +86,170 @@ describe("Inspector", () => {
 		expect(fields[2]!.actions![0]!.onPress).toHaveBeenCalledOnce();
 	});
 
-	it("supports select, connections, and chips", async () => {
-		const changeModel = vi.fn();
-		const changeTargets = vi.fn();
-		const remove = vi.fn();
-		const add = vi.fn();
-		render(
-			<Inspector
-				title="Agent"
-				description="Workflow agent"
-				fields={[
-					{
-						type: "select",
-						id: "model",
-						label: "Model",
-						value: "fast",
-						options: [
-							{ value: "fast", label: "Fast" },
-							{ value: "balanced", label: "Balanced" },
-						],
-						onValueChange: changeModel,
-					},
-					{
-						type: "connections",
-						id: "links",
-						label: "Connects to",
-						targets: [
-							{ id: "a", title: "Draft reply" },
-							{ id: "b", title: "Review" },
-						],
-						value: ["a", "outside"],
-						onValueChange: changeTargets,
-					},
-					{
-						type: "chips",
-						id: "schema",
-						label: "Output schema",
-						items: [{ id: "schema", label: "response_schema", icon: "schema" }],
-						onAdd: add,
-						onRemove: remove,
-					},
-				]}
-			/>,
-		);
-		const model = screen.getByRole("combobox", { name: "Model" });
-		expect(model).toHaveTextContent("Fast");
-		fireEvent.keyDown(model, { key: "ArrowDown" });
-		fireEvent.click(await screen.findByText("Balanced"));
-		expect(changeModel).toHaveBeenCalledWith("balanced");
-		const connection = screen.getByRole("combobox", { name: "Connects to" });
-		expect(connection).toHaveTextContent("Draft reply");
-		expect(connection).toHaveTextContent("+1");
-		expect(screen.getByRole("list", { name: "Output schema" })).toBeVisible();
-		expect(screen.getByRole("button", { name: "Remove response_schema" })).toBeVisible();
-		fireEvent.click(screen.getByRole("button", { name: "Remove response_schema" }));
-		expect(remove).toHaveBeenCalledWith("schema");
-		fireEvent.click(screen.getByRole("button", { name: "Add Output schema" }));
-		expect(add).toHaveBeenCalledOnce();
+	describe("select", () => {
+		const field = {
+			type: "select" as const,
+			id: "model",
+			label: "Model",
+			value: "fast",
+			options: [
+				{ value: "fast", label: "Fast" },
+				{ value: "balanced", label: "Balanced" },
+			],
+		};
+
+		it("reports the chosen value once and leaves the value to the host", async () => {
+			const onValueChange = vi.fn();
+			render(<Inspector title="Agent" description="Agent" fields={[{ ...field, onValueChange }]} />);
+			const trigger = screen.getByRole("combobox", { name: "Model" });
+			expect(trigger).toHaveTextContent("Fast");
+			fireEvent.keyDown(trigger, { key: "ArrowDown" });
+			fireEvent.click(await screen.findByRole("option", { name: "Balanced", hidden: true }));
+			expect(onValueChange).toHaveBeenCalledExactlyOnceWith("balanced");
+			expect(trigger).toHaveTextContent("Fast");
+		});
+
+		it("has its label in server markup", () => {
+			const markup = renderToStaticMarkup(
+				<Inspector title="Agent" description="Agent" fields={[{ ...field, onValueChange: vi.fn() }]} />,
+			);
+			expect(markup).toMatch(/data-slot="select-value"[^>]*>Fast</);
+		});
 	});
 
-	it("keeps unknown connection values, supports empty fields, and does not make static chips buttons", () => {
-		const changeTargets = vi.fn();
-		render(
-			<Inspector
-				title="Agent"
-				description="Workflow agent"
-				fields={[
-					{
-						type: "connections",
-						id: "links",
-						label: "Connects to",
-						targets: [{ id: "a", title: "Draft reply" }],
-						value: ["outside", "a"],
-						onValueChange: changeTargets,
-					},
-					{
-						type: "connections",
-						id: "empty",
-						label: "Empty links",
-						targets: [],
-						value: [],
-						onValueChange: changeTargets,
-					},
-					{ type: "chips", id: "static", label: "Tags", items: [{ id: "one", label: "One" }] },
-				]}
-			/>,
-		);
-		expect(screen.getByRole("combobox", { name: "Empty links" })).toBeDisabled();
-		expect(screen.getByRole("combobox", { name: "Empty links" })).toHaveTextContent("None");
-		expect(screen.queryByRole("button", { name: "One" })).not.toBeInTheDocument();
+	describe("connections", () => {
+		const setup = (value: string[], locale: "en" | "ar" = "en", empty = false) => {
+			const onValueChange = vi.fn();
+			const targets = [
+				{ id: "a", title: "Draft reply" },
+				{ id: "b", title: "Review" },
+				{ id: "c", title: "Send" },
+			];
+			render(
+				<Inspector
+					title="Agent"
+					description="Agent"
+					locale={locale}
+					fields={[
+						{
+							type: "connections",
+							id: "to",
+							label: "Connects to",
+							targets: empty ? [] : targets,
+							value,
+							onValueChange,
+						},
+					]}
+				/>,
+			);
+			return { onValueChange, trigger: screen.getByRole("combobox", { name: "Connects to" }) };
+		};
+
+		it("reports the next ids in target order and keeps the ids it does not offer", async () => {
+			const { onValueChange, trigger } = setup(["outside", "c"]);
+			fireEvent.keyDown(trigger, { key: "ArrowDown" });
+			const option = await screen.findByRole("option", { name: "Draft reply", hidden: true });
+			expect(screen.getByRole("option", { name: "Send", hidden: true })).toHaveAttribute("aria-selected", "true");
+			fireEvent.click(option);
+			expect(onValueChange).toHaveBeenCalledExactlyOnceWith(["a", "c", "outside"]);
+			fireEvent.click(screen.getByRole("option", { name: "Send", hidden: true }));
+			expect(onValueChange).toHaveBeenLastCalledWith(["outside"]);
+		});
+
+		it.each([
+			["en", "Draft reply, +2", "Draft reply, Review, Send"],
+			["ar", "Draft reply، +2", "Draft reply، Review، Send"],
+		] as const)("shows a short summary and names every target in %s", (locale, short, full) => {
+			const { trigger } = setup(["a", "b", "c"], locale);
+			expect(trigger.querySelector('[aria-hidden="true"]')).toHaveTextContent(short);
+			expect(trigger.querySelector(".ts-visually-hidden")).toHaveTextContent(full);
+		});
+
+		it("shows one title, or None", () => {
+			expect(setup(["b"]).trigger).toHaveTextContent(/^Review$/);
+			cleanup();
+			expect(setup([]).trigger).toHaveTextContent(/^None$/);
+			cleanup();
+			expect(setup([], "ar").trigger).toHaveTextContent(/^لا شيء$/);
+		});
+
+		it("is disabled without targets", () => {
+			const { trigger } = setup([], "en", true);
+			expect(trigger).toBeDisabled();
+			expect(trigger).toHaveTextContent("None");
+		});
+	});
+
+	describe("chips", () => {
+		function Chips({ add = true, remove = true, refuse = false }) {
+			const [items, setItems] = useState(["one", "two", "three"]);
+			return (
+				<Inspector
+					title="Agent"
+					description="Agent"
+					fields={[
+						{
+							type: "chips",
+							id: "schema",
+							label: "Output schema",
+							items: items.map((id) => ({ id, label: id, icon: "schema" as const })),
+							onAdd: add ? () => setItems((current) => [...current, `added${current.length}`]) : undefined,
+							onRemove: remove
+								? (id) => setItems((current) => (refuse ? [...current] : current.filter((item) => item !== id)))
+								: undefined,
+						},
+					]}
+				/>
+			);
+		}
+		const press = (name: string) => {
+			const button = screen.getByRole("button", { name });
+			button.focus();
+			fireEvent.click(button);
+		};
+
+		it("adds and removes through its own buttons", () => {
+			render(<Chips />);
+			const list = screen.getByRole("list", { name: "Output schema" });
+			expect(list.children).toHaveLength(3);
+			expect(screen.queryByRole("button", { name: "two" })).not.toBeInTheDocument();
+			press("Add Output schema");
+			expect(list.children).toHaveLength(4);
+			press("Remove two");
+			expect(screen.queryByText("two")).not.toBeInTheDocument();
+		});
+
+		it("moves focus to the next chip, the last chip, then the add button", () => {
+			render(<Chips />);
+			press("Remove two");
+			expect(screen.getByRole("button", { name: "Remove three" })).toHaveFocus();
+			press("Remove three");
+			expect(screen.getByRole("button", { name: "Remove one" })).toHaveFocus();
+			press("Remove one");
+			expect(screen.getByRole("button", { name: "Add Output schema" })).toHaveFocus();
+		});
+
+		it("keeps focus when the host refuses the removal", () => {
+			render(<Chips refuse />);
+			press("Remove two");
+			expect(screen.getByRole("button", { name: "Remove two" })).toHaveFocus();
+		});
+
+		it("has no buttons without callbacks and shows None when it is empty", () => {
+			render(<Chips add={false} remove={false} />);
+			expect(screen.queryByRole("button")).not.toBeInTheDocument();
+			cleanup();
+			render(
+				<Inspector
+					title="Agent"
+					description="Agent"
+					locale="ar"
+					fields={[{ type: "chips", id: "schema", label: "المخطط", items: [] }]}
+				/>,
+			);
+			expect(screen.getByText("لا شيء")).toBeVisible();
+			expect(screen.queryByRole("list")).not.toBeInTheDocument();
+		});
 	});
 
 	it("localizes built-in action labels and server renders", () => {
@@ -189,23 +265,5 @@ describe("Inspector", () => {
 		expect(markup).toContain("aria-labelledby=");
 		expect(markup).toContain('data-slot="input"');
 		expect(markup).toContain("Name");
-		expect(
-			renderToStaticMarkup(
-				<Inspector
-					title="Agent"
-					description="Workflow agent"
-					fields={[
-						{
-							type: "select",
-							id: "model",
-							label: "Model",
-							value: "fast",
-							options: [{ value: "fast", label: "Fast" }],
-							onValueChange: vi.fn(),
-						},
-					]}
-				/>,
-			),
-		).toContain("Model");
 	});
 });

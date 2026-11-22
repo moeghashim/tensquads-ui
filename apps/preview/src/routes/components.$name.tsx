@@ -1577,7 +1577,11 @@ function InspectorPreview({ locale, direction }: { locale: "en" | "ar"; directio
 						id: "schema",
 						label: ar ? "مخطط الإخراج" : "Output schema",
 						items: current.schemas.map((id) => ({ id, label: id, icon: "schema" as const })),
-						onAdd: () => update({ schemas: [...current.schemas, "response_schema"] }),
+						onAdd: () => {
+							let number = current.schemas.length + 1;
+							while (current.schemas.includes(`schema_${number}`)) number += 1;
+							update({ schemas: [...current.schemas, `schema_${number}`] });
+						},
 						onRemove: (id) => update({ schemas: current.schemas.filter((item) => item !== id) }),
 					},
 					{

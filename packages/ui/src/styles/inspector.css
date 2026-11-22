@@ -25,23 +25,27 @@
 	.ts-inspector [data-slot="field"].ts-inspector__row { block-size: var(--ts-control-sm); grid-template-columns: minmax(60px, max-content) minmax(0, 1fr); column-gap: var(--ts-space-3); }
 	.ts-inspector__label { min-inline-size: 60px; color: var(--ts-text-emphasis); font-family: var(--ts-field-label-font-family); font-size: var(--ts-field-label-font-size); font-weight: var(--ts-field-label-font-weight); line-height: var(--ts-control-sm); letter-spacing: var(--ts-field-label-letter-spacing); }
 	.ts-inspector__input { min-inline-size: 0; }
-	.ts-inspector__select-row { position: relative; border-radius: var(--ts-radius-md); }
-	.ts-inspector__select-row:hover { background: var(--ts-ghost-hover); }
-	.ts-inspector__select-trigger { position: absolute; inset: 0; display: flex; inline-size: 100%; block-size: 28px; align-items: center; justify-content: flex-end; gap: var(--ts-space-1); padding: 0; border: 0; border-radius: inherit; background: transparent; color: var(--ts-text); cursor: pointer; }
+	/* The trigger covers the row, so a press on the label opens the list too. */
+	.ts-inspector [data-slot="field"].ts-inspector__select-row { position: relative; display: flex; justify-content: space-between; margin-inline: calc(-1 * var(--ts-space-2)); padding-inline: var(--ts-space-2); border-radius: var(--ts-radius-md); }
+	.ts-inspector__select-row:hover:not(:has([data-slot="select-trigger"][data-disabled])) { background: var(--ts-ghost-hover); }
+	.ts-inspector__select-row [data-slot="field-label"] { position: relative; z-index: 1; overflow: hidden; max-inline-size: 45%; pointer-events: none; text-overflow: ellipsis; white-space: nowrap; }
+	.ts-inspector__select-trigger { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; gap: var(--ts-space-1); padding-block: 0; padding-inline: var(--ts-space-2); border: 0; border-radius: inherit; background: transparent; color: var(--ts-text); cursor: pointer; }
 	.ts-inspector__select-trigger:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
-	.ts-inspector__select-trigger [data-slot="select-value"] { max-inline-size: calc(100% - 20px); overflow: hidden; color: var(--ts-text); font-family: var(--ts-field-value-font-family); font-size: var(--ts-field-value-font-size); font-weight: var(--ts-field-value-font-weight); line-height: var(--ts-field-value-line-height); letter-spacing: var(--ts-field-value-letter-spacing); text-align: end; text-overflow: ellipsis; white-space: nowrap; }
-	.ts-inspector__select-trigger > svg { inline-size: 12px; block-size: 12px; flex: none; }
-	.ts-inspector__select-row [data-slot="field-label"] { position: relative; z-index: 1; pointer-events: none; }
+	.ts-inspector__select-trigger[data-disabled] { color: var(--ts-text-disabled); cursor: default; }
+	.ts-inspector__select-trigger [data-slot="select-value"] { overflow: hidden; max-inline-size: 50%; font-family: var(--ts-field-value-font-family); font-size: var(--ts-field-value-font-size); font-weight: var(--ts-field-value-font-weight); line-height: var(--ts-field-value-line-height); letter-spacing: var(--ts-field-value-letter-spacing); text-overflow: ellipsis; white-space: nowrap; }
+	.ts-inspector__select-trigger > svg { flex: none; inline-size: 12px; block-size: 12px; }
 	[data-slot="select-content"].ts-inspector__select-content { box-sizing: border-box; min-inline-size: var(--anchor-width); max-inline-size: min(var(--ts-content-width), calc(100vw - var(--ts-space-4))); max-block-size: var(--available-height); overflow-y: auto; padding: var(--ts-space-1-5); border: thin solid var(--ts-border-subtle); border-radius: var(--ts-radius-md); background: var(--ts-surface-elevated); box-shadow: var(--ts-shadow-overlay), var(--ts-shadow-hairline); color: var(--ts-text); }
-	.ts-inspector__select-content [data-slot="select-item"] { position: relative; display: flex; min-block-size: var(--ts-control-md); align-items: center; padding: var(--ts-space-1) var(--ts-space-2); border-radius: var(--ts-radius-xs); color: var(--ts-text-secondary); cursor: pointer; }
+	.ts-inspector__select-content [data-slot="select-item"] { box-sizing: border-box; display: flex; min-block-size: var(--ts-control-md); align-items: center; gap: var(--ts-space-2); padding-block: var(--ts-space-1); padding-inline: var(--ts-space-2); border-radius: var(--ts-radius-xs); color: var(--ts-text-secondary); font-family: var(--ts-palette-item-font-family); font-size: var(--ts-palette-item-font-size); font-weight: var(--ts-palette-item-font-weight); line-height: var(--ts-palette-item-line-height); letter-spacing: var(--ts-palette-item-letter-spacing); cursor: pointer; user-select: none; }
 	.ts-inspector__select-content [data-slot="select-item"][data-highlighted] { color: var(--ts-text-emphasis); background: var(--ts-ghost-hover); }
-	.ts-inspector__select-content [data-slot="select-item-indicator"] { margin-inline-start: auto; }
-	.ts-inspector__chips-field { display: flex; flex-direction: column; gap: var(--ts-space-2); min-inline-size: 0; }
-	.ts-inspector__chips-head { display: flex; min-block-size: var(--ts-control-sm); align-items: center; justify-content: space-between; }
+	.ts-inspector__select-content [data-slot="select-item-indicator"] { display: inline-flex; margin-inline-start: auto; }
+	.ts-inspector__chips { display: flex; flex-direction: column; gap: var(--ts-space-2); min-inline-size: 0; }
 	.ts-inspector__chips-list { display: flex; flex-wrap: wrap; gap: var(--ts-space-2); margin: 0; padding: 0; list-style: none; }
-	.ts-inspector__static-chip { display: inline-flex; min-block-size: var(--ts-control-sm); align-items: center; gap: var(--ts-space-2); padding: var(--ts-space-1) var(--ts-space-3); border-radius: var(--ts-radius-full); background: var(--ts-primary-soft); color: var(--ts-text); }
-	.ts-inspector__static-chip svg { inline-size: var(--ts-icon-sm); block-size: var(--ts-icon-sm); color: var(--ts-text-secondary); }
-	.ts-inspector__empty { align-self: flex-end; color: var(--ts-text-tertiary); }
+	.ts-inspector__chip { box-sizing: border-box; display: inline-flex; min-inline-size: 0; max-inline-size: 100%; min-block-size: var(--ts-control-sm); align-items: center; gap: var(--ts-space-2); padding-inline: var(--ts-space-3); border-radius: var(--ts-radius-full); background: var(--ts-primary-soft); color: var(--ts-text); font-family: var(--ts-button-md-font-family); font-size: var(--ts-button-md-font-size); font-weight: var(--ts-button-md-font-weight); line-height: var(--ts-button-md-line-height); letter-spacing: var(--ts-button-md-letter-spacing); }
+	.ts-inspector__chip[data-removable] { padding-inline-end: 2px; }
+	.ts-inspector__chip > svg { flex: none; color: var(--ts-text-secondary); }
+	.ts-inspector__chip-name { min-inline-size: 0; overflow-wrap: anywhere; }
+	.ts-inspector [data-slot="button"].ts-inspector__chip-remove { flex: none; inline-size: var(--ts-control-2xs); block-size: var(--ts-control-2xs); border-radius: var(--ts-radius-full); }
+	.ts-inspector__empty { color: var(--ts-text-secondary); font-family: var(--ts-field-value-font-family); font-size: var(--ts-field-value-font-size); line-height: var(--ts-field-value-line-height); }
 	.ts-inspector__switch { justify-self: end; }
 	.ts-inspector [data-slot="field"].ts-inspector__longtext { display: flex; flex-direction: column; align-items: stretch; gap: var(--ts-space-2); min-inline-size: 0; }
 	.ts-inspector__longtext-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ts-space-2); min-block-size: var(--ts-control-sm); }

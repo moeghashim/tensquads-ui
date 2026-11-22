@@ -1,4 +1,4 @@
-import { expect, type Locator, test } from "@playwright/test";
+import { expect, type Locator, type Page, test } from "@playwright/test";
 import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
@@ -49,9 +49,77 @@ for (const locale of ["en", "ar"] as const) {
 			await expectNoHorizontalScroll(page);
 			await expectAccessible(page);
 		});
+
+		test(`Inspector chooses, connects and removes by keyboard in ${locale} ${theme}`, async ({ page }) => {
+			const ar = locale === "ar";
+			await openPreview(page, { locale, direction: ar ? "rtl" : "ltr", theme }, "/components/Inspector");
+			const inspector = page.getByRole("region", { name: ar ? "وكيل" : "Agent" });
+			const model = inspector.getByRole("combobox", { name: ar ? "النموذج" : "Model" });
+			const connects = inspector.getByRole("combobox", { name: ar ? "يتصل بـ" : "Connects to" });
+			const list = page.getByRole("listbox");
+			for (const field of [model, connects]) await expect(nameFieldRow(field)).toHaveCSS("height", "28px");
+
+			await model.focus();
+			await page.keyboard.press("Enter");
+			await expect(list).toBeVisible();
+			await page.keyboard.press("ArrowDown");
+			await page.keyboard.press("Enter");
+			await expect(list).toBeHidden();
+			await expect(model).toBeFocused();
+			await expect(model).toHaveText(ar ? "دقيق" : "Thorough");
+
+			// The whole row is the trigger, so a press on the label opens the list.
+			const label = (await inspector.getByText(ar ? "النموذج" : "Model", { exact: true }).boundingBox())!;
+			await page.mouse.click(label.x + label.width / 2, label.y + label.height / 2);
+			await expect(list).toBeVisible();
+			await page.keyboard.press("Escape");
+			await expect(list).toBeHidden();
+
+			await connects.focus();
+			await page.keyboard.press("Enter");
+			await expect(list).toBeVisible();
+			await page.keyboard.press("ArrowDown");
+			await page.keyboard.press("Enter");
+			await expect(list).toBeVisible();
+			await page.keyboard.press("ArrowDown");
+			await page.keyboard.press("Enter");
+			await expect(list.getByRole("option", { selected: true })).toHaveCount(3);
+			await finishAnimations(page);
+			await expectAccessible(page);
+			await page.keyboard.press("Escape");
+			await expect(list).toBeHidden();
+			await expect(connects).toBeFocused();
+			await expect(connects.locator('[aria-hidden="true"]').first()).toHaveText(
+				ar ? "صياغة الرد، +2" : "Draft reply, +2",
+			);
+
+			const chips = inspector.getByRole("list", { name: ar ? "مخطط الإخراج" : "Output schema" });
+			const add = inspector.getByRole("button", { name: ar ? "إضافة مخطط الإخراج" : "Add Output schema" });
+			await add.focus();
+			await page.keyboard.press("Enter");
+			await expect(chips.getByRole("listitem")).toHaveCount(2);
+			await chips.getByRole("button").first().press("Enter");
+			await expect(chips.getByRole("listitem")).toHaveCount(1);
+			await expect(chips.getByRole("button")).toBeFocused();
+			await page.keyboard.press("Enter");
+			await expect(add).toBeFocused();
+
+			await page.setViewportSize({ width: 390, height: 844 });
+			await connects.click();
+			await expect(list).toBeVisible();
+			await finishAnimations(page);
+			const box = (await list.boundingBox())!;
+			expect(box.x).toBeGreaterThanOrEqual(0);
+			expect(box.x + box.width).toBeLessThanOrEqual(390);
+			await expectNoHorizontalScroll(page);
+		});
 	}
 }
 
 function nameFieldRow(input: Locator) {
 	return input.locator("xpath=ancestor::*[@data-slot='field'][1]");
+}
+
+async function finishAnimations(page: Page) {
+	await page.evaluate(() => Promise.all(document.getAnimations().map((animation) => animation.finished)));
 }
