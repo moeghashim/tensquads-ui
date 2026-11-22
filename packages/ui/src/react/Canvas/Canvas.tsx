@@ -3,6 +3,7 @@ import {
 	type ConnectDraft,
 	createChange,
 	createConnect,
+	createController,
 	createFocusRecovery,
 	createMove,
 	createRovingFocus,
@@ -31,7 +32,10 @@ import { type CanvasViewport, toLogical, toPhysical } from "../workflow/viewport
 export type { CanvasViewport } from "../workflow/viewport.js";
 export type CanvasSelection = { nodes: string[]; edges: string[] };
 export type CanvasConnection = { from: string; fromPort?: number; to: string };
-export type CanvasHandle = { getNodeSizes(): Record<string, NodeSize> };
+export type CanvasHandle = {
+	getNodeSizes(): Record<string, NodeSize>;
+	pointAt(clientX: number, clientY: number): { x: number; y: number } | null;
+};
 export type CanvasProps = Omit<
 	PartProps<"div">,
 	"children" | "dir" | "defaultViewport" | "viewport" | "onViewportChange" | "ref"
@@ -62,7 +66,9 @@ type CanvasState = {
 	moving: MoveDraft | null;
 	connecting: ConnectDraft | null;
 };
+type CanvasController = { pointAt(clientX: number, clientY: number): { x: number; y: number } | null };
 type CanvasOptions = {
+	controller?: ReturnType<typeof createController<CanvasController>>;
 	viewport?: CanvasViewport;
 	defaultViewport?: CanvasViewport;
 	onViewportChange?: CanvasProps["onViewportChange"];
@@ -83,6 +89,7 @@ type CanvasOptions = {
 const canvas = definePrimitive({
 	name: "workflow-canvas",
 	options: {
+		controller: "value",
 		viewport: "value",
 		defaultViewport: "value",
 		onViewportChange: "callback",
@@ -157,8 +164,7 @@ const canvas = definePrimitive({
 				},
 				point: (x, y) => {
 					pointerPoint = { x, y };
-					const point = viewport.toCanvas(x, y);
-					return { ...point, x: rtl() ? -point.x + 0 : point.x };
+					return toGraph(x, y);
 				},
 				radius: () => 0,
 				label: (id) => context.options().titles?.[id] ?? id,
@@ -267,6 +273,17 @@ const canvas = definePrimitive({
 				set: (value, details) => change("viewport", toLogical(value, width(), rtl()), details),
 			},
 		);
+		const toGraph = (clientX: number, clientY: number) => {
+			const point = viewport.toCanvas(clientX, clientY);
+			return { x: rtl() ? -point.x + 0 : point.x, y: point.y };
+		};
+		const pointAt = (clientX: number, clientY: number) => {
+			const root = context.element("root");
+			const hit = root?.ownerDocument.elementFromPoint(clientX, clientY);
+			if (!root || !hit || !root.contains(hit) || hit.closest("[data-canvas-overlay]")) return null;
+			const { x, y } = toGraph(clientX, clientY);
+			return { x: Math.round(x) + 0, y: Math.round(y) + 0 };
+		};
 		// What an agent can call. Its arguments come from a model, so each one is checked. Every change goes through the
 		// same callback as a person's, which can cancel it.
 		const select = (nodes: string[], edges: string[] = []) => {
@@ -305,6 +322,7 @@ const canvas = definePrimitive({
 			},
 		});
 		return {
+			pointAt,
 			select,
 			move,
 			connect,
@@ -668,6 +686,7 @@ export function Canvas({
 	...props
 }: CanvasProps) {
 	const sizes = useRef<Record<string, NodeSize>>({});
+	const [controller] = useState(() => createController<CanvasController>());
 	const nodeElements = useRef(new Map<string, HTMLElement>());
 	const [internalSelection, setInternalSelection] = useState<CanvasSelection>({ nodes: [], edges: [] });
 	const activeSelection = selection ?? internalSelection;
@@ -687,8 +706,9 @@ export function Canvas({
 		ref,
 		() => ({
 			getNodeSizes: () => Object.fromEntries(Object.entries(sizes.current).map(([id, size]) => [id, { ...size }])),
+			pointAt: (clientX, clientY) => controller.pointAt(clientX, clientY) ?? null,
 		}),
-		[],
+		[controller],
 	);
 	useEffect(() => {
 		const ids = new Map<Element, string>();
@@ -716,6 +736,7 @@ export function Canvas({
 	const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
 	return (
 		<Root
+			controller={controller}
 			{...props}
 			label={label}
 			nodeCount={graph.nodes.length}

@@ -492,3 +492,8 @@ test("Canvas localizes graph copy while preserving edits", async ({ page }) => {
 	await expect(node("note")).toHaveCount(0);
 	await expect.poll(relativeTop).toBeCloseTo(before + 13, 0);
 });
+
+test("Canvas follows the direction control", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "rtl", theme: "light" }, "/components/Canvas");
+	await expect(page.locator(".canvas-preview .ts-canvas")).toHaveAttribute("dir", "rtl");
+});

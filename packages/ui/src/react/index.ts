@@ -100,6 +100,8 @@ export type { FormProps } from "./Form/Form.js";
 export { Form } from "./Form/Form.js";
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
+export type { InspectorAction, InspectorField, InspectorProps } from "./Inspector/Inspector.js";
+export { Inspector } from "./Inspector/Inspector.js";
 export type {
 	MenuCheckboxItemProps,
 	MenuContentProps,
@@ -146,6 +148,8 @@ export type { OwnerMessageViewProps } from "./OwnerMessage/OwnerMessage.js";
 export { approvalDecisions, OwnerMessageView, pendingQuestion } from "./OwnerMessage/OwnerMessage.js";
 export type { PageHeaderProps } from "./PageHeader/PageHeader.js";
 export { PageHeader } from "./PageHeader/PageHeader.js";
+export type { PaletteInsertDetails, PaletteItem, PaletteProps, PaletteSection } from "./Palette/Palette.js";
+export { DEFAULT_PALETTE_SECTIONS, Palette } from "./Palette/Palette.js";
 export type {
 	SegmentedControlIndicatorProps,
 	SegmentedControlItemProps,

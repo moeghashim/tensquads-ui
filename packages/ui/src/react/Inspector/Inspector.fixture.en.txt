@@ -1,0 +1,1 @@
+Inspector edits host-owned workflow state and has no OpenUI fixture.
