@@ -6,9 +6,13 @@ The viewport starts at `{ x: 0, y: 0, zoom: 1 }`. Pass `viewport` and `onViewpor
 
 Click a node or edge to select it. Hold Shift to toggle an item in the selection. Click empty space to clear it. Pass `selection` and `onSelectionChange` to control selection; omit `selection` to let Canvas manage it. `CanvasSelection` contains node and edge ID arrays.
 
+Pass `onNodeMove` to make nodes movable. Canvas reports one logical integer position per moved node and waits for the host to pass the updated graph back. If the pressed node is selected, the selected node group moves together. Without `onNodeMove`, nodes stay fixed. In select mode, drag a node; Escape cancels the current drag. Dragging a selected group keeps its selection.
+
 ## Keyboard
 
 Canvas uses a listbox with options because workflow nodes are spatially arranged choices that can be selected together. Tab enters on the first selected node, or the first node, and leaves the group on the next Tab. Arrow keys move focus to the nearest node in that screen direction; Home and End move to the first and last node. Enter or Space selects the focused node, and Shift+Enter or Shift+Space toggles it. Escape clears the selection. Focused nodes outside the viewport are brought into view.
+
+With `onNodeMove`, Shift+arrow moves the focused node or its selected group by 20 physical pixels. Focus stays on the node.
 
 Use `ref` with `CanvasHandle` to read measured node sizes for `tidyLayout`. Before a node is measured, its edge uses the shared 180px estimate.
 

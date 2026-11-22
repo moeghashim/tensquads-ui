@@ -1,6 +1,7 @@
 import {
 	type ChangeDetails,
 	createChange,
+	createMove,
 	createRovingFocus,
 	createSelection,
 	createViewport,
@@ -15,7 +16,7 @@ import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react
 import type { WorkflowGraph } from "../../schemas/workflow.js";
 import { Node } from "../Node/Node.js";
 import { edgePath, portPosition } from "../workflow/geometry.js";
-import { connectionsLabel, hiddenKind } from "../workflow/labels.js";
+import { connectionsLabel, hiddenKind, kindLabel } from "../workflow/labels.js";
 import { DEFAULT_NODE_WIDTH, type NodeSize } from "../workflow/tidy.js";
 import { type CanvasViewport, toLogical, toPhysical } from "../workflow/viewport.js";
 
@@ -33,6 +34,7 @@ export type CanvasProps = Omit<
 	onViewportChange?: (viewport: CanvasViewport, details: ChangeDetails) => void;
 	selection?: CanvasSelection;
 	onSelectionChange?: (selection: CanvasSelection, details: ChangeDetails) => void;
+	onNodeMove?: (id: string, position: { x: number; y: number }, details: ChangeDetails) => void;
 	grid?: boolean;
 	mode?: "select" | "pan";
 	locale?: "en" | "ar";
@@ -41,13 +43,25 @@ export type CanvasProps = Omit<
 	ref?: Ref<CanvasHandle>;
 };
 
-type CanvasState = { viewport: CanvasViewport; selected: string[]; focused: string | null };
+type MovePoint = { x: number; y: number };
+type MoveDraft = { keys: string[]; dx: number; dy: number } | null;
+type CanvasState = {
+	viewport: CanvasViewport;
+	selected: string[];
+	focused: string | null;
+	positions: Record<string, MovePoint>;
+	moving: MoveDraft;
+};
 type CanvasOptions = {
 	viewport?: CanvasViewport;
 	defaultViewport?: CanvasViewport;
 	onViewportChange?: CanvasProps["onViewportChange"];
 	selected?: string[];
 	onSelectedChange?: (selection: string[], details: ChangeDetails) => void;
+	positions?: Record<string, MovePoint>;
+	onPositionsChange?: (positions: Record<string, MovePoint>, details: ChangeDetails) => void;
+	titles?: Record<string, string>;
+	movable?: boolean;
 	mode?: string;
 	locale?: "en" | "ar";
 	direction?: "ltr" | "rtl";
@@ -61,20 +75,27 @@ const canvas = definePrimitive({
 		onViewportChange: "callback",
 		selected: "value",
 		onSelectedChange: "callback",
+		positions: "value",
+		onPositionsChange: "callback",
+		titles: "value",
+		movable: "boolean",
 		mode: "string",
 		locale: "string",
 		direction: "string",
 	},
-	controlled: ["viewport", "selected"],
-	live: ["viewport"],
+	controlled: ["viewport", "selected", "positions"],
+	live: ["viewport", "moving", "positions"],
 	state: (options: CanvasOptions): CanvasState => ({
 		viewport: options.viewport ?? options.defaultViewport ?? { x: 0, y: 0, zoom: 1 },
 		selected: options.selected ?? [],
+		positions: options.positions ?? {},
+		moving: null,
 		focused: null,
 	}),
 	sync: (options: CanvasOptions) => ({
 		...(options.viewport === undefined ? {} : { viewport: options.viewport }),
 		...(options.selected === undefined ? {} : { selected: options.selected }),
+		...(options.positions === undefined ? {} : { positions: options.positions }),
 	}),
 	api: (context) => {
 		const change = createChange(context);
@@ -84,6 +105,53 @@ const canvas = definePrimitive({
 			set: (value, details) => change("selected", value, details),
 			order: () => [],
 		});
+		const physicalStore = {
+			...context.store,
+			get: () => {
+				const state = context.store.get();
+				return {
+					...state,
+					positions: Object.fromEntries(
+						Object.entries(state.positions).map(([id, p]) => [id, { ...p, x: rtl() ? -p.x + 0 : p.x }]),
+					),
+				};
+			},
+		};
+		const move = createMove(
+			{ store: physicalStore, onDestroy: context.onDestroy },
+			{
+				key: "positions",
+				draft: "moving",
+				set: (positions, details) => {
+					const logical = Object.fromEntries(
+						Object.entries(positions).map(([id, p]) => [id, { ...p, x: rtl() ? -p.x + 0 : p.x }]),
+					);
+					return change("positions", logical, details);
+				},
+				step: () => 1,
+				scale: () => context.store.get().viewport.zoom,
+				disabled: () => !context.options().movable || context.options().mode === "pan",
+				group: (id) =>
+					context.store.get().selected.includes(`node:${id}`)
+						? context.store
+								.get()
+								.selected.filter((key) => key.startsWith("node:"))
+								.map((key) => key.slice(5))
+						: [id],
+				label: (id) => context.options().titles?.[id] ?? id,
+				message: ({ keys, label, at }) => {
+					if (keys.length > 1) {
+						return context.options().locale === "ar"
+							? `العقد المنقولة: ${keys.length}.`
+							: `${keys.length} nodes moved.`;
+					}
+					const x = rtl() ? -at.x + 0 : at.x;
+					return context.options().locale === "ar"
+						? `موضع ${label} الآن ${x}، ${at.y}.`
+						: `${label} moved to ${x}, ${at.y}.`;
+				},
+			},
+		);
 		const roving = createRovingFocus(context, {
 			slot: "node",
 			key: "focused",
@@ -93,6 +161,7 @@ const canvas = definePrimitive({
 			move: spatialMove(),
 		});
 		let pointerDown: { x: number; y: number } | null = null;
+		let selectedOnPointerDown = false;
 		const rtl = () => context.options().direction === "rtl";
 		const width = () => context.element("root")?.getBoundingClientRect().width ?? 0;
 		// The state is logical in both directions. createViewport measures from the left, so it gets a physical view of it.
@@ -118,12 +187,47 @@ const canvas = definePrimitive({
 			},
 		);
 		return {
+			move,
+			moveEnabled: () => !!context.options().movable && context.options().mode !== "pan",
+			isMoving: () => context.store.get().moving !== null,
+			groupFor: (id: string) =>
+				context.store.get().selected.includes(`node:${id}`)
+					? context.store
+							.get()
+							.selected.filter((key) => key.startsWith("node:"))
+							.map((key) => key.slice(5))
+					: [id],
 			viewport,
 			roving,
 			rtl,
 			selection,
 			isPan: () => context.options().mode === "pan",
 			pointerDown: (value: { x: number; y: number } | null) => (pointerDown = value),
+			nodePointerDown: (event: PointerEvent, key: string, el: HTMLElement) => {
+				if (context.options().mode === "pan") {
+					viewport.pointerdown(event);
+					return;
+				}
+				const selected = context.store.get().selected.includes(`node:${key}`);
+				selectedOnPointerDown = !selected;
+				if (!selected) selectItem(selection, `node:${key}`, event);
+				move.pointerdown(event, key, el);
+			},
+			nodePress: (key: string, event?: Event) => {
+				const down = pointerDown;
+				pointerDown = null;
+				if (
+					selectedOnPointerDown ||
+					(down &&
+						event &&
+						Math.hypot((event as MouseEvent).clientX - down.x, (event as MouseEvent).clientY - down.y) > 3)
+				) {
+					selectedOnPointerDown = false;
+					return;
+				}
+				if (!context.options().mode || context.options().mode !== "pan")
+					selectItem(selection, `node:${key}`, event);
+			},
 			get pointerPosition() {
 				return pointerDown;
 			},
@@ -149,6 +253,8 @@ const canvas = definePrimitive({
 				dir: api.rtl() ? "rtl" : "ltr",
 				"aria-label": props.label,
 				tabindex: props.nodeCount === 0 ? "0" : "-1",
+				"data-mode": api.isPan() ? "pan" : "select",
+				"data-movable": api.moveEnabled() ? "true" : "false",
 				style: css({
 					"background-position": `${api.rtl() ? "right" : "left"} ${state.viewport.x}px top ${state.viewport.y}px`,
 					"background-size": `${20 * state.viewport.zoom}px ${20 * state.viewport.zoom}px`,
@@ -170,6 +276,14 @@ const canvas = definePrimitive({
 						event.target === el ||
 						(event.target instanceof Element &&
 							event.target.matches('[data-slot="workflow-canvas-world"], [data-canvas-edge-layer]'));
+					if (event.target instanceof Element) {
+						const node = event.target.closest<HTMLElement>("[data-node-id]");
+						const key = node?.dataset.nodeId;
+						if (node && key) {
+							api.nodePointerDown(event, key, node);
+							return;
+						}
+					}
 					if (ground || api.isPan()) api.viewport.pointerdown(event);
 				},
 				click: (event, { el, api }) => {
@@ -193,6 +307,7 @@ const canvas = definePrimitive({
 				keydown: (event, { api, el }) => {
 					if (!el || event.defaultPrevented || isIgnored(event.target, el)) return;
 					if (event.key === "Escape") {
+						if (api.isMoving()) return;
 						if (api.hasSelection()) {
 							event.preventDefault();
 							api.clearSelection(event, "escape-key");
@@ -226,13 +341,35 @@ const canvas = definePrimitive({
 		node: slot<{ value: string; description: string | undefined }>({
 			props: { value: "string", description: "string" },
 			role: "option",
+			direct: direct(["style", "data-dragging"]),
 			focus: "roving",
-			press: ({ api, key }, event) => api.press(`node:${key}`, event),
+			press: ({ api, key }, event) => api.nodePress(key, event),
 			keys: ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"],
 			bind: (el, part) => part.api.roving.bind(el, part),
 			on: {
 				keydown: (event, { el, api, key }) => {
 					if (!el) return;
+					if (
+						event.shiftKey &&
+						!event.altKey &&
+						!event.ctrlKey &&
+						!event.metaKey &&
+						["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)
+					) {
+						if (api.moveEnabled()) {
+							const delta =
+								event.key === "ArrowUp"
+									? [0, -20]
+									: event.key === "ArrowDown"
+										? [0, 20]
+										: event.key === "ArrowLeft"
+											? [-20, 0]
+											: [20, 0];
+							api.move.moveBy(api.groupFor(key), delta[0] ?? 0, delta[1] ?? 0, { reason: "move-key", event });
+							event.preventDefault();
+						}
+						return;
+					}
 					const moved = api.roving.keydown(event, el);
 					if (moved) {
 						event.preventDefault();
@@ -261,12 +398,57 @@ const canvas = definePrimitive({
 				tabindex: api.roving.tabIndex(state, { key, props }),
 				"aria-selected": String(state.selected.includes(`node:${key}`)),
 				"aria-description": props.description,
+				"data-dragging": api.move.dragging(state, key) ? "" : undefined,
+				style: `inset-inline-start:${state.positions[key]?.x ?? 0}px;inset-block-start:${state.positions[key]?.y ?? 0}px;${api.move.style(state, key) ?? ""}`,
 			}),
+		}),
+		path: slot<{
+			value: string;
+			d: string;
+			from: string;
+			to: string;
+			dx1: number;
+			dy1: number;
+			dx2: number;
+			dy2: number;
+		}>({
+			props: {
+				value: "string",
+				d: "string",
+				from: "string",
+				to: "string",
+				dx1: "number",
+				dy1: "number",
+				dx2: "number",
+				dy2: "number",
+			},
+			direct: direct(["d"]),
+			attrs: (state, { props, api }) => {
+				const draft = state.moving;
+				const fromDragged = !!draft?.keys.includes(props.from);
+				const toDragged = !!draft?.keys.includes(props.to);
+				const x1 =
+					(state.positions[props.from]?.x ?? 0) +
+					props.dx1 +
+					(fromDragged && draft ? (api.rtl() ? -draft.dx : draft.dx) : 0);
+				const y1 = (state.positions[props.from]?.y ?? 0) + props.dy1 + (fromDragged && draft ? draft.dy : 0);
+				const x2 =
+					(state.positions[props.to]?.x ?? 0) +
+					props.dx2 +
+					(toDragged && draft ? (api.rtl() ? -draft.dx : draft.dx) : 0);
+				const y2 = (state.positions[props.to]?.y ?? 0) + props.dy2 + (toDragged && draft ? draft.dy : 0);
+				return { d: edgePath(x1, y1, x2, y2) };
+			},
 		}),
 	}),
 });
 
-const { Root, World, Node: NodePart } = createParts(canvas, { root: "div", world: "div", node: "div" });
+const {
+	Root,
+	World,
+	Node: NodePart,
+	Path,
+} = createParts(canvas, { root: "div", world: "div", node: "div", path: "path" });
 
 function isIgnored(target: EventTarget | null, root: HTMLElement) {
 	if (!(target instanceof Element)) return false;
@@ -317,6 +499,7 @@ export function Canvas({
 	onViewportChange,
 	selection,
 	onSelectionChange,
+	onNodeMove,
 	grid = true,
 	mode = "select",
 	locale = "en",
@@ -334,6 +517,15 @@ export function Canvas({
 		[activeSelection, graph],
 	);
 	const selectedKeys = useMemo(() => fromCanvasSelection(selectedIds), [selectedIds]);
+	const positions = useMemo(
+		() =>
+			Object.fromEntries(graph.nodes.map((node) => [node.id, { x: node.position.x + 0, y: node.position.y + 0 }])),
+		[graph.nodes],
+	);
+	const titles = useMemo(
+		() => Object.fromEntries(graph.nodes.map((node) => [node.id, node.title.trim() || kindLabel(node.kind, locale)])),
+		[graph.nodes, locale],
+	);
 	const [, setSizeVersion] = useState(0);
 	useImperativeHandle(
 		ref,
@@ -375,6 +567,19 @@ export function Canvas({
 			defaultViewport={defaultViewport}
 			onViewportChange={onViewportChange}
 			selected={selectedKeys}
+			positions={positions}
+			titles={titles}
+			movable={onNodeMove !== undefined}
+			onPositionsChange={(next, details) => {
+				let changed = false;
+				for (const node of graph.nodes) {
+					const position = next[node.id];
+					if (!position || (position.x === node.position.x && position.y === node.position.y)) continue;
+					changed = true;
+					onNodeMove?.(node.id, { x: position.x + 0, y: position.y + 0 }, details);
+				}
+				return changed;
+			}}
 			mode={mode}
 			onSelectedChange={(keys, details) => {
 				const next = toCanvasSelection(keys, graph);
@@ -409,8 +614,28 @@ export function Canvas({
 									data-selected={selectedIds.edges.includes(edge.id) ? "true" : undefined}
 									data-edge-from-port={edge.fromPort ?? 0}
 								>
-									<path d={edgePath(start.x, start.y, end.x, end.y)} className="ts-canvas__edge" />
-									<path d={edgePath(start.x, start.y, end.x, end.y)} className="ts-canvas__edge-hit" />
+									<Path
+										value={`${edge.id}:visible`}
+										d={edgePath(start.x, start.y, end.x, end.y)}
+										from={from.id}
+										to={to.id}
+										dx1={start.x - from.position.x}
+										dy1={start.y - from.position.y}
+										dx2={end.x - to.position.x}
+										dy2={end.y - to.position.y}
+										className="ts-canvas__edge"
+									/>
+									<Path
+										value={`${edge.id}:hit`}
+										d={edgePath(start.x, start.y, end.x, end.y)}
+										from={from.id}
+										to={to.id}
+										dx1={start.x - from.position.x}
+										dy1={start.y - from.position.y}
+										dx2={end.x - to.position.x}
+										dy2={end.y - to.position.y}
+										className="ts-canvas__edge-hit"
+									/>
 								</g>
 							) : null;
 						})}
@@ -429,7 +654,6 @@ export function Canvas({
 								else nodeElements.current.delete(node.id);
 							}}
 							className="ts-canvas__node"
-							style={{ insetInlineStart: node.position.x, insetBlockStart: node.position.y }}
 						>
 							{kind && <span className="ts-visually-hidden">{`${kind}: `}</span>}
 							<Node

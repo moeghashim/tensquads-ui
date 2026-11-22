@@ -1427,7 +1427,7 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 	const ar = locale === "ar";
 	const [mode, setMode] = useState<"select" | "pan">("select");
-	const graph: WorkflowGraph = {
+	const [graph, setGraph] = useState<WorkflowGraph>(() => ({
 		nodes: [
 			{ id: "start", kind: "start", title: ar ? "البداية" : "Start", position: { x: 40, y: 110 } },
 			{
@@ -1479,7 +1479,7 @@ function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 			{ id: "other-end", from: "other", to: "end" },
 			{ id: "approval-end", from: "approval", to: "end" },
 		],
-	};
+	}));
 	return (
 		<section className="canvas-preview" aria-label={ar ? "مثال سير العمل" : "Workflow example"}>
 			<div className="canvas-preview__surface">
@@ -1488,6 +1488,12 @@ function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 					locale={locale}
 					label={ar ? "منشئ سير العمل" : "Workflow builder"}
 					mode={mode}
+					onNodeMove={(id, position) =>
+						setGraph((current) => ({
+							...current,
+							nodes: current.nodes.map((node) => (node.id === id ? { ...node, position } : node)),
+						}))
+					}
 					defaultViewport={{ x: 0, y: 0, zoom: 0.65 }}
 				>
 					<div className="canvas-preview__toolbar">

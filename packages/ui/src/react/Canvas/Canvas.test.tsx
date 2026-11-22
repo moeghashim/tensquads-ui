@@ -90,6 +90,90 @@ describe("Canvas", () => {
 		expect(markup).toContain('tabindex="0"');
 	});
 
+	it.each(["ltr", "rtl"] as const)("moves focused nodes by physical keyboard direction in %s", (dir) => {
+		const onNodeMove = vi.fn();
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" dir={dir} onNodeMove={onNodeMove} />);
+		const start = getByRole("option", { name: "Start" });
+		start.focus();
+		fireEvent.keyDown(start, { key: "ArrowRight", shiftKey: true });
+		const x = dir === "rtl" ? 0 : 40;
+		expect(onNodeMove).toHaveBeenCalledTimes(1);
+		expect(onNodeMove).toHaveBeenCalledWith("start", { x, y: 30 }, expect.objectContaining({ reason: "move-key" }));
+		fireEvent.keyDown(start, { key: "ArrowRight", shiftKey: true });
+		expect(onNodeMove).toHaveBeenCalledTimes(2);
+	});
+
+	it("moves every selected node and leaves a host-controlled graph untouched", () => {
+		const frozen: WorkflowGraph = {
+			nodes: graph.nodes.map((node) => ({ ...node, position: { ...node.position } })),
+			edges: graph.edges.map((edge) => ({ ...edge })),
+		};
+		for (const node of frozen.nodes) {
+			Object.freeze(node.position);
+			Object.freeze(node);
+		}
+		for (const edge of frozen.edges) Object.freeze(edge);
+		Object.freeze(frozen.nodes);
+		Object.freeze(frozen.edges);
+		Object.freeze(frozen);
+		const onNodeMove = vi.fn();
+		const { getByRole } = render(
+			<Canvas
+				graph={frozen}
+				label="Workflow"
+				selection={{ nodes: ["start", "end"], edges: [] }}
+				onNodeMove={onNodeMove}
+			/>,
+		);
+		fireEvent.keyDown(getByRole("option", { name: "Start" }), { key: "ArrowDown", shiftKey: true });
+		expect(onNodeMove).toHaveBeenCalledTimes(2);
+		expect(frozen.nodes[0]?.position).toEqual({ x: 20, y: 30 });
+		expect(frozen.nodes[1]?.position).toEqual({ x: 240, y: 30 });
+	});
+
+	it("keeps nodes fixed without a move callback and includes server path data", () => {
+		const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" />);
+		expect(markup).toContain("inset-inline-start:20px");
+		expect(markup).toContain('d="M200,');
+	});
+
+	it("draws a drag without rendering and waits for the host graph", async () => {
+		const onNodeMove = vi.fn();
+		let renders = 0;
+		const { getByRole } = render(
+			<Profiler
+				id="canvas"
+				onRender={() => {
+					renders += 1;
+				}}
+			>
+				<Canvas
+					graph={graph}
+					label="Workflow"
+					selection={{ nodes: ["start"], edges: [] }}
+					onNodeMove={onNodeMove}
+				/>
+			</Profiler>,
+		);
+		const start = getByRole("option", { name: "Start" });
+		const initialRenders = renders;
+		fireEvent.pointerDown(start, {
+			pointerId: 1,
+			button: 0,
+			isPrimary: true,
+			pointerType: "mouse",
+			clientX: 10,
+			clientY: 10,
+		});
+		fireEvent.pointerMove(document, { pointerId: 1, pointerType: "mouse", buttons: 1, clientX: 30, clientY: 30 });
+		await act(async () => new Promise((resolve) => requestAnimationFrame(() => resolve(undefined))));
+		expect(renders).toBe(initialRenders);
+		fireEvent.pointerUp(document, { pointerId: 1, pointerType: "mouse", button: 0, clientX: 30, clientY: 30 });
+		expect(onNodeMove).toHaveBeenCalledTimes(1);
+		fireEvent.click(start);
+		expect(start).toHaveStyle({ insetInlineStart: "20px", insetBlockStart: "30px" });
+	});
+
 	it.each(["ltr", "rtl"] as const)("renders nodes and edges on the server in %s", (dir) => {
 		const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" dir={dir} />);
 		expect(markup).toContain('role="listbox"');
@@ -193,6 +277,7 @@ describe("Canvas", () => {
 		const start = getByRole("option", { name: "Start" });
 		const end = getByRole("option", { name: "End" });
 		fireEvent.click(start);
+		expect(onSelectionChange).toHaveBeenCalled();
 		expect(start).toHaveAttribute("aria-selected", "true");
 		expect(onSelectionChange).toHaveBeenLastCalledWith(
 			{ nodes: ["start"], edges: [] },

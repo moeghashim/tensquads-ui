@@ -2,6 +2,64 @@ import { expect, type Locator, test } from "@playwright/test";
 import { capturePreviewScreenshots, expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
+	test(`Canvas moves and cancels nodes in ${locale}`, async ({ page }) => {
+		const direction = locale === "ar" ? "rtl" : "ltr";
+		await openPreview(page, { locale, direction, theme: "light" }, "/components/Canvas");
+		const root = page.getByRole("region", { name: locale === "ar" ? "منشئ سير العمل" : "Workflow builder" });
+		const node = (id: string) => root.locator(`[data-node-id="${id}"]`);
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+		await root.scrollIntoViewIfNeeded();
+		const clickBefore = await node("refund").boundingBox();
+		await node("refund").click();
+		await expect(node("refund")).toHaveAttribute("aria-selected", "true");
+		const before = await node("refund").boundingBox();
+		if (!before) throw new Error("Refund node has no visible box");
+		expect(before?.x).toBeCloseTo(clickBefore?.x ?? NaN, 1);
+		expect(before?.y).toBeCloseTo(clickBefore?.y ?? NaN, 1);
+		const center = { x: before.x + before.width / 2, y: before.y + before.height / 2 };
+		await page.mouse.move(center.x, center.y);
+		await page.mouse.down();
+		await page.mouse.move(center.x + 60, center.y + 40, { steps: 5 });
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+		const during = await node("refund").boundingBox();
+		expect(during?.x).toBeCloseTo(before.x + 60, 0);
+		expect(during?.y).toBeCloseTo(before.y + 40, 0);
+		await page.mouse.up();
+		await expect.poll(async () => (await node("refund").boundingBox())?.x).toBeCloseTo(before.x + 60, 0);
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+		await expect(node("refund")).toHaveAttribute("aria-selected", "true");
+
+		await page.keyboard.press("Shift+ArrowRight");
+		await expect.poll(async () => (await node("refund").boundingBox())?.x).toBeCloseTo(before.x + 60 + 13, 0);
+
+		const cancelStart = await node("question").boundingBox();
+		if (!cancelStart) throw new Error("Question node has no visible box");
+		const cancelCenter = { x: cancelStart.x + cancelStart.width / 2, y: cancelStart.y + cancelStart.height / 2 };
+		await page.mouse.move(cancelCenter.x, cancelCenter.y);
+		await page.mouse.down();
+		await page.mouse.move(cancelCenter.x + 45, cancelCenter.y + 25, { steps: 3 });
+		await page.keyboard.press("Escape");
+		await page.mouse.up();
+		await expect(node("question")).toHaveAttribute("aria-selected", "true");
+		await expect.poll(async () => (await node("question").boundingBox())?.x).toBeCloseTo(cancelStart.x, 0);
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+
+		await node("classify").click();
+		await page.keyboard.down("Shift");
+		await node("refund").click();
+		await page.keyboard.up("Shift");
+		const classifyBefore = await node("classify").boundingBox();
+		const refundBefore = await node("refund").boundingBox();
+		if (!classifyBefore || !refundBefore) throw new Error("Selected group has no visible boxes");
+		const groupCenter = { x: refundBefore.x + refundBefore.width / 2, y: refundBefore.y + refundBefore.height / 2 };
+		await page.mouse.move(groupCenter.x, groupCenter.y);
+		await page.mouse.down();
+		await page.mouse.move(groupCenter.x + 30, groupCenter.y + 20, { steps: 3 });
+		await page.mouse.up();
+		await expect.poll(async () => (await node("classify").boundingBox())?.x).toBeCloseTo(classifyBefore.x + 30, 0);
+		await expect.poll(async () => (await node("refund").boundingBox())?.x).toBeCloseTo(refundBefore.x + 30, 0);
+	});
+
 	for (const theme of ["light", "dark"] as const) {
 		test(`Canvas renders edges and supports viewport gestures in ${locale} ${theme}`, async ({ page }, testInfo) => {
 			const direction = locale === "ar" ? "rtl" : "ltr";
