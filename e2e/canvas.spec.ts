@@ -47,14 +47,13 @@ for (const locale of ["en", "ar"] as const) {
 			const surface = await root.boundingBox();
 			if (!surface) throw new Error("Canvas surface has no box");
 			const point = { x: surface.x + surface.width * 0.55, y: surface.y + surface.height * 0.45 };
-			const graphPoint = async () => {
-				const transform = await world.evaluate((element) => getComputedStyle(element).transform);
-				const values = transform.match(/matrix\(([^,]+),\s*([^,]+),\s*([^,]+),\s*([^,]+),\s*([^,]+),\s*([^)]+)\)/);
-				return {
-					x: (point.x - surface.x - Number(values?.[5])) / Number(values?.[1]),
-					y: (point.y - surface.y - Number(values?.[6])) / Number(values?.[4]),
-				};
-			};
+			// The world is a zero-size box at the graph origin, so its box is the origin on screen in both directions.
+			const graphPoint = () =>
+				world.evaluate((element, at) => {
+					const origin = element.getBoundingClientRect();
+					const zoom = new DOMMatrix(getComputedStyle(element).transform).a;
+					return { x: (at.x - origin.left) / zoom, y: (at.y - origin.top) / zoom };
+				}, point);
 			const beforeZoomPoint = await graphPoint();
 			await root.evaluate((element, coordinates) => {
 				element.dispatchEvent(

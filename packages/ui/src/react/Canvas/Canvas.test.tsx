@@ -1,4 +1,5 @@
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
+import { Profiler } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { WorkflowGraph } from "../../schemas/workflow.js";
@@ -46,23 +47,37 @@ describe("Canvas", () => {
 		if (dir === "rtl") expect(markup).toContain('transform="scale(-1 1)"');
 	});
 
-	it("renders the default and controlled viewport without mutating the graph", () => {
+	it("places the world from the inline-start edge without a measured width", () => {
+		const ltr = renderToStaticMarkup(
+			<Canvas graph={graph} label="Workflow" defaultViewport={{ x: 18, y: 9, zoom: 1.2 }} />,
+		);
+		expect(ltr).toContain("translate(18px, 9px) scale(1.2)");
+		const rtl = renderToStaticMarkup(
+			<Canvas graph={graph} label="Workflow" dir="rtl" viewport={{ x: 18, y: 9, zoom: 1.2 }} />,
+		);
+		expect(rtl).toContain("translate(-18px, 9px) scale(1.2)");
+		expect(rtl).toContain("left:100%");
+	});
+
+	it("reports a logical viewport in RTL", () => {
 		const onViewportChange = vi.fn();
-		const controlled = render(
+		const { getByRole } = render(
 			<Canvas
 				graph={graph}
 				label="Workflow"
-				viewport={{ x: 50, y: 12, zoom: 1 }}
+				dir="rtl"
+				viewport={{ x: 40, y: 5, zoom: 1 }}
 				onViewportChange={onViewportChange}
 			/>,
 		);
-		expect(controlled.getByRole("region", { name: "Workflow" })).toHaveAttribute("data-slot", "workflow-canvas");
-		expect(graph.nodes[0]?.position).toEqual({ x: 20, y: 30 });
-		controlled.unmount();
-		const uncontrolled = render(
-			<Canvas graph={graph} label="Workflow" defaultViewport={{ x: 18, y: 9, zoom: 1.2 }} />,
+		const root = getByRole("region");
+		vi.spyOn(root, "getBoundingClientRect").mockReturnValue(new DOMRect(100, 0, 500, 300));
+		// The wheel moves the graph 20px to the left, which is further from the right edge.
+		fireEvent.wheel(root, { deltaX: 20, deltaY: 0, deltaMode: 0 });
+		expect(onViewportChange).toHaveBeenCalledWith(
+			{ x: 60, y: 5, zoom: 1 },
+			expect.objectContaining({ reason: "wheel" }),
 		);
-		expect(uncontrolled.getByRole("region")).toBeInTheDocument();
 	});
 
 	it("updates an uncontrolled viewport and reports logical controlled changes", () => {
@@ -93,16 +108,17 @@ describe("Canvas", () => {
 		});
 	});
 
-	it("does not rerender Canvas children during live pans", () => {
-		let renders = 0;
-		function Example() {
-			renders += 1;
-			return <Canvas graph={graph} label="Workflow" />;
-		}
-		const { getByRole } = render(<Example />);
-		const before = renders;
-		fireEvent.wheel(getByRole("region"), { deltaY: -20, deltaX: 0, deltaMode: 0, clientX: 0, clientY: 0 });
-		expect(renders).toBe(before);
+	it("does not render nodes while panning", () => {
+		const onRender = vi.fn();
+		const { getByRole, container } = render(
+			<Profiler id="canvas" onRender={onRender}>
+				<Canvas graph={graph} label="Workflow" />
+			</Profiler>,
+		);
+		onRender.mockClear();
+		fireEvent.wheel(getByRole("region"), { deltaY: -20, deltaX: 0, deltaMode: 0 });
+		expect(container.querySelector(".ts-canvas__world")).toHaveStyle({ transform: "translate(0px, 20px) scale(1)" });
+		expect(onRender).not.toHaveBeenCalled();
 	});
 
 	it("returns a copy of node sizes and prunes removed nodes", () => {

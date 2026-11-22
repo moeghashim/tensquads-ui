@@ -1,4 +1,4 @@
-import { type ChangeDetails, createChange, createViewport, css, definePrimitive, live } from "@ui-sdk/core";
+import { type ChangeDetails, createChange, createViewport, css, definePrimitive, direct } from "@ui-sdk/core";
 import { createParts, type PartProps } from "@ui-sdk/react/primitive";
 import type { ReactNode, Ref } from "react";
 import { useEffect, useImperativeHandle, useRef, useState } from "react";
@@ -27,12 +27,11 @@ export type CanvasProps = Omit<
 	ref?: Ref<CanvasHandle>;
 };
 
-type CanvasState = { viewport: CanvasViewport; width: number; grid: boolean };
+type CanvasState = { viewport: CanvasViewport };
 type CanvasOptions = {
 	viewport?: CanvasViewport;
 	defaultViewport?: CanvasViewport;
 	onViewportChange?: CanvasProps["onViewportChange"];
-	grid?: boolean;
 	locale?: "en" | "ar";
 	direction?: "ltr" | "rtl";
 };
@@ -43,72 +42,65 @@ const canvas = definePrimitive({
 		viewport: "value",
 		defaultViewport: "value",
 		onViewportChange: "callback",
-		grid: "boolean",
 		locale: "string",
 		direction: "string",
 	},
 	controlled: ["viewport"],
-	live: ["viewport", "width", "grid"],
+	live: ["viewport"],
 	state: (options: CanvasOptions): CanvasState => ({
 		viewport: options.viewport ?? options.defaultViewport ?? { x: 0, y: 0, zoom: 1 },
-		width: 0,
-		grid: options.grid ?? true,
 	}),
-	sync: (options: CanvasOptions) => ({
-		...(options.viewport === undefined ? {} : { viewport: options.viewport }),
-		...(options.grid === undefined ? {} : { grid: options.grid }),
-	}),
+	sync: (options: CanvasOptions) => (options.viewport === undefined ? {} : { viewport: options.viewport }),
 	api: (context) => {
 		const change = createChange(context);
-		const viewport = createViewport(context, {
-			key: "viewport",
-			surface: () => context.element("root"),
-			minZoom: () => 0.5,
-			maxZoom: () => 2,
-			message: (zoom) =>
-				context.options().locale === "ar"
-					? `التكبير ${Math.round(zoom * 100)}%`
-					: `Zoom ${Math.round(zoom * 100)}%`,
-			set: (value, details) => change("viewport", value, details),
-		});
-		return { viewport, direction: () => context.options().direction ?? "ltr" };
+		const rtl = () => context.options().direction === "rtl";
+		const width = () => context.element("root")?.getBoundingClientRect().width ?? 0;
+		// The state is logical in both directions. createViewport measures from the left, so it gets a physical view of it.
+		const store = {
+			...context.store,
+			get: () => {
+				const state = context.store.get();
+				return { ...state, viewport: toPhysical(state.viewport, width(), rtl()) };
+			},
+		};
+		const viewport = createViewport(
+			{ store, onDestroy: context.onDestroy },
+			{
+				key: "viewport",
+				surface: () => context.element("root"),
+				minZoom: () => 0.5,
+				maxZoom: () => 2,
+				message: (zoom) =>
+					context.options().locale === "ar"
+						? `التكبير ${Math.round(zoom * 100)}%`
+						: `Zoom ${Math.round(zoom * 100)}%`,
+				set: (value, details) => change("viewport", toLogical(value, width(), rtl()), details),
+			},
+		);
+		return { viewport, rtl };
 	},
 	slots: (slot) => ({
 		root: slot<{ label: string; mode: string }>({
 			props: { label: "string", mode: "string" },
+			// Panning writes the style to the element. It renders nothing, and the server markup has it too.
+			direct: direct(["style"]),
 			attrs: (state, { props, api }) => ({
 				role: "region",
-				dir: api.direction(),
+				dir: api.rtl() ? "rtl" : "ltr",
 				"aria-label": props.label,
 				tabindex: "0",
-				"data-grid": state.grid ? "true" : "false",
-			}),
-			live: live((state) => ({
-				"data-grid": state.grid ? "true" : "false",
 				style: css({
-					"background-position": `${state.viewport.x}px ${state.viewport.y}px`,
+					"background-position": `${api.rtl() ? "right" : "left"} ${state.viewport.x}px top ${state.viewport.y}px`,
 					"background-size": `${20 * state.viewport.zoom}px ${20 * state.viewport.zoom}px`,
 				}),
-			})),
+			}),
 			bind: (el, part) => {
-				const observer = new ResizeObserver((entries) => {
-					const width = entries[0]?.contentRect.width;
-					if (width === undefined || width === part.store.get().width) return;
-					const state = part.store.get();
-					const rtl = part.api.direction() === "rtl";
-					const logical = toLogical(state.viewport, state.width, rtl);
-					part.store.set({ width, viewport: toPhysical(logical, width, rtl) });
-				});
-				observer.observe(el);
 				const wheel = (event: WheelEvent) => {
 					if (isIgnored(event.target, el)) return;
 					part.api.viewport.wheel(event);
 				};
 				el.addEventListener("wheel", wheel, { passive: false });
-				return () => {
-					observer.disconnect();
-					el.removeEventListener("wheel", wheel);
-				};
+				return () => el.removeEventListener("wheel", wheel);
 			},
 			on: {
 				pointerdown: (event, { el, api, props }) => {
@@ -125,18 +117,20 @@ const canvas = definePrimitive({
 				},
 			},
 		}),
-		world: slot<{ dir: string }>({
-			props: { dir: "string" },
-			attrs: () => ({ "aria-hidden": "false" }),
-			live: live((state, { props, api }) => {
-				const rtl = props.dir === "rtl";
-				const beforeMeasure = rtl && state.width === 0;
-				const logical = toLogical(state.viewport, state.width, rtl);
-				const physical = beforeMeasure ? { ...state.viewport, x: -logical.x } : state.viewport;
+		world: slot({
+			// In RTL the world starts at the right edge, so its place needs no measured width.
+			direct: direct(["style"]),
+			attrs: (state, { api }) => {
+				const { x, y, zoom } = state.viewport;
+				const rtl = api.rtl();
 				return {
-					style: `${api.viewport.style({ ...state, viewport: physical })};left:${beforeMeasure ? "100%" : "0"}`,
+					style: css({
+						left: rtl ? "100%" : "0",
+						transform: `translate(${rtl ? -x : x}px, ${y}px) scale(${zoom})`,
+						"transform-origin": "0 0",
+					}),
 				};
-			}),
+			},
 		}),
 	}),
 });
@@ -168,7 +162,6 @@ export function Canvas({
 }: CanvasProps) {
 	const sizes = useRef<Record<string, NodeSize>>({});
 	const nodeElements = useRef(new Map<string, HTMLElement>());
-	const rootRef = useRef<HTMLDivElement>(null);
 	const [, setSizeVersion] = useState(0);
 	useImperativeHandle(
 		ref,
@@ -201,30 +194,20 @@ export function Canvas({
 	}, [graph.nodes]);
 	const nodeById = new Map(graph.nodes.map((node) => [node.id, node]));
 	const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
-	const publicViewportChange: CanvasProps["onViewportChange"] = (value, details) => {
-		onViewportChange?.(toLogical(value, rootRef.current?.clientWidth ?? 0, resolvedDir === "rtl"), details);
-	};
 	return (
 		<Root
 			{...props}
-			ref={rootRef}
 			label={label}
-			viewport={
-				viewport ? toPhysical(viewport, rootRef.current?.clientWidth ?? 0, resolvedDir === "rtl") : undefined
-			}
-			defaultViewport={toPhysical(
-				defaultViewport ?? { x: 0, y: 0, zoom: 1 },
-				rootRef.current?.clientWidth ?? 0,
-				resolvedDir === "rtl",
-			)}
-			onViewportChange={publicViewportChange}
-			grid={grid}
+			viewport={viewport}
+			defaultViewport={defaultViewport}
+			onViewportChange={onViewportChange}
+			data-grid={grid ? "true" : "false"}
 			locale={locale}
 			direction={resolvedDir}
 			mode={mode}
 			className={["ts-canvas", props.className].filter(Boolean).join(" ")}
 		>
-			<World dir={resolvedDir} className="ts-canvas__world">
+			<World className="ts-canvas__world">
 				<svg data-canvas-edge-layer="" aria-hidden="true" className="ts-canvas__edges">
 					<g transform={resolvedDir === "rtl" ? "scale(-1 1)" : undefined}>
 						{graph.edges.map((edge) => {
@@ -267,7 +250,11 @@ export function Canvas({
 					</div>
 				))}
 			</World>
-			{children && <div data-canvas-overlay="">{children}</div>}
+			{children && (
+				<div data-canvas-overlay="" className="ts-canvas__overlay">
+					{children}
+				</div>
+			)}
 		</Root>
 	);
 }

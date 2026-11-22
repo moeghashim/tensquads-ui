@@ -11,6 +11,9 @@
 	.ts-canvas[data-grid="true"] {
 		background-image: radial-gradient(circle, var(--ts-dot-grid) 1px, transparent 1px);
 	}
+	.ts-canvas:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: -2px; }
+	.ts-canvas__overlay { position: absolute; inset: 0; pointer-events: none; }
+	.ts-canvas__overlay > * { pointer-events: auto; }
 	.ts-canvas__world {
 		position: absolute;
 		inset-block-start: 0;
