@@ -75,7 +75,6 @@ type CanvasOptions = {
 	direction?: "ltr" | "rtl";
 	graph?: WorkflowGraph;
 	onConnect?: CanvasProps["onConnect"];
-	onNodeMove?: CanvasProps["onNodeMove"];
 };
 
 const canvas = definePrimitive({
@@ -94,7 +93,6 @@ const canvas = definePrimitive({
 		locale: "string",
 		direction: "string",
 		onConnect: "callback",
-		onNodeMove: "callback",
 		graph: "value",
 	},
 	controlled: ["viewport", "selected", "positions"],
@@ -265,42 +263,27 @@ const canvas = definePrimitive({
 				set: (value, details) => change("viewport", toLogical(value, width(), rtl()), details),
 			},
 		);
+		// What an agent can call. Its arguments come from a model, so each one is checked. Every change goes through the
+		// same callback as a person's, which can cancel it.
 		const select = (nodes: string[], edges: string[] = []) => {
 			const graph = context.options().graph;
-			if (!graph) return false;
-			const nodeIds = new Set(graph.nodes.map(({ id }) => id));
-			const edgeIds = new Set(graph.edges.map(({ id }) => id));
-			change(
-				"selected",
-				[
-					...nodes.filter((id) => nodeIds.has(id)).map((id) => `node:${id}`),
-					...edges.filter((id) => edgeIds.has(id)).map((id) => `edge:${id}`),
-				],
-				{ reason: "imperative" },
-			);
-			return true;
+			if (!graph || !Array.isArray(nodes) || !Array.isArray(edges)) return false;
+			return change("selected", fromCanvasSelection(inGraph({ nodes, edges }, graph)), { reason: "imperative" });
 		};
 		const move = (id: string, x: number, y: number) => {
-			const node = nodeOf(id);
-			if (!node || !Number.isFinite(x) || !Number.isFinite(y) || !context.options().onNodeMove) return false;
-			const positions = { ...context.store.get().positions, [id]: { x: Math.round(x), y: Math.round(y) } };
-			const canceled = dispatch(context, "onPositionsChange", positions, { reason: "imperative" });
-			return !canceled;
+			if (!context.options().movable || !nodeOf(id) || !Number.isFinite(x) || !Number.isFinite(y)) return false;
+			const position = { x: Math.round(x) + 0, y: Math.round(y) + 0 };
+			return change("positions", { ...context.store.get().positions, [id]: position }, { reason: "imperative" });
 		};
 		const connect = (from: string, to: string, port?: number) => {
 			const graph = context.options().graph;
-			const source = graph?.nodes.find((node) => node.id === from);
-			if (!graph || !source || !nodeOf(to) || !context.options().onConnect || !canConnect(graph, from, port, to))
-				return false;
-			if (
-				source.branches
-					? !Number.isInteger(port) || port! < 0 || port! >= source.branches.length
-					: port !== undefined
-			)
-				return false;
+			const branches = nodeOf(from)?.branches;
+			const portFits = branches
+				? port !== undefined && Number.isInteger(port) && port >= 0 && port < branches.length
+				: port === undefined;
+			if (!graph || !context.options().onConnect || !portFits || !canConnect(graph, from, port, to)) return false;
 			const value: CanvasConnection = { from, ...(port === undefined ? {} : { fromPort: port }), to };
-			const canceled = dispatch(context, "onConnect", value, { reason: "imperative" });
-			return !canceled;
+			return !dispatch(context, "onConnect", value, { reason: "imperative" });
 		};
 		return {
 			select,
@@ -610,19 +593,23 @@ function selectItem(
 	else selection.choose(key, details);
 }
 
+function inGraph({ nodes, edges }: CanvasSelection, graph: WorkflowGraph): CanvasSelection {
+	const nodeIds = new Set(graph.nodes.map(({ id }) => id));
+	const edgeIds = new Set(graph.edges.map(({ id }) => id));
+	return { nodes: nodes.filter((id) => nodeIds.has(id)), edges: edges.filter((id) => edgeIds.has(id)) };
+}
+
 function toCanvasSelection(keys: string[], graph: WorkflowGraph): CanvasSelection {
-	const nodes = new Set(graph.nodes.map((node) => node.id));
-	const edges = new Set(graph.edges.map((edge) => edge.id));
 	const selection: CanvasSelection = { nodes: [], edges: [] };
 	for (const key of keys) {
 		const separator = key.indexOf(":");
 		if (separator < 0) continue;
 		const type = key.slice(0, separator);
 		const id = key.slice(separator + 1);
-		if (type === "node" && nodes.has(id)) selection.nodes.push(id);
-		if (type === "edge" && edges.has(id)) selection.edges.push(id);
+		if (type === "node") selection.nodes.push(id);
+		if (type === "edge") selection.edges.push(id);
 	}
-	return selection;
+	return inGraph(selection, graph);
 }
 
 function fromCanvasSelection(selection: CanvasSelection): string[] {
@@ -651,10 +638,7 @@ export function Canvas({
 	const nodeElements = useRef(new Map<string, HTMLElement>());
 	const [internalSelection, setInternalSelection] = useState<CanvasSelection>({ nodes: [], edges: [] });
 	const activeSelection = selection ?? internalSelection;
-	const selectedIds = useMemo(
-		() => toCanvasSelection(fromCanvasSelection(activeSelection), graph),
-		[activeSelection, graph],
-	);
+	const selectedIds = useMemo(() => inGraph(activeSelection, graph), [activeSelection, graph]);
 	const selectedKeys = useMemo(() => fromCanvasSelection(selectedIds), [selectedIds]);
 	const positions = useMemo(
 		() =>
@@ -710,7 +694,6 @@ export function Canvas({
 			titles={titles}
 			graph={graph}
 			onConnect={onConnect}
-			onNodeMove={onNodeMove}
 			movable={onNodeMove !== undefined}
 			onPositionsChange={(next, details) => {
 				for (const node of graph.nodes) {

@@ -80,6 +80,52 @@ describe("Canvas", () => {
 		);
 	});
 
+	it("refuses agent calls that do not fit the graph, without calling the host", async () => {
+		const agentGraph: WorkflowGraph = {
+			nodes: [
+				{ id: "start", kind: "start", title: "Start", position: { x: 0, y: 0 } },
+				{ id: "branch", kind: "classify", title: "Branch", branches: ["A", "B"], position: { x: 200, y: 0 } },
+				{ id: "end", kind: "end", title: "End", position: { x: 400, y: 0 } },
+			],
+			edges: [{ id: "edge", from: "start", to: "end" }],
+		};
+		const onNodeMove = vi.fn();
+		const onConnect = vi.fn();
+		const { rerender } = render(
+			<Canvas graph={agentGraph} label="Workflow" mode="pan" onNodeMove={onNodeMove} onConnect={onConnect} />,
+		);
+		const agent = createAgent();
+		const run = async (action: string, args: unknown[]) => {
+			const step = { ref: agent.snapshot()[0]!.ref, action, args };
+			const outcome = await agent.act({ steps: [step] });
+			// The bridge reports a refusal as `false` and leaves the result out when the action went through.
+			return outcome.steps[0]?.result;
+		};
+		expect(await run("select", ["start"])).toBe(false);
+		expect(await run("move", ["missing", 1, 1])).toBe(false);
+		expect(await run("move", ["start", Number.NaN, 1])).toBe(false);
+		expect(await run("connect", ["start", "end"])).toBe(false);
+		expect(await run("connect", ["end", "branch"])).toBe(false);
+		expect(await run("connect", ["branch", "end"])).toBe(false);
+		expect(await run("connect", ["branch", "end", 2])).toBe(false);
+		expect(await run("connect", ["branch", "end", 0.5])).toBe(false);
+		expect(await run("connect", ["start", "branch", 0])).toBe(false);
+		expect(onNodeMove).not.toHaveBeenCalled();
+		expect(onConnect).not.toHaveBeenCalled();
+
+		expect(await run("move", ["start", -0.2, 40.6])).toBeUndefined();
+		expect(onNodeMove).toHaveBeenCalledWith("start", { x: 0, y: 41 }, expect.objectContaining({ source: "agent" }));
+		expect(await run("connect", ["branch", "end", 1])).toBeUndefined();
+		expect(onConnect).toHaveBeenCalledWith(
+			{ from: "branch", fromPort: 1, to: "end" },
+			expect.objectContaining({ reason: "imperative", source: "agent" }),
+		);
+
+		rerender(<Canvas graph={agentGraph} label="Workflow" />);
+		expect(await run("move", ["start", 5, 5])).toBe(false);
+		expect(await run("connect", ["branch", "end", 1])).toBe(false);
+	});
+
 	it("gives the first selected node the single server tab stop", () => {
 		for (const selection of [undefined, { nodes: ["end"], edges: [] }]) {
 			const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" selection={selection} />);
