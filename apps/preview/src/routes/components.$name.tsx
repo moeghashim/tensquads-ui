@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import { Canvas } from "../../../../packages/ui/src/react/Canvas/Canvas";
 import { Card } from "../../../../packages/ui/src/react/Card/Card";
 import {
 	Chat,
@@ -77,6 +78,7 @@ import {
 	TooltipTrigger,
 } from "../../../../packages/ui/src/react/Tooltip/Tooltip";
 import { AGENT_ROLE_TO_SLUG, type AgentState } from "../../../../packages/ui/src/schemas";
+import type { WorkflowGraph } from "../../../../packages/ui/src/schemas/workflow";
 import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squadmates";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { MarkdownDocument } from "../components/docs/markdown-document";
@@ -103,6 +105,7 @@ const componentOrder = [
 	"Toolbar",
 	"CommandPalette",
 	"Node",
+	"Canvas",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -435,6 +438,7 @@ function ComponentExample() {
 	const { locale } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Node") return <NodePreview locale={locale} />;
+	if (name === "Canvas") return <CanvasPreview locale={locale} />;
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
@@ -1417,6 +1421,89 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 				/>
 			</div>
 		</div>
+	);
+}
+
+function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const [mode, setMode] = useState<"select" | "pan">("select");
+	const graph: WorkflowGraph = {
+		nodes: [
+			{ id: "start", kind: "start", title: ar ? "البداية" : "Start", position: { x: 40, y: 110 } },
+			{
+				id: "classify",
+				kind: "classify",
+				title: ar ? "تصنيف الطلب" : "Classify request",
+				meta: ar ? "ثلاثة مسارات" : "Three paths",
+				branches: ar ? ["استرداد", "استفسار", "أخرى"] : ["Refund", "Question", "Other"],
+				position: { x: 260, y: 80 },
+			},
+			{
+				id: "refund",
+				kind: "agent",
+				title: ar ? "وكيل الاسترداد" : "Refund agent",
+				meta: "Petra",
+				position: { x: 520, y: 20 },
+			},
+			{
+				id: "question",
+				kind: "agent",
+				title: ar ? "وكيل الدعم" : "Support agent",
+				meta: "Sam",
+				position: { x: 520, y: 160 },
+			},
+			{
+				id: "other",
+				kind: "agent",
+				title: ar ? "وكيل الطلبات" : "Orders agent",
+				meta: "Maya",
+				position: { x: 520, y: 300 },
+			},
+			{
+				id: "approval",
+				kind: "user-approval",
+				title: ar ? "موافقة المستخدم" : "User approval",
+				meta: ar ? "قبل الاسترداد" : "Before refund",
+				position: { x: 780, y: 100 },
+			},
+			{ id: "end", kind: "end", title: ar ? "النهاية" : "End", position: { x: 1020, y: 160 } },
+			{ id: "note", kind: "note", title: ar ? "ملاحظة" : "Note", position: { x: 760, y: 330 } },
+		],
+		edges: [
+			{ id: "start-classify", from: "start", to: "classify" },
+			{ id: "classify-refund", from: "classify", fromPort: 0, to: "refund" },
+			{ id: "classify-question", from: "classify", fromPort: 1, to: "question" },
+			{ id: "classify-other", from: "classify", fromPort: 2, to: "other" },
+			{ id: "refund-approval", from: "refund", to: "approval" },
+			{ id: "question-end", from: "question", to: "end" },
+			{ id: "other-end", from: "other", to: "end" },
+			{ id: "approval-end", from: "approval", to: "end" },
+		],
+	};
+	return (
+		<section className="canvas-preview" aria-label={ar ? "مثال سير العمل" : "Workflow example"}>
+			<div className="canvas-preview__surface">
+				<Canvas
+					graph={graph}
+					locale={locale}
+					label={ar ? "منشئ سير العمل" : "Workflow builder"}
+					mode={mode}
+					defaultViewport={{ x: 0, y: 0, zoom: 0.65 }}
+				>
+					<div className="canvas-preview__toolbar">
+						<SegmentedControl
+							aria-label={ar ? "وضع اللوحة" : "Canvas mode"}
+							value={mode}
+							onValueChange={(value) => value && setMode(value as "select" | "pan")}
+						>
+							<SegmentedControlIndicator />
+							<SegmentedControlItem value="select">{ar ? "تحديد" : "Select"}</SegmentedControlItem>
+							<SegmentedControlItem value="pan">{ar ? "تحريك" : "Pan"}</SegmentedControlItem>
+						</SegmentedControl>
+					</div>
+				</Canvas>
+			</div>
+		</section>
 	);
 }
 

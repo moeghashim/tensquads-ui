@@ -20,6 +20,7 @@ components.push("ThemeToggle");
 components.push("Toolbar");
 components.push("CommandPalette");
 components.push("Node");
+components.push("Canvas");
 components.sort();
 
 export const Route = createFileRoute("/components/")({ component: ComponentsPage });

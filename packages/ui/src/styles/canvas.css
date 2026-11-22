@@ -1,0 +1,37 @@
+@layer tensquads {
+	.ts-canvas {
+		position: relative;
+		inline-size: 100%;
+		block-size: 100%;
+		overflow: clip;
+		touch-action: none;
+		user-select: none;
+		background-color: var(--ts-canvas);
+	}
+	.ts-canvas[data-grid="true"] {
+		background-image: radial-gradient(circle, var(--ts-dot-grid) 1px, transparent 1px);
+	}
+	.ts-canvas__world {
+		position: absolute;
+		inset-block-start: 0;
+		inline-size: 0;
+		block-size: 0;
+		pointer-events: none;
+	}
+	.ts-canvas__edges {
+		position: absolute;
+		left: 0;
+		top: 0;
+		inline-size: 1px;
+		block-size: 1px;
+		overflow: visible;
+		pointer-events: none;
+	}
+	.ts-canvas__edge { fill: none; stroke: var(--ts-edge); stroke-width: 1.5px; }
+	.ts-canvas__edge-hit { fill: none; stroke: transparent; stroke-width: 12px; pointer-events: stroke; }
+	.ts-canvas__node {
+		position: absolute;
+		inline-size: max-content;
+		pointer-events: auto;
+	}
+}

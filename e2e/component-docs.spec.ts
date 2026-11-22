@@ -12,6 +12,7 @@ const registryOrder = [
 	"Toolbar",
 	"CommandPalette",
 	"Node",
+	"Canvas",
 ];
 
 test("component index lists every documented component", async ({ page }) => {
@@ -40,6 +41,7 @@ for (const locale of ["en", "ar"] as const) {
 				page.getByRole("heading", { name: locale === "ar" ? "أمثلة تفاعلية" : "Live examples" }),
 			).toBeVisible();
 			if (name === "Node") await expect(page.locator(".node-preview")).toBeVisible();
+			else if (name === "Canvas") await expect(page.locator(".canvas-preview__surface")).toBeVisible();
 			else if (name === "Chat") await expect(page.locator(".chat-preview")).toBeVisible();
 			else if (["ApprovalCard", "OwnerMessageView"].includes(name))
 				await expect(page.locator(".owner-message-preview")).toBeVisible();
@@ -50,7 +52,7 @@ for (const locale of ["en", "ar"] as const) {
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
-			} else if (name === "Node") {
+			} else if (name === "Node" || name === "Canvas") {
 				await expect(page.getByText(/without an OpenUI definition/i)).toBeVisible();
 			} else if (name !== "Sidebar") {
 				await expect(page.locator(".fixture-source summary")).toHaveText(
