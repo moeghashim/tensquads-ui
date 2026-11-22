@@ -1,0 +1,29 @@
+{
+  "baseline": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- sh -c \"npm ci --no-audit --no-fund && npm run verify\"",
+    "exit": 1,
+    "source": "Reported by outer executor; not rerun in this phase"
+  },
+  "commands": [
+    {
+      "command": "npm --prefix apps/preview ci --no-audit --no-fund",
+      "exit": 0
+    },
+    {
+      "command": "npm run build",
+      "exit": 0
+    },
+    {
+      "command": "PLAYWRIGHT_HTML_OPEN=never node_modules/.bin/playwright test e2e/node.spec.ts --reporter=line --workers=2",
+      "exit": 0,
+      "result": "Built preview, served on localhost, and passed en/light, en/dark, ar/light, ar/dark: 13 kinds; start/end port guards; selected If/else 3 outputs; measured logical port centres at card edges and y=24 or 70+32*index; axe; 1440/390 screenshots; no mobile horizontal scroll."
+    },
+    {
+      "command": "node .local-validation/workflow-consumer.mjs",
+      "exit": 0,
+      "result": "Executed real built public package exports with synthetic inputs; detailed graph, layout and schema responses in workflow-consumer.json."
+    }
+  ],
+  "oracle": "Task 002 and Node/BranchNode/Canvas guides. Independent worked coordinates reject top-aligned split columns, discovery-order crossings, omitted prototype IDs and inset ports.",
+  "visualReview": "Inspected English light desktop/dark mobile and Arabic dark desktop/light mobile screenshots; readable, unclipped cards and branch rows, correct selected ring and mirrored ports."
+}

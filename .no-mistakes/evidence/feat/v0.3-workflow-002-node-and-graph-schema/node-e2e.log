@@ -1,0 +1,27 @@
+[WebServer] (node:30377) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 4 tests using 4 workers
+
+(node:30444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:30442) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:30443) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:30441) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] e2e/node.spec.ts:8:3 › Node kinds, Canvas port centres, and accessibility in ar dark
+[2/4] e2e/node.spec.ts:8:3 › Node kinds, Canvas port centres, and accessibility in en light
+[3/4] e2e/node.spec.ts:8:3 › Node kinds, Canvas port centres, and accessibility in ar light
+[4/4] e2e/node.spec.ts:8:3 › Node kinds, Canvas port centres, and accessibility in en dark
+  4 passed (5.5s)

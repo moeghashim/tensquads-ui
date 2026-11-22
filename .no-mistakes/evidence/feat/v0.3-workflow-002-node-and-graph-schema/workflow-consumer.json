@@ -1,0 +1,1463 @@
+{
+  "surface": "Built @tensquads/ui public exports, called directly by a disposable Node consumer; synthetic local graphs, no mocks.",
+  "oracle": "dev/milestones/v0.3-workflow/002-node-and-graph-schema.md and Canvas port guide",
+  "records": [
+    {
+      "name": "Public schema accepts all thirteen kinds and valid branch, loop and empty graphs",
+      "status": "pass",
+      "acceptedGraph": {
+        "nodes": [
+          {
+            "id": "agent",
+            "kind": "agent",
+            "title": "agent",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "classify",
+            "kind": "classify",
+            "title": "classify",
+            "position": {
+              "x": 13,
+              "y": 27
+            },
+            "branches": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "id": "if-else",
+            "kind": "if-else",
+            "title": "if-else",
+            "position": {
+              "x": 13,
+              "y": 27
+            },
+            "branches": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "id": "while",
+            "kind": "while",
+            "title": "while",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "user-approval",
+            "kind": "user-approval",
+            "title": "user-approval",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "start",
+            "kind": "start",
+            "title": "start",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "end",
+            "kind": "end",
+            "title": "end",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "note",
+            "kind": "note",
+            "title": "note",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "file-search",
+            "kind": "file-search",
+            "title": "file-search",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "guardrails",
+            "kind": "guardrails",
+            "title": "guardrails",
+            "position": {
+              "x": 13,
+              "y": 27
+            },
+            "branches": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "id": "mcp",
+            "kind": "mcp",
+            "title": "mcp",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "transform",
+            "kind": "transform",
+            "title": "transform",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "set-state",
+            "kind": "set-state",
+            "title": "set-state",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "1",
+            "from": "start",
+            "to": "if-else"
+          },
+          {
+            "id": "2",
+            "from": "if-else",
+            "fromPort": 0,
+            "to": "while"
+          },
+          {
+            "id": "3",
+            "from": "while",
+            "to": "agent"
+          },
+          {
+            "id": "4",
+            "from": "agent",
+            "to": "while"
+          },
+          {
+            "id": "5",
+            "from": "if-else",
+            "fromPort": 1,
+            "to": "end"
+          }
+        ]
+      },
+      "familyMappings": {
+        "agent": "agent",
+        "classify": "logic",
+        "if-else": "logic",
+        "while": "logic",
+        "user-approval": "logic",
+        "start": "end",
+        "end": "end",
+        "note": "note",
+        "file-search": "tool",
+        "guardrails": "tool",
+        "mcp": "tool",
+        "transform": "data",
+        "set-state": "data"
+      },
+      "iconMappings": {
+        "agent": "agent",
+        "classify": "classify",
+        "if-else": "ifelse",
+        "while": "while",
+        "user-approval": "approval",
+        "start": "play",
+        "end": "end",
+        "note": "note",
+        "file-search": "file",
+        "guardrails": "shield",
+        "mcp": "mcp",
+        "transform": "transform",
+        "set-state": "state"
+      }
+    },
+    {
+      "name": "Public schema rejects malformed graphs with actionable issue paths",
+      "status": "pass",
+      "rejections": [
+        {
+          "name": "duplicate node",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.1.id",
+              "message": "Duplicate node id: a"
+            }
+          ]
+        },
+        {
+          "name": "duplicate edge",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "b",
+                "kind": "agent",
+                "title": "b",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "id": "e",
+                "from": "a",
+                "to": "b"
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.1.id",
+              "message": "Duplicate edge id: e"
+            }
+          ]
+        },
+        {
+          "name": "unknown source",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "missing",
+                "to": "a"
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.from",
+              "message": "Unknown source node: missing"
+            }
+          ]
+        },
+        {
+          "name": "unknown target",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "a",
+                "to": "missing"
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.to",
+              "message": "Unknown target node: missing"
+            }
+          ]
+        },
+        {
+          "name": "into start",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "s",
+                "kind": "start",
+                "title": "s",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "a",
+                "to": "s"
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.to",
+              "message": "Edge e cannot enter start node s"
+            }
+          ]
+        },
+        {
+          "name": "out of end",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "e",
+                "kind": "end",
+                "title": "e",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "x",
+                "from": "e",
+                "to": "a"
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.from",
+              "message": "Edge x cannot leave end node e"
+            }
+          ]
+        },
+        {
+          "name": "ordinary port forbidden",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "b",
+                "kind": "agent",
+                "title": "b",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "a",
+                "to": "b",
+                "fromPort": 0
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.fromPort",
+              "message": "Edge e uses a port on non-branch node a"
+            }
+          ]
+        },
+        {
+          "name": "branch port required",
+          "input": {
+            "nodes": [
+              {
+                "id": "branch",
+                "kind": "if-else",
+                "title": "branch",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": [
+                  "Yes",
+                  "Else"
+                ]
+              },
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "branch",
+                "to": "a"
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.fromPort",
+              "message": "Edge e requires a branch port for node branch"
+            }
+          ]
+        },
+        {
+          "name": "branch port outside range",
+          "input": {
+            "nodes": [
+              {
+                "id": "branch",
+                "kind": "if-else",
+                "title": "branch",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": [
+                  "Yes",
+                  "Else"
+                ]
+              },
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "branch",
+                "to": "a",
+                "fromPort": 2
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.fromPort",
+              "message": "Edge e port is out of range for node branch"
+            }
+          ]
+        },
+        {
+          "name": "negative port",
+          "input": {
+            "nodes": [
+              {
+                "id": "branch",
+                "kind": "if-else",
+                "title": "branch",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": [
+                  "Yes",
+                  "Else"
+                ]
+              },
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "branch",
+                "to": "a",
+                "fromPort": -1
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.fromPort",
+              "message": "Too small: expected number to be >=0"
+            }
+          ]
+        },
+        {
+          "name": "fractional port",
+          "input": {
+            "nodes": [
+              {
+                "id": "branch",
+                "kind": "if-else",
+                "title": "branch",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": [
+                  "Yes",
+                  "Else"
+                ]
+              },
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "branch",
+                "to": "a",
+                "fromPort": 0.5
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0.fromPort",
+              "message": "Invalid input: expected int, received number"
+            }
+          ]
+        },
+        {
+          "name": "branches on ordinary node",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": [
+                  "A",
+                  "B"
+                ]
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.branches",
+              "message": "Node a cannot have branches"
+            }
+          ]
+        },
+        {
+          "name": "only one branch",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "classify",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": [
+                  "A"
+                ]
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.branches",
+              "message": "Node a requires at least two branches"
+            }
+          ]
+        },
+        {
+          "name": "zero branches",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "guardrails",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "branches": []
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.branches",
+              "message": "Node a requires at least two branches"
+            }
+          ]
+        },
+        {
+          "name": "extra graph property",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [],
+            "extra": true
+          },
+          "issues": [
+            {
+              "path": "",
+              "message": "Unrecognized key: \"extra\""
+            }
+          ]
+        },
+        {
+          "name": "extra node property",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                },
+                "extra": true
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0",
+              "message": "Unrecognized key: \"extra\""
+            }
+          ]
+        },
+        {
+          "name": "extra position property",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.position",
+              "message": "Unrecognized key: \"z\""
+            }
+          ]
+        },
+        {
+          "name": "extra edge property",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "b",
+                "kind": "agent",
+                "title": "b",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "e",
+                "from": "a",
+                "to": "b",
+                "extra": true
+              }
+            ]
+          },
+          "issues": [
+            {
+              "path": "edges.0",
+              "message": "Unrecognized key: \"extra\""
+            }
+          ]
+        },
+        {
+          "name": "nonfinite position",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "agent",
+                "title": "a",
+                "position": {
+                  "x": null,
+                  "y": 0
+                }
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.position.x",
+              "message": "Invalid input: expected number, received Infinity"
+            }
+          ]
+        },
+        {
+          "name": "empty id",
+          "input": {
+            "nodes": [
+              {
+                "id": "",
+                "kind": "agent",
+                "title": "",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.id",
+              "message": "Too small: expected string to have >=1 characters"
+            }
+          ]
+        },
+        {
+          "name": "unknown kind",
+          "input": {
+            "nodes": [
+              {
+                "id": "a",
+                "kind": "unknown",
+                "title": "a",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": []
+          },
+          "issues": [
+            {
+              "path": "nodes.0.kind",
+              "message": "Invalid option: expected one of \"agent\"|\"classify\"|\"if-else\"|\"while\"|\"user-approval\"|\"start\"|\"end\"|\"note\"|\"file-search\"|\"guardrails\"|\"mcp\"|\"transform\"|\"set-state\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Public tidyLayout centres split and join columns and preserves branch and parent order",
+      "status": "pass",
+      "oracle": "Task 002: 180x80 cards, 80 column gap, 40 row gap, 20px grid; singleton columns offset 60px within 200px flow.",
+      "centred": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "s",
+              "kind": "start",
+              "title": "s",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "a",
+              "kind": "agent",
+              "title": "a",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "b",
+              "kind": "agent",
+              "title": "b",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "join",
+              "kind": "end",
+              "title": "join",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "note",
+              "kind": "note",
+              "title": "note",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            }
+          ],
+          "edges": [
+            {
+              "id": "sa",
+              "from": "s",
+              "to": "a"
+            },
+            {
+              "id": "sb",
+              "from": "s",
+              "to": "b"
+            },
+            {
+              "id": "aj",
+              "from": "a",
+              "to": "join"
+            },
+            {
+              "id": "bj",
+              "from": "b",
+              "to": "join"
+            }
+          ]
+        },
+        "sizes": {
+          "s": {
+            "width": 180,
+            "height": 80
+          },
+          "a": {
+            "width": 180,
+            "height": 80
+          },
+          "b": {
+            "width": 180,
+            "height": 80
+          },
+          "join": {
+            "width": 180,
+            "height": 80
+          },
+          "note": {
+            "width": 180,
+            "height": 80
+          }
+        },
+        "positions": {
+          "s": {
+            "x": 20,
+            "y": 80
+          },
+          "a": {
+            "x": 280,
+            "y": 20
+          },
+          "b": {
+            "x": 280,
+            "y": 140
+          },
+          "join": {
+            "x": 540,
+            "y": 80
+          },
+          "note": {
+            "x": 20,
+            "y": 260
+          }
+        }
+      },
+      "ordered": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "R",
+              "kind": "if-else",
+              "title": "R",
+              "position": {
+                "x": 13,
+                "y": 27
+              },
+              "branches": [
+                "A",
+                "B"
+              ]
+            },
+            {
+              "id": "B",
+              "kind": "if-else",
+              "title": "B",
+              "position": {
+                "x": 13,
+                "y": 27
+              },
+              "branches": [
+                "K",
+                "J"
+              ]
+            },
+            {
+              "id": "A",
+              "kind": "agent",
+              "title": "A",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "J",
+              "kind": "agent",
+              "title": "J",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "K",
+              "kind": "agent",
+              "title": "K",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "X",
+              "kind": "agent",
+              "title": "X",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "U",
+              "kind": "agent",
+              "title": "U",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "V",
+              "kind": "agent",
+              "title": "V",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            }
+          ],
+          "edges": [
+            {
+              "id": "ra",
+              "from": "R",
+              "fromPort": 0,
+              "to": "A"
+            },
+            {
+              "id": "rb",
+              "from": "R",
+              "fromPort": 1,
+              "to": "B"
+            },
+            {
+              "id": "ax",
+              "from": "A",
+              "to": "X"
+            },
+            {
+              "id": "bk",
+              "from": "B",
+              "fromPort": 0,
+              "to": "K"
+            },
+            {
+              "id": "bj",
+              "from": "B",
+              "fromPort": 1,
+              "to": "J"
+            },
+            {
+              "id": "xu",
+              "from": "X",
+              "to": "U"
+            },
+            {
+              "id": "kj",
+              "from": "K",
+              "to": "J"
+            },
+            {
+              "id": "xv",
+              "from": "X",
+              "to": "V"
+            }
+          ]
+        },
+        "positions": {
+          "R": {
+            "x": 20,
+            "y": 80
+          },
+          "A": {
+            "x": 280,
+            "y": 40
+          },
+          "B": {
+            "x": 280,
+            "y": 140
+          },
+          "U": {
+            "x": 800,
+            "y": 20
+          },
+          "V": {
+            "x": 800,
+            "y": 120
+          },
+          "J": {
+            "x": 800,
+            "y": 220
+          },
+          "X": {
+            "x": 540,
+            "y": 80
+          },
+          "K": {
+            "x": 540,
+            "y": 180
+          }
+        }
+      }
+    },
+    {
+      "name": "Public tidyLayout handles chains, loops, loose nodes, varied sizes and prototype-named IDs without mutation",
+      "status": "pass",
+      "chain": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "s",
+              "kind": "start",
+              "title": "s",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "a",
+              "kind": "agent",
+              "title": "a",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "b",
+              "kind": "end",
+              "title": "b",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "loose",
+              "kind": "note",
+              "title": "loose",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            }
+          ],
+          "edges": [
+            {
+              "id": "sa",
+              "from": "s",
+              "to": "a"
+            },
+            {
+              "id": "ab",
+              "from": "a",
+              "to": "b"
+            }
+          ]
+        },
+        "sizes": {
+          "s": {
+            "width": 244,
+            "height": 80
+          },
+          "a": {
+            "width": 126,
+            "height": 96
+          },
+          "b": {
+            "width": 300,
+            "height": 130
+          },
+          "loose": {
+            "width": 290,
+            "height": 70
+          }
+        },
+        "positions": {
+          "s": {
+            "x": 20,
+            "y": 40
+          },
+          "a": {
+            "x": 360,
+            "y": 40
+          },
+          "b": {
+            "x": 580,
+            "y": 20
+          },
+          "loose": {
+            "x": 20,
+            "y": 200
+          }
+        }
+      },
+      "loop": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "w",
+              "kind": "while",
+              "title": "w",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "work",
+              "kind": "agent",
+              "title": "work",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "note",
+              "kind": "note",
+              "title": "note",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            },
+            {
+              "id": "solo",
+              "kind": "agent",
+              "title": "solo",
+              "position": {
+                "x": 13,
+                "y": 27
+              }
+            }
+          ],
+          "edges": [
+            {
+              "id": "a",
+              "from": "w",
+              "to": "work"
+            },
+            {
+              "id": "b",
+              "from": "work",
+              "to": "w"
+            }
+          ]
+        },
+        "positions": {
+          "w": {
+            "x": 20,
+            "y": 20
+          },
+          "work": {
+            "x": 280,
+            "y": 20
+          },
+          "note": {
+            "x": 20,
+            "y": 120
+          },
+          "solo": {
+            "x": 280,
+            "y": 120
+          }
+        }
+      },
+      "reserved": [
+        {
+          "graph": {
+            "nodes": [
+              {
+                "id": "__proto__",
+                "kind": "agent",
+                "title": "__proto__",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "constructor",
+                "kind": "agent",
+                "title": "constructor",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "toString",
+                "kind": "agent",
+                "title": "toString",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": []
+          },
+          "positions": {
+            "__proto__": {
+              "x": 20,
+              "y": 20
+            },
+            "constructor": {
+              "x": 280,
+              "y": 20
+            },
+            "toString": {
+              "x": 540,
+              "y": 20
+            }
+          }
+        },
+        {
+          "graph": {
+            "nodes": [
+              {
+                "id": "__proto__",
+                "kind": "agent",
+                "title": "__proto__",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "constructor",
+                "kind": "agent",
+                "title": "constructor",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              },
+              {
+                "id": "toString",
+                "kind": "agent",
+                "title": "toString",
+                "position": {
+                  "x": 13,
+                  "y": 27
+                }
+              }
+            ],
+            "edges": [
+              {
+                "id": "a",
+                "from": "__proto__",
+                "to": "constructor"
+              },
+              {
+                "id": "b",
+                "from": "constructor",
+                "to": "toString"
+              }
+            ]
+          },
+          "positions": {
+            "__proto__": {
+              "x": 20,
+              "y": 20
+            },
+            "constructor": {
+              "x": 280,
+              "y": 20
+            },
+            "toString": {
+              "x": 540,
+              "y": 20
+            }
+          }
+        }
+      ],
+      "empty": {},
+      "ports": [
+        {
+          "x": 12,
+          "y": 54
+        },
+        {
+          "x": 212,
+          "y": 100
+        },
+        {
+          "x": 212,
+          "y": 132
+        }
+      ],
+      "edgePath": "M10,20 C50,20 50,60 90,60"
+    }
+  ]
+}
