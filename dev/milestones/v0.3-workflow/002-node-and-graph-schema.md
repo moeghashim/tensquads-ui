@@ -20,6 +20,15 @@ Specs: `Node`, `BranchNode`, `Canvas` (ports and connectors). Design reference: 
 - [ ] `edgePath(x1, y1, x2, y2)` returns the spec's path exactly: horizontal tangents, both control points at the midpoint x.
 - [ ] `NODE_METRICS` holds the numbers ports depend on (head row height, branch row height 28, `space-1` and `space-2` gaps in px, port size 8) as constants read from the token values, and `portPosition(node, "in" | { out: index })` returns the port centre in graph coordinates from the node position and its measured width. Width is measured by Canvas (task 003); here, accept it as an argument.
 
+### Tidy layout (`packages/ui/src/react/workflow/tidy.ts`, exported)
+- [ ] `tidyLayout(graph, sizes?)` returns new positions as `Record<string, { x, y }>`. It is pure and deterministic, and it never changes its input. `sizes` is `Record<string, { width, height }>`. A missing size uses a default width and the height from `NODE_METRICS`.
+- [ ] Columns: a node sits one column after its furthest predecessor. Edges that close a loop (for example, back to a `while`) are found in node order and ignored for columns. Start is in the first column.
+- [ ] Order inside a column follows the order of the parents and their branch ports, so branches read top to bottom without needless crossings. Ties keep the order in `graph.nodes`.
+- [ ] Gaps: 80px between columns (measured from the widest node) and 40px between nodes in a column. Columns are centred on one horizontal axis. Positions snap to the 20px grid without reducing a gap below 40px.
+- [ ] Nodes with no edges, including notes, go in one row under the flow, in `graph.nodes` order. The top inline-start corner of the graph's bounds stays where it was, snapped to the 20px grid.
+- [ ] Running it twice gives the same positions. `x` is logical, so the function needs no direction argument.
+- [ ] Tests: a chain, a branch that joins again, a loop, unconnected nodes and notes, an empty graph, varied sizes (no two nodes overlap), repeat runs, and an unchanged input.
+
 ### Node (one component; BranchNode is `Node` with `branches`)
 - [ ] `Node` props: `kind`, `title`, `meta?`, `branches?`, `selected?`, plus forwarded div props. It is presentational: no position, no events of its own. Canvas (task 003) places it.
 - [ ] Visuals from the spec: `node-surface` card, `radius-2xl`, `node-ring` (`node-ring-selected` when selected; no fill change), 28px tile tinted by family with the glyph in `node-ink`, `node-title` and `node-meta` type, one line, the card grows to fit. Note shows no meta line.

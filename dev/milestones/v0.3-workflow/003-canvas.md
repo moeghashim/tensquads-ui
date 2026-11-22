@@ -15,7 +15,7 @@ Spec: `Canvas`. UI SDK core: `definePrimitive`, `createRovingFocus`, `spatialMov
 - [ ] `Canvas` is a `definePrimitive` primitive (`workflow-canvas`) rendered in React. Props: `graph: WorkflowGraph`, `label` (accessible name), `selection?: { nodes: string[]; edges: string[] }`, `onSelectionChange?`, `viewport?: { x, y, zoom }` with `defaultViewport?` and `onViewportChange?`, `onNodeMove?(id, position, details)`, `onConnect?({ from, fromPort?, to }, details)`, `onDelete?({ nodes, edges }, details)`, `grid?: boolean` (default true), `mode?: "select" | "pan"` (default `select`), `children` (overlays such as MiniMap and Toolbar). `details.source` follows UI SDK (`"pointer"`, `"keyboard"`, `"agent"`).
 - [ ] The host owns the graph. Canvas never mutates it; during a drag it shows a draft position and commits once on release (`createCommit` and `settleDraft`).
 - [ ] Ground is `canvas` with an optional 20px dot grid. Edges are one SVG layer under the nodes: 1.5px `edge`, `edge-selected` when selected, no arrowheads or labels; while connecting, a 1px dashed `connection-line`. Each edge has an invisible 12px hit stroke for pointer selection.
-- [ ] Canvas measures each node's width (ResizeObserver inside an effect, not at module scope) and draws edges between real port positions from `portPosition`.
+- [ ] Canvas measures each node's width (ResizeObserver inside an effect, not at module scope) and draws edges between real port positions from `portPosition`. A typed ref handle exposes `getNodeSizes()`, which returns the measured sizes by node id for `tidyLayout`.
 
 ### Pointer
 - [ ] Drag a node in `select` mode to move it (cursor `grab`, `grabbing` while dragging). A 3px threshold separates a click (select) from a drag.
