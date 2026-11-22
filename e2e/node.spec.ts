@@ -21,7 +21,10 @@ for (const locale of ["en", "ar"] as const) {
 					return {
 						kind: node.getAttribute("data-kind"),
 						width: card.width,
-						branches: Array.from(node.querySelectorAll(".ts-node__branch-label"), (label) => label.textContent ?? ""),
+						branches: Array.from(
+							node.querySelectorAll(".ts-node__branch-label"),
+							(label) => label.textContent ?? "",
+						),
 						ports: Array.from(node.querySelectorAll("[data-port]"), (port) => {
 							const rect = port.getBoundingClientRect();
 							const centreX = rect.left + rect.width / 2;

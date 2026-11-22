@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { WorkflowGraphSchema, type WorkflowGraph } from "../../schemas/workflow.js";
+import { type WorkflowGraph, WorkflowGraphSchema } from "../../schemas/workflow.js";
 import { tidyLayout } from "./tidy.js";
 
 const make = (
@@ -102,7 +102,10 @@ describe("tidyLayout", () => {
 		expect(positions.join!.y).toBe(80);
 		expect(positions.note!.y).toBe(260);
 		expect(
-			tidyLayout({ ...input, nodes: input.nodes.map((node) => ({ ...node, position: positions[node.id]! })) }, sizes),
+			tidyLayout(
+				{ ...input, nodes: input.nodes.map((node) => ({ ...node, position: positions[node.id]! })) },
+				sizes,
+			),
 		).toEqual(positions);
 	});
 	it("orders final columns by their furthest parents rather than discovery or node order", () => {
