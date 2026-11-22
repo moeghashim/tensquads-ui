@@ -1,0 +1,93 @@
+SYNC: npm run design:sync -- 513505617794ee8bdb82cdc019b137910c60c52f exited 0; 186 files pass the real design manifest consumer; all 185 existing asset hashes preserved. Only bundle.js added, SHA-256 48c72278f35fe8662d4eb974e4aa064305954d80f4ef7afaff243b7df5d40df2.
+
+$ npm run icons
+
+> @tensquads/ui@0.1.0 icons
+> node scripts/build-icons.mjs
+
+exit: 0
+
+$ npm run icons
+
+> @tensquads/ui@0.1.0 icons
+> node scripts/build-icons.mjs
+
+exit: 0
+
+$ npm run icons:check
+
+> @tensquads/ui@0.1.0 icons:check
+> node scripts/build-icons.mjs --check
+
+exit: 0
+
+GENERATION: 44 sorted names; task's three sample paths match pinned design; repeat output SHA-256 333c116970a70094223aafe1db186a0820600927459eb07d93607210890f1d3f. Committed generated output matches CLI result byte for byte.
+
+$ npm run icons:check
+
+> @tensquads/ui@0.1.0 icons:check
+> node scripts/build-icons.mjs --check
+
+packages/ui/src/icons/icons.ts is stale. Run npm run icons.
+exit: 1
+
+$ npm run icons
+
+> @tensquads/ui@0.1.0 icons
+> node scripts/build-icons.mjs
+
+exit: 0
+
+$ npm run icons:check
+
+> @tensquads/ui@0.1.0 icons:check
+> node scripts/build-icons.mjs --check
+
+exit: 0
+
+$ npm run icons:check
+
+> @tensquads/ui@0.1.0 icons:check
+> node scripts/build-icons.mjs --check
+
+packages/ui/src/icons/icons.ts is stale. Run npm run icons.
+exit: 1
+
+$ npm run icons
+
+> @tensquads/ui@0.1.0 icons
+> node scripts/build-icons.mjs
+
+exit: 0
+
+$ npm run icons
+
+> @tensquads/ui@0.1.0 icons
+> node scripts/build-icons.mjs
+
+exit: 0
+
+$ npm run icons
+
+> @tensquads/ui@0.1.0 icons
+> node scripts/build-icons.mjs
+
+Invalid ICONS value for "agent"; expected a string.
+exit: 1
+
+$ npm run icons:check
+
+> @tensquads/ui@0.1.0 icons:check
+> node scripts/build-icons.mjs --check
+
+exit: 0
+
+GUARDS: stale and absent output exit 1 without modifying output; npm run icons repairs both. Top-level throw in bundle never executes. Executable ICONS value is rejected; no marker file created; last good output preserved.
+
+ORACLE: generated module equals all 44 entries exposed by the actual pinned AgentUI bundle running in Chromium (independent runtime consumer).
+
+BROWSER light/ltr/1440: all 44 glyphs render at 14/default16/28px; one matching upstream path each; 16x16 viewBox, currentColor inheritance, 1.5 stroke, round cap/join, no fill, aria-hidden; no horizontal overflow. Screenshot captured.
+
+BROWSER dark/rtl/390: all 44 glyphs render at 14/default16/28px; one matching upstream path each; 16x16 viewBox, currentColor inheritance, 1.5 stroke, round cap/join, no fill, aria-hidden; no horizontal overflow. Screenshot captured.
+
+BOUNDARY: importing the built React entry does not expose Icon.
