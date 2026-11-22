@@ -1,0 +1,18 @@
+{
+  "target": "750c1c8c1fae9f76a24ea16e7e9dca4e2b663372",
+  "preview_command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- ./node_modules/.bin/playwright test e2e/canvas.spec.ts e2e/command-palette.spec.ts --grep 'Canvas|CommandPalette opens, filters, selects and passes axe' --reporter=line --output=~/.no-mistakes/evidence/01M82FRQGN7GR48DV2CT1824X3/playwright",
+  "preview_exit": 0,
+  "host_command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- node .canvas-live/drive.mjs",
+  "host_exit": 0,
+  "locale_geometry_command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- node .canvas-live/locale.mjs",
+  "locale_geometry_exit": 0,
+  "baseline": "User reports npm ci && npm run verify exited successfully before this phase. Not rerun.",
+  "oracle": "dev/milestones/v0.3-workflow/003-canvas.md, PLAN.md D30-D31, Canvas.md",
+  "setup_corrections": [
+    "Interrupted initial npm exec invocation because npm consumed runner options; reran the local Playwright executable with correct arguments.",
+    "Harness drag source assertion initially used pointer, which is not a source in the installed UI SDK contract; removed that unsupported expectation. Native pointerup details are retained in host-contract.json.",
+    "Zoom-wheel harness sends repeated ticks because UI SDK limits the effect of a single tick.",
+    "Initialize RTL on the document and Canvas before measuring harness geometry; production preview language-switch geometry matched a fresh Arabic load."
+  ],
+  "source_changes": false
+}

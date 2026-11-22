@@ -1,0 +1,25 @@
+[WebServer] (node:49159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 2 workers
+
+(node:49235) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49234) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 e2e/canvas.spec.ts:5:2 › Canvas moves and cancels nodes in en (1.8s)
+  ✓   1 e2e/canvas.spec.ts:63:2 › Canvas connects nodes with the pointer in en (2.9s)
+  ✓   3 e2e/canvas.spec.ts:142:3 › Canvas renders edges and supports viewport gestures in en light (3.4s)
+  ✓   4 e2e/canvas.spec.ts:142:3 › Canvas renders edges and supports viewport gestures in en dark (3.1s)
+  ✓   5 e2e/canvas.spec.ts:5:2 › Canvas moves and cancels nodes in ar (2.8s)
+  ✓   6 e2e/canvas.spec.ts:63:2 › Canvas connects nodes with the pointer in ar (2.9s)
+  ✓   7 e2e/canvas.spec.ts:142:3 › Canvas renders edges and supports viewport gestures in ar light (3.3s)
+  ✓   9 e2e/canvas.spec.ts:311:2 › Canvas deletes selected items and keeps focus in en (462ms)
+  ✓   8 e2e/canvas.spec.ts:142:3 › Canvas renders edges and supports viewport gestures in ar dark (3.4s)
+  ✓  10 e2e/canvas.spec.ts:347:2 › Canvas moves focus by keyboard in en (815ms)
+  ✓  11 e2e/canvas.spec.ts:311:2 › Canvas deletes selected items and keeps focus in ar (396ms)
+  ✓  13 e2e/canvas.spec.ts:408:1 › Canvas zoom keys change the viewport (148ms)
+  ✓  12 e2e/canvas.spec.ts:347:2 › Canvas moves focus by keyboard in ar (650ms)
+  ✓  14 e2e/canvas.spec.ts:424:1 › Canvas localizes graph copy while preserving edits (763ms)
+
+  14 passed (17.1s)

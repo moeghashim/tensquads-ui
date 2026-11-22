@@ -1,0 +1,1037 @@
+{
+  "surface": "Real Canvas React component and real UI SDK agent bridge served by local Vite; synthetic frozen four-node workflow",
+  "oracle": "v0.3-workflow task 003 and Canvas public contract",
+  "results": [
+    {
+      "scenario": "controlled pointer drag",
+      "dir": "ltr",
+      "before": {
+        "id": "start",
+        "kind": "start",
+        "title": "Start",
+        "position": {
+          "x": 40,
+          "y": 100
+        }
+      },
+      "callback": {
+        "type": "move",
+        "value": {
+          "id": "start",
+          "position": {
+            "x": 90,
+            "y": 130
+          }
+        },
+        "source": "virtual",
+        "reason": "drag",
+        "eventType": "pointerup",
+        "pointerType": "mouse",
+        "eventConstructor": "PointerEvent"
+      },
+      "after": {
+        "id": "start",
+        "kind": "start",
+        "title": "Start",
+        "position": {
+          "x": 40,
+          "y": 100
+        }
+      },
+      "draftCommits": 0,
+      "releaseCommits": 1
+    },
+    {
+      "scenario": "agent applies host updates",
+      "dir": "ltr",
+      "entry": {
+        "ref": "c1",
+        "component": "workflow-canvas",
+        "actions": [
+          "select",
+          "move",
+          "connect"
+        ],
+        "label": "Live workflow",
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1
+        },
+        "selected": [],
+        "positions": {
+          "start": {
+            "x": 40,
+            "y": 100
+          },
+          "branch": {
+            "x": 280,
+            "y": 100
+          },
+          "agent": {
+            "x": 520,
+            "y": 100
+          },
+          "end": {
+            "x": 780,
+            "y": 100
+          }
+        }
+      },
+      "callbacks": [
+        {
+          "type": "selection",
+          "value": {
+            "nodes": [
+              "start"
+            ],
+            "edges": []
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "move",
+          "value": {
+            "id": "start",
+            "position": {
+              "x": 60,
+              "y": 141
+            }
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "connect",
+          "value": {
+            "from": "start",
+            "to": "agent"
+          },
+          "source": "agent",
+          "reason": "imperative"
+        }
+      ],
+      "state": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 60,
+                "y": 141
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "start",
+              "to": "agent",
+              "id": "edge-0"
+            }
+          ]
+        },
+        "selection": {
+          "nodes": [
+            "start"
+          ],
+          "edges": []
+        },
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1
+        },
+        "sizes": {
+          "start": {
+            "width": 83.875,
+            "height": 53
+          },
+          "branch": {
+            "width": 126.25,
+            "height": 121
+          },
+          "agent": {
+            "width": 113.21875,
+            "height": 53
+          },
+          "end": {
+            "width": 80.859375,
+            "height": 53
+          }
+        },
+        "frozen": true,
+        "initial": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 40,
+                "y": 100
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": []
+        }
+      }
+    },
+    {
+      "scenario": "connection and agent guards",
+      "dir": "ltr",
+      "rejected": [
+        [
+          "connect",
+          [
+            "start",
+            "start"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "agent",
+            "start"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "end",
+            "agent"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "start",
+            "agent"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "branch",
+            "end"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "branch",
+            "end",
+            2
+          ]
+        ],
+        [
+          "connect",
+          [
+            "branch",
+            "end",
+            0.5
+          ]
+        ],
+        [
+          "connect",
+          [
+            "missing",
+            "end"
+          ]
+        ],
+        [
+          "move",
+          [
+            "missing",
+            10,
+            10
+          ]
+        ],
+        [
+          "move",
+          [
+            "start",
+            null,
+            10
+          ]
+        ]
+      ],
+      "hostCallbacks": []
+    },
+    {
+      "scenario": "host veto",
+      "dir": "ltr",
+      "callbacks": [
+        {
+          "type": "move",
+          "value": {
+            "id": "start",
+            "position": {
+              "x": 200,
+              "y": 200
+            }
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "connect",
+          "value": {
+            "from": "branch",
+            "fromPort": 1,
+            "to": "end"
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "selection",
+          "value": {
+            "nodes": [
+              "end"
+            ],
+            "edges": []
+          },
+          "source": "agent",
+          "reason": "imperative"
+        }
+      ],
+      "unchangedGraph": true,
+      "unchangedSelection": true
+    },
+    {
+      "scenario": "viewport clamp and measured nodes",
+      "dir": "ltr",
+      "sizes": {
+        "start": {
+          "width": 83.875,
+          "height": 53
+        },
+        "branch": {
+          "width": 126.25,
+          "height": 121
+        },
+        "agent": {
+          "width": 113.21875,
+          "height": 53
+        },
+        "end": {
+          "width": 80.859375,
+          "height": 53
+        }
+      },
+      "zoomBounds": [
+        0.5,
+        2
+      ],
+      "state": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 60,
+                "y": 160
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "start",
+              "to": "agent",
+              "id": "edge-0"
+            }
+          ]
+        },
+        "selection": {
+          "nodes": [
+            "start"
+          ],
+          "edges": []
+        },
+        "viewport": {
+          "x": -492,
+          "y": -25.87499999999997,
+          "zoom": 1
+        },
+        "sizes": {
+          "start": {
+            "width": 83.875,
+            "height": 53
+          },
+          "branch": {
+            "width": 126.25,
+            "height": 121
+          },
+          "agent": {
+            "width": 113.21875,
+            "height": 53
+          },
+          "end": {
+            "width": 80.859375,
+            "height": 53
+          }
+        },
+        "frozen": true,
+        "initial": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 40,
+                "y": 100
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": []
+        }
+      }
+    },
+    {
+      "scenario": "controlled pointer drag",
+      "dir": "rtl",
+      "before": {
+        "id": "start",
+        "kind": "start",
+        "title": "Start",
+        "position": {
+          "x": 40,
+          "y": 100
+        }
+      },
+      "callback": {
+        "type": "move",
+        "value": {
+          "id": "start",
+          "position": {
+            "x": 90,
+            "y": 130
+          }
+        },
+        "source": "virtual",
+        "reason": "drag",
+        "eventType": "pointerup",
+        "pointerType": "mouse",
+        "eventConstructor": "PointerEvent"
+      },
+      "after": {
+        "id": "start",
+        "kind": "start",
+        "title": "Start",
+        "position": {
+          "x": 40,
+          "y": 100
+        }
+      },
+      "draftCommits": 0,
+      "releaseCommits": 1
+    },
+    {
+      "scenario": "agent applies host updates",
+      "dir": "rtl",
+      "entry": {
+        "ref": "c1",
+        "component": "workflow-canvas",
+        "actions": [
+          "select",
+          "move",
+          "connect"
+        ],
+        "label": "Live workflow",
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1
+        },
+        "selected": [],
+        "positions": {
+          "start": {
+            "x": 40,
+            "y": 100
+          },
+          "branch": {
+            "x": 280,
+            "y": 100
+          },
+          "agent": {
+            "x": 520,
+            "y": 100
+          },
+          "end": {
+            "x": 780,
+            "y": 100
+          }
+        }
+      },
+      "callbacks": [
+        {
+          "type": "selection",
+          "value": {
+            "nodes": [
+              "start"
+            ],
+            "edges": []
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "move",
+          "value": {
+            "id": "start",
+            "position": {
+              "x": 60,
+              "y": 141
+            }
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "connect",
+          "value": {
+            "from": "start",
+            "to": "agent"
+          },
+          "source": "agent",
+          "reason": "imperative"
+        }
+      ],
+      "state": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 60,
+                "y": 141
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "start",
+              "to": "agent",
+              "id": "edge-0"
+            }
+          ]
+        },
+        "selection": {
+          "nodes": [
+            "start"
+          ],
+          "edges": []
+        },
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1
+        },
+        "sizes": {
+          "start": {
+            "width": 83.875,
+            "height": 53
+          },
+          "branch": {
+            "width": 126.25,
+            "height": 121
+          },
+          "agent": {
+            "width": 113.21875,
+            "height": 53
+          },
+          "end": {
+            "width": 80.859375,
+            "height": 53
+          }
+        },
+        "frozen": true,
+        "initial": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 40,
+                "y": 100
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": []
+        }
+      }
+    },
+    {
+      "scenario": "connection and agent guards",
+      "dir": "rtl",
+      "rejected": [
+        [
+          "connect",
+          [
+            "start",
+            "start"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "agent",
+            "start"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "end",
+            "agent"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "start",
+            "agent"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "branch",
+            "end"
+          ]
+        ],
+        [
+          "connect",
+          [
+            "branch",
+            "end",
+            2
+          ]
+        ],
+        [
+          "connect",
+          [
+            "branch",
+            "end",
+            0.5
+          ]
+        ],
+        [
+          "connect",
+          [
+            "missing",
+            "end"
+          ]
+        ],
+        [
+          "move",
+          [
+            "missing",
+            10,
+            10
+          ]
+        ],
+        [
+          "move",
+          [
+            "start",
+            null,
+            10
+          ]
+        ]
+      ],
+      "hostCallbacks": []
+    },
+    {
+      "scenario": "host veto",
+      "dir": "rtl",
+      "callbacks": [
+        {
+          "type": "move",
+          "value": {
+            "id": "start",
+            "position": {
+              "x": 200,
+              "y": 200
+            }
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "connect",
+          "value": {
+            "from": "branch",
+            "fromPort": 1,
+            "to": "end"
+          },
+          "source": "agent",
+          "reason": "imperative"
+        },
+        {
+          "type": "selection",
+          "value": {
+            "nodes": [
+              "end"
+            ],
+            "edges": []
+          },
+          "source": "agent",
+          "reason": "imperative"
+        }
+      ],
+      "unchangedGraph": true,
+      "unchangedSelection": true
+    },
+    {
+      "scenario": "viewport clamp and measured nodes",
+      "dir": "rtl",
+      "sizes": {
+        "start": {
+          "width": 83.875,
+          "height": 53
+        },
+        "branch": {
+          "width": 126.25,
+          "height": 121
+        },
+        "agent": {
+          "width": 113.21875,
+          "height": 53
+        },
+        "end": {
+          "width": 80.859375,
+          "height": 53
+        }
+      },
+      "zoomBounds": [
+        0.5,
+        2
+      ],
+      "state": {
+        "graph": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 60,
+                "y": 160
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "start",
+              "to": "agent",
+              "id": "edge-0"
+            }
+          ]
+        },
+        "selection": {
+          "nodes": [
+            "start"
+          ],
+          "edges": []
+        },
+        "viewport": {
+          "x": 492,
+          "y": -25.87499999999997,
+          "zoom": 1
+        },
+        "sizes": {
+          "start": {
+            "width": 83.875,
+            "height": 53
+          },
+          "branch": {
+            "width": 126.25,
+            "height": 121
+          },
+          "agent": {
+            "width": 113.21875,
+            "height": 53
+          },
+          "end": {
+            "width": 80.859375,
+            "height": 53
+          }
+        },
+        "frozen": true,
+        "initial": {
+          "nodes": [
+            {
+              "id": "start",
+              "kind": "start",
+              "title": "Start",
+              "position": {
+                "x": 40,
+                "y": 100
+              }
+            },
+            {
+              "id": "branch",
+              "kind": "classify",
+              "title": "Route request",
+              "branches": [
+                "Refund",
+                "Question"
+              ],
+              "position": {
+                "x": 280,
+                "y": 100
+              }
+            },
+            {
+              "id": "agent",
+              "kind": "agent",
+              "title": "Draft reply",
+              "position": {
+                "x": 520,
+                "y": 100
+              }
+            },
+            {
+              "id": "end",
+              "kind": "end",
+              "title": "End",
+              "position": {
+                "x": 780,
+                "y": 100
+              }
+            }
+          ],
+          "edges": []
+        }
+      }
+    }
+  ],
+  "pageErrors": []
+}

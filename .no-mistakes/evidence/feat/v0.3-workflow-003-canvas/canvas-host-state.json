@@ -1,0 +1,143 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "start",
+        "kind": "start",
+        "title": "Start",
+        "position": {
+          "x": 40,
+          "y": 60
+        }
+      },
+      {
+        "id": "branch",
+        "kind": "classify",
+        "title": "Classify",
+        "branches": [
+          "A",
+          "B"
+        ],
+        "position": {
+          "x": 340,
+          "y": 101
+        }
+      },
+      {
+        "id": "end",
+        "kind": "end",
+        "title": "End",
+        "position": {
+          "x": 650,
+          "y": 60
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-0",
+        "from": "start",
+        "to": "branch"
+      },
+      {
+        "id": "edge-1",
+        "from": "branch",
+        "fromPort": 1,
+        "to": "end"
+      }
+    ]
+  },
+  "calls": [
+    {
+      "type": "select",
+      "value": {
+        "nodes": [
+          "branch"
+        ],
+        "edges": []
+      },
+      "source": "agent"
+    },
+    {
+      "type": "move",
+      "value": {
+        "id": "branch",
+        "position": {
+          "x": 340,
+          "y": 101
+        }
+      },
+      "source": "agent"
+    },
+    {
+      "type": "connect",
+      "value": {
+        "from": "start",
+        "to": "branch"
+      },
+      "source": "agent"
+    },
+    {
+      "type": "connect",
+      "value": {
+        "from": "branch",
+        "fromPort": 1,
+        "to": "end"
+      },
+      "source": "agent"
+    },
+    {
+      "type": "move",
+      "value": {
+        "id": "branch",
+        "position": {
+          "x": 700,
+          "y": 300
+        }
+      },
+      "source": "agent"
+    },
+    {
+      "type": "connect",
+      "value": {
+        "from": "start",
+        "to": "end"
+      },
+      "source": "agent"
+    }
+  ],
+  "snapshot": [
+    {
+      "ref": "c1",
+      "component": "workflow-canvas",
+      "actions": [
+        "select",
+        "move",
+        "connect"
+      ],
+      "label": "Host workflow",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "selected": [
+        "node:branch"
+      ],
+      "positions": {
+        "start": {
+          "x": 40,
+          "y": 60
+        },
+        "branch": {
+          "x": 340,
+          "y": 101
+        },
+        "end": {
+          "x": 650,
+          "y": 60
+        }
+      }
+    }
+  ]
+}

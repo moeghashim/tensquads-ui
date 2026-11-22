@@ -1,0 +1,5 @@
+HOST CONTROL: drag painted a 60×40 draft without changing frozen graph; release called host once with {x:100,y:100}, SDK source virtual; unapplied graph returned to {x:40,y:60}.
+AGENT SNAPSHOT: {"ref":"c1","component":"workflow-canvas","actions":["select","move","connect"],"label":"Host workflow","viewport":{"x":0,"y":0,"zoom":1},"selected":["node:start"],"positions":{"start":{"x":40,"y":60},"branch":{"x":320,"y":60},"end":{"x":650,"y":60}}}
+AGENT ACTIONS: selected only existing IDs, moved branch to rounded {340,101}, connected Start→Classify and branch B→End. Host records source agent. Self, incoming Start, outgoing End, duplicate, absent/invalid branch ports and missing-node connections refused without host calls.
+HOST VETO: canceled agent movement and connection returned false and left graph unchanged.
+ZOOM BOUNDARIES: repeated + clamped at 2.0; repeated - clamped at 0.5.
