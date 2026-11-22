@@ -148,7 +148,7 @@ export function Inspector({
 					);
 				})}
 			</div>
-			{footerContent !== null && <footer className="ts-inspector__footer">{footerContent}</footer>}
+			{footerContent && <footer className="ts-inspector__footer">{footerContent}</footer>}
 		</section>
 	);
 }
@@ -156,17 +156,20 @@ export function Inspector({
 function IconAction({ label, icon, onPress }: Pick<InspectorAction, "label" | "icon" | "onPress">) {
 	return (
 		<Tooltip type="label">
-			<Button
-				className="ts-inspector__icon-button"
-				variant="ghost"
-				size="sm"
-				iconOnly
-				aria-label={label}
-				onClick={onPress}
-				render={<TooltipTrigger />}
+			<TooltipTrigger
+				render={
+					<Button
+						className="ts-inspector__icon-button"
+						variant="ghost"
+						size="sm"
+						iconOnly
+						aria-label={label}
+						onClick={onPress}
+					/>
+				}
 			>
 				<Icon name={icon} />
-			</Button>
+			</TooltipTrigger>
 			<TooltipContent>{label}</TooltipContent>
 		</Tooltip>
 	);

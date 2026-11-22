@@ -1502,11 +1502,7 @@ function InspectorPreview({ locale, direction }: { locale: "en" | "ar"; directio
 		<div className="component-list inspector-preview" dir={direction}>
 			<Inspector
 				title={ar ? "وكيل" : "Agent"}
-				description={
-					ar
-						? "وكيل سير العمل الذي يساعد العملاء في حل أسئلتهم."
-						: "Workflow agent that helps customers resolve their questions."
-				}
+				description={ar ? "استدعاء النموذج وفق التعليمات" : "Call the model with your instructions"}
 				locale={locale}
 				fields={[
 					{

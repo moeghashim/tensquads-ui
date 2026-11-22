@@ -26,7 +26,7 @@
 	.ts-inspector__label { min-inline-size: 60px; color: var(--ts-text-emphasis); font-family: var(--ts-field-label-font-family); font-size: var(--ts-field-label-font-size); font-weight: var(--ts-field-label-font-weight); line-height: var(--ts-control-sm); letter-spacing: var(--ts-field-label-letter-spacing); }
 	.ts-inspector__input { min-inline-size: 0; }
 	.ts-inspector__switch { justify-self: end; }
-	.ts-inspector [data-slot="field"].ts-inspector__longtext { display: flex; flex-direction: column; gap: var(--ts-space-2); min-inline-size: 0; }
+	.ts-inspector [data-slot="field"].ts-inspector__longtext { display: flex; flex-direction: column; align-items: stretch; gap: var(--ts-space-2); min-inline-size: 0; }
 	.ts-inspector__longtext-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ts-space-2); min-block-size: var(--ts-control-sm); }
 	.ts-inspector [data-slot="field-label"].ts-inspector__label { color: var(--ts-text-emphasis); }
 	.ts-inspector [data-slot="textarea"].ts-inspector__textarea {
@@ -51,7 +51,7 @@
 	.ts-inspector [data-slot="textarea"].ts-inspector__textarea::placeholder { color: var(--ts-text-tertiary); opacity: 1; }
 	.ts-inspector [data-slot="textarea"].ts-inspector__textarea:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 	.ts-inspector__footer { padding-block-start: var(--ts-space-3); border-block-start: 1px solid var(--ts-border); }
-	.ts-inspector__footer-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--ts-space-2); }
+	.ts-inspector__footer-actions { display: flex; margin-inline: calc(-1 * var(--ts-space-3)); align-items: center; justify-content: space-between; gap: var(--ts-space-2); }
 	.ts-inspector__footer-button { gap: var(--ts-space-1-5); }
 	.ts-inspector__footer-button svg { inline-size: 14px; block-size: 14px; }
 }
