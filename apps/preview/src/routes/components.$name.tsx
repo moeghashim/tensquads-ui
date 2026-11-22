@@ -1500,6 +1500,19 @@ function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 						}))
 					}
 					mode={mode}
+					onDelete={({ nodes, edges }) =>
+						setGraph((current) => {
+							const removedNodes = new Set(nodes);
+							const removedEdges = new Set(edges);
+							return {
+								nodes: current.nodes.filter((node) => !removedNodes.has(node.id)),
+								edges: current.edges.filter(
+									(edge) =>
+										!removedEdges.has(edge.id) && !removedNodes.has(edge.from) && !removedNodes.has(edge.to),
+								),
+							};
+						})
+					}
 					onNodeMove={(id, position) =>
 						setGraph((current) => ({
 							...current,

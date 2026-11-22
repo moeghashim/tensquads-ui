@@ -3,6 +3,7 @@ import {
 	type ConnectDraft,
 	createChange,
 	createConnect,
+	createFocusRecovery,
 	createMove,
 	createRovingFocus,
 	createSelection,
@@ -44,6 +45,7 @@ export type CanvasProps = Omit<
 	onSelectionChange?: (selection: CanvasSelection, details: ChangeDetails) => void;
 	onNodeMove?: (id: string, position: { x: number; y: number }, details: ChangeDetails) => void;
 	onConnect?: (connection: CanvasConnection, details: ChangeDetails) => void;
+	onDelete?: (selection: CanvasSelection, details: ChangeDetails) => void;
 	grid?: boolean;
 	mode?: "select" | "pan";
 	locale?: "en" | "ar";
@@ -75,6 +77,7 @@ type CanvasOptions = {
 	direction?: "ltr" | "rtl";
 	graph?: WorkflowGraph;
 	onConnect?: CanvasProps["onConnect"];
+	onDelete?: CanvasProps["onDelete"];
 };
 
 const canvas = definePrimitive({
@@ -93,6 +96,7 @@ const canvas = definePrimitive({
 		locale: "string",
 		direction: "string",
 		onConnect: "callback",
+		onDelete: "callback",
 		graph: "value",
 	},
 	controlled: ["viewport", "selected", "positions"],
@@ -285,10 +289,27 @@ const canvas = definePrimitive({
 			const value: CanvasConnection = { from, ...(port === undefined ? {} : { fromPort: port }), to };
 			return !dispatch(context, "onConnect", value, { reason: "imperative" });
 		};
+		const deleteSelection = (event: KeyboardEvent) => {
+			const { graph, onDelete } = context.options();
+			const { selected, moving: dragged, connecting: drawn } = context.store.get();
+			if (!graph || !onDelete || !selected.length || dragged || drawn) return;
+			if (event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
+			event.preventDefault();
+			dispatch(context, "onDelete", toCanvasSelection(selected, graph), { reason: "delete-key", event });
+		};
+		// A removed node that held focus passes it to the node that takes its place, or to the canvas.
+		const recovery = createFocusRecovery<{ index: number }>({
+			fallback: ({ props }) => {
+				const items = roving.items();
+				return (items[props.index] ?? items.at(-1))?.el ?? context.element("root");
+			},
+		});
 		return {
 			select,
 			move,
 			connect,
+			deleteSelection,
+			recovery,
 			moving,
 			connecting,
 			connectable: () => !!context.options().onConnect,
@@ -414,6 +435,10 @@ const canvas = definePrimitive({
 				},
 				keydown: (event, { api, el }) => {
 					if (!el || event.defaultPrevented || isIgnored(event.target, el)) return;
+					if (event.key === "Delete" || event.key === "Backspace") {
+						api.deleteSelection(event);
+						return;
+					}
 					if (event.key === "Escape") {
 						if (api.isMoving()) return;
 						if (api.hasSelection()) {
@@ -446,15 +471,22 @@ const canvas = definePrimitive({
 				};
 			},
 		}),
-		node: slot<{ value: string; description: string | undefined }>({
-			props: { value: "string", description: "string" },
+		node: slot<{ value: string; index: number; description: string | undefined }>({
+			props: { value: "string", index: "number", description: "string" },
 			role: "option",
 			direct: direct(["style", "data-dragging"]),
 			live: live((state, { api, key }) => ({ "data-connect": api.connecting.role(state, key) })),
 			focus: "roving",
 			press: ({ api, key }, event) => api.nodePress(key, event),
 			keys: ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"],
-			bind: (el, part) => part.api.roving.bind(el, part),
+			bind: (el, part) => {
+				const leaveGroup = part.api.roving.bind(el, part);
+				const stopRecovery = part.api.recovery.bind(el, part);
+				return () => {
+					stopRecovery();
+					leaveGroup();
+				};
+			},
 			on: {
 				keydown: (event, { el, api, key }) => {
 					if (!el) return;
@@ -626,6 +658,7 @@ export function Canvas({
 	onSelectionChange,
 	onNodeMove,
 	onConnect,
+	onDelete,
 	grid = true,
 	mode = "select",
 	locale = "en",
@@ -694,6 +727,7 @@ export function Canvas({
 			titles={titles}
 			graph={graph}
 			onConnect={onConnect}
+			onDelete={onDelete}
 			movable={onNodeMove !== undefined}
 			onPositionsChange={(next, details) => {
 				for (const node of graph.nodes) {
@@ -762,12 +796,13 @@ export function Canvas({
 						})}
 					</g>
 				</svg>
-				{graph.nodes.map((node) => {
+				{graph.nodes.map((node, index) => {
 					const kind = hiddenKind(node, locale);
 					return (
 						<NodePart
 							key={node.id}
 							value={node.id}
+							index={index}
 							description={connectionsLabel(node, graph, locale)}
 							data-node-id={node.id}
 							ref={(element) => {

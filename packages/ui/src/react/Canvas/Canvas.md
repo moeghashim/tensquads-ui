@@ -10,6 +10,8 @@ Pass `onNodeMove` to make nodes movable. Canvas reports one logical integer posi
 
 Pass `onConnect` to let users draw an edge from an output port to a node body or input port. Canvas reports `{ from, fromPort?, to }` with UI SDK change details and waits for the host to add the edge to `graph`. `fromPort` is present only for nodes with branches. Escape cancels the connection and keeps the current selection. Without `onConnect`, output ports behave like part of the node. The keyboard path for connecting is the Inspector.
 
+Pass `onDelete` to handle Delete or Backspace on a focused node or the canvas root. Canvas reports the current node and edge selection; the host removes selected items and edges attached to removed nodes. When the focused node is removed, focus goes to the node that takes its place, or to the canvas when no node is left.
+
 The Canvas agent bridge offers `select(nodes, edges?)`, `move(id, x, y)`, and `connect(from, to, fromPort?)`. Selection ignores IDs outside the graph. Movement rounds logical positions and works in pan mode. Movement and connection return `false` when the host has no matching callback, their input is invalid, or the host cancels the change. The bridge reports agent sourced change details to host callbacks.
 
 ## Keyboard

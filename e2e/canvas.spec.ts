@@ -307,6 +307,42 @@ async function edgeErrors(root: Locator) {
 }
 
 for (const locale of ["en", "ar"] as const) {
+	test(`Canvas deletes selected items and keeps focus in ${locale}`, async ({ page }) => {
+		const direction = locale === "ar" ? "rtl" : "ltr";
+		await openPreview(page, { locale, direction, theme: "light" }, "/components/Canvas");
+		const root = page.getByRole("region", { name: locale === "ar" ? "منشئ سير العمل" : "Workflow builder" });
+		const node = (id: string) => root.locator(`[data-node-id="${id}"]`);
+		await root.scrollIntoViewIfNeeded();
+		const hitPath = root.locator(".ts-canvas__edge-hit").first();
+		const edgeId = await hitPath.evaluate((element) =>
+			element.closest("[data-edge-id]")?.getAttribute("data-edge-id"),
+		);
+		const edge = root.locator(`[data-edge-id="${edgeId}"]`);
+		const edges = root.locator("[data-edge-id]");
+		const before = await edges.count();
+		const midpoint = await hitPath.evaluate((element) => {
+			const path = element as SVGPathElement;
+			const point = path.getPointAtLength(path.getTotalLength() / 2);
+			const matrix = path.getScreenCTM();
+			if (!matrix) throw new Error("Edge hit path has no screen transform");
+			const screen = new DOMPoint(point.x, point.y).matrixTransform(matrix);
+			return { x: screen.x, y: screen.y };
+		});
+		await page.mouse.click(midpoint.x, midpoint.y);
+		await expect(edge).toHaveAttribute("data-selected", "true");
+		expect(await root.evaluate((element) => getComputedStyle(element).outlineStyle)).toBe("none");
+		// The press alone put focus in the canvas, so the key reaches it.
+		await page.keyboard.press("Backspace");
+		await expect(edge).toHaveCount(0);
+		await expect(edges).toHaveCount(before - 1);
+
+		await node("start").click();
+		await page.keyboard.press("Delete");
+		await expect(node("start")).toHaveCount(0);
+		await expect(root.locator('[data-edge-from="start"], [data-edge-to="start"]')).toHaveCount(0);
+		await expect(node("classify")).toBeFocused();
+	});
+
 	test(`Canvas moves focus by keyboard in ${locale}`, async ({ page }) => {
 		const direction = locale === "ar" ? "rtl" : "ltr";
 		await openPreview(page, { locale, direction, theme: "light" }, "/components/Canvas");

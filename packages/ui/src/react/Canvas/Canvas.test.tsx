@@ -173,6 +173,95 @@ describe("Canvas", () => {
 		expect(onSelectionChange).toHaveBeenCalledTimes(1);
 	});
 
+	it.each(["Delete", "Backspace"])("requests deletion with %s", (key) => {
+		const onDelete = vi.fn();
+		const { getByRole } = render(
+			<Canvas
+				graph={graph}
+				label="Workflow"
+				selection={{ nodes: ["start"], edges: ["edge"] }}
+				onDelete={onDelete}
+			/>,
+		);
+		const node = getByRole("option", { name: "Start" });
+		node.focus();
+		expect(fireEvent.keyDown(node, { key })).toBe(false);
+		expect(onDelete).toHaveBeenCalledTimes(1);
+		expect(onDelete).toHaveBeenCalledWith(
+			{ nodes: ["start"], edges: ["edge"] },
+			expect.objectContaining({ reason: "delete-key" }),
+		);
+	});
+
+	it("ignores deletion without a selection, callback, or eligible key press", () => {
+		const onDelete = vi.fn();
+		const { getByRole, rerender } = render(<Canvas graph={graph} label="Workflow" onDelete={onDelete} />);
+		const root = getByRole("region");
+		root.focus();
+		expect(fireEvent.keyDown(root, { key: "Delete" })).toBe(true);
+		rerender(
+			<Canvas graph={graph} label="Workflow" selection={{ nodes: ["start"], edges: [] }} onDelete={onDelete} />,
+		);
+		fireEvent.keyDown(root, { key: "Backspace", ctrlKey: true });
+		fireEvent.keyDown(root, { key: "Backspace", metaKey: true });
+		fireEvent.keyDown(root, { key: "Backspace", altKey: true });
+		fireEvent.keyDown(root, { key: "Backspace", repeat: true });
+		expect(onDelete).not.toHaveBeenCalled();
+		rerender(<Canvas graph={graph} label="Workflow" selection={{ nodes: ["start"], edges: [] }} />);
+		root.focus();
+		expect(fireEvent.keyDown(root, { key: "Delete" })).toBe(true);
+	});
+
+	it("does not delete from overlays", () => {
+		const onDelete = vi.fn();
+		const { getByText } = render(
+			<Canvas graph={graph} label="Workflow" selection={{ nodes: ["start"], edges: [] }} onDelete={onDelete}>
+				<button type="button">Overlay</button>
+			</Canvas>,
+		);
+		const overlay = getByText("Overlay");
+		overlay.focus();
+		fireEvent.keyDown(overlay, { key: "Delete" });
+		expect(onDelete).not.toHaveBeenCalled();
+	});
+
+	it("passes focus on when the host removes the focused node, however late", async () => {
+		const { getByRole, rerender } = render(
+			<Canvas graph={graph} label="Workflow" selection={{ nodes: ["start"], edges: [] }} onDelete={vi.fn()} />,
+		);
+		const start = getByRole("option", { name: "Start" });
+		start.focus();
+		fireEvent.keyDown(start, { key: "Delete" });
+		expect(start).toHaveFocus();
+		await act(async () => {
+			rerender(<Canvas graph={{ nodes: [graph.nodes[1]!], edges: [] }} label="Workflow" onDelete={vi.fn()} />);
+		});
+		expect(getByRole("option", { name: "End" })).toHaveFocus();
+		await act(async () => {
+			rerender(<Canvas graph={{ nodes: [], edges: [] }} label="Workflow" onDelete={vi.fn()} />);
+		});
+		expect(getByRole("region")).toHaveFocus();
+	});
+
+	it("leaves focus alone when a removed node did not hold it", async () => {
+		const { rerender, getByRole } = render(
+			<>
+				<button type="button">Elsewhere</button>
+				<Canvas graph={graph} label="Workflow" />
+			</>,
+		);
+		getByRole("button").focus();
+		await act(async () => {
+			rerender(
+				<>
+					<button type="button">Elsewhere</button>
+					<Canvas graph={{ nodes: [graph.nodes[1]!], edges: [] }} label="Workflow" />
+				</>,
+			);
+		});
+		expect(getByRole("button")).toHaveFocus();
+	});
+
 	it("makes an empty canvas root the tab stop", () => {
 		const markup = renderToStaticMarkup(<Canvas graph={{ nodes: [], edges: [] }} label="Workflow" />);
 		expect(markup).toContain('tabindex="0"');
