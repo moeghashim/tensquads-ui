@@ -1,0 +1,42 @@
+[
+  {
+    "name": "en: default catalogue, single tab stop, Home/End and no wrapping",
+    "result": "pass"
+  },
+  {
+    "name": "en: browser pen drag inserts exactly one node at logical drop point",
+    "result": "pass"
+  },
+  {
+    "name": "en: outside and overlay drops never insert nodes",
+    "result": "pass"
+  },
+  {
+    "name": "en: real browser touch tap inserts; touch swipe does not drag or insert",
+    "result": "pass"
+  },
+  {
+    "name": "en: keyboard removes final connection and reconnects Archive without losing text edits",
+    "result": "pass"
+  },
+  {
+    "name": "ar: default catalogue, single tab stop, Home/End and no wrapping",
+    "result": "pass"
+  },
+  {
+    "name": "ar: browser pen drag inserts exactly one node at logical drop point",
+    "result": "pass"
+  },
+  {
+    "name": "ar: outside and overlay drops never insert nodes",
+    "result": "pass"
+  },
+  {
+    "name": "ar: real browser touch tap inserts; touch swipe does not drag or insert",
+    "result": "pass"
+  },
+  {
+    "name": "ar: keyboard removes final connection and reconnects Archive without losing text edits",
+    "result": "pass"
+  }
+]

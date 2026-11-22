@@ -1,0 +1,37 @@
+[WebServer] (node:82763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 26 tests using 2 workers
+
+(node:82829) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:82828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/canvas.spec.ts:496:1 › Canvas follows the direction control (433ms)
+  ✓   2 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/canvas.spec.ts:424:1 › Canvas localizes graph copy while preserving edits (901ms)
+  ✓   4 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/command-palette.spec.ts:37:1 › site shortcut finds a component and navigates to its page (251ms)
+  ✓   5 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/command-palette.spec.ts:50:1 › CommandPalette closes on a backdrop press and returns focus (388ms)
+  ✓   6 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/command-palette.spec.ts:60:1 › CommandPalette filters keywords, handles no matches and closes a search on the first Escape (775ms)
+  ✓   7 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/component-docs.spec.ts:29:3 › CommandPalette docs load in en with localized fixtures (458ms)
+  ✓   8 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/component-docs.spec.ts:29:3 › Palette docs load in en with localized fixtures (499ms)
+  ✓   9 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/component-docs.spec.ts:29:3 › Inspector docs load in en with localized fixtures (521ms)
+  ✓  10 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/component-docs.spec.ts:29:3 › CommandPalette docs load in ar with localized fixtures (421ms)
+  ✓  11 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/component-docs.spec.ts:29:3 › Palette docs load in ar with localized fixtures (464ms)
+  ✓  12 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/component-docs.spec.ts:29:3 › Inspector docs load in ar with localized fixtures (482ms)
+  ✓  13 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:6:3 › Inspector edits fields and runs actions in en light (1.6s)
+  ✓  14 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:54:3 › Inspector chooses, connects and removes by keyboard in en light (1.1s)
+  ✓   3 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/command-palette.spec.ts:5:1 › CommandPalette opens, filters, selects and passes axe in both locales and themes (8.4s)
+  ✓  15 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:6:3 › Inspector edits fields and runs actions in en dark (1.3s)
+  ✓  16 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:54:3 › Inspector chooses, connects and removes by keyboard in en dark (1.3s)
+  ✓  18 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:54:3 › Inspector chooses, connects and removes by keyboard in ar light (1.1s)
+  ✓  17 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:6:3 › Inspector edits fields and runs actions in ar light (2.0s)
+  ✓  20 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:54:3 › Inspector chooses, connects and removes by keyboard in ar dark (1.1s)
+  ✓  19 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/inspector.spec.ts:6:3 › Inspector edits fields and runs actions in ar dark (1.8s)
+  ✓  21 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/palette.spec.ts:6:3 › Palette inserts by pointer and keyboard in en light (940ms)
+  ✓  22 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/palette.spec.ts:6:3 › Palette inserts by pointer and keyboard in en dark (830ms)
+  ✓  24 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/palette.spec.ts:6:3 › Palette inserts by pointer and keyboard in ar light (804ms)
+  ✓  25 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/palette.spec.ts:6:3 › Palette inserts by pointer and keyboard in ar dark (1.0s)
+  ✓  23 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/palette.spec.ts:31:2 › Palette drops on Canvas in en (6.5s)
+  ✓  26 ../../worktrees/383d5bb0a3fa/01M82S7VFJW5G7XTMW0RN9T8XN/e2e/palette.spec.ts:31:2 › Palette drops on Canvas in ar (5.7s)
+
+  26 passed (25.3s)

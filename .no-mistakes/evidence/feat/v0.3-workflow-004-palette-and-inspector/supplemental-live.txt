@@ -1,0 +1,6 @@
+Touch tap inserted exactly one Agent with source touch.
+Touch swipe created no drag ghost and inserted no node.
+Pen drag inserted one Agent at pointer (861.5999999999999, 868.09375); rendered top-left (862, 868.09375).
+Mouse drop onto Palette overlay inserted no node.
+Home/End reached first/last row; arrows did not wrap at boundaries.
+Keyboard deselected existing Draft reply connection; reopening retained no selected targets.
