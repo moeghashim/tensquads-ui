@@ -100,6 +100,8 @@ export type { FormProps } from "./Form/Form.js";
 export { Form } from "./Form/Form.js";
 export type { InputClearProps, InputGroupProps, InputProps, InputVariant } from "./Input/Input.js";
 export { Input, InputClear, InputGroup } from "./Input/Input.js";
+export type { InspectorAction, InspectorField, InspectorProps } from "./Inspector/Inspector.js";
+export { Inspector } from "./Inspector/Inspector.js";
 export type {
 	MenuCheckboxItemProps,
 	MenuContentProps,

@@ -14,6 +14,7 @@ const registryOrder = [
 	"Node",
 	"Canvas",
 	"Palette",
+	"Inspector",
 ];
 
 test("component index lists every documented component", async ({ page }) => {
@@ -54,7 +55,7 @@ for (const locale of ["en", "ar"] as const) {
 			else await expect(page.locator(".component-list").first()).toBeVisible();
 			if (name === "Chat") {
 				await expect(page.getByText(/hosts replies and inline OpenUI content/)).toBeVisible();
-			} else if (name === "Node" || name === "Canvas" || name === "Palette") {
+			} else if (name === "Node" || name === "Canvas" || name === "Palette" || name === "Inspector") {
 				await expect(page.getByText(/without an OpenUI definition/i)).toBeVisible();
 			} else if (name !== "Sidebar") {
 				await expect(page.locator(".fixture-source summary")).toHaveText(

@@ -22,6 +22,7 @@ components.push("CommandPalette");
 components.push("Node");
 components.push("Canvas");
 components.push("Palette");
+components.push("Inspector");
 components.sort();
 
 export const Route = createFileRoute("/components/")({ component: ComponentsPage });
@@ -45,7 +46,8 @@ function ComponentsPage() {
 								name === "ThemeToggle" ||
 								name === "Toolbar" ||
 								name === "CommandPalette" ||
-								name === "Palette" ? (
+								name === "Palette" ||
+								name === "Inspector" ? (
 									<span>{locale === "ar" ? "معاينة التنقل" : "Navigation preview"}</span>
 								) : fixture ? (
 									name === "ChatReply" ? (
