@@ -420,3 +420,75 @@ test("Canvas zoom keys change the viewport", async ({ page }) => {
 	await page.keyboard.press("0");
 	await expect.poll(scale).toBeCloseTo(1);
 });
+
+test("Canvas localizes graph copy while preserving edits", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components/Canvas");
+	const root = page.locator(".canvas-preview .ts-canvas");
+	const node = (id: string) => root.locator(`[data-node-id="${id}"]`);
+	const relativeTop = () =>
+		node("start").evaluate((element) => {
+			const world = element.closest(".ts-canvas__world")!;
+			return element.getBoundingClientRect().top - world.getBoundingClientRect().top;
+		});
+	await node("start").focus();
+	await page.keyboard.press("Enter");
+	const before = await relativeTop();
+	await page.keyboard.press("Shift+ArrowDown");
+	await expect.poll(relativeTop).toBeCloseTo(before + 13, 0);
+
+	for (const locale of ["ar", "en"] as const) {
+		const ar = locale === "ar";
+		await page.getByRole("radio", { name: ar ? "العربية" : "English", exact: true }).click();
+		await expect(root).toHaveAttribute("dir", ar ? "rtl" : "ltr");
+		for (const [id, title] of Object.entries(
+			ar
+				? {
+						start: "البداية",
+						classify: "تصنيف الطلب",
+						refund: "وكيل الاسترداد",
+						question: "وكيل الدعم",
+						other: "وكيل الطلبات",
+						approval: "موافقة المستخدم",
+						end: "النهاية",
+						note: "ملاحظة",
+					}
+				: {
+						start: "Start",
+						classify: "Classify request",
+						refund: "Refund agent",
+						question: "Support agent",
+						other: "Orders agent",
+						approval: "User approval",
+						end: "End",
+						note: "Note",
+					},
+		)) {
+			await expect(node(id).getByText(title, { exact: true })).toBeVisible();
+		}
+		await expect(node("classify").getByText(ar ? "ثلاثة مسارات" : "Three paths", { exact: true })).toBeVisible();
+		for (const id of ["refund", "question", "other"]) {
+			await expect(node(id).getByText(ar ? "وكيل" : "Agent", { exact: true })).toBeVisible();
+		}
+		await expect(node("approval").getByText(ar ? "قبل الاسترداد" : "Before refund", { exact: true })).toBeVisible();
+		for (const branch of ar ? ["استرداد", "استفسار", "أخرى"] : ["Refund", "Question", "Other"]) {
+			await expect(node("classify").getByText(branch, { exact: true })).toBeVisible();
+		}
+		await expect(node("classify")).toHaveAttribute(
+			"aria-description",
+			ar
+				? "يتصل بـ: وكيل الاسترداد، وكيل الدعم، وكيل الطلبات"
+				: "Connects to Refund agent, Support agent, Orders agent",
+		);
+		await expect(node("start")).toHaveAttribute("aria-selected", "true");
+		await expect.poll(relativeTop).toBeCloseTo(before + 13, 0);
+	}
+
+	await node("note").focus();
+	await page.keyboard.press("Enter");
+	await page.keyboard.press("Delete");
+	await expect(node("note")).toHaveCount(0);
+	await page.getByRole("radio", { name: "العربية", exact: true }).click();
+	await expect(root).toHaveAttribute("dir", "rtl");
+	await expect(node("note")).toHaveCount(0);
+	await expect.poll(relativeTop).toBeCloseTo(before + 13, 0);
+});

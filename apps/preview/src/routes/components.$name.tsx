@@ -1427,47 +1427,56 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 	const ar = locale === "ar";
 	const [mode, setMode] = useState<"select" | "pan">("select");
-	const [graph, setGraph] = useState<WorkflowGraph>(() => ({
+	const nodeCopy: Record<string, Pick<WorkflowGraph["nodes"][number], "title" | "meta" | "branches">> = {
+		start: { title: ar ? "البداية" : "Start" },
+		classify: {
+			title: ar ? "تصنيف الطلب" : "Classify request",
+			meta: ar ? "ثلاثة مسارات" : "Three paths",
+			branches: ar ? ["استرداد", "استفسار", "أخرى"] : ["Refund", "Question", "Other"],
+		},
+		refund: { title: ar ? "وكيل الاسترداد" : "Refund agent", meta: ar ? "وكيل" : "Agent" },
+		question: { title: ar ? "وكيل الدعم" : "Support agent", meta: ar ? "وكيل" : "Agent" },
+		other: { title: ar ? "وكيل الطلبات" : "Orders agent", meta: ar ? "وكيل" : "Agent" },
+		approval: {
+			title: ar ? "موافقة المستخدم" : "User approval",
+			meta: ar ? "قبل الاسترداد" : "Before refund",
+		},
+		end: { title: ar ? "النهاية" : "End" },
+		note: { title: ar ? "ملاحظة" : "Note" },
+	};
+	const [graph, setGraph] = useState<{
+		nodes: Omit<WorkflowGraph["nodes"][number], "title" | "meta" | "branches">[];
+		edges: WorkflowGraph["edges"];
+	}>(() => ({
 		nodes: [
-			{ id: "start", kind: "start", title: ar ? "البداية" : "Start", position: { x: 40, y: 110 } },
+			{ id: "start", kind: "start", position: { x: 40, y: 110 } },
 			{
 				id: "classify",
 				kind: "classify",
-				title: ar ? "تصنيف الطلب" : "Classify request",
-				meta: ar ? "ثلاثة مسارات" : "Three paths",
-				branches: ar ? ["استرداد", "استفسار", "أخرى"] : ["Refund", "Question", "Other"],
 				position: { x: 260, y: 80 },
 			},
 			{
 				id: "refund",
 				kind: "agent",
-				title: ar ? "وكيل الاسترداد" : "Refund agent",
-				meta: ar ? "وكيل" : "Agent",
 				position: { x: 520, y: 20 },
 			},
 			{
 				id: "question",
 				kind: "agent",
-				title: ar ? "وكيل الدعم" : "Support agent",
-				meta: ar ? "وكيل" : "Agent",
 				position: { x: 520, y: 160 },
 			},
 			{
 				id: "other",
 				kind: "agent",
-				title: ar ? "وكيل الطلبات" : "Orders agent",
-				meta: ar ? "وكيل" : "Agent",
 				position: { x: 520, y: 300 },
 			},
 			{
 				id: "approval",
 				kind: "user-approval",
-				title: ar ? "موافقة المستخدم" : "User approval",
-				meta: ar ? "قبل الاسترداد" : "Before refund",
 				position: { x: 780, y: 100 },
 			},
-			{ id: "end", kind: "end", title: ar ? "النهاية" : "End", position: { x: 1020, y: 160 } },
-			{ id: "note", kind: "note", title: ar ? "ملاحظة" : "Note", position: { x: 760, y: 330 } },
+			{ id: "end", kind: "end", position: { x: 1020, y: 160 } },
+			{ id: "note", kind: "note", position: { x: 760, y: 330 } },
 		],
 		edges: [
 			{ id: "start-classify", from: "start", to: "classify" },
@@ -1484,7 +1493,7 @@ function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 		<section className="canvas-preview" aria-label={ar ? "مثال سير العمل" : "Workflow example"}>
 			<div className="canvas-preview__surface">
 				<Canvas
-					graph={graph}
+					graph={{ ...graph, nodes: graph.nodes.map((node) => ({ ...node, ...nodeCopy[node.id]! })) }}
 					locale={locale}
 					label={ar ? "منشئ سير العمل" : "Workflow builder"}
 					onConnect={(connection) =>
