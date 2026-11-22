@@ -60,6 +60,84 @@ for (const locale of ["en", "ar"] as const) {
 		await expect.poll(async () => (await node("refund").boundingBox())?.x).toBeCloseTo(refundBefore.x + 30, 0);
 	});
 
+	test(`Canvas connects nodes with the pointer in ${locale}`, async ({ page }) => {
+		const direction = locale === "ar" ? "rtl" : "ltr";
+		await openPreview(page, { locale, direction, theme: "light" }, "/components/Canvas");
+		const root = page.getByRole("region", { name: locale === "ar" ? "منشئ سير العمل" : "Workflow builder" });
+		const node = (id: string) => root.locator(`[data-node-id="${id}"]`);
+		const output = (id: string, port = 0) => node(id).locator(`[data-port="out"][data-port-index="${port}"]`);
+		const edgeCount = () => root.locator("[data-edge-from]").count();
+		const draw = async (from: Locator, to: Locator, inspect = false) => {
+			const a = await from.boundingBox();
+			const b = await to.boundingBox();
+			if (!a || !b) throw new Error("Connection endpoint has no visible box");
+			const start = { x: a.x + a.width / 2, y: a.y + a.height / 2 };
+			const end = { x: b.x + b.width / 2, y: b.y + b.height / 2 };
+			await page.mouse.move(start.x, start.y);
+			await page.mouse.down();
+			await page.mouse.move((start.x + end.x) / 2, (start.y + end.y) / 2, { steps: 3 });
+			await page.mouse.move(end.x, end.y, { steps: 4 });
+			if (inspect) {
+				const path = root.locator(".ts-canvas__connection");
+				await expect(path).toHaveAttribute("data-active", "true");
+				const points = await path.evaluate((element) => {
+					const svg = element as SVGPathElement;
+					const matrix = svg.getScreenCTM();
+					if (!matrix) throw new Error("Connection path has no screen transform");
+					return [0, svg.getTotalLength()].map((length) => {
+						const point = svg.getPointAtLength(length);
+						const screen = new DOMPoint(point.x, point.y).matrixTransform(matrix);
+						return { x: screen.x, y: screen.y };
+					});
+				});
+				for (const [actual, locator] of [
+					[points[0], from],
+					[points[1], to.locator('[data-port="in"]')],
+				] as const) {
+					const box = await locator.boundingBox();
+					if (!box || !actual) throw new Error("Connection port has no visible box");
+					expect(
+						Math.hypot(actual.x - box.x - box.width / 2, actual.y - box.y - box.height / 2),
+					).toBeLessThanOrEqual(1);
+				}
+			}
+			await page.mouse.up();
+		};
+		await root.scrollIntoViewIfNeeded();
+		const before = await edgeCount();
+		await draw(output("start"), node("other"), true);
+		await expect.poll(edgeCount).toBe(before + 1);
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+		await draw(output("classify", 1), node("end"));
+		await expect(
+			root.locator('[data-edge-from="classify"][data-edge-to="end"][data-edge-from-port="1"]'),
+		).toHaveCount(1);
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+		const connected = await edgeCount();
+		const groundSource = await output("start").boundingBox();
+		const canvasBox = await root.boundingBox();
+		if (!groundSource || !canvasBox) throw new Error("Canvas has no visible ground area");
+		await page.mouse.move(groundSource.x + groundSource.width / 2, groundSource.y + groundSource.height / 2);
+		await page.mouse.down();
+		await page.mouse.move(canvasBox.x + canvasBox.width - 16, canvasBox.y + canvasBox.height - 16, { steps: 4 });
+		await page.mouse.up();
+		await expect.poll(edgeCount).toBe(connected);
+		await draw(output("start"), node("start"));
+		await expect.poll(edgeCount).toBe(connected);
+		await draw(output("start"), node("other"));
+		await expect.poll(edgeCount).toBe(connected);
+
+		const source = await output("start").boundingBox();
+		const target = await node("question").boundingBox();
+		if (!source || !target) throw new Error("Connection endpoint has no visible box");
+		await page.mouse.move(source.x + source.width / 2, source.y + source.height / 2);
+		await page.mouse.down();
+		await page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, { steps: 3 });
+		await page.keyboard.press("Escape");
+		await page.mouse.up();
+		await expect.poll(edgeCount).toBe(connected);
+	});
+
 	for (const theme of ["light", "dark"] as const) {
 		test(`Canvas renders edges and supports viewport gestures in ${locale} ${theme}`, async ({ page }, testInfo) => {
 			const direction = locale === "ar" ? "rtl" : "ltr";

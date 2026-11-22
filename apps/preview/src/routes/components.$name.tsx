@@ -1487,6 +1487,18 @@ function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 					graph={graph}
 					locale={locale}
 					label={ar ? "منشئ سير العمل" : "Workflow builder"}
+					onConnect={(connection) =>
+						setGraph((current) => ({
+							...current,
+							edges: [
+								...current.edges,
+								{
+									id: `connection-${current.edges.length}-${connection.from}-${connection.to}-${connection.fromPort ?? 0}`,
+									...connection,
+								},
+							],
+						}))
+					}
 					mode={mode}
 					onNodeMove={(id, position) =>
 						setGraph((current) => ({

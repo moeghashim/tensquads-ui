@@ -9,7 +9,7 @@ export type { BarsProps, BarsRow } from "./Bars/Bars.js";
 export { Bars } from "./Bars/Bars.js";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button/Button.js";
 export { Button } from "./Button/Button.js";
-export type { CanvasHandle, CanvasProps, CanvasSelection, CanvasViewport } from "./Canvas/Canvas.js";
+export type { CanvasConnection, CanvasHandle, CanvasProps, CanvasSelection, CanvasViewport } from "./Canvas/Canvas.js";
 export { Canvas } from "./Canvas/Canvas.js";
 export type { CardLegendItem, CardProps } from "./Card/Card.js";
 export { Card } from "./Card/Card.js";

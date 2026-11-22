@@ -1,6 +1,8 @@
 import {
 	type ChangeDetails,
+	type ConnectDraft,
 	createChange,
+	createConnect,
 	createMove,
 	createRovingFocus,
 	createSelection,
@@ -8,6 +10,8 @@ import {
 	css,
 	definePrimitive,
 	direct,
+	dispatch,
+	live,
 	type MoveDraft,
 	type MovePoint,
 	spatialMove,
@@ -17,6 +21,7 @@ import type { ReactNode, Ref } from "react";
 import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import type { WorkflowGraph } from "../../schemas/workflow.js";
 import { Node } from "../Node/Node.js";
+import { canConnect } from "../workflow/connect.js";
 import { edgePath, portPosition } from "../workflow/geometry.js";
 import { connectionsLabel, hiddenKind, kindLabel } from "../workflow/labels.js";
 import { DEFAULT_NODE_WIDTH, type NodeSize } from "../workflow/tidy.js";
@@ -24,6 +29,7 @@ import { type CanvasViewport, toLogical, toPhysical } from "../workflow/viewport
 
 export type { CanvasViewport } from "../workflow/viewport.js";
 export type CanvasSelection = { nodes: string[]; edges: string[] };
+export type CanvasConnection = { from: string; fromPort?: number; to: string };
 export type CanvasHandle = { getNodeSizes(): Record<string, NodeSize> };
 export type CanvasProps = Omit<
 	PartProps<"div">,
@@ -37,6 +43,7 @@ export type CanvasProps = Omit<
 	selection?: CanvasSelection;
 	onSelectionChange?: (selection: CanvasSelection, details: ChangeDetails) => void;
 	onNodeMove?: (id: string, position: { x: number; y: number }, details: ChangeDetails) => void;
+	onConnect?: (connection: CanvasConnection, details: ChangeDetails) => void;
 	grid?: boolean;
 	mode?: "select" | "pan";
 	locale?: "en" | "ar";
@@ -51,6 +58,7 @@ type CanvasState = {
 	focused: string | null;
 	positions: Record<string, MovePoint>;
 	moving: MoveDraft | null;
+	connecting: ConnectDraft | null;
 };
 type CanvasOptions = {
 	viewport?: CanvasViewport;
@@ -65,6 +73,8 @@ type CanvasOptions = {
 	mode?: string;
 	locale?: "en" | "ar";
 	direction?: "ltr" | "rtl";
+	graph?: WorkflowGraph;
+	onConnect?: CanvasProps["onConnect"];
 };
 
 const canvas = definePrimitive({
@@ -82,14 +92,17 @@ const canvas = definePrimitive({
 		mode: "string",
 		locale: "string",
 		direction: "string",
+		onConnect: "callback",
+		graph: "value",
 	},
 	controlled: ["viewport", "selected", "positions"],
-	live: ["viewport", "moving", "positions"],
+	live: ["viewport", "moving", "connecting", "positions"],
 	state: (options: CanvasOptions): CanvasState => ({
 		viewport: options.viewport ?? options.defaultViewport ?? { x: 0, y: 0, zoom: 1 },
 		selected: options.selected ?? [],
 		positions: options.positions ?? {},
 		moving: null,
+		connecting: null,
 		focused: null,
 	}),
 	sync: (options: CanvasOptions) => ({
@@ -99,6 +112,79 @@ const canvas = definePrimitive({
 	}),
 	api: (context) => {
 		const change = createChange(context);
+		let fromPort: number | undefined;
+		let pointerPoint: { x: number; y: number } | null = null;
+		const connectStore = {
+			...context.store,
+			set: (patch: Partial<CanvasState>, delivered?: boolean) => {
+				const draft = patch.connecting;
+				if (draft && !draft.keyboard && pointerPoint) {
+					const graph = context.options().graph;
+					const node = [...(graph?.nodes ?? [])].reverse().find((candidate) => {
+						const element = context.element("node", candidate.id);
+						if (!element) return false;
+						const rect = element.getBoundingClientRect();
+						const input = element.querySelector<HTMLElement>('[data-port="in"]')?.getBoundingClientRect();
+						const point = pointerPoint!;
+						return (
+							(point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom) ||
+							(!!input &&
+								point.x >= input.left &&
+								point.x <= input.right &&
+								point.y >= input.top &&
+								point.y <= input.bottom)
+						);
+					});
+					patch = {
+						...patch,
+						connecting: {
+							...draft,
+							to: node && graph && canConnect(graph, draft.from, fromPort, node.id) ? node.id : null,
+						},
+					};
+				}
+				context.store.set(patch, delivered);
+			},
+		};
+		const connect = createConnect(
+			{ store: connectStore, onDestroy: context.onDestroy, parts: context.parts },
+			{
+				slot: "node",
+				draft: "connecting",
+				canConnect: (from, to) => {
+					const graph = context.options().graph;
+					return !!graph && canConnect(graph, from, fromPort, to);
+				},
+				point: (x, y) => {
+					pointerPoint = { x, y };
+					const point = viewport.toCanvas(x, y);
+					return { ...point, x: rtl() ? -point.x + 0 : point.x };
+				},
+				radius: () => 0,
+				label: (id) => context.options().titles?.[id] ?? id,
+				message: (message, label) =>
+					message.type === "connect"
+						? context.options().locale === "ar"
+							? `تم ربط ${label(message.from)} بـ ${label(message.to)}.`
+							: `Connected ${label(message.from)} to ${label(message.to)}.`
+						: message.type === "start"
+							? context.options().locale === "ar"
+								? `جارٍ الربط من ${label(message.from)}.`
+								: `Connecting from ${label(message.from)}.`
+							: message.type === "target"
+								? context.options().locale === "ar"
+									? `إلى ${label(message.to)}.`
+									: `To ${label(message.to)}.`
+								: context.options().locale === "ar"
+									? "تم الإلغاء."
+									: "Canceled.",
+				connect: (from, to, details) => {
+					const value: CanvasConnection = { from, ...(fromPort === undefined ? {} : { fromPort }), to };
+					// dispatch reports an action with standard UI SDK details; this callback has no state key.
+					return !dispatch(context, "onConnect", value, details);
+				},
+			},
+		);
 		const selection = createSelection(context, {
 			key: "selected",
 			multiple: () => true,
@@ -183,6 +269,27 @@ const canvas = definePrimitive({
 		);
 		return {
 			move,
+			connect,
+			connectable: () => !!context.options().onConnect,
+			connectionPath: (draft: ConnectDraft | null) => {
+				if (!draft) return undefined;
+				const graph = context.options().graph;
+				const sourcePort = context
+					.element("node", draft.from)
+					?.querySelector<HTMLElement>(`[data-port="out"][data-port-index="${fromPort ?? 0}"]`);
+				if (!sourcePort || !graph) return undefined;
+				const worldPoint = (element: HTMLElement) => {
+					const rect = element.getBoundingClientRect();
+					const point = viewport.toCanvas(rect.left + rect.width / 2, rect.top + rect.height / 2);
+					return { ...point, x: rtl() ? -point.x + 0 : point.x };
+				};
+				const start = worldPoint(sourcePort);
+				const input = draft.to
+					? context.element("node", draft.to)?.querySelector<HTMLElement>('[data-port="in"]')
+					: null;
+				const end = input ? worldPoint(input) : { x: draft.x, y: draft.y };
+				return edgePath(start.x, start.y, end.x, end.y);
+			},
 			moveEnabled: () => !!context.options().movable && context.options().mode !== "pan",
 			isMoving: () => context.store.get().moving !== null,
 			groupFor,
@@ -195,6 +302,16 @@ const canvas = definePrimitive({
 			nodePointerDown: (event: PointerEvent, key: string, el: HTMLElement) => {
 				selectedOnPointerDown = false;
 				if (event.button !== 0) return;
+				const output =
+					event.target instanceof Element ? event.target.closest<HTMLElement>('[data-port="out"]') : null;
+				if (output && context.options().onConnect && context.options().mode !== "pan") {
+					fromPort =
+						el.querySelectorAll('[data-port="out"]').length > 1
+							? Number(output.dataset.portIndex ?? 0)
+							: undefined;
+					connect.pointerdown(event, key, el);
+					return;
+				}
 				if (!context.store.get().selected.includes(`node:${key}`)) {
 					selectedOnPointerDown = true;
 					selectItem(selection, `node:${key}`, event);
@@ -202,6 +319,7 @@ const canvas = definePrimitive({
 				move.pointerdown(event, key, el);
 			},
 			nodePress: (key: string, event?: Event) => {
+				if (connect.active()) return;
 				const down = pointerDown;
 				const handled = selectedOnPointerDown;
 				pointerDown = null;
@@ -240,6 +358,7 @@ const canvas = definePrimitive({
 				tabindex: props.nodeCount === 0 ? "0" : "-1",
 				"data-mode": api.isPan() ? "pan" : "select",
 				"data-movable": api.moveEnabled() ? "true" : "false",
+				"data-connectable": api.connectable() ? "true" : undefined,
 				style: css({
 					"background-position": `${api.rtl() ? "right" : "left"} ${state.viewport.x}px top ${state.viewport.y}px`,
 					"background-size": `${20 * state.viewport.zoom}px ${20 * state.viewport.zoom}px`,
@@ -286,6 +405,7 @@ const canvas = definePrimitive({
 				},
 				keydown: (event, { api, el }) => {
 					if (!el || event.defaultPrevented || isIgnored(event.target, el)) return;
+					if (api.connect.active() && api.connect.keydown(event)) return;
 					if (event.key === "Escape") {
 						if (api.isMoving()) return;
 						if (api.hasSelection()) {
@@ -321,7 +441,8 @@ const canvas = definePrimitive({
 		node: slot<{ value: string; description: string | undefined }>({
 			props: { value: "string", description: "string" },
 			role: "option",
-			direct: direct(["style", "data-dragging"]),
+			direct: direct(["style", "data-dragging", "data-connect"]),
+			live: live((state, { api, key }) => ({ "data-connect": api.connect.role(state, key) })),
 			focus: "roving",
 			press: ({ api, key }, event) => api.nodePress(key, event),
 			keys: ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"],
@@ -423,6 +544,13 @@ const canvas = definePrimitive({
 				return { d: edgePath(x1, y1, x2, y2) };
 			},
 		}),
+		connection: slot({
+			direct: direct(["d", "data-active"]),
+			attrs: (state, { api }) => ({
+				"data-active": state.connecting ? "true" : undefined,
+				d: api.connectionPath(state.connecting),
+			}),
+		}),
 	}),
 });
 
@@ -431,7 +559,8 @@ const {
 	World,
 	Node: NodePart,
 	Path,
-} = createParts(canvas, { root: "div", world: "div", node: "div", path: "path" });
+	Connection,
+} = createParts(canvas, { root: "div", world: "div", node: "div", path: "path", connection: "path" });
 
 function isIgnored(target: EventTarget | null, root: HTMLElement) {
 	if (!(target instanceof Element)) return false;
@@ -483,6 +612,7 @@ export function Canvas({
 	selection,
 	onSelectionChange,
 	onNodeMove,
+	onConnect,
 	grid = true,
 	mode = "select",
 	locale = "en",
@@ -552,6 +682,8 @@ export function Canvas({
 			selected={selectedKeys}
 			positions={positions}
 			titles={titles}
+			graph={graph}
+			onConnect={onConnect}
 			movable={onNodeMove !== undefined}
 			onPositionsChange={(next, details) => {
 				for (const node of graph.nodes) {
@@ -574,6 +706,7 @@ export function Canvas({
 			<World label={label} className="ts-canvas__world">
 				<svg data-canvas-edge-layer="" aria-hidden="true" className="ts-canvas__edges">
 					<g transform={resolvedDir === "rtl" ? "scale(-1 1)" : undefined}>
+						<Connection className="ts-canvas__connection" />
 						{graph.edges.map((edge) => {
 							const from = nodeById.get(edge.from);
 							const to = nodeById.get(edge.to);

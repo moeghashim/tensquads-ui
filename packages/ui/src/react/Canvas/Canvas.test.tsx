@@ -167,6 +167,89 @@ describe("Canvas", () => {
 		expect(getByRole("region")).toHaveAttribute("data-movable", "false");
 	});
 
+	it("connects branch outputs to node bodies without selecting nodes or rendering during the drag", () => {
+		const connectGraph: WorkflowGraph = {
+			nodes: [
+				{ id: "branch", kind: "classify", title: "Branch", branches: ["A", "B"], position: { x: 0, y: 0 } },
+				{ id: "target", kind: "note", title: "Target", position: { x: 200, y: 0 } },
+			],
+			edges: [],
+		};
+		const onConnect = vi.fn();
+		let renders = 0;
+		const { container, getByRole } = render(
+			<Profiler id="canvas" onRender={() => (renders += 1)}>
+				<Canvas graph={connectGraph} label="Workflow" onConnect={onConnect} />
+			</Profiler>,
+		);
+		const source = getByRole("option", { name: "Classify: Branch A B" });
+		const target = getByRole("option", { name: "Note: Target" });
+		vi.spyOn(source, "getBoundingClientRect").mockReturnValue(new DOMRect(0, 0, 120, 90));
+		vi.spyOn(target, "getBoundingClientRect").mockReturnValue(new DOMRect(200, 0, 120, 90));
+		const out = source.querySelector<HTMLElement>('[data-port="out"][data-port-index="1"]')!;
+		vi.spyOn(out, "getBoundingClientRect").mockReturnValue(new DOMRect(116, 35, 8, 8));
+		const input = target.querySelector<HTMLElement>('[data-port="in"]')!;
+		vi.spyOn(input, "getBoundingClientRect").mockReturnValue(new DOMRect(196, 35, 8, 8));
+		const initialRenders = renders;
+		fireEvent.pointerDown(out, {
+			pointerId: 1,
+			button: 0,
+			isPrimary: true,
+			pointerType: "mouse",
+			clientX: 120,
+			clientY: 39,
+		});
+		fireEvent.pointerMove(document, { pointerId: 1, pointerType: "mouse", buttons: 1, clientX: 220, clientY: 45 });
+		expect(renders).toBe(initialRenders);
+		fireEvent.pointerUp(document, { pointerId: 1, pointerType: "mouse", button: 0, clientX: 220, clientY: 45 });
+		expect(onConnect).toHaveBeenCalledTimes(1);
+		expect(onConnect).toHaveBeenCalledWith(
+			{ from: "branch", fromPort: 1, to: "target" },
+			expect.objectContaining({ reason: "drag" }),
+		);
+		expect(source).toHaveAttribute("aria-selected", "false");
+		expect(container.querySelector(".ts-canvas__connection")).toBeTruthy();
+	});
+
+	it("selects an output node on press when connecting is unavailable", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />);
+		fireEvent.pointerDown(getByRole("option", { name: "Start" }).querySelector('[data-port="out"]')!, { button: 0 });
+		expect(onSelectionChange).toHaveBeenCalledTimes(1);
+	});
+
+	it("omits fromPort for a node with one output", () => {
+		const plainGraph: WorkflowGraph = {
+			nodes: [
+				{ id: "source", kind: "start", title: "Source", position: { x: 0, y: 0 } },
+				{ id: "target", kind: "note", title: "Target", position: { x: 200, y: 0 } },
+			],
+			edges: [],
+		};
+		const onConnect = vi.fn();
+		const { getByRole } = render(<Canvas graph={plainGraph} label="Workflow" onConnect={onConnect} />);
+		const source = getByRole("option", { name: "Start: Source" });
+		const target = getByRole("option", { name: "Note: Target" });
+		vi.spyOn(source, "getBoundingClientRect").mockReturnValue(new DOMRect(0, 0, 120, 90));
+		vi.spyOn(target, "getBoundingClientRect").mockReturnValue(new DOMRect(200, 0, 120, 90));
+		const out = source.querySelector<HTMLElement>('[data-port="out"]')!;
+		vi.spyOn(out, "getBoundingClientRect").mockReturnValue(new DOMRect(116, 35, 8, 8));
+		fireEvent.pointerDown(out, {
+			pointerId: 1,
+			button: 0,
+			isPrimary: true,
+			pointerType: "mouse",
+			clientX: 120,
+			clientY: 39,
+		});
+		fireEvent.pointerMove(document, { pointerId: 1, pointerType: "mouse", buttons: 1, clientX: 220, clientY: 45 });
+		fireEvent.pointerUp(document, { pointerId: 1, pointerType: "mouse", button: 0, clientX: 220, clientY: 45 });
+		expect(onConnect).toHaveBeenCalledWith(
+			{ from: "source", to: "target" },
+			expect.objectContaining({ reason: "drag" }),
+		);
+	});
+
 	it("draws a drag without rendering and waits for the host graph", async () => {
 		const onNodeMove = vi.fn();
 		let renders = 0;

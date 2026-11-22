@@ -31,6 +31,8 @@
 		pointer-events: none;
 	}
 	.ts-canvas__edge { fill: none; stroke: var(--ts-edge); stroke-width: 1.5px; }
+	.ts-canvas__connection { fill: none; stroke: var(--ts-connection-line); stroke-width: 1px; stroke-dasharray: 4 4; pointer-events: none; vector-effect: non-scaling-stroke; }
+	.ts-canvas__connection:not([data-active="true"]) { display: none; }
 	.ts-canvas [data-selected="true"] > .ts-canvas__edge { stroke: var(--ts-edge-selected); }
 	.ts-canvas__edge-hit { fill: none; stroke: transparent; stroke-width: 12px; pointer-events: stroke; }
 	.ts-canvas__node {
@@ -43,4 +45,7 @@
 	.ts-canvas__node[data-dragging] { z-index: 1; }
 	.ts-canvas__node:focus-visible { outline: none; }
 	.ts-canvas__node:focus-visible > .ts-node { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	.ts-canvas__node[data-connect="target"] > .ts-node { box-shadow: var(--ts-shadow-node-selected); }
+	.ts-canvas[data-connectable="true"][data-mode="select"] [data-port="out"] { cursor: crosshair; }
+	.ts-canvas[data-connectable="true"][data-mode="select"] [data-port="out"]::after { position: absolute; inset: -8px; content: ""; }
 }
