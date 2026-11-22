@@ -151,6 +151,7 @@ for (const locale of ["en", "ar"] as const) {
 			const startNode = root.locator('[data-node-id="start"]');
 			await startNode.click();
 			await expect(startNode).toHaveAttribute("aria-selected", "true");
+			await expectAccessible(page);
 			const hitPath = root.locator(".ts-canvas__edge-hit").first();
 			const edge = hitPath.locator("xpath=..");
 			const midpoint = await hitPath.evaluate((element) => {
