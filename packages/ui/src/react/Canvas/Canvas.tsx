@@ -64,7 +64,7 @@ const canvas = definePrimitive({
 		direction: "string",
 	},
 	controlled: ["viewport", "selected"],
-	live: ["viewport", "selected"],
+	live: ["viewport"],
 	state: (options: CanvasOptions): CanvasState => ({
 		viewport: options.viewport ?? options.defaultViewport ?? { x: 0, y: 0, zoom: 1 },
 		selected: options.selected ?? [],
@@ -253,11 +253,8 @@ function toCanvasSelection(keys: string[], graph: WorkflowGraph): CanvasSelectio
 	return selection;
 }
 
-function fromCanvasSelection(selection: CanvasSelection | undefined): string[] {
-	return [
-		...(selection?.nodes ?? []).map((id) => `node:${id}`),
-		...(selection?.edges ?? []).map((id) => `edge:${id}`),
-	];
+function fromCanvasSelection(selection: CanvasSelection): string[] {
+	return [...selection.nodes.map((id) => `node:${id}`), ...selection.edges.map((id) => `edge:${id}`)];
 }
 
 export function Canvas({
@@ -280,8 +277,11 @@ export function Canvas({
 	const nodeElements = useRef(new Map<string, HTMLElement>());
 	const [internalSelection, setInternalSelection] = useState<CanvasSelection>({ nodes: [], edges: [] });
 	const activeSelection = selection ?? internalSelection;
-	const selectedKeys = useMemo(() => fromCanvasSelection(activeSelection), [activeSelection]);
-	const selectedIds = useMemo(() => toCanvasSelection(selectedKeys, graph), [selectedKeys, graph]);
+	const selectedIds = useMemo(
+		() => toCanvasSelection(fromCanvasSelection(activeSelection), graph),
+		[activeSelection, graph],
+	);
+	const selectedKeys = useMemo(() => fromCanvasSelection(selectedIds), [selectedIds]);
 	const [, setSizeVersion] = useState(0);
 	useImperativeHandle(
 		ref,
@@ -325,8 +325,8 @@ export function Canvas({
 			mode={mode}
 			onSelectedChange={(keys, details) => {
 				const next = toCanvasSelection(keys, graph);
-				if (selection === undefined) setInternalSelection(next);
 				onSelectionChange?.(next, details);
+				if (selection === undefined && !details.canceled) setInternalSelection(next);
 			}}
 			data-grid={grid ? "true" : "false"}
 			locale={locale}

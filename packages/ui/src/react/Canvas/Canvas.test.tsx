@@ -239,6 +239,28 @@ describe("Canvas", () => {
 		expect(getByRole("option", { name: "End" })).toHaveAttribute("aria-selected", "false");
 	});
 
+	it("keeps its own selection when the host cancels the change", () => {
+		const { getByRole } = render(
+			<Canvas graph={graph} label="Workflow" onSelectionChange={(_selection, details) => details.cancel()} />,
+		);
+		fireEvent.click(getByRole("option", { name: "Start" }));
+		expect(getByRole("option", { name: "Start" })).toHaveAttribute("aria-selected", "false");
+	});
+
+	it("does not report a clear when only missing ids were selected", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(
+			<Canvas
+				graph={graph}
+				label="Workflow"
+				selection={{ nodes: ["missing"], edges: [] }}
+				onSelectionChange={onSelectionChange}
+			/>,
+		);
+		fireEvent.click(getByRole("region"));
+		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
 	it("round-trips ids with colons and ignores selections missing from the graph", () => {
 		const colonGraph: WorkflowGraph = {
 			nodes: [{ id: "start:one", kind: "start", title: "Colon node", position: { x: 20, y: 30 } }],
