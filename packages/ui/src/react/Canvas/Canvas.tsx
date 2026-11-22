@@ -1,11 +1,13 @@
 import {
 	type ChangeDetails,
 	createChange,
+	createRovingFocus,
 	createSelection,
 	createViewport,
 	css,
 	definePrimitive,
 	direct,
+	spatialMove,
 } from "@ui-sdk/core";
 import { createParts, type PartProps } from "@ui-sdk/react/primitive";
 import type { ReactNode, Ref } from "react";
@@ -39,7 +41,7 @@ export type CanvasProps = Omit<
 	ref?: Ref<CanvasHandle>;
 };
 
-type CanvasState = { viewport: CanvasViewport; selected: string[] };
+type CanvasState = { viewport: CanvasViewport; selected: string[]; focused: string | null };
 type CanvasOptions = {
 	viewport?: CanvasViewport;
 	defaultViewport?: CanvasViewport;
@@ -68,6 +70,7 @@ const canvas = definePrimitive({
 	state: (options: CanvasOptions): CanvasState => ({
 		viewport: options.viewport ?? options.defaultViewport ?? { x: 0, y: 0, zoom: 1 },
 		selected: options.selected ?? [],
+		focused: null,
 	}),
 	sync: (options: CanvasOptions) => ({
 		...(options.viewport === undefined ? {} : { viewport: options.viewport }),
@@ -80,6 +83,15 @@ const canvas = definePrimitive({
 			multiple: () => true,
 			set: (value, details) => change("selected", value, details),
 			order: () => [],
+		});
+		const roving = createRovingFocus(context, {
+			slot: "node",
+			key: "focused",
+			remember: false,
+			preferred: (item) => context.store.get().selected.includes(`node:${item.key}`),
+			claims: (state, item) =>
+				state.selected.some((key) => key.startsWith("node:")) ? state.selected.includes(`node:${item.key}`) : true,
+			move: spatialMove(),
 		});
 		let pointerDown: { x: number; y: number } | null = null;
 		const rtl = () => context.options().direction === "rtl";
@@ -108,6 +120,7 @@ const canvas = definePrimitive({
 		);
 		return {
 			viewport,
+			roving,
 			rtl,
 			selection,
 			isPan: () => context.options().mode === "pan",
@@ -115,24 +128,28 @@ const canvas = definePrimitive({
 			get pointerPosition() {
 				return pointerDown;
 			},
-			clearSelection: (event: MouseEvent) => {
-				if (context.store.get().selected.length) change("selected", [], { reason: "clear-press", event });
+			clearSelection: (event: Event, reason = "clear-press") => {
+				if (!context.store.get().selected.length) return false;
+				change("selected", [], { reason, event });
+				return true;
 			},
+			hasSelection: () => context.store.get().selected.length > 0,
 			press: (key: string, event?: Event) => {
 				if (context.options().mode !== "pan") selectItem(selection, key, event);
 			},
+			keyboardPress: (key: string, event: Event) => selectItem(selection, key, event),
 		};
 	},
 	slots: (slot) => ({
-		root: slot<{ label: string }>({
-			props: { label: "string" },
+		root: slot<{ label: string; nodeCount: number }>({
+			props: { label: "string", nodeCount: "number" },
 			role: "region",
 			// Panning writes the style to the element. It renders nothing, and the server markup has it too.
 			direct: direct(["style"]),
 			attrs: (state, { props, api }) => ({
 				dir: api.rtl() ? "rtl" : "ltr",
 				"aria-label": props.label,
-				tabindex: "0",
+				tabindex: props.nodeCount === 0 ? "0" : "-1",
 				style: css({
 					"background-position": `${api.rtl() ? "right" : "left"} ${state.viewport.x}px top ${state.viewport.y}px`,
 					"background-size": `${20 * state.viewport.zoom}px ${20 * state.viewport.zoom}px`,
@@ -175,7 +192,14 @@ const canvas = definePrimitive({
 					api.clearSelection(event);
 				},
 				keydown: (event, { api, el }) => {
-					if (!el || isIgnored(event.target, el)) return;
+					if (!el || event.defaultPrevented || isIgnored(event.target, el)) return;
+					if (event.key === "Escape") {
+						if (api.hasSelection()) {
+							event.preventDefault();
+							api.clearSelection(event, "escape-key");
+						}
+						return;
+					}
 					api.viewport.keydown(event);
 				},
 			},
@@ -183,7 +207,7 @@ const canvas = definePrimitive({
 		world: slot<{ label: string }>({
 			props: { label: "string" },
 			role: "listbox",
-			keys: { none: "Added with selection and focus." },
+			keys: { none: "Each node handles these keys." },
 			// In RTL the world starts at the right edge, so its place needs no measured width.
 			direct: direct(["style"]),
 			attrs: (state, { api, props }) => {
@@ -203,10 +227,31 @@ const canvas = definePrimitive({
 		node: slot<{ value: string; description: string | undefined }>({
 			props: { value: "string", description: "string" },
 			role: "option",
-			focus: { none: "Added with selection and focus." },
+			focus: "roving",
 			press: ({ api, key }, event) => api.press(`node:${key}`, event),
+			keys: ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"],
+			bind: (el, part) => part.api.roving.bind(el, part),
+			on: {
+				keydown: (event, { el, api, key }) => {
+					if (!el) return;
+					const moved = api.roving.keydown(event, el);
+					if (moved) {
+						event.preventDefault();
+						return;
+					}
+					if ((event.key === "Enter" || event.key === " ") && !event.repeat) {
+						event.preventDefault();
+						api.keyboardPress(`node:${key}`, event);
+					}
+				},
+				focus: (event, { el, api }) => {
+					if (el?.matches(":focus-visible"))
+						api.viewport.reveal(api.viewport.rectOf(el), { padding: 24 }, { reason: "focus-in", event });
+				},
+			},
 			// The name is the card's own text, so it always holds what people see (WCAG 2.5.3).
-			attrs: (state, { props, key }) => ({
+			attrs: (state, { props, key, api }) => ({
+				tabindex: api.roving.tabIndex(state, { key, props }),
 				"aria-selected": String(state.selected.includes(`node:${key}`)),
 				"aria-description": props.description,
 			}),
@@ -234,7 +279,7 @@ function selectItem(
 	event?: Event,
 ) {
 	const details = { reason: "item-press" as const, event };
-	if (event instanceof MouseEvent && event.shiftKey) selection.toggle(key, details);
+	if (event && "shiftKey" in event && event.shiftKey) selection.toggle(key, details);
 	else selection.choose(key, details);
 }
 
@@ -318,6 +363,7 @@ export function Canvas({
 		<Root
 			{...props}
 			label={label}
+			nodeCount={graph.nodes.length}
 			viewport={viewport}
 			defaultViewport={defaultViewport}
 			onViewportChange={onViewportChange}

@@ -38,6 +38,58 @@ beforeEach(() => {
 });
 
 describe("Canvas", () => {
+	it("gives the first selected node the single server tab stop", () => {
+		for (const selection of [undefined, { nodes: ["end"], edges: [] }]) {
+			const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" selection={selection} />);
+			expect(markup.match(/tabindex="0"/g)).toHaveLength(1);
+			expect(markup).toContain(`data-node-id="${selection?.nodes[0] ?? "start"}"`);
+		}
+	});
+
+	it("chooses and toggles focused nodes once per key, including in pan mode", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole, rerender } = render(
+			<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />,
+		);
+		const start = getByRole("option", { name: "Start" });
+		fireEvent.keyDown(start, { key: "Enter" });
+		expect(onSelectionChange).toHaveBeenCalledTimes(1);
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: ["start"], edges: [] },
+			expect.objectContaining({ reason: "item-press" }),
+		);
+		expect(onSelectionChange.mock.calls[0]?.[1].event.defaultPrevented).toBe(true);
+		fireEvent.keyDown(start, { key: " ", shiftKey: true });
+		expect(onSelectionChange).toHaveBeenCalledTimes(2);
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: [], edges: [] },
+			expect.objectContaining({ reason: "item-press" }),
+		);
+		rerender(<Canvas graph={graph} label="Workflow" mode="pan" onSelectionChange={onSelectionChange} />);
+		fireEvent.keyDown(getByRole("option", { name: "End" }), { key: "Enter" });
+		expect(onSelectionChange).toHaveBeenCalledTimes(3);
+	});
+
+	it("clears selection once on Escape and does not prevent an empty Escape", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />);
+		fireEvent.click(getByRole("option", { name: "Start" }));
+		onSelectionChange.mockClear();
+		expect(fireEvent.keyDown(getByRole("region"), { key: "Escape" })).toBe(false);
+		expect(onSelectionChange).toHaveBeenCalledTimes(1);
+		expect(onSelectionChange).toHaveBeenLastCalledWith(
+			{ nodes: [], edges: [] },
+			expect.objectContaining({ reason: "escape-key" }),
+		);
+		expect(fireEvent.keyDown(getByRole("region"), { key: "Escape" })).toBe(true);
+		expect(onSelectionChange).toHaveBeenCalledTimes(1);
+	});
+
+	it("makes an empty canvas root the tab stop", () => {
+		const markup = renderToStaticMarkup(<Canvas graph={{ nodes: [], edges: [] }} label="Workflow" />);
+		expect(markup).toContain('tabindex="0"');
+	});
+
 	it.each(["ltr", "rtl"] as const)("renders nodes and edges on the server in %s", (dir) => {
 		const markup = renderToStaticMarkup(<Canvas graph={graph} label="Workflow" dir={dir} />);
 		expect(markup).toContain('role="listbox"');

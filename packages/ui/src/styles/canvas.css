@@ -38,4 +38,6 @@
 		inline-size: max-content;
 		pointer-events: auto;
 	}
+	.ts-canvas__node:focus-visible { outline: none; }
+	.ts-canvas__node:focus-visible > .ts-node { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 }

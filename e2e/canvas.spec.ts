@@ -12,6 +12,28 @@ for (const locale of ["en", "ar"] as const) {
 			await expect.poll(() => edgeErrors(root)).toEqual([]);
 			await expectAccessible(page);
 
+			const keyboardStart = root.locator('[data-node-id="start"]');
+			await keyboardStart.focus();
+			await expect(keyboardStart).toBeFocused();
+			const focusOutline = await keyboardStart.evaluate(
+				(element) => getComputedStyle(element.querySelector(".ts-node")!).outlineStyle,
+			);
+			expect(focusOutline).toBe("solid");
+			await page.keyboard.press("Tab");
+			await expect(keyboardStart).not.toBeFocused();
+			await keyboardStart.focus();
+			await page.keyboard.press(direction === "rtl" ? "ArrowLeft" : "ArrowRight");
+			await expect(root.locator('[data-node-id="classify"]')).toBeFocused();
+			await root.locator('[data-node-id="refund"]').focus();
+			await page.keyboard.press("ArrowDown");
+			await expect(root.locator('[data-node-id="question"]')).toBeFocused();
+			await root.locator('[data-node-id="start"]').focus();
+			await page.keyboard.press("End");
+			const focusedRect = await page.locator(":focus").boundingBox();
+			const rootRect = await root.boundingBox();
+			expect(focusedRect && rootRect && focusedRect.x).toBeGreaterThanOrEqual(rootRect?.x ?? 0);
+			await expect.poll(() => root.evaluate((element) => [element.scrollLeft, element.scrollTop])).toEqual([0, 0]);
+
 			const startNode = root.locator('[data-node-id="start"]');
 			await startNode.click();
 			await expect(startNode).toHaveAttribute("aria-selected", "true");
