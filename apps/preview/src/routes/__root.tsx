@@ -7,6 +7,7 @@ import "@tensquads/ui/styles.css";
 import { SiteShell } from "../components/site-shell";
 import { getPreviewAttributes } from "../state";
 import "../styles.css";
+import "../styles/node-preview.css";
 import faviconUrl from "../../../../design/logo/favicon.svg?url";
 
 export const Route = createRootRoute({

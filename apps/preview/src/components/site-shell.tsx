@@ -71,7 +71,16 @@ export function SiteShell() {
 			items: [
 				...getRegisteredComponents().map((entry) => ({ name: entry.name, description: entry.description })),
 				...(
-					["Chat", "ChatReply", "OwnerMessageView", "Sidebar", "ThemeToggle", "Toolbar", "CommandPalette"] as const
+					[
+						"Chat",
+						"ChatReply",
+						"OwnerMessageView",
+						"Sidebar",
+						"ThemeToggle",
+						"Toolbar",
+						"CommandPalette",
+						"Node",
+					] as const
 				).map((name) => ({ name, description: name })),
 			]
 				.filter(

@@ -138,6 +138,8 @@ export {
 	MenuSubTrigger,
 	MenuTrigger,
 } from "./Menu/Menu.js";
+export type { NodeProps } from "./Node/Node.js";
+export { Node } from "./Node/Node.js";
 export type { OwnerMessageViewProps } from "./OwnerMessage/OwnerMessage.js";
 export { approvalDecisions, OwnerMessageView, pendingQuestion } from "./OwnerMessage/OwnerMessage.js";
 export type { PageHeaderProps } from "./PageHeader/PageHeader.js";
@@ -184,3 +186,6 @@ export type {
 	TooltipTriggerProps,
 } from "./Tooltip/Tooltip.js";
 export { Tooltip, TooltipArrow, TooltipContent, TooltipShortcut, TooltipTrigger } from "./Tooltip/Tooltip.js";
+export { edgePath, NODE_METRICS, portPosition } from "./workflow/geometry.js";
+export type { NodeSize } from "./workflow/tidy.js";
+export { tidyLayout } from "./workflow/tidy.js";
