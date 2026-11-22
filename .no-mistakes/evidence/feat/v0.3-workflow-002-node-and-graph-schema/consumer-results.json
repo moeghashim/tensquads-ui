@@ -1,0 +1,741 @@
+{
+  "schema": [
+    {
+      "input": "13 kinds and a Start → 3-branch If/else → Agent → End graph",
+      "output": {
+        "nodes": [
+          {
+            "id": "s",
+            "kind": "start",
+            "title": "s",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "b",
+            "kind": "if-else",
+            "title": "b",
+            "position": {
+              "x": 13,
+              "y": 27
+            },
+            "branches": [
+              "Available",
+              "Preorder",
+              "Else"
+            ]
+          },
+          {
+            "id": "a",
+            "kind": "agent",
+            "title": "a",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          {
+            "id": "z",
+            "kind": "end",
+            "title": "z",
+            "position": {
+              "x": 13,
+              "y": 27
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "s-b",
+            "from": "s",
+            "to": "b"
+          },
+          {
+            "id": "b-a",
+            "from": "b",
+            "fromPort": 0,
+            "to": "a"
+          },
+          {
+            "id": "a-z",
+            "from": "a",
+            "to": "z"
+          }
+        ]
+      }
+    },
+    {
+      "input": "duplicate node id",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            4,
+            "id"
+          ],
+          "message": "Duplicate node id: s"
+        }
+      ]
+    },
+    {
+      "input": "duplicate edge id",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            3,
+            "id"
+          ],
+          "message": "Duplicate edge id: s-b"
+        }
+      ]
+    },
+    {
+      "input": "unknown source",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            0,
+            "from"
+          ],
+          "message": "Unknown source node: missing"
+        }
+      ]
+    },
+    {
+      "input": "unknown target",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            0,
+            "to"
+          ],
+          "message": "Unknown target node: missing"
+        }
+      ]
+    },
+    {
+      "input": "edge into Start",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            3,
+            "to"
+          ],
+          "message": "Edge a-s cannot enter start node s"
+        }
+      ]
+    },
+    {
+      "input": "edge out of End",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            3,
+            "from"
+          ],
+          "message": "Edge z-a cannot leave end node z"
+        }
+      ]
+    },
+    {
+      "input": "branch index too large",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            1,
+            "fromPort"
+          ],
+          "message": "Edge b-a port is out of range for node b"
+        }
+      ]
+    },
+    {
+      "input": "negative branch index",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            1,
+            "fromPort"
+          ],
+          "message": "Too small: expected number to be >=0"
+        }
+      ]
+    },
+    {
+      "input": "fractional branch index",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            1,
+            "fromPort"
+          ],
+          "message": "Invalid input: expected int, received number"
+        }
+      ]
+    },
+    {
+      "input": "branch port omitted",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            1,
+            "fromPort"
+          ],
+          "message": "Edge b-a requires a branch port for node b"
+        }
+      ]
+    },
+    {
+      "input": "port on ordinary node",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            0,
+            "fromPort"
+          ],
+          "message": "Edge s-b uses a port on non-branch node s"
+        }
+      ]
+    },
+    {
+      "input": "branches on ordinary node",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            2,
+            "branches"
+          ],
+          "message": "Node a cannot have branches"
+        },
+        {
+          "path": [
+            "edges",
+            2,
+            "fromPort"
+          ],
+          "message": "Edge a-z requires a branch port for node a"
+        }
+      ]
+    },
+    {
+      "input": "one branch",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            1,
+            "branches"
+          ],
+          "message": "Node b requires at least two branches"
+        }
+      ]
+    },
+    {
+      "input": "zero branches",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            1,
+            "branches"
+          ],
+          "message": "Node b requires at least two branches"
+        },
+        {
+          "path": [
+            "edges",
+            1,
+            "fromPort"
+          ],
+          "message": "Edge b-a port is out of range for node b"
+        }
+      ]
+    },
+    {
+      "input": "unknown graph field",
+      "issues": [
+        {
+          "path": [],
+          "message": "Unrecognized key: \"unowned\""
+        }
+      ]
+    },
+    {
+      "input": "unknown node field",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            0
+          ],
+          "message": "Unrecognized key: \"unowned\""
+        }
+      ]
+    },
+    {
+      "input": "unknown position field",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            0,
+            "position"
+          ],
+          "message": "Unrecognized key: \"z\""
+        }
+      ]
+    },
+    {
+      "input": "unknown edge field",
+      "issues": [
+        {
+          "path": [
+            "edges",
+            0
+          ],
+          "message": "Unrecognized key: \"unowned\""
+        }
+      ]
+    },
+    {
+      "input": "unknown kind",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            0,
+            "kind"
+          ],
+          "message": "Invalid option: expected one of \"agent\"|\"classify\"|\"if-else\"|\"while\"|\"user-approval\"|\"start\"|\"end\"|\"note\"|\"file-search\"|\"guardrails\"|\"mcp\"|\"transform\"|\"set-state\""
+        }
+      ]
+    },
+    {
+      "input": "infinite coordinate",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            0,
+            "position",
+            "x"
+          ],
+          "message": "Invalid input: expected number, received number"
+        }
+      ]
+    },
+    {
+      "input": "empty node id",
+      "issues": [
+        {
+          "path": [
+            "nodes",
+            2,
+            "id"
+          ],
+          "message": "Too small: expected string to have >=1 characters"
+        },
+        {
+          "path": [
+            "edges",
+            1,
+            "to"
+          ],
+          "message": "Unknown target node: a"
+        },
+        {
+          "path": [
+            "edges",
+            2,
+            "from"
+          ],
+          "message": "Unknown source node: a"
+        }
+      ]
+    }
+  ],
+  "layout": [
+    {
+      "input": "measured 180×80 split/join and note; applied layout twice",
+      "positions": {
+        "s": {
+          "x": 20,
+          "y": 80
+        },
+        "a": {
+          "x": 280,
+          "y": 20
+        },
+        "b": {
+          "x": 280,
+          "y": 140
+        },
+        "j": {
+          "x": 540,
+          "y": 80
+        },
+        "note": {
+          "x": 20,
+          "y": 260
+        }
+      },
+      "inputUnchanged": true,
+      "idempotent": true
+    },
+    {
+      "input": "adversarial discovery order R→A,B; A→X→U; B→K,J; K→J",
+      "positions": {
+        "R": {
+          "x": 20,
+          "y": 80
+        },
+        "A": {
+          "x": 280,
+          "y": 20
+        },
+        "B": {
+          "x": 280,
+          "y": 120
+        },
+        "U": {
+          "x": 800,
+          "y": 60
+        },
+        "J": {
+          "x": 800,
+          "y": 160
+        },
+        "X": {
+          "x": 540,
+          "y": 60
+        },
+        "K": {
+          "x": 540,
+          "y": 160
+        }
+      }
+    },
+    {
+      "input": "while cycle plus two disconnected nodes",
+      "positions": {
+        "w": {
+          "x": 20,
+          "y": 20
+        },
+        "work": {
+          "x": 280,
+          "y": 20
+        },
+        "note": {
+          "x": 20,
+          "y": 120
+        },
+        "loose": {
+          "x": 280,
+          "y": 120
+        }
+      }
+    },
+    {
+      "input": "prototype-named IDs, connected=true",
+      "positions": {
+        "__proto__": {
+          "x": 20,
+          "y": 20
+        },
+        "constructor": {
+          "x": 280,
+          "y": 20
+        },
+        "toString": {
+          "x": 540,
+          "y": 20
+        }
+      }
+    },
+    {
+      "input": "prototype-named IDs, connected=false",
+      "positions": {
+        "__proto__": {
+          "x": 20,
+          "y": 20
+        },
+        "constructor": {
+          "x": 280,
+          "y": 20
+        },
+        "toString": {
+          "x": 540,
+          "y": 20
+        }
+      }
+    },
+    {
+      "input": "chain with measured widths 244,126,300 and heights 80,96,130; loose 290×70",
+      "positions": {
+        "s": {
+          "x": 20,
+          "y": 40
+        },
+        "a": {
+          "x": 360,
+          "y": 40
+        },
+        "b": {
+          "x": 580,
+          "y": 20
+        },
+        "loose": {
+          "x": 20,
+          "y": 200
+        }
+      }
+    },
+    {
+      "connector": "M12,30 C132,30 132,110 252,110"
+    }
+  ],
+  "sizing": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "measured": {
+        "short": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": true,
+          "forwarded": "consumer"
+        },
+        "long": {
+          "width": 428.03125,
+          "titleWidth": 366.03125,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 366,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "selected": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(175, 175, 175) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "note": {
+          "width": 88.703125,
+          "titleWidth": 26.703125,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 27,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": false
+        },
+        "branch": {
+          "width": 132.390625,
+          "titleWidth": 70.390625,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 70,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": true
+        }
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "measured": {
+        "short": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": true,
+          "forwarded": "consumer"
+        },
+        "long": {
+          "width": 428.03125,
+          "titleWidth": 366.03125,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 366,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "selected": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.3) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "note": {
+          "width": 88.703125,
+          "titleWidth": 26.703125,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 27,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": false
+        },
+        "branch": {
+          "width": 132.390625,
+          "titleWidth": 70.390625,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 70,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": true
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "measured": {
+        "short": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": true,
+          "forwarded": "consumer"
+        },
+        "long": {
+          "width": 356.234375,
+          "titleWidth": 294.234375,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 294,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "selected": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(175, 175, 175) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "note": {
+          "width": 97.34375,
+          "titleWidth": 35.34375,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 35,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": false
+        },
+        "branch": {
+          "width": 132.390625,
+          "titleWidth": 70.390625,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 70,
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgb(205, 205, 205) 0px 0px 0px 1px",
+          "meta": true
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "measured": {
+        "short": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": true,
+          "forwarded": "consumer"
+        },
+        "long": {
+          "width": 356.234375,
+          "titleWidth": 294.234375,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 294,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "selected": {
+          "width": 129,
+          "titleWidth": 67,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 67,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.3) 0px 0px 0px 1px",
+          "meta": true
+        },
+        "note": {
+          "width": 97.34375,
+          "titleWidth": 35.34375,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 35,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": false
+        },
+        "branch": {
+          "width": 132.390625,
+          "titleWidth": 70.390625,
+          "titleHeight": 18,
+          "titleLineHeight": 18,
+          "titleScrollWidth": 70,
+          "background": "rgb(48, 48, 48)",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 1px",
+          "meta": true
+        }
+      }
+    }
+  ]
+}

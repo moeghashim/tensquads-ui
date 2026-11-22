@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- sh -c \"npm ci --no-audit --no-fund && npm run verify\"",
+    "status": "supplied successful baseline; not rerun"
+  },
+  "browser": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- npx playwright test --config .local-validation/playwright.config.ts e2e/node.spec.ts e2e/component-docs.spec.ts --grep 'Node|component index lists'",
+    "exitCode": 0,
+    "productionBuild": "completed by Playwright webServer command",
+    "setupRetry": "temporary config initially used its own directory as webServer cwd; corrected to repository cwd"
+  },
+  "consumer": {
+    "command": "MISE_TRUSTED_CONFIG_PATHS=\"$PWD/mise.toml\" mise exec -- node .local-validation/consumer.mjs",
+    "exitCode": 0,
+    "surface": "public @tensquads/ui React and schemas exports, shipped CSS, disposable localhost SSR consumer and Chromium",
+    "oracles": "Task 002; Node, BranchNode, Canvas design guides; independently worked coordinates and layout bounds"
+  }
+}
