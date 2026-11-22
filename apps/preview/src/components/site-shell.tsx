@@ -81,6 +81,7 @@ export function SiteShell() {
 						"CommandPalette",
 						"Node",
 						"Canvas",
+						"Palette",
 					] as const
 				).map((name) => ({ name, description: name })),
 			]

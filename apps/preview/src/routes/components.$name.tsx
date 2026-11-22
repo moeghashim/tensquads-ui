@@ -48,6 +48,7 @@ import {
 import { Node } from "../../../../packages/ui/src/react/Node/Node";
 import { OwnerMessageView } from "../../../../packages/ui/src/react/OwnerMessage/OwnerMessage";
 import { PageHeader } from "../../../../packages/ui/src/react/PageHeader/PageHeader";
+import { DEFAULT_PALETTE_SECTIONS, Palette } from "../../../../packages/ui/src/react/Palette/Palette";
 import {
 	SegmentedControl,
 	SegmentedControlIndicator,
@@ -106,6 +107,7 @@ const componentOrder = [
 	"CommandPalette",
 	"Node",
 	"Canvas",
+	"Palette",
 ];
 
 export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
@@ -435,10 +437,11 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
-	const { locale } = getPreviewState(search);
+	const { locale, direction } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Node") return <NodePreview locale={locale} />;
-	if (name === "Canvas") return <CanvasPreview locale={locale} />;
+	if (name === "Canvas") return <CanvasPreview locale={locale} direction={direction} />;
+	if (name === "Palette") return <PalettePreview locale={locale} />;
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
@@ -1424,7 +1427,32 @@ function NodePreview({ locale }: { locale: "en" | "ar" }) {
 	);
 }
 
-function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
+function PalettePreview({ locale }: { locale: "en" | "ar" }) {
+	const ar = locale === "ar";
+	const [lastInserted, setLastInserted] = useState<string | null>(null);
+	const [lastSource, setLastSource] = useState<string | null>(null);
+	return (
+		<div className="component-list palette-preview" data-last-source={lastSource ?? undefined}>
+			<Palette
+				label={ar ? "عُقد سير العمل" : "Workflow nodes"}
+				sections={DEFAULT_PALETTE_SECTIONS[locale]}
+				onInsert={(kind, details) => {
+					setLastInserted(kind);
+					setLastSource(details.source);
+				}}
+			/>
+			<p role="status">
+				{lastInserted
+					? ar
+						? `تمت إضافة: ${DEFAULT_PALETTE_SECTIONS.ar.flatMap((section) => section.items).find((item) => item.kind === lastInserted)?.label}`
+						: `Added: ${DEFAULT_PALETTE_SECTIONS.en.flatMap((section) => section.items).find((item) => item.kind === lastInserted)?.label}`
+					: ""}
+			</p>
+		</div>
+	);
+}
+
+function CanvasPreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
 	const ar = locale === "ar";
 	const [mode, setMode] = useState<"select" | "pan">("select");
 	const nodeCopy: Record<string, Pick<WorkflowGraph["nodes"][number], "title" | "meta" | "branches">> = {
@@ -1493,6 +1521,7 @@ function CanvasPreview({ locale }: { locale: "en" | "ar" }) {
 		<section className="canvas-preview" aria-label={ar ? "مثال سير العمل" : "Workflow example"}>
 			<div className="canvas-preview__surface">
 				<Canvas
+					dir={direction}
 					graph={{ ...graph, nodes: graph.nodes.map((node) => ({ ...node, ...nodeCopy[node.id]! })) }}
 					locale={locale}
 					label={ar ? "منشئ سير العمل" : "Workflow builder"}
