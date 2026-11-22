@@ -87,7 +87,6 @@ const canvas = definePrimitive({
 		const roving = createRovingFocus(context, {
 			slot: "node",
 			key: "focused",
-			remember: false,
 			preferred: (item) => context.store.get().selected.includes(`node:${item.key}`),
 			claims: (state, item) =>
 				state.selected.some((key) => key.startsWith("node:")) ? state.selected.includes(`node:${item.key}`) : true,
@@ -239,14 +238,22 @@ const canvas = definePrimitive({
 						event.preventDefault();
 						return;
 					}
-					if ((event.key === "Enter" || event.key === " ") && !event.repeat) {
+					if ((event.key === "Enter" || event.key === " ") && !event.ctrlKey && !event.metaKey && !event.altKey) {
 						event.preventDefault();
-						api.keyboardPress(`node:${key}`, event);
+						if (!event.repeat) api.keyboardPress(`node:${key}`, event);
 					}
 				},
 				focus: (event, { el, api }) => {
 					if (el?.matches(":focus-visible"))
 						api.viewport.reveal(api.viewport.rectOf(el), { padding: 24 }, { reason: "focus-in", event });
+				},
+				blur: (event, { el, store, api }) => {
+					// While focus is inside, its node holds the stop. Once it leaves, Tab enters at the selected or first node again.
+					const to = event.relatedTarget;
+					const list = el?.closest('[data-slot="workflow-canvas-world"]');
+					if (to instanceof Element && list?.contains(to)) return;
+					store.set({ focused: null });
+					api.roving.check();
 				},
 			},
 			// The name is the card's own text, so it always holds what people see (WCAG 2.5.3).

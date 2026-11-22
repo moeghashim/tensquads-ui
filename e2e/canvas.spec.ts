@@ -12,28 +12,6 @@ for (const locale of ["en", "ar"] as const) {
 			await expect.poll(() => edgeErrors(root)).toEqual([]);
 			await expectAccessible(page);
 
-			const keyboardStart = root.locator('[data-node-id="start"]');
-			await keyboardStart.focus();
-			await expect(keyboardStart).toBeFocused();
-			const focusOutline = await keyboardStart.evaluate(
-				(element) => getComputedStyle(element.querySelector(".ts-node")!).outlineStyle,
-			);
-			expect(focusOutline).toBe("solid");
-			await page.keyboard.press("Tab");
-			await expect(keyboardStart).not.toBeFocused();
-			await keyboardStart.focus();
-			await page.keyboard.press(direction === "rtl" ? "ArrowLeft" : "ArrowRight");
-			await expect(root.locator('[data-node-id="classify"]')).toBeFocused();
-			await root.locator('[data-node-id="refund"]').focus();
-			await page.keyboard.press("ArrowDown");
-			await expect(root.locator('[data-node-id="question"]')).toBeFocused();
-			await root.locator('[data-node-id="start"]').focus();
-			await page.keyboard.press("End");
-			const focusedRect = await page.locator(":focus").boundingBox();
-			const rootRect = await root.boundingBox();
-			expect(focusedRect && rootRect && focusedRect.x).toBeGreaterThanOrEqual(rootRect?.x ?? 0);
-			await expect.poll(() => root.evaluate((element) => [element.scrollLeft, element.scrollTop])).toEqual([0, 0]);
-
 			const startNode = root.locator('[data-node-id="start"]');
 			await startNode.click();
 			await expect(startNode).toHaveAttribute("aria-selected", "true");
@@ -189,6 +167,68 @@ async function edgeErrors(root: Locator) {
 			for (const error of [distance(start, output), distance(end, input)]) if (error > 1) errors.push(error);
 		}
 		return errors;
+	});
+}
+
+for (const locale of ["en", "ar"] as const) {
+	test(`Canvas moves focus by keyboard in ${locale}`, async ({ page }) => {
+		const direction = locale === "ar" ? "rtl" : "ltr";
+		await openPreview(page, { locale, direction, theme: "light" }, "/components/Canvas");
+		const root = page.getByRole("region", { name: locale === "ar" ? "منشئ سير العمل" : "Workflow builder" });
+		const world = root.locator(".ts-canvas__world");
+		await expect.poll(() => edgeErrors(root)).toEqual([]);
+		await root.scrollIntoViewIfNeeded();
+		const node = (id: string) => root.locator(`[data-node-id="${id}"]`);
+		const onward = direction === "rtl" ? "ArrowLeft" : "ArrowRight";
+		const stops = () =>
+			root
+				.locator('[role="option"][tabindex="0"]')
+				.evaluateAll((options) => options.map((option) => option.getAttribute("data-node-id")));
+		const inCanvas = () =>
+			root.evaluate(
+				(element) =>
+					Boolean(document.activeElement?.closest('[role="option"]')) && element.contains(document.activeElement),
+			);
+		expect(await stops()).toEqual(["start"]);
+		await node("start").focus();
+		await page.keyboard.press(onward);
+		await expect(node("classify")).toBeFocused();
+		await expect
+			.poll(() => node("classify").evaluate((el) => getComputedStyle(el.querySelector(".ts-node")!).outlineStyle))
+			.toBe("solid");
+		await page.keyboard.press("Shift+Tab");
+		expect(await inCanvas()).toBe(false);
+		await page.keyboard.press("Tab");
+		await expect(node("start")).toBeFocused();
+		await page.keyboard.press(onward);
+		await page.keyboard.press("Enter");
+		await expect(node("classify")).toHaveAttribute("aria-selected", "true");
+		await page.keyboard.press("End");
+		await expect(node("note")).toBeFocused();
+		await page.keyboard.press("Home");
+		await expect(node("start")).toBeFocused();
+		await page.keyboard.press("Tab");
+		expect(await inCanvas()).toBe(false);
+		await page.keyboard.press("Shift+Tab");
+		await expect(node("classify")).toBeFocused();
+		await page.keyboard.press("Escape");
+		await expect(node("classify")).toHaveAttribute("aria-selected", "false");
+		await node("refund").focus();
+		await page.keyboard.press("ArrowDown");
+		await expect(node("question")).toBeFocused();
+
+		const place = () => world.evaluate((element) => element.style.transform);
+		const home = await place();
+		const surface = (await root.boundingBox())!;
+		await page.mouse.move(surface.x + surface.width / 2, surface.y + surface.height - 40);
+		await page.mouse.wheel(direction === "rtl" ? -900 : 900, 0);
+		await expect.poll(place).not.toBe(home);
+		await page.keyboard.press("ArrowDown");
+		await expect(node("other")).toBeFocused();
+		const revealed = (await node("other").boundingBox())!;
+		expect(revealed.x).toBeGreaterThanOrEqual(surface.x);
+		expect(revealed.x + revealed.width).toBeLessThanOrEqual(surface.x + surface.width);
+		expect(await root.evaluate((element) => [element.scrollLeft, element.scrollTop])).toEqual([0, 0]);
 	});
 }
 
