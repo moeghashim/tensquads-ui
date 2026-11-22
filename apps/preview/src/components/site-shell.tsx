@@ -80,6 +80,7 @@ export function SiteShell() {
 						"Toolbar",
 						"CommandPalette",
 						"Node",
+						"Canvas",
 					] as const
 				).map((name) => ({ name, description: name })),
 			]

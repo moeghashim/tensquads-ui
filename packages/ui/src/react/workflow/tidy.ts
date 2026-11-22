@@ -7,7 +7,7 @@ const GRID = 20;
 const COLUMN_GAP = 80;
 const NODE_GAP = 40;
 // The node guide specifies content-driven widths but no default. Use a 180px layout estimate until Canvas measures it.
-const DEFAULT_NODE_WIDTH = 180;
+export const DEFAULT_NODE_WIDTH = 180;
 const snap = (value: number) => Math.round(value / GRID) * GRID;
 const atLeastGap = (value: number, min: number) => Math.ceil((value + min) / GRID) * GRID;
 

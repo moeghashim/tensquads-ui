@@ -14,6 +14,9 @@ test("CommandPalette opens, filters, selects and passes axe in both locales and 
 			const dialog = page.getByRole("dialog");
 			await expect(dialog).toBeVisible();
 			await expect(dialog).not.toHaveAttribute("data-starting-style");
+			await page.evaluate(async () => {
+				await Promise.allSettled(document.getAnimations().map((animation) => animation.finished));
+			});
 			const paletteTop = await dialog.evaluate((element) => element.getBoundingClientRect().top);
 			expect(paletteTop).toBeLessThan(120);
 			const audit = await new AxeBuilder({ page }).include('[data-slot="dialog-content"]').analyze();

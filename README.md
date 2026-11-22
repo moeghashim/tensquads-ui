@@ -17,6 +17,7 @@ The library ships these components today. Each row links to its reference and it
 | [BarChart](packages/ui/src/react/BarChart/BarChart.md) | A vertical chart of values over time, with optional stacked series. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/BarChart) |
 | [Bars](packages/ui/src/react/Bars/Bars.md) | Ranked horizontal bars or compact progress rows. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Bars) |
 | [Button](packages/ui/src/react/Button/Button.md) | An accessible button that runs an action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Button) |
+| [Canvas](packages/ui/src/react/Canvas/Canvas.md) | `Canvas` renders a workflow graph in a pannable and zoomable surface. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Canvas) |
 | [Card](packages/ui/src/react/Card/Card.md) | A dashboard panel with a title, one body, optional count and footer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Card) |
 | [Chat](packages/ui/src/react/Chat/Chat.md) | Chat parts build a chat surface: a scrolling log, user messages, agent replies, working and error lines, and a composer. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chat) |
 | [ChatLauncher](packages/ui/src/react/ChatLauncher/ChatLauncher.md) | A floating button that opens the assistant chat. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ChatLauncher) |
