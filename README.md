@@ -205,6 +205,7 @@ Tooltip artifacts use `tooltip-<locale>-<direction>-<theme>-<side>-<width>.png`.
 
 - `mise exec -- npm ci` installs root dependencies and builds the package.
 - `mise exec -- npm run check` runs lint, types, design and generated-file checks, unit tests, and package checks.
+- `mise exec -- npm run icons` regenerates the internal icon paths from the synced `design/agent-ui/components/bundle.js`. Do not edit `packages/ui/src/icons/icons.ts` by hand. `npm run icons:check` checks for drift and runs as part of `npm run check`.
 - `mise exec -- npm run preview:install` installs the separate preview app dependencies.
 - `mise exec -- npm run verify` runs checks, preview checks, and browser tests.
 - `mise exec -- npm run docs` regenerates `llms.txt` and the component table above from component docs and OpenUI descriptions. Edit those sources rather than the generated output. `npm run docs:check` checks both outputs for drift.
