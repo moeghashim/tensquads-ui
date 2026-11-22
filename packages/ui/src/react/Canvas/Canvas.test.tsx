@@ -137,6 +137,36 @@ describe("Canvas", () => {
 		expect(markup).toContain('d="M200,');
 	});
 
+	it("ignores presses that are not the primary button", () => {
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(
+			<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} onNodeMove={vi.fn()} />,
+		);
+		fireEvent.pointerDown(getByRole("option", { name: "Start" }), { button: 2 });
+		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
+	it("selects from a virtual click after a drag whose click never came", () => {
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" onNodeMove={vi.fn()} />);
+		const start = getByRole("option", { name: "Start" });
+		fireEvent.pointerDown(start, { button: 0, isPrimary: true, clientX: 10, clientY: 10 });
+		fireEvent.pointerUp(document, { button: 0, isPrimary: true, clientX: 10, clientY: 10 });
+		fireEvent.click(getByRole("region"), { clientX: 10, clientY: 10 });
+		expect(start).toHaveAttribute("aria-selected", "false");
+		act(() => start.click());
+		expect(start).toHaveAttribute("aria-selected", "true");
+	});
+
+	it("does not move without a move callback", () => {
+		const { getByRole } = render(<Canvas graph={graph} label="Workflow" />);
+		const start = getByRole("option", { name: "Start" });
+		start.focus();
+		fireEvent.keyDown(start, { key: "ArrowRight", shiftKey: true });
+		expect(start).toHaveFocus();
+		expect(start).toHaveStyle({ insetInlineStart: "20px" });
+		expect(getByRole("region")).toHaveAttribute("data-movable", "false");
+	});
+
 	it("draws a drag without rendering and waits for the host graph", async () => {
 		const onNodeMove = vi.fn();
 		let renders = 0;

@@ -8,6 +8,8 @@ import {
 	css,
 	definePrimitive,
 	direct,
+	type MoveDraft,
+	type MovePoint,
 	spatialMove,
 } from "@ui-sdk/core";
 import { createParts, type PartProps } from "@ui-sdk/react/primitive";
@@ -43,14 +45,12 @@ export type CanvasProps = Omit<
 	ref?: Ref<CanvasHandle>;
 };
 
-type MovePoint = { x: number; y: number };
-type MoveDraft = { keys: string[]; dx: number; dy: number } | null;
 type CanvasState = {
 	viewport: CanvasViewport;
 	selected: string[];
 	focused: string | null;
 	positions: Record<string, MovePoint>;
-	moving: MoveDraft;
+	moving: MoveDraft | null;
 };
 type CanvasOptions = {
 	viewport?: CanvasViewport;
@@ -105,16 +105,22 @@ const canvas = definePrimitive({
 			set: (value, details) => change("selected", value, details),
 			order: () => [],
 		});
+		// Positions are logical; createMove moves them physically. In RTL the two mirror each other. `+ 0` drops -0.
+		const mirror = (positions: Record<string, MovePoint>) =>
+			rtl()
+				? Object.fromEntries(Object.entries(positions).map(([id, { x, y }]) => [id, { x: -x + 0, y }]))
+				: positions;
+		const groupFor = (id: string) => {
+			const { selected } = context.store.get();
+			return selected.includes(`node:${id}`)
+				? selected.filter((key) => key.startsWith("node:")).map((key) => key.slice(5))
+				: [id];
+		};
 		const physicalStore = {
 			...context.store,
 			get: () => {
 				const state = context.store.get();
-				return {
-					...state,
-					positions: Object.fromEntries(
-						Object.entries(state.positions).map(([id, p]) => [id, { ...p, x: rtl() ? -p.x + 0 : p.x }]),
-					),
-				};
+				return { ...state, positions: mirror(state.positions) };
 			},
 		};
 		const move = createMove(
@@ -122,22 +128,11 @@ const canvas = definePrimitive({
 			{
 				key: "positions",
 				draft: "moving",
-				set: (positions, details) => {
-					const logical = Object.fromEntries(
-						Object.entries(positions).map(([id, p]) => [id, { ...p, x: rtl() ? -p.x + 0 : p.x }]),
-					);
-					return change("positions", logical, details);
-				},
+				set: (positions, details) => change("positions", mirror(positions), details),
 				step: () => 1,
 				scale: () => context.store.get().viewport.zoom,
 				disabled: () => !context.options().movable || context.options().mode === "pan",
-				group: (id) =>
-					context.store.get().selected.includes(`node:${id}`)
-						? context.store
-								.get()
-								.selected.filter((key) => key.startsWith("node:"))
-								.map((key) => key.slice(5))
-						: [id],
+				group: groupFor,
 				label: (id) => context.options().titles?.[id] ?? id,
 				message: ({ keys, label, at }) => {
 					if (keys.length > 1) {
@@ -190,13 +185,7 @@ const canvas = definePrimitive({
 			move,
 			moveEnabled: () => !!context.options().movable && context.options().mode !== "pan",
 			isMoving: () => context.store.get().moving !== null,
-			groupFor: (id: string) =>
-				context.store.get().selected.includes(`node:${id}`)
-					? context.store
-							.get()
-							.selected.filter((key) => key.startsWith("node:"))
-							.map((key) => key.slice(5))
-					: [id],
+			groupFor,
 			viewport,
 			roving,
 			rtl,
@@ -204,29 +193,25 @@ const canvas = definePrimitive({
 			isPan: () => context.options().mode === "pan",
 			pointerDown: (value: { x: number; y: number } | null) => (pointerDown = value),
 			nodePointerDown: (event: PointerEvent, key: string, el: HTMLElement) => {
-				if (context.options().mode === "pan") {
-					viewport.pointerdown(event);
-					return;
+				selectedOnPointerDown = false;
+				if (event.button !== 0) return;
+				if (!context.store.get().selected.includes(`node:${key}`)) {
+					selectedOnPointerDown = true;
+					selectItem(selection, `node:${key}`, event);
 				}
-				const selected = context.store.get().selected.includes(`node:${key}`);
-				selectedOnPointerDown = !selected;
-				if (!selected) selectItem(selection, `node:${key}`, event);
 				move.pointerdown(event, key, el);
 			},
 			nodePress: (key: string, event?: Event) => {
 				const down = pointerDown;
+				const handled = selectedOnPointerDown;
 				pointerDown = null;
-				if (
-					selectedOnPointerDown ||
-					(down &&
-						event &&
-						Math.hypot((event as MouseEvent).clientX - down.x, (event as MouseEvent).clientY - down.y) > 3)
-				) {
-					selectedOnPointerDown = false;
-					return;
+				selectedOnPointerDown = false;
+				if (context.options().mode === "pan") return;
+				// A click from assistive technology has no press before it, so nothing has selected the node yet.
+				if (event instanceof MouseEvent && event.detail > 0) {
+					if (handled || (down && Math.hypot(event.clientX - down.x, event.clientY - down.y) > 3)) return;
 				}
-				if (!context.options().mode || context.options().mode !== "pan")
-					selectItem(selection, `node:${key}`, event);
+				selectItem(selection, `node:${key}`, event);
 			},
 			get pointerPosition() {
 				return pointerDown;
@@ -276,15 +261,10 @@ const canvas = definePrimitive({
 						event.target === el ||
 						(event.target instanceof Element &&
 							event.target.matches('[data-slot="workflow-canvas-world"], [data-canvas-edge-layer]'));
-					if (event.target instanceof Element) {
-						const node = event.target.closest<HTMLElement>("[data-node-id]");
-						const key = node?.dataset.nodeId;
-						if (node && key) {
-							api.nodePointerDown(event, key, node);
-							return;
-						}
-					}
+					const node =
+						event.target instanceof Element ? event.target.closest<HTMLElement>("[data-node-id]") : null;
 					if (ground || api.isPan()) api.viewport.pointerdown(event);
+					else if (node?.dataset.nodeId) api.nodePointerDown(event, node.dataset.nodeId, node);
 				},
 				click: (event, { el, api }) => {
 					if (!el || isIgnored(event.target, el)) return;
@@ -365,8 +345,13 @@ const canvas = definePrimitive({
 										: event.key === "ArrowLeft"
 											? [-20, 0]
 											: [20, 0];
-							api.move.moveBy(api.groupFor(key), delta[0] ?? 0, delta[1] ?? 0, { reason: "move-key", event });
 							event.preventDefault();
+							api.move.moveBy(api.groupFor(key), delta[0] ?? 0, delta[1] ?? 0, { reason: "move-key", event });
+							// The host passes the new place back first, then a node that left the view comes back into it.
+							requestAnimationFrame(() => {
+								if (el.isConnected)
+									api.viewport.reveal(api.viewport.rectOf(el), { padding: 24 }, { reason: "focus-in" });
+							});
 						}
 						return;
 					}
@@ -404,7 +389,6 @@ const canvas = definePrimitive({
 		}),
 		path: slot<{
 			value: string;
-			d: string;
 			from: string;
 			to: string;
 			dx1: number;
@@ -414,7 +398,6 @@ const canvas = definePrimitive({
 		}>({
 			props: {
 				value: "string",
-				d: "string",
 				from: "string",
 				to: "string",
 				dx1: "number",
@@ -571,14 +554,11 @@ export function Canvas({
 			titles={titles}
 			movable={onNodeMove !== undefined}
 			onPositionsChange={(next, details) => {
-				let changed = false;
 				for (const node of graph.nodes) {
 					const position = next[node.id];
 					if (!position || (position.x === node.position.x && position.y === node.position.y)) continue;
-					changed = true;
 					onNodeMove?.(node.id, { x: position.x + 0, y: position.y + 0 }, details);
 				}
-				return changed;
 			}}
 			mode={mode}
 			onSelectedChange={(keys, details) => {
@@ -616,7 +596,6 @@ export function Canvas({
 								>
 									<Path
 										value={`${edge.id}:visible`}
-										d={edgePath(start.x, start.y, end.x, end.y)}
 										from={from.id}
 										to={to.id}
 										dx1={start.x - from.position.x}
@@ -627,7 +606,6 @@ export function Canvas({
 									/>
 									<Path
 										value={`${edge.id}:hit`}
-										d={edgePath(start.x, start.y, end.x, end.y)}
 										from={from.id}
 										to={to.id}
 										dx1={start.x - from.position.x}

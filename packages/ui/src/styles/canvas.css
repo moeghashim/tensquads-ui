@@ -40,6 +40,7 @@
 	}
 	.ts-canvas[data-movable="true"][data-mode="select"] .ts-canvas__node { cursor: grab; }
 	.ts-canvas[data-movable="true"][data-mode="select"] .ts-canvas__node[data-dragging] { cursor: grabbing; }
+	.ts-canvas__node[data-dragging] { z-index: 1; }
 	.ts-canvas__node:focus-visible { outline: none; }
 	.ts-canvas__node:focus-visible > .ts-node { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 }
