@@ -1,12 +1,13 @@
 {
   "source": "https://github.com/moeghashim/tensquads-design-system.git",
   "commit": "513505617794ee8bdb82cdc019b137910c60c52f",
-  "syncedAt": "2026-11-19",
+  "syncedAt": "2026-11-22",
   "files": {
     "agent-ui/components/Badge/README.md": "5e1cb91a0f85b9748f825eccc43256869135227e704773aeaef2e641c5f38d8a",
     "agent-ui/components/BarChart/README.md": "90a5c454181d65c015641cc67a780cd0d432166ad7827529c8886f88f08fc8b1",
     "agent-ui/components/Bars/README.md": "593b2c16db77206fce1f556b178d6058c7e7a7f2215162571029caf9f7850c33",
     "agent-ui/components/BranchNode/README.md": "92ab5aae23a81b0ad27b3b4edaa0ef2decb09ec2eccd9ebfe40c49905bc9b45f",
+    "agent-ui/components/bundle.js": "48c72278f35fe8662d4eb974e4aa064305954d80f4ef7afaff243b7df5d40df2",
     "agent-ui/components/Button/README.md": "b60982d1275af62c2e17690e3ec0b4ef1bd2bfc8174022445af869799beeb440",
     "agent-ui/components/Canvas/README.md": "085bed785d651d2cd8911d4adeb0a58cdea7b866f72ada7d62d87f077b7fc135",
     "agent-ui/components/Card/README.md": "f52a21b16812f04f13104a5310bae1fecc161a0ac8ff6ccabb9b25b91bda787e",

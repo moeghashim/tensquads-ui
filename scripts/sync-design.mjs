@@ -28,6 +28,7 @@ try {
 		["agent-ui/tokens.json", "tokens.json"],
 		["agent-ui/README.md", "agent-ui/README.md"],
 		["agent-ui/data-display.md", "agent-ui/data-display.md"],
+		["agent-ui/components/bundle.js", "agent-ui/components/bundle.js"],
 		["README.md", "ATTRIBUTION.md"],
 		...componentDocs,
 		...[...(await readdir(join(checkout, "mascots/svg")))].map((name) => [
@@ -70,7 +71,7 @@ try {
 	await rm(root, { recursive: true, force: true });
 	await rename(staging, root);
 	console.log(`Synced ${Object.keys(hashes).length} files from ${commit}.`);
-	console.log("Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.");
+	console.log("Skipped previews, bundle.css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.");
 } finally {
 	await rm(temporary, { recursive: true, force: true });
 }
