@@ -1,5 +1,10 @@
 import { expect, type Locator, type Page, test } from "@playwright/test";
-import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
+import {
+	capturePreviewScreenshots,
+	expectAccessible,
+	expectNoHorizontalScroll,
+	openPreview,
+} from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	for (const theme of ["light", "dark"] as const) {
@@ -7,6 +12,7 @@ for (const locale of ["en", "ar"] as const) {
 			const ar = locale === "ar";
 			const direction = ar ? "rtl" : "ltr";
 			await openPreview(page, { locale, direction, theme }, "/components/Inspector");
+			await capturePreviewScreenshots(page, test.info(), `inspector-${locale}-${direction}-${theme}`);
 			const inspector = page.getByRole("region", { name: ar ? "وكيل" : "Agent" });
 			const name = inspector.getByRole("textbox", { name: ar ? "الاسم" : "Name" });
 			const instructions = inspector.getByRole("textbox", { name: ar ? "التعليمات" : "Instructions" });
@@ -52,7 +58,8 @@ for (const locale of ["en", "ar"] as const) {
 
 		test(`Inspector chooses, connects and removes by keyboard in ${locale} ${theme}`, async ({ page }) => {
 			const ar = locale === "ar";
-			await openPreview(page, { locale, direction: ar ? "rtl" : "ltr", theme }, "/components/Inspector");
+			const direction = ar ? "rtl" : "ltr";
+			await openPreview(page, { locale, direction, theme }, "/components/Inspector");
 			const inspector = page.getByRole("region", { name: ar ? "وكيل" : "Agent" });
 			const model = inspector.getByRole("combobox", { name: ar ? "النموذج" : "Model" });
 			const connects = inspector.getByRole("combobox", { name: ar ? "يتصل بـ" : "Connects to" });
@@ -85,6 +92,7 @@ for (const locale of ["en", "ar"] as const) {
 			await page.keyboard.press("Enter");
 			await expect(list.getByRole("option", { selected: true })).toHaveCount(3);
 			await finishAnimations(page);
+			await capturePreviewScreenshots(page, test.info(), `inspector-list-${locale}-${direction}-${theme}`);
 			await expectAccessible(page);
 			await page.keyboard.press("Escape");
 			await expect(list).toBeHidden();

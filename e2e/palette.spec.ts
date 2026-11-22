@@ -1,11 +1,17 @@
 import { expect, test } from "@playwright/test";
-import { expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
+import {
+	capturePreviewScreenshots,
+	expectAccessible,
+	expectNoHorizontalScroll,
+	openPreview,
+} from "./helpers/preview";
 
 for (const locale of ["en", "ar"] as const) {
 	for (const theme of ["light", "dark"] as const) {
 		test(`Palette inserts by pointer and keyboard in ${locale} ${theme}`, async ({ page }) => {
 			const direction = locale === "ar" ? "rtl" : "ltr";
 			await openPreview(page, { locale, direction, theme }, "/components/Palette");
+			await capturePreviewScreenshots(page, test.info(), `palette-${locale}-${direction}-${theme}`);
 			const palette = page.getByRole("toolbar", { name: locale === "ar" ? "عُقد سير العمل" : "Workflow nodes" });
 			const button = palette.getByRole("button", { name: locale === "ar" ? "وكيل" : "Agent" });
 			await expect(palette).toHaveCSS("width", "200px");
