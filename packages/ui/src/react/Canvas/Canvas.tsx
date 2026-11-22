@@ -113,37 +113,33 @@ const canvas = definePrimitive({
 	api: (context) => {
 		const change = createChange(context);
 		let fromPort: number | undefined;
-		let pointerPoint: { x: number; y: number } | null = null;
+		let fromWidth = DEFAULT_NODE_WIDTH;
+		let pointerPoint = { x: 0, y: 0 };
+		const nodeOf = (id: string) => context.options().graph?.nodes.find((node) => node.id === id);
+		// createConnect snaps to a target's center. Here a drop anywhere on a node connects, so each draft gets the node
+		// under the pointer before it is stored.
+		const targetUnderPointer = (from: string) => {
+			const graph = context.options().graph;
+			if (!graph) return null;
+			const contains = (element: Element | null | undefined) => {
+				const box = element?.getBoundingClientRect();
+				const { x, y } = pointerPoint;
+				return !!box && x >= box.left && x <= box.right && y >= box.top && y <= box.bottom;
+			};
+			const node = [...graph.nodes].reverse().find(({ id }) => {
+				const element = context.element("node", id);
+				return contains(element) || contains(element?.querySelector('[data-port="in"]'));
+			});
+			return node && canConnect(graph, from, fromPort, node.id) ? node.id : null;
+		};
 		const connectStore = {
 			...context.store,
 			set: (patch: Partial<CanvasState>, delivered?: boolean) => {
 				const draft = patch.connecting;
-				if (draft && !draft.keyboard && pointerPoint) {
-					const graph = context.options().graph;
-					const node = [...(graph?.nodes ?? [])].reverse().find((candidate) => {
-						const element = context.element("node", candidate.id);
-						if (!element) return false;
-						const rect = element.getBoundingClientRect();
-						const input = element.querySelector<HTMLElement>('[data-port="in"]')?.getBoundingClientRect();
-						const point = pointerPoint!;
-						return (
-							(point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom) ||
-							(!!input &&
-								point.x >= input.left &&
-								point.x <= input.right &&
-								point.y >= input.top &&
-								point.y <= input.bottom)
-						);
-					});
-					patch = {
-						...patch,
-						connecting: {
-							...draft,
-							to: node && graph && canConnect(graph, draft.from, fromPort, node.id) ? node.id : null,
-						},
-					};
-				}
-				context.store.set(patch, delivered);
+				context.store.set(
+					draft ? { ...patch, connecting: { ...draft, to: targetUnderPointer(draft.from) } } : patch,
+					delivered,
+				);
 			},
 		};
 		const connect = createConnect(
@@ -242,7 +238,7 @@ const canvas = definePrimitive({
 			move: spatialMove(),
 		});
 		let pointerDown: { x: number; y: number } | null = null;
-		let selectedOnPointerDown = false;
+		let pressHandled = false;
 		const rtl = () => context.options().direction === "rtl";
 		const width = () => context.element("root")?.getBoundingClientRect().width ?? 0;
 		// The state is logical in both directions. createViewport measures from the left, so it gets a physical view of it.
@@ -272,22 +268,11 @@ const canvas = definePrimitive({
 			connect,
 			connectable: () => !!context.options().onConnect,
 			connectionPath: (draft: ConnectDraft | null) => {
-				if (!draft) return undefined;
-				const graph = context.options().graph;
-				const sourcePort = context
-					.element("node", draft.from)
-					?.querySelector<HTMLElement>(`[data-port="out"][data-port-index="${fromPort ?? 0}"]`);
-				if (!sourcePort || !graph) return undefined;
-				const worldPoint = (element: HTMLElement) => {
-					const rect = element.getBoundingClientRect();
-					const point = viewport.toCanvas(rect.left + rect.width / 2, rect.top + rect.height / 2);
-					return { ...point, x: rtl() ? -point.x + 0 : point.x };
-				};
-				const start = worldPoint(sourcePort);
-				const input = draft.to
-					? context.element("node", draft.to)?.querySelector<HTMLElement>('[data-port="in"]')
-					: null;
-				const end = input ? worldPoint(input) : { x: draft.x, y: draft.y };
+				const from = draft && nodeOf(draft.from);
+				if (!from) return undefined;
+				const to = draft.to === null ? undefined : nodeOf(draft.to);
+				const start = portPosition(from, { out: fromPort ?? 0 }, fromWidth);
+				const end = to ? portPosition(to, "in", DEFAULT_NODE_WIDTH) : draft;
 				return edgePath(start.x, start.y, end.x, end.y);
 			},
 			moveEnabled: () => !!context.options().movable && context.options().mode !== "pan",
@@ -300,30 +285,29 @@ const canvas = definePrimitive({
 			isPan: () => context.options().mode === "pan",
 			pointerDown: (value: { x: number; y: number } | null) => (pointerDown = value),
 			nodePointerDown: (event: PointerEvent, key: string, el: HTMLElement) => {
-				selectedOnPointerDown = false;
+				pressHandled = false;
 				if (event.button !== 0) return;
 				const output =
 					event.target instanceof Element ? event.target.closest<HTMLElement>('[data-port="out"]') : null;
 				if (output && context.options().onConnect && context.options().mode !== "pan") {
-					fromPort =
-						el.querySelectorAll('[data-port="out"]').length > 1
-							? Number(output.dataset.portIndex ?? 0)
-							: undefined;
+					// The click that ends this gesture selects nothing.
+					pressHandled = true;
+					fromPort = nodeOf(key)?.branches ? Number(output.dataset.portIndex ?? 0) : undefined;
+					fromWidth = el.offsetWidth;
 					connect.pointerdown(event, key, el);
 					return;
 				}
 				if (!context.store.get().selected.includes(`node:${key}`)) {
-					selectedOnPointerDown = true;
+					pressHandled = true;
 					selectItem(selection, `node:${key}`, event);
 				}
 				move.pointerdown(event, key, el);
 			},
 			nodePress: (key: string, event?: Event) => {
-				if (connect.active()) return;
 				const down = pointerDown;
-				const handled = selectedOnPointerDown;
+				const handled = pressHandled;
 				pointerDown = null;
-				selectedOnPointerDown = false;
+				pressHandled = false;
 				if (context.options().mode === "pan") return;
 				// A click from assistive technology has no press before it, so nothing has selected the node yet.
 				if (event instanceof MouseEvent && event.detail > 0) {
@@ -405,7 +389,6 @@ const canvas = definePrimitive({
 				},
 				keydown: (event, { api, el }) => {
 					if (!el || event.defaultPrevented || isIgnored(event.target, el)) return;
-					if (api.connect.active() && api.connect.keydown(event)) return;
 					if (event.key === "Escape") {
 						if (api.isMoving()) return;
 						if (api.hasSelection()) {
@@ -441,7 +424,7 @@ const canvas = definePrimitive({
 		node: slot<{ value: string; description: string | undefined }>({
 			props: { value: "string", description: "string" },
 			role: "option",
-			direct: direct(["style", "data-dragging", "data-connect"]),
+			direct: direct(["style", "data-dragging"]),
 			live: live((state, { api, key }) => ({ "data-connect": api.connect.role(state, key) })),
 			focus: "roving",
 			press: ({ api, key }, event) => api.nodePress(key, event),

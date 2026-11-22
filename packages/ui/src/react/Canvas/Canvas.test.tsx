@@ -211,6 +211,21 @@ describe("Canvas", () => {
 		expect(container.querySelector(".ts-canvas__connection")).toBeTruthy();
 	});
 
+	it("neither selects nor connects when an output port is clicked without a drag", () => {
+		const onConnect = vi.fn();
+		const onSelectionChange = vi.fn();
+		const { getByRole } = render(
+			<Canvas graph={graph} label="Workflow" onConnect={onConnect} onSelectionChange={onSelectionChange} />,
+		);
+		const out = getByRole("option", { name: "Start" }).querySelector('[data-port="out"]')!;
+		const press = { pointerId: 1, button: 0, isPrimary: true, pointerType: "mouse", clientX: 5, clientY: 5 };
+		fireEvent.pointerDown(out, press);
+		fireEvent.pointerUp(document, press);
+		fireEvent.click(out, { clientX: 5, clientY: 5, detail: 1 });
+		expect(onConnect).not.toHaveBeenCalled();
+		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
 	it("selects an output node on press when connecting is unavailable", () => {
 		const onSelectionChange = vi.fn();
 		const { getByRole } = render(<Canvas graph={graph} label="Workflow" onSelectionChange={onSelectionChange} />);
