@@ -28,7 +28,7 @@ export class UnknownSquadmateStateError extends Error {
 
 // ---- Eyes for each state, in the 300 x 370 drawing. Big round eyes with a brown iris. No glasses. ----
 const r1 = (n: number) => Number(n.toFixed(1));
-// An open eye. dx and dy move the iris; scale grows or shrinks it.
+// An open eye. dx and dy move the iris; iris scales the iris and pupil radii.
 const eye = (x: number, y: number, s: number, dx = 0, dy = 0, iris = 1) => {
 	const ix = r1(x + dx * s);
 	const iy = r1(y + dy * s);
@@ -115,8 +115,7 @@ function badge(state: SquadmateDrawState): string {
 	return "";
 }
 
-// At 64 px and up the avatar shows the whole mascot. Smaller, it shows the upper body,
-// so the face stays readable at 16 px.
+// Crop dimensions come from BUST so the face stays readable at 16 px.
 function avatar(mate: Squadmate, state: SquadmateDrawState, size: number): string {
 	const k = `sm-${mate.name.toLowerCase()}-`;
 	const palette = PALETTES[mate.id];

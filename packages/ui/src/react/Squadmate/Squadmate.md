@@ -4,7 +4,7 @@ Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates`
 
 The component takes a character slug such as `petra`. The roster and drawing APIs in `@tensquads/ui/squadmates` use role IDs such as `master`. Use `AGENT_ROLE_TO_SLUG` and `AGENT_SLUG_TO_ROLE` from `@tensquads/ui/schemas` to convert between them. That entry also exports `AgentRoleSchema`, `AgentSlugSchema`, and `AgentStateSchema` with their inferred types.
 
-`SQUADMATES` contains the roster. `AGENT_LOOP_STATES` contains the loop states; `SquadmateDrawState` also includes `idle`. `squadmateMarkup(imageId, state, size)` returns SVG markup. It throws `UnknownSquadmateError` for an unknown role ID and `UnknownSquadmateStateError` for an unknown state. Sizes below 64 px show the upper body; sizes of 64 px or more show the whole mascot. `SQUADMATE_CSS` contains optional blink styles for inline markup and disables the animation for reduced motion. The React image does not include those styles.
+`SQUADMATES` contains the roster. `AGENT_LOOP_STATES` contains the loop states; `SquadmateDrawState` also includes `idle`. `squadmateMarkup(imageId, state, size)` returns SVG markup. It throws `UnknownSquadmateError` for an unknown role ID and `UnknownSquadmateStateError` for an unknown state. Sizes below 64 px show a crop focused on the head; sizes of 64 px or more show the whole mascot. `SQUADMATE_CSS` contains optional blink styles for inline markup and disables the animation for reduced motion. The React image does not include those styles.
 
 The image name contains the localized character name and state. For example, English `Petra, Planning` and Arabic `بترا، تخطيط`.
 
