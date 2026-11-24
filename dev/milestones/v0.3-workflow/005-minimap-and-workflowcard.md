@@ -13,7 +13,7 @@ Specs: `MiniMap`, `WorkflowCard`. UI SDK: `menu.md`.
 
 ### MiniMap
 - [ ] Rendered as a Canvas child. It reads the graph, the viewport and the canvas size from Canvas context and shows only while the graph's bounds exceed the visible area; it hides again when everything fits.
-- [ ] 180×110 `panel` card, `radius-xl`, at the bottom inline-end corner, 16px from the edges. Nodes are family-tinted rectangles at scale; no labels, no edges. The viewport is an `alpha-06` mask with an `alpha-20` outline. Dragging the mask, or clicking the map, pans the canvas through `onViewportChange`.
+- [ ] 180×110 `panel` card, `radius-xl`, at the bottom inline-end corner, 16px from the edges. A `placement?: "end" | "start"` prop (default `"end"`) moves it to the bottom inline-start corner; the Nodes page (task 006) needs it because its Inspector covers the inline end. Nodes are family-tinted rectangles at scale; no labels, no edges. The viewport is an `alpha-06` mask with an `alpha-20` outline. Dragging the mask, or clicking the map, pans the canvas through `onViewportChange`.
 - [ ] It has an accessible name ("Minimap") and is hidden from the Canvas roving group; arrow keys on the focused minimap pan by 10% of the viewport.
 
 ### WorkflowCard
