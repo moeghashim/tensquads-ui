@@ -85,6 +85,7 @@ import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squad
 import { componentDocumentName } from "../catalog-groups";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { MarkdownDocument } from "../components/docs/markdown-document";
+import { MiniMapExample, WorkflowCardExample } from "../components/workflow-examples";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
@@ -111,6 +112,7 @@ const componentOrder = [
 	"Canvas",
 	"Palette",
 	"Inspector",
+	"MiniMap",
 ];
 
 export const Route = createFileRoute("/components/$name")({
@@ -448,6 +450,8 @@ function ComponentExample() {
 	if (name === "Node") return <NodePreview locale={locale} />;
 	if (name === "Canvas") return <CanvasPreview locale={locale} direction={direction} />;
 	if (name === "Palette") return <PalettePreview locale={locale} direction={direction} />;
+	if (name === "MiniMap") return <MiniMapExample locale={locale} direction={direction} />;
+	if (name === "WorkflowCard") return <WorkflowCardExample locale={locale} stream={stream ?? null} />;
 	if (name === "Inspector") return <InspectorPreview locale={locale} direction={direction} />;
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;

@@ -12,6 +12,34 @@ export const NODE_METRICS = {
 	portSize: px(tokens["handle-size"].light),
 } as const;
 
+export type NodeSize = { width: number; height: number };
+export const DEFAULT_NODE_WIDTH = 180;
+
+export function nodeHeight(node: WorkflowNode) {
+	const { headRowHeight, headBranchGap, branchRowHeight, branchGap, cardBlockPadding } = NODE_METRICS;
+	const branches = node.branches?.length ?? 0;
+	return (
+		headRowHeight +
+		2 * cardBlockPadding +
+		(node.branches ? headBranchGap + branches * branchRowHeight + Math.max(0, branches - 1) * branchGap : 0)
+	);
+}
+
+export function graphBounds(nodes: { x: number; y: number; width: number; height: number }[]) {
+	if (!nodes.length) return null;
+	let x = Infinity;
+	let y = Infinity;
+	let endX = -Infinity;
+	let endY = -Infinity;
+	for (const node of nodes) {
+		x = Math.min(x, node.x);
+		y = Math.min(y, node.y);
+		endX = Math.max(endX, node.x + node.width);
+		endY = Math.max(endY, node.y + node.height);
+	}
+	return { x, y, width: endX - x, height: endY - y };
+}
+
 export function edgePath(x1: number, y1: number, x2: number, y2: number) {
 	const midpoint = (x1 + x2) / 2;
 	return `M${x1},${y1} C${midpoint},${y1} ${midpoint},${y2} ${x2},${y2}`;

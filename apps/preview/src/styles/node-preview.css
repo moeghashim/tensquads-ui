@@ -8,3 +8,17 @@
 .canvas-preview__toolbar { position: absolute; z-index: 2; inset-block-start: var(--ts-space-3); inset-inline-end: var(--ts-space-3); }
 .canvas-preview__surface { block-size: 440px; min-inline-size: 0; overflow: hidden; border: 1px solid var(--ts-edge); border-radius: var(--ts-radius-xl); }
 .palette-preview__overlay { position: absolute; display: flex; inset-block-start: var(--ts-page-gutter); inset-inline-start: var(--ts-page-gutter); max-block-size: calc(100% - 2 * var(--ts-page-gutter)); }
+
+.minimap-preview { display: grid; gap: var(--ts-space-3); min-inline-size: 0; }
+.minimap-preview__surface, .minimap-preview__small {
+	overflow: clip;
+	border: 1px solid var(--ts-edge);
+	border-radius: var(--ts-radius-xl);
+}
+.minimap-preview__surface { block-size: 300px; }
+.minimap-preview__small { block-size: 144px; }
+.minimap-preview--specimen { inline-size: 360px; }
+.minimap-preview--specimen .minimap-preview__surface { block-size: 184px; }
+.workflow-card-preview, .workflow-card-preview__grid { display: grid; gap: var(--ts-space-4); min-inline-size: 0; }
+.workflow-card-preview__grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 224px), 1fr)); }
+.workflow-card-preview > .component-list { box-sizing: border-box; inline-size: min(100%, 360px); }

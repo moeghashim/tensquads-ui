@@ -33,6 +33,7 @@ The library ships these components today. Each row links to its reference and it
 | [Input](packages/ui/src/react/Input/Input.md) | A named single-line text input. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Input) |
 | [Inspector](packages/ui/src/react/Inspector/Inspector.md) | `Inspector` is a panel for editing the selected workflow node. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Inspector) |
 | [Menu](packages/ui/src/react/Menu/Menu.md) | A button menu with up to six serializable actions. Each action has a label and value, with optional danger and disabled states. A destructive action is placed last after a separator. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Menu) |
+| [MiniMap](packages/ui/src/react/MiniMap/MiniMap.md) | `MiniMap` shows the shape of a workflow that is larger than the visible Canvas. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/MiniMap) |
 | [Node](packages/ui/src/react/Node/Node.md) | `Node` displays one workflow step. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Node) |
 | [OwnerMessageView](packages/ui/src/react/OwnerMessage/OwnerMessage.md) | Pass owner messages as `messages`. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/OwnerMessageView) |
 | [PageHeader](packages/ui/src/react/PageHeader/PageHeader.md) | A page heading with a title, one subtitle, optional metadata and actions. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/PageHeader) |
@@ -45,6 +46,7 @@ The library ships these components today. Each row links to its reference and it
 | [ThemeToggle](packages/ui/src/react/ThemeToggle/ThemeToggle.md) | It switches between light and dark themes. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/ThemeToggle) |
 | [Toolbar](packages/ui/src/react/Toolbar/Toolbar.md) | It groups up to six icon controls in a floating toolbar. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Toolbar) |
 | [Tooltip](packages/ui/src/react/Tooltip/Tooltip.md) | A short hint shown when a control receives focus or hover. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Tooltip) |
+| [WorkflowCard](packages/ui/src/react/WorkflowCard/WorkflowCard.md) | A workflow summary with a graph thumbnail and three stats in order: runs in the last seven days, grader pass rate, and last run. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/WorkflowCard) |
 
 <!-- components:end -->
 

@@ -1,27 +1,17 @@
 import type { WorkflowGraph, WorkflowNode } from "../../schemas/workflow.js";
-import { NODE_METRICS } from "./geometry.js";
+import { DEFAULT_NODE_WIDTH, type NodeSize, nodeHeight } from "./geometry.js";
 
-export type NodeSize = { width: number; height: number };
+export { DEFAULT_NODE_WIDTH, type NodeSize } from "./geometry.js";
+
 // These layout distances are fixed in the task's tidy-layout specification.
 const GRID = 20;
 const COLUMN_GAP = 80;
 const NODE_GAP = 40;
-// The node guide specifies content-driven widths but no default. Use a 180px layout estimate until Canvas measures it.
-export const DEFAULT_NODE_WIDTH = 180;
 const snap = (value: number) => Math.round(value / GRID) * GRID;
 const atLeastGap = (value: number, min: number) => Math.ceil((value + min) / GRID) * GRID;
 
 function heightOf(node: WorkflowNode, size?: NodeSize) {
-	return (
-		size?.height ??
-		NODE_METRICS.headRowHeight +
-			(node.branches
-				? NODE_METRICS.headBranchGap +
-					node.branches.length * NODE_METRICS.branchRowHeight +
-					Math.max(0, node.branches.length - 1) * NODE_METRICS.branchGap
-				: 0) +
-			2 * NODE_METRICS.cardBlockPadding
-	);
+	return size?.height ?? nodeHeight(node);
 }
 
 export function tidyLayout(

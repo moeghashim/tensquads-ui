@@ -1,0 +1,1 @@
+MiniMap shows nodes and the current viewport on a Canvas whose graph exceeds the visible dimensions.
