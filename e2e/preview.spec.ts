@@ -225,22 +225,28 @@ test("catalog filters and links without interactive specimens", async ({ page })
 	await expect(page).toHaveURL(/\/components\/BarChart\?locale=en&dir=ltr&theme=dark$/);
 });
 
-test("catalog category rail follows the document", async ({ page }) => {
-	await page.setViewportSize({ width: 1440, height: 900 });
-	await openPreview(page, states[0]!, "/components");
-	const rail = page.getByRole("navigation", { name: "Categories" });
-	const data = rail.getByRole("link", { name: /Data and charts/ });
-	await data.click();
-	await expect(data).toHaveAttribute("aria-current", "location");
-	await page.locator("#chat").scrollIntoViewIfNeeded();
-	await page.locator("#chat").evaluate((section) => section.scrollIntoView({ block: "start" }));
-	await expect(rail.getByRole("link", { name: /Chat and agents/ })).toHaveAttribute("aria-current", "location");
-	const workflow = rail.getByRole("link", { name: /Workflow/ });
-	await workflow.click();
-	await expect(workflow).toHaveAttribute("aria-current", "location");
-});
-
 for (const state of states) {
+	test(`catalog category rail follows the document in ${state.locale} ${state.theme}`, async ({ page }) => {
+		await page.setViewportSize({ width: 1440, height: 900 });
+		await openPreview(page, state, "/components");
+		const filter = page.getByRole("searchbox");
+		// SSR links work before hydration, but the router can reset their scroll during startup.
+		await expect(async () => {
+			await filter.fill("BarChart");
+			await expect(page.locator(".component-card")).toHaveCount(1);
+		}).toPass({ timeout: 10_000 });
+		await filter.clear();
+		await expect(page.locator(".component-card")).toHaveCount(33);
+		const rail = page.getByRole("navigation", { name: state.locale === "ar" ? "الفئات" : "Categories" });
+		for (const id of ["actions", "forms", "feedback", "data", "chat", "app", "workflow"]) {
+			const link = rail.locator(`a[href="#${id}"]`);
+			await link.click();
+			await expect(link).toHaveAttribute("aria-current", "location");
+		}
+		await page.locator("#chat").evaluate((section) => section.scrollIntoView({ block: "start" }));
+		await expect(rail.locator('a[href="#chat"]')).toHaveAttribute("aria-current", "location");
+	});
+
 	test(`catalog and foundations render in ${state.locale} ${state.theme}`, async ({ page }, testInfo) => {
 		for (const [path, name] of [
 			["/components", "components"],
