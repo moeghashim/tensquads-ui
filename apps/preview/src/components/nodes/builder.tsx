@@ -558,20 +558,16 @@ function Builder({
 					<ThemeToggle value={theme} onValueChange={onTheme} locale={locale} />
 				</div>
 			</header>
-			<div
-				className="builder-stage"
-				ref={stage}
-				data-tidying={tidying || undefined}
-				onFocus={(event) => {
-					const node = commandDestination.current;
-					if (!node || !(event.target instanceof Element) || !event.target.closest("[data-node-id]")) return;
-					commandDestination.current = null;
-					stage.current?.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(node.id)}"]`)?.focus();
-					placeInView([node], viewport.zoom);
-				}}
-			>
+			<div className="builder-stage" ref={stage} data-tidying={tidying || undefined}>
 				<Canvas
 					ref={canvas}
+					onFocus={(event) => {
+						const node = commandDestination.current;
+						if (!node || !(event.target instanceof Element) || !event.target.closest("[data-node-id]")) return;
+						commandDestination.current = null;
+						stage.current?.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(node.id)}"]`)?.focus();
+						placeInView([node], viewport.zoom);
+					}}
 					graph={graph}
 					label={copy.canvas}
 					viewport={viewport}
