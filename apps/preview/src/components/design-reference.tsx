@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { siteCopy } from "../copy";
+import { referenceSections } from "../reference";
 import type { Direction, Locale, PreviewSearch } from "../state";
 
 export const foundationNames = [
@@ -71,5 +72,33 @@ export function ReferenceLayout({ label, links, children }: { label: string; lin
 			</nav>
 			<div className="reference-body">{children}</div>
 		</div>
+	);
+}
+
+export function DesignReferenceLinks({ locale, search }: { locale: Locale; search: PreviewSearch }) {
+	const copy = siteCopy[locale].designSystem;
+	return referenceSections.map(({ id, path }) => (
+		<Link key={id} to={path} search={search}>
+			{copy[id]}
+		</Link>
+	));
+}
+
+export function DesignReferenceLayout({
+	locale,
+	search,
+	children,
+}: {
+	locale: Locale;
+	search: PreviewSearch;
+	children: ReactNode;
+}) {
+	return (
+		<ReferenceLayout
+			label={siteCopy[locale].designSystem.reference}
+			links={<DesignReferenceLinks locale={locale} search={search} />}
+		>
+			{children}
+		</ReferenceLayout>
 	);
 }

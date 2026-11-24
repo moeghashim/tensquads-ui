@@ -12,6 +12,7 @@ import { useState } from "react";
 import { openUIComponents, reactOnlyComponents } from "../catalog";
 import { siteCopy } from "../copy";
 import { signal } from "../design-assets";
+import { pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
 import { getPreviewState } from "../state";
 import { foundationNames, llmsUrl } from "./design-reference";
 
@@ -78,6 +79,27 @@ export function SiteShell() {
 				keywords: [name],
 				onSelect: () => void navigate({ to: "/foundations/$name", params: { name }, search }),
 			})),
+		},
+		{
+			id: "reference",
+			label: design.reference,
+			items: [
+				...referenceSections.map(({ id, path }) => ({
+					id: `reference-${id}`,
+					label: design[id],
+					onSelect: () => void navigate({ to: path, search }),
+				})),
+				...productScreens.map((screen) => ({
+					id: `screen-${screen.id}`,
+					label: productScreenTitle(screen, locale),
+					onSelect: () => void navigate({ to: "/reference/screens/$id", params: { id: screen.id }, search }),
+				})),
+				...pageDesigns.map(({ id }) => ({
+					id: `page-design-${id}`,
+					label: copy.reference.pageTitles[id],
+					onSelect: () => void navigate({ to: "/reference/pages/$id", params: { id }, search }),
+				})),
+			],
 		},
 		{
 			id: "components",

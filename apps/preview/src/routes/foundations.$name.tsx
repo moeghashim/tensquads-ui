@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound, useRouterState } from "@tanstack/react-router";
-import { Badge, Button, squadmateCharacterName, squadmateStateLabel } from "@tensquads/ui/react";
-import { AGENT_ROLE_TO_SLUG, type AgentState } from "@tensquads/ui/schemas";
-import { AGENT_LOOP_STATES } from "@tensquads/ui/squadmates";
+import { Badge, Button, squadmateCharacterName } from "@tensquads/ui/react";
+import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
 import { type CSSProperties, useState } from "react";
 import mascots from "../../../../design/mascots/mascots.json";
 import tokens from "../../../../design/tokens.json";
 import { type FoundationName, foundationNames, ReferenceIntro, ReferenceLayout } from "../components/design-reference";
+import { SquadmateStates } from "../components/squadmate-states";
 import { siteCopy } from "../copy";
 import { designAsset } from "../design-assets";
 import { getPreviewState, type Locale } from "../state";
@@ -365,7 +365,6 @@ function Logo({ copy }: { copy: DesignCopy }) {
 
 function Mascots({ locale }: { locale: Locale }) {
 	const copy = siteCopy[locale].designSystem;
-	const states: AgentState[] = ["idle", ...AGENT_LOOP_STATES.map(({ id }) => id)];
 	return (
 		<div className="foundation-assets">
 			{mascots.map((mascot) => {
@@ -395,14 +394,7 @@ function Mascots({ locale }: { locale: Locale }) {
 						</dl>
 						<details className="foundation-disclosure">
 							<summary>{copy.mascotStates}</summary>
-							<div className="foundation-mascot__states">
-								{states.map((state) => (
-									<figure key={state}>
-										<img loading="lazy" src={designAsset(`mascots/states/${agent}-${state}.svg`)} alt="" />
-										<figcaption>{squadmateStateLabel(state, locale)}</figcaption>
-									</figure>
-								))}
-							</div>
+							<SquadmateStates agent={agent} locale={locale} size={48} />
 						</details>
 					</article>
 				);

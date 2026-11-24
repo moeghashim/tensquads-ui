@@ -2,7 +2,7 @@ import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
 import { Button, squadmateCharacterName } from "@tensquads/ui/react";
 import { CopyCodeButton } from "../components/copy-code-button";
-import { Arrow, FoundationLinks, llmsUrl } from "../components/design-reference";
+import { Arrow, DesignReferenceLinks, FoundationLinks, llmsUrl } from "../components/design-reference";
 import { StreamDemo } from "../components/stream-demo";
 import { siteCopy } from "../copy";
 import { designAsset, wordmark } from "../design-assets";
@@ -50,7 +50,7 @@ function HomePage() {
 					</div>
 					<figcaption>
 						<span>{design.specimen}</span>
-						<Link to="/foundations/$name" params={{ name: "mascots" }} search={search}>
+						<Link to="/reference/mascot-states" search={search}>
 							{design.exploreMascots} {arrow}
 						</Link>
 					</figcaption>
@@ -116,10 +116,7 @@ function HomePage() {
 
 			<div className="design-reference-row">
 				<strong>{design.reference}</strong>
-				<a href="https://10squads.com/design/#overview">{design.principles}</a>
-				<a href="https://10squads.com/design/#screens">{design.screens}</a>
-				<a href="https://10squads.com/design/#pages">{design.pages}</a>
-				<a href="https://10squads.com/design/#states">{design.states}</a>
+				<DesignReferenceLinks locale={locale} search={search} />
 			</div>
 			<div className="design-reference-row">
 				<strong>{design.demos}</strong>
