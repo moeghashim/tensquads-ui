@@ -299,7 +299,7 @@ test("approval decisions survive language changes while pending content is trans
 	]);
 	await expect(page.locator(".ts-card__count")).toHaveText("3");
 	await page.getByRole("button", { name: "رفض", exact: true }).first().click();
-	await page.getByRole("radio", { name: "English", exact: true }).click();
+	await page.getByRole("button", { name: "English", exact: true }).click();
 	await expect(page.locator(".ts-approval-card__content")).toHaveText([
 		"Offer a 15% discount on the next order",
 		"Refund order 1088 after duplicate payment",
