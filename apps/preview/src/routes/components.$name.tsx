@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
 import { useEffect, useRef, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
@@ -82,6 +82,7 @@ import {
 import { AGENT_ROLE_TO_SLUG, type AgentState } from "../../../../packages/ui/src/schemas";
 import type { WorkflowGraph } from "../../../../packages/ui/src/schemas/workflow";
 import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squadmates";
+import { componentDocumentName } from "../catalog-groups";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { MarkdownDocument } from "../components/docs/markdown-document";
 import { siteCopy } from "../copy";
@@ -112,27 +113,30 @@ const componentOrder = [
 	"Inspector",
 ];
 
-export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
+export const Route = createFileRoute("/components/$name")({
+	loader: ({ params, location }) => {
+		if (params.name === "OwnerMessage") {
+			throw redirect({ to: "/components/$name", params: { name: "OwnerMessageView" }, search: location.search });
+		}
+		const sourceName = componentDocumentName(params.name);
+		const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`];
+		if (!markdown) throw notFound();
+	},
+	component: ComponentPage,
+});
 
 function ComponentPage() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale].componentPage;
-	const sourceName = name === "OwnerMessageView" ? "OwnerMessage" : name;
-	const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`];
+	const sourceName = componentDocumentName(name);
+	const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`]!;
 	const stream = fixtures[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.fixture.${locale}.txt`];
 	const index = componentOrder.indexOf(name);
 	const previous = index > 0 ? componentOrder[index - 1] : undefined;
 	const next = index >= 0 ? componentOrder[index + 1] : undefined;
 	const noFixtureReason = markdown?.match(/(?:OpenUI[^.]*does not[^.]*\.|without an OpenUI definition[^.]*\.)/i)?.[0];
-	if (!markdown)
-		return (
-			<main id="main" className="content-page">
-				<h1>{name}</h1>
-				<p className="intro">{copy.unavailable}</p>
-			</main>
-		);
 	return (
 		<main id="main" className="component-doc-page">
 			<div className="component-doc-page__header">

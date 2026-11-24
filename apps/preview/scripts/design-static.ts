@@ -15,13 +15,12 @@ const contentTypes: Record<string, string> = {
 };
 
 export function designStatic(): Plugin {
-	const folders = ["screens", "pages", "mascots/avatars"];
+	const folders = ["screens", "pages", "mascots/avatars", "mascots/svg", "logo"];
 	const paths = folders.flatMap((folder) =>
 		readdirSync(new URL(`${folder}/`, designRoot), { recursive: true, withFileTypes: true })
 			.filter((entry) => entry.isFile())
 			.map((entry) => `${entry.parentPath}/${entry.name}`),
 	);
-	paths.push(fileURLToPath(new URL("logo/favicon.svg", designRoot)));
 	const assets = new Map<string, string>();
 	for (const path of paths) {
 		const asset = relative(fileURLToPath(designRoot), path).replaceAll("\\", "/");

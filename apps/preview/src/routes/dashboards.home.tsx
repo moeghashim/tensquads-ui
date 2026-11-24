@@ -16,6 +16,7 @@ import {
 import type { PlatformApprovalRequest } from "@tensquads/ui/schemas";
 import { useState } from "react";
 import { siteCopy } from "../copy";
+import { storeHeader } from "../dashboard-copy";
 import { getPreviewState } from "../state";
 import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
 
@@ -122,8 +123,8 @@ function StoreDashboard() {
 				</Sidebar>
 				<section className="dashboard-panel dashboard-panel--home">
 					<PageHeader
-						title={ar ? "صباح الخير، Moe" : "Good morning, Moe"}
-						subtitle={ar ? "إليك ملخص متجرك اليوم" : "Here is your store overview for today"}
+						title={storeHeader[locale].title}
+						subtitle={storeHeader[locale].lead}
 						meta={
 							<>
 								<span className="mission-pill">

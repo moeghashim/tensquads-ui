@@ -1,22 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { siteCopy } from "../copy";
-import { referenceSections } from "../reference";
+import { foundationNames, referenceSections } from "../reference";
 import type { Direction, Locale, PreviewSearch } from "../state";
 
-export const foundationNames = [
-	"colour",
-	"typography",
-	"spacing",
-	"radius",
-	"shadow",
-	"motion",
-	"logo",
-	"mascots",
-] as const;
-export type FoundationName = (typeof foundationNames)[number];
+export { type FoundationName, foundationNames } from "../reference";
 
-export const llmsUrl = "https://github.com/moeghashim/tensquads-ui/blob/main/llms.txt";
+export const llmsUrl = "/llms.txt";
 
 export function Arrow({ direction }: { direction: Direction }) {
 	return <span aria-hidden="true">{direction === "rtl" ? "←" : "→"}</span>;

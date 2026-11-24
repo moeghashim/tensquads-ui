@@ -1,16 +1,8 @@
 import { getRegisteredComponents } from "../../../packages/ui/src/openui";
 
-export const catalogGroups = {
-	actions: ["Button", "Menu", "Tooltip", "Chip", "SegmentedControl"],
-	forms: ["Input", "Field", "Switch", "Form"],
-	feedback: ["Badge", "Dialog", "EmptyState"],
-	data: ["StatTile", "BarChart", "Bars", "Distribution", "DataTable", "Card"],
-	chat: ["Chat", "ChatReply", "ChatLauncher", "ApprovalCard", "OwnerMessageView", "Squadmate"],
-	app: ["PageHeader", "Sidebar", "ThemeToggle", "Toolbar", "CommandPalette"],
-	workflow: ["Node", "Canvas", "Palette", "Inspector"],
-} as const;
+import type { ComponentName } from "./catalog-groups";
 
-export type ComponentName = (typeof catalogGroups)[keyof typeof catalogGroups][number];
+export { type ComponentName, catalogGroups } from "./catalog-groups";
 
 export const openUIComponents = new Map(getRegisteredComponents().map(({ name, description }) => [name, description]));
 

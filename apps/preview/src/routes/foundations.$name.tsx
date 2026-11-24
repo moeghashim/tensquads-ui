@@ -4,14 +4,13 @@ import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
 import { type CSSProperties, useState } from "react";
 import mascots from "../../../../design/mascots/mascots.json";
 import tokens from "../../../../design/tokens.json";
-import { type FoundationName, foundationNames, ReferenceIntro, ReferenceLayout } from "../components/design-reference";
+import { ReferenceIntro, ReferenceLayout } from "../components/design-reference";
 import { SquadmateStates } from "../components/squadmate-states";
 import { siteCopy } from "../copy";
 import { designAsset } from "../design-assets";
+import { colourGroups, type DesignCopy, logoGroups, primitives, type Token, variable } from "../foundations";
+import { type FoundationName, foundationNames } from "../reference";
 import { getPreviewState, type Locale } from "../state";
-
-type DesignCopy = (typeof siteCopy)[Locale]["designSystem"];
-type Token = { name: string; value: string | { light: string; dark: string }; usage: string };
 
 export const Route = createFileRoute("/foundations/$name")({
 	loader: ({ params }) => {
@@ -71,10 +70,6 @@ function FoundationContent({ name, locale }: { name: FoundationName; locale: Loc
 		case "mascots":
 			return <Mascots locale={locale} />;
 	}
-}
-
-function variable(name: string) {
-	return `--ts-${name}`;
 }
 
 function TokenTable({
@@ -147,31 +142,6 @@ function TokenTable({
 		</table>
 	);
 }
-
-const primitiveNames = /^(gray|blue|green|red|orange|yellow|purple|pink|alpha)-/;
-const statusNames = /^(info|warning|caution|danger|success|discovery)-/;
-const workflowNames = /^(node-|tint-|branch-|edge|connection-line|handle|toolbar-bg|dot-grid)/;
-
-const colours = tokens.color.tokens;
-const primitives = new Map<string, Token[]>();
-for (const token of colours) {
-	const family = primitiveNames.exec(token.name)?.[1];
-	if (!family) continue;
-	const group = primitives.get(family) ?? [];
-	group.push(token);
-	primitives.set(family, group);
-}
-const colourGroups: { id: string; label: "coreRoles" | "statusColours" | "workflowColours"; rows: Token[] }[] = [
-	{
-		id: "roles",
-		label: "coreRoles",
-		rows: colours.filter(
-			({ name }) => !primitiveNames.test(name) && !statusNames.test(name) && !workflowNames.test(name),
-		),
-	},
-	{ id: "status", label: "statusColours", rows: colours.filter(({ name }) => statusNames.test(name)) },
-	{ id: "workflow-colours", label: "workflowColours", rows: colours.filter(({ name }) => workflowNames.test(name)) },
-];
 
 function ColourLinks({ copy }: { copy: DesignCopy }) {
 	return (
@@ -327,11 +297,7 @@ function Motion({ locale }: { locale: Locale }) {
 }
 
 function Logo({ copy }: { copy: DesignCopy }) {
-	const groups = [
-		{ title: copy.signal, files: ["logo.svg", "logo-dark.svg", "logo-512.png", "logo-dark-512.png"] },
-		{ title: copy.wordmark, files: ["wordmark.svg", "wordmark-dark.svg"] },
-		{ title: copy.appIcons, files: ["favicon.svg", "favicon-32.png", "apple-touch-icon.png"] },
-	];
+	const groups = logoGroups(copy);
 	return (
 		<div className="foundation-sections">
 			{groups.map(({ title, files }) => (

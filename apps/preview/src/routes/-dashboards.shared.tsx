@@ -1,13 +1,16 @@
 import { Badge, type BarChartPoint, type StatTileProps } from "@tensquads/ui/react";
 import type { ReactNode } from "react";
+import { storeHeader } from "../dashboard-copy";
 import arData from "../fixtures/dashboard-data.fixture.ar.json";
 import enData from "../fixtures/dashboard-data.fixture.en.json";
+
+export { demoCopy } from "../dashboard-copy";
 
 export function DashboardFrame({ children }: { children: ReactNode }) {
 	return <div className="dashboard-window">{children}</div>;
 }
 export function DemoPill({ locale }: { locale: "en" | "ar" }) {
-	return <Badge tone="default">{locale === "ar" ? "بيانات تجريبية" : "Demo data"}</Badge>;
+	return <Badge tone="default">{storeHeader[locale].demo}</Badge>;
 }
 
 export function Icon({ name }: { name: string }) {
@@ -47,124 +50,3 @@ type DashboardData = {
 	attentionCount: number;
 };
 export const dashboardData: Record<"en" | "ar", DashboardData> = { en: enData, ar: arData };
-
-const en = {
-	openNavigation: "Open navigation",
-	workspace: "Workspace",
-	comingNext: "Coming next",
-	usageBilling: "Usage and billing",
-	platformHealth: "Platform health",
-	adminUsers: "Admin users",
-	superAdmin: "Super admin",
-	companiesSubtitle: "A view of companies, squads, and platform activity",
-	companies: "Companies",
-	adminNav: "Admin navigation",
-	imagesTitle: "Squad images",
-	imagesSubtitle: "Squad artwork and registry health",
-	companiesChartTitle: "Companies created, last 8 weeks",
-	lastEightWeeks: "New company accounts",
-	plansTitle: "Companies by plan",
-	activePlans: "Current plan mix",
-	allCompanies: "All companies",
-	companyRecords: "Company accounts across the platform",
-	noCompanies: "No companies found",
-	noCompaniesDescription: "Clear the filters to view company accounts.",
-	clearFilters: "Clear filters",
-	searchCompanies: "Search companies",
-	search: "Search",
-	filters: { All: "All", Active: "Active", Trial: "Trial", Paused: "Paused" },
-	company: "Company and mission",
-	owner: "Owner",
-	plan: "Plan",
-	subscription: "Subscription",
-	started: "Started",
-	allTimeValue: "All-time value",
-	squads: "Squads",
-	online: "Online",
-	allImages: "All images",
-	all: "All",
-	needsAttention: "Needs attention",
-	withBugs: "With bugs",
-	withRequests: "With requests",
-	image: "Image",
-	version: "Version",
-	lastUpdated: "Last updated",
-	deployed: "Deployed",
-	bugs: "Bugs",
-	imageDetails: "Image details",
-	registryPath: "Registry path",
-	rollOut: "Roll out 2.1.1",
-	viewChangelog: "View changelog",
-	openBugs: "Open bugs",
-	featuresToAdd: "Features to add",
-	squad: "Squad",
-	mission: "Mission",
-	revenueChartTitle: "Revenue, last 14 days",
-	lastFourteenDays: "Daily revenue",
-	previousWeek: "Previous week",
-	thisWeek: "This week",
-	needsApproval: "Needs your approval",
-	commandSent: "ApprovalDecision command sent",
-	revenue: "Revenue",
-};
-const ar = {
-	...en,
-	openNavigation: "فتح التنقل",
-	workspace: "مساحة العمل",
-	comingNext: "قريبًا",
-	usageBilling: "الاستخدام والفوترة",
-	platformHealth: "حالة المنصة",
-	adminUsers: "المشرفون",
-	superAdmin: "مشرف المنصة",
-	companiesSubtitle: "عرض الشركات والفرق ونشاط المنصة",
-	companies: "الشركات",
-	adminNav: "التنقل الإداري",
-	imagesTitle: "صور الفرق",
-	imagesSubtitle: "صور الفرق وحالة السجل",
-	companiesChartTitle: "الشركات المضافة خلال ٨ أسابيع",
-	lastEightWeeks: "حسابات الشركات الجديدة",
-	plansTitle: "الشركات حسب الخطة",
-	activePlans: "توزيع الخطط الحالي",
-	allCompanies: "جميع الشركات",
-	companyRecords: "حسابات الشركات على المنصة",
-	noCompanies: "لم نعثر على شركات",
-	noCompaniesDescription: "أزل عوامل التصفية لعرض حسابات الشركات.",
-	clearFilters: "إزالة عوامل التصفية",
-	searchCompanies: "البحث عن الشركات",
-	search: "بحث",
-	filters: { All: "الكل", Active: "نشطة", Trial: "تجريبية", Paused: "متوقفة" },
-	company: "الشركة والمهمة",
-	owner: "المالك",
-	plan: "الخطة",
-	subscription: "الاشتراك",
-	started: "تاريخ البدء",
-	allTimeValue: "القيمة الإجمالية",
-	squads: "الفرق",
-	online: "متصل",
-	allImages: "جميع الصور",
-	all: "الكل",
-	needsAttention: "تحتاج إلى مراجعة",
-	withBugs: "بها أخطاء",
-	withRequests: "بها طلبات",
-	image: "الصورة",
-	version: "الإصدار",
-	lastUpdated: "آخر تحديث",
-	deployed: "منشورة",
-	bugs: "الأخطاء",
-	imageDetails: "تفاصيل الصورة",
-	registryPath: "مسار السجل",
-	rollOut: "نشر الإصدار ٢.١.١",
-	viewChangelog: "عرض سجل التغييرات",
-	openBugs: "الأخطاء المفتوحة",
-	featuresToAdd: "ميزات مقترحة",
-	squad: "الفريق",
-	mission: "المهمة",
-	revenueChartTitle: "الإيرادات خلال ١٤ يومًا",
-	lastFourteenDays: "الإيرادات اليومية",
-	previousWeek: "الأسبوع السابق",
-	thisWeek: "هذا الأسبوع",
-	needsApproval: "بانتظار موافقتك",
-	commandSent: "تم إرسال أمر قرار الموافقة",
-	revenue: "الإيرادات",
-};
-export const demoCopy = { en, ar } as const;

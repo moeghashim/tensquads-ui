@@ -6,6 +6,7 @@ import { Arrow, DesignReferenceLinks, FoundationLinks, llmsUrl } from "../compon
 import { StreamDemo } from "../components/stream-demo";
 import { siteCopy } from "../copy";
 import { designAsset, wordmark } from "../design-assets";
+import { installExample } from "../get-started-examples";
 import { getPreviewState } from "../state";
 
 export const Route = createFileRoute("/")({ component: HomePage });
@@ -15,7 +16,6 @@ function HomePage() {
 	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale];
 	const design = copy.designSystem;
-	const installLine = "npm install github:moeghashim/tensquads-ui#<commit-sha>";
 	const sample = `root = Badge(${JSON.stringify(design.ready)}, "success")`;
 	const arrow = <Arrow direction={direction} />;
 
@@ -61,9 +61,9 @@ function HomePage() {
 				<div className="design-setup__install">
 					<strong>{design.install}</strong>
 					<div className="install-card">
-						<code>{installLine}</code>
+						<code>{installExample}</code>
 						<CopyCodeButton
-							code={installLine}
+							code={installExample}
 							copyLabel={copy.copy}
 							copiedLabel={copy.copied}
 							failedLabel={copy.copyFailed}

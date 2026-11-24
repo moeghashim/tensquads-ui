@@ -3,12 +3,13 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
+import { agentDocs } from "./scripts/agent-docs";
 import { designStatic } from "./scripts/design-static";
 
 const uiSource = fileURLToPath(new URL("../../packages/ui/src/", import.meta.url));
 
 export default defineConfig({
-	plugins: [designStatic(), cloudflare({ viteEnvironment: { name: "ssr" } }), tanstackStart(), viteReact()],
+	plugins: [agentDocs(), designStatic(), cloudflare({ viteEnvironment: { name: "ssr" } }), tanstackStart(), viteReact()],
 	css: {
 		lightningcss: {
 			// Features.DirSelector: language-based lowering breaks explicit dir overrides.

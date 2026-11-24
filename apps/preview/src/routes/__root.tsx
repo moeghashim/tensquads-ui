@@ -5,6 +5,7 @@ import "@tensquads/ui/fonts.css";
 import "@tensquads/ui/tokens.css";
 import "@tensquads/ui/styles.css";
 import { SiteShell } from "../components/site-shell";
+import { useMarkdownHref } from "../components/use-markdown-href";
 import { getPreviewAttributes } from "../state";
 import "../styles.css";
 import "../styles/node-preview.css";
@@ -33,10 +34,12 @@ function RootPage() {
 function Document({ children }: { readonly children: ReactNode }) {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const attributes = getPreviewAttributes(search);
+	const markdownHref = useMarkdownHref(attributes.lang);
 	return (
 		<html lang={attributes.lang} dir={attributes.dir} data-theme={attributes["data-theme"]}>
 			<head>
 				<HeadContent />
+				{markdownHref && <link rel="alternate" type="text/markdown" href={markdownHref} />}
 			</head>
 			<body>
 				{children}
