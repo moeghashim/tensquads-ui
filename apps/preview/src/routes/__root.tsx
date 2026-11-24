@@ -12,6 +12,7 @@ import "../styles/node-preview.css";
 import "../styles/design-system.css";
 import "../styles/stream-demo.css";
 import "../styles/chat-demo.css";
+import "../styles/nodes-builder.css";
 import faviconUrl from "../../../../design/logo/favicon.svg?url";
 
 export const Route = createRootRoute({

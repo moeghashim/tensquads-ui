@@ -228,6 +228,8 @@ const en = {
 		days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 	},
 	nav: {
+		nodes: "Nodes",
+		chatNav: "Chat",
 		home: "Home",
 		components: "Components",
 		chat: "Chat demo",
