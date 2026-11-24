@@ -523,7 +523,20 @@ function Builder({
 	];
 
 	return (
-		<main id="main" className="builder">
+		<main
+			id="main"
+			className="builder"
+			onFocus={(event) => {
+				const node = commandDestination.current;
+				if (!node || !(event.target instanceof Element) || !event.target.closest("[data-node-id]")) return;
+				commandDestination.current = null;
+				// Let the dialog finish restoring focus before moving it to the command destination.
+				queueMicrotask(() => {
+					stage.current?.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(node.id)}"]`)?.focus();
+					placeInView([node], viewport.zoom);
+				});
+			}}
+		>
 			<header className="builder-header">
 				<div className="builder-crumb">
 					<Link to="/workflows" search={(prev) => prev}>
@@ -561,13 +574,6 @@ function Builder({
 			<div className="builder-stage" ref={stage} data-tidying={tidying || undefined}>
 				<Canvas
 					ref={canvas}
-					onFocus={(event) => {
-						const node = commandDestination.current;
-						if (!node || !(event.target instanceof Element) || !event.target.closest("[data-node-id]")) return;
-						commandDestination.current = null;
-						stage.current?.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(node.id)}"]`)?.focus();
-						placeInView([node], viewport.zoom);
-					}}
 					graph={graph}
 					label={copy.canvas}
 					viewport={viewport}

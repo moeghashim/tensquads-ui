@@ -87,8 +87,9 @@ for (const locale of ["en", "ar"] as const) {
 			const inspector = page.getByRole("button", { name: ar ? "لوحة الخصائص" : "Inspector", exact: true });
 			if (width === 390) await inspector.click();
 			const canvas = page.locator('[data-slot="workflow-canvas"]');
-			const remove = page.getByRole("button", { name: ar ? "حذف الخطوة" : "Delete step" });
-			const duplicate = page.getByRole("button", { name: ar ? "تكرار" : "Duplicate" });
+			const panel = page.locator("#builder-inspector");
+			const remove = panel.getByRole("button", { name: ar ? "حذف الخطوة" : "Delete step" });
+			const duplicate = panel.getByRole("button", { name: ar ? "تكرار" : "Duplicate" });
 			for (const key of ["Enter", "Delete", "Backspace"]) {
 				const count = await steps(page).count();
 				await (key === "Enter" ? remove : duplicate).focus();
