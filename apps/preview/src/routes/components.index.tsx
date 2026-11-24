@@ -36,9 +36,13 @@ function ComponentsPage() {
 	const categoryIds = visibleCategories.map(({ id }) => id).join(" ");
 	useEffect(() => {
 		const headings = categoryIds.split(" ").flatMap((id) => document.getElementById(id) ?? []);
+		const fromEnd = [...headings].reverse();
 		const update = () => {
-			const visible =
-				[...headings].reverse().find((heading) => heading.getBoundingClientRect().top < 120) ?? headings[0];
+			const atEnd =
+				window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1;
+			const visible = atEnd
+				? fromEnd[0]
+				: (fromEnd.find((heading) => heading.getBoundingClientRect().top < 120) ?? headings[0]);
 			if (visible) setCurrentCategory(visible.id as Category);
 		};
 		update();

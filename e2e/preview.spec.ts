@@ -235,6 +235,9 @@ test("catalog category rail follows the document", async ({ page }) => {
 	await page.locator("#chat").scrollIntoViewIfNeeded();
 	await page.locator("#chat").evaluate((section) => section.scrollIntoView({ block: "start" }));
 	await expect(rail.getByRole("link", { name: /Chat and agents/ })).toHaveAttribute("aria-current", "location");
+	const workflow = rail.getByRole("link", { name: /Workflow/ });
+	await workflow.click();
+	await expect(workflow).toHaveAttribute("aria-current", "location");
 });
 
 for (const state of states) {
