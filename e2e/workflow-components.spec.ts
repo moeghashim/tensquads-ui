@@ -21,7 +21,9 @@ for (const locale of ["en", "ar"] as const) {
 			expect(ar ? frame.x + frame.width - bounds.x - bounds.width : bounds.x - frame.x).toBeCloseTo(16);
 			expect(frame.y + frame.height - bounds.y - bounds.height).toBeCloseTo(16);
 			await expectAccessible(page);
+			const initialMaskWidth = (await mask.getAttribute("width"))!;
 			await capturePreviewScreenshots(page, test.info(), `MiniMap-${locale}-${theme}`);
+			await expect(mask).toHaveAttribute("width", initialMaskWidth);
 
 			await map.focus();
 			await expect(map).toHaveCSS("outline-width", "2px");
