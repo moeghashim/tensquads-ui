@@ -47,7 +47,11 @@ test("every component fixture parses and renders", async ({ page }) => {
 			} else if (component.name === "Menu") {
 				const trigger = fixtureRegion.getByRole("button", { name: locale === "en" ? "Actions" : "الإجراءات" });
 				await expect(trigger).toBeVisible();
-				await trigger.press("Enter");
+				// The server-rendered trigger is visible before its keyboard handler hydrates.
+				await expect(async () => {
+					if ((await trigger.getAttribute("aria-expanded")) !== "true") await trigger.press("Enter");
+					await expect(trigger).toHaveAttribute("aria-expanded", "true", { timeout: 750 });
+				}).toPass({ timeout: 5_000 });
 				await expect(
 					fixtureRegion.getByRole("menuitem", { name: locale === "en" ? "Open project" : "فتح المشروع" }),
 				).toBeVisible();
