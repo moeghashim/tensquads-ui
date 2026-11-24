@@ -272,6 +272,7 @@ for (const state of states) {
 				new RegExp(`/foundations/${path}\\?locale=${state.locale}&dir=${state.direction}&theme=${state.theme}$`),
 			);
 			await expectNoHorizontalScroll(page);
+			await expectAccessible(page);
 		}
 	});
 }
