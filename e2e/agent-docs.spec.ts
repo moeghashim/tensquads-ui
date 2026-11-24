@@ -79,6 +79,16 @@ test("Markdown twins preserve source content and the HTML locale", async ({ page
 	expect(await (await request.get("/foundations/colour.md?locale=ar")).text()).toContain("الألوان");
 });
 
+test("shadow Markdown retains both source theme values in each locale and the full document", async ({ request }) => {
+	for (const path of ["/foundations/shadow.md", "/foundations/shadow.md?locale=ar", "/llms-full.txt"]) {
+		const response = await request.get(path);
+		expect(response.ok(), path).toBe(true);
+		expect(await response.text(), path).toContain(
+			"| `--ts-shadow-hairline` | `0 0 0 1px #00000014` | `0 0 0 0.5px #ffffff1f` |",
+		);
+	}
+});
+
 test("Markdown endpoints support HEAD and report unknown paths", async ({ request }) => {
 	const head = await request.head("/components/Node.md");
 	expect(head.ok()).toBe(true);

@@ -12,7 +12,11 @@ import { blocks, code, heading, item, table } from "./markdown-format";
 
 const states = ["idle", ...AGENT_LOOP_STATES.map(({ id }) => id)] as const;
 
-function tokenTable(rows: readonly Token[], locale: Locale, themed = false) {
+function tokenTable(
+	rows: readonly Token[],
+	locale: Locale,
+	themed = rows.some(({ value }) => typeof value !== "string"),
+) {
 	const { designSystem: copy, theme } = siteCopy[locale];
 	return table(
 		[
