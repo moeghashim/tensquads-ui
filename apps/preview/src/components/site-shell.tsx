@@ -15,12 +15,14 @@ import { signal } from "../design-assets";
 import { pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
 import { getPreviewState } from "../state";
 import { foundationNames, llmsUrl } from "./design-reference";
+import { useMarkdownHref } from "./use-markdown-href";
 
 export function SiteShell() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const navigate = useNavigate();
 	const { locale, theme } = getPreviewState(search);
 	const copy = siteCopy[locale];
+	const markdownHref = useMarkdownHref(locale);
 	const design = copy.designSystem;
 	const nextLocale = locale === "en" ? "ar" : "en";
 	const [paletteOpen, setPaletteOpen] = useState(false);
@@ -218,6 +220,9 @@ export function SiteShell() {
 							{copy.nav.getStarted}
 						</Link>
 						<a href={llmsUrl}>llms.txt</a>
+						{markdownHref && (
+							<a href={markdownHref}>{locale === "ar" ? "عرض بصيغة Markdown" : "View as Markdown"}</a>
+						)}
 					</nav>
 				</div>
 			</footer>

@@ -3,6 +3,18 @@ import { siteCopy } from "./copy";
 import { archivedHomepage } from "./reference-exclusions";
 import type { Locale } from "./state";
 
+export const foundationNames = [
+	"colour",
+	"typography",
+	"spacing",
+	"radius",
+	"shadow",
+	"motion",
+	"logo",
+	"mascots",
+] as const;
+export type FoundationName = (typeof foundationNames)[number];
+
 export const referenceSections = [
 	{ id: "principles", path: "/foundations/principles" },
 	{ id: "screens", path: "/reference/screens" },

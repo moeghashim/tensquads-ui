@@ -18,6 +18,7 @@ import {
 import type { ChatActionTurn, ChatTurn, Direction, Locale } from "@tensquads/ui/schemas";
 import { Squadmate } from "@tensquads/ui/squadmates";
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import { partPages } from "../chat-parts";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
@@ -274,15 +275,6 @@ function RoutedSteps({ steps, locale }: { steps: DemoStep[]; locale: Locale }) {
 		</section>
 	);
 }
-
-const partPages = {
-	reply: ["ChatReply"],
-	steps: ["Chat"],
-	plan: ["Form"],
-	fields: ["Field", "Switch", "SegmentedControl"],
-	approval: ["ApprovalCard"],
-	composer: ["Chat"],
-} as const;
 
 function ChatGuide({
 	locale,
