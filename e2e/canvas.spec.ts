@@ -438,7 +438,7 @@ test("Canvas localizes graph copy while preserving edits", async ({ page }) => {
 
 	for (const locale of ["ar", "en"] as const) {
 		const ar = locale === "ar";
-		await page.getByRole("radio", { name: ar ? "العربية" : "English", exact: true }).click();
+		await page.getByRole("button", { name: ar ? "العربية" : "English", exact: true }).click();
 		await expect(root).toHaveAttribute("dir", ar ? "rtl" : "ltr");
 		for (const [id, title] of Object.entries(
 			ar
@@ -487,7 +487,7 @@ test("Canvas localizes graph copy while preserving edits", async ({ page }) => {
 	await page.keyboard.press("Enter");
 	await page.keyboard.press("Delete");
 	await expect(node("note")).toHaveCount(0);
-	await page.getByRole("radio", { name: "العربية", exact: true }).click();
+	await page.getByRole("button", { name: "العربية", exact: true }).click();
 	await expect(root).toHaveAttribute("dir", "rtl");
 	await expect(node("note")).toHaveCount(0);
 	await expect.poll(relativeTop).toBeCloseTo(before + 13, 0);

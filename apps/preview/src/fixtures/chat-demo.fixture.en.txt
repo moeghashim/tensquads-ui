@@ -1,11 +1,24 @@
 {
   "request": "Set up a store for me",
   "steps": [
-    { "agent": "pisa", "status": "Done", "responseId": "orders-204" },
-    { "agent": "angkor", "status": "Done", "responseId": "website-318" },
-    { "agent": "petra", "status": "Done", "responseId": "master-421" }
+    {
+      "agent": "pisa",
+      "responseId": "orders-204",
+      "seconds": 12
+    },
+    {
+      "agent": "angkor",
+      "responseId": "website-318",
+      "seconds": 20
+    },
+    {
+      "agent": "petra",
+      "responseId": "master-421",
+      "seconds": 4
+    }
   ],
-  "reply": "## Launch plan\n\nI have a plan ready. Update any details, then approve it to continue.\n\n```openui\nroot = Form(\"Store plan\", [Field(\"Store name\", \"storeName\", \"\", \"Bannaa Market\"), Switch(\"Email me when done\", true, false, \"emailUpdates\"), SegmentedControl(\"Update frequency\", [\"Weekly\", \"Monthly\"], \"Weekly\", false, \"frequency\")], \"Approve plan\", {type: \"ApproveStorePlan\", params: {planId: \"launch-01\"}})\n```",
+  "reply": "I have a plan ready. Update any details, then approve it to continue.\n\n```openui\nroot = Form(\"Store plan\", [Field(\"Store name\", \"storeName\", \"\", \"Bannaa Market\"), Switch(\"Email me when done\", true, false, \"emailUpdates\"), SegmentedControl(\"Update frequency\", [\"Weekly\", \"Monthly\"], \"Weekly\", false, \"frequency\"), Button(\"Send back\", \"soft\", \"md\", true, false, {type: \"ReviseStorePlan\", params: {planId: \"launch-01\"}})], \"Approve plan\", {type: \"ApproveStorePlan\", params: {planId: \"launch-01\"}})\n```",
   "followup": "Plan approved for **{store}**. I will send **{frequency}** updates. Email notifications are **{email}**.\n\n```openui\nroot = Badge(\"Plan approved\", \"success\")\n```",
-  "freeReply": "This site has no live model. The chat demo uses a scripted reply."
+  "freeReply": "This site has no live model. The chat demo uses a scripted reply.",
+  "revision": "The plan is back for revision. Share what should change."
 }

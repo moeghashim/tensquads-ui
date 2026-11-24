@@ -105,7 +105,7 @@ function StoreDashboard() {
 		: { refund_limit: "Refund limit", discount_limit: "Discount limit" };
 	const chatSearch = { ...search };
 	return (
-		<main className="dashboard-page" dir={direction}>
+		<main id="main" className="dashboard-page" dir={direction}>
 			<DashboardFrame>
 				<Sidebar label={ar ? "تنقل المتجر" : "Store navigation"} mobileLabel={c.openNavigation}>
 					<SidebarBrand

@@ -128,13 +128,13 @@ function ComponentPage() {
 	const noFixtureReason = markdown?.match(/(?:OpenUI[^.]*does not[^.]*\.|without an OpenUI definition[^.]*\.)/i)?.[0];
 	if (!markdown)
 		return (
-			<main className="content-page">
+			<main id="main" className="content-page">
 				<h1>{name}</h1>
 				<p className="intro">{copy.unavailable}</p>
 			</main>
 		);
 	return (
-		<main className="component-doc-page">
+		<main id="main" className="component-doc-page">
 			<div className="component-doc-page__header">
 				<Link className="back-link" to="/components" search={search as never}>
 					{copy.backToComponents}

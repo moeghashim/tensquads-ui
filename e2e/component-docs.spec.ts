@@ -19,8 +19,8 @@ const registryOrder = [
 
 test("component index lists every documented component", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/components");
-	const names = await page.locator(".component-card__link strong").allTextContents();
-	expect(names).toEqual([...registryOrder].sort());
+	const names = await page.locator(".component-card__meta strong").allTextContents();
+	expect(names.sort()).toEqual([...registryOrder].sort());
 });
 
 for (const locale of ["en", "ar"] as const) {

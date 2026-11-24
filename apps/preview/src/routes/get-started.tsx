@@ -18,7 +18,7 @@ function GetStartedPage() {
 	const copy = siteCopy[locale].getStartedPage;
 
 	return (
-		<main className="content-page get-started-page" dir={direction}>
+		<main id="main" className="content-page get-started-page" dir={direction}>
 			<header className="get-started-intro">
 				<p className="eyebrow">{copy.eyebrow}</p>
 				<h1>{copy.title}</h1>

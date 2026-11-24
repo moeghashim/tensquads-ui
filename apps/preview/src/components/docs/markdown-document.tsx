@@ -101,14 +101,60 @@ function InlineMarkdown({ text }: { text: string }) {
 	);
 }
 
+type ProseBlock = Exclude<MarkdownBlock, { type: "code" }>;
+
+function ProseBlocks({ blocks, headingOffset = 0 }: { blocks: ProseBlock[]; headingOffset?: number }) {
+	const blockKey = (block: ProseBlock) =>
+		block.type === "list" ? `${block.type}-${block.items.join("|")}` : `${block.type}-${block.text}`;
+
+	return (
+		<>
+			{blocks.map((block) => {
+				if (block.type === "heading") {
+					const Heading = `h${Math.min(block.level + headingOffset, 6)}` as "h2" | "h3" | "h4" | "h5" | "h6";
+					return (
+						<Heading key={blockKey(block)}>
+							<InlineMarkdown text={block.text} />
+						</Heading>
+					);
+				}
+				if (block.type === "paragraph")
+					return (
+						<p key={blockKey(block)}>
+							<InlineMarkdown text={block.text} />
+						</p>
+					);
+				if (block.type === "list") {
+					const List = block.ordered ? "ol" : "ul";
+					return (
+						<List key={blockKey(block)}>
+							{block.items.map((item) => (
+								<li key={item}>
+									<InlineMarkdown text={item} />
+								</li>
+							))}
+						</List>
+					);
+				}
+				return null;
+			})}
+		</>
+	);
+}
+
+export function MarkdownProse({ markdown }: { markdown: string }) {
+	const blocks = parseMarkdown(markdown).filter((block) => block.type !== "code");
+	return <ProseBlocks blocks={blocks} />;
+}
+
 export function MarkdownDocument({ markdown, labels }: { markdown: string; labels: MarkdownLabels }) {
 	const blocks = parseMarkdown(markdown).filter((block) => !(block.type === "heading" && block.level === 1));
 	const descriptionIndex = blocks.findIndex((block) => block.type === "paragraph");
 	const description = descriptionIndex >= 0 ? blocks[descriptionIndex] : undefined;
-	const props = blocks.filter((block, index) => index !== descriptionIndex && block.type !== "code");
+	const props = blocks.filter(
+		(block, index): block is ProseBlock => index !== descriptionIndex && block.type !== "code",
+	);
 	const usage = blocks.filter((block): block is Extract<MarkdownBlock, { type: "code" }> => block.type === "code");
-	const blockKey = (block: Exclude<MarkdownBlock, { type: "code" }>) =>
-		block.type === "list" ? `${block.type}-${block.items.join("|")}` : `${block.type}-${block.text}`;
 
 	return (
 		<div className="markdown-document">
@@ -124,35 +170,7 @@ export function MarkdownDocument({ markdown, labels }: { markdown: string; label
 				<h2>{labels.props}</h2>
 				{/* Component docs are written in English; keep them left-to-right on Arabic pages. */}
 				<div lang="en" dir="ltr">
-					{props.map((block) => {
-						if (block.type === "heading") {
-							const Heading = `h${Math.min(block.level + 1, 6)}` as "h2" | "h3" | "h4" | "h5" | "h6";
-							return (
-								<Heading key={blockKey(block)}>
-									<InlineMarkdown text={block.text} />
-								</Heading>
-							);
-						}
-						if (block.type === "paragraph")
-							return (
-								<p key={blockKey(block)}>
-									<InlineMarkdown text={block.text} />
-								</p>
-							);
-						if (block.type === "list") {
-							const List = block.ordered ? "ol" : "ul";
-							return (
-								<List key={blockKey(block)}>
-									{block.items.map((item) => (
-										<li key={item}>
-											<InlineMarkdown text={item} />
-										</li>
-									))}
-								</List>
-							);
-						}
-						return null;
-					})}
+					<ProseBlocks blocks={props} headingOffset={1} />
 				</div>
 			</section>
 			{usage.length > 0 && (
