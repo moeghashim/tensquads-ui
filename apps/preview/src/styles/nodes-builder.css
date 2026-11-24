@@ -67,6 +67,8 @@
 		direction: ltr;
 		white-space: nowrap;
 	}
+	/* Monospace fallbacks break Arabic letter joining; Arabic hints use the sans stack. */
+	.builder kbd:lang(ar) { font-family: var(--ts-font-sans); }
 	.builder-header__actions button { gap: var(--ts-space-2); }
 	.builder-stage {
 		--builder-panel-gap: var(--ts-space-5);

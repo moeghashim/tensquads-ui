@@ -512,7 +512,8 @@
 		.site-brand img { inline-size: var(--ts-space-6); block-size: var(--ts-space-6); }
 		.site-controls { grid-column: 2; grid-row: 1; }
 		.site-controls .site-search-button { padding-inline: var(--ts-space-2); }
-		.site-nav { grid-column: 1 / -1; }
+		.site-nav { grid-column: 1 / -1; flex-wrap: nowrap; overflow-x: auto; padding-block: var(--ts-space-1); scrollbar-width: none; }
+		.site-nav a { flex: none; padding-inline: var(--ts-space-2); }
 		.design-hero, .reference-layout { grid-template-columns: minmax(0, 1fr); }
 		.design-hero { padding-block: var(--ts-space-8) var(--ts-space-6); }
 		.design-hero__copy, .brand-specimen, .reference-rail, .reference-body { grid-column: 1; }
