@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { liveHomepages, productScreens } from "../apps/preview/src/reference";
+import { pageDesigns, productScreens } from "../apps/preview/src/reference";
 import {
 	capturePreviewScreenshots,
 	expectAccessible,
@@ -89,6 +89,7 @@ test("home and foundations links reach local references with the current locale 
 test("built reference assets preserve relative paths and content types", async ({ request }) => {
 	const samples = [
 		...productScreens.map(({ src }) => [src, "text/html"]),
+		["/design/pages/squadmates-sidebar/sidebar.html", "text/html"],
 		["/design/screens/support.js", "javascript"],
 		["/design/screens/ds/agent-ui/tokens.json", "application/json"],
 		["/design/mascots/avatars/petra-idle.svg", "image/svg+xml"],
@@ -100,6 +101,9 @@ test("built reference assets preserve relative paths and content types", async (
 		const response = await request.get(path);
 		expect(response.ok(), path).toBe(true);
 		expect(response.headers()["content-type"], path).toContain(contentType);
+		if (contentType !== "image/png") {
+			expect(await response.text(), `Served reference output: ${path}`).not.toMatch(/\b10squads\.com\b/i);
+		}
 	}
 });
 
@@ -109,7 +113,10 @@ test("reference catalogs feature the live homepage and omit the archived designs
 	await openPreview(page, states[0], "/reference/pages");
 	const homepage = page.locator(".reference-page-card").first();
 	await expect(homepage.getByRole("heading", { name: "Homepage" })).toBeVisible();
-	for (const [locale, href] of Object.entries(liveHomepages)) {
+	for (const [locale, href] of Object.entries({
+		en: "https://tensquads-website.mohanadgh.workers.dev/",
+		ar: "https://tensquads-website-ar.mohanadgh.workers.dev/",
+	})) {
 		const link = homepage.locator(`a[hreflang="${locale}"]`);
 		await expect(link).toHaveAttribute("href", href);
 		await expect(link).toHaveAttribute("target", "_blank");
@@ -119,3 +126,34 @@ test("reference catalogs feature the live homepage and omit the archived designs
 		expect((await request.get(path)).status(), path).toBe(404);
 	}
 });
+
+for (const state of states) {
+	for (const path of [
+		"/",
+		"/foundations",
+		"/foundations/principles",
+		"/reference/screens",
+		"/reference/pages",
+		"/reference/mascot-states",
+		...productScreens.map(({ id }) => `/reference/screens/${id}`),
+		...pageDesigns.map(({ id }) => `/reference/pages/${id}`),
+	]) {
+		test(`D32 links avoid the legacy host on ${path} in ${state.locale} ${state.theme}`, async ({ page }) => {
+			await openPreview(page, state, path);
+			for (const frame of page.frames()) {
+				await frame.waitForLoadState("domcontentloaded");
+				const destinations = await frame.locator("[href], [src]").evaluateAll((elements) =>
+					elements.flatMap((element) =>
+						["href", "src"].flatMap((attribute) => {
+							const value = element.getAttribute(attribute);
+							return value ? [new URL(value, document.baseURI).href] : [];
+						}),
+					),
+				);
+				for (const destination of destinations) {
+					expect(new URL(destination).hostname, `${path}: ${destination}`).not.toMatch(/(^|\.)10squads\.com$/i);
+				}
+			}
+		});
+	}
+}
