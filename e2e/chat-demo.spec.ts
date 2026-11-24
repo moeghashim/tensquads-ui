@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
-import { capturePreviewScreenshots, expectAccessible, expectNoHorizontalScroll, openPreview } from "./helpers/preview";
+import {
+	capturePreviewScreenshots,
+	expectAccessible,
+	expectNoHorizontalScroll,
+	expectThemeFocusRing,
+	openPreview,
+} from "./helpers/preview";
 
 const states = [
 	{
@@ -49,12 +55,31 @@ for (const localized of states) {
 			expect(submitWidth).toBeLessThan(formWidth);
 			expect(segmentWidth).toBeLessThan(formWidth);
 			const replyHeadingSize = await page
-				.locator(".ts-chat-reply__markdown h2")
+				.locator(".chat-demo__plan h2")
 				.evaluate((heading) => Number.parseFloat(getComputedStyle(heading).fontSize));
 			expect(replyHeadingSize).toBeLessThanOrEqual(20);
-			await expect(page.getByText("orders-204")).toBeVisible();
-			await expect(page.getByText("website-318")).toBeVisible();
-			await expect(page.getByText("master-421")).toBeVisible();
+			const steps = page.locator(".chat-demo__steps");
+			await expect(steps.locator(".ts-chat__step")).toHaveCount(3);
+			await expect(steps.locator(".ts-chat__response-id")).toHaveText(["orders-204", "website-318", "master-421"]);
+			await expect(page.locator(".chat-demo__header")).toContainText(state.locale === "ar" ? "بترا" : "Petra");
+			await expect(page.locator(".chat-demo__plan > header")).toContainText("OpenUI");
+			await expect(page.locator(".chat-guide li")).toHaveCount(6);
+			await expect(page.locator(".chat-demo__suggestions button")).toHaveCount(3);
+			for (const width of [1440, 390]) {
+				await page.setViewportSize({ width, height: 900 });
+				await expect
+					.poll(() =>
+						page
+							.locator(".ts-chat__user-message")
+							.first()
+							.evaluate((message) => {
+								const log = message.closest(".ts-chat__log");
+								return !!log && message.getBoundingClientRect().top >= log.getBoundingClientRect().top;
+							}),
+					)
+					.toBe(true);
+			}
+			await expectAccessible(page);
 			await capturePreviewScreenshots(page, testInfo, `chat-${state.locale}-${theme}-before-approve`);
 
 			const field = page.getByRole("textbox", { name: state.storeLabel });
@@ -72,9 +97,12 @@ for (const localized of states) {
 			await expect(monthly).toBeDisabled();
 			await expect(monthly).toBeChecked();
 			await expect(email).not.toBeChecked();
-			await expect(page.getByRole("button", { name: state.locale === "en" ? "Send" : "إرسال" })).toBeVisible();
+			await expect(
+				page.getByRole("button", { name: state.locale === "en" ? "Send" : "إرسال", exact: true }),
+			).toBeVisible();
 			await capturePreviewScreenshots(page, testInfo, `chat-${state.locale}-${theme}-after-approve`);
 			await expectNoHorizontalScroll(page);
+			await expect(page.locator(".chat-demo__scripted")).toBeHidden();
 			await expectAccessible(page);
 		});
 	}
@@ -89,7 +117,7 @@ test("chat replay stays in its reserved panel and typed messages get the local s
 	expect(await surface.boundingBox()).toMatchObject({ height: initialBounds?.height });
 	const message = page.getByRole("textbox", { name: "Try a message" });
 	await message.fill("Can you connect inventory?");
-	await page.getByRole("button", { name: "Send" }).click();
+	await page.getByRole("button", { name: "Send", exact: true }).click();
 	await expect(page.locator(".ts-chat__log").getByText(states[0]!.freeReply)).toBeVisible();
 });
 
@@ -138,7 +166,7 @@ for (const state of states) {
 		});
 		for (let count = 1; count <= 2; count += 1) {
 			await composer.fill(opening);
-			await page.getByRole("button", { name: state.locale === "en" ? "Send" : "إرسال" }).click();
+			await page.getByRole("button", { name: state.locale === "en" ? "Send" : "إرسال", exact: true }).click();
 			await expect(page.locator(".ts-chat-reply").getByText(state.freeReply, { exact: true })).toHaveCount(count);
 			await expect(page.locator(".ts-chat__user-message")).toHaveCount(count + 1);
 			await expect(page.locator(".chat-demo__steps")).toHaveCount(1);
@@ -152,3 +180,33 @@ for (const state of states) {
 		await expect(page.locator(".ts-chat__user-message")).toHaveCount(1);
 	});
 }
+
+test("chat guide highlights the matching part on hover and focus", async ({ page }) => {
+	await page.setViewportSize({ width: 1440, height: 900 });
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/chat");
+	await expectThemeFocusRing(page, "light");
+	await expect(page.getByRole("button", { name: "Approve plan" })).toBeVisible();
+	const guide = page.getByRole("complementary", { name: "In this screen" });
+	const plan = guide.getByRole("link", { name: "OpenUI block" });
+	await guide.getByRole("link", { name: "ChatReply" }).hover();
+	await expect(page.locator(".chat-demo__turn--opening")).toHaveCSS("outline-width", "2px");
+	await plan.hover();
+	await expect(page.locator(".chat-demo__plan")).toHaveCSS("outline-width", "2px");
+	await guide.getByRole("link", { name: "Step rows" }).focus();
+	await expect(page.locator(".chat-demo__steps")).toHaveCSS("outline-width", "2px");
+	await plan.click();
+	await expect(page).toHaveURL(/\/components\/Form\?locale=en&dir=ltr&theme=light$/);
+});
+
+test("chat suggestions fill the composer and Send back locks the plan", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/chat");
+	const sendBack = page.getByRole("button", { name: "Send back" });
+	await sendBack.click();
+	await expect(page.getByText("The plan is back for revision. Share what should change.")).toBeVisible();
+	await expect(page.locator(".ts-chat__user-message").last()).toHaveText("Send back");
+	await expect(page.getByRole("button", { name: "Approve plan" })).toBeDisabled();
+	await page.getByRole("button", { name: "Add a returns policy" }).click();
+	const field = page.getByRole("textbox", { name: "Try a message" });
+	await expect(field).toHaveValue("Add a returns policy");
+	await expect(field).toBeFocused();
+});
