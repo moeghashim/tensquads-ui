@@ -1,0 +1,1833 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The tensquads design system · tensquads</title><link rel="icon" href="../../../../../design/logo/favicon.svg"><script>const saved=new URLSearchParams(location.search).get("theme");document.documentElement.dataset.theme=["light","dark"].includes(saved)?saved:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";</script><style>
+@layer tensquads {
+  :root,
+  [data-theme="light"] {
+  --ts-gray-0: #fff;
+  --ts-gray-25: #fcfcfc;
+  --ts-gray-50: #f9f9f9;
+  --ts-gray-75: #f3f3f3;
+  --ts-gray-100: #ededed;
+  --ts-gray-150: #dfdfdf;
+  --ts-gray-200: #cdcdcd;
+  --ts-gray-250: #b9b9b9;
+  --ts-gray-300: #afafaf;
+  --ts-gray-350: #9f9f9f;
+  --ts-gray-400: #8f8f8f;
+  --ts-gray-450: #767676;
+  --ts-gray-500: #5d5d5d;
+  --ts-gray-550: #4f4f4f;
+  --ts-gray-600: #414141;
+  --ts-gray-650: #393939;
+  --ts-gray-700: #303030;
+  --ts-gray-750: #282828;
+  --ts-gray-800: #212121;
+  --ts-gray-850: #1c1c1c;
+  --ts-gray-900: #181818;
+  --ts-gray-925: #161616;
+  --ts-gray-950: #131313;
+  --ts-gray-975: #101010;
+  --ts-gray-1000: #0d0d0d;
+  --ts-blue-25: #f5faff;
+  --ts-blue-50: #e5f3ff;
+  --ts-blue-75: #cce6ff;
+  --ts-blue-100: #99ceff;
+  --ts-blue-200: #66b5ff;
+  --ts-blue-300: #339cff;
+  --ts-blue-400: #0285ff;
+  --ts-blue-500: #0169cc;
+  --ts-blue-600: #004f99;
+  --ts-blue-700: #003f7a;
+  --ts-blue-800: #013566;
+  --ts-blue-900: #00284d;
+  --ts-blue-950: #000e1a;
+  --ts-blue-1000: #000d19;
+  --ts-blue-a25: #0285ff0a;
+  --ts-blue-a50: #0285ff21;
+  --ts-blue-a75: #0285ff40;
+  --ts-blue-a100: #0285ff66;
+  --ts-blue-a200: #0285ff99;
+  --ts-blue-a300: #0285ffcc;
+  --ts-green-25: #edfaf2;
+  --ts-green-50: #d9f4e4;
+  --ts-green-75: #b8ebcc;
+  --ts-green-100: #8cdfad;
+  --ts-green-200: #66d492;
+  --ts-green-300: #40c977;
+  --ts-green-400: #04b84c;
+  --ts-green-500: #00a240;
+  --ts-green-600: #008635;
+  --ts-green-700: #00692a;
+  --ts-green-800: #004f1f;
+  --ts-green-900: #003716;
+  --ts-green-950: #011c0b;
+  --ts-green-1000: #001207;
+  --ts-green-a25: #04b84c14;
+  --ts-green-a50: #04b84c26;
+  --ts-green-a75: #04b84c4a;
+  --ts-green-a100: #04b84c73;
+  --ts-green-a200: #04b84c99;
+  --ts-green-a300: #04b84cbf;
+  --ts-red-25: #fff0f0;
+  --ts-red-50: #ffd9d9;
+  --ts-red-75: #ffc6c5;
+  --ts-red-100: #ffa4a2;
+  --ts-red-200: #ff8583;
+  --ts-red-300: #ff6764;
+  --ts-red-400: #fa423e;
+  --ts-red-500: #e02e2a;
+  --ts-red-600: #ba2623;
+  --ts-red-700: #911e1b;
+  --ts-red-800: #6e1615;
+  --ts-red-900: #4d100e;
+  --ts-red-950: #280b0a;
+  --ts-red-1000: #1f0909;
+  --ts-red-a25: #fa423e14;
+  --ts-red-a50: #fa423e29;
+  --ts-red-a75: #fa423e4c;
+  --ts-red-a100: #fa423e7a;
+  --ts-red-a200: #fa423ea3;
+  --ts-red-a300: #fa423ec9;
+  --ts-orange-25: #fff5f0;
+  --ts-orange-50: #ffe7d9;
+  --ts-orange-75: #ffcfb4;
+  --ts-orange-100: #ffb790;
+  --ts-orange-200: #ff9e6c;
+  --ts-orange-300: #ff8549;
+  --ts-orange-400: #fb6a22;
+  --ts-orange-500: #e25507;
+  --ts-orange-600: #b9480d;
+  --ts-orange-700: #923b0f;
+  --ts-orange-800: #6d2e0f;
+  --ts-orange-900: #4a2206;
+  --ts-orange-950: #281105;
+  --ts-orange-1000: #211107;
+  --ts-orange-a25: #fb6a2212;
+  --ts-orange-a50: #fb6a2229;
+  --ts-orange-a75: #fb6a2254;
+  --ts-orange-a100: #fb6a227a;
+  --ts-orange-a200: #fb6a22a6;
+  --ts-orange-a300: #fb6a22cf;
+  --ts-yellow-25: #fffbed;
+  --ts-yellow-50: #fff6d9;
+  --ts-yellow-75: #ffeeb8;
+  --ts-yellow-100: #ffe48c;
+  --ts-yellow-200: #ffdb66;
+  --ts-yellow-300: #ffd240;
+  --ts-yellow-400: #ffc300;
+  --ts-yellow-500: #e0ac00;
+  --ts-yellow-600: #ba8e00;
+  --ts-yellow-700: #916f00;
+  --ts-yellow-800: #6e5400;
+  --ts-yellow-900: #4d3b00;
+  --ts-yellow-950: #261d00;
+  --ts-yellow-1000: #1a1400;
+  --ts-yellow-a25: #ffc30014;
+  --ts-yellow-a50: #ffc30026;
+  --ts-yellow-a75: #ffc30045;
+  --ts-yellow-a100: #ffc30073;
+  --ts-yellow-a200: #ffc30096;
+  --ts-yellow-a300: #ffc300bd;
+  --ts-purple-25: #f9f5fe;
+  --ts-purple-50: #efe5fe;
+  --ts-purple-75: #e0cefd;
+  --ts-purple-100: #ceb0fb;
+  --ts-purple-200: #be95fa;
+  --ts-purple-300: #ad7bf9;
+  --ts-purple-400: #924ff7;
+  --ts-purple-500: #8046d9;
+  --ts-purple-600: #6b3ab4;
+  --ts-purple-700: #532d8d;
+  --ts-purple-800: #3f226a;
+  --ts-purple-900: #2c184a;
+  --ts-purple-950: #160c25;
+  --ts-purple-1000: #100a19;
+  --ts-purple-a25: #924ff70f;
+  --ts-purple-a50: #924ff726;
+  --ts-purple-a75: #924ff747;
+  --ts-purple-a100: #924ff773;
+  --ts-purple-a200: #924ff799;
+  --ts-purple-a300: #924ff7bf;
+  --ts-pink-25: #fff4f9;
+  --ts-pink-50: #ffe8f3;
+  --ts-pink-75: #ffd4e8;
+  --ts-pink-100: #ffbada;
+  --ts-pink-200: #ffa3ce;
+  --ts-pink-300: #ff8cc1;
+  --ts-pink-400: #ff66ad;
+  --ts-pink-500: #e04c91;
+  --ts-pink-600: #ba437a;
+  --ts-pink-700: #963c67;
+  --ts-pink-800: #6e2c4a;
+  --ts-pink-900: #4d1f34;
+  --ts-pink-950: #29101c;
+  --ts-pink-1000: #1a0a11;
+  --ts-pink-a25: #ff66ad14;
+  --ts-pink-a50: #ff66ad29;
+  --ts-pink-a75: #ff66ad47;
+  --ts-pink-a100: #ff66ad73;
+  --ts-pink-a200: #ff66ad99;
+  --ts-pink-a300: #ff66adc2;
+  --ts-alpha-01: #0d0d0d03;
+  --ts-alpha-02: #0d0d0d05;
+  --ts-alpha-04: #0d0d0d0a;
+  --ts-alpha-05: #0d0d0d0d;
+  --ts-alpha-06: #0d0d0d0f;
+  --ts-alpha-08: #0d0d0d14;
+  --ts-alpha-10: #0d0d0d1a;
+  --ts-alpha-12: #0d0d0d1f;
+  --ts-alpha-15: #0d0d0d26;
+  --ts-alpha-16: #0d0d0d29;
+  --ts-alpha-20: #0d0d0d33;
+  --ts-alpha-25: #0d0d0d40;
+  --ts-alpha-30: #0d0d0d4c;
+  --ts-alpha-35: #0d0d0d59;
+  --ts-alpha-40: #0d0d0d66;
+  --ts-alpha-50: #0d0d0d80;
+  --ts-alpha-60: #0d0d0d99;
+  --ts-alpha-70: #0d0d0db2;
+  --ts-canvas: var(--ts-gray-75);
+  --ts-surface: var(--ts-gray-0);
+  --ts-surface-secondary: var(--ts-gray-50);
+  --ts-surface-tertiary: var(--ts-gray-75);
+  --ts-surface-elevated: var(--ts-gray-0);
+  --ts-panel: #fcfcfc;
+  --ts-panel-border: #ededed;
+  --ts-text: var(--ts-gray-750);
+  --ts-text-secondary: var(--ts-gray-500);
+  --ts-text-tertiary: var(--ts-gray-400);
+  --ts-text-emphasis: var(--ts-gray-1000);
+  --ts-text-inverse: var(--ts-gray-0);
+  --ts-text-disabled: var(--ts-gray-400);
+  --ts-border-subtle: var(--ts-alpha-05);
+  --ts-border: var(--ts-alpha-10);
+  --ts-border-strong: var(--ts-alpha-15);
+  --ts-ring: var(--ts-blue-500);
+  --ts-primary-solid: var(--ts-gray-900);
+  --ts-primary-solid-hover: var(--ts-gray-700);
+  --ts-primary-solid-active: var(--ts-gray-600);
+  --ts-primary-soft: var(--ts-gray-100);
+  --ts-primary-soft-hover: var(--ts-gray-150);
+  --ts-primary-soft-active: var(--ts-gray-200);
+  --ts-primary-outline-border: var(--ts-alpha-16);
+  --ts-primary-outline-hover: var(--ts-alpha-02);
+  --ts-ghost-hover: var(--ts-alpha-08);
+  --ts-ghost-active: var(--ts-alpha-12);
+  --ts-secondary-solid: var(--ts-gray-500);
+  --ts-input-bg: var(--ts-alpha-08);
+  --ts-input-border-focus: var(--ts-alpha-20);
+  --ts-input-border-invalid: var(--ts-red-500);
+  --ts-link: var(--ts-blue-500);
+  --ts-link-hover: var(--ts-blue-800);
+  --ts-switch-track: var(--ts-gray-150);
+  --ts-switch-track-checked: var(--ts-gray-900);
+  --ts-switch-thumb: var(--ts-gray-0);
+  --ts-segmented-track: var(--ts-gray-100);
+  --ts-segmented-thumb: var(--ts-gray-0);
+  --ts-tooltip-compact-bg: var(--ts-gray-700);
+  --ts-backdrop: #0000004d;
+  --ts-info-text: var(--ts-blue-500);
+  --ts-info-surface: var(--ts-blue-a25);
+  --ts-info-surface-text: var(--ts-blue-600);
+  --ts-info-solid: var(--ts-blue-400);
+  --ts-warning-text: var(--ts-orange-700);
+  --ts-warning-surface: var(--ts-orange-a25);
+  --ts-warning-surface-text: var(--ts-orange-700);
+  --ts-warning-solid: var(--ts-orange-500);
+  --ts-caution-text: var(--ts-yellow-700);
+  --ts-caution-surface: var(--ts-yellow-a25);
+  --ts-caution-surface-text: var(--ts-yellow-800);
+  --ts-danger-text: var(--ts-red-700);
+  --ts-danger-surface: var(--ts-red-a25);
+  --ts-danger-surface-text: var(--ts-red-600);
+  --ts-danger-solid: var(--ts-red-500);
+  --ts-danger-ring: var(--ts-red-200);
+  --ts-success-text: var(--ts-green-700);
+  --ts-success-surface: var(--ts-green-a25);
+  --ts-success-surface-text: var(--ts-green-600);
+  --ts-success-solid: var(--ts-green-500);
+  --ts-discovery-text: var(--ts-purple-700);
+  --ts-discovery-surface: var(--ts-purple-a25);
+  --ts-discovery-surface-text: var(--ts-purple-600);
+  --ts-discovery-solid: var(--ts-purple-400);
+  --ts-node-surface: var(--ts-gray-0);
+  --ts-node-ring: var(--ts-gray-200);
+  --ts-node-ring-selected: var(--ts-gray-300);
+  --ts-node-ink: var(--ts-gray-1000);
+  --ts-tint-agent: #e7efff;
+  --ts-tint-logic: #fee7c2;
+  --ts-tint-end: #def5ee;
+  --ts-tint-note: #dfdfdf;
+  --ts-tint-tool: #ffefa4;
+  --ts-tint-data: #ece3ff;
+  --ts-tint-ink-dark: var(--ts-gray-1000);
+  --ts-branch-bg: var(--ts-gray-50);
+  --ts-edge: var(--ts-gray-200);
+  --ts-edge-selected: #555555;
+  --ts-connection-line: #b1b1b7;
+  --ts-handle: var(--ts-gray-0);
+  --ts-toolbar-bg: #fffffff5;
+  --ts-dot-grid: #91919a;
+  --ts-font-sans: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ts-heading-5xl-font-size: 72px;
+  --ts-heading-5xl-line-height: 72px;
+  --ts-heading-5xl-font-weight: 600;
+  --ts-heading-5xl-letter-spacing: -0.02em;
+  --ts-heading-5xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-4xl-font-size: 60px;
+  --ts-heading-4xl-line-height: 60px;
+  --ts-heading-4xl-font-weight: 600;
+  --ts-heading-4xl-letter-spacing: -0.02em;
+  --ts-heading-4xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-3xl-font-size: 48px;
+  --ts-heading-3xl-line-height: 48px;
+  --ts-heading-3xl-font-weight: 600;
+  --ts-heading-3xl-letter-spacing: -0.02em;
+  --ts-heading-3xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-2xl-font-size: 36px;
+  --ts-heading-2xl-line-height: 42px;
+  --ts-heading-2xl-font-weight: 600;
+  --ts-heading-2xl-letter-spacing: -0.02em;
+  --ts-heading-2xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-xl-font-size: 32px;
+  --ts-heading-xl-line-height: 38px;
+  --ts-heading-xl-font-weight: 600;
+  --ts-heading-xl-letter-spacing: -0.02em;
+  --ts-heading-xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-lg-font-size: 24px;
+  --ts-heading-lg-line-height: 28px;
+  --ts-heading-lg-font-weight: 600;
+  --ts-heading-lg-letter-spacing: -0.01em;
+  --ts-heading-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-md-font-size: 20px;
+  --ts-heading-md-line-height: 26px;
+  --ts-heading-md-font-weight: 600;
+  --ts-heading-md-letter-spacing: -0.01em;
+  --ts-heading-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-sm-font-size: 18px;
+  --ts-heading-sm-line-height: 26px;
+  --ts-heading-sm-font-weight: 600;
+  --ts-heading-sm-letter-spacing: -0.01em;
+  --ts-heading-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-xs-font-size: 16px;
+  --ts-heading-xs-line-height: 24px;
+  --ts-heading-xs-font-weight: 600;
+  --ts-heading-xs-letter-spacing: -0.01em;
+  --ts-heading-xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-lg-font-size: 18px;
+  --ts-text-lg-line-height: 29px;
+  --ts-text-lg-font-weight: 400;
+  --ts-text-lg-letter-spacing: -0.01em;
+  --ts-text-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-md-font-size: 16px;
+  --ts-text-md-line-height: 24px;
+  --ts-text-md-font-weight: 400;
+  --ts-text-md-letter-spacing: -0.01em;
+  --ts-text-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-sm-font-size: 14px;
+  --ts-text-sm-line-height: 20px;
+  --ts-text-sm-font-weight: 400;
+  --ts-text-sm-letter-spacing: -0.01em;
+  --ts-text-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-xs-font-size: 12px;
+  --ts-text-xs-line-height: 18px;
+  --ts-text-xs-font-weight: 400;
+  --ts-text-xs-letter-spacing: 0;
+  --ts-text-xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-2xs-font-size: 10px;
+  --ts-text-2xs-line-height: 15px;
+  --ts-text-2xs-font-weight: 400;
+  --ts-text-2xs-letter-spacing: 0;
+  --ts-text-2xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-3xs-font-size: 8px;
+  --ts-text-3xs-line-height: 12px;
+  --ts-text-3xs-font-weight: 400;
+  --ts-text-3xs-letter-spacing: 0;
+  --ts-text-3xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-small-caps-md-font-size: 11px;
+  --ts-small-caps-md-line-height: 15px;
+  --ts-small-caps-md-font-weight: 600;
+  --ts-small-caps-md-letter-spacing: 0.65px;
+  --ts-small-caps-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-small-caps-lg-font-size: 13px;
+  --ts-small-caps-lg-line-height: 19px;
+  --ts-small-caps-lg-font-weight: 600;
+  --ts-small-caps-lg-letter-spacing: 0.6px;
+  --ts-small-caps-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-page-title-font-size: 36px;
+  --ts-page-title-line-height: 40px;
+  --ts-page-title-font-weight: 590;
+  --ts-page-title-letter-spacing: 0.36px;
+  --ts-page-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-panel-title-font-size: 16px;
+  --ts-panel-title-line-height: 24px;
+  --ts-panel-title-font-weight: 600;
+  --ts-panel-title-letter-spacing: -0.16px;
+  --ts-panel-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-panel-description-font-size: 14px;
+  --ts-panel-description-line-height: 20px;
+  --ts-panel-description-font-weight: 400;
+  --ts-panel-description-letter-spacing: -0.14px;
+  --ts-panel-description-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-field-label-font-size: 14px;
+  --ts-field-label-line-height: 21px;
+  --ts-field-label-font-weight: 400;
+  --ts-field-label-letter-spacing: -0.16px;
+  --ts-field-label-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-field-value-font-size: 14px;
+  --ts-field-value-line-height: 24px;
+  --ts-field-value-font-weight: 500;
+  --ts-field-value-letter-spacing: -0.16px;
+  --ts-field-value-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-input-text-font-size: 14px;
+  --ts-input-text-line-height: 21px;
+  --ts-input-text-font-weight: 400;
+  --ts-input-text-letter-spacing: -0.14px;
+  --ts-input-text-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-palette-item-font-size: 14px;
+  --ts-palette-item-line-height: 20px;
+  --ts-palette-item-font-weight: 500;
+  --ts-palette-item-letter-spacing: -0.16px;
+  --ts-palette-item-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-palette-section-font-size: 12px;
+  --ts-palette-section-line-height: 18px;
+  --ts-palette-section-font-weight: 500;
+  --ts-palette-section-letter-spacing: -0.16px;
+  --ts-palette-section-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-node-title-font-size: 12px;
+  --ts-node-title-line-height: 18px;
+  --ts-node-title-font-weight: 500;
+  --ts-node-title-letter-spacing: -0.16px;
+  --ts-node-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-node-meta-font-size: 10px;
+  --ts-node-meta-line-height: 15px;
+  --ts-node-meta-font-weight: 500;
+  --ts-node-meta-letter-spacing: -0.16px;
+  --ts-node-meta-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-branch-label-font-size: 12px;
+  --ts-branch-label-line-height: 28px;
+  --ts-branch-label-font-weight: 500;
+  --ts-branch-label-letter-spacing: -0.16px;
+  --ts-branch-label-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-badge-font-size: 12px;
+  --ts-badge-line-height: 24px;
+  --ts-badge-font-weight: 600;
+  --ts-badge-letter-spacing: 0.36px;
+  --ts-badge-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-button-md-font-size: 14px;
+  --ts-button-md-line-height: 14px;
+  --ts-button-md-font-weight: 500;
+  --ts-button-md-letter-spacing: -0.14px;
+  --ts-button-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-button-sm-font-size: 12px;
+  --ts-button-sm-line-height: 12px;
+  --ts-button-sm-font-weight: 500;
+  --ts-button-sm-letter-spacing: 0;
+  --ts-button-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-button-lg-font-size: 16px;
+  --ts-button-lg-line-height: 16px;
+  --ts-button-lg-font-weight: 500;
+  --ts-button-lg-letter-spacing: -0.01em;
+  --ts-button-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-code-font-size: 13px;
+  --ts-code-line-height: 20px;
+  --ts-code-font-weight: 400;
+  --ts-code-letter-spacing: 0;
+  --ts-code-font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ts-space-0-5: 2px;
+  --ts-space-1: 4px;
+  --ts-space-1-5: 6px;
+  --ts-space-2: 8px;
+  --ts-space-2-5: 10px;
+  --ts-space-3: 12px;
+  --ts-space-4: 16px;
+  --ts-space-5: 20px;
+  --ts-space-6: 24px;
+  --ts-space-8: 32px;
+  --ts-space-10: 40px;
+  --ts-space-12: 48px;
+  --ts-space-14: 56px;
+  --ts-space-16: 64px;
+  --ts-control-3xs: 22px;
+  --ts-control-2xs: 24px;
+  --ts-control-xs: 26px;
+  --ts-control-sm: 28px;
+  --ts-control-md: 32px;
+  --ts-control-lg: 36px;
+  --ts-control-xl: 40px;
+  --ts-control-2xl: 44px;
+  --ts-control-3xl: 48px;
+  --ts-gutter-2xs: 6px;
+  --ts-gutter-xs: 8px;
+  --ts-gutter-sm: 10px;
+  --ts-gutter-md: 12px;
+  --ts-gutter-lg: 14px;
+  --ts-gutter-xl: 16px;
+  --ts-icon-xs: 14px;
+  --ts-icon-sm: 16px;
+  --ts-icon-md: 18px;
+  --ts-icon-lg: 20px;
+  --ts-icon-xl: 22px;
+  --ts-icon-2xl: 24px;
+  --ts-header-height: 54px;
+  --ts-side-nav-width: 210px;
+  --ts-side-nav-collapsed: 56px;
+  --ts-palette-width: 200px;
+  --ts-inspector-width: 360px;
+  --ts-content-width: 760px;
+  --ts-page-gutter: 8px;
+  --ts-switch-w: 32px;
+  --ts-switch-h: 19px;
+  --ts-handle-size: 8px;
+  --ts-radius-2xs: 2px;
+  --ts-radius-xs: 4px;
+  --ts-radius-sm: 6px;
+  --ts-radius-md: 8px;
+  --ts-radius-lg: 10px;
+  --ts-radius-xl: 12px;
+  --ts-radius-2xl: 16px;
+  --ts-radius-3xl: 20px;
+  --ts-radius-4xl: 24px;
+  --ts-radius-full: 9999px;
+  --ts-shadow-hairline: 0 0 0 1px #00000014;
+  --ts-shadow-100: 0 1px 2px -1px #00000014;
+  --ts-shadow-200: 0 2px 4px -1px #00000014;
+  --ts-shadow-300: 0 4px 8px -2px #0000001a;
+  --ts-shadow-400: 0 8px 16px -4px #0000001f;
+  --ts-shadow-toolbar: 0 8px 16px -4px #0000001f;
+  --ts-shadow-overlay: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
+  --ts-shadow-node: 0 0 0 1px #cdcdcd;
+  --ts-shadow-node-selected: 0 0 0 1px #afafaf;
+  --ts-shadow-handle: 0 0 0 1px #cdcdcd;
+  --ts-shadow-switch-thumb: 0 1px 2px #00000033;
+  --ts-ease-enter: cubic-bezier(0.19, 1, 0.22, 1);
+  --ts-ease-exit: cubic-bezier(0.8, 0, 0.4, 1);
+  --ts-ease-exit-snappy: cubic-bezier(0.65, 0, 0.4, 1);
+  --ts-ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+  --ts-ease-basic: ease;
+  --ts-duration-basic: 150ms;
+  --ts-duration-enter: 240ms;
+  --ts-duration-exit: 120ms;
+  }
+
+  [data-theme="dark"] {
+  --ts-gray-0: #0d0d0d;
+  --ts-gray-25: #101010;
+  --ts-gray-50: #131313;
+  --ts-gray-75: #161616;
+  --ts-gray-100: #181818;
+  --ts-gray-150: #1c1c1c;
+  --ts-gray-200: #212121;
+  --ts-gray-250: #282828;
+  --ts-gray-300: #303030;
+  --ts-gray-350: #393939;
+  --ts-gray-400: #414141;
+  --ts-gray-450: #4f4f4f;
+  --ts-gray-500: #5d5d5d;
+  --ts-gray-550: #767676;
+  --ts-gray-600: #8f8f8f;
+  --ts-gray-650: #9f9f9f;
+  --ts-gray-700: #afafaf;
+  --ts-gray-750: #b9b9b9;
+  --ts-gray-800: #cdcdcd;
+  --ts-gray-850: #dcdcdc;
+  --ts-gray-900: #ededed;
+  --ts-gray-925: #f3f3f3;
+  --ts-gray-950: #f3f3f3;
+  --ts-gray-975: #f9f9f9;
+  --ts-gray-1000: #fff;
+  --ts-blue-25: #f5faff;
+  --ts-blue-50: #e5f3ff;
+  --ts-blue-75: #cce6ff;
+  --ts-blue-100: #99ceff;
+  --ts-blue-200: #66b5ff;
+  --ts-blue-300: #339cff;
+  --ts-blue-400: #0285ff;
+  --ts-blue-500: #0169cc;
+  --ts-blue-600: #004f99;
+  --ts-blue-700: #003f7a;
+  --ts-blue-800: #013566;
+  --ts-blue-900: #00284d;
+  --ts-blue-950: #000e1a;
+  --ts-blue-1000: #000d19;
+  --ts-blue-a25: #0285ff0a;
+  --ts-blue-a50: #0285ff21;
+  --ts-blue-a75: #0285ff40;
+  --ts-blue-a100: #0285ff66;
+  --ts-blue-a200: #0285ff99;
+  --ts-blue-a300: #0285ffcc;
+  --ts-green-25: #edfaf2;
+  --ts-green-50: #d9f4e4;
+  --ts-green-75: #b8ebcc;
+  --ts-green-100: #8cdfad;
+  --ts-green-200: #66d492;
+  --ts-green-300: #40c977;
+  --ts-green-400: #04b84c;
+  --ts-green-500: #00a240;
+  --ts-green-600: #008635;
+  --ts-green-700: #00692a;
+  --ts-green-800: #004f1f;
+  --ts-green-900: #003716;
+  --ts-green-950: #011c0b;
+  --ts-green-1000: #001207;
+  --ts-green-a25: #04b84c14;
+  --ts-green-a50: #04b84c26;
+  --ts-green-a75: #04b84c4a;
+  --ts-green-a100: #04b84c73;
+  --ts-green-a200: #04b84c99;
+  --ts-green-a300: #04b84cbf;
+  --ts-red-25: #fff0f0;
+  --ts-red-50: #ffd9d9;
+  --ts-red-75: #ffc6c5;
+  --ts-red-100: #ffa4a2;
+  --ts-red-200: #ff8583;
+  --ts-red-300: #ff6764;
+  --ts-red-400: #fa423e;
+  --ts-red-500: #e02e2a;
+  --ts-red-600: #ba2623;
+  --ts-red-700: #911e1b;
+  --ts-red-800: #6e1615;
+  --ts-red-900: #4d100e;
+  --ts-red-950: #280b0a;
+  --ts-red-1000: #1f0909;
+  --ts-red-a25: #fa423e14;
+  --ts-red-a50: #fa423e29;
+  --ts-red-a75: #fa423e4c;
+  --ts-red-a100: #fa423e7a;
+  --ts-red-a200: #fa423ea3;
+  --ts-red-a300: #fa423ec9;
+  --ts-orange-25: #fff5f0;
+  --ts-orange-50: #ffe7d9;
+  --ts-orange-75: #ffcfb4;
+  --ts-orange-100: #ffb790;
+  --ts-orange-200: #ff9e6c;
+  --ts-orange-300: #ff8549;
+  --ts-orange-400: #fb6a22;
+  --ts-orange-500: #e25507;
+  --ts-orange-600: #b9480d;
+  --ts-orange-700: #923b0f;
+  --ts-orange-800: #6d2e0f;
+  --ts-orange-900: #4a2206;
+  --ts-orange-950: #281105;
+  --ts-orange-1000: #211107;
+  --ts-orange-a25: #fb6a2212;
+  --ts-orange-a50: #fb6a2229;
+  --ts-orange-a75: #fb6a2254;
+  --ts-orange-a100: #fb6a227a;
+  --ts-orange-a200: #fb6a22a6;
+  --ts-orange-a300: #fb6a22cf;
+  --ts-yellow-25: #fffbed;
+  --ts-yellow-50: #fff6d9;
+  --ts-yellow-75: #ffeeb8;
+  --ts-yellow-100: #ffe48c;
+  --ts-yellow-200: #ffdb66;
+  --ts-yellow-300: #ffd240;
+  --ts-yellow-400: #ffc300;
+  --ts-yellow-500: #e0ac00;
+  --ts-yellow-600: #ba8e00;
+  --ts-yellow-700: #916f00;
+  --ts-yellow-800: #6e5400;
+  --ts-yellow-900: #4d3b00;
+  --ts-yellow-950: #261d00;
+  --ts-yellow-1000: #1a1400;
+  --ts-yellow-a25: #ffc30014;
+  --ts-yellow-a50: #ffc30026;
+  --ts-yellow-a75: #ffc30045;
+  --ts-yellow-a100: #ffc30073;
+  --ts-yellow-a200: #ffc30096;
+  --ts-yellow-a300: #ffc300bd;
+  --ts-purple-25: #f9f5fe;
+  --ts-purple-50: #efe5fe;
+  --ts-purple-75: #e0cefd;
+  --ts-purple-100: #ceb0fb;
+  --ts-purple-200: #be95fa;
+  --ts-purple-300: #ad7bf9;
+  --ts-purple-400: #924ff7;
+  --ts-purple-500: #8046d9;
+  --ts-purple-600: #6b3ab4;
+  --ts-purple-700: #532d8d;
+  --ts-purple-800: #3f226a;
+  --ts-purple-900: #2c184a;
+  --ts-purple-950: #160c25;
+  --ts-purple-1000: #100a19;
+  --ts-purple-a25: #924ff70f;
+  --ts-purple-a50: #924ff726;
+  --ts-purple-a75: #924ff747;
+  --ts-purple-a100: #924ff773;
+  --ts-purple-a200: #924ff799;
+  --ts-purple-a300: #924ff7bf;
+  --ts-pink-25: #fff4f9;
+  --ts-pink-50: #ffe8f3;
+  --ts-pink-75: #ffd4e8;
+  --ts-pink-100: #ffbada;
+  --ts-pink-200: #ffa3ce;
+  --ts-pink-300: #ff8cc1;
+  --ts-pink-400: #ff66ad;
+  --ts-pink-500: #e04c91;
+  --ts-pink-600: #ba437a;
+  --ts-pink-700: #963c67;
+  --ts-pink-800: #6e2c4a;
+  --ts-pink-900: #4d1f34;
+  --ts-pink-950: #29101c;
+  --ts-pink-1000: #1a0a11;
+  --ts-pink-a25: #ff66ad14;
+  --ts-pink-a50: #ff66ad29;
+  --ts-pink-a75: #ff66ad47;
+  --ts-pink-a100: #ff66ad73;
+  --ts-pink-a200: #ff66ad99;
+  --ts-pink-a300: #ff66adc2;
+  --ts-alpha-01: #ffffff03;
+  --ts-alpha-02: #ffffff05;
+  --ts-alpha-04: #ffffff0a;
+  --ts-alpha-05: #ffffff0d;
+  --ts-alpha-06: #ffffff0f;
+  --ts-alpha-08: #ffffff14;
+  --ts-alpha-10: #ffffff1a;
+  --ts-alpha-12: #ffffff1f;
+  --ts-alpha-15: #ffffff26;
+  --ts-alpha-16: #ffffff29;
+  --ts-alpha-20: #ffffff33;
+  --ts-alpha-25: #ffffff40;
+  --ts-alpha-30: #ffffff4c;
+  --ts-alpha-35: #ffffff59;
+  --ts-alpha-40: #ffffff66;
+  --ts-alpha-50: #ffffff80;
+  --ts-alpha-60: #ffffff99;
+  --ts-alpha-70: #ffffffb2;
+  --ts-canvas: var(--ts-gray-75);
+  --ts-surface: var(--ts-gray-200);
+  --ts-surface-secondary: var(--ts-gray-100);
+  --ts-surface-tertiary: var(--ts-gray-50);
+  --ts-surface-elevated: var(--ts-gray-300);
+  --ts-panel: #1c1c1c;
+  --ts-panel-border: var(--ts-alpha-12);
+  --ts-text: var(--ts-gray-850);
+  --ts-text-secondary: var(--ts-gray-700);
+  --ts-text-tertiary: var(--ts-gray-600);
+  --ts-text-emphasis: var(--ts-gray-1000);
+  --ts-text-inverse: var(--ts-gray-0);
+  --ts-text-disabled: var(--ts-gray-500);
+  --ts-border-subtle: var(--ts-alpha-06);
+  --ts-border: var(--ts-alpha-12);
+  --ts-border-strong: var(--ts-alpha-20);
+  --ts-ring: var(--ts-blue-400);
+  --ts-primary-solid: var(--ts-gray-950);
+  --ts-primary-solid-hover: var(--ts-gray-900);
+  --ts-primary-solid-active: var(--ts-gray-850);
+  --ts-primary-soft: var(--ts-gray-300);
+  --ts-primary-soft-hover: var(--ts-gray-350);
+  --ts-primary-soft-active: var(--ts-gray-400);
+  --ts-primary-outline-border: var(--ts-alpha-25);
+  --ts-primary-outline-hover: var(--ts-alpha-04);
+  --ts-ghost-hover: var(--ts-alpha-12);
+  --ts-ghost-active: var(--ts-alpha-16);
+  --ts-secondary-solid: var(--ts-gray-400);
+  --ts-input-bg: var(--ts-alpha-12);
+  --ts-input-border-focus: var(--ts-alpha-20);
+  --ts-input-border-invalid: var(--ts-red-600);
+  --ts-link: var(--ts-blue-300);
+  --ts-link-hover: var(--ts-blue-400);
+  --ts-switch-track: var(--ts-gray-400);
+  --ts-switch-track-checked: var(--ts-blue-400);
+  --ts-switch-thumb: var(--ts-gray-1000);
+  --ts-segmented-track: var(--ts-gray-0);
+  --ts-segmented-thumb: var(--ts-gray-300);
+  --ts-tooltip-compact-bg: var(--ts-gray-700);
+  --ts-backdrop: #00000080;
+  --ts-info-text: var(--ts-blue-200);
+  --ts-info-surface: var(--ts-blue-a50);
+  --ts-info-surface-text: var(--ts-blue-300);
+  --ts-info-solid: var(--ts-blue-400);
+  --ts-warning-text: var(--ts-orange-500);
+  --ts-warning-surface: var(--ts-orange-a50);
+  --ts-warning-surface-text: var(--ts-orange-400);
+  --ts-warning-solid: var(--ts-orange-500);
+  --ts-caution-text: var(--ts-yellow-500);
+  --ts-caution-surface: var(--ts-yellow-a50);
+  --ts-caution-surface-text: var(--ts-yellow-400);
+  --ts-danger-text: var(--ts-red-500);
+  --ts-danger-surface: var(--ts-red-a50);
+  --ts-danger-surface-text: var(--ts-red-400);
+  --ts-danger-solid: var(--ts-red-500);
+  --ts-danger-ring: var(--ts-red-200);
+  --ts-success-text: var(--ts-green-400);
+  --ts-success-surface: var(--ts-green-a50);
+  --ts-success-surface-text: var(--ts-green-400);
+  --ts-success-solid: var(--ts-green-600);
+  --ts-discovery-text: var(--ts-purple-500);
+  --ts-discovery-surface: var(--ts-purple-a50);
+  --ts-discovery-surface-text: var(--ts-purple-200);
+  --ts-discovery-solid: var(--ts-purple-400);
+  --ts-node-surface: var(--ts-gray-300);
+  --ts-node-ring: var(--ts-alpha-16);
+  --ts-node-ring-selected: var(--ts-alpha-30);
+  --ts-node-ink: var(--ts-gray-1000);
+  --ts-tint-agent: #00284d;
+  --ts-tint-logic: #4a2206;
+  --ts-tint-end: #003716;
+  --ts-tint-note: #414141;
+  --ts-tint-tool: #4d3b00;
+  --ts-tint-data: #2c184a;
+  --ts-tint-ink-dark: var(--ts-gray-1000);
+  --ts-branch-bg: var(--ts-gray-100);
+  --ts-edge: var(--ts-gray-400);
+  --ts-edge-selected: var(--ts-gray-600);
+  --ts-connection-line: #b1b1b7;
+  --ts-handle: var(--ts-gray-300);
+  --ts-toolbar-bg: #303030f5;
+  --ts-dot-grid: #414141;
+  --ts-font-sans: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ts-heading-5xl-font-size: 72px;
+  --ts-heading-5xl-line-height: 72px;
+  --ts-heading-5xl-font-weight: 600;
+  --ts-heading-5xl-letter-spacing: -0.02em;
+  --ts-heading-5xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-4xl-font-size: 60px;
+  --ts-heading-4xl-line-height: 60px;
+  --ts-heading-4xl-font-weight: 600;
+  --ts-heading-4xl-letter-spacing: -0.02em;
+  --ts-heading-4xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-3xl-font-size: 48px;
+  --ts-heading-3xl-line-height: 48px;
+  --ts-heading-3xl-font-weight: 600;
+  --ts-heading-3xl-letter-spacing: -0.02em;
+  --ts-heading-3xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-2xl-font-size: 36px;
+  --ts-heading-2xl-line-height: 42px;
+  --ts-heading-2xl-font-weight: 600;
+  --ts-heading-2xl-letter-spacing: -0.02em;
+  --ts-heading-2xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-xl-font-size: 32px;
+  --ts-heading-xl-line-height: 38px;
+  --ts-heading-xl-font-weight: 600;
+  --ts-heading-xl-letter-spacing: -0.02em;
+  --ts-heading-xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-lg-font-size: 24px;
+  --ts-heading-lg-line-height: 28px;
+  --ts-heading-lg-font-weight: 600;
+  --ts-heading-lg-letter-spacing: -0.01em;
+  --ts-heading-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-md-font-size: 20px;
+  --ts-heading-md-line-height: 26px;
+  --ts-heading-md-font-weight: 600;
+  --ts-heading-md-letter-spacing: -0.01em;
+  --ts-heading-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-sm-font-size: 18px;
+  --ts-heading-sm-line-height: 26px;
+  --ts-heading-sm-font-weight: 600;
+  --ts-heading-sm-letter-spacing: -0.01em;
+  --ts-heading-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-heading-xs-font-size: 16px;
+  --ts-heading-xs-line-height: 24px;
+  --ts-heading-xs-font-weight: 600;
+  --ts-heading-xs-letter-spacing: -0.01em;
+  --ts-heading-xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-lg-font-size: 18px;
+  --ts-text-lg-line-height: 29px;
+  --ts-text-lg-font-weight: 400;
+  --ts-text-lg-letter-spacing: -0.01em;
+  --ts-text-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-md-font-size: 16px;
+  --ts-text-md-line-height: 24px;
+  --ts-text-md-font-weight: 400;
+  --ts-text-md-letter-spacing: -0.01em;
+  --ts-text-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-sm-font-size: 14px;
+  --ts-text-sm-line-height: 20px;
+  --ts-text-sm-font-weight: 400;
+  --ts-text-sm-letter-spacing: -0.01em;
+  --ts-text-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-xs-font-size: 12px;
+  --ts-text-xs-line-height: 18px;
+  --ts-text-xs-font-weight: 400;
+  --ts-text-xs-letter-spacing: 0;
+  --ts-text-xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-2xs-font-size: 10px;
+  --ts-text-2xs-line-height: 15px;
+  --ts-text-2xs-font-weight: 400;
+  --ts-text-2xs-letter-spacing: 0;
+  --ts-text-2xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-text-3xs-font-size: 8px;
+  --ts-text-3xs-line-height: 12px;
+  --ts-text-3xs-font-weight: 400;
+  --ts-text-3xs-letter-spacing: 0;
+  --ts-text-3xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-small-caps-md-font-size: 11px;
+  --ts-small-caps-md-line-height: 15px;
+  --ts-small-caps-md-font-weight: 600;
+  --ts-small-caps-md-letter-spacing: 0.65px;
+  --ts-small-caps-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-small-caps-lg-font-size: 13px;
+  --ts-small-caps-lg-line-height: 19px;
+  --ts-small-caps-lg-font-weight: 600;
+  --ts-small-caps-lg-letter-spacing: 0.6px;
+  --ts-small-caps-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-page-title-font-size: 36px;
+  --ts-page-title-line-height: 40px;
+  --ts-page-title-font-weight: 590;
+  --ts-page-title-letter-spacing: 0.36px;
+  --ts-page-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-panel-title-font-size: 16px;
+  --ts-panel-title-line-height: 24px;
+  --ts-panel-title-font-weight: 600;
+  --ts-panel-title-letter-spacing: -0.16px;
+  --ts-panel-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-panel-description-font-size: 14px;
+  --ts-panel-description-line-height: 20px;
+  --ts-panel-description-font-weight: 400;
+  --ts-panel-description-letter-spacing: -0.14px;
+  --ts-panel-description-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-field-label-font-size: 14px;
+  --ts-field-label-line-height: 21px;
+  --ts-field-label-font-weight: 400;
+  --ts-field-label-letter-spacing: -0.16px;
+  --ts-field-label-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-field-value-font-size: 14px;
+  --ts-field-value-line-height: 24px;
+  --ts-field-value-font-weight: 500;
+  --ts-field-value-letter-spacing: -0.16px;
+  --ts-field-value-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-input-text-font-size: 14px;
+  --ts-input-text-line-height: 21px;
+  --ts-input-text-font-weight: 400;
+  --ts-input-text-letter-spacing: -0.14px;
+  --ts-input-text-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-palette-item-font-size: 14px;
+  --ts-palette-item-line-height: 20px;
+  --ts-palette-item-font-weight: 500;
+  --ts-palette-item-letter-spacing: -0.16px;
+  --ts-palette-item-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-palette-section-font-size: 12px;
+  --ts-palette-section-line-height: 18px;
+  --ts-palette-section-font-weight: 500;
+  --ts-palette-section-letter-spacing: -0.16px;
+  --ts-palette-section-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-node-title-font-size: 12px;
+  --ts-node-title-line-height: 18px;
+  --ts-node-title-font-weight: 500;
+  --ts-node-title-letter-spacing: -0.16px;
+  --ts-node-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-node-meta-font-size: 10px;
+  --ts-node-meta-line-height: 15px;
+  --ts-node-meta-font-weight: 500;
+  --ts-node-meta-letter-spacing: -0.16px;
+  --ts-node-meta-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-branch-label-font-size: 12px;
+  --ts-branch-label-line-height: 28px;
+  --ts-branch-label-font-weight: 500;
+  --ts-branch-label-letter-spacing: -0.16px;
+  --ts-branch-label-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-badge-font-size: 12px;
+  --ts-badge-line-height: 24px;
+  --ts-badge-font-weight: 600;
+  --ts-badge-letter-spacing: 0.36px;
+  --ts-badge-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-button-md-font-size: 14px;
+  --ts-button-md-line-height: 14px;
+  --ts-button-md-font-weight: 500;
+  --ts-button-md-letter-spacing: -0.14px;
+  --ts-button-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-button-sm-font-size: 12px;
+  --ts-button-sm-line-height: 12px;
+  --ts-button-sm-font-weight: 500;
+  --ts-button-sm-letter-spacing: 0;
+  --ts-button-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-button-lg-font-size: 16px;
+  --ts-button-lg-line-height: 16px;
+  --ts-button-lg-font-weight: 500;
+  --ts-button-lg-letter-spacing: -0.01em;
+  --ts-button-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --ts-code-font-size: 13px;
+  --ts-code-line-height: 20px;
+  --ts-code-font-weight: 400;
+  --ts-code-letter-spacing: 0;
+  --ts-code-font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ts-space-0-5: 2px;
+  --ts-space-1: 4px;
+  --ts-space-1-5: 6px;
+  --ts-space-2: 8px;
+  --ts-space-2-5: 10px;
+  --ts-space-3: 12px;
+  --ts-space-4: 16px;
+  --ts-space-5: 20px;
+  --ts-space-6: 24px;
+  --ts-space-8: 32px;
+  --ts-space-10: 40px;
+  --ts-space-12: 48px;
+  --ts-space-14: 56px;
+  --ts-space-16: 64px;
+  --ts-control-3xs: 22px;
+  --ts-control-2xs: 24px;
+  --ts-control-xs: 26px;
+  --ts-control-sm: 28px;
+  --ts-control-md: 32px;
+  --ts-control-lg: 36px;
+  --ts-control-xl: 40px;
+  --ts-control-2xl: 44px;
+  --ts-control-3xl: 48px;
+  --ts-gutter-2xs: 6px;
+  --ts-gutter-xs: 8px;
+  --ts-gutter-sm: 10px;
+  --ts-gutter-md: 12px;
+  --ts-gutter-lg: 14px;
+  --ts-gutter-xl: 16px;
+  --ts-icon-xs: 14px;
+  --ts-icon-sm: 16px;
+  --ts-icon-md: 18px;
+  --ts-icon-lg: 20px;
+  --ts-icon-xl: 22px;
+  --ts-icon-2xl: 24px;
+  --ts-header-height: 54px;
+  --ts-side-nav-width: 210px;
+  --ts-side-nav-collapsed: 56px;
+  --ts-palette-width: 200px;
+  --ts-inspector-width: 360px;
+  --ts-content-width: 760px;
+  --ts-page-gutter: 8px;
+  --ts-switch-w: 32px;
+  --ts-switch-h: 19px;
+  --ts-handle-size: 8px;
+  --ts-radius-2xs: 2px;
+  --ts-radius-xs: 4px;
+  --ts-radius-sm: 6px;
+  --ts-radius-md: 8px;
+  --ts-radius-lg: 10px;
+  --ts-radius-xl: 12px;
+  --ts-radius-2xl: 16px;
+  --ts-radius-3xl: 20px;
+  --ts-radius-4xl: 24px;
+  --ts-radius-full: 9999px;
+  --ts-shadow-hairline: 0 0 0 0.5px #ffffff1f;
+  --ts-shadow-100: 0 1px 2px -1px #00000033;
+  --ts-shadow-200: 0 2px 4px -1px #00000033;
+  --ts-shadow-300: 0 4px 8px -2px #0000005c;
+  --ts-shadow-400: 0 8px 16px -4px #0000004d;
+  --ts-shadow-toolbar: 0 8px 16px -4px #0000001f;
+  --ts-shadow-overlay: 0 10px 15px -3px #00000033, 0 4px 6px -4px #00000033;
+  --ts-shadow-node: 0 0 0 1px #ffffff29;
+  --ts-shadow-node-selected: 0 0 0 1px #ffffff4d;
+  --ts-shadow-handle: 0 0 0 1px #414141;
+  --ts-shadow-switch-thumb: 0 1px 2px #00000033;
+  --ts-ease-enter: cubic-bezier(0.19, 1, 0.22, 1);
+  --ts-ease-exit: cubic-bezier(0.8, 0, 0.4, 1);
+  --ts-ease-exit-snappy: cubic-bezier(0.65, 0, 0.4, 1);
+  --ts-ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+  --ts-ease-basic: ease;
+  --ts-duration-basic: 150ms;
+  --ts-duration-enter: 240ms;
+  --ts-duration-exit: 120ms;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+    --ts-gray-0: #0d0d0d;
+    --ts-gray-25: #101010;
+    --ts-gray-50: #131313;
+    --ts-gray-75: #161616;
+    --ts-gray-100: #181818;
+    --ts-gray-150: #1c1c1c;
+    --ts-gray-200: #212121;
+    --ts-gray-250: #282828;
+    --ts-gray-300: #303030;
+    --ts-gray-350: #393939;
+    --ts-gray-400: #414141;
+    --ts-gray-450: #4f4f4f;
+    --ts-gray-500: #5d5d5d;
+    --ts-gray-550: #767676;
+    --ts-gray-600: #8f8f8f;
+    --ts-gray-650: #9f9f9f;
+    --ts-gray-700: #afafaf;
+    --ts-gray-750: #b9b9b9;
+    --ts-gray-800: #cdcdcd;
+    --ts-gray-850: #dcdcdc;
+    --ts-gray-900: #ededed;
+    --ts-gray-925: #f3f3f3;
+    --ts-gray-950: #f3f3f3;
+    --ts-gray-975: #f9f9f9;
+    --ts-gray-1000: #fff;
+    --ts-blue-25: #f5faff;
+    --ts-blue-50: #e5f3ff;
+    --ts-blue-75: #cce6ff;
+    --ts-blue-100: #99ceff;
+    --ts-blue-200: #66b5ff;
+    --ts-blue-300: #339cff;
+    --ts-blue-400: #0285ff;
+    --ts-blue-500: #0169cc;
+    --ts-blue-600: #004f99;
+    --ts-blue-700: #003f7a;
+    --ts-blue-800: #013566;
+    --ts-blue-900: #00284d;
+    --ts-blue-950: #000e1a;
+    --ts-blue-1000: #000d19;
+    --ts-blue-a25: #0285ff0a;
+    --ts-blue-a50: #0285ff21;
+    --ts-blue-a75: #0285ff40;
+    --ts-blue-a100: #0285ff66;
+    --ts-blue-a200: #0285ff99;
+    --ts-blue-a300: #0285ffcc;
+    --ts-green-25: #edfaf2;
+    --ts-green-50: #d9f4e4;
+    --ts-green-75: #b8ebcc;
+    --ts-green-100: #8cdfad;
+    --ts-green-200: #66d492;
+    --ts-green-300: #40c977;
+    --ts-green-400: #04b84c;
+    --ts-green-500: #00a240;
+    --ts-green-600: #008635;
+    --ts-green-700: #00692a;
+    --ts-green-800: #004f1f;
+    --ts-green-900: #003716;
+    --ts-green-950: #011c0b;
+    --ts-green-1000: #001207;
+    --ts-green-a25: #04b84c14;
+    --ts-green-a50: #04b84c26;
+    --ts-green-a75: #04b84c4a;
+    --ts-green-a100: #04b84c73;
+    --ts-green-a200: #04b84c99;
+    --ts-green-a300: #04b84cbf;
+    --ts-red-25: #fff0f0;
+    --ts-red-50: #ffd9d9;
+    --ts-red-75: #ffc6c5;
+    --ts-red-100: #ffa4a2;
+    --ts-red-200: #ff8583;
+    --ts-red-300: #ff6764;
+    --ts-red-400: #fa423e;
+    --ts-red-500: #e02e2a;
+    --ts-red-600: #ba2623;
+    --ts-red-700: #911e1b;
+    --ts-red-800: #6e1615;
+    --ts-red-900: #4d100e;
+    --ts-red-950: #280b0a;
+    --ts-red-1000: #1f0909;
+    --ts-red-a25: #fa423e14;
+    --ts-red-a50: #fa423e29;
+    --ts-red-a75: #fa423e4c;
+    --ts-red-a100: #fa423e7a;
+    --ts-red-a200: #fa423ea3;
+    --ts-red-a300: #fa423ec9;
+    --ts-orange-25: #fff5f0;
+    --ts-orange-50: #ffe7d9;
+    --ts-orange-75: #ffcfb4;
+    --ts-orange-100: #ffb790;
+    --ts-orange-200: #ff9e6c;
+    --ts-orange-300: #ff8549;
+    --ts-orange-400: #fb6a22;
+    --ts-orange-500: #e25507;
+    --ts-orange-600: #b9480d;
+    --ts-orange-700: #923b0f;
+    --ts-orange-800: #6d2e0f;
+    --ts-orange-900: #4a2206;
+    --ts-orange-950: #281105;
+    --ts-orange-1000: #211107;
+    --ts-orange-a25: #fb6a2212;
+    --ts-orange-a50: #fb6a2229;
+    --ts-orange-a75: #fb6a2254;
+    --ts-orange-a100: #fb6a227a;
+    --ts-orange-a200: #fb6a22a6;
+    --ts-orange-a300: #fb6a22cf;
+    --ts-yellow-25: #fffbed;
+    --ts-yellow-50: #fff6d9;
+    --ts-yellow-75: #ffeeb8;
+    --ts-yellow-100: #ffe48c;
+    --ts-yellow-200: #ffdb66;
+    --ts-yellow-300: #ffd240;
+    --ts-yellow-400: #ffc300;
+    --ts-yellow-500: #e0ac00;
+    --ts-yellow-600: #ba8e00;
+    --ts-yellow-700: #916f00;
+    --ts-yellow-800: #6e5400;
+    --ts-yellow-900: #4d3b00;
+    --ts-yellow-950: #261d00;
+    --ts-yellow-1000: #1a1400;
+    --ts-yellow-a25: #ffc30014;
+    --ts-yellow-a50: #ffc30026;
+    --ts-yellow-a75: #ffc30045;
+    --ts-yellow-a100: #ffc30073;
+    --ts-yellow-a200: #ffc30096;
+    --ts-yellow-a300: #ffc300bd;
+    --ts-purple-25: #f9f5fe;
+    --ts-purple-50: #efe5fe;
+    --ts-purple-75: #e0cefd;
+    --ts-purple-100: #ceb0fb;
+    --ts-purple-200: #be95fa;
+    --ts-purple-300: #ad7bf9;
+    --ts-purple-400: #924ff7;
+    --ts-purple-500: #8046d9;
+    --ts-purple-600: #6b3ab4;
+    --ts-purple-700: #532d8d;
+    --ts-purple-800: #3f226a;
+    --ts-purple-900: #2c184a;
+    --ts-purple-950: #160c25;
+    --ts-purple-1000: #100a19;
+    --ts-purple-a25: #924ff70f;
+    --ts-purple-a50: #924ff726;
+    --ts-purple-a75: #924ff747;
+    --ts-purple-a100: #924ff773;
+    --ts-purple-a200: #924ff799;
+    --ts-purple-a300: #924ff7bf;
+    --ts-pink-25: #fff4f9;
+    --ts-pink-50: #ffe8f3;
+    --ts-pink-75: #ffd4e8;
+    --ts-pink-100: #ffbada;
+    --ts-pink-200: #ffa3ce;
+    --ts-pink-300: #ff8cc1;
+    --ts-pink-400: #ff66ad;
+    --ts-pink-500: #e04c91;
+    --ts-pink-600: #ba437a;
+    --ts-pink-700: #963c67;
+    --ts-pink-800: #6e2c4a;
+    --ts-pink-900: #4d1f34;
+    --ts-pink-950: #29101c;
+    --ts-pink-1000: #1a0a11;
+    --ts-pink-a25: #ff66ad14;
+    --ts-pink-a50: #ff66ad29;
+    --ts-pink-a75: #ff66ad47;
+    --ts-pink-a100: #ff66ad73;
+    --ts-pink-a200: #ff66ad99;
+    --ts-pink-a300: #ff66adc2;
+    --ts-alpha-01: #ffffff03;
+    --ts-alpha-02: #ffffff05;
+    --ts-alpha-04: #ffffff0a;
+    --ts-alpha-05: #ffffff0d;
+    --ts-alpha-06: #ffffff0f;
+    --ts-alpha-08: #ffffff14;
+    --ts-alpha-10: #ffffff1a;
+    --ts-alpha-12: #ffffff1f;
+    --ts-alpha-15: #ffffff26;
+    --ts-alpha-16: #ffffff29;
+    --ts-alpha-20: #ffffff33;
+    --ts-alpha-25: #ffffff40;
+    --ts-alpha-30: #ffffff4c;
+    --ts-alpha-35: #ffffff59;
+    --ts-alpha-40: #ffffff66;
+    --ts-alpha-50: #ffffff80;
+    --ts-alpha-60: #ffffff99;
+    --ts-alpha-70: #ffffffb2;
+    --ts-canvas: var(--ts-gray-75);
+    --ts-surface: var(--ts-gray-200);
+    --ts-surface-secondary: var(--ts-gray-100);
+    --ts-surface-tertiary: var(--ts-gray-50);
+    --ts-surface-elevated: var(--ts-gray-300);
+    --ts-panel: #1c1c1c;
+    --ts-panel-border: var(--ts-alpha-12);
+    --ts-text: var(--ts-gray-850);
+    --ts-text-secondary: var(--ts-gray-700);
+    --ts-text-tertiary: var(--ts-gray-600);
+    --ts-text-emphasis: var(--ts-gray-1000);
+    --ts-text-inverse: var(--ts-gray-0);
+    --ts-text-disabled: var(--ts-gray-500);
+    --ts-border-subtle: var(--ts-alpha-06);
+    --ts-border: var(--ts-alpha-12);
+    --ts-border-strong: var(--ts-alpha-20);
+    --ts-ring: var(--ts-blue-400);
+    --ts-primary-solid: var(--ts-gray-950);
+    --ts-primary-solid-hover: var(--ts-gray-900);
+    --ts-primary-solid-active: var(--ts-gray-850);
+    --ts-primary-soft: var(--ts-gray-300);
+    --ts-primary-soft-hover: var(--ts-gray-350);
+    --ts-primary-soft-active: var(--ts-gray-400);
+    --ts-primary-outline-border: var(--ts-alpha-25);
+    --ts-primary-outline-hover: var(--ts-alpha-04);
+    --ts-ghost-hover: var(--ts-alpha-12);
+    --ts-ghost-active: var(--ts-alpha-16);
+    --ts-secondary-solid: var(--ts-gray-400);
+    --ts-input-bg: var(--ts-alpha-12);
+    --ts-input-border-focus: var(--ts-alpha-20);
+    --ts-input-border-invalid: var(--ts-red-600);
+    --ts-link: var(--ts-blue-300);
+    --ts-link-hover: var(--ts-blue-400);
+    --ts-switch-track: var(--ts-gray-400);
+    --ts-switch-track-checked: var(--ts-blue-400);
+    --ts-switch-thumb: var(--ts-gray-1000);
+    --ts-segmented-track: var(--ts-gray-0);
+    --ts-segmented-thumb: var(--ts-gray-300);
+    --ts-tooltip-compact-bg: var(--ts-gray-700);
+    --ts-backdrop: #00000080;
+    --ts-info-text: var(--ts-blue-200);
+    --ts-info-surface: var(--ts-blue-a50);
+    --ts-info-surface-text: var(--ts-blue-300);
+    --ts-info-solid: var(--ts-blue-400);
+    --ts-warning-text: var(--ts-orange-500);
+    --ts-warning-surface: var(--ts-orange-a50);
+    --ts-warning-surface-text: var(--ts-orange-400);
+    --ts-warning-solid: var(--ts-orange-500);
+    --ts-caution-text: var(--ts-yellow-500);
+    --ts-caution-surface: var(--ts-yellow-a50);
+    --ts-caution-surface-text: var(--ts-yellow-400);
+    --ts-danger-text: var(--ts-red-500);
+    --ts-danger-surface: var(--ts-red-a50);
+    --ts-danger-surface-text: var(--ts-red-400);
+    --ts-danger-solid: var(--ts-red-500);
+    --ts-danger-ring: var(--ts-red-200);
+    --ts-success-text: var(--ts-green-400);
+    --ts-success-surface: var(--ts-green-a50);
+    --ts-success-surface-text: var(--ts-green-400);
+    --ts-success-solid: var(--ts-green-600);
+    --ts-discovery-text: var(--ts-purple-500);
+    --ts-discovery-surface: var(--ts-purple-a50);
+    --ts-discovery-surface-text: var(--ts-purple-200);
+    --ts-discovery-solid: var(--ts-purple-400);
+    --ts-node-surface: var(--ts-gray-300);
+    --ts-node-ring: var(--ts-alpha-16);
+    --ts-node-ring-selected: var(--ts-alpha-30);
+    --ts-node-ink: var(--ts-gray-1000);
+    --ts-tint-agent: #00284d;
+    --ts-tint-logic: #4a2206;
+    --ts-tint-end: #003716;
+    --ts-tint-note: #414141;
+    --ts-tint-tool: #4d3b00;
+    --ts-tint-data: #2c184a;
+    --ts-tint-ink-dark: var(--ts-gray-1000);
+    --ts-branch-bg: var(--ts-gray-100);
+    --ts-edge: var(--ts-gray-400);
+    --ts-edge-selected: var(--ts-gray-600);
+    --ts-connection-line: #b1b1b7;
+    --ts-handle: var(--ts-gray-300);
+    --ts-toolbar-bg: #303030f5;
+    --ts-dot-grid: #414141;
+    --ts-font-sans: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --ts-heading-5xl-font-size: 72px;
+    --ts-heading-5xl-line-height: 72px;
+    --ts-heading-5xl-font-weight: 600;
+    --ts-heading-5xl-letter-spacing: -0.02em;
+    --ts-heading-5xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-4xl-font-size: 60px;
+    --ts-heading-4xl-line-height: 60px;
+    --ts-heading-4xl-font-weight: 600;
+    --ts-heading-4xl-letter-spacing: -0.02em;
+    --ts-heading-4xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-3xl-font-size: 48px;
+    --ts-heading-3xl-line-height: 48px;
+    --ts-heading-3xl-font-weight: 600;
+    --ts-heading-3xl-letter-spacing: -0.02em;
+    --ts-heading-3xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-2xl-font-size: 36px;
+    --ts-heading-2xl-line-height: 42px;
+    --ts-heading-2xl-font-weight: 600;
+    --ts-heading-2xl-letter-spacing: -0.02em;
+    --ts-heading-2xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-xl-font-size: 32px;
+    --ts-heading-xl-line-height: 38px;
+    --ts-heading-xl-font-weight: 600;
+    --ts-heading-xl-letter-spacing: -0.02em;
+    --ts-heading-xl-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-lg-font-size: 24px;
+    --ts-heading-lg-line-height: 28px;
+    --ts-heading-lg-font-weight: 600;
+    --ts-heading-lg-letter-spacing: -0.01em;
+    --ts-heading-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-md-font-size: 20px;
+    --ts-heading-md-line-height: 26px;
+    --ts-heading-md-font-weight: 600;
+    --ts-heading-md-letter-spacing: -0.01em;
+    --ts-heading-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-sm-font-size: 18px;
+    --ts-heading-sm-line-height: 26px;
+    --ts-heading-sm-font-weight: 600;
+    --ts-heading-sm-letter-spacing: -0.01em;
+    --ts-heading-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-heading-xs-font-size: 16px;
+    --ts-heading-xs-line-height: 24px;
+    --ts-heading-xs-font-weight: 600;
+    --ts-heading-xs-letter-spacing: -0.01em;
+    --ts-heading-xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-text-lg-font-size: 18px;
+    --ts-text-lg-line-height: 29px;
+    --ts-text-lg-font-weight: 400;
+    --ts-text-lg-letter-spacing: -0.01em;
+    --ts-text-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-text-md-font-size: 16px;
+    --ts-text-md-line-height: 24px;
+    --ts-text-md-font-weight: 400;
+    --ts-text-md-letter-spacing: -0.01em;
+    --ts-text-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-text-sm-font-size: 14px;
+    --ts-text-sm-line-height: 20px;
+    --ts-text-sm-font-weight: 400;
+    --ts-text-sm-letter-spacing: -0.01em;
+    --ts-text-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-text-xs-font-size: 12px;
+    --ts-text-xs-line-height: 18px;
+    --ts-text-xs-font-weight: 400;
+    --ts-text-xs-letter-spacing: 0;
+    --ts-text-xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-text-2xs-font-size: 10px;
+    --ts-text-2xs-line-height: 15px;
+    --ts-text-2xs-font-weight: 400;
+    --ts-text-2xs-letter-spacing: 0;
+    --ts-text-2xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-text-3xs-font-size: 8px;
+    --ts-text-3xs-line-height: 12px;
+    --ts-text-3xs-font-weight: 400;
+    --ts-text-3xs-letter-spacing: 0;
+    --ts-text-3xs-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-small-caps-md-font-size: 11px;
+    --ts-small-caps-md-line-height: 15px;
+    --ts-small-caps-md-font-weight: 600;
+    --ts-small-caps-md-letter-spacing: 0.65px;
+    --ts-small-caps-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-small-caps-lg-font-size: 13px;
+    --ts-small-caps-lg-line-height: 19px;
+    --ts-small-caps-lg-font-weight: 600;
+    --ts-small-caps-lg-letter-spacing: 0.6px;
+    --ts-small-caps-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-page-title-font-size: 36px;
+    --ts-page-title-line-height: 40px;
+    --ts-page-title-font-weight: 590;
+    --ts-page-title-letter-spacing: 0.36px;
+    --ts-page-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-panel-title-font-size: 16px;
+    --ts-panel-title-line-height: 24px;
+    --ts-panel-title-font-weight: 600;
+    --ts-panel-title-letter-spacing: -0.16px;
+    --ts-panel-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-panel-description-font-size: 14px;
+    --ts-panel-description-line-height: 20px;
+    --ts-panel-description-font-weight: 400;
+    --ts-panel-description-letter-spacing: -0.14px;
+    --ts-panel-description-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-field-label-font-size: 14px;
+    --ts-field-label-line-height: 21px;
+    --ts-field-label-font-weight: 400;
+    --ts-field-label-letter-spacing: -0.16px;
+    --ts-field-label-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-field-value-font-size: 14px;
+    --ts-field-value-line-height: 24px;
+    --ts-field-value-font-weight: 500;
+    --ts-field-value-letter-spacing: -0.16px;
+    --ts-field-value-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-input-text-font-size: 14px;
+    --ts-input-text-line-height: 21px;
+    --ts-input-text-font-weight: 400;
+    --ts-input-text-letter-spacing: -0.14px;
+    --ts-input-text-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-palette-item-font-size: 14px;
+    --ts-palette-item-line-height: 20px;
+    --ts-palette-item-font-weight: 500;
+    --ts-palette-item-letter-spacing: -0.16px;
+    --ts-palette-item-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-palette-section-font-size: 12px;
+    --ts-palette-section-line-height: 18px;
+    --ts-palette-section-font-weight: 500;
+    --ts-palette-section-letter-spacing: -0.16px;
+    --ts-palette-section-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-node-title-font-size: 12px;
+    --ts-node-title-line-height: 18px;
+    --ts-node-title-font-weight: 500;
+    --ts-node-title-letter-spacing: -0.16px;
+    --ts-node-title-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-node-meta-font-size: 10px;
+    --ts-node-meta-line-height: 15px;
+    --ts-node-meta-font-weight: 500;
+    --ts-node-meta-letter-spacing: -0.16px;
+    --ts-node-meta-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-branch-label-font-size: 12px;
+    --ts-branch-label-line-height: 28px;
+    --ts-branch-label-font-weight: 500;
+    --ts-branch-label-letter-spacing: -0.16px;
+    --ts-branch-label-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-badge-font-size: 12px;
+    --ts-badge-line-height: 24px;
+    --ts-badge-font-weight: 600;
+    --ts-badge-letter-spacing: 0.36px;
+    --ts-badge-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-button-md-font-size: 14px;
+    --ts-button-md-line-height: 14px;
+    --ts-button-md-font-weight: 500;
+    --ts-button-md-letter-spacing: -0.14px;
+    --ts-button-md-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-button-sm-font-size: 12px;
+    --ts-button-sm-line-height: 12px;
+    --ts-button-sm-font-weight: 500;
+    --ts-button-sm-letter-spacing: 0;
+    --ts-button-sm-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-button-lg-font-size: 16px;
+    --ts-button-lg-line-height: 16px;
+    --ts-button-lg-font-weight: 500;
+    --ts-button-lg-letter-spacing: -0.01em;
+    --ts-button-lg-font-family: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --ts-code-font-size: 13px;
+    --ts-code-line-height: 20px;
+    --ts-code-font-weight: 400;
+    --ts-code-letter-spacing: 0;
+    --ts-code-font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --ts-space-0-5: 2px;
+    --ts-space-1: 4px;
+    --ts-space-1-5: 6px;
+    --ts-space-2: 8px;
+    --ts-space-2-5: 10px;
+    --ts-space-3: 12px;
+    --ts-space-4: 16px;
+    --ts-space-5: 20px;
+    --ts-space-6: 24px;
+    --ts-space-8: 32px;
+    --ts-space-10: 40px;
+    --ts-space-12: 48px;
+    --ts-space-14: 56px;
+    --ts-space-16: 64px;
+    --ts-control-3xs: 22px;
+    --ts-control-2xs: 24px;
+    --ts-control-xs: 26px;
+    --ts-control-sm: 28px;
+    --ts-control-md: 32px;
+    --ts-control-lg: 36px;
+    --ts-control-xl: 40px;
+    --ts-control-2xl: 44px;
+    --ts-control-3xl: 48px;
+    --ts-gutter-2xs: 6px;
+    --ts-gutter-xs: 8px;
+    --ts-gutter-sm: 10px;
+    --ts-gutter-md: 12px;
+    --ts-gutter-lg: 14px;
+    --ts-gutter-xl: 16px;
+    --ts-icon-xs: 14px;
+    --ts-icon-sm: 16px;
+    --ts-icon-md: 18px;
+    --ts-icon-lg: 20px;
+    --ts-icon-xl: 22px;
+    --ts-icon-2xl: 24px;
+    --ts-header-height: 54px;
+    --ts-side-nav-width: 210px;
+    --ts-side-nav-collapsed: 56px;
+    --ts-palette-width: 200px;
+    --ts-inspector-width: 360px;
+    --ts-content-width: 760px;
+    --ts-page-gutter: 8px;
+    --ts-switch-w: 32px;
+    --ts-switch-h: 19px;
+    --ts-handle-size: 8px;
+    --ts-radius-2xs: 2px;
+    --ts-radius-xs: 4px;
+    --ts-radius-sm: 6px;
+    --ts-radius-md: 8px;
+    --ts-radius-lg: 10px;
+    --ts-radius-xl: 12px;
+    --ts-radius-2xl: 16px;
+    --ts-radius-3xl: 20px;
+    --ts-radius-4xl: 24px;
+    --ts-radius-full: 9999px;
+    --ts-shadow-hairline: 0 0 0 0.5px #ffffff1f;
+    --ts-shadow-100: 0 1px 2px -1px #00000033;
+    --ts-shadow-200: 0 2px 4px -1px #00000033;
+    --ts-shadow-300: 0 4px 8px -2px #0000005c;
+    --ts-shadow-400: 0 8px 16px -4px #0000004d;
+    --ts-shadow-toolbar: 0 8px 16px -4px #0000001f;
+    --ts-shadow-overlay: 0 10px 15px -3px #00000033, 0 4px 6px -4px #00000033;
+    --ts-shadow-node: 0 0 0 1px #ffffff29;
+    --ts-shadow-node-selected: 0 0 0 1px #ffffff4d;
+    --ts-shadow-handle: 0 0 0 1px #414141;
+    --ts-shadow-switch-thumb: 0 1px 2px #00000033;
+    --ts-ease-enter: cubic-bezier(0.19, 1, 0.22, 1);
+    --ts-ease-exit: cubic-bezier(0.8, 0, 0.4, 1);
+    --ts-ease-exit-snappy: cubic-bezier(0.65, 0, 0.4, 1);
+    --ts-ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+    --ts-ease-basic: ease;
+    --ts-duration-basic: 150ms;
+    --ts-duration-enter: 240ms;
+    --ts-duration-exit: 120ms;
+    }
+  }
+}
+
+@font-face{font-family:Inter;src:url("../../../../../packages/ui/src/fonts/inter/Inter-Regular.woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url("../../../../../packages/ui/src/fonts/inter/Inter-Medium.woff2");font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url("../../../../../packages/ui/src/fonts/inter/Inter-SemiBold.woff2");font-weight:600 800;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url("../../../../../packages/ui/src/fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-Regular.woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url("../../../../../packages/ui/src/fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-Medium.woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url("../../../../../packages/ui/src/fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-SemiBold.woff2");font-weight:600 800;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url("../../../../../packages/ui/src/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2");font-display:swap}
+:root{--rule:var(--ts-primary-outline-border);--max:1216px;--gutter:var(--ts-space-6);--preview:136px}
+*,*::before,*::after{box-sizing:border-box}
+html{color-scheme:light;scroll-padding-block-start:var(--ts-space-6)}
+html[data-theme=dark]{color-scheme:dark}
+body{margin:0;background:var(--ts-surface);color:var(--ts-text);font:400 var(--ts-text-md-font-size)/var(--ts-text-md-line-height) var(--ts-font-sans);-webkit-font-smoothing:antialiased}
+body:lang(ar){font-family:"IBM Plex Sans Arabic",Inter,sans-serif;line-height:1.65}
+::selection{background:var(--ts-info-surface);color:var(--ts-text-emphasis)}
+:focus-visible{outline:2px solid var(--ts-ring);outline-offset:2px}
+a{color:inherit;text-decoration:none}
+button,input{color:inherit;font:inherit}
+button{cursor:pointer}
+img{display:block;max-inline-size:100%}
+h1,h2,h3,p,figure{margin:0}
+h1,h2,h3,b,strong{font-weight:600;color:var(--ts-text-emphasis)}
+h1{font-size:var(--ts-heading-4xl-font-size);line-height:1.05;letter-spacing:-.04em}
+h2{font-size:var(--ts-heading-lg-font-size);line-height:var(--ts-heading-lg-line-height);letter-spacing:-.02em}
+h3{font-size:var(--ts-heading-xs-font-size);line-height:var(--ts-heading-xs-line-height)}
+:lang(ar) h1,:lang(ar) h2{letter-spacing:normal;line-height:1.22}
+code{font-family:var(--ts-font-mono);font-size:var(--ts-text-xs-font-size);font-variant-numeric:tabular-nums}
+small{font-size:var(--ts-text-xs-font-size)}
+[hidden]{display:none!important}
+.wrap{inline-size:min(var(--max),calc(100% - var(--gutter) * 2));margin-inline:auto}
+.ic{inline-size:16px;block-size:16px;flex:none;vertical-align:middle}
+[dir=rtl] .arrow{transform:scaleX(-1)}
+.skip{position:absolute;inset-inline-start:var(--gutter);inset-block-start:8px;transform:translateY(-200%);z-index:2;background:var(--ts-surface);padding:8px}
+.skip:focus{transform:none}
+.site-header{border-block-end:1px solid var(--rule)}
+.head{min-block-size:68px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;justify-self:start;color:var(--ts-text-emphasis);font-size:14px;font-weight:600;white-space:nowrap}
+.brand img{inline-size:30px;block-size:30px}
+.dark-mark, [data-theme=dark] .light-mark, [data-theme=dark] .moon{display:none}
+[data-theme=dark] .dark-mark,[data-theme=dark] .sun{display:block}
+.sun{display:none}
+.topnav,.utilities{display:flex;align-items:center;gap:4px}
+.topnav a,.utilities a,.icon-btn{display:inline-flex;align-items:center;justify-content:center;min-block-size:40px;padding-inline:12px;border-radius:var(--ts-radius-md);white-space:nowrap;font-size:14px;color:var(--ts-text-secondary)}
+.topnav a:hover,.utilities a:hover,.icon-btn:hover{background:var(--ts-ghost-hover);color:var(--ts-text-emphasis)}
+.topnav [aria-current=page]{color:var(--ts-text-emphasis);font-weight:600;background:var(--ts-primary-soft)}
+.utilities{justify-self:end}
+.icon-btn{background:none;border:0;min-inline-size:40px;padding:0}
+.site-footer{margin-block-start:64px;border-block-start:1px solid var(--rule)}
+.foot{min-block-size:80px;display:flex;gap:12px 24px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-block:16px;color:var(--ts-text-secondary);font-size:14px}
+.foot nav,.doclinks{display:flex;gap:12px 16px;align-items:center;flex-wrap:wrap}
+.doclinks{font-size:12px;color:var(--ts-text-secondary)}
+.doclinks a,.foot a,.textlink{text-underline-offset:4px}
+.doclinks a:hover,.foot a:hover,.textlink:hover{text-decoration:underline;color:var(--ts-text-emphasis)}
+.doclinks .ic{inline-size:14px;block-size:14px;margin-inline-end:4px}
+.hero{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;padding-block:48px 32px}
+.hero-copy{grid-column:span 7}
+.hero h1{font-size:clamp(42px,5.55vw,80px);line-height:1.02;max-inline-size:13ch;text-wrap:balance}
+.hero-copy p,.lead{font-size:var(--ts-text-lg-font-size);line-height:var(--ts-text-lg-line-height);color:var(--ts-text-secondary);max-inline-size:55ch;margin-block-start:20px;text-wrap:pretty}
+.hero figure{grid-column:span 5;display:grid;gap:0;background:var(--ts-surface-secondary);border:1px solid var(--rule);border-radius:var(--ts-radius-2xl);min-inline-size:0}
+.hero:lang(ar) h1{line-height:1.12}
+.plate{min-block-size:245px;display:grid;grid-template-rows:1fr auto;align-items:end;justify-items:center;padding:24px 20px 0}
+.plate-brand{inline-size:min(40%,156px);block-size:auto;align-self:center}
+.squad{display:flex;justify-content:center;align-items:end;inline-size:min(100%,355px);gap:8px}
+.squad img{inline-size:27%;height:auto;object-fit:contain}
+.squad img:nth-child(2){inline-size:34%}
+.hero figcaption{min-block-size:40px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;font-size:12px;color:var(--ts-text-secondary);border-block-start:1px solid var(--rule)}
+.cta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-block-start:24px}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-block-size:40px;padding-inline:16px;border:1px solid transparent;border-radius:var(--ts-radius-full);font-size:14px;font-weight:600;white-space:nowrap}
+.pill.solid,.sample-btn.solid{background:var(--ts-primary-solid);color:var(--ts-text-inverse)}
+.pill.solid:hover{background:var(--ts-primary-solid-hover)}
+.pill.soft,.sample-btn.soft{background:var(--ts-primary-soft);color:var(--ts-text-emphasis)}
+.pill.soft:hover{background:var(--ts-primary-soft-hover)}
+.quick{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px 24px;border-block:1px solid var(--rule);padding-block:16px}
+.quick-install{display:flex;gap:8px 16px;align-items:center;flex-wrap:wrap}
+.quick-install>strong{font-size:14px}
+.command{max-inline-size:100%;display:flex;align-items:center;gap:4px 8px;padding:4px 4px 4px 12px;padding-inline:12px 4px;background:var(--ts-surface-tertiary);border-radius:var(--ts-radius-md)}
+.command code{direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
+button.copy{display:inline-grid;place-items:center;min-inline-size:36px;min-block-size:34px;background:var(--ts-surface);border:1px solid var(--rule);border-radius:var(--ts-radius-md)}
+button.copy:hover{background:var(--ts-primary-soft)}
+.quick .doclinks{justify-self:end}
+.home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;padding-block-start:48px}
+.home-grid{grid-template-rows:auto 1fr;row-gap:0}
+.home-grid>section{display:grid;grid-row:span 2;grid-template-rows:subgrid}
+.home-grid h2{font-size:var(--ts-heading-xl-font-size);line-height:1.16}
+.home-grid header p{margin-block:10px 20px;color:var(--ts-text-secondary);max-inline-size:47ch}
+.link-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.link-list a,.system-items a{display:flex;align-items:center;justify-content:space-between;gap:12px;border-block-start:1px solid var(--rule);min-block-size:43px;font-size:14px;font-weight:500}
+.link-list a:hover,.system-items a:hover{color:var(--ts-link)}
+.link-list a .ic,.system-items a .ic,.card-name .ic{color:var(--ts-text-secondary)}
+.ui-sample{margin-block-start:16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:1px solid var(--rule);border-radius:var(--ts-radius-2xl);background:var(--ts-surface-secondary)}
+.ui-sample>div{padding:12px 16px;min-inline-size:0;display:grid;gap:6px;align-content:center}
+.ui-sample>div+div{border-inline-start:1px solid var(--rule)}
+.ui-sample small{color:var(--ts-text-secondary)}
+.ui-sample code{overflow-wrap:anywhere}
+.extra{margin-block-start:36px;display:flex;align-items:baseline;gap:8px 20px;flex-wrap:wrap;border-block-start:1px solid var(--rule);padding-block-start:16px;font-size:14px}
+.page-intro{padding-block:48px 32px;border-block-end:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px}
+.page-intro h1{font-size:var(--ts-heading-4xl-font-size)}
+.page-intro .lead{margin-block-start:12px;max-inline-size:60ch}
+.doc-layout{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gutter);padding-block-start:32px}
+.rail{grid-column:span 2;align-self:start;position:sticky;inset-block-start:24px;min-inline-size:0}
+.rail strong{font-size:14px;display:block;margin-block-end:8px}
+.rail nav{display:grid;gap:0;color:var(--ts-text-secondary);font-size:14px}
+.rail a{padding:7px 8px;border-radius:var(--ts-radius-md);margin-inline-start:-8px}
+.rail a:hover,.rail a[aria-current=page]{background:var(--ts-primary-soft);color:var(--ts-text-emphasis)}
+.body-grid{grid-column:3 / -1;min-inline-size:0}
+.find{display:flex;align-items:center;gap:10px;padding-inline:12px;border:1px solid var(--rule);border-radius:var(--ts-radius-md);max-inline-size:390px;color:var(--ts-text-secondary);min-block-size:44px}
+.find:focus-within{outline:2px solid var(--ts-ring);outline-offset:2px}
+.find input{background:transparent;border:0;min-inline-size:0;inline-size:100%;outline:0;font-size:14px}
+.find input::placeholder{color:var(--ts-text-secondary);opacity:1}
+.group{margin-block-start:32px}
+.group+.group{margin-block-start:40px}
+.group-title{display:flex;gap:12px;align-items:baseline;justify-content:space-between;margin-block-end:16px}
+.group-title span{font-size:12px;color:var(--ts-text-secondary)}
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.demo-card{min-inline-size:0;display:grid;grid-template-rows:var(--preview) 52px;border:1px solid var(--rule);border-radius:var(--ts-radius-2xl);background:var(--ts-surface)}
+.demo-card:hover{border-color:var(--ts-border-strong)}
+.demo-card:hover .card-name .ic{color:var(--ts-text-emphasis)}
+.demo-preview{display:grid;place-items:center;min-inline-size:0;background:var(--ts-surface-secondary);padding:12px;border-start-start-radius:calc(var(--ts-radius-2xl) - 1px);border-start-end-radius:calc(var(--ts-radius-2xl) - 1px)}
+.card-name{display:flex;align-items:center;justify-content:space-between;padding-inline:14px;gap:4px;border-block-start:1px solid var(--rule);min-inline-size:0;color:var(--ts-text-emphasis);font-size:14px;line-height:18px;font-weight:600}
+.card-name span{overflow-wrap:anywhere}
+.specimen{max-inline-size:100%;inline-size:max-content;font-size:11px;line-height:15px;color:var(--ts-text)}
+.specimen .ic{inline-size:13px;block-size:13px}
+.sample-panel{inline-size:168px;max-inline-size:100%;display:grid;gap:6px;padding:8px 10px;background:var(--ts-surface);border:1px solid var(--rule);border-radius:var(--ts-radius-md)}
+.sample-row,.sample-between{display:flex;align-items:center;gap:5px;min-inline-size:0}
+.sample-row{justify-content:center;flex-wrap:wrap}
+.sample-between{justify-content:space-between}
+.sample-muted{color:var(--ts-text-secondary);font-size:10px}
+.sample-btn,.sample-tag{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:4px 8px;border-radius:var(--ts-radius-full);font-weight:600;white-space:nowrap}
+.sample-tag{font-size:11px;background:var(--ts-success-surface);color:var(--ts-success-text);padding-block:2px}
+.sample-tag.info{background:var(--ts-info-surface);color:var(--ts-info-surface-text)}
+.sample-tag.neutral{background:var(--ts-primary-soft);color:var(--ts-text-emphasis)}
+.sample-input{display:flex;align-items:center;gap:5px;border-radius:var(--ts-radius-sm);background:var(--ts-input-bg);min-block-size:25px;padding:3px 7px;color:var(--ts-text-secondary);width:100%}
+.sample-switch{inline-size:32px;block-size:19px;border-radius:var(--ts-radius-full);background:var(--ts-switch-track-checked);padding:3px;display:flex;justify-content:end;flex:none}
+.sample-switch::after{content:"";inline-size:13px;block-size:13px;background:var(--ts-switch-thumb);border-radius:var(--ts-radius-full)}
+.sample-segments{display:flex;background:var(--ts-segmented-track);padding:3px;border-radius:var(--ts-radius-full);white-space:nowrap}
+.sample-segments span{padding:3px 7px;border-radius:inherit}
+.sample-segments .picked{background:var(--ts-segmented-thumb);font-weight:600}
+.sample-rule{border-block-start:1px solid var(--rule);padding-block-start:4px}
+.sample-pop{background:var(--ts-primary-solid);color:var(--ts-text-inverse);border-radius:var(--ts-radius-sm);padding:4px 7px}
+.sample-center{text-align:center;justify-items:center}
+.avatar{inline-size:27px;block-size:33px;object-fit:contain;flex:none}
+.sample-mascot{inline-size:58px;block-size:69px;object-fit:contain}
+.barplot{height:54px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;align-items:end;padding-inline:4px;border-block-end:1px solid var(--rule);background:linear-gradient(to bottom,var(--rule) 1px,transparent 1px) 0 0/100% 50%}
+.barplot i,.barline i{display:block;background:var(--ts-gray-650);border-start-start-radius:3px;border-start-end-radius:3px}
+.barplot i{height:var(--value)}
+.barplot i:last-child{background:var(--ts-primary-solid)}
+.axis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));text-align:center;font-size:10px;color:var(--ts-text-secondary);line-height:12px}
+.barline{display:block;background:var(--ts-primary-soft);block-size:4px;border-radius:4px}
+.barline i{width:var(--value);height:100%;border-radius:inherit}
+.distrib{display:flex;height:12px;gap:2px}
+.distrib i{width:var(--value);background:var(--tone);border-radius:2px}
+.metric{font-size:23px;line-height:26px;letter-spacing:-.04em}
+.sample-msg{max-inline-size:100%;justify-self:end;background:var(--ts-primary-soft);padding:3px 6px;border-radius:var(--ts-radius-md)}
+.node{display:flex;align-items:center;gap:6px;justify-content:start;background:var(--ts-node-surface);box-shadow:0 0 0 1px var(--ts-node-ring);border-radius:var(--ts-radius-md);padding:5px 6px;min-inline-size:0}
+.node i{display:grid;place-items:center;inline-size:20px;block-size:20px;border-radius:var(--ts-radius-xs);background:var(--tint,var(--ts-tint-agent));color:var(--ts-node-ink);flex:none}
+.canvas{background:radial-gradient(var(--ts-dot-grid) .6px,transparent .6px) 0 0/10px 10px;padding:10px 5px;display:flex;align-items:center;min-inline-size:0}
+.canvas .node{font-size:9px;gap:4px;padding:4px}
+.canvas .node i{inline-size:15px;block-size:15px}
+.canvas .node .ic{inline-size:11px;block-size:11px}
+.canvas .join{inline-size:10px;border-block-start:1px solid var(--ts-edge);flex:none}
+.sample-tools{display:flex;gap:8px;align-items:center;background:var(--ts-toolbar-bg);border:1px solid var(--rule);padding:6px 10px;border-radius:var(--ts-radius-full)}
+.sample-map{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;inline-size:110px;padding:10px;border:1px solid var(--ts-node-ring);border-radius:var(--ts-radius-md);background:var(--ts-canvas)}
+.sample-map i{display:block;block-size:12px;border-radius:var(--ts-radius-xs);background:var(--ts-tint-agent)}
+.sample-map i:nth-child(2){margin-block-start:9px;background:var(--ts-tint-logic)}
+.sample-map i:nth-child(3){background:var(--ts-tint-end)}
+.empty-search{padding-block:24px;color:var(--ts-text-secondary)}
+.row-title{margin-block-end:12px}
+.colour-header p,.palette-note{color:var(--ts-text-secondary);max-inline-size:68ch;margin-block:8px 16px}
+.colour-specimen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--rule);border-radius:var(--ts-radius-2xl)}
+.colour-mode{display:grid;gap:12px;padding:16px 20px;color:var(--ts-text);background:var(--ts-surface-secondary)}
+.colour-mode:first-child{border-start-start-radius:inherit;border-end-start-radius:inherit}
+.colour-mode:last-child{border-start-end-radius:inherit;border-end-end-radius:inherit;border-inline-start:1px solid var(--rule)}
+.colour-mode>span{font-size:12px;color:var(--ts-text-secondary)}
+.mode-demo{display:flex;justify-content:space-between;gap:8px;align-items:center;background:var(--ts-panel);border:1px solid var(--ts-panel-border);border-radius:var(--ts-radius-md);padding:10px;font-size:13px;min-inline-size:0;flex-wrap:wrap}
+.colour-group{margin-block-start:32px}
+.token-table{inline-size:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;text-align:start}
+.token-table col:first-child{width:31%}
+.token-table col:nth-child(2),.token-table col:nth-child(3){width:18%}
+.token-table th,.token-table td{padding:10px 8px;border-block-end:1px solid var(--rule);text-align:start;overflow-wrap:anywhere}
+.token-table th:first-child,.token-table td:first-child{padding-inline-start:0}
+.token-table thead th{font-size:12px;font-weight:500;color:var(--ts-text-secondary)}
+.token-table td:last-child{color:var(--ts-text-secondary);font-size:13px}
+.token-copy{display:inline-flex;align-items:center;gap:4px;text-align:start;max-inline-size:100%;min-block-size:30px;padding:0 4px;border:0;background:none;border-radius:var(--ts-radius-xs);margin-inline-start:-4px}
+.token-copy:hover{background:var(--ts-primary-soft)}
+.token-copy .ic{color:var(--ts-text-secondary);width:13px;height:13px}
+.token-value{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.swatch{inline-size:24px;block-size:24px;border-radius:var(--ts-radius-sm);border:1px solid var(--rule);background-color:var(--ts-canvas);display:inline-grid;place-items:stretch;flex:none}
+.swatch i{border-radius:inherit;background:var(--swatch)}
+details{border-block-end:1px solid var(--rule)}
+summary{cursor:pointer;padding-block:12px;font-weight:500;color:var(--ts-text-emphasis)}
+summary::marker{color:var(--ts-text-secondary)}
+.notice{position:fixed;inset-block-end:16px;inset-inline-end:var(--gutter);z-index:3;max-inline-size:calc(100% - var(--gutter)*2);background:var(--ts-primary-solid);color:var(--ts-text-inverse);font-size:14px;padding:9px 14px;border-radius:var(--ts-radius-md)}
+@media(max-width:950px){
+ .head{gap:8px}.hero{gap:16px}.home-grid{gap:32px}
+ .doc-layout{grid-template-columns:minmax(126px,1fr) minmax(0,5fr);gap:20px}
+ .rail{grid-column:1}.body-grid{grid-column:2}.card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:720px){
+ :root{--gutter:var(--ts-space-4)}
+ .head{grid-template-columns:1fr auto;gap:0 8px;padding-block-start:8px}
+ .topnav{grid-row:2;grid-column:1/-1;margin-inline-start:-6px;padding-block:3px 6px;gap:2px}
+ .topnav a,.utilities a{padding-inline:9px}.utilities{grid-column:2;grid-row:1}
+ .hero{grid-template-columns:minmax(0,1fr);gap:24px;padding-block:32px 24px}
+ .hero-copy,.hero figure{grid-column:1}.hero figure{max-inline-size:none}
+ .hero-copy p,.lead{margin-block-start:12px;font-size:16px;line-height:24px}
+ .plate{min-block-size:0;gap:8px;padding-block-start:14px}
+ .squad{inline-size:min(85%,232px)}
+ .cta{margin-block-start:16px;gap:12px}
+ .quick,.home-grid,.page-intro,.doc-layout{grid-template-columns:minmax(0,1fr)}
+ .quick .doclinks{justify-self:start}.home-grid{gap:28px;padding-block-start:32px;grid-template-rows:none}.home-grid>section{display:block;grid-row:auto}
+ .page-intro{padding-block:28px 20px;gap:13px}.page-intro h1{font-size:var(--ts-heading-2xl-font-size)}
+ .doc-layout{padding-block-start:20px;gap:20px}
+ .rail,.body-grid{grid-column:1;position:static}
+ .rail{border-block-end:1px solid var(--rule);padding-block-end:8px}
+ .rail nav{display:flex;flex-wrap:wrap;gap:0 2px}
+ .rail a{margin:0;padding:5px 8px;font-size:12px}
+ .rail strong{margin-block-end:3px}
+ .group{margin-block-start:24px}.group+.group{margin-block-start:28px}
+ .card-grid{gap:10px}.card-name{padding-inline:8px;font-size:13px}
+ .card-name .ic{inline-size:12px;block-size:12px}.demo-preview{padding-inline:8px}
+ .token-table col:first-child{width:40%}
+ .token-table col:nth-child(2),.token-table col:nth-child(3){width:30%}
+ .token-table col:nth-child(4),.token-table th:last-child,.token-table td:last-child{display:none}
+ .colour-mode{padding:10px}.token-value{gap:4px}.token-table th,.token-table td{padding-inline:4px}
+ .site-footer{margin-block-start:40px}
+}
+@media(max-width:355px){
+ .card-grid{grid-template-columns:minmax(0,1fr)}.ui-sample{grid-template-columns:minmax(0,1fr)}
+ .ui-sample>div+div{border-inline-start:0;border-block-start:1px solid var(--rule)}
+}
+
+.brand:lang(ar) img{direction:ltr}
+.demo-preview{grid-template-columns:minmax(0,1fr)}
+.specimen{min-inline-size:0}
+
+</style><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap head"><a class="brand" href="home.html"><img class=" light-mark" src="../../../../../design/logo/logo.svg" alt=""><img class=" dark-mark" src="../../../../../design/logo/logo-dark.svg" alt=""><span>Design system</span></a><nav class="topnav" aria-label="Main"><a href="home.html" aria-current="page">Home</a><a href="foundation-colour.html">Foundations</a><a href="components.html">Components</a></nav><div class="utilities"><a class="" href="home-ar.html"><span lang="ar">العربية</span></a><button type="button" class="icon-btn" id="theme" aria-label="Toggle theme" title="Toggle theme"><svg class="ic moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 9.35A5.6 5.6 0 0 1 6.65 2.5 5.6 5.6 0 1 0 13.5 9.35Z"/></svg><svg class="ic sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.75v1.5m0 9.5v1.5m6.25-6.25h-1.5m-9.5 0h-1.5m10.67-4.42-1.06 1.06m-6.72 6.72-1.06 1.06m8.84 0-1.06-1.06M4.64 4.64 3.58 3.58"/></svg></button></div></div></header><main class="wrap" id="main"><section class="hero"><div class="hero-copy"><h1>The tensquads<br>design system</h1><p>Design foundations and React components for tensquads and <span lang="ar" dir="rtl">بنّاء</span>. Build consistent interfaces for people and agents.</p><div class="cta"><a class="pill solid" href="foundation-colour.html">Explore foundations<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="pill soft" href="components.html">Browse components<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a></div></div><figure><div class="plate"><img class="plate-brand light-mark" src="../../../../../design/logo/wordmark.svg" alt=""><img class="plate-brand dark-mark" src="../../../../../design/logo/wordmark-dark.svg" alt=""><div class="squad"><img class="" src="../../../../../design/mascots/svg/kyoto.svg" alt="Kyoto"><img class="" src="../../../../../design/mascots/svg/petra.svg" alt="Petra"><img class="" src="../../../../../design/mascots/svg/delphi.svg" alt="Delphi"></div></div><figcaption><span>Signal and the squadmates</span><a class="textlink" href="https://10squads.com/design/#mascots">Explore the mascots <svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a></figcaption></figure></section><div class="quick"><div class="quick-install"><strong>Install the UI library</strong><div class="command"><code dir="ltr">npm install github:moeghashim/tensquads-ui#&lt;commit-sha&gt;</code><button type="button" class="copy" data-copy="npm install github:moeghashim/tensquads-ui#&lt;commit-sha&gt;" aria-label="Copy install command" title="Copy install command"><svg class="ic copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1.25"/><path d="M10 3H4.25C3.56 3 3 3.56 3 4.25V10"/></svg></button></div><a class="textlink" href="https://tensquads-ui-preview.mohanadgh.workers.dev/get-started">Get started <svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a></div><nav class="doclinks" aria-label="Text formats"><a class="" href="markdown/home.md"><svg class="ic doc" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2.5h4.5L12.5 5.5V13A.5.5 0 0 1 12 13.5H4A.5.5 0 0 1 3.5 13V3A.5.5 0 0 1 4 2.5h1Zm4.5 0V6h3M6 8.5h4M6 11h3"/></svg>View as Markdown</a><a class="" href="llms.txt"><bdi>llms.txt</bdi></a></nav></div><div class="home-grid"><section aria-labelledby="foundations"><header><h2 id="foundations">Foundations</h2><p>The tokens and brand assets that shape every tensquads interface.</p></header><div class="link-list"><a class="" href="foundation-colour.html">Colour<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#typography">Typography<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#spacing">Spacing<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#radius">Corner radius<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#shadows">Shadows<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#easing">Motion<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#logo">Logo<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://10squads.com/design/#mascots">Mascots<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a></div></section><section aria-labelledby="ui-system"><header><h2 id="ui-system">UI system</h2><p>Build screens in React or stream the same components from an agent with OpenUI.</p></header><div><div class="system-items"><a class="" href="components.html">Browse the component library<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a><a class="" href="https://tensquads-ui-preview.mohanadgh.workers.dev/get-started">Build with React and OpenUI<svg class="ic arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h8m-3.5-3.5L12 8l-3.5 3.5"/></svg></a></div><div class="ui-sample"><div><small>OpenUI stream</small><code dir="ltr">root = Badge("Ready", "success")</code></div><div><small>Rendered component</small><div><span class="sample-tag ">Ready</span></div></div></div></div></section></div><div class="extra"><strong>Design reference</strong><a class="textlink" href="https://10squads.com/design/#overview">Principles</a><a class="textlink" href="https://10squads.com/design/#screens">Product screens</a><a class="textlink" href="https://10squads.com/design/#pages">Page designs</a><a class="textlink" href="https://10squads.com/design/#states">Mascot states</a></div></main><footer class="site-footer"><div class="wrap foot"><span><bdi>tensquads</bdi> · Design system</span><nav aria-label="Project resources"><a class="" href="https://github.com/moeghashim/tensquads-ui">GitHub</a><a class="" href="https://tensquads-ui-preview.mohanadgh.workers.dev/get-started">Get started</a><a class="" href="llms.txt"><bdi>llms.txt</bdi></a></nav></div></footer><div class="notice" role="status" hidden></div><script>const root = document.documentElement;
+const theme = document.querySelector('#theme');
+theme.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+theme.addEventListener('click', () => {
+  const dark = root.dataset.theme !== 'dark';
+  root.dataset.theme = dark ? 'dark' : 'light';
+  theme.setAttribute('aria-pressed', String(dark));
+  const url = new URL(location.href);
+  url.searchParams.set('theme', root.dataset.theme);
+  history.replaceState(null, '', url);
+});
+
+const notice = document.querySelector('.notice');
+let timer;
+document.addEventListener('click', async (event) => {
+  const button = event.target.closest('[data-copy]');
+  if (!button) return;
+  const value = button.dataset.copy;
+  let copied = false;
+  try {
+    await navigator.clipboard.writeText(value);
+    copied = true;
+  } catch {
+    const selection = getSelection();
+    const range = new Range();
+    range.selectNodeContents(button.querySelector('code') || button.closest('.command').querySelector('code'));
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+  notice.textContent = root.lang === 'ar'
+    ? (copied ? 'تم النسخ' : 'حُدّد النص. انسخه باستخدام لوحة المفاتيح.')
+    : (copied ? 'Copied to clipboard' : 'Text selected. Use your keyboard to copy it.');
+  notice.hidden = false;
+  clearTimeout(timer);
+  timer = setTimeout(() => { notice.hidden = true; }, 2500);
+});
+const filter = document.querySelector('#find');
+if (filter) {
+  const groups = [...document.querySelectorAll('[data-group]')];
+  filter.addEventListener('input', () => {
+    const query = filter.value.trim().toLowerCase();
+    let total = 0;
+    for (const group of groups) {
+      let matches = 0;
+      for (const card of group.querySelectorAll('[data-name]')) {
+        card.hidden = !card.dataset.name.toLowerCase().includes(query);
+        if (!card.hidden) matches++;
+      }
+      group.hidden = matches === 0;
+      group.querySelector('[data-count]').textContent = matches;
+      document.querySelector('.rail a[href="#' + group.id + '"]').hidden = group.hidden;
+      total += matches;
+    }
+    document.querySelector('.empty-search').hidden = total > 0;
+  });
+}
+document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+  link.addEventListener('click', () => {
+    if (link.protocol !== location.protocol || link.host !== location.host || link.pathname.includes('/tensquads-design-system/')) return;
+    const url = new URL(link.href);
+    url.searchParams.set('theme', root.dataset.theme);
+    link.href = url;
+  });
+});
+</script></body></html>
