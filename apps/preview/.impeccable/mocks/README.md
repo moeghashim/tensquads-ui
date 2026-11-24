@@ -1,6 +1,6 @@
 # Approved design comps
 
-Static HTML comps that Moe approved before the build. Each folder has the comp in light and dark and the script that builds it. Run `node <folder>/<folder>.mjs` from any directory to rebuild it from the current tokens, logo and mascots.
+Static HTML comps that Moe approved before the build. The `stream/`, `catalog/`, `chat/` and `nodes/` folders include light and dark comps and a build script. From the repository root, run `node apps/preview/.impeccable/mocks/<folder>/<folder>.mjs` to rebuild one of these sets from the current generated token CSS and the assets its script reads. From another directory, use the full path to the script. The `design-system/` and `decision/` folders contain static references without build scripts.
 
 | Folder | What | Task |
 |---|---|---|
