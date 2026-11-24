@@ -206,9 +206,11 @@ test("catalog filters and links without interactive specimens", async ({ page })
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "dark" }, "/components");
 	const filter = page.getByRole("searchbox", { name: "Filter components" });
 	const cards = page.locator(".component-card");
-	await expect(cards).toHaveCount(33);
+	await expect(cards).toHaveCount(35);
 	await page.getByRole("radio", { name: "React only" }).click();
-	await expect(cards).toHaveCount(11);
+	await expect(cards).toHaveCount(12);
+	await expect(page.getByRole("link", { name: /^MiniMap / })).toBeVisible();
+	await expect(page.getByRole("link", { name: /^WorkflowCard / })).toHaveCount(0);
 	await expect(page.getByRole("link", { name: /^Canvas / })).toBeVisible();
 	await filter.fill("bar");
 	await expect(cards).toHaveCount(2);
@@ -236,7 +238,7 @@ for (const state of states) {
 			await expect(page.locator(".component-card")).toHaveCount(1);
 		}).toPass({ timeout: 10_000 });
 		await filter.clear();
-		await expect(page.locator(".component-card")).toHaveCount(33);
+		await expect(page.locator(".component-card")).toHaveCount(35);
 		const rail = page.getByRole("navigation", { name: state.locale === "ar" ? "الفئات" : "Categories" });
 		for (const id of ["actions", "forms", "feedback", "data", "chat", "app", "workflow"]) {
 			const link = rail.locator(`a[href="#${id}"]`);
