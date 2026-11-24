@@ -17,7 +17,7 @@ One documentation site connects the foundations of Agent-UI, the React component
 
 ## Navigation and page structure
 
-- Pair Signal with the name **Design system** in the masthead. Use Home, Foundations, and Components as the primary destinations. Place language and theme controls at the inline end. The mobile header uses a second row for navigation.
+- Pair Signal with the name **Design system** in the masthead. Use the primary navigation specified in [task 002](../../../../../dev/milestones/v0.3-design-system/002-build-site.md). Place language and theme controls at the inline end. The mobile header uses a second row for navigation.
 - Keep the home calls to action in the same column as the headline and lead. Put the install command, copy control, and getting-started link on the shared setup row directly below the masthead. The brand specimen has its own aligned grid area with a shared baseline for the squadmates.
 - Present **Foundations** and **UI system** as peer sections. Give their headings, leads, and first links shared rows on desktop, including in Arabic. Foundations covers visual tokens and brand assets. The UI system links to the grouped React catalog at `/components` and to React and OpenUI setup. Detail pages live at `/components/<Name>`.
 - Give each page a quiet **View as Markdown** and **llms.txt** pair. On home, put the links on the setup row. On reference pages, align them with the end of the intro. Both remain visible in the normal flow on mobile. Publish equivalent headings, copyable values, component links, and installation text in the Markdown twins. Link each twin from the `/llms.txt` index.
