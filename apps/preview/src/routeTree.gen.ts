@@ -16,6 +16,8 @@ import { Route as ComponentsIndexRouteImport } from './routes/components.index'
 import { Route as ComponentsNameRouteImport } from './routes/components.$name'
 import { Route as DashboardsAdminRouteImport } from './routes/dashboards.admin'
 import { Route as DashboardsHomeRouteImport } from './routes/dashboards.home'
+import { Route as FoundationsIndexRouteImport } from './routes/foundations.index'
+import { Route as FoundationsNameRouteImport } from './routes/foundations.$name'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +54,16 @@ const DashboardsHomeRoute = DashboardsHomeRouteImport.update({
   path: '/dashboards/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoundationsIndexRoute = FoundationsIndexRouteImport.update({
+  id: '/foundations/',
+  path: '/foundations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoundationsNameRoute = FoundationsNameRouteImport.update({
+  id: '/foundations/$name',
+  path: '/foundations/$name',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,7 +72,9 @@ export interface FileRoutesByFullPath {
   '/components/$name': typeof ComponentsNameRoute
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
+  '/foundations/$name': typeof FoundationsNameRoute
   '/components/': typeof ComponentsIndexRoute
+  '/foundations/': typeof FoundationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,7 +83,9 @@ export interface FileRoutesByTo {
   '/components/$name': typeof ComponentsNameRoute
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
+  '/foundations/$name': typeof FoundationsNameRoute
   '/components': typeof ComponentsIndexRoute
+  '/foundations': typeof FoundationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,7 +95,9 @@ export interface FileRoutesById {
   '/components/$name': typeof ComponentsNameRoute
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
+  '/foundations/$name': typeof FoundationsNameRoute
   '/components/': typeof ComponentsIndexRoute
+  '/foundations/': typeof FoundationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -90,7 +108,9 @@ export interface FileRouteTypes {
     | '/components/$name'
     | '/dashboards/admin'
     | '/dashboards/home'
+    | '/foundations/$name'
     | '/components/'
+    | '/foundations/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -99,7 +119,9 @@ export interface FileRouteTypes {
     | '/components/$name'
     | '/dashboards/admin'
     | '/dashboards/home'
+    | '/foundations/$name'
     | '/components'
+    | '/foundations'
   id:
     | '__root__'
     | '/'
@@ -108,7 +130,9 @@ export interface FileRouteTypes {
     | '/components/$name'
     | '/dashboards/admin'
     | '/dashboards/home'
+    | '/foundations/$name'
     | '/components/'
+    | '/foundations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,7 +142,9 @@ export interface RootRouteChildren {
   ComponentsNameRoute: typeof ComponentsNameRoute
   DashboardsAdminRoute: typeof DashboardsAdminRoute
   DashboardsHomeRoute: typeof DashboardsHomeRoute
+  FoundationsNameRoute: typeof FoundationsNameRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
+  FoundationsIndexRoute: typeof FoundationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +198,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardsHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/foundations/': {
+      id: '/foundations/'
+      path: '/foundations'
+      fullPath: '/foundations/'
+      preLoaderRoute: typeof FoundationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/foundations/$name': {
+      id: '/foundations/$name'
+      path: '/foundations/$name'
+      fullPath: '/foundations/$name'
+      preLoaderRoute: typeof FoundationsNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -182,7 +222,9 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsNameRoute: ComponentsNameRoute,
   DashboardsAdminRoute: DashboardsAdminRoute,
   DashboardsHomeRoute: DashboardsHomeRoute,
+  FoundationsNameRoute: FoundationsNameRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
+  FoundationsIndexRoute: FoundationsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

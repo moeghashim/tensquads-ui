@@ -76,7 +76,7 @@ function ChatExperience({
 	}, [chat.send, fixture.request, locale, replayNumber]);
 
 	return (
-		<main className="content-page chat-page" dir={direction}>
+		<main id="main" className="content-page chat-page" dir={direction}>
 			<header className="chat-page__intro">
 				<p className="eyebrow">{copy.eyebrow}</p>
 				<h1>{copy.title}</h1>

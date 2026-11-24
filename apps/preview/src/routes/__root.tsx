@@ -8,6 +8,8 @@ import { SiteShell } from "../components/site-shell";
 import { getPreviewAttributes } from "../state";
 import "../styles.css";
 import "../styles/node-preview.css";
+import "../styles/design-system.css";
+import "../styles/stream-demo.css";
 import faviconUrl from "../../../../design/logo/favicon.svg?url";
 
 export const Route = createRootRoute({
@@ -15,7 +17,7 @@ export const Route = createRootRoute({
 		meta: [
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ title: "tensquads ui" },
+			{ title: "tensquads design system" },
 		],
 		links: [{ rel: "icon", type: "image/svg+xml", href: faviconUrl }],
 	}),
