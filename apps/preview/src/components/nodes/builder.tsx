@@ -141,6 +141,8 @@ function Builder({
 	const paletteButton = useRef<HTMLButtonElement>(null);
 	const inspectorButton = useRef<HTMLButtonElement>(null);
 	const restoreInspectorFocus = useRef(false);
+	const commandFromNode = useRef(false);
+	const commandDestination = useRef<WorkflowNode | null>(null);
 	const guide = useRef<HTMLDivElement>(null);
 	const fieldGroup = useRef<object | undefined>(undefined);
 	const viewEdited = useRef(false);
@@ -205,6 +207,15 @@ function Builder({
 		const next = fitSteps(nodes, canvas.current?.getNodeSizes() ?? {}, resizeArea(), maxZoom);
 		if (next) moveViewport(next);
 	};
+	const openCommands = () => {
+		commandFromNode.current = Boolean(document.activeElement?.closest("[data-node-id]"));
+		commandDestination.current = null;
+		setCommandOpen(true);
+	};
+	const revealCommand = (node: WorkflowNode) => {
+		if (commandFromNode.current) commandDestination.current = node;
+		else placeInView([node], viewport.zoom);
+	};
 	const insert = (kind: WorkflowNodeKind, drop?: Position) => {
 		const id = `step-${++sequence.current}`;
 		const sizes = canvas.current?.getNodeSizes() ?? {};
@@ -259,6 +270,7 @@ function Builder({
 				placeInView([node], viewport.zoom);
 			}
 		}
+		return node;
 	};
 	const duplicate = () => {
 		if (!active) return;
@@ -398,7 +410,7 @@ function Builder({
 			const mod = event.metaKey || event.ctrlKey;
 			if (mod && key === "k") {
 				event.preventDefault();
-				setCommandOpen(true);
+				openCommands();
 				return;
 			}
 			if (commandOpen) return;
@@ -439,7 +451,7 @@ function Builder({
 					id: `add-${kind}`,
 					label,
 					icon: nodeIcon(kind),
-					onSelect: () => insert(kind),
+					onSelect: () => revealCommand(insert(kind)),
 				})),
 			),
 		},
@@ -452,7 +464,7 @@ function Builder({
 				icon: nodeIcon(node.kind),
 				onSelect: () => {
 					setSelection({ nodes: [node.id], edges: [] });
-					placeInView([node], viewport.zoom);
+					revealCommand(node);
 				},
 			})),
 		},
@@ -537,7 +549,7 @@ function Builder({
 					>
 						{copy.guide}
 					</Button>
-					<Button size="sm" variant="soft" onClick={() => setCommandOpen(true)}>
+					<Button size="sm" variant="soft" onClick={openCommands}>
 						{copy.search} <kbd>⌘K</kbd>
 					</Button>
 					<Button size="sm" variant="soft" onClick={tidy}>
@@ -546,7 +558,18 @@ function Builder({
 					<ThemeToggle value={theme} onValueChange={onTheme} locale={locale} />
 				</div>
 			</header>
-			<div className="builder-stage" ref={stage} data-tidying={tidying || undefined}>
+			<div
+				className="builder-stage"
+				ref={stage}
+				data-tidying={tidying || undefined}
+				onFocus={(event) => {
+					const node = commandDestination.current;
+					if (!node || !(event.target instanceof Element) || !event.target.closest("[data-node-id]")) return;
+					commandDestination.current = null;
+					stage.current?.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(node.id)}"]`)?.focus();
+					placeInView([node], viewport.zoom);
+				}}
+			>
 				<Canvas
 					ref={canvas}
 					graph={graph}
@@ -604,7 +627,7 @@ function Builder({
 					data-sheet-open={sheet === "palette"}
 					ref={palettePanel}
 				>
-					<Button className="builder-palette-search" size="sm" variant="soft" onClick={() => setCommandOpen(true)}>
+					<Button className="builder-palette-search" size="sm" variant="soft" onClick={openCommands}>
 						{copy.palette}
 						<kbd>⌘K</kbd>
 					</Button>

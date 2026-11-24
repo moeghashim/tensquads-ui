@@ -22,8 +22,8 @@ async function tabTo(page: Page, locator: Locator) {
 	await expect(locator).toBeFocused();
 }
 
-async function command(page: Page, label: string) {
-	const dialog = page.getByRole("dialog", { name: "Search workflow" });
+async function command(page: Page, label: string, title = "Search workflow") {
+	const dialog = page.getByRole("dialog", { name: title });
 	await expect(async () => {
 		await page.keyboard.press("Control+k");
 		await expect(dialog).toBeVisible({ timeout: 500 });
@@ -42,11 +42,48 @@ async function drag(page: Page, source: Locator, destination: { x: number; y: nu
 }
 
 for (const locale of ["en", "ar"] as const) {
+	test(`Distant command destinations retain focus and visibility in ${locale}`, async ({ page }) => {
+		await page.setViewportSize({ width: 1440, height: 900 });
+		const ar = locale === "ar";
+		await openPreview(page, { locale, direction: ar ? "rtl" : "ltr", theme: "light" }, "/nodes");
+		await page.waitForLoadState("networkidle");
+		const faq = step(page, "faq");
+		const start = step(page, "start");
+		await faq.focus();
+		await page.keyboard.press("Enter");
+		for (let count = 0; count < 80; count++) {
+			await page.keyboard.press(ar ? "Shift+ArrowLeft" : "Shift+ArrowRight");
+		}
+		const title = ar ? "البحث في مسار العمل" : "Search workflow";
+		for (const [label, destination] of [
+			[ar ? "إجابة من الأسئلة الشائعة" : "Answer from FAQ", faq],
+			[ar ? "تحويل" : "Transform", step(page, "step-1")],
+		] as const) {
+			await start.focus();
+			await command(page, label, title);
+			await expect(destination).toBeFocused();
+			await expect(destination).toHaveAttribute("aria-selected", "true");
+			await expect
+				.poll(() =>
+					destination.evaluate((node) => {
+						const box = node.getBoundingClientRect();
+						return node.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
+					}),
+				)
+				.toBe(true);
+		}
+		await start.focus();
+		await page.keyboard.press("Control+k");
+		await expect(page.getByRole("dialog", { name: title })).toBeVisible();
+		await page.keyboard.press("Escape");
+		await expect(start).toBeFocused();
+	});
 	for (const width of [1440, 390]) {
 		test(`Inspector deletion preserves focus in ${locale} at ${width}px`, async ({ page }) => {
 			await page.setViewportSize({ width, height: 900 });
 			const ar = locale === "ar";
 			await openPreview(page, { locale, direction: ar ? "rtl" : "ltr", theme: "light" }, "/nodes");
+			await page.waitForLoadState("networkidle");
 			const inspector = page.getByRole("button", { name: ar ? "لوحة الخصائص" : "Inspector", exact: true });
 			if (width === 390) await inspector.click();
 			const canvas = page.locator('[data-slot="workflow-canvas"]');
