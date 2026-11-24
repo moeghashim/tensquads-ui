@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import { squadmateCharacterName } from "../../../packages/ui/src/react/Squadmate/Squadmate";
 import { AgentSlugSchema } from "../../../packages/ui/src/schemas";
+import { builderCopy } from "../src/components/nodes/copy";
+import { demoWorkflow, workflowIds } from "../src/components/nodes/demo-workflows";
 import { catalogGroups, componentDocumentName } from "../src/catalog-groups";
 import { partPages } from "../src/chat-parts";
 import { siteCopy } from "../src/copy";
@@ -100,6 +102,22 @@ function routePages(locale: Locale): RoutePages {
 	}));
 	const componentsLead = design.uiLead;
 	const chat = copy.chat;
+	const builder = builderCopy[locale];
+	const workflows = workflowIds.map((id) => demoWorkflow(id, locale));
+	const builderPage = (path: string, workflow: (typeof workflows)[number]) => page(
+		path,
+		workflow.name,
+		builder.builderLead,
+		blocks(
+			link(builder.workflows, markdownPath("/workflows", locale)),
+			heading(2, builder.guideTitle),
+			builder.steps.map(([step, description, key]) => `- **${step}** · ${description} (${code(key)})`).join("\n"),
+			heading(2, copy.nav.nodes),
+			workflow.document.graph.nodes.map(({ title, meta }) => `- ${title}${meta ? ` · ${meta}` : ""}`).join("\n"),
+			heading(2, builder.actions),
+			[`- ${builder.search} ${code("⌘K")}`, `- ${builder.tidy} ${code("⌘⇧L")}`, `- ${builder.redo} ${code("⌘⇧Z")}`].join("\n"),
+		),
+	);
 	const chatFixture = JSON.parse(source(`apps/preview/src/fixtures/chat-demo.fixture.${locale}.txt`)) as {
 		request: string;
 		reply: string;
@@ -131,6 +149,7 @@ function routePages(locale: Locale): RoutePages {
 					referenceLinks,
 					heading(2, design.demos),
 					[
+						item(copy.nav.nodes, markdownPath("/nodes", locale)),
 						item(copy.nav.chat, markdownPath("/chat", locale)),
 						item(copy.nav.dashboards, markdownPath("/dashboards/home", locale)),
 						item(design.admin, markdownPath("/dashboards/admin", locale)),
@@ -261,6 +280,13 @@ function routePages(locale: Locale): RoutePages {
 				),
 			),
 		],
+		"/nodes/": [builderPage("/nodes", demoWorkflow("support", locale))],
+		"/nodes/$id": workflows.map((workflow) => builderPage(`/nodes/${workflow.id}`, workflow)),
+		"/workflows": [
+			page("/workflows", builder.workflows, builder.listLead,
+				workflows.map(({ id, name, meta }) => item(name, markdownPath(`/nodes/${id}`, locale), meta)).join("\n"),
+			),
+		],
 		"/chat": [
 			page(
 				"/chat",
@@ -329,7 +355,7 @@ const groups: PageGroup[] = [
 	},
 	{
 		title: "Demos",
-		routes: ["/chat", "/dashboards/home", "/dashboards/admin"],
+		routes: ["/nodes/", "/workflows", "/nodes/$id", "/chat", "/dashboards/home", "/dashboards/admin"],
 	},
 ];
 
