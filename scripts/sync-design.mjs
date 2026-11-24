@@ -59,6 +59,7 @@ try {
 			`mascots/states/${name}`,
 		]),
 		["mascots/mascots.json", "mascots/mascots.json"],
+		...(await listFiles(checkout, "mascots/avatars")).map((path) => [path, path]),
 		...(await listFiles(checkout, "screens"))
 			.filter((path) => !path.startsWith("screens/inventory/"))
 			.map((path) => [path, path]),
@@ -94,7 +95,7 @@ try {
 	await rm(root, { recursive: true, force: true });
 	await rename(staging, root);
 	console.log(`Synced ${Object.keys(hashes).length} files from ${commit}.`);
-	console.log("Skipped previews, bundle.css, screen inventories, PNG/JPEG mascot lineups, avatars, and mascot cards.");
+	console.log("Skipped previews, bundle.css, screen inventories, PNG/JPEG mascot lineups, and mascot cards.");
 } finally {
 	await rm(temporary, { recursive: true, force: true });
 }
