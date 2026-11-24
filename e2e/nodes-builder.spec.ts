@@ -42,6 +42,38 @@ async function drag(page: Page, source: Locator, destination: { x: number; y: nu
 }
 
 for (const locale of ["en", "ar"] as const) {
+	for (const width of [1440, 390]) {
+		test(`Inspector deletion preserves focus in ${locale} at ${width}px`, async ({ page }) => {
+			await page.setViewportSize({ width, height: 900 });
+			const ar = locale === "ar";
+			await openPreview(page, { locale, direction: ar ? "rtl" : "ltr", theme: "light" }, "/nodes");
+			const inspector = page.getByRole("button", { name: ar ? "لوحة الخصائص" : "Inspector", exact: true });
+			if (width === 390) await inspector.click();
+			const canvas = page.locator('[data-slot="workflow-canvas"]');
+			const remove = page.getByRole("button", { name: ar ? "حذف الخطوة" : "Delete step" });
+			const duplicate = page.getByRole("button", { name: ar ? "تكرار" : "Duplicate" });
+			for (const key of ["Enter", "Delete", "Backspace"]) {
+				const count = await steps(page).count();
+				await (key === "Enter" ? remove : duplicate).focus();
+				await page.keyboard.press(key);
+				await expect(steps(page)).toHaveCount(count - 1);
+				await expect(width === 390 ? inspector : canvas).toBeFocused();
+				await steps(page).first().focus();
+				await page.keyboard.press("Enter");
+			}
+			while ((await steps(page).count()) > 0) {
+				const count = await steps(page).count();
+				await remove.focus();
+				await page.keyboard.press("Enter");
+				await expect(steps(page)).toHaveCount(count - 1);
+				await expect(width === 390 ? inspector : canvas).toBeFocused();
+				if (count > 1) {
+					await steps(page).first().focus();
+					await page.keyboard.press("Enter");
+				}
+			}
+		});
+	}
 	test(`Builder minimap opens at the inline start in ${locale}`, async ({ page }) => {
 		await page.setViewportSize({ width: 1200, height: 900 });
 		await openPreview(page, { locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "light" }, "/nodes");
@@ -212,9 +244,11 @@ test("workflow cards open the localized demos and edits end when leaving the pag
 	await expect(title).toHaveValue("Refund agent copy");
 	const remove = page.getByRole("button", { name: "Delete step" });
 	await expect(remove).toHaveAttribute("data-agent-confirm", /Refund agent copy/);
-	await remove.click();
+	await remove.focus();
+	await page.keyboard.press("Enter");
 	await expect(step(page, "step-1")).toHaveCount(0);
 	await expect(page.getByText("Select a step to edit its settings.")).toBeVisible();
+	await expect(page.locator('[data-slot="workflow-canvas"]')).toBeFocused();
 	await page.getByRole("button", { name: "Undo (⌘Z)" }).click();
 	await expect(step(page, "step-1")).toHaveCount(1);
 	await page.emulateMedia({ colorScheme: "dark" });

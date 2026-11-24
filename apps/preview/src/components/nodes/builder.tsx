@@ -25,7 +25,7 @@ import { DEFAULT_NODE_WIDTH, nodeHeight } from "@tensquads/ui/react/workflow/geo
 import { kindLabel } from "@tensquads/ui/react/workflow/labels";
 import { WORKFLOW_KIND_ICON, type WorkflowNode, type WorkflowNodeKind } from "@tensquads/ui/schemas";
 import { createLocalStorage } from "@ui-sdk/core";
-import { useContext, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
 import { type Direction, getPreviewState, type Locale } from "../../state";
 import { SitePageCommands } from "../site-page-commands";
 import { builderCopy } from "./copy";
@@ -140,11 +140,22 @@ function Builder({
 	const mobileControls = useRef<HTMLDivElement>(null);
 	const paletteButton = useRef<HTMLButtonElement>(null);
 	const inspectorButton = useRef<HTMLButtonElement>(null);
+	const restoreInspectorFocus = useRef(false);
 	const guide = useRef<HTMLDivElement>(null);
 	const fieldGroup = useRef<object | undefined>(undefined);
 	const viewEdited = useRef(false);
 	const sequence = useRef(0);
 	const sitePages = useContext(SitePageCommands);
+
+	useLayoutEffect(() => {
+		if (!restoreInspectorFocus.current) return;
+		restoreInspectorFocus.current = false;
+		if (mobileControls.current?.getClientRects().length) {
+			inspectorButton.current?.focus();
+		} else {
+			stage.current?.querySelector<HTMLElement>('[data-slot="workflow-canvas"]')?.focus();
+		}
+	});
 
 	const active = graph.nodes.find((node) => node.id === selection.nodes[0]);
 	const nameOf = (node: WorkflowNode) => node.title.trim() || kindLabel(node.kind, locale);
@@ -268,6 +279,9 @@ function Builder({
 		setSelection({ nodes: [id], edges: [] });
 	};
 	const remove = ({ nodes, edges }: CanvasSelection) => {
+		if (active && nodes.includes(active.id) && inspectorPanel.current?.contains(document.activeElement)) {
+			restoreInspectorFocus.current = true;
+		}
 		edit((doc) => {
 			const keepNodes = doc.graph.nodes.filter((node) => !nodes.includes(node.id));
 			const keepEdges = doc.graph.edges.filter(
@@ -446,14 +460,6 @@ function Builder({
 			id: "actions",
 			label: copy.actions,
 			items: [
-				{ id: "pan", label: copy.pan, icon: <Icon name="hand" />, hint: ["V"], onSelect: () => setMode("pan") },
-				{
-					id: "select",
-					label: copy.select,
-					icon: <Icon name="cursor" />,
-					hint: ["S"],
-					onSelect: () => setMode("select"),
-				},
 				{ id: "undo", label: copy.undo, icon: <Icon name="undo" />, hint: ["⌘Z"], onSelect: () => travel("undo") },
 				{ id: "redo", label: copy.redo, icon: <Icon name="redo" />, hint: ["⌘⇧Z"], onSelect: () => travel("redo") },
 				{ id: "tidy", label: copy.tidy, icon: <Icon name="layout" />, hint: ["⌘⇧L"], onSelect: tidy },
