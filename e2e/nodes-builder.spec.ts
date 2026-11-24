@@ -48,10 +48,8 @@ for (const locale of ["en", "ar"] as const) {
 		const canvas = page.locator('[data-slot="workflow-canvas"]');
 		const minimap = canvas.getByRole("region", { name: locale === "ar" ? "خريطة مصغّرة" : "Minimap" });
 		await expect(minimap).toHaveCount(0);
-		await page.mouse.move(600, 650);
-		await page.keyboard.down("Control");
-		await page.mouse.wheel(0, -1800);
-		await page.keyboard.up("Control");
+		await canvas.focus();
+		for (let count = 0; count < 8; count++) await page.keyboard.press("+");
 		await expect(minimap).toHaveAttribute("data-placement", "start");
 		const surface = (await canvas.boundingBox())!;
 		const map = (await minimap.boundingBox())!;
