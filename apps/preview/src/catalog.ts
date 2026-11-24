@@ -12,6 +12,7 @@ export const reactOnlyComponents = [
 	"ChatReply",
 	"CommandPalette",
 	"Inspector",
+	"MiniMap",
 	"Node",
 	"OwnerMessageView",
 	"Palette",

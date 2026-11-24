@@ -120,6 +120,12 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(fixtureRegion.getByRole("table")).toBeVisible();
 			} else if (component.name === "EmptyState") {
 				await expect(fixtureRegion.locator("[data-slot='empty-state']")).toBeVisible();
+			} else if (component.name === "WorkflowCard") {
+				const card = fixtureRegion.getByRole("article");
+				await expect(card.getByText(locale === "en" ? "Stock alerts" : "تنبيهات المخزون")).toBeVisible();
+				await expect(card.getByText(locale === "en" ? "Live" : "منشور", { exact: true })).toBeVisible();
+				await expect(card.getByRole("link")).toHaveCount(0);
+				await expect(card.getByRole("button")).toHaveCount(0);
 			} else if (component.name === "ChatLauncher") {
 				await expect(
 					fixtureRegion.getByRole("button", {

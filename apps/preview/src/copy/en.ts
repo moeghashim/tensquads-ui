@@ -203,6 +203,8 @@ const en = {
 			Canvas: "Pan, zoom and connect steps.",
 			Palette: "Add a step to the canvas.",
 			Inspector: "Edit the selected step.",
+			MiniMap: "Navigate a graph that extends beyond the canvas.",
+			WorkflowCard: "Summarize a workflow with a graph and three stats.",
 		},
 		groups: {
 			actions: "Actions",

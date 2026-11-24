@@ -1,0 +1,22 @@
+@layer tensquads {
+	.ts-minimap {
+		position: absolute;
+		inset-inline-end: var(--ts-space-4);
+		inset-block-end: var(--ts-space-4);
+		inline-size: min(180px, calc(100% - 2 * var(--ts-space-4)));
+		aspect-ratio: 180 / 110;
+		border-radius: var(--ts-radius-xl);
+		background: var(--ts-panel);
+		box-shadow: inset 0 0 0 0.5px var(--ts-panel-border);
+		overflow: clip;
+		touch-action: none;
+		cursor: crosshair;
+	}
+	.ts-minimap[data-placement="start"] { inset-inline: var(--ts-space-4) auto; }
+	.ts-minimap:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	.ts-minimap__map { display: block; inline-size: 100%; block-size: 100%; }
+	.ts-minimap:dir(rtl) .ts-minimap__map { transform: scaleX(-1); }
+	.ts-minimap__node { fill: var(--ts-node-tint); }
+	.ts-minimap__viewport { fill: var(--ts-alpha-06); stroke: var(--ts-alpha-20); vector-effect: non-scaling-stroke; cursor: grab; }
+	.ts-minimap__viewport:active { cursor: grabbing; }
+}

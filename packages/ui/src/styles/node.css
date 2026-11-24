@@ -14,12 +14,12 @@
 		color: var(--ts-text-emphasis);
 	}
 	.ts-node[data-selected="true"] { box-shadow: var(--ts-shadow-node-selected); }
-	.ts-node[data-family="agent"] { --ts-node-tint: var(--ts-tint-agent); }
-	.ts-node[data-family="logic"] { --ts-node-tint: var(--ts-tint-logic); }
-	.ts-node[data-family="end"] { --ts-node-tint: var(--ts-tint-end); }
-	.ts-node[data-family="note"] { --ts-node-tint: var(--ts-tint-note); }
-	.ts-node[data-family="tool"] { --ts-node-tint: var(--ts-tint-tool); }
-	.ts-node[data-family="data"] { --ts-node-tint: var(--ts-tint-data); }
+	:is(.ts-node, .ts-workflow-graph-node)[data-family="agent"] { --ts-node-tint: var(--ts-tint-agent); }
+	:is(.ts-node, .ts-workflow-graph-node)[data-family="logic"] { --ts-node-tint: var(--ts-tint-logic); }
+	:is(.ts-node, .ts-workflow-graph-node)[data-family="end"] { --ts-node-tint: var(--ts-tint-end); }
+	:is(.ts-node, .ts-workflow-graph-node)[data-family="note"] { --ts-node-tint: var(--ts-tint-note); }
+	:is(.ts-node, .ts-workflow-graph-node)[data-family="tool"] { --ts-node-tint: var(--ts-tint-tool); }
+	:is(.ts-node, .ts-workflow-graph-node)[data-family="data"] { --ts-node-tint: var(--ts-tint-data); }
 	.ts-node__head { display: flex; align-items: center; gap: var(--ts-space-2); block-size: var(--ts-node-head); }
 	.ts-node__icon { display: grid; flex: none; place-items: center; inline-size: var(--ts-control-sm); block-size: var(--ts-control-sm); border-radius: var(--ts-radius-md); background: var(--ts-node-tint); color: var(--ts-node-ink); }
 	.ts-node__copy { display: flex; min-inline-size: 0; flex-direction: column; }

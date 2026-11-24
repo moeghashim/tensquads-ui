@@ -20,6 +20,7 @@ import "../react/DataTable/DataTable.openui.js";
 import "../react/EmptyState/EmptyState.openui.js";
 import "../react/ApprovalCard/ApprovalCard.openui.js";
 import "../react/ChatLauncher/ChatLauncher.openui.js";
+import "../react/WorkflowCard/WorkflowCard.openui.js";
 import type { DefinedComponent } from "@openuidev/react-lang";
 import { getRegisteredDefinitions } from "./registration-store.js";
 

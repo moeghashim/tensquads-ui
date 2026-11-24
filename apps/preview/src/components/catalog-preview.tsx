@@ -33,6 +33,8 @@ import type { ComponentName } from "../catalog";
 import { siteCopy } from "../copy";
 import type { Direction, Locale } from "../state";
 
+import { MiniMapExample } from "./workflow-examples";
+
 const fixtures = import.meta.glob<string>("../../../../packages/ui/src/react/*/*.fixture.*.txt", {
 	eager: true,
 	query: "?raw",
@@ -205,6 +207,8 @@ function Specimen({ name, locale, direction }: { name: ComponentName; locale: Lo
 					]}
 				/>
 			);
+		case "MiniMap":
+			return <MiniMapExample locale={locale} direction={direction} specimen />;
 		case "Canvas": {
 			const graph: WorkflowGraph = {
 				nodes: [

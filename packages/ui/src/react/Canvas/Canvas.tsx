@@ -20,9 +20,10 @@ import {
 } from "@ui-sdk/core";
 import { createParts, type PartProps } from "@ui-sdk/react/primitive";
 import type { ReactNode, Ref } from "react";
-import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import type { WorkflowGraph } from "../../schemas/workflow.js";
 import { Node } from "../Node/Node.js";
+import { CanvasContext, type CanvasPan } from "../workflow/canvas-context.js";
 import { canConnect } from "../workflow/connect.js";
 import { edgePath, portPosition } from "../workflow/geometry.js";
 import { connectionsLabel, hiddenKind, kindLabel } from "../workflow/labels.js";
@@ -66,7 +67,10 @@ type CanvasState = {
 	moving: MoveDraft | null;
 	connecting: ConnectDraft | null;
 };
-type CanvasController = { pointAt(clientX: number, clientY: number): { x: number; y: number } | null };
+type CanvasController = {
+	pointAt(clientX: number, clientY: number): { x: number; y: number } | null;
+	pan: CanvasPan;
+};
 type CanvasOptions = {
 	controller?: ReturnType<typeof createController<CanvasController>>;
 	viewport?: CanvasViewport;
@@ -323,6 +327,9 @@ const canvas = definePrimitive({
 		});
 		return {
 			pointAt,
+			pan: (value: CanvasViewport, reason: "drag" | "imperative", event: Event) => {
+				viewport.setViewport(toPhysical(value, width(), rtl()), { reason, event });
+			},
 			select,
 			move,
 			connect,
@@ -469,6 +476,7 @@ const canvas = definePrimitive({
 				},
 			},
 		}),
+		overlay: slot({ state: ({ viewport }) => ({ viewport }) }),
 		world: slot<{ label: string }>({
 			props: { label: "string" },
 			role: "listbox",
@@ -615,11 +623,12 @@ const canvas = definePrimitive({
 
 const {
 	Root,
+	Overlay,
 	World,
 	Node: NodePart,
 	Path,
 	Connection,
-} = createParts(canvas, { root: "div", world: "div", node: "div", path: "path", connection: "path" });
+} = createParts(canvas, { root: "div", overlay: "div", world: "div", node: "div", path: "path", connection: "path" });
 
 function isIgnored(target: EventTarget | null, root: HTMLElement) {
 	if (!(target instanceof Element)) return false;
@@ -666,6 +675,33 @@ function fromCanvasSelection(selection: CanvasSelection): string[] {
 	return [...selection.nodes.map((id) => `node:${id}`), ...selection.edges.map((id) => `edge:${id}`)];
 }
 
+function CanvasOverlay({
+	children,
+	graph,
+	nodeSizes,
+	locale,
+	pan,
+}: Omit<NonNullable<React.ContextType<typeof CanvasContext>>, "size" | "viewport"> & { children: ReactNode }) {
+	const element = useRef<HTMLDivElement>(null);
+	const [size, setSize] = useState({ width: 0, height: 0 });
+	useEffect(() => {
+		const overlay = element.current;
+		if (!overlay) return;
+		const observer = new ResizeObserver(([entry]) => {
+			if (entry) setSize({ width: entry.contentRect.width, height: entry.contentRect.height });
+		});
+		observer.observe(overlay);
+		return () => observer.disconnect();
+	}, []);
+	return (
+		<Overlay ref={element} data-canvas-overlay="" className="ts-canvas__overlay">
+			{({ viewport }) => (
+				<CanvasContext value={{ graph, viewport, nodeSizes, size, locale, pan }}>{children}</CanvasContext>
+			)}
+		</Overlay>
+	);
+}
+
 export function Canvas({
 	graph,
 	label,
@@ -685,8 +721,9 @@ export function Canvas({
 	ref,
 	...props
 }: CanvasProps) {
-	const sizes = useRef<Record<string, NodeSize>>({});
+	const sizes = useRef<Record<string, NodeSize>>(Object.create(null));
 	const [controller] = useState(() => createController<CanvasController>());
+	const pan = useCallback<CanvasPan>((value, reason, event) => controller.pan(value, reason, event), [controller]);
 	const nodeElements = useRef(new Map<string, HTMLElement>());
 	const [internalSelection, setInternalSelection] = useState<CanvasSelection>({ nodes: [], edges: [] });
 	const activeSelection = selection ?? internalSelection;
@@ -845,9 +882,9 @@ export function Canvas({
 				})}
 			</World>
 			{children && (
-				<div data-canvas-overlay="" className="ts-canvas__overlay">
+				<CanvasOverlay graph={graph} locale={locale} nodeSizes={sizes.current} pan={pan}>
 					{children}
-				</div>
+				</CanvasOverlay>
 			)}
 		</Root>
 	);

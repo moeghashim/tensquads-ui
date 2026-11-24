@@ -1,0 +1,76 @@
+@layer tensquads {
+	.ts-workflow-card {
+		position: relative;
+		min-inline-size: 0;
+		border: 0.5px solid var(--ts-panel-border);
+		border-radius: var(--ts-radius-2xl);
+		background: var(--ts-panel);
+		color: var(--ts-text);
+		transition: box-shadow var(--ts-duration-basic) var(--ts-ease-basic);
+	}
+	.ts-workflow-card:has(.ts-workflow-card__link):hover { box-shadow: var(--ts-shadow-300); }
+	.ts-workflow-card__thumbnail {
+		block-size: 132px;
+		border-start-start-radius: inherit;
+		border-start-end-radius: inherit;
+		background: radial-gradient(circle, var(--ts-dot-grid) 1px, transparent 1px) var(--ts-canvas);
+		background-size: var(--ts-space-3) var(--ts-space-3);
+		overflow: clip;
+	}
+	.ts-workflow-card__thumbnail svg { display: block; inline-size: 100%; block-size: 100%; }
+	.ts-workflow-card:dir(rtl) .ts-workflow-card__thumbnail svg { transform: scaleX(-1); }
+	.ts-workflow-card__edge { fill: none; stroke: var(--ts-edge); stroke-width: 0.5px; vector-effect: non-scaling-stroke; }
+	.ts-workflow-card__node { fill: var(--ts-node-surface); rx: var(--ts-radius-xl); stroke: var(--ts-panel-border); vector-effect: non-scaling-stroke; }
+	.ts-workflow-card__tile { fill: var(--ts-node-tint); rx: var(--ts-radius-md); }
+	.ts-workflow-card__body { padding: var(--ts-space-4); overflow-wrap: anywhere; }
+	.ts-workflow-card__title {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--ts-space-1) var(--ts-space-2);
+		color: var(--ts-text-emphasis);
+		font-size: var(--ts-heading-xs-font-size);
+		font-weight: var(--ts-heading-xs-font-weight);
+		line-height: var(--ts-heading-xs-line-height);
+	}
+	.ts-workflow-card__title strong { font-weight: inherit; }
+	.ts-workflow-card__link { color: inherit; text-decoration: none; }
+	.ts-workflow-card__link::after { position: absolute; inset: 0; border-radius: var(--ts-radius-2xl); content: ""; }
+	.ts-workflow-card__link:focus-visible { outline: none; }
+	.ts-workflow-card__link:focus-visible::after,
+	.ts-workflow-card__actions:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
+	.ts-workflow-card__meta,
+	.ts-workflow-card__stats {
+		color: var(--ts-text-secondary);
+		font-size: var(--ts-text-xs-font-size);
+		line-height: var(--ts-text-xs-line-height);
+	}
+	.ts-workflow-card__meta { margin: var(--ts-space-1) 0 0; }
+	.ts-workflow-card__stats {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--ts-space-2);
+		border-block-start: 1px solid var(--ts-border-subtle);
+		margin: var(--ts-space-3) 0 0;
+		padding-block-start: var(--ts-space-3);
+	}
+	.ts-workflow-card__stats dd { margin: 0; color: var(--ts-text-emphasis); font-weight: var(--ts-heading-xs-font-weight); }
+	.ts-workflow-card__actions {
+		position: absolute;
+		inset-block-start: var(--ts-space-2);
+		inset-inline-end: var(--ts-space-2);
+		display: grid;
+		place-items: center;
+		inline-size: var(--ts-control-md);
+		block-size: var(--ts-control-md);
+		padding: 0;
+		border: 0.5px solid var(--ts-panel-border);
+		border-radius: var(--ts-radius-lg);
+		background: var(--ts-panel);
+		color: var(--ts-text-secondary);
+		cursor: pointer;
+	}
+	.ts-workflow-card__actions:hover,
+	.ts-workflow-card__actions[data-open] { color: var(--ts-text-emphasis); background: var(--ts-surface-secondary); }
+	@media (prefers-reduced-motion: reduce) { .ts-workflow-card { transition: none; } }
+}
