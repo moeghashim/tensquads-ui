@@ -48,6 +48,7 @@ for (const locale of ["en", "ar"] as const) {
 		const canvas = page.locator('[data-slot="workflow-canvas"]');
 		const minimap = canvas.getByRole("region", { name: locale === "ar" ? "خريطة مصغّرة" : "Minimap" });
 		await expect(minimap).toHaveCount(0);
+		await expect(canvas.locator(".ts-canvas__world")).not.toHaveCSS("transform", "matrix(1, 0, 0, 1, 0, 0)");
 		await canvas.focus();
 		for (let count = 0; count < 8; count++) await page.keyboard.press("+");
 		await expect(minimap).toHaveAttribute("data-placement", "start");
@@ -204,6 +205,7 @@ test("workflow cards open the localized demos and edits end when leaving the pag
 		await expect(page.getByRole("heading", { level: 1 })).toHaveText(name!);
 		if (id !== "support") await page.getByRole("link", { name: "Workflows" }).click();
 	}
+	await page.waitForLoadState("networkidle");
 	await expect(title).toHaveValue("Refund agent");
 	await page.getByRole("button", { name: "Duplicate" }).click();
 	await expect(step(page, "step-1")).toHaveAttribute("aria-selected", "true");
