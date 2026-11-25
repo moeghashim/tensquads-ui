@@ -216,6 +216,7 @@ const en = {
 			workflow: "Workflow",
 		},
 		foundationsIndex: {
+			guide: { title: "Design guide", lead: "Read this before you build a screen", sourceLanguage: "" },
 			colour: { title: "Colour", lead: "Semantic colours for surfaces, text, status and workflows." },
 			typography: { title: "Typography", lead: "Font families and the Agent-UI type scale." },
 			spacing: { title: "Spacing", lead: "A spacing scale based on a 4 px unit." },

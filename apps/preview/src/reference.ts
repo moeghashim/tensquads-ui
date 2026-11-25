@@ -3,6 +3,8 @@ import { siteCopy } from "./copy";
 import { archivedHomepage } from "./reference-exclusions";
 import type { Locale } from "./state";
 
+export const designGuidePath = "/foundations/guide";
+
 export const foundationNames = [
 	"colour",
 	"typography",

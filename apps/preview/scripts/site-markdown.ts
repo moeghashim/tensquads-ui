@@ -19,6 +19,7 @@ import {
 import { markdownPath } from "../src/markdown-path";
 import { mascotMotionCopy, mascotMotionPath } from "../src/mascot-motion-copy";
 import {
+	designGuidePath,
 	foundationNames,
 	liveHomepages,
 	pageDesigns,
@@ -73,6 +74,7 @@ function routePages(locale: Locale): RoutePages {
 	const design = copy.designSystem;
 	const gettingStarted = copy.getStartedPage;
 	const reference = copy.reference;
+	const guide = design.foundationsIndex.guide;
 	const componentItem = (name: keyof typeof design.componentLeads) =>
 		item(name, markdownPath(`/components/${name}`, locale), design.componentLeads[name]);
 	const foundations = foundationNames.map((name) => ({
@@ -80,11 +82,12 @@ function routePages(locale: Locale): RoutePages {
 		...design.foundationsIndex[name],
 	}));
 	const foundationLinks = (descriptions: boolean) =>
-		foundations
-			.map(({ name, title, lead }) =>
+		[
+			item(guide.title, markdownPath(designGuidePath, locale), descriptions ? guide.lead : undefined),
+			...foundations.map(({ name, title, lead }) =>
 				item(title, markdownPath(`/foundations/${name}`, locale), descriptions ? lead : undefined),
-			)
-			.join("\n");
+			),
+		].join("\n");
 	const referenceLinks = referenceSections
 		.map(({ id, path }) => item(design[id], markdownPath(path, locale)))
 		.join("\n");
@@ -169,6 +172,7 @@ function routePages(locale: Locale): RoutePages {
 		"/foundations/$name": foundations.map(({ name, title, lead }) =>
 			page(`/foundations/${name}`, title, lead, foundationMarkdown(name, locale)),
 		),
+		[designGuidePath]: [{ path: designGuidePath, title: guide.title, description: guide.lead, body: source("DESIGN.md") }],
 		[mascotMotionPath]: [
 			page(mascotMotionPath, mascotMotionCopy[locale].title, mascotMotionCopy[locale].lead, mascotMotionMarkdown(locale)),
 		],
@@ -342,7 +346,7 @@ function routePages(locale: Locale): RoutePages {
 }
 
 const groups: PageGroup[] = [
-	{ title: "Start here", routes: ["/"] },
+	{ title: "Start here", routes: [designGuidePath, "/"] },
 	{ title: "Foundations", routes: ["/foundations/", "/foundations/$name", mascotMotionPath] },
 	{ title: "Components", routes: ["/components/", "/components/$name"] },
 	{ title: "Get started", routes: ["/get-started"] },

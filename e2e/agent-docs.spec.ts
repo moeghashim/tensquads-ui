@@ -9,11 +9,15 @@ test("the agent index covers every page and the full document follows index orde
 	expect(indexResponse.headers()["content-type"]).toBe(textType);
 	const index = await indexResponse.text();
 	expect(index).toMatch(/^# tensquads design system\n\n> .+/);
+	expect(index).toContain(
+		"## Start here\n\n- [Design guide](https://tensquads-ui-preview.mohanadgh.workers.dev/foundations/guide.md): Read this before you build a screen\n",
+	);
 	const paths = Array.from(index.matchAll(/^- \[[^\]]+\]\((https:\/\/[^)]+\.md)\): .+$/gm), ([, url]) => {
 		const target = new URL(url);
 		expect(target.origin).toBe("https://tensquads-ui-preview.mohanadgh.workers.dev");
 		return target.pathname;
 	});
+	expect(paths[0]).toBe("/foundations/guide.md");
 	expect(paths).toEqual(
 		expect.arrayContaining([
 			"/index.md",

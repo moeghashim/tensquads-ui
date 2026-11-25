@@ -4,7 +4,7 @@ import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
 import { type CSSProperties, useState } from "react";
 import mascots from "../../../../design/mascots/mascots.json";
 import tokens from "../../../../design/tokens.json";
-import { ReferenceIntro, ReferenceLayout } from "../components/design-reference";
+import { FoundationPageLinks, ReferenceIntro, ReferenceLayout } from "../components/design-reference";
 import { SquadmateStates } from "../components/squadmate-states";
 import { siteCopy } from "../copy";
 import { designAsset } from "../design-assets";
@@ -39,15 +39,7 @@ function FoundationPage() {
 			<ReferenceLayout
 				label={name === "colour" ? copy.onPage : copy.foundations}
 				links={
-					name === "colour" ? (
-						<ColourLinks copy={copy} />
-					) : (
-						foundationNames.map((id) => (
-							<Link key={id} to="/foundations/$name" params={{ name: id }} search={search}>
-								{copy.foundationsIndex[id].title}
-							</Link>
-						))
-					)
+					name === "colour" ? <ColourLinks copy={copy} /> : <FoundationPageLinks locale={locale} search={search} />
 				}
 			>
 				<FoundationContent name={name} locale={locale} />

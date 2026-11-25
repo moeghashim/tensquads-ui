@@ -12,7 +12,7 @@ import { useState } from "react";
 import { openUIComponents, reactOnlyComponents } from "../catalog";
 import { siteCopy } from "../copy";
 import { signal } from "../design-assets";
-import { pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
+import { designGuidePath, pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
 import { getPreviewState } from "../state";
 import { foundationNames, llmsUrl } from "./design-reference";
 import { SitePageCommands } from "./site-page-commands";
@@ -83,12 +83,20 @@ export function SiteShell() {
 		{
 			id: "foundations",
 			label: design.foundations,
-			items: foundationNames.map((name) => ({
-				id: `foundation-${name}`,
-				label: design.foundationsIndex[name].title,
-				keywords: [name],
-				onSelect: () => void navigate({ to: "/foundations/$name", params: { name }, search }),
-			})),
+			items: [
+				{
+					id: "foundation-guide",
+					label: design.foundationsIndex.guide.title,
+					keywords: ["DESIGN.md"],
+					onSelect: () => void navigate({ to: designGuidePath, search }),
+				},
+				...foundationNames.map((name) => ({
+					id: `foundation-${name}`,
+					label: design.foundationsIndex[name].title,
+					keywords: [name],
+					onSelect: () => void navigate({ to: "/foundations/$name", params: { name }, search }),
+				})),
+			],
 		},
 		{
 			id: "reference",
