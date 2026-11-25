@@ -9,6 +9,7 @@ Static HTML comps that Moe approved before the build. The `stream/`, `catalog/`,
 | `catalog/` | The component catalog | v0.3-design-system 002 |
 | `chat/` | The `/chat` page | v0.3-design-system 002 |
 | `nodes/` | The Nodes builder page | v0.3-workflow 006 |
+| `mascot-motion/` | Mascot motion guide (D33) | v0.3-design-system 004 |
 | `decision/` | Stream-to-screen home (D21) | v0.2-home |
 
 The comp wins on layout and copy. Component specs under `design/agent-ui/` win on component visuals.
