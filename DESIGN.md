@@ -253,7 +253,7 @@ Template: [Workflow builder demo](https://tensquads-ui-preview.mohanadgh.workers
 
 | Region | Component | Value |
 |---|---|---|
-| Header | Workflow name (`--ts-panel-title-font-weight`), status `Badge`, actions | height `--ts-header-height`, padding-inline `--ts-space-6` (desktop) or `--ts-space-3` (at 71rem and below), `--ts-border-subtle` rule under it (`nodes-builder.css`) |
+| Header | Workflow name (`--ts-panel-title-font-weight`), status `Badge`, actions | minimum height `--ts-header-height`, shared site page frame (see Gutters above), `--ts-border-subtle` rule under it (`nodes-builder.css`) |
 | Canvas | `Canvas` with `Node` and `BranchNode` | fills the rest; ground `--ts-canvas`, grid `--ts-dot-grid` |
 | Palette | `Palette` in a floating panel | width `--ts-palette-width` + `--ts-space-4`; inline-start offset `--ts-page-gutter`; top offset `--ts-space-5`; `--ts-panel`, `--ts-radius-2xl`, `--ts-shadow-overlay` |
 | Inspector | `Inspector` | width `--ts-inspector-width`; offset `--ts-space-5` from the inline-end and top |
