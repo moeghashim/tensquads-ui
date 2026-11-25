@@ -1,1 +1,3 @@
-root = Squadmate("petra", "planning", 64, "en")
+still = Squadmate("petra", "planning", 64, "en")
+moving = Squadmate("petra", "running", 64, "en", true)
+root = Card("Squadmate states", null, null, [still, moving])

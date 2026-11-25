@@ -17,6 +17,7 @@ import {
 	workerExample,
 } from "../src/get-started-examples";
 import { markdownPath } from "../src/markdown-path";
+import { mascotMotionCopy, mascotMotionPath } from "../src/mascot-motion-copy";
 import {
 	foundationNames,
 	liveHomepages,
@@ -27,7 +28,7 @@ import {
 } from "../src/reference";
 import type { FileRoutesByFullPath } from "../src/routeTree.gen";
 import type { Locale } from "../src/state";
-import { foundationMarkdown, mascotStates } from "./foundation-markdown";
+import { foundationMarkdown, mascotMotionMarkdown, mascotStates } from "./foundation-markdown";
 import { blocks, code, fence, heading, item, link } from "./markdown-format";
 
 const repo = new URL("../../../", import.meta.url);
@@ -168,6 +169,9 @@ function routePages(locale: Locale): RoutePages {
 		"/foundations/$name": foundations.map(({ name, title, lead }) =>
 			page(`/foundations/${name}`, title, lead, foundationMarkdown(name, locale)),
 		),
+		[mascotMotionPath]: [
+			page(mascotMotionPath, mascotMotionCopy[locale].title, mascotMotionCopy[locale].lead, mascotMotionMarkdown(locale)),
+		],
 		"/components/": [
 			page(
 				"/components",
@@ -339,7 +343,7 @@ function routePages(locale: Locale): RoutePages {
 
 const groups: PageGroup[] = [
 	{ title: "Start here", routes: ["/"] },
-	{ title: "Foundations", routes: ["/foundations/", "/foundations/$name"] },
+	{ title: "Foundations", routes: ["/foundations/", "/foundations/$name", mascotMotionPath] },
 	{ title: "Components", routes: ["/components/", "/components/$name"] },
 	{ title: "Get started", routes: ["/get-started"] },
 	{

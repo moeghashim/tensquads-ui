@@ -23,6 +23,7 @@ import { Route as FoundationsPrinciplesRouteImport } from './routes/foundations.
 import { Route as NodesIndexRouteImport } from './routes/nodes.index'
 import { Route as NodesIdRouteImport } from './routes/nodes.$id'
 import { Route as ReferenceMascotStatesRouteImport } from './routes/reference.mascot-states'
+import { Route as FoundationsMascotsMotionRouteImport } from './routes/foundations.mascots.motion'
 import { Route as ReferencePagesIndexRouteImport } from './routes/reference.pages.index'
 import { Route as ReferencePagesIdRouteImport } from './routes/reference.pages.$id'
 import { Route as ReferenceScreensIndexRouteImport } from './routes/reference.screens.index'
@@ -98,6 +99,12 @@ const ReferenceMascotStatesRoute = ReferenceMascotStatesRouteImport.update({
   path: '/reference/mascot-states',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoundationsMascotsMotionRoute =
+  FoundationsMascotsMotionRouteImport.update({
+    id: '/foundations/mascots/motion',
+    path: '/foundations/mascots/motion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ReferencePagesIndexRoute = ReferencePagesIndexRouteImport.update({
   id: '/reference/pages/',
   path: '/reference/pages/',
@@ -134,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/components/': typeof ComponentsIndexRoute
   '/foundations/': typeof FoundationsIndexRoute
   '/nodes/': typeof NodesIndexRoute
+  '/foundations/mascots/motion': typeof FoundationsMascotsMotionRoute
   '/reference/pages/$id': typeof ReferencePagesIdRoute
   '/reference/screens/$id': typeof ReferenceScreensIdRoute
   '/reference/pages/': typeof ReferencePagesIndexRoute
@@ -154,6 +162,7 @@ export interface FileRoutesByTo {
   '/components': typeof ComponentsIndexRoute
   '/foundations': typeof FoundationsIndexRoute
   '/nodes': typeof NodesIndexRoute
+  '/foundations/mascots/motion': typeof FoundationsMascotsMotionRoute
   '/reference/pages/$id': typeof ReferencePagesIdRoute
   '/reference/screens/$id': typeof ReferenceScreensIdRoute
   '/reference/pages': typeof ReferencePagesIndexRoute
@@ -175,6 +184,7 @@ export interface FileRoutesById {
   '/components/': typeof ComponentsIndexRoute
   '/foundations/': typeof FoundationsIndexRoute
   '/nodes/': typeof NodesIndexRoute
+  '/foundations/mascots/motion': typeof FoundationsMascotsMotionRoute
   '/reference/pages/$id': typeof ReferencePagesIdRoute
   '/reference/screens/$id': typeof ReferenceScreensIdRoute
   '/reference/pages/': typeof ReferencePagesIndexRoute
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/components/'
     | '/foundations/'
     | '/nodes/'
+    | '/foundations/mascots/motion'
     | '/reference/pages/$id'
     | '/reference/screens/$id'
     | '/reference/pages/'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/components'
     | '/foundations'
     | '/nodes'
+    | '/foundations/mascots/motion'
     | '/reference/pages/$id'
     | '/reference/screens/$id'
     | '/reference/pages'
@@ -237,6 +249,7 @@ export interface FileRouteTypes {
     | '/components/'
     | '/foundations/'
     | '/nodes/'
+    | '/foundations/mascots/motion'
     | '/reference/pages/$id'
     | '/reference/screens/$id'
     | '/reference/pages/'
@@ -258,6 +271,7 @@ export interface RootRouteChildren {
   ComponentsIndexRoute: typeof ComponentsIndexRoute
   FoundationsIndexRoute: typeof FoundationsIndexRoute
   NodesIndexRoute: typeof NodesIndexRoute
+  FoundationsMascotsMotionRoute: typeof FoundationsMascotsMotionRoute
   ReferencePagesIdRoute: typeof ReferencePagesIdRoute
   ReferenceScreensIdRoute: typeof ReferenceScreensIdRoute
   ReferencePagesIndexRoute: typeof ReferencePagesIndexRoute
@@ -364,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReferenceMascotStatesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/foundations/mascots/motion': {
+      id: '/foundations/mascots/motion'
+      path: '/foundations/mascots/motion'
+      fullPath: '/foundations/mascots/motion'
+      preLoaderRoute: typeof FoundationsMascotsMotionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reference/pages/': {
       id: '/reference/pages/'
       path: '/reference/pages'
@@ -410,6 +431,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsIndexRoute: ComponentsIndexRoute,
   FoundationsIndexRoute: FoundationsIndexRoute,
   NodesIndexRoute: NodesIndexRoute,
+  FoundationsMascotsMotionRoute: FoundationsMascotsMotionRoute,
   ReferencePagesIdRoute: ReferencePagesIdRoute,
   ReferenceScreensIdRoute: ReferenceScreensIdRoute,
   ReferencePagesIndexRoute: ReferencePagesIndexRoute,

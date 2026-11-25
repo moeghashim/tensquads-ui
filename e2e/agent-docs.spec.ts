@@ -19,6 +19,7 @@ test("the agent index covers every page and the full document follows index orde
 			"/index.md",
 			"/foundations.md",
 			"/foundations/colour.md",
+			"/foundations/mascots/motion.md",
 			"/components.md",
 			"/components/Node.md",
 			"/get-started.md",

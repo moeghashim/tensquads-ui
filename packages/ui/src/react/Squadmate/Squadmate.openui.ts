@@ -13,6 +13,7 @@ export const SquadmateOpenUI = defineComponent({
 		state: AgentStateSchema.describe("Agent loop state"),
 		size: z.number().positive().default(64).describe("Image width and height in pixels"),
 		locale: LocaleSchema.default("en").describe("Locale for the accessible image name"),
+		animated: z.boolean().default(false).describe("Animate a single active squadmate"),
 	}),
 	component: ({ props }) => createElement(Squadmate, props),
 });

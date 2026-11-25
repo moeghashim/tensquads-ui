@@ -1,12 +1,16 @@
 # Squadmate
 
-Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
+Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image with optional state motion. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
+
+Set `animated` to render inline SVG and play the motion for the current state. It defaults to `false` and renders a still image. Import `@tensquads/ui/styles.css` for the motion styles. Changing `state` starts the next performance. Done plays once on entry. Sent back droops once, then loops a sigh.
+
+In a list, animate only the active or focused squadmate. At 24 px and below, motion is limited to the face and badge. With `prefers-reduced-motion: reduce`, the drawing and badge show the state and all motion stops. See the [Mascot motion guide](/foundations/mascots/motion) for examples and timings.
 
 The component takes a character slug such as `petra`. The roster and drawing APIs in `@tensquads/ui/squadmates` use role IDs such as `master`. Use `AGENT_ROLE_TO_SLUG` and `AGENT_SLUG_TO_ROLE` from `@tensquads/ui/schemas` to convert between them. That entry also exports `AgentRoleSchema`, `AgentSlugSchema`, and `AgentStateSchema` with their inferred types.
 
 `SQUADMATES` contains the roster. `AGENT_LOOP_STATES` contains the loop states; `SquadmateDrawState` also includes `idle`. `squadmateMarkup(imageId, state, size)` returns SVG markup. It throws `UnknownSquadmateError` for an unknown role ID and `UnknownSquadmateStateError` for an unknown state. Sizes below 64 px show a crop focused on the head; sizes of 64 px or more show the whole mascot. `SQUADMATE_CSS` contains optional blink styles for inline markup and disables the animation for reduced motion. The React image does not include those styles.
 
-`SQUADMATE_PARTS` is exported from `@tensquads/ui/squadmates`. It lists the motion hook class names and their joints in the SVG markup. See its declaration in `packages/ui/src/squadmates/draw.ts` for the hook reference. The joint wrappers support CSS transforms with `transform-origin: 0 0`; shadow and badge transforms use `transform-box: fill-box`. An arm hook can match separate groups for the arm and hand or prop, so apply the same motion to every matching group. `sm-raised` marks the raised left arm on Petra and Machu. Keep its shoulder rotation small so the arm does not cross the face. The hooks preserve the drawings and add no animation by themselves. Use inline SVG to style the parts; page CSS cannot target parts inside the React component's image.
+`SQUADMATE_PARTS` is exported from `@tensquads/ui/squadmates`. It lists the motion hook class names and their joints in the SVG markup. See its declaration in `packages/ui/src/squadmates/draw.ts` for the hook reference. The joint wrappers use `transform-origin: 0 0`. Shadow and badge transforms use `transform-box: fill-box`. An arm hook can match separate groups for the arm and hand or prop, so apply the same motion to every matching group. `sm-raised` marks the raised left arm on Petra and Machu. Use a small shoulder wave so the arm clears the face.
 
 The image name contains the localized character name and state. For example, English `Petra, Planning` and Arabic `بترا، تخطيط`.
 

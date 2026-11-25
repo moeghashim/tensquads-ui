@@ -6,6 +6,8 @@ import { AGENT_LOOP_STATES } from "../../../packages/ui/src/squadmates/roster";
 import { tokens as resolvedTokens, type TokenName } from "../../../packages/ui/src/tokens/tokens";
 import { siteCopy } from "../src/copy";
 import { colourGroups, logoGroups, primitives, type Token, variable } from "../src/foundations";
+import { alarmSizes, mascotMotionCopy, mascotMotionPath, motionSizes, motionStates, motionSteps } from "../src/mascot-motion-copy";
+import { markdownPath } from "../src/markdown-path";
 import type { FoundationName } from "../src/reference";
 import type { Locale } from "../src/state";
 import { blocks, code, heading, item, table } from "./markdown-format";
@@ -39,6 +41,39 @@ export function mascotStates(locale: Locale) {
 			squadmateStateLabel(state, locale),
 			AGENT_LOOP_STATES.find(({ id }) => id === state)?.hint ?? "",
 		]),
+	);
+}
+
+export function mascotMotionMarkdown(locale: Locale) {
+	const copy = mascotMotionCopy[locale];
+	return blocks(
+		heading(2, copy.principlesTitle),
+		copy.principlesLead,
+		...copy.principles.flatMap(([title, text]) => [heading(3, title), text]),
+		heading(2, copy.statesTitle),
+		copy.statesLead,
+		motionStates.map(({ state, kind }) => {
+			const [name, motion, reason] = copy.states[state];
+			return `- **${name}** (${copy.kinds[kind]}). ${motion}. ${reason}`;
+		}).join("\n"),
+		heading(2, copy.flowTitle),
+		copy.flowLead,
+		motionSteps.map(({ state }, index) => `${index + 1}. ${copy.states[state][0]}`).join("\n"),
+		copy.flowHold,
+		heading(2, copy.sizeTitle),
+		copy.sizeLead,
+		[...motionSizes.map(copy.pixels), ...alarmSizes.map(copy.alarmSize)].map((label) => `- ${label}`).join("\n"),
+		heading(2, copy.specTitle),
+		copy.specLead,
+		table(copy.columns, motionStates.map(({ state, kind }) => {
+			const [name, motion, , spec] = copy.states[state];
+			return [name, copy.kinds[kind], motion, spec];
+		})),
+		heading(2, copy.guidanceTitle),
+		heading(3, copy.doTitle),
+		copy.do.map((text) => `- ${text}`).join("\n"),
+		heading(3, copy.dontTitle),
+		copy.dont.map((text) => `- ${text}`).join("\n"),
 	);
 }
 
@@ -97,6 +132,7 @@ export function foundationMarkdown(name: FoundationName, locale: Locale) {
 			);
 		case "mascots":
 			return blocks(
+				item(mascotMotionCopy[locale].title, markdownPath(mascotMotionPath, locale)),
 				...mascots.map((mascot) => {
 					const agent = AGENT_ROLE_TO_SLUG[mascot.id as keyof typeof AGENT_ROLE_TO_SLUG];
 					return blocks(
