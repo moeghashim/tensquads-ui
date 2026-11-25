@@ -306,7 +306,7 @@ The grid is 4 px (`--ts-space-1`).
 | Builder panel inset | `--ts-page-gutter` and `--ts-space-5` |
 | Fixed control heights | `--ts-control-3xs` (22) to `--ts-control-3xl` (48). Buttons: `--ts-control-sm`, `--ts-control-md`, `--ts-control-lg`. |
 | Icons | `--ts-icon-xs` (14) to `--ts-icon-2xl` (24). 16 px in buttons and nav. |
-| Fixed panel widths | `--ts-palette-width`, `--ts-inspector-width`, `--ts-content-width` (docs column), `--ts-header-height` |
+| Fixed panel widths | `--ts-palette-width`, `--ts-inspector-width`, `--ts-content-width` (MiniMap specimen maximum), `--ts-header-height` |
 
 ### Colour
 
