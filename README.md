@@ -4,9 +4,15 @@
 
 Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.mohanadgh.workers.dev)
 
+## For coding agents
+
+1. Read [DESIGN.md](DESIGN.md) for the visual rules and page layouts.
+2. Read [llms.txt](llms.txt) to find the component documentation.
+3. Read the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md) for setup and composition.
+
 ## Components
 
-The library ships these components today. Each row links to its reference and its live page. Coding agents: read [llms.txt](llms.txt) for the full index, then install the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md). Import from `@tensquads/ui/react`.
+The library ships these components today. Each row links to its reference and its live page. Import from `@tensquads/ui/react`.
 
 <!-- components:start -->
 

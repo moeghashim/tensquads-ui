@@ -19,6 +19,7 @@ import { Route as DashboardsAdminRouteImport } from './routes/dashboards.admin'
 import { Route as DashboardsHomeRouteImport } from './routes/dashboards.home'
 import { Route as FoundationsIndexRouteImport } from './routes/foundations.index'
 import { Route as FoundationsNameRouteImport } from './routes/foundations.$name'
+import { Route as FoundationsGuideRouteImport } from './routes/foundations.guide'
 import { Route as FoundationsPrinciplesRouteImport } from './routes/foundations.principles'
 import { Route as NodesIndexRouteImport } from './routes/nodes.index'
 import { Route as NodesIdRouteImport } from './routes/nodes.$id'
@@ -79,6 +80,11 @@ const FoundationsNameRoute = FoundationsNameRouteImport.update({
   path: '/foundations/$name',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoundationsGuideRoute = FoundationsGuideRouteImport.update({
+  id: '/foundations/guide',
+  path: '/foundations/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FoundationsPrinciplesRoute = FoundationsPrinciplesRouteImport.update({
   id: '/foundations/principles',
   path: '/foundations/principles',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
   '/foundations/$name': typeof FoundationsNameRoute
+  '/foundations/guide': typeof FoundationsGuideRoute
   '/foundations/principles': typeof FoundationsPrinciplesRoute
   '/nodes/$id': typeof NodesIdRoute
   '/reference/mascot-states': typeof ReferenceMascotStatesRoute
@@ -156,6 +163,7 @@ export interface FileRoutesByTo {
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
   '/foundations/$name': typeof FoundationsNameRoute
+  '/foundations/guide': typeof FoundationsGuideRoute
   '/foundations/principles': typeof FoundationsPrinciplesRoute
   '/nodes/$id': typeof NodesIdRoute
   '/reference/mascot-states': typeof ReferenceMascotStatesRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
   '/foundations/$name': typeof FoundationsNameRoute
+  '/foundations/guide': typeof FoundationsGuideRoute
   '/foundations/principles': typeof FoundationsPrinciplesRoute
   '/nodes/$id': typeof NodesIdRoute
   '/reference/mascot-states': typeof ReferenceMascotStatesRoute
@@ -201,6 +210,7 @@ export interface FileRouteTypes {
     | '/dashboards/admin'
     | '/dashboards/home'
     | '/foundations/$name'
+    | '/foundations/guide'
     | '/foundations/principles'
     | '/nodes/$id'
     | '/reference/mascot-states'
@@ -222,6 +232,7 @@ export interface FileRouteTypes {
     | '/dashboards/admin'
     | '/dashboards/home'
     | '/foundations/$name'
+    | '/foundations/guide'
     | '/foundations/principles'
     | '/nodes/$id'
     | '/reference/mascot-states'
@@ -243,6 +254,7 @@ export interface FileRouteTypes {
     | '/dashboards/admin'
     | '/dashboards/home'
     | '/foundations/$name'
+    | '/foundations/guide'
     | '/foundations/principles'
     | '/nodes/$id'
     | '/reference/mascot-states'
@@ -265,6 +277,7 @@ export interface RootRouteChildren {
   DashboardsAdminRoute: typeof DashboardsAdminRoute
   DashboardsHomeRoute: typeof DashboardsHomeRoute
   FoundationsNameRoute: typeof FoundationsNameRoute
+  FoundationsGuideRoute: typeof FoundationsGuideRoute
   FoundationsPrinciplesRoute: typeof FoundationsPrinciplesRoute
   NodesIdRoute: typeof NodesIdRoute
   ReferenceMascotStatesRoute: typeof ReferenceMascotStatesRoute
@@ -350,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoundationsNameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/foundations/guide': {
+      id: '/foundations/guide'
+      path: '/foundations/guide'
+      fullPath: '/foundations/guide'
+      preLoaderRoute: typeof FoundationsGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/foundations/principles': {
       id: '/foundations/principles'
       path: '/foundations/principles'
@@ -425,6 +445,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardsAdminRoute: DashboardsAdminRoute,
   DashboardsHomeRoute: DashboardsHomeRoute,
   FoundationsNameRoute: FoundationsNameRoute,
+  FoundationsGuideRoute: FoundationsGuideRoute,
   FoundationsPrinciplesRoute: FoundationsPrinciplesRoute,
   NodesIdRoute: NodesIdRoute,
   ReferenceMascotStatesRoute: ReferenceMascotStatesRoute,
