@@ -143,6 +143,8 @@ export function AgentStatus() {
 
 The same `/squadmates` entry exports the roster and SVG drawing helpers. Shared schemas also map between role IDs such as `master` and character slugs such as `petra`.
 
+See the [Squadmate contract](packages/ui/src/react/Squadmate/Squadmate.md) for `animated` and motion accessibility. The bilingual [Mascot motion guide](https://tensquads-ui-preview.mohanadgh.workers.dev/foundations/mascots/motion) shows the states and timings.
+
 ## OpenUI client
 
 Render an OpenUI Lang text stream with `TensquadsRenderer` from `@tensquads/ui/openui`:

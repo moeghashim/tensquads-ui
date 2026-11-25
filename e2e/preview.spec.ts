@@ -75,7 +75,12 @@ test("home works in both directions and themes", async ({ page }, testInfo) => {
 			page.getByRole("navigation", { name: state.locale === "ar" ? "التنقل الرئيسي" : "Primary navigation" }),
 		).toBeVisible();
 		await expect(page.locator(".design-home__systems section")).toHaveCount(2);
-		await expect(page.locator(".brand-specimen__squad img")).toHaveCount(3);
+		const squad = page.locator(".brand-specimen__squad");
+		await expect(squad.getByRole("img")).toHaveCount(3);
+		await expect(squad.locator("[data-animated]")).toHaveCount(1);
+		await expect(
+			squad.getByRole("img", { name: state.locale === "ar" ? "بترا، في استراحة" : "Petra, Idle" }),
+		).toHaveAttribute("data-animated", "");
 		await expect(
 			page.getByRole("button", { name: state.locale === "ar" ? "اعتماد الخطة" : "Approve plan" }),
 		).toBeVisible({ timeout: 5000 });

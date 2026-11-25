@@ -9,6 +9,7 @@ import { SquadmateStates } from "../components/squadmate-states";
 import { siteCopy } from "../copy";
 import { designAsset } from "../design-assets";
 import { colourGroups, type DesignCopy, logoGroups, primitives, type Token, variable } from "../foundations";
+import { mascotMotionCopy, mascotMotionPath } from "../mascot-motion-copy";
 import { type FoundationName, foundationNames } from "../reference";
 import { getPreviewState, type Locale } from "../state";
 
@@ -30,6 +31,11 @@ function FoundationPage() {
 	return (
 		<main id="main" className="design-wrap">
 			<ReferenceIntro title={title} lead={lead} />
+			{name === "mascots" && (
+				<Button variant="soft" render={<Link to={mascotMotionPath} search={search} />}>
+					{mascotMotionCopy[locale].title}
+				</Button>
+			)}
 			<ReferenceLayout
 				label={name === "colour" ? copy.onPage : copy.foundations}
 				links={

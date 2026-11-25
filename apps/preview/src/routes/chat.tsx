@@ -196,7 +196,7 @@ function ChatExperience({
 						{waiting && (
 							<ChatWorking
 								locale={locale}
-								glyph={<Squadmate agent="petra" state="planning" size={24} locale={locale} />}
+								glyph={<Squadmate agent="petra" state="planning" size={24} locale={locale} animated />}
 							/>
 						)}
 						{chat.error && (

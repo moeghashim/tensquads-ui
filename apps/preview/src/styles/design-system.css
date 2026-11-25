@@ -153,7 +153,8 @@
 	.brand-specimen__mark { inline-size: min(40%, 9.75rem); }
 	.brand-specimen__squad { display: flex; justify-content: center; align-items: end; inline-size: min(100%, 22rem); }
 	.brand-specimen__squad img { inline-size: 27%; }
-	.brand-specimen__squad img:nth-child(2) { inline-size: 34%; }
+	.brand-specimen__squad .ts-squadmate { inline-size: 34%; }
+	.brand-specimen__squad .ts-squadmate svg { inline-size: 100%; block-size: auto; }
 	.brand-specimen figcaption {
 		display: flex;
 		justify-content: space-between;
