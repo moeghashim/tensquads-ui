@@ -65,19 +65,17 @@ const defaults = {
 
 const handoffAgents = ["kyoto", "giza", "pisa"] as const;
 
-export type ChatPageProps = { locale?: Locale; copy?: typeof defaults.en; endpoint?: string; onReplay?: () => void };
+export type ChatPageProps = { locale?: Locale; copy?: typeof defaults.en; onReplay?: () => void };
 
-export function ChatPage({ locale = "en", copy = defaults[locale], endpoint, onReplay }: ChatPageProps) {
+export function ChatPage({ locale = "en", copy = defaults[locale], onReplay }: ChatPageProps) {
 	const petra = squadmateCharacterName("petra", locale);
 	const kyoto = squadmateCharacterName("kyoto", locale);
 	const chat = useChat({
-		endpoint: endpoint ?? "/api/chat",
+		endpoint: "/api/chat",
 		locale,
-		transport: endpoint
-			? undefined
-			: async function* ({ turns }) {
-					yield turns.at(-1)?.role === "action" ? copy.recorded : copy.demoReply;
-				},
+		transport: async function* ({ turns }) {
+			yield turns.at(-1)?.role === "action" ? copy.recorded : copy.demoReply;
+		},
 	});
 	const form = `root = Form(${JSON.stringify(copy.form)}, [Field(${JSON.stringify(copy.note)}, "instructions")], ${JSON.stringify(copy.submit)}, {type: "SendRefundInstructions"})`;
 	const reply = ["```openui", form, "```"].join("\n");

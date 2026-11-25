@@ -26,4 +26,4 @@ Set `lang` and `dir` on `<html>`. For Arabic, pass `locale="ar"` and set `lang="
 
 ## Replace the sample content
 
-Replace the sample conversation and hand-offs. The sample transport returns scripted text. Pass `endpoint` to connect a streaming backend, and replace the sample reply and its action with your agent's messages. Pass `onReplay` to reset the conversation in place by remounting the component with a new key.
+Replace the sample conversation and hand-offs. The sample transport returns scripted text. Replace the scripted transport in `useChat` to connect your agent, and replace the sample reply and its action with your agent's messages. Pass `onReplay` to reset the conversation in place by remounting the component with a new key.
