@@ -191,7 +191,7 @@ Template: [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.wo
 
 ### 4.4 Settings and forms
 
-Reference: [Rules.dc.html](/design/screens/Rules.dc.html) (in-app settings), [SignIn.dc.html](/design/screens/SignIn.dc.html) and [Onboarding.dc.html](/design/screens/Onboarding.dc.html) (public forms). Live: no full settings page yet. See the components at [/components/Form](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form), [/components/Field](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Field), [/components/Switch](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch).
+Reference: [Rules.dc.html](/design/screens/Rules.dc.html) (in-app settings), [SignIn.dc.html](/design/screens/SignIn.dc.html) and [Onboarding.dc.html](/design/screens/Onboarding.dc.html) (public forms). See the live settings template below and the components at [/components/Form](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form), [/components/Field](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Field), [/components/Switch](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch).
 Template: [Settings](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/settings)
 
 ```
