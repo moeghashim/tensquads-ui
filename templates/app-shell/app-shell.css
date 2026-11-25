@@ -1,3 +1,13 @@
+.template-shell,
+.template-shell__navigation {
+	font:
+		var(--ts-text-md-font-weight) var(--ts-text-md-font-size) / var(--ts-text-md-line-height)
+		var(--ts-text-md-font-family);
+	letter-spacing: var(--ts-text-md-letter-spacing);
+	color: var(--ts-text);
+	font-synthesis: none;
+}
+
 .template-shell {
 	display: flex;
 	align-items: stretch;

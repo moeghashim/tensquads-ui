@@ -114,3 +114,17 @@ test("chat submits an inline form and locks it until replay", async ({ page }) =
 	await expect(instructions).toBeEnabled();
 	await expect(instructions).toHaveValue("");
 });
+
+test("the app shell supplies its text styles without the preview baseline", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "dark" }, "/templates/app-shell");
+	await page.addStyleTag({ content: ":root { font-family: serif; color: black; }" });
+
+	const body = page.getByText("Your squad handles orders, customer support and stock.");
+	await expect(body).toHaveCSS("font-family", /Inter.*IBM Plex Sans Arabic/);
+	await expect(body).toHaveCSS("color", "rgb(220, 220, 220)");
+
+	await page.setViewportSize({ width: 390, height: 844 });
+	await page.getByRole("button", { name: "Open workspace navigation" }).click();
+	const sheet = page.getByRole("dialog").getByRole("navigation", { name: "Workspace navigation" });
+	await expect(sheet.getByText("Accounts")).toHaveCSS("font-family", /Inter.*IBM Plex Sans Arabic/);
+});

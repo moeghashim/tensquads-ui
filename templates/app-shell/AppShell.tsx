@@ -81,7 +81,7 @@ export function AppShell({
 	return (
 		<div className="template-shell">
 			<aside className="template-shell__sidebar" aria-label={copy.workspace}>
-				<Sidebar label={copy.nav} mobileLabel={copy.open}>
+				<Sidebar className="template-shell__navigation" label={copy.nav} mobileLabel={copy.open}>
 					<SidebarBrand icon={copy.brandMark} title={copy.brand} subtitle={copy.workspace} />
 					<SidebarSection label={copy.workspace}>
 						{(Object.keys(icons) as Destination[]).map((id) => (
