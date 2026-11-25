@@ -47,3 +47,13 @@
 5. `approval_decided { approvalId, decision }` is sent once, when a decision is applied. `question_answered { questionId }` is sent when an answer is applied; it has no answer text.
 6. `reply.text`, `result.summary` and `evidence` are plain text.
 **Status**: answered — task `v0.2-platform/001`
+
+## Q5 — Sidebar width and the unused `--ts-side-nav-width` token
+
+**Context**: The Sidebar component is 248 px wide (`packages/ui/src/styles/sidebar.css`). The token `--ts-side-nav-width` is 210 px (`design/tokens.json`) and nothing uses it. The reference screen `design/screens/Main.dc.html` measures 237 px. Found while writing DESIGN.md (task v0.3-design-system/005); recorded in PR #101.
+**Options**:
+  1. The Sidebar uses `--ts-side-nav-width`, and the design system changes the token to the measured value.
+  2. The Sidebar uses the token as it is (210 px).
+  3. Keep 248 px and remove or rename the unused token in the design system.
+**Recommendation**: Option 1. The width comes from one token, and the design-system source owns the value. That needs a design-system change, then a design sync.
+**Status**: open — owner decision

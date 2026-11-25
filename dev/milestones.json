@@ -84,7 +84,7 @@
     },
     {
       "id": "v0.3-workflow",
-      "status": "active",
+      "status": "done",
       "tasks": [
         "001-icon-sync",
         "002-node-and-graph-schema",
@@ -104,7 +104,7 @@
     },
     {
       "id": "v0.3-design-system",
-      "status": "planned",
+      "status": "done",
       "tasks": [
         "001-design-comps",
         "002-build-site",
