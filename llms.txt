@@ -43,3 +43,11 @@
 - [Toolbar](packages/ui/src/react/Toolbar/Toolbar.md): Import `Toolbar` from `@tensquads/ui/react`. It groups up to six icon controls in a floating toolbar. The toolbar has no OpenUI definition because it is application chrome with callbacks (D28).
 - [Tooltip](packages/ui/src/react/Tooltip/Tooltip.md): Import `Tooltip`, its parts, and their prop types from `@tensquads/ui/react`. It wraps the UI SDK Tooltip from `@ui-sdk/react/tooltip` and keeps its root, trigger, content, arrow, and shortcut parts, `data-slot` values, `render` props, placement, open and delay options, and forwarded props.
 - [WorkflowCard](packages/ui/src/react/WorkflowCard/WorkflowCard.md): `WorkflowCard` summarizes a workflow with a fitted graph thumbnail, status, and three stats. The thumbnail mirrors in RTL and is hidden from assistive technology.
+
+## Templates
+
+- [App shell](templates/app-shell/README.md): Lay out a signed-in workspace with side navigation, a page heading and one content panel.
+- [Chat](templates/chat/README.md): Show a conversation with Petra, an inline form action and squad hand-offs.
+- [Dashboard](templates/dashboard/README.md): Show store metrics, a revenue trend, work by squad and recent activity.
+- [List and table](templates/list/README.md): Show a company table with search, a status filter and an empty state.
+- [Settings](templates/settings/README.md): Show existing workspace rules, an edit form and operating limits.

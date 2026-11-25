@@ -7,8 +7,9 @@ Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.
 ## For coding agents
 
 1. Read [DESIGN.md](DESIGN.md) for the visual rules and page layouts.
-2. Read [llms.txt](llms.txt) to find the component documentation.
-3. Read the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md) for setup and composition.
+2. Browse [templates](https://tensquads-ui-preview.mohanadgh.workers.dev/templates) for a page layout.
+3. Read [llms.txt](llms.txt) to find the component documentation.
+4. Read the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md) for setup and composition.
 
 ## Components
 

@@ -47,6 +47,14 @@ for (const directory of (await readdir(componentsRoot, { withFileTypes: true }))
 }
 
 entries.sort((left, right) => left.name.localeCompare(right.name));
+const templateEntries = [];
+for (const directory of await readdir(join(root, "templates"), { withFileTypes: true })) {
+	if (!directory.isDirectory()) continue;
+	const path = `templates/${directory.name}/README.md`;
+	const [heading, , summary] = (await readFile(join(root, path), "utf8")).split(/\r?\n/);
+	templateEntries.push(`- [${heading.slice(2)}](${path}): ${summary}`);
+}
+templateEntries.sort();
 const site = "https://tensquads-ui-preview.mohanadgh.workers.dev";
 const generated = [
 	"# tensquads UI component index",
@@ -60,6 +68,10 @@ const generated = [
 	"## Components",
 	"",
 	...entries.map(({ name, summary, path }) => `- [${name}](${path}): ${summary}`),
+	"",
+	"## Templates",
+	"",
+	...templateEntries,
 	"",
 ].join("\n");
 
