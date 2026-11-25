@@ -7,8 +7,9 @@ Site: [tensquads-ui-preview.mohanadgh.workers.dev](https://tensquads-ui-preview.
 ## For coding agents
 
 1. Read [DESIGN.md](DESIGN.md) for the visual rules and page layouts.
-2. Read [llms.txt](llms.txt) to find the component documentation.
-3. Read the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md) for setup and composition.
+2. Browse [templates](https://tensquads-ui-preview.mohanadgh.workers.dev/templates) for a page layout.
+3. Read [llms.txt](llms.txt) to find the component documentation.
+4. Read the [tensquads-ui skill](.agents/skills/tensquads-ui/SKILL.md) for setup and composition.
 
 ## Components
 
@@ -60,13 +61,15 @@ The library ships these components today. Each row links to its reference and it
 
 The home page introduces the design foundations and the shared UI library. Browse `/foundations` for the Design guide, tokens, Signal and the squadmates. The [Design guide](https://tensquads-ui-preview.mohanadgh.workers.dev/foundations/guide) serves [DESIGN.md](DESIGN.md) in English in both locales. The token and artwork pages read their values and assets from the synced design source.
 
-Coding agents can read the site's [page index](https://tensquads-ui-preview.mohanadgh.workers.dev/llms.txt) or [all pages in one file](https://tensquads-ui-preview.mohanadgh.workers.dev/llms-full.txt). Both files start with the Design guide, then follow the site's page groups. Both files stay in English. The repository's [llms.txt](llms.txt) starts with the guide, followed by the component contract index.
+Coding agents can read the site's [page index](https://tensquads-ui-preview.mohanadgh.workers.dev/llms.txt) or [all pages in one file](https://tensquads-ui-preview.mohanadgh.workers.dev/llms-full.txt). Both files start with the Design guide, then follow the site's page groups. Both files stay in English. The repository's [llms.txt](llms.txt) starts with the guide, followed by the component contracts and templates.
 
 Every site page has a Markdown twin at its path plus `.md`, served as `text/markdown; charset=utf-8`. The home page uses `/index.md`. Use the footer's View as Markdown link where available, or the HTML discovery link (`rel="alternate"`, `type="text/markdown"`). The builder has no site footer. These discovery links preserve the selected language through `?locale=ar` where translated copy is available. For example, `/foundations/colour.md?locale=ar` has Arabic headings. The preview build generates these documents from the same sources as the HTML pages and fails if a route has no Markdown twin. Generated foundation tables include both light and dark values where the tokens differ by theme.
 
 The Design reference row on the home and foundations pages opens Principles at `/foundations/principles`, product screens at `/reference/screens`, page designs at `/reference/pages`, and mascot states at `/reference/mascot-states`. Principles displays the synced Agent-UI guide in English, including when the site language is Arabic. Product screens and the squadmates sidebar design open in scaled viewers with an option to open the locally hosted source at full size. The page designs index links to the live English and Arabic homepages instead of the archived homepage designs. The mascot states page shows every squadmate in each state with localized labels.
 
 Browse the grouped catalog at `/components`. Filter by component name, description or OpenUI support, then select a card to open `/components/$name`. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`). Changing the site language also sets its direction. Use `/get-started` for the English and Arabic setup guide with copyable examples.
+
+Browse `/templates` for the app shell, dashboard, list, settings and chat examples. Each `/templates/<name>` page offers Copy source, Copy styles and a GitHub source link. These are copyable examples, not package exports. Follow the template's README, also included in its Markdown twin, for setup and replacement guidance.
 
 Open Nodes at `/nodes` or `/nodes/support` to edit Support triage. The builder's Workflows link opens `/workflows`, with cards for Support triage, Order review and Store onboarding. Each card opens `/nodes/<id>`. Activity figures are sample data. The builder supports English and Arabic and mirrors the graph in RTL. Edits and history reset when you leave the builder or change its workflow, language or direction. The theme choice persists.
 

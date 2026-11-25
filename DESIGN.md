@@ -30,7 +30,7 @@ Do these five steps in order.
 
    Source: `.agents/skills/tensquads-ui/SKILL.md`. Arabic pages use `lang="ar" dir="rtl"`. Without `data-theme`, the page follows the system theme.
 
-2. **Pick the closest page layout and its reference screen.** Use the table in section 4. Open the reference screen file and the live page side by side. When task 006 lands, copy the page template from `templates/`.
+2. **Pick the closest page layout and its reference screen.** Use the table in section 4. Open the reference screen file and the live page side by side. Copy the page layout and its styles from `templates/` or the [Templates preview](https://tensquads-ui-preview.mohanadgh.workers.dev/templates).
 
 3. **Build only from library components and `--ts-*` tokens.** Import components from `@tensquads/ui/react`. Write your own CSS only for page layout (grid, gaps, padding). Use tokens for every value in that CSS. Use logical properties (`margin-inline-start`, `padding-block`, `inset-inline-end`).
 
@@ -64,6 +64,8 @@ tensquads is a quiet, neutral workspace. Grey surfaces carry the interface. Colo
 A signed-in tensquads screen has two columns on the `--ts-canvas` ground: the side navigation (Sidebar) and one content panel. There is no top bar inside the app. The page title lives in the content panel.
 
 Reference: [Main.dc.html](/design/screens/Main.dc.html) (every workspace view). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home), [/dashboards/admin](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin). Built CSS: `packages/ui/src/styles/sidebar.css`, `apps/preview/src/styles.css` (`.dashboard-*`).
+
+Template: [App shell](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/app-shell)
 
 ### Layout
 
@@ -120,7 +122,7 @@ Each layout gives the grid, the component per region, the spacing and its links.
 ### 4.1 Dashboard
 
 Reference: [Main.dc.html](/design/screens/Main.dc.html) (Overview), [Accounts.dc.html](/design/screens/Accounts.dc.html). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home), [/dashboards/admin](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin).
-Template: (task 006)
+Template: [Dashboard](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/dashboard)
 
 ```
 | Sidebar | PageHeader (title, subtitle, meta badges)        |
@@ -146,7 +148,7 @@ Rules:
 ### 4.2 List and table
 
 Reference: [Accounts.dc.html](/design/screens/Accounts.dc.html) (table), [Agents.dc.html](/design/screens/Agents.dc.html) (card grid). Live: [/dashboards/admin](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin) (table), [/workflows](https://tensquads-ui-preview.mohanadgh.workers.dev/workflows) (card grid).
-Template: (task 006)
+Template: [List and table](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/list)
 
 ```
 | Sidebar | PageHeader                                         |
@@ -167,7 +169,7 @@ DataTable rules (`design/agent-ui/components/DataTable/README.md`): newest first
 ### 4.3 Detail
 
 Reference: [AgentDetail.dc.html](/design/screens/AgentDetail.dc.html), [AgentImages.dc.html](/design/screens/AgentImages.dc.html). Live: [/dashboards/admin?view=images](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin?view=images) (list with a selected item).
-Template: (task 006)
+Template: [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/app-shell#detail-pages)
 
 ```
 | Sidebar | back link                                         |
@@ -189,8 +191,8 @@ Template: (task 006)
 
 ### 4.4 Settings and forms
 
-Reference: [Rules.dc.html](/design/screens/Rules.dc.html) (in-app settings), [SignIn.dc.html](/design/screens/SignIn.dc.html) and [Onboarding.dc.html](/design/screens/Onboarding.dc.html) (public forms). Live: no full settings page yet. See the components at [/components/Form](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form), [/components/Field](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Field), [/components/Switch](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch).
-Template: (task 006)
+Reference: [Rules.dc.html](/design/screens/Rules.dc.html) (in-app settings), [SignIn.dc.html](/design/screens/SignIn.dc.html) and [Onboarding.dc.html](/design/screens/Onboarding.dc.html) (public forms). See the live settings template below and the components at [/components/Form](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Form), [/components/Field](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Field), [/components/Switch](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Switch).
+Template: [Settings](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/settings)
 
 ```
 | Sidebar | PageHeader                                 |
@@ -212,7 +214,7 @@ Form rules (`design/agent-ui/components/Input/README.md`, `Inspector/README.md`)
 ### 4.5 Chat
 
 Reference: [Chat.dc.html](/design/screens/Chat.dc.html). Live: [/chat](https://tensquads-ui-preview.mohanadgh.workers.dev/chat).
-Template: (task 006)
+Template: [Chat](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/chat)
 
 ```
 | Sidebar | Chat surface (8fr)                   | Side panel (4fr)  |
@@ -237,7 +239,7 @@ The library log and composer cap at 48rem (measured, `chat.css`). At 56.25rem an
 ### 4.6 Builder
 
 Reference: the builder spec in `design/agent-ui/README.md` ("Layout of the builder") and `design/agent-ui/components/{Canvas,Palette,Inspector,Toolbar,MiniMap}/README.md`. There is no `.dc.html` builder screen. Live: [/nodes](https://tensquads-ui-preview.mohanadgh.workers.dev/nodes).
-Template: (task 006)
+Template: [Workflow builder demo](https://tensquads-ui-preview.mohanadgh.workers.dev/nodes)
 
 ```
 | header: back · workflow name · status badge ·          actions |

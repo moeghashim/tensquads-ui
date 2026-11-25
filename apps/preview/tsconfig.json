@@ -20,5 +20,5 @@
 			"@tensquads/ui/*": ["../../packages/ui/src/*"]
 		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "../../templates/**/*.tsx"]
 }

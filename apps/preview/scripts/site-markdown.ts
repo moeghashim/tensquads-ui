@@ -29,6 +29,7 @@ import {
 } from "../src/reference";
 import type { FileRoutesByFullPath } from "../src/routeTree.gen";
 import type { Locale } from "../src/state";
+import { templateCopy, templateNames, templatePath, templates } from "../src/template-catalog";
 import { foundationMarkdown, mascotMotionMarkdown, mascotStates } from "./foundation-markdown";
 import { blocks, code, fence, heading, item, link } from "./markdown-format";
 
@@ -105,6 +106,7 @@ function routePages(locale: Locale): RoutePages {
 		title: reference.pageTitles[design.id],
 	}));
 	const componentsLead = design.uiLead;
+	const templateListing = templateCopy[locale];
 	const chat = copy.chat;
 	const builder = builderCopy[locale];
 	const workflows = workflowIds.map((id) => demoWorkflow(id, locale));
@@ -200,6 +202,41 @@ function routePages(locale: Locale): RoutePages {
 				description: design.componentLeads[name],
 				body: componentMarkdown(name),
 			})),
+		"/templates/": [
+			page(
+				"/templates",
+				templateListing.title,
+				templateListing.lead,
+				templateNames.map((name) => {
+					const { title, description } = templates[name][locale];
+					return item(title, markdownPath(`/templates/${name}`, locale), description);
+				}).join("\n"),
+			),
+		],
+		"/templates/$name": templateNames.map((name) => {
+			const path = templatePath(name);
+			const file = `${path}/${templates[name].file}`;
+			const styles = `${path}/${name}.css`;
+			const { title, description } = templates[name][locale];
+			const readme = source(`${path}/README.md`)
+				.replace(/^# [^\n]+\n+/, "")
+				.replace(/\]\((?!https?:|#)([^)]+)\)/g, (_, target: string) =>
+					`](${new URL(target, `${sourceUrl}/${path}/`).href})`,
+				);
+			return page(
+				`/${path}`,
+				title,
+				description,
+				blocks(
+					readme,
+					item(templateListing.github, `${sourceUrl}/${file}`),
+					heading(2, templates[name].file),
+					fence("tsx", source(file)),
+					heading(2, `${name}.css`),
+					fence("css", source(styles)),
+				),
+			);
+		}),
 		"/get-started": [
 			page(
 				"/get-started",
@@ -349,6 +386,7 @@ const groups: PageGroup[] = [
 	{ title: "Start here", routes: [designGuidePath, "/"] },
 	{ title: "Foundations", routes: ["/foundations/", "/foundations/$name", mascotMotionPath] },
 	{ title: "Components", routes: ["/components/", "/components/$name"] },
+	{ title: "Templates", routes: ["/templates/", "/templates/$name"] },
 	{ title: "Get started", routes: ["/get-started"] },
 	{
 		title: "Design reference",

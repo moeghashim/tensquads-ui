@@ -53,7 +53,7 @@ test("the Markdown twin serves the guide and its reference and live links resolv
 		Array.from(source.matchAll(/\]\(([^)]+)\)/g), ([, href]) => {
 			const url = new URL(href, site);
 			expect(url.origin).toBe(site);
-			return url.pathname + url.search;
+			return url.pathname + url.search + url.hash;
 		}),
 	);
 	expect([...targets]).toEqual(

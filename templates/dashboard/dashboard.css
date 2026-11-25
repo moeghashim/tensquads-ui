@@ -1,0 +1,22 @@
+.template-dashboard {
+	display: grid;
+	min-inline-size: 0;
+	gap: var(--ts-space-4);
+}
+
+.template-dashboard > .ts-page-header {
+	margin-block-end: var(--ts-space-2);
+}
+
+.template-dashboard__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+	gap: var(--ts-space-4);
+	align-items: start;
+}
+
+@media (max-width: 60rem) {
+	.template-dashboard__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
