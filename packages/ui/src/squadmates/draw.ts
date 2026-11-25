@@ -1,4 +1,4 @@
-import { BUST, DRAW, defs, type Face, INK, lens, PALETTES, shadow } from "./mascots.js";
+import { BUST, DRAW, defs, PALETTES, shadow } from "./mascots.js";
 import { AGENT_LOOP_STATES, type AgentLoopState, SQUADMATES, type Squadmate } from "./roster.js";
 
 export type SquadmateDrawState = AgentLoopState | "idle";
@@ -26,44 +26,6 @@ export class UnknownSquadmateStateError extends Error {
 	}
 }
 
-// ---- Eyes for each state, in the 300 x 370 drawing. The lens always covers the right eye. ----
-const bead = (x: number, y: number, r = 7) =>
-	`<circle cx="${x}" cy="${y}" r="${r}" fill="${INK}"/><circle cx="${x - r * 0.35}" cy="${y - r * 0.35}" r="${r * 0.3}" fill="#fff" opacity=".9"/>`;
-const lid = (x: number, y: number) => `<ellipse cx="${x}" cy="${y + 1}" rx="7.5" ry="3.2" fill="${INK}"/>`;
-const bar = (x: number, y: number) =>
-	`<rect x="${x - 8}" y="${y - 2.5}" width="16" height="5" rx="2.5" fill="${INK}"/>`;
-const arc = (x: number, y: number, up: boolean) =>
-	`<path d="M${x - 8} ${y + (up ? 3 : -3)} Q${x} ${y + (up ? -7 : 7)} ${x + 8} ${y + (up ? 3 : -3)}" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round"/>`;
-
-const EYES: Record<SquadmateDrawState, (l: number, r: number, y: number) => string> = {
-	idle: (l, r, y) => bead(l, y) + bead(r, y),
-	waiting: (l, r, y) => lid(l, y) + lid(r, y),
-	planning: (l, r, y) => bead(l + 2, y - 5) + bead(r + 2, y - 5),
-	running: (l, r, y) => bead(l + 4, y, 6.5) + bead(r + 4, y, 6.5),
-	checking: (l, r, y) => bead(l, y) + bar(r, y),
-	done: (l, r, y) => arc(l, y, true) + arc(r, y, true),
-	sentback: (l, r, y) => bead(l - 2, y + 5, 6) + bead(r - 2, y + 5, 6),
-	blocked: (l, r, y) => bar(l, y) + bar(r, y),
-	escalated: (l, r, y) => bead(l, y, 9) + bead(r, y, 9),
-	dropped: (l, r, y) => arc(l, y, false) + arc(r, y, false),
-};
-
-const FLAT = new Set<SquadmateDrawState>(["sentback", "blocked", "dropped"]);
-
-function face(k: string, state: SquadmateDrawState): Face {
-	const blink = state === "waiting" || state === "idle" ? ' class="sm-blink"' : "";
-	return {
-		eyes: (l, r, y, size) => `<g${blink}>${EYES[state](l, r, y)}</g>${lens(k, r, y, size)}`,
-		mouth: (x, y, kind = "smile") => {
-			if (kind === "o" || state === "escalated")
-				return `<ellipse cx="${x}" cy="${y}" rx="${kind === "o" ? 9 : 6}" ry="${kind === "o" ? 6 : 7}" fill="${INK}" opacity=".75"/>`;
-			if (FLAT.has(state))
-				return `<path d="M${x - 8} ${y + 3} L${x + 8} ${y + 3}" stroke="${INK}" stroke-width="3" stroke-linecap="round" opacity=".7"/>`;
-			return `<path d="M${x - 10} ${y} Q${x} ${y + 8} ${x + 10} ${y}" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round" opacity=".7"/>`;
-		},
-	};
-}
-
 // ---- Marks over the avatar, in the 64 x 64 box. ----
 function badge(state: SquadmateDrawState): string {
 	if (state === "escalated")
@@ -79,8 +41,8 @@ function badge(state: SquadmateDrawState): string {
 	return "";
 }
 
-// At 64 px and up the avatar shows the whole mascot. Smaller, it shows the upper body,
-// so the face stays readable at 16 px.
+// At 64 px and up the avatar shows the whole mascot. Smaller, it shows the crop in BUST,
+// focused on the head, so the face stays readable at 16 px.
 function avatar(mate: Squadmate, state: SquadmateDrawState, size: number): string {
 	const k = `sm-${mate.name.toLowerCase()}-`;
 	const palette = PALETTES[mate.id];
@@ -91,8 +53,8 @@ function avatar(mate: Squadmate, state: SquadmateDrawState, size: number): strin
 	const [x, y, side] = full ? [-35, 0, 370] : bust;
 	const scale = Number((64 / side).toFixed(5));
 	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="${size}" height="${size}" role="img" aria-label="${mate.name}, ${mate.role}${state === "idle" ? "" : `, ${state}`}">
-${defs(k, palette)}<g transform="scale(${scale}) translate(${-x} ${-y})">${full ? shadow(k) : ""}${draw(k, palette, face(k, state))}</g>
-${badge(state)}
+${defs(k, palette)}<g transform="scale(${scale}) translate(${-x} ${-y})">${full ? shadow(k) : ""}${draw(k, palette, state)}</g>
+${badge(state) ? `<g class="sm-badge">${badge(state)}</g>` : ""}
 </svg>`;
 }
 
@@ -102,9 +64,33 @@ export const SQUADMATE_CSS = `<style>
 @media (prefers-reduced-motion:reduce){.sm-blink{animation:none}}
 </style>`;
 
+// Motion hooks in the markup. Each class group turns around its joint with transform-origin 0 0.
+// sm-raised marks a raised left arm (Petra, Machu): swing it only a little, or it crosses the face.
+export const SQUADMATE_PARTS = [
+	{ name: "sm-all", joint: "the floor under the mascot" },
+	{ name: "sm-torso", joint: "above the boots" },
+	{ name: "sm-foot-l", joint: "the left heel" },
+	{ name: "sm-foot-r", joint: "the right heel" },
+	{ name: "sm-arm-l", joint: "the left shoulder" },
+	{ name: "sm-arm-r", joint: "the right shoulder" },
+	{ name: "sm-face", joint: "the face centre" },
+	{ name: "sm-shadow", joint: "none (use transform-box: fill-box)" },
+	{ name: "sm-badge", joint: "none (use transform-box: fill-box)" },
+] as const;
+
 export function squadmateMarkup(imageId: string, state: string, size: number): string {
 	const mate = BY_ID.get(imageId);
 	if (mate == null) throw new UnknownSquadmateError(imageId);
 	if (!DRAW_STATES.has(state)) throw new UnknownSquadmateStateError(state);
 	return avatar(mate, state as SquadmateDrawState, size);
+}
+
+// The whole mascot with its idle face, in the 300 x 370 drawing, for the cards, the PNG files and the lineup.
+export function mascotDrawing(imageId: string, k: string): string {
+	const mate = BY_ID.get(imageId);
+	if (mate == null) throw new UnknownSquadmateError(imageId);
+	const palette = PALETTES[mate.id];
+	const draw = DRAW[mate.id];
+	if (palette == null || draw == null) throw new UnknownSquadmateError(mate.id);
+	return `${defs(k, palette)}${shadow(k)}${draw(k, palette, "idle")}`;
 }

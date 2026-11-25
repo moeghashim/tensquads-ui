@@ -5,8 +5,14 @@ import "@tensquads/ui/fonts.css";
 import "@tensquads/ui/tokens.css";
 import "@tensquads/ui/styles.css";
 import { SiteShell } from "../components/site-shell";
+import { useMarkdownHref } from "../components/use-markdown-href";
 import { getPreviewAttributes } from "../state";
 import "../styles.css";
+import "../styles/node-preview.css";
+import "../styles/design-system.css";
+import "../styles/stream-demo.css";
+import "../styles/chat-demo.css";
+import "../styles/nodes-builder.css";
 import faviconUrl from "../../../../design/logo/favicon.svg?url";
 
 export const Route = createRootRoute({
@@ -14,7 +20,7 @@ export const Route = createRootRoute({
 		meta: [
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ title: "tensquads ui" },
+			{ title: "tensquads design system" },
 		],
 		links: [{ rel: "icon", type: "image/svg+xml", href: faviconUrl }],
 	}),
@@ -29,10 +35,12 @@ function RootPage() {
 function Document({ children }: { readonly children: ReactNode }) {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const attributes = getPreviewAttributes(search);
+	const markdownHref = useMarkdownHref(attributes.lang);
 	return (
 		<html lang={attributes.lang} dir={attributes.dir} data-theme={attributes["data-theme"]}>
 			<head>
 				<HeadContent />
+				{markdownHref && <link rel="alternate" type="text/markdown" href={markdownHref} />}
 			</head>
 			<body>
 				{children}

@@ -1,0 +1,89 @@
+@layer tensquads {
+	.ts-palette {
+		box-sizing: border-box;
+		inline-size: var(--ts-palette-width);
+		max-block-size: 100%;
+		overflow-y: auto;
+		padding: var(--ts-space-2);
+		border: 0.5px solid var(--ts-panel-border);
+		border-radius: var(--ts-radius-2xl);
+		background: var(--ts-panel);
+	}
+	.ts-palette__section { display: flex; flex-direction: column; gap: var(--ts-space-1); }
+	.ts-palette__section + .ts-palette__section { margin-block-start: var(--ts-space-2); }
+	.ts-palette__heading {
+		padding-block: var(--ts-space-1);
+		padding-inline: var(--ts-space-2);
+		/* Text-tertiary fails AA contrast here, so the section label uses text-secondary. */
+		color: var(--ts-text-secondary);
+		font-family: var(--ts-palette-section-font-family);
+		font-size: var(--ts-palette-section-font-size);
+		font-weight: var(--ts-palette-section-font-weight);
+		line-height: var(--ts-palette-section-line-height);
+		letter-spacing: var(--ts-palette-section-letter-spacing);
+	}
+	.ts-palette__item {
+		display: flex;
+		inline-size: 100%;
+		block-size: var(--ts-control-xl);
+		align-items: center;
+		gap: var(--ts-space-2);
+		padding-block: 0;
+		padding-inline: var(--ts-space-2);
+		border: 0;
+		border-radius: var(--ts-radius-md);
+		background: transparent;
+		color: var(--ts-text-emphasis);
+		text-align: start;
+		cursor: pointer;
+	}
+	.ts-palette__item:hover:not([aria-disabled="true"]) { background: var(--ts-ghost-hover); }
+	.ts-palette__item:active:not([aria-disabled="true"]) { background: var(--ts-ghost-active); }
+	.ts-palette__item[aria-disabled="true"] { color: var(--ts-text-disabled); cursor: default; }
+	.ts-palette__item[data-dragging] { cursor: grabbing; }
+	.ts-palette__ghost {
+		position: fixed;
+		/* The place is physical: the pointer's own coordinates, in both directions. */
+		left: 0;
+		top: 0;
+		z-index: 1000;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		gap: var(--ts-space-2);
+		min-inline-size: var(--ts-palette-width);
+		block-size: var(--ts-control-xl);
+		padding-inline: var(--ts-space-2);
+		border: 0.5px solid var(--ts-panel-border);
+		border-radius: var(--ts-radius-md);
+		background: var(--ts-panel);
+		color: var(--ts-text-emphasis);
+		box-shadow: var(--ts-shadow-overlay);
+		pointer-events: none;
+	}
+	.ts-palette__item:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: -2px; }
+	.ts-palette__tile {
+		display: grid;
+		flex: none;
+		inline-size: var(--ts-control-2xs);
+		block-size: var(--ts-control-2xs);
+		place-items: center;
+		border-radius: var(--ts-radius-md);
+		background: var(--ts-node-tint);
+		color: var(--ts-node-ink);
+	}
+	.ts-palette__tile[data-family="agent"] { --ts-node-tint: var(--ts-tint-agent); }
+	.ts-palette__tile[data-family="logic"] { --ts-node-tint: var(--ts-tint-logic); }
+	.ts-palette__tile[data-family="end"] { --ts-node-tint: var(--ts-tint-end); }
+	.ts-palette__tile[data-family="note"] { --ts-node-tint: var(--ts-tint-note); }
+	.ts-palette__tile[data-family="tool"] { --ts-node-tint: var(--ts-tint-tool); }
+	.ts-palette__tile[data-family="data"] { --ts-node-tint: var(--ts-tint-data); }
+	.ts-palette__name {
+		min-inline-size: 0;
+		font-family: var(--ts-palette-item-font-family);
+		font-size: var(--ts-palette-item-font-size);
+		font-weight: var(--ts-palette-item-font-weight);
+		line-height: var(--ts-palette-item-line-height);
+		letter-spacing: var(--ts-palette-item-letter-spacing);
+	}
+}

@@ -1,11 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const baseURL = `http://127.0.0.1:${process.env.PREVIEW_PORT ?? "5173"}`;
+
 export default defineConfig({
 	testDir: "./e2e",
 	fullyParallel: true,
 	reporter: "html",
 	use: {
-		baseURL: "http://localhost:5173",
+		baseURL,
 		...devices["Desktop Chrome"],
 		browserName: "chromium",
 		locale: "en-US",
@@ -16,7 +18,7 @@ export default defineConfig({
 	},
 	webServer: {
 		command: "npm run build:preview && npm --prefix apps/preview run preview",
-		url: "http://localhost:5173",
+		url: baseURL,
 		reuseExistingServer: false,
 		timeout: 120_000,
 	},

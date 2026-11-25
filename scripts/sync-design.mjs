@@ -5,6 +5,25 @@ import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
+
+/** Lists every file under `directory` in the checkout, as paths relative to the checkout, sorted. */
+async function listFiles(checkout, directory) {
+	const found = [];
+	let entries;
+	try {
+		entries = await readdir(join(checkout, directory), { withFileTypes: true });
+	} catch (error) {
+		// Older design-system commits have no screens or pages folder.
+		if (error?.code === "ENOENT") return found;
+		throw error;
+	}
+	for (const entry of entries) {
+		const path = `${directory}/${entry.name}`;
+		if (entry.isDirectory()) found.push(...(await listFiles(checkout, path)));
+		else found.push(path);
+	}
+	return found.sort();
+}
 const repository = "https://github.com/moeghashim/tensquads-design-system.git";
 const defaultCommit = "644fd15aa8c18dbb0ec5c83181426a7719a5dc4f";
 const root = resolve("design");
@@ -28,6 +47,7 @@ try {
 		["agent-ui/tokens.json", "tokens.json"],
 		["agent-ui/README.md", "agent-ui/README.md"],
 		["agent-ui/data-display.md", "agent-ui/data-display.md"],
+		["agent-ui/components/bundle.js", "agent-ui/components/bundle.js"],
 		["README.md", "ATTRIBUTION.md"],
 		...componentDocs,
 		...[...(await readdir(join(checkout, "mascots/svg")))].map((name) => [
@@ -39,6 +59,11 @@ try {
 			`mascots/states/${name}`,
 		]),
 		["mascots/mascots.json", "mascots/mascots.json"],
+		...(await listFiles(checkout, "mascots/avatars")).map((path) => [path, path]),
+		...(await listFiles(checkout, "screens"))
+			.filter((path) => !path.startsWith("screens/inventory/"))
+			.map((path) => [path, path]),
+		...(await listFiles(checkout, "pages")).map((path) => [path, path]),
 		...[
 			"apple-touch-icon.png",
 			"favicon-32.png",
@@ -70,7 +95,7 @@ try {
 	await rm(root, { recursive: true, force: true });
 	await rename(staging, root);
 	console.log(`Synced ${Object.keys(hashes).length} files from ${commit}.`);
-	console.log("Skipped previews, bundle.js/css, screens, PNG/JPEG mascot lineups, avatars, and mascot cards.");
+	console.log("Skipped previews, bundle.css, screen inventories, PNG/JPEG mascot lineups, and mascot cards.");
 } finally {
 	await rm(temporary, { recursive: true, force: true });
 }

@@ -10,7 +10,7 @@ web
 Developers who build tensquads and بنّاء screens, and the coding agents they point at this library. They arrive to learn what `@tensquads/ui` is, install it from a pinned commit, and find the right component with copyable code. Server agents that stream OpenUI are a second audience, reached through the same docs. (Confirmed by Moe, 2026-11-18.)
 
 ## Product Purpose
-`@tensquads/ui` is the shared React UI library for tensquads and بنّاء: Agent-UI styled components with UI SDK behaviour, the squadmates, and an OpenUI bridge so a live agent can stream the same components. This site is the library's public home: home page, one page per component, and a getting-started page for agents. Success: a developer or agent goes from landing to a working install and the right component without asking anyone.
+See the [README introduction](../../README.md#tensquads-ui) for the product and the [Site guide](../../README.md#site) for the public site's foundations and component catalog. Success: a developer or agent goes from landing to a working install and the right component without asking anyone.
 
 ## Positioning
 One component set that both a coding agent (React) and a live server agent (OpenUI streams) can use, bilingual English and Arabic with real right-to-left, on top of UI SDK instead of a fork.

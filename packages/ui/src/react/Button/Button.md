@@ -2,7 +2,7 @@
 
 Import `Button` and the `ButtonProps` type from `@tensquads/ui/react`. It wraps UI SDK's `Button` from `@ui-sdk/react/button` and keeps its native button behavior, `data-slot`, `render` prop, and forwarded props.
 
-`variant` accepts `solid`, `soft`, `outline`, `ghost`, or `danger` (default `solid`). `size` accepts `sm`, `md`, or `lg` (default `md`). `pill` makes the corners fully rounded. `iconOnly` sizes an icon-only button and requires an `aria-label`. Pass icons as React children; this task does not port the Agent-UI icon set.
+`variant` accepts `solid`, `soft`, `outline`, `ghost`, or `danger` (default `solid`). `size` accepts `sm`, `md`, or `lg` (default `md`). `pill` makes the corners fully rounded. `iconOnly` sizes an icon-only button and requires an `aria-label`. Pass icons as React children.
 
 The danger variant uses `gray-0` text in light mode and maps its component text property to `gray-1000` in explicit and system dark modes. Both tokens resolve to white in their respective themes, matching the white text specified for `danger-solid`.
 

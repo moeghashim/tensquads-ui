@@ -1,9 +1,10 @@
-import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect, useNavigate, useRouterState } from "@tanstack/react-router";
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
 import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
+import { Canvas, type CanvasHandle } from "../../../../packages/ui/src/react/Canvas/Canvas";
 import { Card } from "../../../../packages/ui/src/react/Card/Card";
 import {
 	Chat,
@@ -36,6 +37,7 @@ import {
 import { EmptyState } from "../../../../packages/ui/src/react/EmptyState/EmptyState";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../../../packages/ui/src/react/Field/Field";
 import { Input } from "../../../../packages/ui/src/react/Input/Input";
+import { Inspector } from "../../../../packages/ui/src/react/Inspector/Inspector";
 import {
 	Menu,
 	MenuContent,
@@ -44,8 +46,10 @@ import {
 	MenuSeparator,
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
+import { Node } from "../../../../packages/ui/src/react/Node/Node";
 import { OwnerMessageView } from "../../../../packages/ui/src/react/OwnerMessage/OwnerMessage";
 import { PageHeader } from "../../../../packages/ui/src/react/PageHeader/PageHeader";
+import { DEFAULT_PALETTE_SECTIONS, Palette } from "../../../../packages/ui/src/react/Palette/Palette";
 import {
 	SegmentedControl,
 	SegmentedControlIndicator,
@@ -76,9 +80,12 @@ import {
 	TooltipTrigger,
 } from "../../../../packages/ui/src/react/Tooltip/Tooltip";
 import { AGENT_ROLE_TO_SLUG, type AgentState } from "../../../../packages/ui/src/schemas";
+import type { WorkflowGraph } from "../../../../packages/ui/src/schemas/workflow";
 import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squadmates";
+import { componentDocumentName } from "../catalog-groups";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { MarkdownDocument } from "../components/docs/markdown-document";
+import { MiniMapExample, WorkflowCardExample } from "../components/workflow-examples";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
@@ -101,31 +108,39 @@ const componentOrder = [
 	"ThemeToggle",
 	"Toolbar",
 	"CommandPalette",
+	"Node",
+	"Canvas",
+	"Palette",
+	"Inspector",
+	"MiniMap",
 ];
 
-export const Route = createFileRoute("/components/$name")({ component: ComponentPage });
+export const Route = createFileRoute("/components/$name")({
+	loader: ({ params, location }) => {
+		if (params.name === "OwnerMessage") {
+			throw redirect({ to: "/components/$name", params: { name: "OwnerMessageView" }, search: location.search });
+		}
+		const sourceName = componentDocumentName(params.name);
+		const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`];
+		if (!markdown) throw notFound();
+	},
+	component: ComponentPage,
+});
 
 function ComponentPage() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
 	const copy = siteCopy[locale].componentPage;
-	const sourceName = name === "OwnerMessageView" ? "OwnerMessage" : name;
-	const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`];
+	const sourceName = componentDocumentName(name);
+	const markdown = documents[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.md`]!;
 	const stream = fixtures[`../../../../packages/ui/src/react/${sourceName}/${sourceName}.fixture.${locale}.txt`];
 	const index = componentOrder.indexOf(name);
 	const previous = index > 0 ? componentOrder[index - 1] : undefined;
 	const next = index >= 0 ? componentOrder[index + 1] : undefined;
 	const noFixtureReason = markdown?.match(/(?:OpenUI[^.]*does not[^.]*\.|without an OpenUI definition[^.]*\.)/i)?.[0];
-	if (!markdown)
-		return (
-			<main className="content-page">
-				<h1>{name}</h1>
-				<p className="intro">{copy.unavailable}</p>
-			</main>
-		);
 	return (
-		<main className="component-doc-page">
+		<main id="main" className="component-doc-page">
 			<div className="component-doc-page__header">
 				<Link className="back-link" to="/components" search={search as never}>
 					{copy.backToComponents}
@@ -430,8 +445,14 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 function ComponentExample() {
 	const { name } = Route.useParams();
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
-	const { locale } = getPreviewState(search);
+	const { locale, direction } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
+	if (name === "Node") return <NodePreview locale={locale} />;
+	if (name === "Canvas") return <CanvasPreview locale={locale} direction={direction} />;
+	if (name === "Palette") return <PalettePreview locale={locale} direction={direction} />;
+	if (name === "MiniMap") return <MiniMapExample locale={locale} direction={direction} />;
+	if (name === "WorkflowCard") return <WorkflowCardExample locale={locale} stream={stream ?? null} />;
+	if (name === "Inspector") return <InspectorPreview locale={locale} direction={direction} />;
 	if (name === "Sidebar") return <SidebarPreview locale={locale} />;
 	if (name === "ThemeToggle") return <ThemeTogglePreview locale={locale} />;
 	if (name === "Toolbar") return <ToolbarPreview locale={locale} />;
@@ -1335,6 +1356,387 @@ ${menuContentsCode}
 				)}
 			</section>
 		</div>
+	);
+}
+
+function NodePreview({ locale }: { locale: "en" | "ar" }) {
+	const labels =
+		locale === "ar"
+			? [
+					"وكيل",
+					"تصنيف",
+					"إذا / وإلا",
+					"أثناء",
+					"موافقة المستخدم",
+					"البداية",
+					"النهاية",
+					"ملاحظة",
+					"البحث عن الملفات",
+					"ضوابط الحماية",
+					"MCP",
+					"تحويل",
+					"تعيين الحالة",
+				]
+			: [
+					"Agent",
+					"Classify",
+					"If/else",
+					"While",
+					"User approval",
+					"Start",
+					"End",
+					"Note",
+					"File search",
+					"Guardrails",
+					"MCP",
+					"Transform",
+					"Set state",
+				];
+	const kinds = [
+		"agent",
+		"classify",
+		"if-else",
+		"while",
+		"user-approval",
+		"start",
+		"end",
+		"note",
+		"file-search",
+		"guardrails",
+		"mcp",
+		"transform",
+		"set-state",
+	] as const;
+	return (
+		<div className="node-preview">
+			<div className="node-preview__grid">
+				{kinds.map((kind, index) => (
+					<Node
+						key={kind}
+						kind={kind}
+						title={labels[index]!}
+						meta={locale === "ar" ? "خطوة سير العمل" : "Workflow step"}
+					/>
+				))}
+			</div>
+			<div className="node-preview__branches">
+				<Node
+					kind="if-else"
+					title={locale === "ar" ? "هل الطلب متاح؟" : "Is the order available?"}
+					meta={locale === "ar" ? "شرطان" : "Two conditions"}
+					branches={locale === "ar" ? ["متاح", "طلب مسبق", "وإلا"] : ["In stock", "Preorder", "Else"]}
+					selected
+				/>
+				<Node
+					kind="guardrails"
+					title={locale === "ar" ? "فحص السياسات" : "Check policies"}
+					meta={locale === "ar" ? "فحصان" : "Two checks"}
+					branches={locale === "ar" ? ["اجتياز", "إخفاق"] : ["Pass", "Fail"]}
+				/>
+			</div>
+		</div>
+	);
+}
+
+function PalettePreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
+	const ar = locale === "ar";
+	const [lastInserted, setLastInserted] = useState<WorkflowGraph["nodes"][number]["kind"] | null>(null);
+	const [lastSource, setLastSource] = useState<string | null>(null);
+	const [nodes, setNodes] = useState<Omit<WorkflowGraph["nodes"][number], "title">[]>([
+		{ id: "palette-0", kind: "agent", position: { x: 270, y: 80 } },
+	]);
+	const titleOf = (kind: WorkflowGraph["nodes"][number]["kind"]) =>
+		DEFAULT_PALETTE_SECTIONS[locale].flatMap((section) => section.items).find((item) => item.kind === kind)?.label ??
+		kind;
+	const canvas = useRef<CanvasHandle | null>(null);
+	const graph: WorkflowGraph = { nodes: nodes.map((node) => ({ ...node, title: titleOf(node.kind) })), edges: [] };
+	return (
+		<div className="component-list palette-preview" data-last-source={lastSource ?? undefined} dir={direction}>
+			<div className="canvas-preview__surface">
+				<Canvas
+					ref={canvas}
+					dir={direction}
+					locale={locale}
+					label={ar ? "منشئ سير العمل" : "Workflow builder"}
+					graph={graph}
+				>
+					<div className="palette-preview__overlay">
+						<Palette
+							canvas={canvas}
+							label={ar ? "عُقد سير العمل" : "Workflow nodes"}
+							sections={DEFAULT_PALETTE_SECTIONS[locale]}
+							onInsert={(kind, details) => {
+								setLastInserted(kind);
+								setLastSource(details.source);
+								setNodes((current) => [
+									...current,
+									{
+										id: `palette-${current.length}`,
+										kind,
+										position: details.position ?? {
+											x: 280 + current.length * 20,
+											y: 250 + current.length * 20,
+										},
+									},
+								]);
+							}}
+						/>
+					</div>
+				</Canvas>
+			</div>
+			<p role="status">
+				{lastInserted ? (ar ? `تمت إضافة: ${titleOf(lastInserted)}` : `Added: ${titleOf(lastInserted)}`) : ""}
+			</p>
+		</div>
+	);
+}
+
+type InspectorValues = {
+	name: string;
+	instructions: string;
+	reasoning: boolean;
+	model: string;
+	schemas: string[];
+	targets: string[];
+};
+
+function InspectorPreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
+	const [values, setValues] = useState<Record<"en" | "ar", InspectorValues>>({
+		en: {
+			name: "Petra",
+			instructions: "Help customers with their orders.",
+			reasoning: true,
+			model: "balanced",
+			schemas: ["response_schema"],
+			targets: ["draft"],
+		},
+		ar: {
+			name: "بترا",
+			instructions: "ساعد العملاء في طلباتهم.",
+			reasoning: true,
+			model: "balanced",
+			schemas: ["response_schema"],
+			targets: ["draft"],
+		},
+	});
+	const [status, setStatus] = useState("");
+	const ar = locale === "ar";
+	const current = values[locale];
+	const update = (change: Partial<InspectorValues>) =>
+		setValues((previous) => ({
+			...previous,
+			[locale]: { ...previous[locale], ...change },
+		}));
+	return (
+		<div className="component-list inspector-preview" dir={direction}>
+			<Inspector
+				title={ar ? "وكيل" : "Agent"}
+				description={ar ? "استدعاء النموذج وفق التعليمات" : "Call the model with your instructions"}
+				locale={locale}
+				fields={[
+					{
+						type: "text",
+						id: "name",
+						label: ar ? "الاسم" : "Name",
+						value: current.name,
+						onValueChange: (name) => update({ name }),
+					},
+					{
+						type: "select",
+						id: "model",
+						label: ar ? "النموذج" : "Model",
+						value: current.model,
+						options: [
+							{ value: "fast", label: ar ? "سريع" : "Fast" },
+							{ value: "balanced", label: ar ? "متوازن" : "Balanced" },
+							{ value: "thorough", label: ar ? "دقيق" : "Thorough" },
+						],
+						onValueChange: (model) => update({ model }),
+					},
+					{
+						type: "longtext",
+						id: "instructions",
+						label: ar ? "التعليمات" : "Instructions",
+						value: current.instructions,
+						onValueChange: (instructions) => update({ instructions }),
+						actions: [
+							{
+								id: "improve",
+								label: ar ? "إضافة اقتراح" : "Add a suggestion",
+								icon: "wand",
+								onPress: () => {
+									update({
+										instructions: `${current.instructions} ${ar ? "قدّم خطوات واضحة." : "Give clear next steps."}`,
+									});
+									setStatus(ar ? "تمت إضافة اقتراح" : "Suggestion added");
+								},
+							},
+						],
+					},
+					{
+						type: "switch",
+						id: "reasoning",
+						label: ar ? "الاستدلال" : "Reasoning",
+						checked: current.reasoning,
+						onCheckedChange: (reasoning) => update({ reasoning }),
+					},
+					{
+						type: "chips",
+						id: "schema",
+						label: ar ? "مخطط الإخراج" : "Output schema",
+						items: current.schemas.map((id) => ({ id, label: id, icon: "schema" as const })),
+						onAdd: () => {
+							let number = current.schemas.length + 1;
+							while (current.schemas.includes(`schema_${number}`)) number += 1;
+							update({ schemas: [...current.schemas, `schema_${number}`] });
+						},
+						onRemove: (id) => update({ schemas: current.schemas.filter((item) => item !== id) }),
+					},
+					{
+						type: "connections",
+						id: "connections",
+						label: ar ? "يتصل بـ" : "Connects to",
+						targets: [
+							{ id: "draft", title: ar ? "صياغة الرد" : "Draft reply" },
+							{ id: "review", title: ar ? "مراجعة" : "Review" },
+							{ id: "send", title: ar ? "إرسال الرد" : "Send reply" },
+							{ id: "archive", title: ar ? "أرشفة" : "Archive" },
+						],
+						value: current.targets,
+						onValueChange: (targets) => update({ targets }),
+					},
+				]}
+				onDuplicate={() => setStatus(ar ? "تم تكرار الوكيل" : "Agent duplicated")}
+				onDelete={() => setStatus(ar ? "تم حذف الوكيل" : "Agent deleted")}
+				onMore={() => setStatus(ar ? "تم فتح المزيد" : "More options opened")}
+				onEvaluate={() => setStatus(ar ? "بدأ التقييم" : "Evaluation started")}
+			/>
+			<p role="status">{status}</p>
+		</div>
+	);
+}
+
+function CanvasPreview({ locale, direction }: { locale: "en" | "ar"; direction: "ltr" | "rtl" }) {
+	const ar = locale === "ar";
+	const [mode, setMode] = useState<"select" | "pan">("select");
+	const nodeCopy: Record<string, Pick<WorkflowGraph["nodes"][number], "title" | "meta" | "branches">> = {
+		start: { title: ar ? "البداية" : "Start" },
+		classify: {
+			title: ar ? "تصنيف الطلب" : "Classify request",
+			meta: ar ? "ثلاثة مسارات" : "Three paths",
+			branches: ar ? ["استرداد", "استفسار", "أخرى"] : ["Refund", "Question", "Other"],
+		},
+		refund: { title: ar ? "وكيل الاسترداد" : "Refund agent", meta: ar ? "وكيل" : "Agent" },
+		question: { title: ar ? "وكيل الدعم" : "Support agent", meta: ar ? "وكيل" : "Agent" },
+		other: { title: ar ? "وكيل الطلبات" : "Orders agent", meta: ar ? "وكيل" : "Agent" },
+		approval: {
+			title: ar ? "موافقة المستخدم" : "User approval",
+			meta: ar ? "قبل الاسترداد" : "Before refund",
+		},
+		end: { title: ar ? "النهاية" : "End" },
+		note: { title: ar ? "ملاحظة" : "Note" },
+	};
+	const [graph, setGraph] = useState<{
+		nodes: Omit<WorkflowGraph["nodes"][number], "title" | "meta" | "branches">[];
+		edges: WorkflowGraph["edges"];
+	}>(() => ({
+		nodes: [
+			{ id: "start", kind: "start", position: { x: 40, y: 110 } },
+			{
+				id: "classify",
+				kind: "classify",
+				position: { x: 260, y: 80 },
+			},
+			{
+				id: "refund",
+				kind: "agent",
+				position: { x: 520, y: 20 },
+			},
+			{
+				id: "question",
+				kind: "agent",
+				position: { x: 520, y: 160 },
+			},
+			{
+				id: "other",
+				kind: "agent",
+				position: { x: 520, y: 300 },
+			},
+			{
+				id: "approval",
+				kind: "user-approval",
+				position: { x: 780, y: 100 },
+			},
+			{ id: "end", kind: "end", position: { x: 1020, y: 160 } },
+			{ id: "note", kind: "note", position: { x: 760, y: 330 } },
+		],
+		edges: [
+			{ id: "start-classify", from: "start", to: "classify" },
+			{ id: "classify-refund", from: "classify", fromPort: 0, to: "refund" },
+			{ id: "classify-question", from: "classify", fromPort: 1, to: "question" },
+			{ id: "classify-other", from: "classify", fromPort: 2, to: "other" },
+			{ id: "refund-approval", from: "refund", to: "approval" },
+			{ id: "question-end", from: "question", to: "end" },
+			{ id: "other-end", from: "other", to: "end" },
+			{ id: "approval-end", from: "approval", to: "end" },
+		],
+	}));
+	return (
+		<section className="canvas-preview" aria-label={ar ? "مثال سير العمل" : "Workflow example"}>
+			<div className="canvas-preview__surface">
+				<Canvas
+					dir={direction}
+					graph={{ ...graph, nodes: graph.nodes.map((node) => ({ ...node, ...nodeCopy[node.id]! })) }}
+					locale={locale}
+					label={ar ? "منشئ سير العمل" : "Workflow builder"}
+					onConnect={(connection) =>
+						setGraph((current) => ({
+							...current,
+							edges: [
+								...current.edges,
+								{
+									id: `connection-${current.edges.length}-${connection.from}-${connection.to}-${connection.fromPort ?? 0}`,
+									...connection,
+								},
+							],
+						}))
+					}
+					mode={mode}
+					onDelete={({ nodes, edges }) =>
+						setGraph((current) => {
+							const removedNodes = new Set(nodes);
+							const removedEdges = new Set(edges);
+							return {
+								nodes: current.nodes.filter((node) => !removedNodes.has(node.id)),
+								edges: current.edges.filter(
+									(edge) =>
+										!removedEdges.has(edge.id) && !removedNodes.has(edge.from) && !removedNodes.has(edge.to),
+								),
+							};
+						})
+					}
+					onNodeMove={(id, position) =>
+						setGraph((current) => ({
+							...current,
+							nodes: current.nodes.map((node) => (node.id === id ? { ...node, position } : node)),
+						}))
+					}
+					defaultViewport={{ x: 0, y: 0, zoom: 0.65 }}
+				>
+					<div className="canvas-preview__toolbar">
+						<SegmentedControl
+							aria-label={ar ? "وضع اللوحة" : "Canvas mode"}
+							value={mode}
+							onValueChange={(value) => value && setMode(value as "select" | "pan")}
+						>
+							<SegmentedControlIndicator />
+							<SegmentedControlItem value="select">{ar ? "تحديد" : "Select"}</SegmentedControlItem>
+							<SegmentedControlItem value="pan">{ar ? "تحريك" : "Pan"}</SegmentedControlItem>
+						</SegmentedControl>
+					</div>
+				</Canvas>
+			</div>
+		</section>
 	);
 }
 

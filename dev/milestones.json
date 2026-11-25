@@ -101,6 +101,16 @@
         "001-agent-ready-components",
         "002-site-agent-tools"
       ]
+    },
+    {
+      "id": "v0.3-design-system",
+      "status": "planned",
+      "tasks": [
+        "001-design-comps",
+        "002-build-site",
+        "003-agent-docs",
+        "004-mascot-motion"
+      ]
     }
   ]
 }

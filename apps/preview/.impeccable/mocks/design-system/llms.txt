@@ -1,0 +1,12 @@
+# tensquads design system
+
+> Design foundations and React components for tensquads and بنّاء.
+
+## Start here
+
+- [Design system](markdown/home.md): Install the package and find foundations and components.
+- [نظام تصميم بنّاء](markdown/home-ar.md): الصفحة الرئيسية بالعربية.
+- [Colour tokens](markdown/foundation-colour.md): Semantic and primitive values for light and dark.
+- [Component index](markdown/components.md): React components by category.
+- [Get started](https://tensquads-ui-preview.mohanadgh.workers.dev/get-started): Set up React and OpenUI.
+- [Library llms.txt](https://github.com/moeghashim/tensquads-ui/blob/main/llms.txt): Published library documentation.

@@ -47,7 +47,11 @@ test("every component fixture parses and renders", async ({ page }) => {
 			} else if (component.name === "Menu") {
 				const trigger = fixtureRegion.getByRole("button", { name: locale === "en" ? "Actions" : "الإجراءات" });
 				await expect(trigger).toBeVisible();
-				await trigger.press("Enter");
+				// The server-rendered trigger is visible before its keyboard handler hydrates.
+				await expect(async () => {
+					if ((await trigger.getAttribute("aria-expanded")) !== "true") await trigger.press("Enter");
+					await expect(trigger).toHaveAttribute("aria-expanded", "true", { timeout: 750 });
+				}).toPass({ timeout: 5_000 });
 				await expect(
 					fixtureRegion.getByRole("menuitem", { name: locale === "en" ? "Open project" : "فتح المشروع" }),
 				).toBeVisible();
@@ -116,6 +120,12 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(fixtureRegion.getByRole("table")).toBeVisible();
 			} else if (component.name === "EmptyState") {
 				await expect(fixtureRegion.locator("[data-slot='empty-state']")).toBeVisible();
+			} else if (component.name === "WorkflowCard") {
+				const card = fixtureRegion.getByRole("article");
+				await expect(card.getByText(locale === "en" ? "Stock alerts" : "تنبيهات المخزون")).toBeVisible();
+				await expect(card.getByText(locale === "en" ? "Live" : "منشور", { exact: true })).toBeVisible();
+				await expect(card.getByRole("link")).toHaveCount(0);
+				await expect(card.getByRole("button")).toHaveCount(0);
 			} else if (component.name === "ChatLauncher") {
 				await expect(
 					fixtureRegion.getByRole("button", {

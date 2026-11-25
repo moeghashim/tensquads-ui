@@ -1,4 +1,5 @@
 import { createRequire } from "node:module";
+import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { expect, test } from "@playwright/test";
 
@@ -8,9 +9,11 @@ let server: Awaited<ReturnType<typeof createServer>>;
 let url: string;
 
 test.beforeAll(async () => {
+	const testInfo = test.info();
 	server = await createServer({
 		configFile: false,
 		root: fileURLToPath(new URL("./fixtures/chat-composer", import.meta.url)),
+		cacheDir: join(testInfo.project.outputDir, "vite-cache", String(testInfo.workerIndex)),
 		server: { host: "127.0.0.1", port: 0, fs: { allow: [process.cwd()] } },
 	});
 	await server.listen();

@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { getRegisteredComponents } from "../packages/ui/src/openui";
 import {
 	capturePreviewScreenshots,
 	expectAccessible,
@@ -57,7 +56,7 @@ for (const state of states) {
 			});
 			await button.click();
 			await expect(button).toHaveText(state.locale === "ar" ? "تم النسخ" : "Copied");
-			await expect(card.getByRole("status")).toBeEmpty();
+			await expect(card.getByRole("status")).toHaveText(state.locale === "ar" ? "تم النسخ" : "Copied");
 			expect(await page.evaluate(() => sessionStorage.getItem("copied-command"))).toBe(
 				"npm install github:moeghashim/tensquads-ui#<commit-sha>",
 			);
@@ -75,7 +74,8 @@ test("home works in both directions and themes", async ({ page }, testInfo) => {
 		await expect(
 			page.getByRole("navigation", { name: state.locale === "ar" ? "التنقل الرئيسي" : "Primary navigation" }),
 		).toBeVisible();
-		await expect(page.locator(".component-card")).toHaveCount(getRegisteredComponents().length);
+		await expect(page.locator(".design-home__systems section")).toHaveCount(2);
+		await expect(page.locator(".brand-specimen__squad img")).toHaveCount(3);
 		await expect(
 			page.getByRole("button", { name: state.locale === "ar" ? "اعتماد الخطة" : "Approve plan" }),
 		).toBeVisible({ timeout: 5000 });
@@ -89,17 +89,19 @@ test("home works in both directions and themes", async ({ page }, testInfo) => {
 test("site routes render in English and Arabic", async ({ page }) => {
 	for (const locale of ["en", "ar"] as const) {
 		const direction = locale === "ar" ? "rtl" : "ltr";
-		for (const route of ["/", "/components", "/get-started"]) {
+		for (const route of ["/", "/components", "/foundations", "/get-started"]) {
 			await openPreview(page, { locale, direction, theme: "light" }, route);
 			await expect(page.getByRole("main")).toBeVisible();
-			await expect(page.getByRole("navigation")).toBeVisible();
+			await expect(
+				page.getByRole("navigation", { name: locale === "ar" ? "التنقل الرئيسي" : "Primary navigation" }),
+			).toBeVisible();
 		}
 	}
 });
 
 test("locale and theme controls update the URL state", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" });
-	await page.getByRole("radio", { name: "العربية", exact: true }).click();
+	await page.getByRole("button", { name: "العربية", exact: true }).click();
 	await expect(page.locator("html")).toHaveAttribute("lang", "ar");
 	await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 	await expect(page).toHaveURL(/locale=ar/);
@@ -116,7 +118,7 @@ test("stream demo replays localized OpenUI fixtures", async ({ page }) => {
 	await expect(page.getByRole("switch", { name: "Email me when done" })).toBeVisible();
 	await expect(page.getByRole("radio", { name: "Weekly" })).toBeVisible();
 	await expect(page.locator(".stream-screen__agent [data-slot='badge']")).toHaveText("Checking");
-	await page.getByRole("radio", { name: "العربية · RTL" }).click();
+	await page.getByRole("radio", { name: "العربية" }).click();
 	await expect(page.getByRole("button", { name: "اعتماد الخطة" })).toBeVisible({ timeout: 5000 });
 	await expect(page.locator(".stream-screen")).toHaveAttribute("dir", "rtl");
 });
@@ -129,7 +131,9 @@ for (const locale of ["en", "ar"] as const) {
 		const notifications = pane.getByRole("switch");
 		const weekly = pane.getByRole("radio", { name: locale === "ar" ? "أسبوعي" : "Weekly", exact: true });
 		const monthly = pane.getByRole("radio", { name: locale === "ar" ? "شهري" : "Monthly", exact: true });
-		await expect(page.locator(".stream-code__footer")).toContainText("7/7");
+		await expect(page.locator(".stream-code__footer")).toContainText(
+			locale === "ar" ? "السطر 7 من 7" : "Line 7 of 7",
+		);
 		await field.fill("Edited store");
 		await notifications.click();
 		await monthly.click();
@@ -137,46 +141,22 @@ for (const locale of ["en", "ar"] as const) {
 		await expect(notifications).not.toBeChecked();
 		await expect(monthly).toBeChecked();
 		await page.getByRole("button", { name: locale === "ar" ? "إعادة العرض" : "Replay", exact: true }).click();
-		await expect(page.locator(".stream-code__footer")).toContainText("7/7");
+		await expect(page.locator(".stream-code__footer")).toContainText(
+			locale === "ar" ? "السطر 7 من 7" : "Line 7 of 7",
+		);
 		await expect(field).toHaveValue(locale === "ar" ? "متجر بنّاء" : "Bannaa Market");
 		await expect(notifications).toBeChecked();
 		await expect(weekly).toBeChecked();
 	});
 }
 
-test("fixture cards allow input independently of navigation", async ({ page }) => {
-	for (const locale of ["en", "ar"] as const) {
-		const direction = locale === "ar" ? "rtl" : "ltr";
-		for (const route of ["/", "/components"]) {
-			await openPreview(page, { locale, direction, theme: "dark" }, route);
-			const originalUrl = page.url();
-			for (const name of ["Field", "Input"]) {
-				const card = page.locator(".component-card").filter({
-					has: page.getByRole("link", { name, exact: true }),
-				});
-				const input = card.getByRole("textbox");
-				await input.click();
-				await input.fill("Updated project");
-				await expect(input).toHaveValue("Updated project");
-				await expect(page).toHaveURL(originalUrl);
-			}
-			const chip = page.locator(".component-card").filter({
-				has: page.getByRole("link", { name: "Chip", exact: true }),
-			});
-			await chip.getByRole("link", { name: /response_schema/ }).click();
-			await expect(page).toHaveURL(`${originalUrl}#response_schema`);
-			await chip.getByRole("link", { name: "Chip", exact: true }).click();
-			await expect(page).toHaveURL(new RegExp(`/components/Chip\\?locale=${locale}&dir=${direction}&theme=dark$`));
-		}
-	}
-});
-
 test("demo copy follows its own locale in both directions", async ({ page }) => {
 	for (const locale of ["en", "ar"] as const) {
 		await openPreview(page, { locale, direction: locale === "ar" ? "rtl" : "ltr", theme: "light" });
 		const pane = page.locator(".stream-screen");
+		const controls = page.locator(".stream-demo__controls");
 		for (const selected of ["ar", "en"] as const) {
-			await pane.getByRole("radio", { name: selected === "ar" ? "العربية · RTL" : "English", exact: true }).click();
+			await controls.getByRole("radio", { name: selected === "ar" ? "العربية" : "English", exact: true }).click();
 			await expect(pane).toHaveAttribute("lang", selected);
 			await expect(pane).toHaveAttribute("dir", selected === "ar" ? "rtl" : "ltr");
 			await expect(pane.locator(".stream-screen__agent-copy strong")).toHaveText(
@@ -199,77 +179,147 @@ test("homepage stream demo keeps its size while streaming", async ({ page }) => 
 	await page.getByRole("button", { name: "Replay" }).click();
 	const demo = page.locator(".stream-demo");
 	const startHeight = (await demo.boundingBox())?.height ?? 0;
-	await expect(page.locator(".stream-code__footer")).toContainText("7/7");
+	await expect(page.locator(".stream-code__footer")).toContainText("Line 7 of 7");
 	const endHeight = (await demo.boundingBox())?.height ?? 0;
 	expect(Math.abs(endHeight - startHeight), "Stream demo height changed while streaming").toBeLessThanOrEqual(1);
 });
 
-test("homepage presents streamed messages and keeps previews readable", async ({ page }) => {
+test("homepage aligns the setup row and stream panes", async ({ page }) => {
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" });
 	await page.setViewportSize({ width: 1440, height: 900 });
-	const messages = page.locator(".stream-code__line");
-	await expect(messages).toHaveCount(7);
-	await expect(messages.nth(2).locator(".stream-code__message-label")).toHaveText("Message 3 of 7");
+	const numbers = page.locator(".stream-code__number");
+	await expect(numbers).toHaveText(["1", "2", "3", "4", "5", "6", "7"]);
 	const installCommand = page.locator(".install-card code");
 	await expect(installCommand).toHaveText("npm install github:moeghashim/tensquads-ui#<commit-sha>");
-	expect(
-		await installCommand.evaluate((element) => element.scrollWidth <= element.clientWidth),
-		"The install command should fit on one line at desktop width",
-	).toBe(true);
-	const actions = page.locator(".hero__links");
-	await expect(actions.getByRole("link", { name: "Get started", exact: true })).toBeVisible();
-	const componentCount = await page.locator(".component-card").count();
-	const browse = actions.getByRole("link", { name: `Browse ${componentCount} components`, exact: true });
-	await expect(browse).toBeVisible();
-	expect(await browse.evaluate((element) => getComputedStyle(element).textDecorationLine)).toBe("none");
-	await expect(page.getByRole("tooltip")).toContainText("Create a new item");
-	await expect(page.locator(".component-card__arrow").first()).toHaveText("→");
-	const squadCards = page.locator(".squad-row").getByRole("link");
-	const squadRows = await squadCards.evaluateAll(
-		(cards) => new Set(cards.map((card) => Math.round(card.getBoundingClientRect().top))).size,
+	expect(await installCommand.evaluate((element) => element.getClientRects().length)).toBe(1);
+	await expect(page.locator(".design-setup").getByRole("link", { name: /Get started/ })).toBeVisible();
+	const paneHeaders = page.locator(".stream-demo__pane-heading");
+	const [code, rendered] = await paneHeaders.evaluateAll((headers) =>
+		headers.map((header) => header.getBoundingClientRect().top),
 	);
-	expect(squadRows).toBe(1);
-	const streamGridBottom = await page
-		.locator(".stream-screen__grid")
-		.evaluate((element) => element.getBoundingClientRect().bottom);
-	const localeControlTop = await page
-		.locator(".stream-screen__locale")
-		.evaluate((element) => element.getBoundingClientRect().top);
-	expect(localeControlTop - streamGridBottom).toBeLessThanOrEqual(20);
-	await page.setViewportSize({ width: 390, height: 844 });
-	expect(
-		await page
-			.locator(".component-grid")
-			.evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(" ").length),
-	).toBe(1);
-	const fieldCard = page.locator(".component-card").filter({
-		has: page.getByRole("link", { name: "Field", exact: true }),
-	});
-	await expect(fieldCard.getByRole("textbox")).toHaveValue("Northstar");
-	const chipCard = page.locator(".component-card").filter({
-		has: page.getByRole("link", { name: "Chip", exact: true }),
-	});
-	const chipText = chipCard.locator(".ts-chip__name");
-	await expect(chipText).toHaveText("response_schema");
-	expect(await chipText.evaluate((element) => getComputedStyle(element).whiteSpace)).toBe("nowrap");
-	await expectNoHorizontalScroll(page);
-	await openPreview(page, { locale: "ar", direction: "rtl", theme: "light" }, "/components");
-	await expect(page.locator(".component-card__arrow").first()).toHaveText("←");
+	expect(code).toBe(rendered);
+	await expect(page.locator(".stream-code__line[data-current='true']")).toContainText("Approve plan");
+	await expect(page.locator(".stream-screen__actions [data-current='true']")).toContainText("Approve plan");
 });
 
-test("squad cards link to Squadmate with URL state", async ({ page }) => {
-	for (const locale of ["en", "ar"] as const) {
-		const direction = locale === "ar" ? "rtl" : "ltr";
-		await openPreview(page, { locale, direction, theme: "dark" });
-		const cards = page.locator(".squad-row").getByRole("link");
-		await expect(cards).toHaveCount(13);
-		for (const card of await cards.all()) {
-			await expect(card).toHaveAttribute(
-				"href",
-				`/components/Squadmate?locale=${locale}&dir=${direction}&theme=dark`,
-			);
+test("catalog filters and links without interactive specimens", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "dark" }, "/components");
+	const filter = page.getByRole("searchbox", { name: "Filter components" });
+	const cards = page.locator(".component-card");
+	await expect(cards).toHaveCount(35);
+	await page.getByRole("radio", { name: "React only" }).click();
+	await expect(cards).toHaveCount(12);
+	await expect(page.getByRole("link", { name: /^MiniMap / })).toBeVisible();
+	await expect(page.getByRole("link", { name: /^WorkflowCard / })).toHaveCount(0);
+	await expect(page.getByRole("link", { name: /^Canvas / })).toBeVisible();
+	await filter.fill("bar");
+	await expect(cards).toHaveCount(2);
+	await expect(page.getByRole("link", { name: /^Toolbar / })).toBeVisible();
+	await page.getByRole("radio", { name: "OpenUI", exact: true }).click();
+	await expect(cards).toHaveCount(2);
+	await expect(page.locator(".component-card__stage[inert]")).toHaveCount(2);
+	await filter.fill("no such component");
+	await expect(page.getByRole("status")).toHaveText("No components match your search.");
+	await filter.clear();
+	const chart = page.getByRole("link", { name: /^BarChart / });
+	await expect(chart.locator(".ts-bar-chart__tick")).toHaveText(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+	await chart.click();
+	await expect(page).toHaveURL(/\/components\/BarChart\?locale=en&dir=ltr&theme=dark$/);
+});
+
+for (const state of states) {
+	test(`catalog category rail follows the document in ${state.locale} ${state.theme}`, async ({ page }) => {
+		await page.setViewportSize({ width: 1440, height: 900 });
+		await openPreview(page, state, "/components");
+		const filter = page.getByRole("searchbox");
+		// SSR links work before hydration, but the router can reset their scroll during startup.
+		await expect(async () => {
+			await filter.fill("BarChart");
+			await expect(page.locator(".component-card")).toHaveCount(1);
+		}).toPass({ timeout: 10_000 });
+		await filter.clear();
+		await expect(page.locator(".component-card")).toHaveCount(35);
+		const rail = page.getByRole("navigation", { name: state.locale === "ar" ? "الفئات" : "Categories" });
+		for (const id of ["actions", "forms", "feedback", "data", "chat", "app", "workflow"]) {
+			const link = rail.locator(`a[href="#${id}"]`);
+			await link.click();
+			await expect(link).toHaveAttribute("aria-current", "location");
 		}
-		await cards.first().click();
-		await expect(page).toHaveURL(new RegExp(`/components/Squadmate\\?locale=${locale}&dir=${direction}&theme=dark$`));
+		await page.locator("#chat").evaluate((section) => section.scrollIntoView({ block: "start" }));
+		await expect(rail.locator('a[href="#chat"]')).toHaveAttribute("aria-current", "location");
+	});
+
+	test(`catalog and foundations render in ${state.locale} ${state.theme}`, async ({ page }, testInfo) => {
+		for (const [path, name] of [
+			["/components", "components"],
+			["/foundations", "foundations"],
+			["/foundations/colour", "colour"],
+		] as const) {
+			await openPreview(page, state, path);
+			await capturePreviewScreenshots(page, testInfo, `${name}-${state.locale}-${state.direction}-${state.theme}`);
+			await expectNoHorizontalScroll(page);
+			await expectAccessible(page);
+		}
+	});
+
+	test(`all foundation details preserve ${state.locale} ${state.theme} and show their source data`, async ({
+		page,
+	}) => {
+		const fixtures = {
+			typography: ".foundation-type__sample",
+			spacing: ".foundation-swatch--spacing",
+			radius: ".foundation-swatch--radius",
+			shadow: ".foundation-swatch--shadow",
+			motion: ".motion-specimen__track",
+			logo: ".foundation-assets__image img",
+			mascots: ".foundation-mascot",
+		};
+		for (const [path, specimen] of Object.entries(fixtures)) {
+			await openPreview(page, state, "/foundations");
+			const link = page.locator(`.foundation-grid a[href*="/foundations/${path}"]`);
+			await link.click();
+			await expect(page.locator(specimen).first()).toBeVisible();
+			await expect(page).toHaveURL(
+				new RegExp(`/foundations/${path}\\?locale=${state.locale}&dir=${state.direction}&theme=${state.theme}$`),
+			);
+			await expectNoHorizontalScroll(page);
+			await expectAccessible(page);
+		}
+	});
+}
+
+test("catalog stages fit the full specimen at mobile and desktop widths", async ({ page }) => {
+	for (const width of [390, 1440]) {
+		await page.setViewportSize({ width, height: 900 });
+		await openPreview(page, states[0]!, "/components");
+		await expect
+			.poll(() =>
+				page
+					.locator(".component-card__specimen")
+					.evaluateAll((elements) =>
+						elements.every((element) => getComputedStyle(element).getPropertyValue("--specimen-scale").trim()),
+					),
+			)
+			.toBe(true);
+		expect(
+			await page.locator(".component-card__specimen").evaluateAll((elements) =>
+				elements.flatMap((element) => {
+					const stage = element.parentElement?.getBoundingClientRect();
+					const rect = element.getBoundingClientRect();
+					return !stage ||
+						rect.left < stage.left ||
+						rect.right > stage.right ||
+						rect.top < stage.top ||
+						rect.bottom > stage.bottom
+						? [element.parentElement?.dataset.component]
+						: [];
+				}),
+			),
+		).toEqual([]);
+		const tracks = await page
+			.locator(".catalog-grid")
+			.first()
+			.evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.split(" ").length);
+		expect(tracks).toBe(width === 390 ? 2 : 4);
 	}
 });

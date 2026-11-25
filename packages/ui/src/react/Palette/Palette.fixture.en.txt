@@ -1,0 +1,1 @@
+Palette renders application chrome with callbacks and has no OpenUI fixture.

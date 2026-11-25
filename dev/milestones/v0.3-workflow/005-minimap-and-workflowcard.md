@@ -13,7 +13,7 @@ Specs: `MiniMap`, `WorkflowCard`. UI SDK: `menu.md`.
 
 ### MiniMap
 - [ ] Rendered as a Canvas child. It reads the graph, the viewport and the canvas size from Canvas context and shows only while the graph's bounds exceed the visible area; it hides again when everything fits.
-- [ ] 180×110 `panel` card, `radius-xl`, at the bottom inline-end corner, 16px from the edges. Nodes are family-tinted rectangles at scale; no labels, no edges. The viewport is an `alpha-06` mask with an `alpha-20` outline. Dragging the mask, or clicking the map, pans the canvas through `onViewportChange`.
+- [ ] 180×110 `panel` card, `radius-xl`, at the bottom inline-end corner, 16px from the edges. A `placement?: "end" | "start"` prop (default `"end"`) moves it to the bottom inline-start corner; the Nodes page (task 006) needs it because its Inspector covers the inline end. Nodes are family-tinted rectangles at scale; no labels, no edges. The viewport is an `alpha-06` mask with an `alpha-20` outline. Dragging the mask, or clicking the map, pans the canvas through `onViewportChange`.
 - [ ] It has an accessible name ("Minimap") and is hidden from the Canvas roving group; arrow keys on the focused minimap pan by 10% of the viewport.
 
 ### WorkflowCard
@@ -29,7 +29,7 @@ Specs: `MiniMap`, `WorkflowCard`. UI SDK: `menu.md`.
 - Read D25, D30 and D31 in `PLAN.md`, the named specs under `design/agent-ui/components/` in full, `design/agent-ui/README.md` (Canvas, Iconography, Themes and shortcuts), and the UI SDK docs the task names (`node_modules/@ui-sdk/react/docs/`). The spec wins on visuals unless this file says otherwise.
 - Branch `feat/v0.3-workflow-NNN-slug` from `v0.3-workflow`. Base the PR on `v0.3-workflow`. Work in the project checkout; do not create git worktrees (D25).
 - Each component: `X.tsx`, `X.test.tsx`, `X.md` (state why there is no OpenUI definition, D30, except WorkflowCard), `X.fixture.en.txt` and `X.fixture.ar.txt`, a registry line, an export from `@tensquads/ui/react`, a CSS file imported from `styles.css`, and a `/components/X` page (§12 checklist).
-- Build what UI SDK does not ship from `@ui-sdk/core` (`definePrimitive`, `createParts`, `createRovingFocus`, `spatialMove`, drag behaviors, `createCommit`). Wrap what it ships. Public entries only. No hand-rolled roles UI SDK ships.
+- Build what UI SDK does not ship from `@ui-sdk/core` (`definePrimitive`, `createParts`, `createRovingFocus`, `spatialMove`, `createViewport`, `createMove`, `createConnect`). Wrap what it ships. Public entries only. No hand-rolled roles UI SDK ships.
 - Tokens only (`check:css-tokens`), logical CSS properties, light and dark, RTL. Icons come from the generated `icons.ts` (task 001), never hand-drawn.
 - No module-scope randomness, dates, timers or `window` access; the components render on the server.
 - Lists keyed by id, never by index.

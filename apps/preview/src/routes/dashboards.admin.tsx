@@ -142,7 +142,7 @@ function AdminDashboard() {
 		};
 	});
 	return (
-		<main className="dashboard-page" dir={direction}>
+		<main id="main" className="dashboard-page" dir={direction}>
 			<DashboardFrame>
 				<Sidebar label="Platform admin" mobileLabel={copy.openNavigation}>
 					<SidebarBrand icon={<Icon name="grid" />} title="Platform admin" subtitle={copy.workspace} />

@@ -1,15 +1,23 @@
-// The thirteen squad mascots. Frosted toys, one for each agent. Each body takes its shape
-// from the place the agent is named after. Every mascot wears one lens over its right eye.
-// The source is github.com/moeghashim/tensquads-design-system (scripts/mascots.mjs).
-// Here the eyes and the mouth come from a Face, so the avatar can show an Agent loop state.
+// The thirteen squad mascots. Clay toy characters, one for each agent. Each body takes its shape
+// from the place the agent is named after. Every mascot has soft studio light, big glossy brown
+// eyes, a round nose, an open smile, stout hands and scuffed lace-up boots. No glasses.
+// Designed by GPT-6.2 Sol. The source is github.com/moeghashim/tensquads-design-system
+// (scripts/squadmates/mascots.ts). The face is drawn for each Agent loop state.
 
 export type Palette = { readonly light: string; readonly base: string; readonly deep: string; readonly limb: string };
 
-// Draws the eyes, the lens and the mouth. Coordinates are in the 300 x 370 drawing.
-export type Face = {
-	readonly eyes: (left: number, right: number, y: number, lens: number) => string;
-	readonly mouth: (x: number, y: number, kind?: "smile" | "o") => string;
-};
+// The Agent loop states the face can show, and idle.
+export type FaceState =
+	| "idle"
+	| "waiting"
+	| "planning"
+	| "running"
+	| "checking"
+	| "done"
+	| "sentback"
+	| "blocked"
+	| "escalated"
+	| "dropped";
 
 export const PALETTES: Record<string, Palette> = {
 	master: { light: "#FBD8D0", base: "#EBA196", deep: "#C9746A", limb: "#E3958A" },
@@ -27,199 +35,511 @@ export const PALETTES: Record<string, Palette> = {
 	channels: { light: "#FFD6F0", base: "#F28CCB", deep: "#C9529C", limb: "#EC80C2" },
 };
 
-// The square that shows the upper body in a small avatar: x, y and side, in the drawing.
-export const BUST: Record<string, readonly [number, number, number]> = {
-	master: [45, 45, 210],
-	orders: [45, 50, 210],
-	support: [40, 50, 220],
-	marketing: [45, 70, 220],
-	finance: [40, 90, 220],
-	inventory: [40, 80, 220],
-	market: [35, 80, 230],
-	website: [30, 60, 240],
-	analytics: [45, 70, 210],
-	hr: [40, 80, 220],
-	places: [38, 58, 236],
-	catalog: [40, 50, 230],
-	channels: [35, 85, 230],
+// Where the face sits in the 300 x 370 drawing.
+const FACE: Record<string, readonly [number, number]> = {
+	master: [150, 174],
+	orders: [164, 174],
+	support: [150, 160],
+	marketing: [150, 170],
+	finance: [141, 164],
+	inventory: [150, 190],
+	market: [148, 176],
+	website: [150, 179],
+	analytics: [150, 158],
+	hr: [139, 175],
+	places: [150, 180],
+	catalog: [150, 150],
+	channels: [150, 158],
 };
 
-export const INK = "#1B1B1F";
+// The square that shows the head in a small avatar: x, y and side, in the drawing.
+const BUST_CROPS: Partial<Record<string, readonly [number, number, number]>> = {
+	orders: [52, 25, 232],
+	hr: [32, 38, 242],
+	channels: [63, 53, 228],
+};
 
+export const BUST: Record<string, readonly [number, number, number]> = Object.fromEntries(
+	Object.entries(FACE).map(([id, [x, y]]) => [id, BUST_CROPS[id] ?? [x - 100, y - 95, 200]]),
+);
+
+export const INK = "#41252C";
+
+// ---- Shapes. ----
+const path = (d: string, fill: string, extra = "") => `<path d="${d}" fill="${fill}"${extra ? ` ${extra}` : ""}/>`;
+const oval = (x: number, y: number, rx: number, ry: number, fill: string) =>
+	`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${fill}"/>`;
+const box = (x: number, y: number, w: number, h: number, r: number, fill: string) =>
+	`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}"/>`;
+const line = (d: string, stroke: string, w: number, opacity = 1) =>
+	path(
+		d,
+		"none",
+		`stroke="${stroke}" stroke-width="${w}"${opacity < 1 ? ` opacity="${opacity}"` : ""} stroke-linecap="round" stroke-linejoin="round"`,
+	);
+const group = (transform: string, content: string) => `<g transform="${transform}">${content}</g>`;
+// A motion part: content wrapped so the class group turns around (x, y), its joint.
+// CSS animates the class group with transform-origin 0 0. The wrapper adds no visible change.
+const part = (x: number, y: number, name: string, content: string) =>
+	`<g transform="translate(${x} ${y})"><g class="${name}"><g transform="translate(${-x} ${-y})">${content}</g></g></g>`;
+const r2 = (n: number) => Number(n.toFixed(2));
+
+const gradient = (id: string, colors: readonly string[], cx = "32%", cy = "23%", r = "78%") =>
+	`<radialGradient id="${id}" cx="${cx}" cy="${cy}" r="${r}">${colors.map((c, i) => `<stop offset="${[0, 0.54, 1][i]}" stop-color="${c}"/>`).join("")}</radialGradient>`;
+
+// The gradients for one mascot. `k` keeps the ids apart when two avatars share a page.
 export function defs(k: string, c: Palette): string {
-	return `<defs><radialGradient id="${k}b" cx="32%" cy="26%" r="85%"><stop offset="0" stop-color="${c.light}"/><stop offset=".55" stop-color="${c.base}"/><stop offset="1" stop-color="${c.deep}"/></radialGradient><radialGradient id="${k}l" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></radialGradient><filter id="${k}f" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter><filter id="${k}s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter></defs>`;
+	return `<defs>${gradient(`${k}clay`, [c.light, c.base, c.deep])}${gradient(`${k}arm`, [c.light, c.limb, c.deep])}${gradient(`${k}recess`, [c.deep, c.deep, "#594454"])}${gradient(`${k}boot`, ["#d39a69", "#966347", "#4a302d"])}${gradient(`${k}wood`, ["#ffe0a6", "#bb8051", "#774231"])}${gradient(`${k}gold`, ["#fff5bb", "#ebba54", "#aa612e"])}${gradient(`${k}red`, ["#ffb3a4", "#e47065", "#a53247"])}${gradient(`${k}white`, ["#fffef9", "#fff6e8", "#c9a8a5"])}${gradient(`${k}iris`, ["#d9ab73", "#905837", "#4b2b29"])}<radialGradient id="${k}floor"><stop stop-color="#38252e" stop-opacity=".31"/><stop offset=".55" stop-color="#483442" stop-opacity=".2"/><stop offset="1" stop-color="#483442" stop-opacity="0"/></radialGradient></defs>`;
 }
 
-export const lens = (k: string, x: number, y: number, r: number) =>
-	`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#${k}l)" stroke="#fff" stroke-opacity=".9" stroke-width="4"/><circle cx="${x}" cy="${y}" r="${r - 7}" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2"/><path d="M${x - r * 0.55} ${y - r * 0.35} A${r * 0.7} ${r * 0.7} 0 0 1 ${x - r * 0.1} ${y - r * 0.68}" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".85"/>`;
-const limb = (c: Palette, d: string, w = 13) =>
-	`<path d="${d}" fill="none" stroke="${c.limb}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity=".96"/>`;
-const legs = (c: Palette, a: number, b: number, top: number, w = 13) =>
-	limb(c, `M${a} ${top} L${a - 3} 344`, w) +
-	limb(c, `M${b} ${top} L${b + 3} 344`, w) +
-	`<ellipse cx="${a - 7}" cy="347" rx="17" ry="9" fill="${c.limb}"/><ellipse cx="${b + 7}" cy="347" rx="17" ry="9" fill="${c.limb}"/>`;
-const hand = (c: Palette, x: number, y: number, r = 10) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${c.limb}"/>`;
-export const shadow = (k: string) =>
-	`<ellipse cx="150" cy="356" rx="95" ry="10" fill="#1B2430" opacity=".14" filter="url(#${k}s)"/>`;
-const sheen = (k: string, d: string) => `<path d="${d}" fill="#fff" opacity=".42" filter="url(#${k}f)"/>`;
-const rim = (d: string) =>
-	`<path d="${d}" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+// The soft floor shadow.
+export const shadow = (k: string) => `<g class="sm-shadow">${oval(150, 345, 123, 19, `url(#${k}floor)`)}</g>`;
 
-type Draw = (k: string, c: Palette, f: Face) => string;
+// ---- The face: eyes, brows, nose, cheeks and mouth for each state. ----
+function expression(state: FaceState, clay: string, deep: string, white: string, iris: string): string {
+	const eyes = ([-1, 1] as const)
+		.map((side) => {
+			const closed = ["done", "blocked", "dropped"].includes(state) || (state === "checking" && side === 1);
+			const arc = state === "done" || state === "checking" ? -19 : state === "dropped" ? 12 : 0;
+			const height = state === "waiting" ? 11 : state === "escalated" ? 25 : 21;
+			const dx = state === "running" ? 7 : 0;
+			const dy = state === "planning" ? -8 : state === "sentback" ? 7 : 0;
+			const brow =
+				state === "escalated"
+					? "M-12 -34Q0 -48 12 -34"
+					: state === "running"
+						? side === -1
+							? "M-12 -37L12 -29"
+							: "M-12 -29L12 -37"
+						: state === "sentback"
+							? side === -1
+								? "M-12 -25Q0 -31 12 -35"
+								: "M-12 -35Q0 -31 12 -25"
+							: "M-12 -28Q0 -38 12 -29";
+			const open =
+				oval(1, 2, 22, height + 2, deep) +
+				oval(0, 0, 20, height, white) +
+				oval(dx, dy, 11, Math.min(height - 2, 12), iris) +
+				oval(dx, dy, 6, Math.min(height - 4, 8), "#25161c") +
+				oval(dx - 4, dy - 4, 3.7, 3.5, "white") +
+				oval(dx + 4, dy + 4, 1.5, 1.5, "#fff4d5");
+			const lid = closed ? line(`M-14 0Q0 ${arc} 14 0`, INK, 6) : open;
+			return group(`translate(${side * 31} 0)`, line(brow, INK, 5, 0.72) + lid);
+		})
+		.join("");
+	let mouth =
+		path("M-20 30Q0 37 20 30Q18 55 0 56Q-17 55-20 30Z", INK) +
+		path("M-16 33Q0 38 16 33Q13 41 0 41Q-13 41-16 33Z", "#fff4e4") +
+		path("M-11 51Q0 43 11 51Q0 57-11 51Z", "#e78383");
+	if (state === "blocked" || state === "sentback") mouth = line("M-13 40Q0 39 13 40", INK, 5);
+	if (state === "escalated" || state === "dropped")
+		mouth = oval(0, 40, state === "escalated" ? 9 : 5, state === "escalated" ? 11 : 4, INK);
+	if (state === "running") mouth = line("M-10 40Q2 45 13 37", INK, 5);
+	const blink = state === "idle" || state === "waiting" ? ' class="sm-blink"' : "";
+	const cheek = (x: number) => `<ellipse cx="${x}" cy="23" rx="12" ry="6" fill="#a63655" opacity=".15"/>`;
+	return `${cheek(-52)}${cheek(52)}<g${blink}>${eyes}</g>${oval(0, 18, 13, 11, deep)}${oval(-1, 15, 12, 11, clay)}${mouth}`;
+}
 
-export const DRAW: Record<string, Draw> = {
-	master: (k, c, f) => `${legs(c, 125, 175, 300)}
-${limb(c, "M94 205 Q70 230 74 268")}${hand(c, 74, 270)}
-${limb(c, "M206 195 Q244 182 250 128")}<g transform="translate(250 118)"><ellipse rx="12" ry="14" fill="${c.limb}"/><path d="M-9 -8 L-14 -24 M-2 -12 L-3 -30 M5 -11 L9 -28 M10 -5 L18 -18" stroke="${c.limb}" stroke-width="7" stroke-linecap="round"/></g>
-<path d="M150 60 m-11 0 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M144 68 L156 68 L158 84 L142 84 Z" fill="url(#${k}b)"/>
-<path d="M88 296 L88 146 A62 62 0 0 1 212 146 L212 296 Q212 310 198 310 L102 310 Q88 310 88 296 Z" fill="url(#${k}b)"/>
-<path d="M108 300 L108 154 A42 42 0 0 1 192 154 L192 300" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5"/>
-${sheen(k, "M104 150 A46 46 0 0 1 150 104 Q132 130 112 200 Z")}
-${f.eyes(126, 174, 178, 27)}${f.mouth(150, 212)}`,
-
-	orders: (k, c, f) => `${legs(c, 128, 182, 296)}
-<g transform="rotate(7 150 300)">
-<rect x="114" y="58" width="72" height="44" rx="16" fill="url(#${k}b)"/>
-<rect x="98" y="92" width="104" height="212" rx="30" fill="url(#${k}b)"/>
-${rim("M104 146 L196 146 M104 200 L196 200 M104 254 L196 254")}
-<path d="M118 112 v18 M134 112 v18 M150 112 v18 M166 112 v18 M182 112 v18" stroke="#fff" stroke-opacity=".35" stroke-width="5" stroke-linecap="round"/>
-${sheen(k, "M106 110 Q104 200 112 290 L122 290 Q114 200 118 110 Z")}
-${f.eyes(128, 172, 174, 24)}${f.mouth(150, 214)}
-</g>
-${limb(c, "M98 214 Q72 230 70 262")}${hand(c, 70, 264)}
-<g transform="rotate(-4 236 268)"><rect x="200" y="238" width="72" height="56" rx="8" fill="#E2C49A"/><path d="M200 258 L272 258 M236 238 L236 258" stroke="#C9A472" stroke-width="5"/></g>
-${limb(c, "M204 214 Q226 226 222 250")}${hand(c, 222, 252)}${hand(c, 262, 246)}`,
-
-	support: (k, c, f) => `${legs(c, 126, 174, 296)}
-${limb(c, "M84 214 Q58 234 62 266")}${hand(c, 62, 268)}
-${limb(c, "M216 214 Q244 232 240 266")}${hand(c, 240, 268)}
-<rect x="80" y="102" width="140" height="196" rx="66" fill="url(#${k}b)"/>
-<rect x="110" y="88" width="80" height="26" rx="9" fill="${c.deep}"/>
-<rect x="110" y="286" width="80" height="22" rx="9" fill="${c.deep}"/>
-${rim("M92 150 Q150 138 208 150 M86 200 Q150 190 214 200 M92 250 Q150 262 208 250")}
-${sheen(k, "M98 130 Q86 200 100 270 L112 270 Q100 200 110 130 Z")}
-${f.eyes(128, 172, 196, 24)}${f.mouth(150, 236)}
-<path d="M80 186 Q78 54 150 54 Q222 54 220 186" fill="none" stroke="#2A2D34" stroke-width="7" stroke-linecap="round"/>
-<rect x="68" y="168" width="20" height="40" rx="9" fill="#2A2D34"/><rect x="212" y="168" width="20" height="40" rx="9" fill="#2A2D34"/>
-<path d="M74 206 Q84 250 120 244" fill="none" stroke="#2A2D34" stroke-width="5" stroke-linecap="round"/><circle cx="122" cy="244" r="6" fill="#2A2D34"/>`,
-
-	marketing: (k, c, f) => `${legs(c, 124, 180, 296)}
-${limb(c, "M76 226 Q48 244 54 278")}${hand(c, 54, 280)}
-<path d="M68 300 Q56 156 130 86 Q190 40 222 120 Q244 200 236 300 Z" fill="url(#${k}b)" stroke="url(#${k}b)" stroke-width="16" stroke-linejoin="round"/>
-${sheen(k, "M96 150 Q76 220 86 290 L100 290 Q92 220 110 150 Z")}
-${f.eyes(132, 178, 196, 26)}${f.mouth(156, 236)}
-${limb(c, "M230 220 Q250 214 252 194")}
-<g transform="rotate(-30 252 186)"><path d="M248 176 L276 162 L276 206 L248 192 Z" fill="#F7F3EC" stroke="#D9D1C2" stroke-width="3" stroke-linejoin="round"/><rect x="238" y="178" width="12" height="16" rx="4" fill="#D9D1C2"/></g>
-${hand(c, 252, 194)}
-<path d="M262 128 Q272 136 268 148 M272 114 Q288 130 280 152" fill="none" stroke="${c.deep}" stroke-width="4" stroke-linecap="round" opacity=".7"/>`,
-
-	finance: (k, c, f) => `${legs(c, 124, 176, 286)}
-${limb(c, "M62 214 Q36 232 42 266")}${hand(c, 42, 268)}
-${limb(c, "M238 196 Q266 176 262 140")}${hand(c, 262, 138)}
-<circle cx="262" cy="114" r="18" fill="#F3C548" stroke="#D69E20" stroke-width="3"/><circle cx="262" cy="114" r="10" fill="none" stroke="#B9851A" stroke-width="2.5"/>
-<circle cx="150" cy="200" r="98" fill="url(#${k}b)"/>
-<circle cx="150" cy="200" r="94" fill="none" stroke="${c.deep}" stroke-opacity=".45" stroke-width="7" stroke-dasharray="3 6"/>
-<circle cx="150" cy="200" r="76" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="4"/>
-${sheen(k, "M84 170 A70 70 0 0 1 150 120 Q110 150 98 210 Z")}
-${f.eyes(126, 174, 194, 26)}${f.mouth(150, 232)}`,
-
-	inventory: (k, c, f) => `${legs(c, 122, 178, 296)}
-<path d="M150 74 L262 298 L38 298 Z" fill="url(#${k}b)" stroke="url(#${k}b)" stroke-width="24" stroke-linejoin="round"/>
-${rim("M110 150 L190 150 M86 200 L214 200 M62 252 L238 252")}
-<path d="M150 150 v50 M118 200 v52 M182 200 v52 M150 252 v40 M94 252 v40 M206 252 v40" stroke="${c.deep}" stroke-opacity=".25" stroke-width="3"/>
-${sheen(k, "M146 90 Q112 160 74 270 Q104 190 150 104 Z")}
-${f.eyes(128, 172, 222, 26)}${f.mouth(150, 262)}
-${limb(c, "M66 262 Q40 270 42 300")}${hand(c, 42, 302)}
-<rect x="200" y="252" width="66" height="58" rx="6" fill="#D9A86A"/><path d="M200 252 L266 310 M266 252 L200 310" stroke="#B9874A" stroke-width="5"/><rect x="200" y="252" width="66" height="58" rx="6" fill="none" stroke="#B9874A" stroke-width="5"/>
-${limb(c, "M226 256 Q232 240 214 244")}${hand(c, 206, 274)}${hand(c, 262, 270)}`,
-
-	market: (k, c, f) => `${legs(c, 122, 178, 300)}
-${limb(c, "M44 250 Q14 262 18 296")}${hand(c, 18, 298)}
-${limb(c, "M244 228 Q276 200 270 150")}<g transform="translate(270 146)"><circle r="11" fill="${c.limb}"/><path d="M-2 -6 L-4 -32" stroke="${c.limb}" stroke-width="7" stroke-linecap="round"/></g>
-<path d="M150 76 L184 132 L203 132 L222 192 L242 192 L258 300 L42 300 L58 192 L78 192 L97 132 L116 132 Z" fill="url(#${k}b)" stroke="url(#${k}b)" stroke-width="22" stroke-linejoin="round"/>
-${rim("M82 192 L218 192 M101 132 L199 132")}
-${sheen(k, "M150 84 Q120 130 92 210 Q118 160 150 100 Z")}
-${f.eyes(122, 178, 236, 34)}${f.mouth(150, 272, "o")}`,
-
-	website: (k, c, f) => `${legs(c, 124, 176, 300, 16)}
-<path d="M150 46 Q180 80 174 116 L126 116 Q120 80 150 46 Z" fill="url(#${k}b)"/>
-<rect x="112" y="106" width="76" height="62" rx="22" fill="url(#${k}b)"/>
-<rect x="96" y="156" width="108" height="70" rx="26" fill="url(#${k}b)"/>
-<rect x="78" y="214" width="144" height="94" rx="32" fill="url(#${k}b)"/>
-<path d="M120 168 L180 168 M106 226 L194 226" stroke="${c.deep}" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
-${sheen(k, "M134 62 Q124 90 128 110 L140 110 Q134 84 144 62 Z")}${sheen(k, "M94 228 Q88 260 96 292 L108 292 Q100 258 108 228 Z")}
-${f.eyes(126, 172, 254, 24)}${f.mouth(149, 282)}
-${limb(c, "M82 252 Q60 262 62 286")}${limb(c, "M218 252 Q244 262 240 286")}
-<g transform="rotate(-6 150 300)"><rect x="196" y="270" width="56" height="40" rx="9" fill="#F2EEE6" stroke="#CFC6B6" stroke-width="2"/><path d="M196 290 L252 290 M224 270 L224 290 M210 290 L210 310 M238 290 L238 310" stroke="#CFC6B6" stroke-width="2"/></g>
-${hand(c, 202, 292)}${hand(c, 246, 288)}`,
-
-	analytics: (k, c, f) => `${legs(c, 128, 172, 300)}
-${limb(c, "M112 200 Q80 220 82 254")}${hand(c, 82, 256)}
-<rect x="110" y="104" width="80" height="182" rx="12" fill="url(#${k}b)"/>
-<path d="M126 122 v150 M142 122 v150 M158 122 v150 M174 122 v150" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
-<rect x="86" y="80" width="128" height="30" rx="12" fill="url(#${k}b)"/>
-<circle cx="92" cy="100" r="16" fill="url(#${k}b)"/><circle cx="92" cy="100" r="7" fill="none" stroke="${c.deep}" stroke-opacity=".6" stroke-width="3"/>
-<circle cx="208" cy="100" r="16" fill="url(#${k}b)"/><circle cx="208" cy="100" r="7" fill="none" stroke="${c.deep}" stroke-opacity=".6" stroke-width="3"/>
-<rect x="96" y="280" width="108" height="24" rx="10" fill="url(#${k}b)"/>
-${sheen(k, "M116 116 Q112 200 118 276 L126 276 Q120 200 124 116 Z")}
-${f.eyes(132, 170, 168, 22)}${f.mouth(150, 202)}
-${limb(c, "M188 200 Q220 190 230 160")}
-<g transform="rotate(8 248 140)"><rect x="216" y="100" width="66" height="54" rx="8" fill="#fff" stroke="#D6DCE4" stroke-width="2"/><rect x="228" y="130" width="10" height="16" rx="2" fill="${c.deep}"/><rect x="244" y="120" width="10" height="26" rx="2" fill="${c.base}"/><rect x="260" y="110" width="10" height="36" rx="2" fill="${c.deep}"/></g>
-${hand(c, 230, 156)}`,
-
-	hr: (k, c, f) => `${legs(c, 128, 184, 296)}
-${limb(c, "M78 230 Q50 248 56 280")}${hand(c, 56, 282)}
-<path d="M64 300 Q66 150 206 76 Q190 180 222 300 Z" fill="url(#${k}b)" stroke="url(#${k}b)" stroke-width="14" stroke-linejoin="round"/>
-<path d="M156 300 Q166 206 258 168 Q246 236 268 300 Z" fill="url(#${k}b)" stroke="url(#${k}b)" stroke-width="14" stroke-linejoin="round" opacity=".92"/>
-<path d="M156 300 Q166 206 258 168" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="4" stroke-linecap="round"/>
-${rim("M96 290 Q100 180 190 104")}
-${sheen(k, "M90 280 Q92 200 150 130 Q110 200 104 280 Z")}
-${f.eyes(122, 166, 222, 24)}${f.mouth(144, 258)}
-<rect x="114" y="252" width="56" height="40" rx="7" fill="#fff" stroke="#D6DCE4" stroke-width="2"/><circle cx="130" cy="272" r="8" fill="${c.base}"/><path d="M144 266 h18 M144 278 h12" stroke="#9AA3B1" stroke-width="3" stroke-linecap="round"/>
-${limb(c, "M214 250 Q196 268 172 268")}${hand(c, 170, 268)}`,
-	places: (k, c, f) => `${legs(c, 124, 176, 300)}
-${limb(c, "M88 228 Q60 244 64 276")}${hand(c, 64, 278)}
-<rect x="88" y="150" width="124" height="156" rx="18" fill="url(#${k}b)"/>
-${rim("M100 186 L200 186")}
-<path d="M66 158 A84 80 0 0 1 234 158 Z" fill="url(#${k}b)"/>
-<path d="M92 156 Q100 112 132 88 M208 156 Q200 112 168 88" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="4" stroke-linecap="round"/>
-<path d="M141 79 L159 79 L162 158 L138 158 Z" fill="${c.deep}" opacity=".55"/>
-<rect x="62" y="152" width="176" height="14" rx="7" fill="${c.deep}" opacity=".85"/>
-<rect x="144" y="64" width="12" height="16" rx="3" fill="#B0894A"/>
-<circle cx="150" cy="56" r="14" fill="#E5574A"/><circle cx="145" cy="51" r="4.5" fill="#fff" opacity=".6"/>
-<path d="M150 268 L150 304" stroke="#D9AE45" stroke-width="6" stroke-linecap="round"/>
-${sheen(k, "M82 150 A72 70 0 0 1 128 94 Q104 120 98 150 Z")}${sheen(k, "M100 176 Q96 236 104 292 L114 292 Q108 236 112 176 Z")}
-${f.eyes(126, 174, 214, 26)}${f.mouth(150, 248)}
-${limb(c, "M212 226 Q244 214 250 188")}
-<g transform="rotate(-8 256 164)"><path d="M224 140 L246 132 L266 140 L288 132 L288 184 L266 192 L246 184 L224 192 Z" fill="#F4EFE4" stroke="#D3C9B5" stroke-width="2" stroke-linejoin="round"/><path d="M246 132 L246 184 L266 192 L266 140 Z" fill="#E4DAC6"/><path d="M232 176 Q248 154 258 166 T282 148" fill="none" stroke="#5F86D6" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/><circle cx="282" cy="146" r="6" fill="#E5574A"/></g>
-${hand(c, 250, 188)}`,
-	catalog: (k, c, f) => `${legs(c, 124, 176, 300)}
-${limb(c, "M96 222 Q70 238 72 270")}${hand(c, 72, 272)}
-<circle cx="150" cy="58" r="9" fill="${c.deep}" opacity=".85"/>
-<path d="M96 300 L96 118 A54 54 0 0 1 204 118 L204 300 Q204 312 192 312 L108 312 Q96 312 96 300 Z" fill="url(#${k}b)"/>
-<rect x="108" y="190" width="84" height="112" rx="8" fill="${c.deep}" opacity=".35"/>
-<rect x="112" y="204" width="12" height="38" rx="2" fill="#F4EFE4"/><rect x="126" y="198" width="10" height="44" rx="2" fill="#E5574A"/><rect x="138" y="206" width="14" height="36" rx="2" fill="#D9AE45"/><rect x="154" y="200" width="10" height="42" rx="2" fill="#5EA885"/><rect x="166" y="204" width="12" height="38" rx="2" fill="#F4EFE4"/><rect x="180" y="210" width="10" height="34" rx="2" fill="#5F86D6" transform="rotate(-12 185 244)"/>
-<rect x="104" y="242" width="92" height="6" rx="3" fill="${c.deep}" opacity=".85"/>
-<rect x="112" y="256" width="10" height="40" rx="2" fill="#5F86D6"/><rect x="124" y="262" width="14" height="34" rx="2" fill="#F4EFE4"/><rect x="140" y="254" width="10" height="42" rx="2" fill="#D9AE45"/><rect x="152" y="260" width="12" height="36" rx="2" fill="#E5574A"/><rect x="166" y="256" width="10" height="40" rx="2" fill="#F4EFE4"/><rect x="178" y="262" width="12" height="34" rx="2" fill="#5EA885"/>
-<rect x="104" y="296" width="92" height="6" rx="3" fill="${c.deep}" opacity=".85"/>
-${sheen(k, "M106 118 A44 44 0 0 1 140 76 Q118 100 112 184 Z")}
-${f.eyes(128, 172, 146, 24)}${f.mouth(150, 176)}
-${limb(c, "M204 214 Q236 206 244 180")}
-<path d="M244 180 Q252 196 258 210" fill="none" stroke="#D3C9B5" stroke-width="2"/>
-<g transform="rotate(14 258 232)"><path d="M248 216 L258 206 L268 216 L268 256 L248 256 Z" fill="#F4EFE4" stroke="#D3C9B5" stroke-width="2" stroke-linejoin="round"/><circle cx="258" cy="216" r="3" fill="#D3C9B5"/><path d="M253 232 L263 232 M253 242 L261 242" stroke="#E5574A" stroke-width="3" stroke-linecap="round"/></g>
-${hand(c, 244, 180)}`,
-	channels: (k, c, f) => `${legs(c, 94, 206, 304)}
-${limb(c, "M74 236 Q50 252 54 282")}${hand(c, 54, 284)}
-<path d="M214 112 L276 300" stroke="#B0894A" stroke-width="7" stroke-linecap="round"/>
-<ellipse cx="279" cy="310" rx="9" ry="22" fill="#C99A5B" transform="rotate(-18 279 310)"/>
-<path d="M122 120 L150 98 L178 120 Z" fill="${c.deep}" opacity=".85"/>
-<rect x="128" y="118" width="44" height="44" rx="4" fill="url(#${k}b)"/>
-<path d="M140 162 L140 138 A10 10 0 0 1 160 138 L160 162 Z" fill="${c.deep}" opacity=".55"/>
-<path d="M74 304 L74 196 Q150 116 226 196 L226 304 Q226 312 218 312 L188 312 L188 300 A38 30 0 0 0 112 300 L112 312 L82 312 Q74 312 74 304 Z" fill="url(#${k}b)"/>
-<path d="M86 208 L86 200 A5 5 0 0 1 96 200 L96 208 Z M100 208 L100 200 A5 5 0 0 1 110 200 L110 208 Z M114 208 L114 200 A5 5 0 0 1 124 200 L124 208 Z M176 208 L176 200 A5 5 0 0 1 186 200 L186 208 Z M190 208 L190 200 A5 5 0 0 1 200 200 L200 208 Z M204 208 L204 200 A5 5 0 0 1 214 200 L214 208 Z" fill="${c.deep}" opacity=".55"/>
-${rim("M82 214 Q150 172 218 214")}
-<path d="M118 304 q8 -6 16 0 t16 0 t16 0 t16 0" fill="none" stroke="#4C9EC2" stroke-width="4" stroke-linecap="round" opacity=".8"/><path d="M128 296 q6 -4 12 0 t12 0 t12 0" fill="none" stroke="#86CDE8" stroke-width="3" stroke-linecap="round" opacity=".8"/>
-${sheen(k, "M84 200 Q110 170 140 160 Q110 182 96 246 Z")}
-${f.eyes(126, 174, 232, 24)}${f.mouth(150, 260)}
-${limb(c, "M226 230 Q244 224 246 210")}${hand(c, 246, 210)}`,
+// ---- The bodies. ----
+type Paint = {
+	readonly clay: string;
+	readonly arm: string;
+	readonly leather: string;
+	readonly wood: string;
+	readonly gold: string;
+	readonly recess: string;
+	readonly red: string;
 };
+
+type Body = { body: string; prop?: string; overlay?: string };
+
+function bodies(id: string, c: Palette, p: Paint): Body {
+	const { light, deep } = c;
+	const { clay, leather, wood, gold, recess } = p;
+	const seam = (d: string) => line(d, deep, 4, 0.73) + group("translate(0 -2)", line(d, light, 2, 0.6));
+	const glint = (d: string) => line(d, "white", 4, 0.26);
+	const arch = (x: number, y: number, w: number, h: number, fill = recess) =>
+		path(`M${x} ${y + h}v-${h - w / 2}a${w / 2} ${w / 2} 0 0 1 ${w} 0v${h - w / 2}Z`, fill);
+	switch (id) {
+		case "master":
+			return {
+				body:
+					arch(76, 65, 156, 211, deep) +
+					arch(67, 57, 154, 215, clay) +
+					oval(144, 58, 20, 19, clay) +
+					arch(90, 106, 109, 155, recess) +
+					arch(96, 114, 98, 142, clay) +
+					path("M80 124L145 77L210 124Q211 132 201 132H89Q79 132 80 124Z", clay) +
+					line("M95 119L145 86L194 119", light, 4, 0.75) +
+					[77, 198]
+						.map(
+							(x) =>
+								box(x, 139, 14, 108, 7, clay) +
+								box(x - 4, 131, 22, 11, 4, clay) +
+								box(x - 5, 240, 24, 11, 4, clay),
+						)
+						.join("") +
+					box(64, 249, 164, 25, 10, clay),
+			};
+		case "orders":
+			return {
+				body: group(
+					"rotate(9 150 264)",
+					box(89, 78, 122, 190, 13, clay) +
+						path("M198 90H208V254H198Q204 178 198 90Z", deep, 'opacity=".24"') +
+						box(112, 42, 76, 46, 11, clay) +
+						box(108, 38, 84, 12, 6, clay) +
+						arch(135, 52, 30, 35) +
+						path("M140 77Q143 74 143 67Q150 60 157 67Q157 74 160 77V80H140Z", gold) +
+						oval(150, 81, 3, 3, gold) +
+						[98, 239].map((y) => [98, 127, 156, 185].map((x) => arch(x, y, 17, 24)).join("")).join("") +
+						[87, 119, 228, 259].map((y) => box(82, y, 136, 12, 6, clay) + glint(`M93 ${y + 3}H204`)).join(""),
+				),
+				prop: group(
+					"rotate(-9 219 233)",
+					box(191, 207, 59, 53, 9, wood) +
+						box(213, 207, 15, 53, 2, "#f2c98e") +
+						box(195, 235, 13, 13, 2, "#fff3dd"),
+				),
+			};
+		case "support":
+			return {
+				body:
+					box(106, 53, 90, 35, 12, wood) +
+					box(105, 236, 92, 28, 11, wood) +
+					path(
+						"M104 73Q57 97 59 161Q59 212 106 246Q154 259 196 244Q238 216 239 160Q241 101 195 73Q150 62 104 73Z",
+						clay,
+					) +
+					seam("M85 93Q150 81 217 94M70 116Q151 104 229 118M68 208Q146 229 229 210M87 231Q148 248 210 232") +
+					glint("M92 109Q78 127 77 148"),
+				overlay:
+					line("M66 153Q56 79 116 68Q158 53 202 81Q235 101 234 152", "#594354", 10) +
+					box(51, 143, 27, 53, 11, leather) +
+					box(223, 143, 27, 53, 11, leather) +
+					line("M235 183Q228 225 200 221", "#594354", 6) +
+					oval(196, 222, 11, 6, leather),
+			};
+		case "marketing":
+			return {
+				body:
+					path(
+						"M69 249Q59 225 71 175L97 95Q117 48 160 47Q199 47 211 91L239 223Q244 258 207 269L106 272Q78 269 69 249Z",
+						clay,
+					) +
+					glint("M89 159Q102 98 130 76") +
+					seam("M77 238Q102 247 122 241M183 248Q211 248 232 232"),
+				prop: group(
+					"rotate(-23 230 197)",
+					box(221, 204, 13, 40, 5, leather) +
+						path("M197 187L219 187L257 168V220L219 205H197Q189 196 197 187Z", gold) +
+						oval(254, 194, 13, 27, gold) +
+						oval(257, 194, 9, 20, "#733954") +
+						oval(254, 194, 4, 8, "#f1c685"),
+				),
+			};
+		case "finance": {
+			const milled = Array.from({ length: 13 }, (_, i) => {
+				const a = (i - 6) * 0.19;
+				return line(`M${r2(161 + 85 * Math.cos(a) - 18)} ${r2(165 + 101 * Math.sin(a))}l17 -2`, light, 2, 0.56);
+			}).join("");
+			return {
+				body:
+					oval(161, 165, 88, 104, deep) +
+					milled +
+					oval(141, 162, 88, 104, clay) +
+					oval(140, 162, 76, 91, recess) +
+					oval(139, 160, 71, 87, clay) +
+					glint("M67 135Q83 81 124 68"),
+				prop: group(
+					"rotate(15 240 153)",
+					oval(243, 153, 27, 35, wood) +
+						oval(237, 153, 27, 35, gold) +
+						oval(237, 153, 19, 26, wood) +
+						oval(236, 152, 16, 23, gold) +
+						path("M237 136L247 153L237 169L227 153Z", "#fff0a5"),
+				),
+			};
+		}
+		case "inventory":
+			return {
+				body:
+					path("M145 63Q150 54 159 63L250 240Q261 258 244 269L215 282H65Q49 280 54 264Z", deep) +
+					path("M140 63Q147 53 152 66L228 260Q235 275 218 276H65Q47 276 55 259Z", clay) +
+					seam("M118 108H170M102 142H184M67 235H218M57 258H227M143 108V141M111 236V257M178 236V257") +
+					line("M186 103L248 242M220 234L244 224M227 255L253 244", light, 3, 0.34),
+				prop: group(
+					"rotate(8 235 250)",
+					box(204, 223, 59, 49, 7, wood) +
+						box(210, 229, 47, 37, 3, "#77472e") +
+						line("M212 258L254 234M211 242H255M211 254H255", "#cc935b", 5),
+				),
+			};
+		case "market":
+			return {
+				body:
+					path(
+						"M57 250Q52 240 66 224L83 194L102 125Q119 89 139 79L166 56Q180 50 185 70L213 162L238 226Q252 252 237 269H71Q57 267 57 250Z",
+						clay,
+					) +
+					glint("M105 154Q118 101 157 79") +
+					path("M64 228Q113 248 229 221L239 238Q141 270 55 247Z", recess) +
+					path("M57 252Q134 271 243 241L243 261Q142 289 63 268Z", clay) +
+					seam("M66 239Q139 260 232 231M71 259Q146 281 235 252"),
+			};
+		case "website":
+			return {
+				body:
+					path("M123 91Q123 67 149 40Q177 63 177 91Z", clay) +
+					seam("M149 49Q136 69 137 85M151 49Q162 70 160 85") +
+					box(109, 80, 82, 39, 15, clay) +
+					box(95, 103, 113, 41, 14, clay) +
+					arch(81, 124, 142, 140, clay) +
+					arch(99, 131, 104, 123, clay) +
+					[238, 253, 269].map((y, i) => box(77 - i * 8, y, 150 + i * 16, 17, 7, clay)).join("") +
+					seam("M121 89H178M108 112H193M93 135H107M193 135H210"),
+				prop: group(
+					"rotate(9 232 239)",
+					box(201, 214, 59, 51, 9, gold) +
+						box(204, 223, 53, 40, 7, clay) +
+						oval(217, 236, 5, 5, recess) +
+						oval(245, 236, 5, 5, recess) +
+						line("M219 246H243", light, 4),
+				),
+			};
+		case "analytics":
+			return {
+				body:
+					box(88, 78, 127, 181, 24, clay) +
+					[98, 113, 130, 149, 168, 186, 201].map((x) => seam(`M${x} 204v37`)).join("") +
+					[97, 203]
+						.map(
+							(x, i) =>
+								oval(x, 78, 27, 26, clay) +
+								group(
+									`translate(${x} 78) scale(${i ? -1 : 1} 1)`,
+									seam("M-13 4Q-16-16 2-13Q15-11 12 1Q10 11 1 7Q-4 5 0 0"),
+								),
+						)
+						.join("") +
+					box(102, 61, 97, 28, 9, clay) +
+					glint("M113 67H183") +
+					box(78, 241, 146, 20, 8, clay) +
+					box(72, 256, 159, 20, 9, clay),
+				prop: group(
+					"rotate(-10 223 227)",
+					box(194, 198, 63, 58, 9, wood) +
+						box(198, 201, 54, 49, 6, "#fff0d1") +
+						line("M206 213V240H244", "#aa896a", 2) +
+						line("M210 232L220 223L229 228L242 213", "#688333", 4),
+				),
+			};
+		case "hr": {
+			const shell = (d: string, whiteOpacity: number) =>
+				path(d, clay) +
+				path(d, "white", `fill-opacity="${whiteOpacity}" stroke="${deep}" stroke-opacity=".8" stroke-width="2"`);
+			const ribs = (d: string) => line(d, deep, 3, 0.62);
+
+			return {
+				body:
+					shell("M48 235C42 185 65 136 90 108Q94 104 94 111C90 146 109 186 137 217L134 238Z", 0.58) +
+					ribs("M88 121Q63 153 60 210M89 122Q77 157 80 217") +
+					shell("M147 231C157 176 195 124 242 94Q246 92 245 97C234 145 243 173 260 208Q267 224 250 238Z", 0.64) +
+					path("M245 97Q224 154 241 231L251 237Q265 228 259 210Q237 163 245 97Z", deep, 'opacity=".22"') +
+					ribs("M238 109Q207 144 203 215M239 110Q223 151 224 223") +
+					shell("M68 227C76 145 126 76 202 47Q207 45 205 50C183 94 185 141 204 185Q218 217 206 237H72Z", 0.76) +
+					path(
+						"M202 54C182 100 183 148 199 189Q212 220 202 234H189Q199 218 190 190C178 145 177 97 202 54Z",
+						deep,
+						'opacity=".16"',
+					) +
+					ribs("M195 57Q124 95 95 169M195 58Q150 89 134 120M197 59Q176 89 173 125") +
+					glint("M83 212Q87 195 93 181") +
+					box(49, 232, 203, 34, 10, clay) +
+					line("M61 241H239", light, 3, 0.8),
+				prop: group(
+					"rotate(11 235 229)",
+					box(204, 212, 60, 43, 7, leather) +
+						box(207, 213, 54, 38, 6, "#fff5de") +
+						box(226, 207, 15, 11, 4, recess) +
+						oval(220, 230, 6, 6, clay) +
+						line("M231 226H251M231 235H246", deep, 3),
+				),
+			};
+		}
+		case "places":
+			return {
+				body:
+					box(147, 49, 8, 43, 4, leather) +
+					oval(151, 48, 17, 16, p.red) +
+					box(70, 144, 161, 121, 23, clay) +
+					path("M62 156Q67 77 150 72Q225 72 240 156Z", clay) +
+					path("M140 73Q162 69 173 76L192 128H165Z", recess) +
+					line("M138 74L160 128M176 78L196 128", light, 4, 0.76) +
+					box(64, 131, 172, 18, 8, clay) +
+					box(64, 246, 172, 26, 10, clay) +
+					glint("M80 120Q99 91 125 85"),
+				prop: group(
+					"rotate(8 229 232)",
+					path("M199 205L219 214L240 205L262 215L257 257L238 248L216 256L195 247Z", "#ffe9ba") +
+						path("M219 214L240 205L238 248L216 256Z", "#d4e1ab") +
+						line("M203 237L215 226L227 237L247 219L254 230", "#509ca0", 3) +
+						oval(227, 237, 4, 4, "#b75055"),
+				),
+			};
+		case "catalog": {
+			const spines = ["#e5aa76", "#e494a4", "#b6cb86", "#99cddb", "#e6bc83", "#d7a1e6"]
+				.map(
+					(col, n) =>
+						box(96 + n * 17, 218 - (n % 3) * 4, 14, 30 + (n % 3) * 4, 3, col) +
+						line(`M${100 + n * 17} 237h6`, "#fff1de", 2, 0.7),
+				)
+				.join("");
+			return {
+				body:
+					arch(82, 51, 147, 220, deep) +
+					arch(71, 47, 146, 220, clay) +
+					arch(86, 59, 117, 192, recess) +
+					arch(91, 65, 106, 148, clay) +
+					spines +
+					box(78, 246, 137, 16, 6, clay) +
+					glint("M77 125Q82 82 113 65"),
+				prop: group(
+					"rotate(17 235 222)",
+					path("M228 198H253Q260 198 260 206V245Q260 252 253 252H218Q211 252 211 245V216Z", gold) +
+						oval(227, 212, 5, 5, "#754936") +
+						line("M227 212Q221 190 239 185", leather, 4) +
+						line("M221 227H249M221 237H241", "#885440", 3),
+				),
+			};
+		}
+		default:
+			// channels
+			return {
+				body:
+					path(
+						"M49 244V175Q53 161 77 155L114 114Q147 102 194 116L225 154Q252 166 253 183V245Q253 257 242 257H200Q190 257 188 245Q184 217 150 216Q116 217 112 245Q111 257 101 257H61Q49 257 49 244Z",
+						clay,
+					) +
+					path("M112 102L150 73L190 102V120H112Z", clay) +
+					arch(138, 92, 24, 28) +
+					seam("M51 182Q82 164 96 150M205 150Q222 166 250 183") +
+					[63, 84, 201, 222].map((x, i) => arch(x, i === 1 || i === 2 ? 180 : 194, 15, 22)).join("") +
+					glint("M113 225Q145 197 183 219"),
+				prop: group(
+					"rotate(18 238 252)",
+					box(234, 161, 8, 151, 4, wood) +
+						path(
+							"M234 180C233 162 227 147 226 121Q226 112 231 110L243 109Q247 109 247 114C246 141 240 160 242 180Z",
+							wood,
+						) +
+						line("M231 118Q230 140 237 163M237 187V303", "#f2c98e", 2, 0.8) +
+						line("M229 126L244 124", "#774231", 2, 0.5),
+				),
+			};
+	}
+}
+
+// The right hand's height for each mascot that holds something.
+const GRIP: Record<string, number> = {
+	orders: 251,
+	marketing: 218,
+	finance: 172,
+	inventory: 261,
+	website: 253,
+	analytics: 246,
+	hr: 248,
+	places: 250,
+	catalog: 245,
+	channels: 245,
+};
+
+type Draw = (k: string, c: Palette, state: FaceState) => string;
+
+function draw(id: string): Draw {
+	return (k, c, state) => {
+		const p: Paint = {
+			clay: `url(#${k}clay)`,
+			arm: `url(#${k}arm)`,
+			leather: `url(#${k}boot)`,
+			wood: `url(#${k}wood)`,
+			gold: `url(#${k}gold)`,
+			recess: `url(#${k}recess)`,
+			red: `url(#${k}red)`,
+		};
+		const { body, prop = "", overlay = "" } = bodies(id, c, p);
+		const [faceX, faceY] = FACE[id] ?? [150, 170];
+		const boots = [0, 1]
+			.map((i) =>
+				group(
+					`translate(${i ? 181 : 119} 302) rotate(${i ? 9 : -9}) scale(${i ? -1 : 1} 1)`,
+					box(-13, -53, 27, 71, 13, p.arm) +
+						path("M-17-13Q-12-20 12-17Q23-17 21-6L20 23Q32 37 14 45H-27Q-45 44-42 29Q-41 12-22 11Z", p.leather) +
+						path("M-42 32Q-24 42 22 32Q27 46 12 47H-28Q-45 45-42 32Z", "#49302b") +
+						line("M-40 33Q-20 43 24 33", "#bd9169", 2.7) +
+						line("M-39 30Q-33 17-19 17M-15-10Q-4-15 13-10", "#f1bd89", 3, 0.55) +
+						[-3, 4, 11]
+							.map(
+								(y, n) =>
+									oval(-15 - n * 2, y, 2.7, 2.7, "#3b2826") +
+									oval(2 - n * 2, y + 2, 2.7, 2.7, "#3b2826") +
+									line(`M${-15 - n * 2} ${y}l17 2`, "#f4d3a6", 2.5),
+							)
+							.join("") +
+						line("M-10 17q-14 9-17 5M-10 17q8 4 10 11", "#dfad7d", 2, 0.7) +
+						line("M-29 26l6 1m-9-5l4 1m36-3l5-1", "#d5a47a", 1.5, 0.65),
+				),
+			)
+			.join("");
+		const raisedLeft = id === "master" || id === "market";
+		const rightY = GRIP[id] ?? 242;
+		const leftArm = path(
+			raisedLeft
+				? "M92 190Q67 201 55 161L35 164Q35 227 83 226Z"
+				: "M111 187Q65 176 45 220Q37 249 59 254Q76 247 76 225L110 211Z",
+			p.arm,
+		);
+		const rightArm = path(`M207 183Q238 183 250 ${rightY - 6}L232 ${rightY + 9}Q219 209 204 222Z`, p.arm);
+		const hand = (x: number, y: number, point = false) =>
+			oval(x, y, 16, 18, p.arm) +
+			oval(x - 10, y - 4, 7, 9, p.clay) +
+			(point ? box(x - 4, y - 31, 10, 29, 5, p.clay) : "") +
+			line(`M${x + 2} ${y + 9}q7 -1 9 -7`, c.deep, 2, 0.65);
+		const leftHand = raisedLeft
+			? hand(44, 151, id === "market") +
+				(id === "master"
+					? group(
+							"rotate(-28 40 147)",
+							box(28, 129, 8, 23, 4, p.arm) + box(38, 124, 9, 27, 4, p.arm) + box(49, 128, 8, 22, 4, p.arm),
+						)
+					: "")
+			: hand(55, 244);
+		const face = group(
+			`translate(${faceX} ${faceY})`,
+			expression(state, p.clay, c.deep, `url(#${k}white)`, `url(#${k}iris)`),
+		);
+		const rightX = id === "finance" ? 234 : id === "support" ? 241 : 238;
+		// Motion parts (see SQUADMATE_PARTS in draw.ts). Arms turn at the shoulder, feet at the heel,
+		// the face at its centre, the torso above the boots and the whole mascot at the floor.
+		const armLeft = raisedLeft ? "sm-arm-l sm-raised" : "sm-arm-l";
+		const cut = boots.indexOf('<g transform="translate(181 302)');
+		const torso =
+			part(108, 192, armLeft, leftArm) +
+			part(207, 186, "sm-arm-r", rightArm) +
+			body +
+			overlay +
+			part(108, 192, armLeft, leftHand) +
+			part(faceX, faceY, "sm-face", face) +
+			part(207, 186, "sm-arm-r", prop + hand(rightX, rightY + 7));
+		return part(
+			150,
+			345,
+			"sm-all",
+			part(119, 320, "sm-foot-l", boots.slice(0, cut)) +
+				part(181, 320, "sm-foot-r", boots.slice(cut)) +
+				part(150, 300, "sm-torso", torso),
+		);
+	};
+}
+
+export const DRAW: Record<string, Draw> = Object.fromEntries(Object.keys(PALETTES).map((id) => [id, draw(id)]));

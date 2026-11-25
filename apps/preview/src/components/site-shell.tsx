@@ -1,5 +1,4 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
-import { getRegisteredComponents } from "@tensquads/ui/openui";
 import {
 	Button,
 	CommandPalette,
@@ -10,17 +9,31 @@ import {
 	useCommandPaletteShortcut,
 } from "@tensquads/ui/react";
 import { useState } from "react";
+import { openUIComponents, reactOnlyComponents } from "../catalog";
 import { siteCopy } from "../copy";
+import { signal } from "../design-assets";
+import { pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
 import { getPreviewState } from "../state";
-import { TensquadsWordmark } from "./tensquads-wordmark";
+import { foundationNames, llmsUrl } from "./design-reference";
+import { SitePageCommands } from "./site-page-commands";
+import { useMarkdownHref } from "./use-markdown-href";
+
+function SiteCommandPalette(props: React.ComponentProps<typeof CommandPalette>) {
+	useCommandPaletteShortcut(() => props.onOpenChange(true));
+	return <CommandPalette {...props} />;
+}
 
 export function SiteShell() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
+	const path = useRouterState({ select: (state) => state.location.pathname });
+	const builder = path === "/nodes" || path.startsWith("/nodes/");
 	const navigate = useNavigate();
 	const { locale, theme } = getPreviewState(search);
 	const copy = siteCopy[locale];
+	const markdownHref = useMarkdownHref(locale);
+	const design = copy.designSystem;
+	const nextLocale = locale === "en" ? "ar" : "en";
 	const [paletteOpen, setPaletteOpen] = useState(false);
-	useCommandPaletteShortcut(() => setPaletteOpen(true));
 	const change = (key: "locale" | "theme", value: string) => {
 		const nextSearch = { ...search, [key]: value };
 		if (key === "locale") nextSearch.dir = value === "ar" ? "rtl" : "ltr";
@@ -51,7 +64,9 @@ export function SiteShell() {
 			items: [
 				{ id: "home", label: locale === "ar" ? "الرئيسية" : "Home", path: "/" },
 				{ id: "get-started", label: locale === "ar" ? "البدء" : "Get started", path: "/get-started" },
+				{ id: "foundations", label: design.foundations, path: "/foundations" },
 				{ id: "components", label: copy.nav.components, path: "/components" },
+				{ id: "nodes", label: copy.nav.nodes, path: "/nodes" },
 				{ id: "chat", label: copy.nav.chat, path: "/chat" },
 				{ id: "admin", label: locale === "ar" ? "لوحة الإدارة" : "Admin dashboard", path: "/dashboards/admin" },
 				{
@@ -66,24 +81,45 @@ export function SiteShell() {
 			})),
 		},
 		{
+			id: "foundations",
+			label: design.foundations,
+			items: foundationNames.map((name) => ({
+				id: `foundation-${name}`,
+				label: design.foundationsIndex[name].title,
+				keywords: [name],
+				onSelect: () => void navigate({ to: "/foundations/$name", params: { name }, search }),
+			})),
+		},
+		{
+			id: "reference",
+			label: design.reference,
+			items: [
+				...referenceSections.map(({ id, path }) => ({
+					id: `reference-${id}`,
+					label: design[id],
+					onSelect: () => void navigate({ to: path, search }),
+				})),
+				...productScreens.map((screen) => ({
+					id: `screen-${screen.id}`,
+					label: productScreenTitle(screen, locale),
+					onSelect: () => void navigate({ to: "/reference/screens/$id", params: { id: screen.id }, search }),
+				})),
+				...pageDesigns.map(({ id }) => ({
+					id: `page-design-${id}`,
+					label: copy.reference.pageTitles[id],
+					onSelect: () => void navigate({ to: "/reference/pages/$id", params: { id }, search }),
+				})),
+			],
+		},
+		{
 			id: "components",
 			label: locale === "ar" ? "المكوّنات" : "Components",
-			items: [
-				...getRegisteredComponents().map((entry) => ({ name: entry.name, description: entry.description })),
-				...(
-					["Chat", "ChatReply", "OwnerMessageView", "Sidebar", "ThemeToggle", "Toolbar", "CommandPalette"] as const
-				).map((name) => ({ name, description: name })),
-			]
-				.filter(
-					(entry, index, entries) => entries.findIndex((candidate) => candidate.name === entry.name) === index,
-				)
-				.map((entry) => ({
-					id: `component-${entry.name}`,
-					label: entry.name,
-					keywords: [entry.description],
-					onSelect: () =>
-						void navigate({ to: "/components/$name", params: { name: entry.name }, search: search as never }),
-				})),
+			items: [...openUIComponents.keys(), ...reactOnlyComponents].map((name) => ({
+				id: `component-${name}`,
+				label: name,
+				keywords: [openUIComponents.get(name) ?? name],
+				onSelect: () => void navigate({ to: "/components/$name", params: { name }, search }),
+			})),
 		},
 		{
 			id: "settings",
@@ -112,69 +148,115 @@ export function SiteShell() {
 	];
 
 	return (
-		<div className="site-shell">
+		<div className={builder ? "site-shell site-shell--builder" : "site-shell"}>
+			<a className="site-skip" href="#main">
+				{design.skip}
+			</a>
 			<header className="site-header">
-				<div className="site-brand-group">
-					<Link className="site-brand" to="/" search={search as never} aria-label="tensquads">
-						<TensquadsWordmark />
+				<div className="design-wrap site-header__inner">
+					<Link className="site-brand" to="/" search={search}>
+						<img src={signal.light} alt="" />
+						<img className="theme-mark-dark" src={signal.dark} alt="" />
+						{design.brand}
 					</Link>
-					<span className="site-brand__ui">ui</span>
-				</div>
-				<nav className="site-nav" aria-label={locale === "ar" ? "التنقل الرئيسي" : "Primary navigation"}>
-					<Link to="/" search={search as never} activeOptions={{ exact: true }}>
-						{copy.nav.home}
-					</Link>
-					<Link to="/components" search={search as never}>
-						{copy.nav.components}
-					</Link>
-					<Link to="/chat" search={search as never}>
-						{copy.nav.chat}
-					</Link>
-					<Link to="/dashboards/home" search={search as never}>
-						{copy.nav.dashboards}
-					</Link>
-					<Link to="/get-started" search={search as never}>
-						{copy.nav.getStarted}
-					</Link>
-				</nav>
-				<div className="site-controls">
-					<Button className="site-search-button" variant="ghost" onClick={() => setPaletteOpen(true)}>
-						<svg aria-hidden="true" viewBox="0 0 24 24">
-							<circle cx="10.8" cy="10.8" r="6.8" />
-							<path d="m16 16 5 5" />
-						</svg>
-						<span>{locale === "ar" ? "بحث" : "Search"}</span>
-						<kbd>⌘K</kbd>
-					</Button>
-					<SegmentedControl
-						aria-label={copy.localeLabel}
-						value={locale}
-						onValueChange={(value) => value && change("locale", value)}
-					>
-						<SegmentedControlIndicator />
-						<SegmentedControlItem value="en">English</SegmentedControlItem>
-						<SegmentedControlItem value="ar">العربية</SegmentedControlItem>
-					</SegmentedControl>
-					<SegmentedControl
-						aria-label={copy.themeLabel}
-						value={theme}
-						onValueChange={(value) => value && change("theme", value)}
-					>
-						<SegmentedControlIndicator />
-						<SegmentedControlItem value="light">{copy.theme.light}</SegmentedControlItem>
-						<SegmentedControlItem value="dark">{copy.theme.dark}</SegmentedControlItem>
-						<SegmentedControlItem value="system">{copy.theme.system}</SegmentedControlItem>
-					</SegmentedControl>
+					<nav className="site-nav" aria-label={design.primaryNav}>
+						{builder && (
+							<Link to="/" search={search}>
+								{copy.nav.home}
+							</Link>
+						)}
+						<Link to="/foundations" search={search}>
+							{design.foundations}
+						</Link>
+						<Link to="/components" search={search}>
+							{copy.nav.components}
+						</Link>
+						<Link to="/nodes" search={search}>
+							{copy.nav.nodes}
+						</Link>
+						<Link to="/chat" search={search}>
+							{copy.nav.chatNav}
+						</Link>
+						{!builder && (
+							<Link to="/get-started" search={search}>
+								{copy.nav.getStarted}
+							</Link>
+						)}
+					</nav>
+					<div className="site-controls">
+						{!builder && (
+							<Button className="site-search-button" variant="ghost" onClick={() => setPaletteOpen(true)}>
+								<svg aria-hidden="true" viewBox="0 0 24 24">
+									<circle cx="10.8" cy="10.8" r="6.8" />
+									<path d="m16 16 5 5" />
+								</svg>
+								<span>{locale === "ar" ? "بحث" : "Search"}</span>
+								<kbd>⌘K</kbd>
+							</Button>
+						)}
+						<Button variant="ghost" size="sm" onClick={() => change("locale", nextLocale)} lang={nextLocale}>
+							{copy.locale[nextLocale]}
+						</Button>
+						{!builder && (
+							<SegmentedControl
+								className="site-theme"
+								aria-label={copy.themeLabel}
+								value={theme}
+								onValueChange={(value) => value && change("theme", value)}
+							>
+								<SegmentedControlIndicator />
+								{(["light", "dark", "system"] as const).map((mode) => (
+									<SegmentedControlItem
+										key={mode}
+										value={mode}
+										aria-label={copy.theme[mode]}
+										title={copy.theme[mode]}
+									>
+										<svg aria-hidden="true" viewBox="0 0 24 24">
+											{mode === "light" && (
+												<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19m11-7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+											)}
+											{mode === "dark" && <path d="M21 13a9 9 0 1 1-10-10 7.5 7.5 0 0 0 10 10Z" />}
+											{mode === "system" && <path d="M3 4h18v13H3zM8 21h8m-4-4v4" />}
+										</svg>
+									</SegmentedControlItem>
+								))}
+							</SegmentedControl>
+						)}
+					</div>
 				</div>
 			</header>
-			<CommandPalette
-				open={paletteOpen}
-				onOpenChange={setPaletteOpen}
-				groups={groups}
-				locale={locale}
-				labels={paletteLabels}
-			/>
-			<Outlet />
+			{!builder && (
+				<SiteCommandPalette
+					open={paletteOpen}
+					onOpenChange={setPaletteOpen}
+					groups={groups}
+					locale={locale}
+					labels={paletteLabels}
+				/>
+			)}
+			<SitePageCommands.Provider value={groups[0]}>
+				<Outlet />
+			</SitePageCommands.Provider>
+			{!builder && (
+				<footer className="site-footer">
+					<div className="site-footer__inner design-wrap">
+						<span>
+							<bdi>tensquads</bdi> · {design.brand}
+						</span>
+						<nav aria-label={design.resources}>
+							<a href="https://github.com/moeghashim/tensquads-ui">{copy.footerGithub}</a>
+							<Link to="/get-started" search={search}>
+								{copy.nav.getStarted}
+							</Link>
+							<a href={llmsUrl}>llms.txt</a>
+							{markdownHref && (
+								<a href={markdownHref}>{locale === "ar" ? "عرض بصيغة Markdown" : "View as Markdown"}</a>
+							)}
+						</nav>
+					</div>
+				</footer>
+			)}
 		</div>
 	);
 }

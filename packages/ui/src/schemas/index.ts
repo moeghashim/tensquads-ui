@@ -1,7 +1,10 @@
 import { z } from "zod/v4";
+import { WORKFLOW_KIND_FAMILY, WORKFLOW_KIND_ICON, WorkflowGraphSchema, WorkflowNodeKindSchema } from "./workflow.js";
 
 export type { ChatAction, ChatActionTurn, ChatTurn } from "./chat.js";
 export * from "./platform.js";
+export type { WorkflowEdge, WorkflowGraph, WorkflowNode, WorkflowNodeFamily, WorkflowNodeKind } from "./workflow.js";
+export { WORKFLOW_KIND_FAMILY, WORKFLOW_KIND_ICON, WorkflowGraphSchema, WorkflowNodeKindSchema };
 
 export const LocaleSchema = z.enum(["en", "ar"]);
 export type Locale = z.infer<typeof LocaleSchema>;

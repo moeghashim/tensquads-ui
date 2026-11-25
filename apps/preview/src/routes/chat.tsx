@@ -11,17 +11,26 @@ import {
 	type ChatTransport,
 	ChatUserMessage,
 	ChatWorking,
+	OwnerMessageView,
 	squadmateCharacterName,
 	useChat,
 } from "@tensquads/ui/react";
-import type { AgentSlug, ChatActionTurn, ChatTurn, Direction, Locale } from "@tensquads/ui/schemas";
+import type { ChatActionTurn, ChatTurn, Direction, Locale } from "@tensquads/ui/schemas";
 import { Squadmate } from "@tensquads/ui/squadmates";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import { partPages } from "../chat-parts";
 import { siteCopy } from "../copy";
 import { getPreviewState } from "../state";
 
-type DemoStep = { agent: string; status: string; responseId: string };
-type ChatFixture = { request: string; steps: DemoStep[]; reply: string; followup: string; freeReply: string };
+type DemoStep = { agent: "pisa" | "angkor" | "petra"; responseId: string; seconds: number };
+type ChatFixture = {
+	request: string;
+	steps: DemoStep[];
+	reply: string;
+	followup: string;
+	revision: string;
+	freeReply: string;
+};
 
 const fixtures = import.meta.glob<string>("../fixtures/chat-demo.fixture.*.txt", {
 	eager: true,
@@ -53,6 +62,8 @@ function ChatExperience({
 	const copy = siteCopy[locale].chat;
 	const fixture = scripts[locale];
 	const [replayNumber, setReplayNumber] = useState(0);
+	const [draft, setDraft] = useState("");
+	const composer = useRef<HTMLTextAreaElement>(null);
 	const startedRun = useRef<string | null>(null);
 	const turnIds = useRef(new WeakMap<ChatTurn, number>());
 	const nextTurnId = useRef(0);
@@ -65,6 +76,7 @@ function ChatExperience({
 	const waiting = chat.busy && !(lastTurn?.role === "assistant" && lastTurn.content);
 	const replay = () => {
 		chat.reset();
+		setDraft("");
 		setReplayNumber((number) => number + 1);
 	};
 
@@ -75,15 +87,34 @@ function ChatExperience({
 		void chat.send(fixture.request);
 	}, [chat.send, fixture.request, locale, replayNumber]);
 
+	const firstReply = chat.turns[1];
+	const plan = firstReply?.role === "assistant" && firstReply.content ? splitScriptedPlan(firstReply.content) : null;
+
 	return (
-		<main className="content-page chat-page" dir={direction}>
+		<main id="main" className="design-wrap chat-page" dir={direction}>
 			<header className="chat-page__intro">
 				<p className="eyebrow">{copy.eyebrow}</p>
 				<h1>{copy.title}</h1>
-				<p>{copy.intro}</p>
+				<p className="chat-page__lead">{copy.intro}</p>
 			</header>
-			<section className="chat-demo" aria-label={copy.eyebrow}>
-				<Chat className="chat-demo__surface" lang={locale} dir={direction}>
+			<div className="chat-demo-layout">
+				<Chat className="chat-demo__surface" lang={locale} dir={direction} aria-label={copy.eyebrow}>
+					<header className="chat-demo__header">
+						<span aria-hidden="true">
+							<Squadmate agent="petra" state="idle" size={36} locale={locale} />
+						</span>
+						<div className="chat-demo__identity">
+							<strong>{squadmateCharacterName("petra", locale)}</strong>
+							<small>{copy.leadRole}</small>
+						</div>
+						<span className="chat-demo__scripted">{copy.scripted}</span>
+						<Button variant="soft" size="sm" pill onClick={replay}>
+							<svg aria-hidden="true" viewBox="0 0 16 16">
+								<path d="M13 8a5 5 0 1 1-1.5-3.6M13 3v3h-3" />
+							</svg>
+							{copy.newChat}
+						</Button>
+					</header>
 					<ChatLog>
 						{chat.turns.map((turn, position) => {
 							const requestTurn = turn.role === "assistant" ? chat.turns[position - 1]! : turn;
@@ -93,28 +124,73 @@ function ChatExperience({
 								turnIds.current.set(requestTurn, requestId);
 							}
 							const turnId = `${turn.role}-${requestId}`;
-							if (turn.role === "user") {
-								return (
-									<Fragment key={turnId}>
-										<ChatUserMessage>{turn.content}</ChatUserMessage>
-										{turn === chat.turns[0] && <RoutedSteps steps={fixture.steps} locale={locale} />}
-									</Fragment>
-								);
-							}
-							if (turn.role === "action") {
+							if (turn.role === "action")
 								return <ChatUserMessage key={turnId}>{turn.action.summary}</ChatUserMessage>;
+							if (turn.role === "user") {
+								return <ChatUserMessage key={turnId}>{turn.content}</ChatUserMessage>;
+							}
+							if (position === 1) {
+								return (
+									<ChatAssistantMessage key={turnId} className="chat-demo__turn chat-demo__turn--opening">
+										<span aria-hidden="true">
+											<Squadmate agent="petra" state="idle" size={32} locale={locale} />
+										</span>
+										<div className="chat-demo__turn-body">
+											<RoutedSteps steps={fixture.steps} locale={locale} />
+											{plan && <ChatReply reply={plan.prose} locale={locale} />}
+											{plan?.stream && (
+												<section
+													className="chat-demo__plan"
+													aria-labelledby="chat-plan-title"
+													style={
+														{ "--chat-cadence-label": JSON.stringify(copy.frequency) } as CSSProperties
+													}
+												>
+													<header>
+														<h2 id="chat-plan-title">{copy.launchPlan}</h2>
+														<span lang="en">OpenUI</span>
+													</header>
+													<ChatReply
+														reply={plan.stream}
+														locale={locale}
+														isStreaming={chat.busy && position === chat.turns.length - 1}
+														onAction={(event, blockId) => chat.act(event, `${turnId}/${blockId}`)}
+														locked={(blockId) => chat.locked.has(`${turnId}/${blockId}`)}
+													/>
+												</section>
+											)}
+										</div>
+									</ChatAssistantMessage>
+								);
 							}
 							if (!turn.content) return null;
 							return (
-								<ChatAssistantMessage key={turnId}>
-									<ChatReply
-										reply={turn.content}
-										locale={locale}
-										isStreaming={chat.busy}
-										onAction={(event, blockId) => chat.act(event, `${turnId}/${blockId}`)}
-										locked={(blockId) => chat.locked.has(`${turnId}/${blockId}`)}
-									/>
-								</ChatAssistantMessage>
+								<div className="chat-demo__turn" key={turnId}>
+									<span aria-hidden="true">
+										<Squadmate agent="petra" state="idle" size={32} locale={locale} />
+									</span>
+									{turn.content === fixture.freeReply ? (
+										<OwnerMessageView
+											locale={locale}
+											messages={[
+												{
+													type: "reply",
+													seq: position,
+													at: "2026-11-24T00:00:00.000Z",
+													text: turn.content,
+												},
+											]}
+										/>
+									) : (
+										<ChatAssistantMessage>
+											<ChatReply
+												reply={turn.content}
+												locale={locale}
+												isStreaming={chat.busy && position === chat.turns.length - 1}
+											/>
+										</ChatAssistantMessage>
+									)}
+								</div>
 							);
 						})}
 						{waiting && (
@@ -129,41 +205,115 @@ function ChatExperience({
 							</ChatError>
 						)}
 					</ChatLog>
-					<ChatComposer
-						locale={locale}
-						busy={chat.busy}
-						onSend={(message) => void chat.send(message)}
-						onStop={chat.stop}
-						textareaProps={{ "aria-label": copy.composer }}
-					/>
+					<div className="chat-demo__compose">
+						<fieldset className="chat-demo__suggestions" aria-label={copy.suggestionsLabel}>
+							{copy.suggestions.map((suggestion) => (
+								<Button
+									key={suggestion}
+									variant="outline"
+									pill
+									size="sm"
+									onClick={() => {
+										setDraft(suggestion);
+										composer.current?.focus();
+									}}
+								>
+									{suggestion}
+								</Button>
+							))}
+						</fieldset>
+						<ChatComposer
+							locale={locale}
+							busy={chat.busy}
+							value={draft}
+							onValueChange={setDraft}
+							onSend={(message) => void chat.send(message)}
+							onStop={chat.stop}
+							placeholder={copy.placeholder}
+							textareaProps={{ "aria-label": copy.composer, ref: composer }}
+						/>
+						<p className="chat-page__note">{copy.localOnly}</p>
+					</div>
 				</Chat>
-			</section>
-			<div className="chat-page__footer">
-				<p className="chat-page__note">{copy.localOnly}</p>
-				<Button variant="ghost" size="sm" onClick={replay}>
-					{copy.newChat}
-				</Button>
-				<Button variant="ghost" size="sm" render={<Link to="/components" search={search as never} />}>
-					{siteCopy[locale].browse}
-				</Button>
+				<ChatGuide locale={locale} search={search} direction={direction} />
 			</div>
 		</main>
 	);
 }
 
+const planStart = "\n\n```openui";
+function splitScriptedPlan(content: string) {
+	const fence = content.indexOf(planStart);
+	return fence < 0
+		? { prose: content, stream: "" }
+		: {
+				prose: content.slice(0, fence),
+				stream: content.slice(fence).trimStart(),
+			};
+}
+
 function RoutedSteps({ steps, locale }: { steps: DemoStep[]; locale: Locale }) {
+	const copy = siteCopy[locale].chat;
+	const roles = { pisa: copy.ordersRole, angkor: copy.websiteRole, petra: copy.leadRole };
+	const number = new Intl.NumberFormat(locale);
 	return (
-		<section className="chat-demo__steps" aria-label={locale === "ar" ? "خطوات العمل" : "Work steps"}>
+		<section className="chat-demo__steps" aria-label={copy.workSteps}>
+			<header>
+				<span>{copy.worked.replace("{count}", number.format(steps.length))}</span>
+				<span className="chat-demo__done">{copy.done}</span>
+			</header>
 			{steps.map((step) => (
 				<ChatStep
 					key={step.responseId}
-					name={squadmateCharacterName(step.agent as AgentSlug, locale)}
-					glyph={<Squadmate agent={step.agent as AgentSlug} state="done" size={24} locale={locale} />}
-					status={step.status}
+					name={squadmateCharacterName(step.agent, locale)}
+					glyph={<Squadmate agent={step.agent} state="done" size={28} locale={locale} />}
+					status={roles[step.agent]}
 					responseId={step.responseId}
+					reply={copy.duration.replace("{seconds}", number.format(step.seconds))}
 				/>
 			))}
 		</section>
+	);
+}
+
+function ChatGuide({
+	locale,
+	search,
+	direction,
+}: {
+	locale: Locale;
+	search: Record<string, unknown>;
+	direction: Direction;
+}) {
+	const copy = siteCopy[locale].chat;
+	const number = new Intl.NumberFormat(locale);
+	const parts = Object.entries(partPages) as [keyof typeof partPages, readonly string[]][];
+	return (
+		<aside className="chat-guide" aria-labelledby="chat-guide-title">
+			<h2 id="chat-guide-title">{copy.sideHeading}</h2>
+			<ol>
+				{parts.map(([id, names], index) => (
+					<li key={id} data-part={id}>
+						<span className="chat-guide__number" aria-hidden="true">
+							{number.format(index + 1)}
+						</span>
+						<div>
+							<div className="chat-guide__links">
+								{names.map((name) => (
+									<Link to="/components/$name" params={{ name }} search={search} key={name}>
+										{id === "fields" ? <bdi>{name}</bdi> : copy.parts[id].title}
+									</Link>
+								))}
+							</div>
+							<p>{copy.parts[id].detail}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+			<Link className="chat-guide__browse" to="/components" search={search}>
+				{siteCopy[locale].browse} <span aria-hidden="true">{direction === "rtl" ? "←" : "→"}</span>
+			</Link>
+		</aside>
 	);
 }
 
@@ -173,7 +323,9 @@ function scriptedTransport(turns: ChatTurn[], locale: Locale, signal: AbortSigna
 		const fixture = scripts[locale];
 		const last = turns.at(-1);
 		if (last?.role === "action") {
-			yield* streamReply(fillFollowup(fixture.followup, last, locale), signal);
+			const reply =
+				last.action.name === "ReviseStorePlan" ? fixture.revision : fillFollowup(fixture.followup, last, locale);
+			yield* streamReply(reply, signal);
 		} else if (turns.filter((turn) => turn.role === "user").length === 1) {
 			yield* streamReply(fixture.reply, signal);
 		} else {
@@ -190,7 +342,7 @@ async function* streamReply(reply: string, signal: AbortSignal) {
 	// A short wait first, so the visitor sees the working state a live agent shows.
 	await playbackPause(signal, 700);
 	if (signal.aborted) return;
-	const openUiStart = reply.indexOf("\n\n```openui");
+	const openUiStart = reply.indexOf(planStart);
 	if (openUiStart < 0) {
 		yield reply;
 		return;

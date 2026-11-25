@@ -79,6 +79,7 @@ Use the checklist in PLAN.md §12. Each component has four files: `X.tsx`, `X.op
 - `npm run e2e` runs Playwright behavior, accessibility, focus-ring, overflow, RTL and OpenUI round-trip checks. It also takes full-page screenshots and attaches them to the run; CI uploads them as the `screenshots` artifact. There are no pixel comparisons and no committed baselines (PLAN.md D20). Never add `toHaveScreenshot`.
 - `npm run docs` rebuilds `llms.txt` from component docs.
 - `npm run tokens` rebuilds token CSS and TypeScript from `design/tokens.json`.
+- `npm run icons` rebuilds `packages/ui/src/icons/icons.ts` from `design/agent-ui/components/bundle.js`; `npm run icons:check` checks for drift and runs in `npm run check`. Never edit `icons.ts` by hand.
 - `npm run design:check` verifies synced design files against their manifest.
 - `npm run design:sync -- <commit>` syncs design files at the specified commit and updates the manifest. Use a full commit SHA. This change needs its own PR.
 - `npm run ui-sdk:update` checks for a newer UI SDK release and prepares the package and skill update.

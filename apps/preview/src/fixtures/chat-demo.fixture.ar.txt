@@ -1,11 +1,24 @@
 {
   "request": "أعدّ لي متجراً",
   "steps": [
-    { "agent": "pisa", "status": "تم", "responseId": "orders-204" },
-    { "agent": "angkor", "status": "تم", "responseId": "website-318" },
-    { "agent": "petra", "status": "تم", "responseId": "master-421" }
+    {
+      "agent": "pisa",
+      "responseId": "orders-204",
+      "seconds": 12
+    },
+    {
+      "agent": "angkor",
+      "responseId": "website-318",
+      "seconds": 20
+    },
+    {
+      "agent": "petra",
+      "responseId": "master-421",
+      "seconds": 4
+    }
   ],
-  "reply": "## خطة الإطلاق\n\nأعددت الخطة. يمكن تعديل التفاصيل ثم اعتمادها للمتابعة.\n\n```openui\nroot = Form(\"خطة المتجر\", [Field(\"اسم المتجر\", \"storeName\", \"\", \"متجر بنّاء\"), Switch(\"أرسل إليّ إشعاراً عند الانتهاء\", true, false, \"emailUpdates\"), SegmentedControl(\"وتيرة التحديثات\", [\"أسبوعي\", \"شهري\"], \"أسبوعي\", false, \"frequency\")], \"اعتماد الخطة\", {type: \"ApproveStorePlan\", params: {planId: \"launch-01\"}})\n```",
+  "reply": "أعددت الخطة. يمكن تعديل التفاصيل ثم اعتمادها للمتابعة.\n\n```openui\nroot = Form(\"خطة المتجر\", [Field(\"اسم المتجر\", \"storeName\", \"\", \"متجر بنّاء\"), Switch(\"أرسل إليّ إشعاراً عند الانتهاء\", true, false, \"emailUpdates\"), SegmentedControl(\"وتيرة التحديثات\", [\"أسبوعي\", \"شهري\"], \"أسبوعي\", false, \"frequency\"), Button(\"إعادة للمراجعة\", \"soft\", \"md\", true, false, {type: \"ReviseStorePlan\", params: {planId: \"launch-01\"}})], \"اعتماد الخطة\", {type: \"ApproveStorePlan\", params: {planId: \"launch-01\"}})\n```",
   "followup": "تم اعتماد خطة **{store}**. سأرسل تحديثات **{frequency}**. إشعارات البريد **{email}**.\n\n```openui\nroot = Badge(\"تم اعتماد الخطة\", \"success\")\n```",
-  "freeReply": "لا يتصل هذا الموقع بنموذج مباشر. تستخدم المحادثة رداً معدّاً مسبقاً."
+  "freeReply": "لا يتصل هذا الموقع بنموذج مباشر. تستخدم المحادثة رداً معدّاً مسبقاً.",
+  "revision": "أُعيدت الخطة للمراجعة. يمكن تحديد التعديلات المطلوبة."
 }
