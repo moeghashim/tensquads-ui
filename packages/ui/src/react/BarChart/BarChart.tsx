@@ -40,11 +40,13 @@ export function BarChart({ points, keys = [], highlight, label, locale = "en", f
 			: (point.segments?.every((part) => Number.isInteger(part.value)) ?? true),
 	);
 	const max = integerData ? niceAxisMaximum(dataMax) : dataMax;
-	const format = (value: number) => (formatValue ? formatValue(value) : String(value));
+	const format =
+		formatValue ??
+		(locale === "ar" ? new Intl.NumberFormat("ar-EG-u-nu-arab", { maximumFractionDigits: 20 }).format : String);
 	const summary = points
 		.map(
 			({ label: pointLabel, value, segments }) =>
-				`${pointLabel}: ${value ?? segments?.reduce((sum, part) => sum + part.value, 0) ?? 0}`,
+				`${pointLabel}: ${format(value ?? segments?.reduce((sum, part) => sum + part.value, 0) ?? 0)}`,
 		)
 		.join(", ");
 	// Each column needs at least 1.5rem plus 0.5rem of spacing; wider plots grow the columns up to 2.25rem.

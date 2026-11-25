@@ -78,7 +78,7 @@ Template: [App shell](https://tensquads-ui-preview.mohanadgh.workers.dev/templat
 | Content panel fill | `--ts-panel` | `styles.css` `.dashboard-panel` |
 | Content panel corners | `--ts-radius-2xl` on the inline-start corners | `styles.css` `.dashboard-panel` |
 | Content panel padding | `--ts-space-8` above 60rem, `--ts-space-4` at 60rem and below | `styles.css` |
-| Content max width | None. The panel fills the space beside the navigation. The demo frame caps at 96rem (measured, `styles.css` `.dashboard-window`). | `styles.css` |
+| Content max width | None. The panel fills the space beside the navigation. The dashboard demo and template frames fill the shared site wrapper. | `styles.css` |
 | Mobile | Below 960 px the Sidebar becomes a 56 px bar (measured) with a menu button that opens a sheet. Below 47.5rem the content panel loses its corners. | `sidebar.css`, `styles.css` |
 
 The Sidebar component does not use `--ts-side-nav-width` (210 px) or `--ts-side-nav-collapsed`. Use the Sidebar component; do not set its width.
@@ -103,11 +103,14 @@ From top to bottom:
 
 | Gutter | Token |
 |---|---|
+| Site page frame | `design-wrap` caps the width at 76rem with `--ts-space-6` inline gutters, reduced to `--ts-space-4` on narrow screens (`apps/preview/src/styles/design-system.css`). |
 | Space around the shell in the reference screens | `--ts-page-gutter` (8 px, measured in [Main.dc.html](/design/screens/Main.dc.html)) |
 | Content panel padding | `--ts-space-8` |
 | Between page header and first row | `--ts-space-6` |
 | Between rows and between cards | `--ts-space-4` |
 | Inside a card | `--ts-space-5` |
+
+The site header and footer share the page frame. The Nodes canvas fills the viewport width. Its header uses the shared gutters.
 
 ### Chat launcher
 
@@ -250,7 +253,7 @@ Template: [Workflow builder demo](https://tensquads-ui-preview.mohanadgh.workers
 
 | Region | Component | Value |
 |---|---|---|
-| Header | Workflow name (`--ts-panel-title-font-weight`), status `Badge`, actions | height `--ts-header-height`, padding-inline `--ts-space-6` (desktop) or `--ts-space-3` (at 71rem and below), `--ts-border-subtle` rule under it (`nodes-builder.css`) |
+| Header | Workflow name (`--ts-panel-title-font-weight`), status `Badge`, actions | minimum height `--ts-header-height`, shared site page frame (see Gutters above), `--ts-border-subtle` rule under it (`nodes-builder.css`) |
 | Canvas | `Canvas` with `Node` and `BranchNode` | fills the rest; ground `--ts-canvas`, grid `--ts-dot-grid` |
 | Palette | `Palette` in a floating panel | width `--ts-palette-width` + `--ts-space-4`; inline-start offset `--ts-page-gutter`; top offset `--ts-space-5`; `--ts-panel`, `--ts-radius-2xl`, `--ts-shadow-overlay` |
 | Inspector | `Inspector` | width `--ts-inspector-width`; offset `--ts-space-5` from the inline-end and top |
@@ -303,7 +306,7 @@ The grid is 4 px (`--ts-space-1`).
 | Builder panel inset | `--ts-page-gutter` and `--ts-space-5` |
 | Fixed control heights | `--ts-control-3xs` (22) to `--ts-control-3xl` (48). Buttons: `--ts-control-sm`, `--ts-control-md`, `--ts-control-lg`. |
 | Icons | `--ts-icon-xs` (14) to `--ts-icon-2xl` (24). 16 px in buttons and nav. |
-| Fixed panel widths | `--ts-palette-width`, `--ts-inspector-width`, `--ts-content-width` (docs column), `--ts-header-height` |
+| Fixed panel widths | `--ts-palette-width`, `--ts-inspector-width`, `--ts-content-width` (MiniMap specimen maximum), `--ts-header-height` |
 
 ### Colour
 
@@ -448,7 +451,7 @@ The accessible name is the character name and the state, for example `Petra, Pla
 ### Numbers and dates
 
 - Format numbers, money, percentages and dates with `Intl` for the locale. Do not build number strings by hand.
-- The library formats Arabic counts with `ar-EG-u-nu-arab` (Arabic-Indic digits) and English with `en-US` (`packages/ui/src/schemas/platform.ts`, `ChatLauncher.tsx`). Use the same locales.
+- Use `ar-EG-u-nu-arab` for Arabic-Indic digits and `en-US` for English. The dashboard demos and template use these locales for metrics and counts. BarChart formats Arabic chart values by default. StatTile and Card display the text supplied by the caller.
 - Put units in the display string: `1.08 s`, `42.5 h`, `$19.22`.
 - Show the comparison with a delta: `+12% vs last week`. Colour the delta (`--ts-success-text` or `--ts-danger-text`), not the value.
 

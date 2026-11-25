@@ -49,7 +49,9 @@ for (const locale of ["en", "ar"] as const) {
 			"/dashboards/admin",
 		);
 		await page.getByRole("button", { name: locale === "ar" ? "صور الفرق" : "Squad images" }).click();
-		await expect(page.locator(".ts-stat-tile__value")).toHaveText(["7", "127", "8", "15", "4"]);
+		await expect(page.locator(".ts-stat-tile__value")).toHaveText(
+			locale === "ar" ? ["٧", "١٢٧", "٨", "١٥", "٤"] : ["7", "127", "8", "15", "4"],
+		);
 		await expect(page.locator(".ts-stat-tile__footer")).toHaveText(
 			locale === "ar"
 				? [
@@ -80,7 +82,7 @@ for (const locale of ["en", "ar"] as const) {
 				2,
 				2,
 				"22 of 34 (65%)",
-				"22 من 34 (65%)",
+				"٢٢ من ٣٤ (٦٥٪\u061c)",
 			],
 			[
 				"support",
@@ -94,7 +96,7 @@ for (const locale of ["en", "ar"] as const) {
 				2,
 				3,
 				"20 of 21 (95%)",
-				"20 من 21 (95%)",
+				"٢٠ من ٢١ (٩٥٪\u061c)",
 			],
 			[
 				"marketing",
@@ -108,7 +110,7 @@ for (const locale of ["en", "ar"] as const) {
 				2,
 				3,
 				"17 of 18 (94%)",
-				"17 من 18 (94%)",
+				"١٧ من ١٨ (٩٤٪\u061c)",
 			],
 			[
 				"finance",
@@ -122,7 +124,7 @@ for (const locale of ["en", "ar"] as const) {
 				0,
 				3,
 				"14 of 15 (93%)",
-				"14 من 15 (93%)",
+				"١٤ من ١٥ (٩٣٪\u061c)",
 			],
 			[
 				"inventory",
@@ -136,7 +138,7 @@ for (const locale of ["en", "ar"] as const) {
 				2,
 				0,
 				"13 of 14 (93%)",
-				"13 من 14 (93%)",
+				"١٣ من ١٤ (٩٣٪\u061c)",
 			],
 			[
 				"analytics",
@@ -150,7 +152,7 @@ for (const locale of ["en", "ar"] as const) {
 				0,
 				4,
 				"13 of 13 (100%)",
-				"13 من 13 (100%)",
+				"١٣ من ١٣ (١٠٠٪\u061c)",
 			],
 			[
 				"people",
@@ -164,15 +166,19 @@ for (const locale of ["en", "ar"] as const) {
 				0,
 				0,
 				"12 of 12 (100%)",
-				"12 من 12 (100%)",
+				"١٢ من ١٢ (١٠٠٪\u061c)",
 			],
 		] as const;
 		for (const [id, name, nameAr, role, roleAr, age, ageAr, deployed, bugs, requests, latest, latestAr] of records) {
 			const row = page.getByRole("row").filter({ hasText: `registry.agents.example/${id}:` });
 			await expect(row.locator("strong")).toHaveText(locale === "ar" ? nameAr : name);
 			await expect(row.getByRole("cell").nth(2)).toHaveText(locale === "ar" ? ageAr : age);
-			await expect(row.getByRole("cell").nth(3)).toHaveText(String(deployed));
-			await expect(row.getByRole("cell").nth(4)).toHaveText(String(bugs));
+			await expect(row.getByRole("cell").nth(3)).toHaveText(
+				locale === "ar" ? deployed.toLocaleString("ar-EG-u-nu-arab") : String(deployed),
+			);
+			await expect(row.getByRole("cell").nth(4)).toHaveText(
+				locale === "ar" ? bugs.toLocaleString("ar-EG-u-nu-arab") : String(bugs),
+			);
 			await row.click();
 			const cards = page.locator(".dashboard-stack .ts-card");
 			await expect(cards.first().getByRole("heading")).toHaveText(locale === "ar" ? nameAr : name);
@@ -211,7 +217,7 @@ test("store approvals send a command and launcher preserves URL state", async ({
 	await expect(page.getByRole("heading", { name: /Moe/ })).toBeVisible();
 	await expect(page.getByRole("button", { name: "موافقة" }).first()).toBeEnabled();
 	await page.getByRole("button", { name: "موافقة" }).first().click();
-	await expect(page.locator(".ts-card__count")).toHaveText("3");
+	await expect(page.locator(".ts-card__count")).toHaveText("٣");
 	await expect(page.locator(".sent-commands")).toBeVisible();
 	await expect(page.locator(".sent-commands")).not.toHaveAttribute("open", "");
 	await page.getByText("الأوامر المُرسلة", { exact: true }).click();
@@ -254,7 +260,9 @@ for (const [locale, direction] of [
 					}
 					await expect(page.locator(".dashboard-panel h1")).toBeVisible();
 					if (view === "companies") {
-						await expect(page.locator(".ts-bars__labels")).toContainText(["Growth4", "Starter3", "Scale2"]);
+						await expect(page.locator(".ts-bars__labels")).toContainText(
+							locale === "ar" ? ["Growth٤", "Starter٣", "Scale٢"] : ["Growth4", "Starter3", "Scale2"],
+						);
 					} else if (view === "home") {
 						await expect(page.locator(".ts-bar-chart__legend li")).toHaveText([
 							locale === "ar" ? "الأسبوع السابق" : "Previous week",
@@ -297,7 +305,7 @@ test("approval decisions survive language changes while pending content is trans
 		"تقديم خصم ١٥٪ على الطلب التالي",
 		"استرداد قيمة الطلب ١٠٨٨ بعد تكرار الدفع",
 	]);
-	await expect(page.locator(".ts-card__count")).toHaveText("3");
+	await expect(page.locator(".ts-card__count")).toHaveText("٣");
 	await page.getByRole("button", { name: "رفض", exact: true }).first().click();
 	await page.getByRole("button", { name: "English", exact: true }).click();
 	await expect(page.locator(".ts-approval-card__content")).toHaveText([
@@ -307,4 +315,23 @@ test("approval decisions survive language changes while pending content is trans
 	await expect(page.locator(".ts-card__count")).toHaveText("2");
 	await page.locator(".sent-commands summary").click();
 	await expect(page.locator(".sent-commands pre")).toContainText('"decision": "reject"');
+});
+
+test("Arabic dashboard metrics, counts and chart labels use Arabic-Indic digits", async ({ page }) => {
+	const state = { locale: "ar", direction: "rtl", theme: "light" } as const;
+	for (const [path, expectedMetric, additionalValues] of [
+		["/dashboards/home", "١٬٢٨٤", ".ts-card__count"],
+		["/dashboards/admin", "٤٬٧٦٥", ".ts-bars__labels, .dashboard-numeric, .ts-sidebar-count"],
+		["/templates/dashboard", "١٨٦", ".ts-bars__labels"],
+	] as const) {
+		await openPreview(page, state, path);
+		const values = page.locator(".ts-stat-tile__value");
+		await expect(values.getByText(expectedMetric, { exact: true }).first()).toBeVisible();
+		const numbers = page.locator(
+			`.ts-stat-tile__value, .ts-bar-chart__gridline, .ts-bar-chart__tick, ${additionalValues}`,
+		);
+		for (const value of await numbers.allTextContents()) {
+			expect(value, path).not.toMatch(/[0-9]/);
+		}
+	}
 });

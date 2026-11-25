@@ -23,7 +23,7 @@ import { siteCopy } from "../copy";
 import arImages from "../fixtures/dashboard-images.fixture.ar.json";
 import enImages from "../fixtures/dashboard-images.fixture.en.json";
 import { getPreviewState } from "../state";
-import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
+import { DashboardFrame, DemoPill, dashboardData, dashboardNumberLocale, demoCopy, Icon } from "./-dashboards.shared";
 
 export const Route = createFileRoute("/dashboards/admin")({ component: AdminDashboard });
 
@@ -37,8 +37,8 @@ type Company = {
 	subscription: string;
 	started: string;
 	value: string;
-	squads: string;
-	online: string;
+	squads: number;
+	online: number;
 };
 const companyFixtures = import.meta.glob<string>("../fixtures/dashboard-companies.fixture.*.json", {
 	eager: true,
@@ -84,6 +84,7 @@ function AdminDashboard() {
 	const search = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
 	const { locale, direction } = getPreviewState(search);
 	const copy = demoCopy[locale];
+	const { format: numberText } = new Intl.NumberFormat(dashboardNumberLocale(locale));
 	const adminCopy = siteCopy[locale].adminDemo;
 	const view = search.view === "images" ? "images" : "companies";
 	const navigate = useNavigate();
@@ -133,16 +134,16 @@ function AdminDashboard() {
 	}
 	const plans = Array.from(planCounts, ([label, value]) => {
 		const planCompanies = companiesByLocale[locale].filter((company) => company.plan === label);
-		const squads = planCompanies.reduce((total, company) => total + Number(company.squads), 0);
+		const squads = planCompanies.reduce((total, company) => total + company.squads, 0);
 		return {
 			label,
 			value,
-			display: `${value} ${adminCopy.companyUnit} · ${squads} ${adminCopy.squadUnit}`,
+			display: `${numberText(value)} ${adminCopy.companyUnit} · ${numberText(squads)} ${adminCopy.squadUnit}`,
 			tone: label === "Growth" ? ("info" as const) : undefined,
 		};
 	});
 	return (
-		<main id="main" className="dashboard-page" dir={direction}>
+		<main id="main" className="design-wrap dashboard-page" dir={direction}>
 			<DashboardFrame>
 				<Sidebar label="Platform admin" mobileLabel={copy.openNavigation}>
 					<SidebarBrand icon={<Icon name="grid" />} title="Platform admin" subtitle={copy.workspace} />
@@ -157,7 +158,7 @@ function AdminDashboard() {
 						<SidebarItem
 							icon={<Icon name="image" />}
 							active={view === "images"}
-							count={data.attentionCount}
+							count={numberText(data.attentionCount)}
 							onClick={() => setView("images")}
 						>
 							{items[1]}
@@ -304,12 +305,10 @@ function AdminDashboard() {
 												),
 												started: row.started,
 												value: row.value,
-												squads: <span className="dashboard-numeric">{row.squads}</span>,
+												squads: <span className="dashboard-numeric">{numberText(row.squads)}</span>,
 												online: (
-													<Badge
-														tone={Number(row.online) / Number(row.squads) >= 0.75 ? "success" : "default"}
-													>
-														{row.online} / {row.squads}
+													<Badge tone={row.online / row.squads >= 0.75 ? "success" : "default"}>
+														{numberText(row.online)} / {numberText(row.squads)}
 													</Badge>
 												),
 											},
@@ -359,10 +358,9 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 	const copy = siteCopy[locale].adminDemo;
 	const images = imagesByLocale[locale];
 	const selectedImage = images.find((image) => image.id === selected) ?? images[0]!;
-	const numberText = (value: number) =>
-		locale === "ar"
-			? String(value).replace(/[0-9]/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)] ?? digit)
-			: String(value);
+	const numberLocale = dashboardNumberLocale(locale);
+	const { format: numberText } = new Intl.NumberFormat(numberLocale);
+	const percent = new Intl.NumberFormat(numberLocale, { style: "percent" });
 	const visibleImages = images.filter(
 		(image) =>
 			filter === "all" ||
@@ -378,7 +376,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 	const stats = [
 		{
 			label: copy.images,
-			value: String(images.length),
+			value: numberText(images.length),
 			foot: copy.imagesFoot
 				.replace("{stable}", numberText(images.filter((image) => image.lifecycle === "stable").length))
 				.replace(
@@ -388,12 +386,12 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 		},
 		{
 			label: copy.deployments,
-			value: String(deployments),
+			value: numberText(deployments),
 			delta: { text: copy.deploymentsFoot.replace("{count}", numberText(behind)), tone: "negative" as const },
 		},
 		{
 			label: copy.openBugs,
-			value: String(bugs.length),
+			value: numberText(bugs.length),
 			delta: {
 				text:
 					locale === "ar" && highBugs === 2
@@ -404,7 +402,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 		},
 		{
 			label: copy.featuresRequested,
-			value: String(requests.length),
+			value: numberText(requests.length),
 			foot: copy.featuresFoot.replace(
 				"{count}",
 				numberText(requests.filter((request) => request.inProgress).length),
@@ -412,7 +410,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 		},
 		{
 			label: copy.updatedThisWeek,
-			value: String(images.filter((image) => image.updatedAgeHours < 7 * 24).length),
+			value: numberText(images.filter((image) => image.updatedAgeHours < 7 * 24).length),
 			foot: copy.updatedFoot.replace("{count}", numberText(images.length)),
 		},
 	];
@@ -498,12 +496,12 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 								),
 								version: image.version,
 								updated: locale === "ar" ? image.updatedAr : image.updated,
-								deployed: <span className="dashboard-numeric">{image.deployed}</span>,
+								deployed: <span className="dashboard-numeric">{numberText(image.deployed)}</span>,
 								bugs: (
 									<span
 										className={image.bugs.length ? "dashboard-danger dashboard-numeric" : "dashboard-numeric"}
 									>
-										{image.bugs.length}
+										{numberText(image.bugs.length)}
 									</span>
 								),
 							},
@@ -524,16 +522,13 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 							<dt>{copy.lastUpdated}</dt>
 							<dd>{locale === "ar" ? selectedImage.updatedAr : selectedImage.updated}</dd>
 							<dt>{copy.deployedTo}</dt>
-							<dd className="dashboard-numeric">{selectedImage.deployed}</dd>
+							<dd className="dashboard-numeric">{numberText(selectedImage.deployed)}</dd>
 							<dt>{copy.onLatest}</dt>
 							<dd>
 								{copy.onLatestCount
-									.replace("{latest}", String(selectedImage.latest))
-									.replace("{deployed}", String(selectedImage.deployed))
-									.replace(
-										"{percent}",
-										String(Math.round((selectedImage.latest / selectedImage.deployed) * 100)),
-									)}
+									.replace("{latest}", numberText(selectedImage.latest))
+									.replace("{deployed}", numberText(selectedImage.deployed))
+									.replace("{percent}", percent.format(selectedImage.latest / selectedImage.deployed))}
 							</dd>
 						</dl>
 						<div className="dashboard-actions">
@@ -577,7 +572,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 										{copy.bugMeta
 											.replace("{id}", bug.id)
 											.replace("{age}", locale === "ar" ? bug.ageAr : bug.age)
-											.replace("{accounts}", String(bug.accounts))}
+											.replace("{accounts}", numberText(bug.accounts))}
 									</small>
 								</div>
 							))
