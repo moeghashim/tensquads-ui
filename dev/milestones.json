@@ -109,7 +109,10 @@
         "001-design-comps",
         "002-build-site",
         "003-agent-docs",
-        "004-mascot-motion"
+        "004-mascot-motion",
+        "005-design-guide",
+        "006-page-templates",
+        "007-page-width"
       ]
     }
   ]
