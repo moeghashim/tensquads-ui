@@ -1681,9 +1681,9 @@ code{font-family:var(--ts-font-mono);font-size:12px;background:var(--ts-surface-
 
 /* A raised arm (Petra, Machu) would sweep over the face; it waves from the shoulder instead. */
 @keyframes mm-raised-wave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(6deg)}}
-.mm .mm-raised{animation:none!important}
-.mm:is([data-state="idle"],[data-state="running"],[data-state="escalated"]) .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) infinite!important}
-.mm[data-state="done"] .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) 2!important}
+.mm[data-state] .mm-raised{animation:none}
+.mm:is([data-state="idle"],[data-state="running"],[data-state="escalated"]) .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) infinite}
+.mm[data-state="done"] .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) 2}
 /* Below 32 px: face and badge only. */
 .mm[width="24"] :is(.mm-all,.mm-torso,[class^="mm-foot"],[class^="mm-arm"]),.mm[width="16"] :is(.mm-all,.mm-torso,[class^="mm-foot"],[class^="mm-arm"]){animation:none!important}
 @media (prefers-reduced-motion:reduce){.mm *{animation:none!important}.swap svg,.steps span{transition:none!important}}
