@@ -1,0 +1,22 @@
+.template-list > .ts-page-header {
+	margin-block-end: var(--ts-space-6);
+}
+
+.template-list__filters {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ts-space-1);
+}
+
+.template-list__filters [data-slot="input"] {
+	inline-size: 12rem;
+	max-inline-size: 100%;
+}
+
+@media (max-width: 47.5rem) {
+	.template-list__filters,
+	.template-list__filters [data-slot="input"] {
+		inline-size: 100%;
+	}
+}

@@ -1,0 +1,108 @@
+.template-chat {
+	display: grid;
+	grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+	gap: var(--ts-space-8);
+	align-items: start;
+}
+
+.template-chat__surface.ts-chat {
+	box-sizing: border-box;
+	min-inline-size: 0;
+	block-size: 54rem;
+	border: thin solid var(--ts-border-subtle);
+	border-radius: var(--ts-radius-3xl);
+	background: var(--ts-surface);
+	box-shadow: var(--ts-shadow-100);
+}
+
+.template-chat__header {
+	display: flex;
+	flex: none;
+	align-items: center;
+	gap: var(--ts-space-3);
+	padding: var(--ts-space-3) var(--ts-space-5);
+	border-block-end: thin solid var(--ts-border-subtle);
+}
+
+.template-chat__header h1,
+.template-chat__header p,
+.template-chat__handoffs p {
+	margin: 0;
+}
+
+.template-chat__header h1 {
+	color: var(--ts-text-emphasis);
+	font:
+		var(--ts-panel-title-font-weight) var(--ts-panel-title-font-size) / var(--ts-panel-title-line-height)
+		var(--ts-panel-title-font-family);
+	letter-spacing: var(--ts-panel-title-letter-spacing);
+}
+
+.template-chat__header p,
+.template-chat__handoffs p {
+	color: var(--ts-text-secondary);
+	font-size: var(--ts-text-xs-font-size);
+}
+
+.template-chat__header button {
+	margin-inline-start: auto;
+}
+
+.template-chat__surface > .ts-chat__log {
+	padding: var(--ts-space-6);
+}
+
+.template-chat__surface .ts-chat__log-content {
+	gap: var(--ts-space-4);
+}
+
+.template-chat__turn {
+	display: grid;
+	grid-template-columns: var(--ts-space-8) minmax(0, 1fr);
+	align-items: start;
+	gap: var(--ts-space-3);
+}
+
+.template-chat__turn-body {
+	display: grid;
+	gap: var(--ts-space-3);
+	min-inline-size: 0;
+}
+
+.template-chat__composer {
+	padding: var(--ts-space-3) var(--ts-space-6) var(--ts-space-5);
+}
+
+.template-chat__composer .ts-chat__composer {
+	inline-size: 100%;
+	margin: 0 auto;
+}
+
+.template-chat__suggestions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--ts-space-2);
+	max-inline-size: 48rem;
+	margin-inline: auto;
+	margin-block-end: var(--ts-space-3);
+}
+
+.template-chat__handoffs {
+	display: grid;
+	gap: var(--ts-space-3);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.template-chat__handoffs li {
+	display: flex;
+	align-items: center;
+	gap: var(--ts-space-3);
+}
+
+@media (max-width: 56.25rem) {
+	.template-chat {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

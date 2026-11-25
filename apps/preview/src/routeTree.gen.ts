@@ -19,10 +19,14 @@ import { Route as DashboardsAdminRouteImport } from './routes/dashboards.admin'
 import { Route as DashboardsHomeRouteImport } from './routes/dashboards.home'
 import { Route as FoundationsIndexRouteImport } from './routes/foundations.index'
 import { Route as FoundationsNameRouteImport } from './routes/foundations.$name'
+import { Route as FoundationsGuideRouteImport } from './routes/foundations.guide'
 import { Route as FoundationsPrinciplesRouteImport } from './routes/foundations.principles'
 import { Route as NodesIndexRouteImport } from './routes/nodes.index'
 import { Route as NodesIdRouteImport } from './routes/nodes.$id'
 import { Route as ReferenceMascotStatesRouteImport } from './routes/reference.mascot-states'
+import { Route as TemplatesIndexRouteImport } from './routes/templates.index'
+import { Route as TemplatesNameRouteImport } from './routes/templates.$name'
+import { Route as FoundationsMascotsMotionRouteImport } from './routes/foundations.mascots.motion'
 import { Route as ReferencePagesIndexRouteImport } from './routes/reference.pages.index'
 import { Route as ReferencePagesIdRouteImport } from './routes/reference.pages.$id'
 import { Route as ReferenceScreensIndexRouteImport } from './routes/reference.screens.index'
@@ -78,6 +82,11 @@ const FoundationsNameRoute = FoundationsNameRouteImport.update({
   path: '/foundations/$name',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoundationsGuideRoute = FoundationsGuideRouteImport.update({
+  id: '/foundations/guide',
+  path: '/foundations/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FoundationsPrinciplesRoute = FoundationsPrinciplesRouteImport.update({
   id: '/foundations/principles',
   path: '/foundations/principles',
@@ -98,6 +107,22 @@ const ReferenceMascotStatesRoute = ReferenceMascotStatesRouteImport.update({
   path: '/reference/mascot-states',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TemplatesIndexRoute = TemplatesIndexRouteImport.update({
+  id: '/templates/',
+  path: '/templates/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemplatesNameRoute = TemplatesNameRouteImport.update({
+  id: '/templates/$name',
+  path: '/templates/$name',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoundationsMascotsMotionRoute =
+  FoundationsMascotsMotionRouteImport.update({
+    id: '/foundations/mascots/motion',
+    path: '/foundations/mascots/motion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ReferencePagesIndexRoute = ReferencePagesIndexRouteImport.update({
   id: '/reference/pages/',
   path: '/reference/pages/',
@@ -128,12 +153,16 @@ export interface FileRoutesByFullPath {
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
   '/foundations/$name': typeof FoundationsNameRoute
+  '/foundations/guide': typeof FoundationsGuideRoute
   '/foundations/principles': typeof FoundationsPrinciplesRoute
   '/nodes/$id': typeof NodesIdRoute
   '/reference/mascot-states': typeof ReferenceMascotStatesRoute
+  '/templates/$name': typeof TemplatesNameRoute
   '/components/': typeof ComponentsIndexRoute
   '/foundations/': typeof FoundationsIndexRoute
   '/nodes/': typeof NodesIndexRoute
+  '/templates/': typeof TemplatesIndexRoute
+  '/foundations/mascots/motion': typeof FoundationsMascotsMotionRoute
   '/reference/pages/$id': typeof ReferencePagesIdRoute
   '/reference/screens/$id': typeof ReferenceScreensIdRoute
   '/reference/pages/': typeof ReferencePagesIndexRoute
@@ -148,12 +177,16 @@ export interface FileRoutesByTo {
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
   '/foundations/$name': typeof FoundationsNameRoute
+  '/foundations/guide': typeof FoundationsGuideRoute
   '/foundations/principles': typeof FoundationsPrinciplesRoute
   '/nodes/$id': typeof NodesIdRoute
   '/reference/mascot-states': typeof ReferenceMascotStatesRoute
+  '/templates/$name': typeof TemplatesNameRoute
   '/components': typeof ComponentsIndexRoute
   '/foundations': typeof FoundationsIndexRoute
   '/nodes': typeof NodesIndexRoute
+  '/templates': typeof TemplatesIndexRoute
+  '/foundations/mascots/motion': typeof FoundationsMascotsMotionRoute
   '/reference/pages/$id': typeof ReferencePagesIdRoute
   '/reference/screens/$id': typeof ReferenceScreensIdRoute
   '/reference/pages': typeof ReferencePagesIndexRoute
@@ -169,12 +202,16 @@ export interface FileRoutesById {
   '/dashboards/admin': typeof DashboardsAdminRoute
   '/dashboards/home': typeof DashboardsHomeRoute
   '/foundations/$name': typeof FoundationsNameRoute
+  '/foundations/guide': typeof FoundationsGuideRoute
   '/foundations/principles': typeof FoundationsPrinciplesRoute
   '/nodes/$id': typeof NodesIdRoute
   '/reference/mascot-states': typeof ReferenceMascotStatesRoute
+  '/templates/$name': typeof TemplatesNameRoute
   '/components/': typeof ComponentsIndexRoute
   '/foundations/': typeof FoundationsIndexRoute
   '/nodes/': typeof NodesIndexRoute
+  '/templates/': typeof TemplatesIndexRoute
+  '/foundations/mascots/motion': typeof FoundationsMascotsMotionRoute
   '/reference/pages/$id': typeof ReferencePagesIdRoute
   '/reference/screens/$id': typeof ReferenceScreensIdRoute
   '/reference/pages/': typeof ReferencePagesIndexRoute
@@ -191,12 +228,16 @@ export interface FileRouteTypes {
     | '/dashboards/admin'
     | '/dashboards/home'
     | '/foundations/$name'
+    | '/foundations/guide'
     | '/foundations/principles'
     | '/nodes/$id'
     | '/reference/mascot-states'
+    | '/templates/$name'
     | '/components/'
     | '/foundations/'
     | '/nodes/'
+    | '/templates/'
+    | '/foundations/mascots/motion'
     | '/reference/pages/$id'
     | '/reference/screens/$id'
     | '/reference/pages/'
@@ -211,12 +252,16 @@ export interface FileRouteTypes {
     | '/dashboards/admin'
     | '/dashboards/home'
     | '/foundations/$name'
+    | '/foundations/guide'
     | '/foundations/principles'
     | '/nodes/$id'
     | '/reference/mascot-states'
+    | '/templates/$name'
     | '/components'
     | '/foundations'
     | '/nodes'
+    | '/templates'
+    | '/foundations/mascots/motion'
     | '/reference/pages/$id'
     | '/reference/screens/$id'
     | '/reference/pages'
@@ -231,12 +276,16 @@ export interface FileRouteTypes {
     | '/dashboards/admin'
     | '/dashboards/home'
     | '/foundations/$name'
+    | '/foundations/guide'
     | '/foundations/principles'
     | '/nodes/$id'
     | '/reference/mascot-states'
+    | '/templates/$name'
     | '/components/'
     | '/foundations/'
     | '/nodes/'
+    | '/templates/'
+    | '/foundations/mascots/motion'
     | '/reference/pages/$id'
     | '/reference/screens/$id'
     | '/reference/pages/'
@@ -252,12 +301,16 @@ export interface RootRouteChildren {
   DashboardsAdminRoute: typeof DashboardsAdminRoute
   DashboardsHomeRoute: typeof DashboardsHomeRoute
   FoundationsNameRoute: typeof FoundationsNameRoute
+  FoundationsGuideRoute: typeof FoundationsGuideRoute
   FoundationsPrinciplesRoute: typeof FoundationsPrinciplesRoute
   NodesIdRoute: typeof NodesIdRoute
   ReferenceMascotStatesRoute: typeof ReferenceMascotStatesRoute
+  TemplatesNameRoute: typeof TemplatesNameRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
   FoundationsIndexRoute: typeof FoundationsIndexRoute
   NodesIndexRoute: typeof NodesIndexRoute
+  TemplatesIndexRoute: typeof TemplatesIndexRoute
+  FoundationsMascotsMotionRoute: typeof FoundationsMascotsMotionRoute
   ReferencePagesIdRoute: typeof ReferencePagesIdRoute
   ReferenceScreensIdRoute: typeof ReferenceScreensIdRoute
   ReferencePagesIndexRoute: typeof ReferencePagesIndexRoute
@@ -336,6 +389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoundationsNameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/foundations/guide': {
+      id: '/foundations/guide'
+      path: '/foundations/guide'
+      fullPath: '/foundations/guide'
+      preLoaderRoute: typeof FoundationsGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/foundations/principles': {
       id: '/foundations/principles'
       path: '/foundations/principles'
@@ -362,6 +422,27 @@ declare module '@tanstack/react-router' {
       path: '/reference/mascot-states'
       fullPath: '/reference/mascot-states'
       preLoaderRoute: typeof ReferenceMascotStatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templates/': {
+      id: '/templates/'
+      path: '/templates'
+      fullPath: '/templates/'
+      preLoaderRoute: typeof TemplatesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templates/$name': {
+      id: '/templates/$name'
+      path: '/templates/$name'
+      fullPath: '/templates/$name'
+      preLoaderRoute: typeof TemplatesNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/foundations/mascots/motion': {
+      id: '/foundations/mascots/motion'
+      path: '/foundations/mascots/motion'
+      fullPath: '/foundations/mascots/motion'
+      preLoaderRoute: typeof FoundationsMascotsMotionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reference/pages/': {
@@ -404,12 +485,16 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardsAdminRoute: DashboardsAdminRoute,
   DashboardsHomeRoute: DashboardsHomeRoute,
   FoundationsNameRoute: FoundationsNameRoute,
+  FoundationsGuideRoute: FoundationsGuideRoute,
   FoundationsPrinciplesRoute: FoundationsPrinciplesRoute,
   NodesIdRoute: NodesIdRoute,
   ReferenceMascotStatesRoute: ReferenceMascotStatesRoute,
+  TemplatesNameRoute: TemplatesNameRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
   FoundationsIndexRoute: FoundationsIndexRoute,
   NodesIndexRoute: NodesIndexRoute,
+  TemplatesIndexRoute: TemplatesIndexRoute,
+  FoundationsMascotsMotionRoute: FoundationsMascotsMotionRoute,
   ReferencePagesIdRoute: ReferencePagesIdRoute,
   ReferenceScreensIdRoute: ReferenceScreensIdRoute,
   ReferencePagesIndexRoute: ReferencePagesIndexRoute,

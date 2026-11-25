@@ -153,7 +153,8 @@
 	.brand-specimen__mark { inline-size: min(40%, 9.75rem); }
 	.brand-specimen__squad { display: flex; justify-content: center; align-items: end; inline-size: min(100%, 22rem); }
 	.brand-specimen__squad img { inline-size: 27%; }
-	.brand-specimen__squad img:nth-child(2) { inline-size: 34%; }
+	.brand-specimen__squad .ts-squadmate { inline-size: 34%; }
+	.brand-specimen__squad .ts-squadmate svg { inline-size: 100%; block-size: auto; }
 	.brand-specimen figcaption {
 		display: flex;
 		justify-content: space-between;
@@ -349,6 +350,17 @@
 	.reference-prose { max-inline-size: 75ch; }
 	.reference-prose h2 { margin-block: var(--ts-space-8) var(--ts-space-2); }
 	.reference-prose ul { padding-inline-start: var(--ts-space-6); }
+	.design-guide ol { padding-inline-start: var(--ts-space-6); }
+	.design-guide li + li { margin-block-start: var(--ts-space-1); }
+	.design-guide hr { margin-block: var(--ts-space-8); border: 0; border-block-start: var(--site-rule); }
+	.design-guide pre {
+		padding: var(--ts-space-3);
+		border-radius: var(--ts-radius-md);
+		background: var(--ts-surface-secondary);
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+	}
+	.design-guide code { font: var(--ts-text-xs-font-size) / var(--ts-text-xs-line-height) var(--ts-font-mono); overflow-wrap: anywhere; }
 
 	.reference-screen-list { margin: 0; padding: 0; list-style: none; }
 	.reference-screen-list li + li { border-block-start: var(--site-rule); }

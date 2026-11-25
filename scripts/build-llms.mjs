@@ -7,6 +7,15 @@ const componentsRoot = join(root, "packages/ui/src/react");
 const outputPath = join(root, "llms.txt");
 const checkOnly = process.argv.includes("--check");
 
+const guide = await readFile(join(root, "DESIGN.md"), "utf8");
+const css = await readFile(join(root, "packages/ui/src/tokens/tokens.css"), "utf8");
+const tokens = new Set(Array.from(css.matchAll(/^\s*(--ts-[\w-]+):/gm), ([, name]) => name));
+const references = new Set(guide.match(/--ts-(?:[\w-]+\*?|\*)/g));
+const unknown = [...references].filter((name) =>
+	name.endsWith("*") ? ![...tokens].some((token) => token.startsWith(name.slice(0, -1))) : !tokens.has(name),
+);
+if (unknown.length) throw new Error(`DESIGN.md refers to unknown tokens: ${unknown.join(", ")}`);
+
 const entries = [];
 for (const directory of (await readdir(componentsRoot, { withFileTypes: true })).filter((entry) =>
 	entry.isDirectory(),
@@ -38,13 +47,31 @@ for (const directory of (await readdir(componentsRoot, { withFileTypes: true }))
 }
 
 entries.sort((left, right) => left.name.localeCompare(right.name));
+const templateEntries = [];
+for (const directory of await readdir(join(root, "templates"), { withFileTypes: true })) {
+	if (!directory.isDirectory()) continue;
+	const path = `templates/${directory.name}/README.md`;
+	const [heading, , summary] = (await readFile(join(root, path), "utf8")).split(/\r?\n/);
+	templateEntries.push(`- [${heading.slice(2)}](${path}): ${summary}`);
+}
+templateEntries.sort();
 const site = "https://tensquads-ui-preview.mohanadgh.workers.dev";
 const generated = [
 	"# tensquads UI component index",
 	"",
 	`@tensquads/ui is a React component library with ${entries.length} documented components. Live gallery: ${site}/components. Install and setup: README.md. Agent skill: .agents/skills/tensquads-ui/SKILL.md.`,
 	"",
+	"## Start here",
+	"",
+	"- [Design guide](DESIGN.md): Read this before you build a screen",
+	"",
+	"## Components",
+	"",
 	...entries.map(({ name, summary, path }) => `- [${name}](${path}): ${summary}`),
+	"",
+	"## Templates",
+	"",
+	...templateEntries,
 	"",
 ].join("\n");
 

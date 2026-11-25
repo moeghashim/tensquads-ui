@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { AGENT_ROLE_TO_SLUG, AGENT_SLUG_TO_ROLE, AgentRoleSchema } from "../../schemas/index.js";
 import {
@@ -45,9 +46,54 @@ describe("Squadmate image", () => {
 	it("uses a localized character and state name without adding keyboard focus", () => {
 		const { container } = render(<Squadmate agent="petra" state="planning" locale="en" />);
 		const image = screen.getByRole("img", { name: "Petra, Planning" });
+		expect(image.tagName).toBe("IMG");
+		expect(image).toHaveAttribute(
+			"src",
+			`data:image/svg+xml;charset=utf-8,${encodeURIComponent(golden["master:planning"] ?? "")}`,
+		);
 		expect(image).not.toHaveAttribute("tabindex");
 		expect(image).not.toHaveAttribute("role", "button");
 		expect(container.querySelector("button, a, input, [tabindex]")).toBeNull();
+	});
+
+	it("serves distinct inline drawings with local gradient references and the same accessible name", () => {
+		const pair = (
+			<>
+				<Squadmate agent="petra" state="planning" animated />
+				<Squadmate agent="petra" state="planning" animated />
+			</>
+		);
+		const { container } = render(pair);
+		const images = within(container).getAllByRole("img", { name: "Petra, Planning" });
+		expect(images).toHaveLength(2);
+		expect(renderToString(pair)).toContain('aria-label="Petra, Planning"');
+		const gradients = new Set<string>();
+		for (const image of images) {
+			expect(image).toHaveAttribute("data-state", "planning");
+			expect(image).toHaveAttribute("data-size", "64");
+			expect(image.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
+			const localIds = new Set(Array.from(image.querySelectorAll("radialGradient[id]"), ({ id }) => id));
+			expect(localIds.size).toBeGreaterThan(0);
+			for (const id of localIds) {
+				expect(gradients.has(id)).toBe(false);
+				gradients.add(id);
+			}
+			for (const shape of image.querySelectorAll('[fill^="url(#"]')) {
+				const id = shape.getAttribute("fill")?.slice(5, -1);
+				expect(localIds.has(id ?? "")).toBe(true);
+			}
+		}
+		expect(container.querySelector("img")).toBeNull();
+	});
+
+	it("replaces the SVG on state changes and keeps it when the name changes", () => {
+		const { container, rerender } = render(<Squadmate agent="petra" state="planning" animated />);
+		const initialSvg = container.querySelector("svg");
+		rerender(<Squadmate agent="petra" state="planning" locale="ar" animated />);
+		expect(container.querySelector("svg")).toBe(initialSvg);
+		rerender(<Squadmate agent="petra" state="done" locale="ar" animated />);
+		expect(container.querySelector("svg")).not.toBe(initialSvg);
+		expect(screen.getByRole("img", { name: "بترا، تم" })).toHaveAttribute("data-state", "done");
 	});
 
 	it("uses the website's Arabic name and available state copy", () => {

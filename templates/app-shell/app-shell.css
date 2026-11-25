@@ -1,0 +1,72 @@
+.template-shell,
+.template-shell__navigation {
+	font:
+		var(--ts-text-md-font-weight) var(--ts-text-md-font-size) / var(--ts-text-md-line-height)
+		var(--ts-text-md-font-family);
+	letter-spacing: var(--ts-text-md-letter-spacing);
+	color: var(--ts-text);
+	font-synthesis: none;
+}
+
+.template-shell {
+	display: flex;
+	align-items: stretch;
+	min-block-size: 100dvb;
+	padding: var(--ts-page-gutter);
+	background: var(--ts-canvas);
+}
+
+.template-shell__sidebar {
+	display: grid;
+}
+
+.template-shell__panel {
+	position: relative;
+	flex: 1;
+	min-inline-size: 0;
+	padding: var(--ts-space-8);
+	border-start-start-radius: var(--ts-radius-2xl);
+	border-end-start-radius: var(--ts-radius-2xl);
+	background: var(--ts-panel);
+}
+
+.template-shell__panel > .ts-page-header {
+	margin-block-end: var(--ts-space-6);
+}
+
+.template-shell__panel:has(.template-shell__launcher) {
+	padding-block-end: calc(var(--ts-control-md) + var(--ts-space-6));
+}
+
+.template-shell__launcher .ts-chat-launcher {
+	position: static;
+}
+
+.template-shell__launcher {
+	position: absolute;
+	inset-block-end: var(--ts-space-4);
+	inset-inline-end: var(--ts-space-4);
+}
+
+@media (max-width: 959px) {
+	.template-shell {
+		display: block;
+		min-block-size: auto;
+	}
+}
+
+@media (max-width: 60rem) {
+	.template-shell__panel {
+		padding: var(--ts-space-4);
+	}
+}
+
+@media (max-width: 47.5rem) {
+	.template-shell {
+		padding: 0;
+	}
+
+	.template-shell__panel {
+		border-radius: 0;
+	}
+}

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { siteCopy } from "../copy";
-import { foundationNames, referenceSections } from "../reference";
+import { designGuidePath, foundationNames, referenceSections } from "../reference";
 import type { Direction, Locale, PreviewSearch } from "../state";
 
 export { type FoundationName, foundationNames } from "../reference";
@@ -23,28 +23,57 @@ export function FoundationLinks({
 	search: PreviewSearch;
 	descriptions?: boolean;
 }) {
-	const copy = siteCopy[locale].designSystem.foundationsIndex;
 	return (
 		<div className={descriptions ? "foundation-grid" : "design-links design-links--paired"}>
-			{foundationNames.map((name) => (
-				<Link key={name} to="/foundations/$name" params={{ name }} search={search}>
-					<span>
-						{copy[name].title}
-						{descriptions && <small>{copy[name].lead}</small>}
-					</span>
-					<Arrow direction={direction} />
-				</Link>
-			))}
+			<FoundationPageLinks locale={locale} search={search} direction={direction} descriptions={descriptions} />
 		</div>
 	);
 }
 
-export function ReferenceIntro({ title, lead }: { title: string; lead: string }) {
+export function FoundationPageLinks({
+	locale,
+	search,
+	direction,
+	descriptions = false,
+}: {
+	locale: Locale;
+	search: PreviewSearch;
+	direction?: Direction;
+	descriptions?: boolean;
+}) {
+	const copy = siteCopy[locale].designSystem.foundationsIndex;
+	const label = (name: keyof typeof copy) =>
+		direction ? (
+			<>
+				<span>
+					{copy[name].title}
+					{descriptions && <small>{copy[name].lead}</small>}
+				</span>
+				<Arrow direction={direction} />
+			</>
+		) : (
+			copy[name].title
+		);
+	return (
+		<>
+			<Link to={designGuidePath} search={search}>
+				{label("guide")}
+			</Link>
+			{foundationNames.map((name) => (
+				<Link key={name} to="/foundations/$name" params={{ name }} search={search}>
+					{label(name)}
+				</Link>
+			))}
+		</>
+	);
+}
+
+export function ReferenceIntro({ title, lead }: { title: string; lead?: string }) {
 	return (
 		<header className="reference-intro">
 			<div>
 				<h1>{title}</h1>
-				<p>{lead}</p>
+				{lead && <p>{lead}</p>}
 			</div>
 			<a className="reference-resource" href={llmsUrl}>
 				llms.txt

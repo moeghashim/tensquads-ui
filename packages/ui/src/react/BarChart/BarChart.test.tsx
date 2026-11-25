@@ -29,7 +29,7 @@ describe("BarChart", () => {
 							: ["Day 1", "Day 6", "Day 11", "Day 16", "Day 21", "Day 26"],
 				);
 				expect(getAllByRole("button").map((column) => column.getAttribute("aria-label"))).toEqual(
-					points.map((point) => `${point.label}: 1`),
+					points.map((point) => `${point.label}: ${locale === "ar" ? "١" : "1"}`),
 				);
 				unmount();
 			}
@@ -86,21 +86,23 @@ describe("BarChart", () => {
 					<BarChart locale={dir === "rtl" ? "ar" : "en"} points={points} />
 				</div>,
 			);
-			expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual([
-				"4",
-				"2",
-				"0",
-			]);
-			const smaller = getByRole("button", { name: "A: 2" }).querySelector<HTMLElement>(".ts-bar-chart__stack");
+			expect(Array.from(container.querySelectorAll(".ts-bar-chart__gridline"), (tick) => tick.textContent)).toEqual(
+				dir === "rtl" ? ["٤", "٢", "٠"] : ["4", "2", "0"],
+			);
+			const smaller = getByRole("button", { name: dir === "rtl" ? "A: ٢" : "A: 2" }).querySelector<HTMLElement>(
+				".ts-bar-chart__stack",
+			);
 			expect(Number.parseFloat(smaller!.style.blockSize)).toBeCloseTo(50, 3);
-			expect(getByRole("button", { name: "B: 3" }).querySelector(".ts-bar-chart__stack")).toHaveStyle({
+			expect(
+				getByRole("button", { name: dir === "rtl" ? "B: ٣" : "B: 3" }).querySelector(".ts-bar-chart__stack"),
+			).toHaveStyle({
 				blockSize: "75%",
 			});
 			unmount();
 		}
 	});
 
-	it("formats axis and tooltip values", () => {
+	it("uses a custom formatter for ticks, tooltip values, and the summary", () => {
 		const formatValue = (value: number) => `$${value.toFixed(2)}`;
 		const { container, getByRole, getByText } = render(
 			<BarChart points={[{ label: "Today", value: 3 }]} formatValue={formatValue} />,
@@ -112,6 +114,7 @@ describe("BarChart", () => {
 		]);
 		fireEvent.focus(getByRole("button", { name: "Today: $3.00" }));
 		expect(getByText("Today: $3.00")).toBeInTheDocument();
+		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent("Chart: Today: $3.00");
 	});
 
 	it("labels every point through 14 and every fifth point beyond 14", () => {
@@ -145,21 +148,25 @@ describe("BarChart", () => {
 			</div>,
 		);
 		for (const [name, height] of [
-			["Quarter: 0.25", "25%"],
-			["Half: 0.5", "50%"],
+			[locale === "ar" ? "Quarter: ٠٫٢٥" : "Quarter: 0.25", "25%"],
+			[locale === "ar" ? "Half: ٠٫٥" : "Half: 0.5", "50%"],
 		] as const) {
 			const stack = getByRole("button", { name }).querySelector<HTMLElement>(".ts-bar-chart__stack")!;
 			expect(stack).toHaveStyle({ blockSize: height });
 			expect(Number(getComputedStyle(stack.firstElementChild!).flexGrow)).toBeGreaterThanOrEqual(1);
 		}
-		const stacked = getByRole("button", { name: "Stacked: 0.5" });
+		const stacked = getByRole("button", { name: locale === "ar" ? "Stacked: ٠٫٥" : "Stacked: 0.5" });
 		expect(stacked.querySelector(".ts-bar-chart__stack")).toHaveStyle({ blockSize: "50%" });
 		const weights = Array.from(stacked.querySelectorAll(".ts-bar-chart__segment"), (part) =>
 			Number(getComputedStyle(part).flexGrow),
 		);
 		expect(weights[0]! + weights[1]!).toBeGreaterThanOrEqual(1);
 		expect(weights[1]! / weights[0]!).toBeCloseTo(3);
-		expect(getByRole("button", { name: "Zero: 0" }).querySelectorAll(".ts-bar-chart__segment")).toHaveLength(0);
+		expect(
+			getByRole("button", { name: locale === "ar" ? "Zero: ٠" : "Zero: 0" }).querySelectorAll(
+				".ts-bar-chart__segment",
+			),
+		).toHaveLength(0);
 		expect(container.querySelectorAll(".ts-bar-chart__segment")).toHaveLength(4);
 	});
 
@@ -247,14 +254,18 @@ describe("BarChart", () => {
 	it.each(["en", "ar"] as const)("localizes the default %s summary in React and OpenUI", (locale) => {
 		const label = locale === "ar" ? "رسم بياني" : "Chart";
 		const { container, rerender } = render(<BarChart locale={locale} points={[{ label: "A", value: 1 }]} />);
-		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent(`${label}: A: 1`);
+		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent(
+			`${label}: A: ${locale === "ar" ? "١" : "1"}`,
+		);
 		rerender(
 			<TensquadsRenderer
 				locale={locale}
 				stream={`root = BarChart([{label: "A", value: 1}], [], null, null, "${locale}")`}
 			/>,
 		);
-		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent(`${label}: A: 1`);
+		expect(container.querySelector(".ts-visually-hidden")).toHaveTextContent(
+			`${label}: A: ${locale === "ar" ? "١" : "1"}`,
+		);
 	});
 
 	it("round trips both locale fixtures", () => {

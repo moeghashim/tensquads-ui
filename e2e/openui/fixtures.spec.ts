@@ -66,6 +66,11 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await expect(image).toBeVisible();
 				await expect(image).toHaveCSS("width", "64px");
 				await expect(image).toHaveCSS("height", "64px");
+				const animated = fixtureRegion.getByRole("img", {
+					name: locale === "en" ? "Petra, Running skill" : "بترا، قيد العمل",
+				});
+				await expect(animated.locator("svg")).toHaveCount(1);
+				await expect(animated).toHaveAttribute("data-state", "running");
 			} else if (component.name === "Dialog") {
 				const trigger = locale === "en" ? "Review" : "مراجعة";
 				await expect(fixtureRegion.getByRole("button", { name: trigger })).toBeVisible();

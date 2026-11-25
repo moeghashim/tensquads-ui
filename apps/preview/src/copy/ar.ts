@@ -5,7 +5,7 @@ const ar = {
 		needsAttention: "تحتاج إلى مراجعة",
 		deployedTo: "منشورة إلى",
 		onLatest: "على أحدث إصدار",
-		onLatestCount: "{latest} من {deployed} ({percent}%)",
+		onLatestCount: "{latest} من {deployed} ({percent})",
 		rollOut: "نشر الإصدار 2.1.1",
 		viewChangelog: "عرض سجل التغييرات",
 		imageName: "الصورة",
@@ -227,6 +227,11 @@ const ar = {
 			workflow: "سير العمل",
 		},
 		foundationsIndex: {
+			guide: {
+				title: "دليل التصميم",
+				lead: "اقرأ هذا الدليل قبل بناء أي شاشة",
+				sourceLanguage: "يتوفر الدليل باللغة الإنجليزية.",
+			},
 			colour: { title: "الألوان", lead: "ألوان دلالية للأسطح والنصوص والحالات وسير العمل." },
 			typography: { title: "الخطوط", lead: "عائلات الخطوط ومقياس أنماط النص في Agent-UI." },
 			spacing: { title: "المسافات", lead: "مقياس مسافات مبنيّ على وحدة مقدارها ٤ بكسل." },

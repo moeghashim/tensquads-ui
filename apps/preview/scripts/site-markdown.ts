@@ -17,7 +17,9 @@ import {
 	workerExample,
 } from "../src/get-started-examples";
 import { markdownPath } from "../src/markdown-path";
+import { mascotMotionCopy, mascotMotionPath } from "../src/mascot-motion-copy";
 import {
+	designGuidePath,
 	foundationNames,
 	liveHomepages,
 	pageDesigns,
@@ -27,7 +29,8 @@ import {
 } from "../src/reference";
 import type { FileRoutesByFullPath } from "../src/routeTree.gen";
 import type { Locale } from "../src/state";
-import { foundationMarkdown, mascotStates } from "./foundation-markdown";
+import { templateCopy, templateNames, templatePath, templates } from "../src/template-catalog";
+import { foundationMarkdown, mascotMotionMarkdown, mascotStates } from "./foundation-markdown";
 import { blocks, code, fence, heading, item, link } from "./markdown-format";
 
 const repo = new URL("../../../", import.meta.url);
@@ -72,6 +75,7 @@ function routePages(locale: Locale): RoutePages {
 	const design = copy.designSystem;
 	const gettingStarted = copy.getStartedPage;
 	const reference = copy.reference;
+	const guide = design.foundationsIndex.guide;
 	const componentItem = (name: keyof typeof design.componentLeads) =>
 		item(name, markdownPath(`/components/${name}`, locale), design.componentLeads[name]);
 	const foundations = foundationNames.map((name) => ({
@@ -79,11 +83,12 @@ function routePages(locale: Locale): RoutePages {
 		...design.foundationsIndex[name],
 	}));
 	const foundationLinks = (descriptions: boolean) =>
-		foundations
-			.map(({ name, title, lead }) =>
+		[
+			item(guide.title, markdownPath(designGuidePath, locale), descriptions ? guide.lead : undefined),
+			...foundations.map(({ name, title, lead }) =>
 				item(title, markdownPath(`/foundations/${name}`, locale), descriptions ? lead : undefined),
-			)
-			.join("\n");
+			),
+		].join("\n");
 	const referenceLinks = referenceSections
 		.map(({ id, path }) => item(design[id], markdownPath(path, locale)))
 		.join("\n");
@@ -101,6 +106,7 @@ function routePages(locale: Locale): RoutePages {
 		title: reference.pageTitles[design.id],
 	}));
 	const componentsLead = design.uiLead;
+	const templateListing = templateCopy[locale];
 	const chat = copy.chat;
 	const builder = builderCopy[locale];
 	const workflows = workflowIds.map((id) => demoWorkflow(id, locale));
@@ -168,6 +174,10 @@ function routePages(locale: Locale): RoutePages {
 		"/foundations/$name": foundations.map(({ name, title, lead }) =>
 			page(`/foundations/${name}`, title, lead, foundationMarkdown(name, locale)),
 		),
+		[designGuidePath]: [{ path: designGuidePath, title: guide.title, description: guide.lead, body: source("DESIGN.md") }],
+		[mascotMotionPath]: [
+			page(mascotMotionPath, mascotMotionCopy[locale].title, mascotMotionCopy[locale].lead, mascotMotionMarkdown(locale)),
+		],
 		"/components/": [
 			page(
 				"/components",
@@ -192,6 +202,41 @@ function routePages(locale: Locale): RoutePages {
 				description: design.componentLeads[name],
 				body: componentMarkdown(name),
 			})),
+		"/templates/": [
+			page(
+				"/templates",
+				templateListing.title,
+				templateListing.lead,
+				templateNames.map((name) => {
+					const { title, description } = templates[name][locale];
+					return item(title, markdownPath(`/templates/${name}`, locale), description);
+				}).join("\n"),
+			),
+		],
+		"/templates/$name": templateNames.map((name) => {
+			const path = templatePath(name);
+			const file = `${path}/${templates[name].file}`;
+			const styles = `${path}/${name}.css`;
+			const { title, description } = templates[name][locale];
+			const readme = source(`${path}/README.md`)
+				.replace(/^# [^\n]+\n+/, "")
+				.replace(/\]\((?!https?:|#)([^)]+)\)/g, (_, target: string) =>
+					`](${new URL(target, `${sourceUrl}/${path}/`).href})`,
+				);
+			return page(
+				`/${path}`,
+				title,
+				description,
+				blocks(
+					readme,
+					item(templateListing.github, `${sourceUrl}/${file}`),
+					heading(2, templates[name].file),
+					fence("tsx", source(file)),
+					heading(2, `${name}.css`),
+					fence("css", source(styles)),
+				),
+			);
+		}),
 		"/get-started": [
 			page(
 				"/get-started",
@@ -338,9 +383,10 @@ function routePages(locale: Locale): RoutePages {
 }
 
 const groups: PageGroup[] = [
-	{ title: "Start here", routes: ["/"] },
-	{ title: "Foundations", routes: ["/foundations/", "/foundations/$name"] },
+	{ title: "Start here", routes: [designGuidePath, "/"] },
+	{ title: "Foundations", routes: ["/foundations/", "/foundations/$name", mascotMotionPath] },
 	{ title: "Components", routes: ["/components/", "/components/$name"] },
+	{ title: "Templates", routes: ["/templates/", "/templates/$name"] },
 	{ title: "Get started", routes: ["/get-started"] },
 	{
 		title: "Design reference",

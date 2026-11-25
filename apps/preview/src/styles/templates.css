@@ -1,0 +1,31 @@
+.template-preview__toolbar,
+.template-preview__toolbar nav,
+.template-preview__tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ts-space-3);
+}
+
+.template-preview__toolbar {
+	justify-content: space-between;
+	padding: var(--ts-space-3) var(--ts-space-5);
+	border-block-end: thin solid var(--ts-border-subtle);
+	font-size: var(--ts-text-sm-font-size);
+}
+
+.template-preview__toolbar a {
+	color: var(--ts-link);
+}
+
+.template-preview__toolbar [aria-current="page"] {
+	color: var(--ts-text-secondary);
+}
+
+.template-preview__detail {
+	padding: var(--ts-space-4) var(--ts-space-8);
+}
+
+.template-preview__detail h2 {
+	font-size: var(--ts-heading-xs-font-size);
+}

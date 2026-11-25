@@ -12,8 +12,9 @@ import { useState } from "react";
 import { openUIComponents, reactOnlyComponents } from "../catalog";
 import { siteCopy } from "../copy";
 import { signal } from "../design-assets";
-import { pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
+import { designGuidePath, pageDesigns, productScreens, productScreenTitle, referenceSections } from "../reference";
 import { getPreviewState } from "../state";
+import { templateCopy } from "../template-catalog";
 import { foundationNames, llmsUrl } from "./design-reference";
 import { SitePageCommands } from "./site-page-commands";
 import { useMarkdownHref } from "./use-markdown-href";
@@ -66,6 +67,7 @@ export function SiteShell() {
 				{ id: "get-started", label: locale === "ar" ? "البدء" : "Get started", path: "/get-started" },
 				{ id: "foundations", label: design.foundations, path: "/foundations" },
 				{ id: "components", label: copy.nav.components, path: "/components" },
+				{ id: "templates", label: templateCopy[locale].title, path: "/templates" },
 				{ id: "nodes", label: copy.nav.nodes, path: "/nodes" },
 				{ id: "chat", label: copy.nav.chat, path: "/chat" },
 				{ id: "admin", label: locale === "ar" ? "لوحة الإدارة" : "Admin dashboard", path: "/dashboards/admin" },
@@ -83,12 +85,20 @@ export function SiteShell() {
 		{
 			id: "foundations",
 			label: design.foundations,
-			items: foundationNames.map((name) => ({
-				id: `foundation-${name}`,
-				label: design.foundationsIndex[name].title,
-				keywords: [name],
-				onSelect: () => void navigate({ to: "/foundations/$name", params: { name }, search }),
-			})),
+			items: [
+				{
+					id: "foundation-guide",
+					label: design.foundationsIndex.guide.title,
+					keywords: ["DESIGN.md"],
+					onSelect: () => void navigate({ to: designGuidePath, search }),
+				},
+				...foundationNames.map((name) => ({
+					id: `foundation-${name}`,
+					label: design.foundationsIndex[name].title,
+					keywords: [name],
+					onSelect: () => void navigate({ to: "/foundations/$name", params: { name }, search }),
+				})),
+			],
 		},
 		{
 			id: "reference",
@@ -170,6 +180,9 @@ export function SiteShell() {
 						</Link>
 						<Link to="/components" search={search}>
 							{copy.nav.components}
+						</Link>
+						<Link to="/templates" search={search}>
+							{templateCopy[locale].title}
 						</Link>
 						<Link to="/nodes" search={search}>
 							{copy.nav.nodes}

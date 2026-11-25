@@ -1,0 +1,372 @@
+@layer tensquads {
+	.ts-squadmate[data-animated] {
+		display: inline-block;
+		vertical-align: middle;
+		--ts-squadmate-direction: 1;
+	}
+	.ts-squadmate[data-animated]:dir(rtl) {
+		--ts-squadmate-direction: -1;
+	}
+	.ts-squadmate[data-animated] > svg {
+		display: block;
+	}
+	.ts-squadmate[data-animated]:not([data-bust]) > svg {
+		overflow: visible;
+	}
+	.ts-squadmate[data-animated] .sm-all,
+	.ts-squadmate[data-animated] .sm-torso,
+	.ts-squadmate[data-animated] .sm-foot-l,
+	.ts-squadmate[data-animated] .sm-foot-r,
+	.ts-squadmate[data-animated] .sm-arm-l,
+	.ts-squadmate[data-animated] .sm-arm-r,
+	.ts-squadmate[data-animated] .sm-face {
+		transform-origin: 0 0;
+	}
+	.ts-squadmate[data-animated] .sm-badge,
+	.ts-squadmate[data-animated] .sm-shadow {
+		transform-box: fill-box;
+		transform-origin: center;
+	}
+	.ts-squadmate[data-animated] .sm-blink {
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: ts-sm-blink 4.8s infinite;
+	}
+	@keyframes ts-sm-blink {
+		0%, 92%, 100% { transform: scaleY(1); }
+		95% { transform: scaleY(.1); }
+	}
+
+	/* shared */
+	@keyframes ts-sm-breathe {
+		50% { transform: scale(1.025, .975); }
+	}
+	@keyframes ts-sm-look {
+		0%, 30% { transform: none; }
+		40%, 60% { transform: translateX(calc(-7px * var(--ts-squadmate-direction))); }
+		70%, 85% { transform: translateX(calc(6px * var(--ts-squadmate-direction))); }
+		100% { transform: none; }
+	}
+	@keyframes ts-sm-wave {
+		0%, 48%, 100% { transform: none; }
+		54%, 66%, 78% { transform: rotate(-34deg); }
+		60%, 72% { transform: rotate(-14deg); }
+	}
+	@keyframes ts-sm-tap {
+		0%, 40%, 100% { transform: none; }
+		20% { transform: rotate(-16deg); }
+	}
+	@keyframes ts-sm-sway {
+		50% { transform: rotate(calc(3deg * var(--ts-squadmate-direction))); }
+		0%, 100% { transform: rotate(calc(-3deg * var(--ts-squadmate-direction))); }
+	}
+	@keyframes ts-sm-shadow-pulse {
+		50% { transform: scaleX(.8); opacity: .55; }
+	}
+	/* planning */
+	@keyframes ts-sm-think {
+		0%, 100% { transform: none; }
+		50% { transform: translateY(-8px) rotate(-7deg); }
+	}
+	@keyframes ts-sm-chin {
+		0%, 100% { transform: none; }
+		50% { transform: rotate(14deg); }
+	}
+	@keyframes ts-sm-dot {
+		0%, 10% { opacity: 0; transform: translateY(6px) scale(.4); }
+		30% { opacity: 1; transform: translateY(-1px) scale(1.15); }
+		40%, 80% { opacity: 1; transform: none; }
+		100% { opacity: 0; transform: translateY(-3px); }
+	}
+	/* running */
+	@keyframes ts-sm-bob {
+		0%, 100% { transform: none; }
+		50% { transform: translateY(-12px) scale(.98, 1.02); }
+	}
+	@keyframes ts-sm-step {
+		0%, 50%, 100% { transform: none; }
+		25% { transform: translateY(-24px) rotate(-8deg); }
+	}
+	@keyframes ts-sm-swing {
+		0%, 100% { transform: rotate(-16deg); }
+		50% { transform: rotate(16deg); }
+	}
+	/* checking */
+	@keyframes ts-sm-scan {
+		0%, 100% { transform: translateX(calc(-10px * var(--ts-squadmate-direction))); }
+		50% { transform: translateX(calc(10px * var(--ts-squadmate-direction))); }
+	}
+	@keyframes ts-sm-lean {
+		0%, 100% { transform: rotate(calc(3deg * var(--ts-squadmate-direction))); }
+		50% { transform: rotate(calc(5deg * var(--ts-squadmate-direction))) translateY(2px); }
+	}
+	@keyframes ts-sm-hold {
+		0%, 100% { transform: rotate(-18deg); }
+		50% { transform: rotate(-24deg); }
+	}
+	/* done */
+	@keyframes ts-sm-jump {
+		0% { transform: none; }
+		14% { transform: scale(1.08, .9); }
+		36% { transform: translateY(-70px) scale(.94, 1.08); }
+		52% { transform: translateY(-74px) scale(1); }
+		68% { transform: scale(1.1, .88); }
+		80% { transform: scale(.97, 1.03); }
+		100% { transform: none; }
+	}
+	@keyframes ts-sm-cheer-l {
+		0%, 14%, 100% { transform: none; }
+		36%, 60% { transform: rotate(60deg); }
+	}
+	@keyframes ts-sm-cheer-r {
+		0%, 14%, 100% { transform: none; }
+		36%, 60% { transform: rotate(-72deg); }
+	}
+	@keyframes ts-sm-pop {
+		0%, 40% { transform: scale(0) rotate(-90deg); }
+		62% { transform: scale(1.3) rotate(8deg); }
+		78% { transform: scale(.92); }
+		100% { transform: scale(1); }
+	}
+	@keyframes ts-sm-shadow-jump {
+		36%, 52% { transform: scaleX(.55); opacity: .35; }
+		68% { transform: scaleX(1.1); }
+	}
+	/* sent back */
+	@keyframes ts-sm-droop {
+		0% { transform: none; }
+		30% { transform: translateY(-6px); }
+		100% { transform: translateY(10px) scale(1.04, .94); }
+	}
+	@keyframes ts-sm-hang {
+		to { transform: translateY(10px) rotate(6deg); }
+	}
+	@keyframes ts-sm-slump-l {
+		to { transform: rotate(-12deg); }
+	}
+	@keyframes ts-sm-slump-r {
+		to { transform: rotate(12deg); }
+	}
+	@keyframes ts-sm-sigh {
+		0%, 70%, 100% { transform: translateY(10px) scale(1.04, .94); }
+		82% { transform: translateY(4px) scale(1.01, .99); }
+	}
+	/* blocked */
+	@keyframes ts-sm-impatient {
+		0%, 100% { transform: none; }
+		25% { transform: rotate(-14deg); }
+		50% { transform: none; }
+		75% { transform: rotate(-14deg); }
+	}
+	@keyframes ts-sm-badge-beat {
+		0%, 60%, 100% { transform: scale(1); }
+		70% { transform: scale(1.25); }
+		80% { transform: scale(.95); }
+		90% { transform: scale(1.12); }
+	}
+	/* escalated */
+	@keyframes ts-sm-alarm {
+		0%, 100% { transform: none; }
+		10% {
+			transform: translateX(calc(-9px * var(--ts-squadmate-direction))) rotate(calc(-3deg * var(--ts-squadmate-direction)));
+		}
+		20% {
+			transform: translateX(calc(9px * var(--ts-squadmate-direction))) rotate(calc(3deg * var(--ts-squadmate-direction)));
+		}
+		30% { transform: translateX(calc(-7px * var(--ts-squadmate-direction))); }
+		40% { transform: translateX(calc(5px * var(--ts-squadmate-direction))); }
+		50% { transform: none; }
+		65% { transform: translateY(-22px); }
+		80% { transform: none; }
+	}
+	@keyframes ts-sm-flail-l {
+		0%, 100% { transform: rotate(10deg); }
+		50% { transform: rotate(50deg); }
+	}
+	@keyframes ts-sm-flail-r {
+		0%, 100% { transform: rotate(-10deg); }
+		50% { transform: rotate(-50deg); }
+	}
+	@keyframes ts-sm-ring {
+		0% { opacity: .7; transform: scale(1); }
+		100% { opacity: 0; transform: scale(2.2); }
+	}
+	/* dropped */
+	@keyframes ts-sm-snore {
+		50% { transform: scale(1.035, .965); }
+	}
+	@keyframes ts-sm-nod {
+		0%, 55% { transform: none; }
+		85% { transform: translateY(12px) rotate(5deg); }
+		90% { transform: translateY(-3px); }
+		100% { transform: none; }
+	}
+	@keyframes ts-sm-z {
+		0% { opacity: 0; transform: translate(0, 4px) scale(.6); }
+		25% { opacity: 1; }
+		100% { opacity: 0; transform: translate(calc(5px * var(--ts-squadmate-direction)), -10px) scale(1.2); }
+	}
+
+	.ts-squadmate[data-animated][data-state="idle"] .sm-all {
+		animation: ts-sm-breathe 3s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="idle"] .sm-arm-r {
+		animation: ts-sm-wave 5s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="idle"] .sm-face {
+		animation: ts-sm-look 7s var(--ts-ease-move) infinite;
+	}
+
+	.ts-squadmate[data-animated][data-state="waiting"] .sm-all {
+		animation: ts-sm-sway 3.2s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="waiting"] .sm-foot-r {
+		animation: ts-sm-tap 1.1s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="waiting"] .sm-face {
+		animation: ts-sm-look 6s var(--ts-ease-move) infinite;
+	}
+
+	.ts-squadmate[data-animated][data-state="planning"] .sm-all {
+		animation: ts-sm-breathe 2.4s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="planning"] .sm-face {
+		animation: ts-sm-think 2.4s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="planning"] .sm-arm-l {
+		animation: ts-sm-chin 2.4s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="planning"] .sm-badge circle {
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: ts-sm-dot 1.8s var(--ts-ease-move) infinite both;
+	}
+	.ts-squadmate[data-animated][data-state="planning"] .sm-badge circle:nth-child(2) {
+		animation-delay: .3s;
+	}
+
+	.ts-squadmate[data-animated][data-state="running"] .sm-all {
+		animation: ts-sm-bob .5s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="running"] .sm-foot-l {
+		animation: ts-sm-step 1s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="running"] .sm-foot-r {
+		animation: ts-sm-step 1s var(--ts-ease-move) -.5s infinite;
+	}
+	.ts-squadmate[data-animated][data-state="running"] .sm-arm-l {
+		animation: ts-sm-swing 1s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="running"] .sm-arm-r {
+		animation: ts-sm-swing 1s var(--ts-ease-move) -.5s infinite;
+	}
+	.ts-squadmate[data-animated][data-state="running"] .sm-shadow {
+		animation: ts-sm-shadow-pulse .5s var(--ts-ease-move) infinite;
+	}
+
+	.ts-squadmate[data-animated][data-state="checking"] .sm-all {
+		animation: ts-sm-lean 1.6s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="checking"] .sm-face {
+		animation: ts-sm-scan 1.6s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="checking"] .sm-arm-r {
+		animation: ts-sm-hold 1.6s var(--ts-ease-move) infinite;
+	}
+
+	.ts-squadmate[data-animated][data-state="done"] .sm-all {
+		animation: ts-sm-jump 1.1s var(--ts-ease-move) both;
+	}
+	.ts-squadmate[data-animated][data-state="done"] .sm-arm-l {
+		animation: ts-sm-cheer-l 1.1s var(--ts-ease-move) both;
+	}
+	.ts-squadmate[data-animated][data-state="done"] .sm-arm-r {
+		animation: ts-sm-cheer-r 1.1s var(--ts-ease-move) both;
+	}
+	.ts-squadmate[data-animated][data-state="done"] .sm-shadow {
+		animation: ts-sm-shadow-jump 1.1s var(--ts-ease-move) both;
+	}
+	.ts-squadmate[data-animated][data-state="done"] .sm-badge {
+		animation: ts-sm-pop .9s var(--ts-ease-enter) both;
+	}
+
+	.ts-squadmate[data-animated][data-state="sentback"] .sm-all {
+		animation: ts-sm-droop .6s var(--ts-ease-exit) both, ts-sm-sigh 4s var(--ts-ease-move) .6s infinite;
+	}
+	.ts-squadmate[data-animated][data-state="sentback"] .sm-face {
+		animation: ts-sm-hang .6s var(--ts-ease-exit) both;
+	}
+	.ts-squadmate[data-animated][data-state="sentback"] .sm-arm-l {
+		animation: ts-sm-slump-l .6s var(--ts-ease-exit) both;
+	}
+	.ts-squadmate[data-animated][data-state="sentback"] .sm-arm-r {
+		animation: ts-sm-slump-r .6s var(--ts-ease-exit) both;
+	}
+
+	.ts-squadmate[data-animated][data-state="blocked"] .sm-foot-r {
+		animation: ts-sm-impatient .9s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="blocked"] .sm-all {
+		animation: ts-sm-breathe 2.6s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="blocked"] .sm-badge {
+		animation: ts-sm-badge-beat 2s var(--ts-ease-move) infinite;
+	}
+
+	.ts-squadmate[data-animated][data-state="escalated"] .sm-all {
+		animation: ts-sm-alarm 1.4s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="escalated"] .sm-arm-l {
+		animation: ts-sm-flail-l .35s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="escalated"] .sm-arm-r {
+		animation: ts-sm-flail-r .35s var(--ts-ease-move) -.17s infinite;
+	}
+	.ts-squadmate[data-animated][data-state="escalated"] .sm-ring {
+		fill: none;
+		stroke: var(--ts-danger-solid);
+		stroke-width: 2;
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: ts-sm-ring 1.4s var(--ts-ease-exit) infinite both;
+	}
+
+	.ts-squadmate[data-animated][data-state="dropped"] .sm-all {
+		animation: ts-sm-snore 4s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="dropped"] .sm-face {
+		animation: ts-sm-nod 4s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="dropped"] .sm-badge text {
+		transform-box: fill-box;
+		animation: ts-sm-z 3s var(--ts-ease-move) infinite both;
+	}
+	.ts-squadmate[data-animated][data-state="dropped"] .sm-badge text:nth-child(2) {
+		animation-delay: 1.2s;
+	}
+
+	/* A raised arm (Petra, Machu) would sweep over the face; it waves from the shoulder instead. */
+	@keyframes ts-sm-raised-wave {
+		0%, 100% { transform: rotate(-8deg); }
+		50% { transform: rotate(6deg); }
+	}
+	.ts-squadmate[data-animated][data-state] .sm-raised {
+		animation: none;
+	}
+	.ts-squadmate[data-animated]:is([data-state="idle"], [data-state="running"], [data-state="escalated"]) .sm-raised {
+		animation: ts-sm-raised-wave .5s var(--ts-ease-move) infinite;
+	}
+	.ts-squadmate[data-animated][data-state="done"] .sm-raised {
+		animation: ts-sm-raised-wave .5s var(--ts-ease-move) 2;
+	}
+	.ts-squadmate[data-animated][data-small]
+		:is(.sm-all, .sm-torso, .sm-foot-l, .sm-foot-r, .sm-arm-l, .sm-arm-r, .sm-shadow) {
+		animation: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ts-squadmate[data-animated] * {
+			animation: none !important;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { TensquadsRenderer } from "@tensquads/ui/openui";
-import { Button, squadmateCharacterName } from "@tensquads/ui/react";
+import { Button, Squadmate, squadmateCharacterName } from "@tensquads/ui/react";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { Arrow, DesignReferenceLinks, FoundationLinks, llmsUrl } from "../components/design-reference";
 import { StreamDemo } from "../components/stream-demo";
@@ -39,13 +39,9 @@ function HomePage() {
 						<img className="brand-specimen__mark" src={wordmark.light} alt="" />
 						<img className="brand-specimen__mark theme-mark-dark" src={wordmark.dark} alt="" />
 						<div className="brand-specimen__squad">
-							{(["kyoto", "petra", "delphi"] as const).map((name) => (
-								<img
-									key={name}
-									src={designAsset(`mascots/svg/${name}.svg`)}
-									alt={squadmateCharacterName(name, locale)}
-								/>
-							))}
+							<img src={designAsset("mascots/svg/kyoto.svg")} alt={squadmateCharacterName("kyoto", locale)} />
+							<Squadmate agent="petra" state="idle" size={128} locale={locale} animated />
+							<img src={designAsset("mascots/svg/delphi.svg")} alt={squadmateCharacterName("delphi", locale)} />
 						</div>
 					</div>
 					<figcaption>

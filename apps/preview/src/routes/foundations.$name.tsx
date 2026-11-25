@@ -4,11 +4,12 @@ import { AGENT_ROLE_TO_SLUG } from "@tensquads/ui/schemas";
 import { type CSSProperties, useState } from "react";
 import mascots from "../../../../design/mascots/mascots.json";
 import tokens from "../../../../design/tokens.json";
-import { ReferenceIntro, ReferenceLayout } from "../components/design-reference";
+import { FoundationPageLinks, ReferenceIntro, ReferenceLayout } from "../components/design-reference";
 import { SquadmateStates } from "../components/squadmate-states";
 import { siteCopy } from "../copy";
 import { designAsset } from "../design-assets";
 import { colourGroups, type DesignCopy, logoGroups, primitives, type Token, variable } from "../foundations";
+import { mascotMotionCopy, mascotMotionPath } from "../mascot-motion-copy";
 import { type FoundationName, foundationNames } from "../reference";
 import { getPreviewState, type Locale } from "../state";
 
@@ -30,18 +31,15 @@ function FoundationPage() {
 	return (
 		<main id="main" className="design-wrap">
 			<ReferenceIntro title={title} lead={lead} />
+			{name === "mascots" && (
+				<Button variant="soft" render={<Link to={mascotMotionPath} search={search} />}>
+					{mascotMotionCopy[locale].title}
+				</Button>
+			)}
 			<ReferenceLayout
 				label={name === "colour" ? copy.onPage : copy.foundations}
 				links={
-					name === "colour" ? (
-						<ColourLinks copy={copy} />
-					) : (
-						foundationNames.map((id) => (
-							<Link key={id} to="/foundations/$name" params={{ name: id }} search={search}>
-								{copy.foundationsIndex[id].title}
-							</Link>
-						))
-					)
+					name === "colour" ? <ColourLinks copy={copy} /> : <FoundationPageLinks locale={locale} search={search} />
 				}
 			>
 				<FoundationContent name={name} locale={locale} />

@@ -30,6 +30,8 @@
 			"apps/preview/src/**/*.ts",
 			"apps/preview/src/**/*.tsx",
 			"!apps/preview/src/routeTree.gen.ts",
+			"templates/**/*.tsx",
+			"templates/**/*.css",
 			"e2e/**/*.ts",
 			"playwright.config.ts",
 			"scripts/**/*.mjs",

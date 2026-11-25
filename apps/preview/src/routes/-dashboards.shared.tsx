@@ -6,6 +6,10 @@ import enData from "../fixtures/dashboard-data.fixture.en.json";
 
 export { demoCopy } from "../dashboard-copy";
 
+export function dashboardNumberLocale(locale: "en" | "ar") {
+	return locale === "ar" ? "ar-EG-u-nu-arab" : "en-US";
+}
+
 export function DashboardFrame({ children }: { children: ReactNode }) {
 	return <div className="dashboard-window">{children}</div>;
 }
