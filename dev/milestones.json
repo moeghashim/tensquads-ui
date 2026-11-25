@@ -108,7 +108,8 @@
       "tasks": [
         "001-design-comps",
         "002-build-site",
-        "003-agent-docs"
+        "003-agent-docs",
+        "004-mascot-motion"
       ]
     }
   ]
