@@ -93,7 +93,9 @@ code{font-family:var(--ts-font-mono);font-size:12px;background:var(--ts-surface-
 .steps span{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--ts-surface-secondary);color:var(--ts-text-secondary);transition:background var(--ts-duration-enter) var(--ts-ease-enter),color var(--ts-duration-enter)}
 .steps span.on{background:var(--ts-text-emphasis);color:var(--ts-surface)}
 .swap{position:relative;width:160px;height:160px}
-.swap svg{position:absolute;inset:0;transition:opacity var(--ts-duration-enter) var(--ts-ease-enter)}
+.swap svg{position:absolute;inset:0;transition:opacity var(--ts-duration-exit) var(--ts-ease-exit)}
+.swap svg[data-visible]{transition:opacity var(--ts-duration-enter) var(--ts-ease-enter)}
+.swap svg:not([data-playing]) *{animation-play-state:paused!important}
 .dd{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .dd div{background:var(--ts-surface);border:1px solid var(--ts-border-subtle);border-radius:16px;padding:18px}
 .dd ul{margin:8px 0 0;padding-inline-start:18px;color:var(--ts-text-secondary)}
@@ -204,11 +206,13 @@ code{font-family:var(--ts-font-mono);font-size:12px;background:var(--ts-surface-
 /* A raised arm (Petra, Machu) would sweep over the face; it waves from the shoulder instead. */
 @keyframes mm-raised-wave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(6deg)}}
 .mm .mm-raised{animation:none!important}
-.mm:is([data-state="idle"],[data-state="running"],[data-state="done"],[data-state="escalated"]) .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) infinite!important}
+.mm:is([data-state="idle"],[data-state="running"],[data-state="escalated"]) .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) infinite!important}
+.mm[data-state="done"] .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) 2!important}
 /* Below 32 px: face and badge only. */
 .mm[width="24"] :is(.mm-all,.mm-torso,[class^="mm-foot"],[class^="mm-arm"]),.mm[width="16"] :is(.mm-all,.mm-torso,[class^="mm-foot"],[class^="mm-arm"]){animation:none!important}
-@media (prefers-reduced-motion:reduce){.mm *{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.mm *{animation:none!important}.swap svg,.steps span{transition:none!important}}
 .reduce .mm *{animation:none!important}
+.reduce .swap svg,.reduce .steps span{transition:none!important}
 .paused .mm *{animation-play-state:paused!important}
 `;
 
@@ -272,21 +276,38 @@ ${STATES.map((s) => `<tr><td><b>${s.id}</b></td><td>${s.kind}</td><td>${s.motion
 </ul></div></div>
 </main>
 <script>
-const root=document.documentElement,replay=document.getElementById("replay"),reduce=document.getElementById("reduce"),pause=document.getElementById("pause");
-replay.onclick=()=>document.querySelectorAll('.mm[data-state="done"],.mm[data-state="sentback"],.mm[data-state="escalated"]').forEach(s=>{const p=s.parentNode,n=s.nextSibling;p.removeChild(s);p.insertBefore(s,n)});
-const toggle=(b,c)=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);document.body.classList.toggle(c,on)};
+const replay=document.getElementById("replay"),reduce=document.getElementById("reduce"),pause=document.getElementById("pause");
+replay.onclick=()=>document.querySelectorAll('.mm:not([data-flow]):is([data-state="done"],[data-state="sentback"],[data-state="escalated"])').forEach(s=>{const p=s.parentNode,n=s.nextSibling;p.removeChild(s);p.insertBefore(s,n)});
+const flow=${JSON.stringify(flowStates)},poses=[...document.querySelectorAll("[data-flow]")],media=matchMedia("(prefers-reduced-motion: reduce)");
+let i=0,timer;
+const reduced=()=>media.matches||document.body.classList.contains("reduce");
+const show=()=>{
+ const s=flow[i%flow.length];
+ poses.forEach(e=>{
+  const on=e.dataset.flow===s;
+  e.removeAttribute("data-playing");
+  e.toggleAttribute("data-visible",on);
+  if(on){const p=e.parentNode,n=e.nextSibling;p.removeChild(e);p.insertBefore(e,n);e.getBoundingClientRect()}
+  e.style.opacity=on?1:0;
+  if(on&&reduced())e.setAttribute("data-playing","");
+ });
+ document.querySelectorAll(".steps span").forEach(e=>e.classList.toggle("on",+e.dataset.i===i%flow.length));
+ i++;
+};
+poses.forEach(e=>e.addEventListener("transitionend",event=>{
+ if(event.target===e&&event.propertyName==="opacity"&&e.hasAttribute("data-visible"))e.setAttribute("data-playing","");
+}));
+const syncPlayback=()=>{
+ clearInterval(timer);
+ const paused=document.body.classList.contains("paused");
+ document.getAnimations().filter(a=>a instanceof CSSTransition).forEach(a=>{if(paused)a.pause();else a.play()});
+ if(reduced())poses.forEach(e=>{if(e.hasAttribute("data-visible"))e.setAttribute("data-playing","")});
+ if(!paused&&!reduced())timer=setInterval(show,2200);
+};
+const toggle=(b,c)=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);document.body.classList.toggle(c,on);syncPlayback()};
 reduce.onclick=()=>toggle(reduce,"reduce");pause.onclick=()=>toggle(pause,"paused");
-const flow=${JSON.stringify(flowStates)};let i=0;const show=()=>{const s=flow[i%flow.length];document.querySelectorAll("[data-flow]").forEach(e=>{const on=e.dataset.flow===s;e.style.transition=on?"opacity 240ms cubic-bezier(.19,1,.22,1)":"opacity 120ms cubic-bezier(.8,0,.4,1)";e.style.opacity=on?1:0;if(on){const p=e.parentNode,n=e.nextSibling;p.removeChild(e);p.insertBefore(e,n)}});document.querySelectorAll(".steps span").forEach(e=>e.classList.toggle("on",+e.dataset.i===i%flow.length));i++};show();setInterval(show,2200);
+media.addEventListener("change",syncPlayback);
+show();syncPlayback();
 </script></body></html>`;
 
 writeFileSync(new URL("mascot-motion.html", import.meta.url), page);
-
-// Compact preview of the ten states, for showing in chat. Not part of the comp.
-if (process.argv[2]) {
-	const lite = css.replace(/@font-face\{[^}]+\}/g, "").replace(/body\{background:[^;]+;/, "body{");
-	const grid = `<!doctype html><html><head><meta charset="utf-8"><style>${lite}
-body{font-family:var(--font-sans,Inter,system-ui)}.grid{grid-template-columns:repeat(5,1fr);gap:8px}.card{padding:8px 8px 10px;gap:4px;border-radius:12px}.stage{height:104px}.card p{font-size:11px}.card .k{font-size:10px}.card h3{font-size:13px}</style></head><body>
-<div class="grid">${STATES.map((s) => card(s).replace('width="128" height="128"', 'width="92" height="92"')).join("")}</div>
-<script>setInterval(()=>document.querySelectorAll('.mm[data-state="done"],.mm[data-state="sentback"],.mm[data-state="escalated"]').forEach(s=>{const p=s.parentNode,n=s.nextSibling;p.removeChild(s);p.insertBefore(s,n)}),3000)</script></body></html>`;
-	writeFileSync(process.argv[2], grid);
-}
