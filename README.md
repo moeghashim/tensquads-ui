@@ -143,7 +143,7 @@ export function AgentStatus() {
 
 The same `/squadmates` entry exports the roster and SVG drawing helpers. Shared schemas also map between role IDs such as `master` and character slugs such as `petra`.
 
-Pass `animated` to show state motion. In lists, use it on the active or focused squadmate. All motion stops when the system preference is set to reduce motion.
+See the [Squadmate contract](packages/ui/src/react/Squadmate/Squadmate.md) for `animated` and motion accessibility. The bilingual [Mascot motion guide](https://tensquads-ui-preview.mohanadgh.workers.dev/foundations/mascots/motion) shows the states and timings.
 
 ## OpenUI client
 

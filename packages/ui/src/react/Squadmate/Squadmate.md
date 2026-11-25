@@ -2,9 +2,9 @@
 
 Import `Squadmate` and the `SquadmateProps` type from `@tensquads/ui/squadmates` or `@tensquads/ui/react`. The component renders an accessible agent image with optional state motion. It accepts an `agent` slug, an `AgentState`, a square pixel `size` (default `64`), and a `locale` for the accessible name (default `en`). The image is not interactive and is not in the tab order.
 
-Set `animated` to render inline SVG and play the motion for the current state. It defaults to `false` and renders a still image. Import `@tensquads/ui/styles.css` for the motion styles. Changing `state` starts the next performance. Done plays once on entry. Sent back droops once, then loops a sigh.
+Set `animated` to render inline SVG and play the motion for the current state. It defaults to `false` and renders a still image. Import `@tensquads/ui/styles.css` for the motion styles. Changing `state` restarts the motion immediately. The host owns crossfades between states and pausing motion off-screen or in hidden tabs. Done plays once on entry. Sent back droops once, then loops a sigh.
 
-In a list, animate only the active or focused squadmate. At 24 px and below, motion is limited to the face and badge. With `prefers-reduced-motion: reduce`, the drawing and badge show the state and all motion stops. See the [Mascot motion guide](/foundations/mascots/motion) for examples and timings.
+In a list, animate only the active or focused squadmate. At 24 px and below, motion is limited to the face and badge. With `prefers-reduced-motion: reduce`, the drawing and badge show the state and all motion stops. See the [Mascot motion guide](https://tensquads-ui-preview.mohanadgh.workers.dev/foundations/mascots/motion) for examples and timings.
 
 The component takes a character slug such as `petra`. The roster and drawing APIs in `@tensquads/ui/squadmates` use role IDs such as `master`. Use `AGENT_ROLE_TO_SLUG` and `AGENT_SLUG_TO_ROLE` from `@tensquads/ui/schemas` to convert between them. That entry also exports `AgentRoleSchema`, `AgentSlugSchema`, and `AgentStateSchema` with their inferred types.
 
