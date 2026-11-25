@@ -1,6 +1,6 @@
 ---
 name: tensquads-ui
-description: Build frontend interfaces and OpenUI streams with @tensquads/ui. Covers install, styles, locale and direction, choosing and composing library components, Squadmate, and the OpenUI client and server APIs. Use with the installed ui-sdk skill for UI behavior and components.
+description: Build frontend interfaces and OpenUI streams with @tensquads/ui that look like tensquads. Read DESIGN.md first for layouts and visual rules. Covers install, styles, locale and direction, choosing and composing library components, Squadmate, and the OpenUI client and server APIs. Use with the installed ui-sdk skill for UI behavior and components.
 ---
 
 # Build with tensquads-ui
@@ -8,6 +8,8 @@ description: Build frontend interfaces and OpenUI streams with @tensquads/ui. Co
 Use `@tensquads/ui` for shared tensquads and بنّاء interfaces. It provides React components styled with Agent-UI tokens, Squadmate artwork, shared schemas, and an OpenUI Lang renderer and server bridge.
 
 ## Read first
+
+**Before you build a screen, read [DESIGN.md](https://github.com/moeghashim/tensquads-ui/blob/main/DESIGN.md)** (also at `/foundations/guide` on the [design system site](https://tensquads-ui-preview.mohanadgh.workers.dev/foundations/guide)). The components alone do not make a tensquads screen: the layout, spacing, type and colour rules do. Follow its "Start here" steps: pick the closest page layout and its reference screen, build only from library components and `--ts-*` tokens, check both locales and themes, and compare your screen with the reference before you finish. If your screen has more colour, shadow or borders than the reference, remove them.
 
 Read the installed [`ui-sdk` skill](../ui-sdk/SKILL.md). It explains UI SDK behaviors, composition, accessibility, testing, and how to build a missing behavior with `@ui-sdk/core`. This skill adds the tensquads library API and conventions; it does not replace the UI SDK guidance.
 
@@ -72,6 +74,12 @@ export function ProfileForm() {
 import { Squadmate } from "@tensquads/ui/squadmates";
 
 <Squadmate agent="petra" state="planning" locale="ar" size={64} />;
+```
+
+Add `animated` to let one squadmate act out its state (D33). Animate only the squadmate that is working or focused; leave squadmates in lists still. Motion stops under reduced motion. See `/foundations/mascots/motion`.
+
+```tsx
+<Squadmate agent="petra" state="running" size={96} animated />;
 ```
 
 Role IDs such as `master` differ from character slugs such as `petra`. Convert with `AGENT_ROLE_TO_SLUG` or `AGENT_SLUG_TO_ROLE` from `@tensquads/ui/schemas`.
