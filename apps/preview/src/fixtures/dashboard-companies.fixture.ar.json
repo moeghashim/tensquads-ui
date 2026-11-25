@@ -8,9 +8,9 @@
     "plan": "Growth",
     "subscription": "Active",
     "started": "١٨ أكتوبر ٢٠٢٥",
-    "value": "$3,420",
-    "squads": "8",
-    "online": "7"
+    "value": "‏٣٬٤٢٠ US$",
+    "squads": 8,
+    "online": 7
   },
   {
     "id": "cedar",
@@ -21,9 +21,9 @@
     "plan": "Starter",
     "subscription": "Trial",
     "started": "٢ نوفمبر ٢٠٢٥",
-    "value": "$1,860",
-    "squads": "7",
-    "online": "6"
+    "value": "‏١٬٨٦٠ US$",
+    "squads": 7,
+    "online": 6
   },
   {
     "id": "golden-hour",
@@ -34,9 +34,9 @@
     "plan": "Scale",
     "subscription": "Active",
     "started": "١١ أغسطس ٢٠٢٥",
-    "value": "$4,105",
-    "squads": "12",
-    "online": "11"
+    "value": "‏٤٬١٠٥ US$",
+    "squads": 12,
+    "online": 11
   },
   {
     "id": "field-notes",
@@ -47,9 +47,9 @@
     "plan": "Growth",
     "subscription": "Paused",
     "started": "٢١ يونيو ٢٠٢٥",
-    "value": "$2,018",
-    "squads": "9",
-    "online": "2"
+    "value": "‏٢٬٠١٨ US$",
+    "squads": 9,
+    "online": 2
   },
   {
     "id": "morrow",
@@ -60,9 +60,9 @@
     "plan": "Growth",
     "subscription": "Active",
     "started": "٣ أكتوبر ٢٠٢٥",
-    "value": "$1,208",
-    "squads": "7",
-    "online": "6"
+    "value": "‏١٬٢٠٨ US$",
+    "squads": 7,
+    "online": 6
   },
   {
     "id": "bluebird",
@@ -73,9 +73,9 @@
     "plan": "Starter",
     "subscription": "Active",
     "started": "١٦ سبتمبر ٢٠٢٥",
-    "value": "$964",
-    "squads": "4",
-    "online": "4"
+    "value": "‏٩٦٤ US$",
+    "squads": 4,
+    "online": 4
   },
   {
     "id": "good-form",
@@ -86,9 +86,9 @@
     "plan": "Scale",
     "subscription": "Trial",
     "started": "٥ نوفمبر ٢٠٢٥",
-    "value": "$612",
-    "squads": "10",
-    "online": "9"
+    "value": "‏٦١٢ US$",
+    "squads": 10,
+    "online": 9
   },
   {
     "id": "wildfern",
@@ -99,9 +99,9 @@
     "plan": "Starter",
     "subscription": "Active",
     "started": "٨ يوليو ٢٠٢٥",
-    "value": "$271",
-    "squads": "6",
-    "online": "5"
+    "value": "‏٢٧١ US$",
+    "squads": 6,
+    "online": 5
   },
   {
     "id": "orbit",
@@ -112,8 +112,8 @@
     "plan": "Growth",
     "subscription": "Active",
     "started": "١٢ مايو ٢٠٢٥",
-    "value": "$110",
-    "squads": "3",
-    "online": "3"
+    "value": "‏١١٠ US$",
+    "squads": 3,
+    "online": 3
   }
 ]

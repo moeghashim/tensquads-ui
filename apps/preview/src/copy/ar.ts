@@ -5,7 +5,7 @@ const ar = {
 		needsAttention: "تحتاج إلى مراجعة",
 		deployedTo: "منشورة إلى",
 		onLatest: "على أحدث إصدار",
-		onLatestCount: "{latest} من {deployed} ({percent}%)",
+		onLatestCount: "{latest} من {deployed} ({percent})",
 		rollOut: "نشر الإصدار 2.1.1",
 		viewChangelog: "عرض سجل التغييرات",
 		imageName: "الصورة",

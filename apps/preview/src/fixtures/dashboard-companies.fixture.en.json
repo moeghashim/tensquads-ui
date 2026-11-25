@@ -9,8 +9,8 @@
     "subscription": "Active",
     "started": "Oct 18, 2025",
     "value": "$3,420",
-    "squads": "8",
-    "online": "7"
+    "squads": 8,
+    "online": 7
   },
   {
     "id": "cedar",
@@ -22,8 +22,8 @@
     "subscription": "Trial",
     "started": "Nov 02, 2025",
     "value": "$1,860",
-    "squads": "7",
-    "online": "6"
+    "squads": 7,
+    "online": 6
   },
   {
     "id": "golden-hour",
@@ -35,8 +35,8 @@
     "subscription": "Active",
     "started": "Aug 11, 2025",
     "value": "$4,105",
-    "squads": "12",
-    "online": "11"
+    "squads": 12,
+    "online": 11
   },
   {
     "id": "field-notes",
@@ -48,8 +48,8 @@
     "subscription": "Paused",
     "started": "Jun 21, 2025",
     "value": "$2,018",
-    "squads": "9",
-    "online": "2"
+    "squads": 9,
+    "online": 2
   },
   {
     "id": "morrow",
@@ -61,8 +61,8 @@
     "subscription": "Active",
     "started": "Oct 03, 2025",
     "value": "$1,208",
-    "squads": "7",
-    "online": "6"
+    "squads": 7,
+    "online": 6
   },
   {
     "id": "bluebird",
@@ -74,8 +74,8 @@
     "subscription": "Active",
     "started": "Sep 16, 2025",
     "value": "$964",
-    "squads": "4",
-    "online": "4"
+    "squads": 4,
+    "online": 4
   },
   {
     "id": "good-form",
@@ -87,8 +87,8 @@
     "subscription": "Trial",
     "started": "Nov 05, 2025",
     "value": "$612",
-    "squads": "10",
-    "online": "9"
+    "squads": 10,
+    "online": 9
   },
   {
     "id": "wildfern",
@@ -100,8 +100,8 @@
     "subscription": "Active",
     "started": "Jul 08, 2025",
     "value": "$271",
-    "squads": "6",
-    "online": "5"
+    "squads": 6,
+    "online": 5
   },
   {
     "id": "orbit",
@@ -113,7 +113,7 @@
     "subscription": "Active",
     "started": "May 12, 2025",
     "value": "$110",
-    "squads": "3",
-    "online": "3"
+    "squads": 3,
+    "online": 3
   }
 ]

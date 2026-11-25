@@ -140,7 +140,7 @@ function ComponentPage() {
 	const next = index >= 0 ? componentOrder[index + 1] : undefined;
 	const noFixtureReason = markdown?.match(/(?:OpenUI[^.]*does not[^.]*\.|without an OpenUI definition[^.]*\.)/i)?.[0];
 	return (
-		<main id="main" className="component-doc-page">
+		<main id="main" className="design-wrap component-doc-page">
 			<div className="component-doc-page__header">
 				<Link className="back-link" to="/components" search={search as never}>
 					{copy.backToComponents}

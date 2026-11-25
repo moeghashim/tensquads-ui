@@ -18,7 +18,7 @@ import { useState } from "react";
 import { siteCopy } from "../copy";
 import { storeHeader } from "../dashboard-copy";
 import { getPreviewState } from "../state";
-import { DashboardFrame, DemoPill, dashboardData, demoCopy, Icon } from "./-dashboards.shared";
+import { DashboardFrame, DemoPill, dashboardData, dashboardNumberLocale, demoCopy, Icon } from "./-dashboards.shared";
 
 export const Route = createFileRoute("/dashboards/home")({ component: StoreDashboard });
 const approvalFixtures = import.meta.glob<string>("../fixtures/dashboard-approvals.fixture.*.json", {
@@ -40,11 +40,15 @@ function StoreDashboard() {
 	const ar = locale === "ar";
 	const c = demoCopy[locale];
 	const homeCopy = siteCopy[locale].dashboardHome;
+	const numberLocale = dashboardNumberLocale(locale);
+	const number = new Intl.NumberFormat(numberLocale);
+	const percent = new Intl.NumberFormat(numberLocale, { style: "percent", signDisplay: "always" });
+	const pointDelta = number.format(-1);
 	const statDeltas = [
-		{ text: `+${ar ? "١٢" : "12"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
-		{ text: `+${ar ? "٨" : "8"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
-		{ text: `+${ar ? "٤" : "4"}% ${homeCopy.vsLastWeek}`, tone: "positive" },
-		{ text: `${ar ? "-١ نقطة" : "-1 pt"} ${homeCopy.vsLastWeek}`, tone: "negative" },
+		{ text: `${percent.format(0.12)} ${homeCopy.vsLastWeek}`, tone: "positive" },
+		{ text: `${percent.format(0.08)} ${homeCopy.vsLastWeek}`, tone: "positive" },
+		{ text: `${percent.format(0.04)} ${homeCopy.vsLastWeek}`, tone: "positive" },
+		{ text: `${pointDelta} ${ar ? "نقطة" : "pt"} ${homeCopy.vsLastWeek}`, tone: "negative" },
 		// The last two tiles have no prior period; their foot line says what the number covers.
 		null,
 		null,
@@ -106,7 +110,7 @@ function StoreDashboard() {
 		: { refund_limit: "Refund limit", discount_limit: "Discount limit" };
 	const chatSearch = { ...search };
 	return (
-		<main id="main" className="dashboard-page" dir={direction}>
+		<main id="main" className="design-wrap dashboard-page" dir={direction}>
 			<DashboardFrame>
 				<Sidebar label={ar ? "تنقل المتجر" : "Store navigation"} mobileLabel={c.openNavigation}>
 					<SidebarBrand
@@ -153,7 +157,7 @@ function StoreDashboard() {
 								]}
 							/>
 						</Card>
-						<Card title={c.needsApproval} count={pending.length}>
+						<Card title={c.needsApproval} count={number.format(pending.length)}>
 							<div className="approval-list">
 								{pending.map((request) => (
 									<ApprovalCard

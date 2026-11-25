@@ -537,7 +537,7 @@ function Builder({
 				});
 			}}
 		>
-			<header className="builder-header">
+			<header className="design-wrap builder-header">
 				<div className="builder-crumb">
 					<Link to="/workflows" search={(prev) => prev}>
 						{copy.workflows}

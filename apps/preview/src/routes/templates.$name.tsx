@@ -96,7 +96,7 @@ function TemplatePage() {
 	const clipboard = siteCopy[locale].getStartedPage;
 
 	return (
-		<div className="template-preview">
+		<div className="design-wrap template-preview">
 			<div className="template-preview__toolbar">
 				<nav aria-label={copy.title}>
 					<Link to="/templates" search={search}>
