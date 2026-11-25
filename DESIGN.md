@@ -132,7 +132,7 @@ Template: (task 006)
 | Region | Component | Spacing after it |
 |---|---|---|
 | Title row | `PageHeader` with `title`, `subtitle`, and badges in `meta` (for example `Demo data`, `4 of 5 squads online`) | `--ts-space-6` |
-| Headline numbers | `StatTile` in a `div.ts-stat-grid`. 6 columns at full width, 3 below 73.75rem, 2 below 47.5rem, 1 below 21.1875rem (`stat-tile.css`). | `--ts-space-4` |
+| Headline numbers | `StatTile` in a `div.ts-stat-grid`. The grid fits up to six columns and uses fewer when the viewport or container is narrow, or there are fewer tiles. See `packages/ui/src/react/StatTile/StatTile.md` for the responsive contract. | `--ts-space-4` |
 | Trend and work queue | Two `Card`s in a 3:2 grid (`minmax(0, 3fr) minmax(0, 2fr)`, gap `--ts-space-4`). Left: `BarChart`. Right: `ApprovalCard` list or `Bars`. | `--ts-space-4` |
 | Records | One full-width `Card` holding a `DataTable`, or an `EmptyState` when there are no rows | none |
 
