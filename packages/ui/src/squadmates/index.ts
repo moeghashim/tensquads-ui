@@ -6,6 +6,12 @@ export type Squadmate = SquadmateRecord;
 export const Squadmate = SquadmateImage;
 
 export type { SquadmateDrawState } from "./draw.js";
-export { SQUADMATE_CSS, squadmateMarkup, UnknownSquadmateError, UnknownSquadmateStateError } from "./draw.js";
+export {
+	SQUADMATE_CSS,
+	SQUADMATE_PARTS,
+	squadmateMarkup,
+	UnknownSquadmateError,
+	UnknownSquadmateStateError,
+} from "./draw.js";
 export type { AgentLoopState, SquadmateId, SquadmateProp } from "./roster.js";
 export { AGENT_LOOP_STATES, characterName, SQUADMATES, shownRoleTag } from "./roster.js";

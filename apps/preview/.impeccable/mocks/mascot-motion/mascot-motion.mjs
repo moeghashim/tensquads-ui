@@ -6,27 +6,13 @@ const tokens = readFileSync(`${R}/packages/ui/src/tokens/tokens.css`, "utf8");
 const font = (f) => `${R}/packages/ui/src/fonts/inter/${f}`;
 const b64 = (f) => readFileSync(font(f)).toString("base64");
 
-// The library markup has no part hooks yet. This comp loads the library drawing source,
-// wraps each part in a pivot group (feet, arms, torso, face, badge) and renders it.
-// The same hooks would be added to the design-system source (scripts/squadmates).
+// The synced squadmate drawings carry the motion part hooks (SQUADMATE_PARTS, design-system b972fb4).
+// Node runs the library source directly: copy it to a temp folder with .ts import paths.
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 const SRC = `${R}/packages/ui/src/squadmates`;
 const tmp = mkdtempSync(`${tmpdir()}/mm-`);
-const P = (x, y, cls, inner) => `<g transform="translate(${x} ${y})"><g class="${cls}"><g transform="translate(${-x} ${-y})">${inner}</g></g></g>`;
-globalThis.__mmP = P;
-let mascots = readFileSync(`${SRC}/mascots.ts`, "utf8");
-const ret = "return boots + leftArm + rightArm + body + overlay + leftHand + face + prop + hand(rightX, rightY + 7);";
-if (!mascots.includes(ret)) throw new Error("mascots.ts changed; update the hook patch");
-mascots = mascots.replace(
-	ret,
-	`const P = globalThis.__mmP; const cut = boots.indexOf('<g transform="translate(181 302)');
-		const torso = P(108, 192, raisedLeft ? "mm-arm-l mm-raised" : "mm-arm-l", leftArm) + P(207, 186, "mm-arm-r", rightArm) + body + overlay + P(108, 192, raisedLeft ? "mm-arm-l mm-raised" : "mm-arm-l", leftHand) + P(faceX, faceY, "mm-face", face) + P(207, 186, "mm-arm-r", prop + hand(rightX, rightY + 7));
-		return P(150, 345, "mm-all", P(119, 320, "mm-foot-l", boots.slice(0, cut)) + P(181, 320, "mm-foot-r", boots.slice(cut)) + P(150, 300, "mm-torso", torso));`,
-);
-writeFileSync(`${tmp}/mascots.ts`, mascots);
-writeFileSync(`${tmp}/roster.ts`, readFileSync(`${SRC}/roster.ts`, "utf8"));
-writeFileSync(`${tmp}/draw.ts`, readFileSync(`${SRC}/draw.ts`, "utf8").replaceAll('.js"', '.ts"'));
+for (const f of ["mascots", "roster", "draw"]) writeFileSync(`${tmp}/${f}.ts`, readFileSync(`${SRC}/${f}.ts`, "utf8").replaceAll('.js"', '.ts"'));
 const { squadmateMarkup } = await import(`${tmp}/draw.ts`);
 const { SQUADMATES } = await import(`${tmp}/roster.ts`);
 const ROLE = Object.fromEntries(SQUADMATES.map((m) => [m.name.toLowerCase(), m.id]));
@@ -34,10 +20,9 @@ const ROLE = Object.fromEntries(SQUADMATES.map((m) => [m.name.toLowerCase(), m.i
 let uid = 0;
 function mascot(slug, state, size) {
 	const n = ++uid;
-	const raw = squadmateMarkup(ROLE[slug], state, size).replaceAll(`sm-${slug}-`, `sm-${slug}${n}-`);
-	const lines = raw.split("\n");
-	const badge = lines.slice(2, -1).join("");
-	return [lines[0].replace("<svg ", `<svg class="mm" data-state="${state}" `), lines[1].replace(/<ellipse([^>]*floor\)")/, '<ellipse class="mm-shadow"$1'), badge ? `<g class="mm-badge">${badge}</g>` : "", "</svg>"].join("\n");
+	return squadmateMarkup(ROLE[slug], state, size)
+		.replaceAll(`sm-${slug}-`, `sm-${slug}${n}-`)
+		.replace("<svg ", `<svg class="mm" data-state="${state}" `);
 }
 
 const STATES = [
@@ -102,10 +87,10 @@ code{font-family:var(--ts-font-mono);font-size:12px;background:var(--ts-surface-
 .dd li{margin-block:4px}
 .dd h3.do{color:var(--ts-success-surface-text, #00a240)}.dd h3.dont{color:var(--ts-danger-surface-text, #e5484d)}
 
-/* ---- Motion. Part hooks: .mm-all (pivot at the feet), .mm-torso, .mm-foot-l/r, .mm-arm-l/r (pivot at the shoulder), .mm-face, .mm-badge, .mm-shadow, .sm-blink. Units are drawing units (about 6 per px at 64 px). ---- */
+/* ---- Motion. Part hooks: .sm-all (pivot at the feet), .sm-torso, .sm-foot-l/r, .sm-arm-l/r (pivot at the shoulder), .sm-face, .sm-badge, .sm-shadow, .sm-blink. Units are drawing units (about 6 per px at 64 px). ---- */
 .mm{overflow:visible}
-.mm .mm-all,.mm .mm-torso,.mm [class^="mm-foot"],.mm [class^="mm-arm"],.mm .mm-face{transform-origin:0 0}
-.mm .mm-badge,.mm .mm-shadow{transform-box:fill-box;transform-origin:center}
+.mm .sm-all,.mm .sm-torso,.mm [class^="sm-foot"],.mm [class^="sm-arm"],.mm .sm-face{transform-origin:0 0}
+.mm .sm-badge,.mm .sm-shadow{transform-box:fill-box;transform-origin:center}
 .sm-blink{transform-box:fill-box;transform-origin:center;animation:sm-blink 4.8s infinite}
 @keyframes sm-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
 
@@ -153,63 +138,63 @@ code{font-family:var(--ts-font-mono);font-size:12px;background:var(--ts-surface-
 @keyframes mm-nod{0%,55%{transform:none}85%{transform:translateY(12px) rotate(5deg)}90%{transform:translateY(-3px)}100%{transform:none}}
 @keyframes mm-z{0%{opacity:0;transform:translate(0,4px) scale(.6)}25%{opacity:1}100%{opacity:0;transform:translate(5px,-10px) scale(1.2)}}
 
-.mm[data-state="idle"] .mm-all{animation:mm-breathe 3s var(--ts-ease-move) infinite}
-.mm[data-state="idle"] .mm-arm-r{animation:mm-wave 5s var(--ts-ease-move) infinite}
-.mm[data-state="idle"] .mm-face{animation:mm-look 7s var(--ts-ease-move) infinite}
+.mm[data-state="idle"] .sm-all{animation:mm-breathe 3s var(--ts-ease-move) infinite}
+.mm[data-state="idle"] .sm-arm-r{animation:mm-wave 5s var(--ts-ease-move) infinite}
+.mm[data-state="idle"] .sm-face{animation:mm-look 7s var(--ts-ease-move) infinite}
 
-.mm[data-state="waiting"] .mm-all{animation:mm-sway 3.2s var(--ts-ease-move) infinite}
-.mm[data-state="waiting"] .mm-foot-r{animation:mm-tap 1.1s var(--ts-ease-move) infinite}
-.mm[data-state="waiting"] .mm-face{animation:mm-look 6s var(--ts-ease-move) infinite}
+.mm[data-state="waiting"] .sm-all{animation:mm-sway 3.2s var(--ts-ease-move) infinite}
+.mm[data-state="waiting"] .sm-foot-r{animation:mm-tap 1.1s var(--ts-ease-move) infinite}
+.mm[data-state="waiting"] .sm-face{animation:mm-look 6s var(--ts-ease-move) infinite}
 
-.mm[data-state="planning"] .mm-all{animation:mm-breathe 2.4s var(--ts-ease-move) infinite}
-.mm[data-state="planning"] .mm-face{animation:mm-think 2.4s var(--ts-ease-move) infinite}
-.mm[data-state="planning"] .mm-arm-l{animation:mm-chin 2.4s var(--ts-ease-move) infinite}
-.mm[data-state="planning"] .mm-badge circle{transform-box:fill-box;transform-origin:center;animation:mm-dot 1.8s var(--ts-ease-move) infinite both}
-.mm[data-state="planning"] .mm-badge circle:nth-child(2){animation-delay:.3s}
+.mm[data-state="planning"] .sm-all{animation:mm-breathe 2.4s var(--ts-ease-move) infinite}
+.mm[data-state="planning"] .sm-face{animation:mm-think 2.4s var(--ts-ease-move) infinite}
+.mm[data-state="planning"] .sm-arm-l{animation:mm-chin 2.4s var(--ts-ease-move) infinite}
+.mm[data-state="planning"] .sm-badge circle{transform-box:fill-box;transform-origin:center;animation:mm-dot 1.8s var(--ts-ease-move) infinite both}
+.mm[data-state="planning"] .sm-badge circle:nth-child(2){animation-delay:.3s}
 
-.mm[data-state="running"] .mm-all{animation:mm-bob .5s var(--ts-ease-move) infinite}
-.mm[data-state="running"] .mm-foot-l{animation:mm-step 1s var(--ts-ease-move) infinite}
-.mm[data-state="running"] .mm-foot-r{animation:mm-step 1s var(--ts-ease-move) -.5s infinite}
-.mm[data-state="running"] .mm-arm-l{animation:mm-swing 1s var(--ts-ease-move) infinite}
-.mm[data-state="running"] .mm-arm-r{animation:mm-swing 1s var(--ts-ease-move) -.5s infinite}
-.mm[data-state="running"] .mm-shadow{animation:mm-shadow-pulse .5s var(--ts-ease-move) infinite}
+.mm[data-state="running"] .sm-all{animation:mm-bob .5s var(--ts-ease-move) infinite}
+.mm[data-state="running"] .sm-foot-l{animation:mm-step 1s var(--ts-ease-move) infinite}
+.mm[data-state="running"] .sm-foot-r{animation:mm-step 1s var(--ts-ease-move) -.5s infinite}
+.mm[data-state="running"] .sm-arm-l{animation:mm-swing 1s var(--ts-ease-move) infinite}
+.mm[data-state="running"] .sm-arm-r{animation:mm-swing 1s var(--ts-ease-move) -.5s infinite}
+.mm[data-state="running"] .sm-shadow{animation:mm-shadow-pulse .5s var(--ts-ease-move) infinite}
 
-.mm[data-state="checking"] .mm-all{animation:mm-lean 1.6s var(--ts-ease-move) infinite}
-.mm[data-state="checking"] .mm-face{animation:mm-scan 1.6s var(--ts-ease-move) infinite}
-.mm[data-state="checking"] .mm-arm-r{animation:mm-hold 1.6s var(--ts-ease-move) infinite}
+.mm[data-state="checking"] .sm-all{animation:mm-lean 1.6s var(--ts-ease-move) infinite}
+.mm[data-state="checking"] .sm-face{animation:mm-scan 1.6s var(--ts-ease-move) infinite}
+.mm[data-state="checking"] .sm-arm-r{animation:mm-hold 1.6s var(--ts-ease-move) infinite}
 
-.mm[data-state="done"] .mm-all{animation:mm-jump 1.1s var(--ts-ease-move) both}
-.mm[data-state="done"] .mm-arm-l{animation:mm-cheer-l 1.1s var(--ts-ease-move) both}
-.mm[data-state="done"] .mm-arm-r{animation:mm-cheer-r 1.1s var(--ts-ease-move) both}
-.mm[data-state="done"] .mm-shadow{animation:mm-shadow-jump 1.1s var(--ts-ease-move) both}
-.mm[data-state="done"] .mm-badge{animation:mm-pop .9s var(--ts-ease-enter) both}
+.mm[data-state="done"] .sm-all{animation:mm-jump 1.1s var(--ts-ease-move) both}
+.mm[data-state="done"] .sm-arm-l{animation:mm-cheer-l 1.1s var(--ts-ease-move) both}
+.mm[data-state="done"] .sm-arm-r{animation:mm-cheer-r 1.1s var(--ts-ease-move) both}
+.mm[data-state="done"] .sm-shadow{animation:mm-shadow-jump 1.1s var(--ts-ease-move) both}
+.mm[data-state="done"] .sm-badge{animation:mm-pop .9s var(--ts-ease-enter) both}
 
-.mm[data-state="sentback"] .mm-all{animation:mm-droop .6s var(--ts-ease-exit) both,mm-sigh 4s var(--ts-ease-move) .6s infinite}
-.mm[data-state="sentback"] .mm-face{animation:mm-hang .6s var(--ts-ease-exit) both}
-.mm[data-state="sentback"] .mm-arm-l{animation:mm-slump-l .6s var(--ts-ease-exit) both}
-.mm[data-state="sentback"] .mm-arm-r{animation:mm-slump-r .6s var(--ts-ease-exit) both}
+.mm[data-state="sentback"] .sm-all{animation:mm-droop .6s var(--ts-ease-exit) both,mm-sigh 4s var(--ts-ease-move) .6s infinite}
+.mm[data-state="sentback"] .sm-face{animation:mm-hang .6s var(--ts-ease-exit) both}
+.mm[data-state="sentback"] .sm-arm-l{animation:mm-slump-l .6s var(--ts-ease-exit) both}
+.mm[data-state="sentback"] .sm-arm-r{animation:mm-slump-r .6s var(--ts-ease-exit) both}
 
-.mm[data-state="blocked"] .mm-foot-r{animation:mm-impatient .9s var(--ts-ease-move) infinite}
-.mm[data-state="blocked"] .mm-all{animation:mm-breathe 2.6s var(--ts-ease-move) infinite}
-.mm[data-state="blocked"] .mm-badge{animation:mm-badge-beat 2s var(--ts-ease-move) infinite}
+.mm[data-state="blocked"] .sm-foot-r{animation:mm-impatient .9s var(--ts-ease-move) infinite}
+.mm[data-state="blocked"] .sm-all{animation:mm-breathe 2.6s var(--ts-ease-move) infinite}
+.mm[data-state="blocked"] .sm-badge{animation:mm-badge-beat 2s var(--ts-ease-move) infinite}
 
-.mm[data-state="escalated"] .mm-all{animation:mm-alarm 1.4s var(--ts-ease-move) infinite}
-.mm[data-state="escalated"] .mm-arm-l{animation:mm-flail-l .35s var(--ts-ease-move) infinite}
-.mm[data-state="escalated"] .mm-arm-r{animation:mm-flail-r .35s var(--ts-ease-move) -.17s infinite}
+.mm[data-state="escalated"] .sm-all{animation:mm-alarm 1.4s var(--ts-ease-move) infinite}
+.mm[data-state="escalated"] .sm-arm-l{animation:mm-flail-l .35s var(--ts-ease-move) infinite}
+.mm[data-state="escalated"] .sm-arm-r{animation:mm-flail-r .35s var(--ts-ease-move) -.17s infinite}
 .mm[data-state="escalated"] .mm-ring{transform-box:fill-box;transform-origin:center;animation:mm-ring 1.4s var(--ts-ease-exit) infinite both}
 
-.mm[data-state="dropped"] .mm-all{animation:mm-snore 4s var(--ts-ease-move) infinite}
-.mm[data-state="dropped"] .mm-face{animation:mm-nod 4s var(--ts-ease-move) infinite}
-.mm[data-state="dropped"] .mm-badge text{transform-box:fill-box;animation:mm-z 3s var(--ts-ease-move) infinite both}
-.mm[data-state="dropped"] .mm-badge text:nth-child(2){animation-delay:1.2s}
+.mm[data-state="dropped"] .sm-all{animation:mm-snore 4s var(--ts-ease-move) infinite}
+.mm[data-state="dropped"] .sm-face{animation:mm-nod 4s var(--ts-ease-move) infinite}
+.mm[data-state="dropped"] .sm-badge text{transform-box:fill-box;animation:mm-z 3s var(--ts-ease-move) infinite both}
+.mm[data-state="dropped"] .sm-badge text:nth-child(2){animation-delay:1.2s}
 
 /* A raised arm (Petra, Machu) would sweep over the face; it waves from the shoulder instead. */
 @keyframes mm-raised-wave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(6deg)}}
-.mm[data-state] .mm-raised{animation:none}
-.mm:is([data-state="idle"],[data-state="running"],[data-state="escalated"]) .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) infinite}
-.mm[data-state="done"] .mm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) 2}
+.mm[data-state] .sm-raised{animation:none}
+.mm:is([data-state="idle"],[data-state="running"],[data-state="escalated"]) .sm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) infinite}
+.mm[data-state="done"] .sm-raised{animation:mm-raised-wave .5s var(--ts-ease-move) 2}
 /* Below 32 px: face and badge only. */
-.mm[width="24"] :is(.mm-all,.mm-torso,[class^="mm-foot"],[class^="mm-arm"]),.mm[width="16"] :is(.mm-all,.mm-torso,[class^="mm-foot"],[class^="mm-arm"]){animation:none!important}
+.mm[width="24"] :is(.sm-all,.sm-torso,[class^="sm-foot"],[class^="sm-arm"]),.mm[width="16"] :is(.sm-all,.sm-torso,[class^="sm-foot"],[class^="sm-arm"]){animation:none!important}
 @media (prefers-reduced-motion:reduce){.mm *{animation:none!important}.swap svg,.steps span{transition:none!important}}
 .reduce .mm *{animation:none!important}
 .reduce .swap svg,.reduce .steps span{transition:none!important}
@@ -217,7 +202,7 @@ code{font-family:var(--ts-font-mono);font-size:12px;background:var(--ts-surface-
 `;
 
 const ring = '<circle class="mm-ring" cx="53" cy="53" r="8" fill="none" stroke="#e5484d" stroke-width="2"/>';
-const withRing = (svg) => svg.replace('<g class="mm-badge">', `<g class="mm-badge">${ring}`);
+const withRing = (svg) => svg.replace('<g class="sm-badge">', `<g class="sm-badge">${ring}`);
 const card = (s) => {
 	let svg = mascot("petra", s.id, 128);
 	if (s.id === "escalated") svg = withRing(svg);
