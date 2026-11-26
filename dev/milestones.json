@@ -117,7 +117,7 @@
     },
     {
       "id": "v0.4-trial-gaps",
-      "status": "planned",
+      "status": "done",
       "tasks": [
         "001-design-comps",
         "002-component-fixes",
