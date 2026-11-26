@@ -35,7 +35,7 @@ for (const locale of ["en", "ar"] as const) {
 			await expect(docs.getByRole("heading", { name: locale === "ar" ? "الخصائص" : "Props" })).toBeVisible();
 			// Usage shows only when the component doc has code samples.
 			const usage = docs.getByRole("heading", { name: locale === "ar" ? "الاستخدام" : "Usage" });
-			if (["Field", "Input", "Chat", "ChatReply", "ThemeToggle", "Toolbar", "Node"].includes(name))
+			if (["Field", "Input", "Chat", "ChatReply", "ThemeToggle", "Toolbar", "Node", "Menu"].includes(name))
 				await expect(usage).toBeVisible();
 			else await expect(usage).toHaveCount(0);
 			// English doc text stays left-to-right on Arabic pages.
