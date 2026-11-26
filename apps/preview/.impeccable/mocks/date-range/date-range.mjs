@@ -62,14 +62,14 @@ function field(l, { s, e, state = "" } = {}) {
 	return `<div class="dr-field ${state}" role="group" aria-label="${c.start} – ${c.end}">${icon.calendar}${value}</div>`;
 }
 
-function popup(l, { hover, presetOn = 3, months = 2, foot = true } = {}) {
+function popup(l, { hover, months = 2, foot = true } = {}) {
 	const c = copy[l];
 	const opts = { start, end: hover ? undefined : end, hover, today, locale: l };
 	const ms = [month(2026, 10, opts), months === 2 ? month(2026, 11, opts) : ""].join("");
 	const heads = [fmt.month(utc(2026, 10, 1), l), months === 2 ? fmt.month(utc(2026, 11, 1), l) : ""].filter(Boolean).map((h) => `<span>${h}</span>`).join("");
 	const days = Math.round(((hover ?? end) - start) / 864e5) + 1;
 	return `<div class="dr-pop${months === 1 ? " dr-pop--sheet" : ""}">
-<div class="dr-presets">${c.presets.map((p, i) => `<button type="button" aria-pressed="${i === presetOn}">${p}</button>`).join("")}</div>
+<div class="dr-presets">${c.presets.map((p, i) => `<button type="button" aria-pressed="${i === 5}">${p}</button>`).join("")}</div>
 <div class="dr-main"><div class="dr-nav"><button class="dr-icon" aria-label="Previous month">${icon.prev}</button><h3>${heads}</h3><button class="dr-icon" aria-label="Next month">${icon.next}</button></div>
 <div class="dr-months">${ms}</div>
 ${foot ? `<div class="dr-foot"><span><b>${fmt.short(start, l)} – ${fmt.short(hover ?? end, l)}</b> · ${c.nights(days)}</span><span class="dr-actions"><button class="ts-button ts-button--ghost ts-button--sm" data-slot="button" type="button">${c.clear}</button><button class="ts-button ts-button--solid ts-button--sm" data-slot="button" type="button">${c.apply}</button></span></div>` : ""}
@@ -80,7 +80,7 @@ function sheet(l) {
 	const c = copy[l];
 	return `<div class="phone"><div class="phone__screen"><div class="phone__dim"></div><div class="phone__sheet"><i class="phone__grab"></i>
 <div class="sheet-head"><b>${c.start} – ${c.end}</b><button class="dr-icon" aria-label="Close">${icon.close}</button></div>
-<div class="chips">${c.presets.slice(1, 4).map((p, i) => `<button type="button" class="ts-chip" data-slot="button" aria-pressed="${i === 2}">${p}</button>`).join("")}</div>
+<div class="chips">${[...c.presets.slice(1, 3), c.presets[5]].map((p, i) => `<button type="button" class="ts-chip" data-slot="button" aria-pressed="${i === 2}">${p}</button>`).join("")}</div>
 <div class="dr-nav"><button class="dr-icon" aria-label="Previous month">${icon.prev}</button><h3><span>${fmt.month(utc(2026, 10, 1), l)}</span></h3><button class="dr-icon" aria-label="Next month">${icon.next}</button></div>
 ${month(2026, 10, { start, end, today, locale: l })}
 <div class="sheet-foot"><span><b>${fmt.short(start, l)} – ${fmt.short(end, l)}</b></span><button class="ts-button ts-button--solid ts-button--md" data-slot="button" type="button">${c.apply}</button></div>
@@ -132,7 +132,7 @@ function body(l) {
 </div>
 <section class="wide"><h2>${s.open}</h2><div class="anchor">${field(l, { s: start, e: end, state: "is-open" })}${popup(l)}</div></section>
 <div class="row2">
-<section class="wide"><h2>${s.picking}</h2><div class="anchor">${field(l, { s: start, state: "is-open" })}${popup(l, { hover: utc(2026, 10, 18), presetOn: 5 })}</div></section>
+<section class="wide"><h2>${s.picking}</h2><div class="anchor">${field(l, { s: start, state: "is-open" })}${popup(l, { hover: utc(2026, 10, 18) })}</div></section>
 <section class="wide"><h2>${s.mobile}</h2>${sheet(l)}</section>
 </div>
 <section class="wide"><h2>${s.header}</h2><div class="hdr"><header data-slot="page-header" class="ts-page-header"><div class="ts-page-header__main"><div class="ts-page-header__copy"><h1 class="ts-page-header__title">${c.orders}</h1><p class="ts-page-header__subtitle">${c.ordersLead}</p></div></div></header><div class="hdr-actions">${field(l, { s: start, e: end })}<button class="ts-button ts-button--soft ts-button--md" data-slot="button" type="button">${icon.download}${c.exportLabel}</button></div></div></section>

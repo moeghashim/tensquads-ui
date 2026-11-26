@@ -101,7 +101,7 @@ const orders = [
 	["1047", "Sara Al-Qahtani", "سارة القحطاني", 25, "pending", 412],
 	["1046", "Omar Haddad", "عمر حداد", 25, "processing", 1290],
 	["1045", "Lina Farouk", "لينا فاروق", 24, "paid", 86.5],
-	["1044", "Yousef Nasser", "يوسف ناصر", 23, "paid", 878.6],
+	["1044", "Yousef Nasser", "يوسف ناصر", 23, "paid", 779.7],
 	["1043", "Huda Salem", "هدى سالم", 22, "refunded", 240],
 	["1042", "Khalid Mansour", "خالد منصور", 21, "failed", 155],
 ];
