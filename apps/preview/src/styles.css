@@ -157,6 +157,7 @@
 		border-end-end-radius: var(--ts-radius-lg);
 		background: var(--ts-surface);
 	}
+	.date-range-preview__examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--ts-space-6); }
 	.section-heading { display: flex; align-items: center; gap: var(--ts-space-2-5); }
 	.section-heading h2 {
 		margin-block: 0;
@@ -242,9 +243,6 @@
 	.dashboard-table-tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ts-space-1); }
 	.dashboard-table-tools [data-slot="input"] { inline-size: 12rem; }
 	.dashboard-table .ts-card__header { flex-wrap: wrap; }
-	.dashboard-details { display: grid; grid-template-columns: minmax(6rem, 1fr) minmax(0, 2fr); gap: var(--ts-space-2) var(--ts-space-4); margin: 0; font-size: var(--ts-text-sm-font-size); }
-	.dashboard-details dt { color: var(--ts-text-secondary); }
-	.dashboard-details dd { min-inline-size: 0; margin: 0; color: var(--ts-text-emphasis); font-family: var(--ts-font-mono); overflow-wrap: anywhere; }
 	.dashboard-actions { display: flex; flex-wrap: wrap; gap: var(--ts-space-2); margin-block-start: var(--ts-space-4); }
 	.mission-pill { display: inline-flex; align-items: center; gap: var(--ts-space-2); color: var(--ts-text-secondary); font-size: var(--ts-text-sm-font-size); }
 	.approval-list { display: grid; gap: var(--ts-space-3); }

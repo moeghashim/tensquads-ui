@@ -32,6 +32,7 @@ The library ships these components today. Each row links to its reference and it
 | [Chip](packages/ui/src/react/Chip/Chip.md) | A pill that opens an attached object such as an output schema or tool. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Chip) |
 | [CommandPalette](packages/ui/src/react/CommandPalette/CommandPalette.md) | Provide flat groups, labels and an `onSelect` callback for each item. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/CommandPalette) |
 | [DataTable](packages/ui/src/react/DataTable/DataTable.md) | A selectable table of records with labelled columns. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/DataTable) |
+| [DateRangePicker](packages/ui/src/react/DateRangePicker/DateRangePicker.md) | A labeled picker for a start and end date. Give dates as Gregorian YYYY-MM-DD strings. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/DateRangePicker) |
 | [Dialog](packages/ui/src/react/Dialog/Dialog.md) | A focused modal window that explains a task and offers a clear action. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Dialog) |
 | [Distribution](packages/ui/src/react/Distribution/Distribution.md) | A whole split into ranked grey parts. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/Distribution) |
 | [EmptyState](packages/ui/src/react/EmptyState/EmptyState.md) | A quiet empty view that explains what will fill the space. | [open](https://tensquads-ui-preview.mohanadgh.workers.dev/components/EmptyState) |
@@ -69,7 +70,7 @@ The Design reference row on the home and foundations pages opens Principles at `
 
 Every page, including Nodes, uses the same site header with navigation, Search, language and Light, Dark or System controls. Browse the grouped catalog at `/components`. Filter by component name, description or OpenUI support, then select a card to open `/components/$name`. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`). Changing the site language also sets its direction. Use `/get-started` for the English and Arabic setup guide with copyable examples.
 
-Browse `/templates` for the app shell, dashboard, list, settings and chat examples. Each `/templates/<name>` page offers Copy source, Copy styles and a GitHub source link. These are copyable examples, not package exports. Follow the template's README, also included in its Markdown twin, for setup and replacement guidance.
+Browse `/templates` for copyable page examples. See the [template index](llms.txt#templates) for the available layouts. Each `/templates/<name>` page offers Copy source, Copy styles and a GitHub source link. These are copyable examples, not package exports. Follow the template's README, also included in its Markdown twin, for setup and replacement guidance.
 
 Open Nodes at `/nodes` or `/nodes/support` to edit Support triage. The builder's Workflows link opens `/workflows`, with cards for Support triage, Order review and Store onboarding. Each card opens `/nodes/<id>`. Activity figures are sample data. The builder supports English and Arabic and mirrors the graph in RTL. Edits and history reset when you leave the builder or change its workflow, language or direction.
 
@@ -98,6 +99,8 @@ npm install github:moeghashim/tensquads-ui#<commit-sha>
 ```
 
 The root package builds `packages/ui/dist` during installation. React and React DOM 19 are peer dependencies.
+
+The npm 11 warning about unreviewed install scripts and `allowScripts` is expected. The warning itself is informational.
 
 ## Styles, locale, and theme
 
@@ -171,6 +174,10 @@ export function GeneratedPanel({ stream }: { stream: string | null }) {
 The entry also exports `defineComponent`, `getRegisteredComponents`, and `createTensquadsLibrary(locale)`. Components register typed, serializable props. The renderer creates its library lazily and reports parse and render errors through `onError`.
 
 For chat replies, use `ChatReply` from `@tensquads/ui/react`. See the [ChatReply contract](packages/ui/src/react/ChatReply/ChatReply.md) for usage and the supported reply format.
+
+### Hide the OpenUI Inspect button
+
+To hide Inspect in development, add `[data-openui-devtools-root] { display: none; }` to your global stylesheet after the imports. See the [TensquadsRenderer reference](packages/ui/src/openui/TensquadsRenderer.md#hide-the-openui-inspect-button).
 
 ## OpenUI server
 

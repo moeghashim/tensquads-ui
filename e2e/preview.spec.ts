@@ -211,7 +211,8 @@ test("catalog filters and links without interactive specimens", async ({ page })
 	await openPreview(page, { locale: "en", direction: "ltr", theme: "dark" }, "/components");
 	const filter = page.getByRole("searchbox", { name: "Filter components" });
 	const cards = page.locator(".component-card");
-	await expect(cards).toHaveCount(35);
+	await expect(cards).toHaveCount(36);
+	await expect(page.getByRole("link", { name: /^DateRangePicker / })).toBeVisible();
 	await page.getByRole("radio", { name: "React only" }).click();
 	await expect(cards).toHaveCount(12);
 	await expect(page.getByRole("link", { name: /^MiniMap / })).toBeVisible();
@@ -243,7 +244,7 @@ for (const state of states) {
 			await expect(page.locator(".component-card")).toHaveCount(1);
 		}).toPass({ timeout: 10_000 });
 		await filter.clear();
-		await expect(page.locator(".component-card")).toHaveCount(35);
+		await expect(page.locator(".component-card")).toHaveCount(36);
 		const rail = page.getByRole("navigation", { name: state.locale === "ar" ? "الفئات" : "Categories" });
 		for (const id of ["actions", "forms", "feedback", "data", "chat", "app", "workflow"]) {
 			const link = rail.locator(`a[href="#${id}"]`);

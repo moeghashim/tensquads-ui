@@ -24,7 +24,9 @@ Set `lang` and `dir` on `<html>`. For Arabic, pass `locale="ar"` and set `lang="
 
 ## Replace the sample content
 
-Set `links` to your app routes and `current` to the active destination. Replace the brand, sidebar labels, account and sample content through `copy` and `children`. A chat destination adds the launcher.
+Set `links` to your app routes and `current` to the active destination. The Orders destination appears when `links.orders` is set or `current="orders"`. Replace the brand, sidebar labels, account and sample content through `copy` and `children`. Import `appShellCopy` from `AppShell.tsx` to extend the localized defaults.
+
+Pass `squad` to replace the sample squad. Each entry takes SidebarAgent props except `locale`, which comes from the shell. A chat destination adds the launcher outside the chat page. Set `showLauncher={false}` to hide it.
 
 ## Detail pages
 

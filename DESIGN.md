@@ -114,7 +114,7 @@ The site header and footer share the page frame. The Nodes canvas fills the view
 
 ### Chat launcher
 
-Every workspace page has a ChatLauncher at the bottom inline-end corner: a `--ts-primary-solid` pill with a squadmate and a count badge. It opens the chat with the lead agent. Reference: [Main.dc.html](/design/screens/Main.dc.html) ("CHAT DOCK"). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home). Leave room for it: the home panel adds `--ts-control-md` + `--ts-space-6` of padding at the bottom (`styles.css` `.dashboard-panel--home`).
+When present, the workspace ChatLauncher sits at the bottom inline-end corner: a `--ts-primary-solid` pill with a squadmate and a count badge. It opens the chat with the lead agent. Pass `showLauncher={false}` to `AppShell` to hide the launcher. Reference: [Main.dc.html](/design/screens/Main.dc.html) ("CHAT DOCK"). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home). Leave room for it: the home panel adds `--ts-control-md` + `--ts-space-6` of padding at the bottom (`styles.css` `.dashboard-panel--home`).
 
 ---
 
@@ -172,7 +172,9 @@ DataTable rules (`design/agent-ui/components/DataTable/README.md`): newest first
 ### 4.3 Detail
 
 Reference: [AgentDetail.dc.html](/design/screens/AgentDetail.dc.html), [AgentImages.dc.html](/design/screens/AgentImages.dc.html). Live: [/dashboards/admin?view=images](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin?view=images) (list with a selected item).
-Template: [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/app-shell#detail-pages)
+Templates: [List and detail](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/list-detail) and [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/app-shell#detail-pages)
+
+Use List and detail when selecting a table row should keep the list in view. At 1024 px and above, put the detail beside the table and make it sticky. Below 1024 px, open it as a bottom sheet.
 
 ```
 | Sidebar | back link                                         |
@@ -189,7 +191,7 @@ Template: [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.wo
 | Summary | One full-width `Card` | `--ts-space-4` (built) |
 | Key numbers | `StatTile` row in `ts-stat-grid` | `--ts-space-4` |
 | Main and side | Two Cards, 3:2 (`dashboard-grid--3-2`). The side column is a stack of Cards with gap `--ts-space-4` (`styles.css` `.dashboard-stack`). | `--ts-space-4` |
-| Facts | A `dl` grid: labels `--ts-text-secondary`, values `--ts-text-emphasis`, identifiers in `--ts-font-mono` (`styles.css` `.dashboard-details`) | — |
+| Facts | A `dl` grid: labels `--ts-text-secondary`, values `--ts-text-emphasis`, identifiers in `--ts-font-mono` (`templates/list-detail/list-detail.css` `.template-detail-rows`) | — |
 | Actions | One solid `Button` and one `soft` Button, gap `--ts-space-2`, `--ts-space-4` above (`styles.css` `.dashboard-actions`) | — |
 
 ### 4.4 Settings and forms
@@ -454,6 +456,32 @@ The accessible name is the character name and the state, for example `Petra, Pla
 - Use `ar-EG-u-nu-arab` for Arabic-Indic digits and `en-US` for English. The dashboard demos and template use these locales for metrics and counts. BarChart formats Arabic chart values by default. StatTile and Card display the text supplied by the caller.
 - Put units in the display string: `1.08 s`, `42.5 h`, `$19.22`.
 - Show the comparison with a delta: `+12% vs last week`. Colour the delta (`--ts-success-text` or `--ts-danger-text`), not the value.
+
+#### Arabic currency
+
+Format SAR with `Intl.NumberFormat`. On the repository's Node version, `Intl.NumberFormat("ar", { style: "currency", currency: "SAR" })` uses Latin digits. Use the site's `ar-EG-u-nu-arab` locale to display 1250.5 as `١٬٢٥٠٫٥٠ ر.س.`. Pass the entire formatted string to the table cell and the StatTile value to preserve the currency spacing and direction marks.
+
+```tsx
+import { DataTable, StatTile } from "@tensquads/ui/react";
+
+const sar = new Intl.NumberFormat("ar-EG-u-nu-arab", {
+  style: "currency",
+  currency: "SAR",
+});
+
+export function OrderAmounts({ amount, total }: { amount: number; total: number }) {
+  return (
+    <>
+      <StatTile label="إجمالي الطلبات" value={sar.format(total)} />
+      <DataTable
+        caption="الطلبات"
+        columns={[{ key: "amount", label: "المبلغ", align: "end" }]}
+        rows={[{ id: "order-1", cells: { amount: sar.format(amount) } }]}
+      />
+    </>
+  );
+}
+```
 
 ---
 

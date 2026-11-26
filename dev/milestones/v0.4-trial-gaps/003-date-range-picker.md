@@ -7,7 +7,7 @@ priority: high
 files: ["packages/ui/src/react/DateRangePicker/**", "packages/ui/src/react/index.ts", "packages/ui/src/styles/**", "packages/ui/src/openui/**", "apps/preview/**", "e2e/**", "llms.txt"]
 ---
 
-Starts after Moe approves the comp in task 001. The comp is the spec for layout and copy.
+Moe approved the comp in task 001 on 2026-11-26 (`apps/preview/.impeccable/mocks/date-range/`). The comp is the spec for layout and copy.
 
 ## Acceptance criteria
 - [ ] `DateRangePicker` wraps UI SDK's Date Picker in range mode (`@ui-sdk/react` public entry only): two inputs, one trigger, one popup. Controlled and uncontrolled (`value`, `defaultValue`, `onValueChange` with `{ start, end }`), `min`, `max`, `disabled`, `invalid`, and a `presets` prop that renders preset buttons.

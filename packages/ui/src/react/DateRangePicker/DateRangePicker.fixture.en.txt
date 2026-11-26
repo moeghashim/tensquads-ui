@@ -1,0 +1,1 @@
+root = DateRangePicker("Orders date range", {start: "2026-10-10", end: "2026-10-23"}, "2026-10-01", "2026-11-30", [{label: "This month", value: {start: "2026-10-01", end: "2026-10-31"}}])
