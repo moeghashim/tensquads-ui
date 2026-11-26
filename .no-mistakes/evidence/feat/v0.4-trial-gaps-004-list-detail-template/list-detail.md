@@ -27,7 +27,7 @@ Set `lang` and `dir` on `<html>`. For Arabic, pass `locale="ar"` and set `lang="
 
 ## Use your order data
 
-Pass `orders` newest first, with Gregorian ISO dates, prices in SAR and localized text. Pass the VAT amount from the order when available. The template otherwise calculates VAT at 15%. Set `links` to your app routes. Set `defaultRange` to the initial dates or `null` for all dates. Set `defaultSelectedId` to the order to show first on desktop. Replace the example date presets and payment copy with values for your page.
+Pass `orders` newest first, with Gregorian ISO dates, prices in SAR and localized text. Pass the VAT amount from the order when available. The template otherwise calculates VAT at 15%. Set `links` to your app routes. Set `defaultRange` to the initial dates or `null` for all dates. Set `defaultSelectedId` to an order on the first filtered page to show its detail on desktop. Replace the example date presets and payment copy with values for your page.
 
 Bind `onExport` to export the filtered orders. Bind `onContact` to start a customer conversation and `onRefundRequest` to open your refund confirmation flow. The Refund button marks the amount and order number with `data-agent-confirm` so the agent bridge requires a person. The callback should request confirmation before moving money.
 
@@ -785,12 +785,34 @@ export function ListDetail({
 
 @media (min-width: 1024px) {
 	.template-order__layout:has(.template-order__panel) {
-		grid-template-columns: minmax(0, 1fr) clamp(16rem, 28vw, 23rem);
+		grid-template-columns: minmax(0, 1fr) clamp(16rem, calc(50% - 8rem), 23rem);
 	}
+}
+
+.template-order__list {
+	container-type: inline-size;
 }
 
 .template-order__list .ts-card__header {
 	flex-wrap: wrap;
+}
+
+@container (max-width: 42rem) {
+	.template-order__list .ts-data-table__entity {
+		min-inline-size: 0;
+	}
+
+	.template-order__list .ts-data-table :is(th, td) {
+		padding-inline: var(--ts-space-2);
+	}
+
+	.template-order__list .ts-data-table :is(th, td):first-child {
+		padding-inline-start: var(--ts-space-4);
+	}
+
+	.template-order__list .ts-data-table :is(th, td):last-child {
+		padding-inline-end: var(--ts-space-4);
+	}
 }
 
 .template-order__list .ts-data-table__entity-copy > span:empty {

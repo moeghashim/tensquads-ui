@@ -1,0 +1,323 @@
+{
+  "config": {
+    "argv": [
+      "~/.local/share/mise/installs/node/26.13.1/bin/node",
+      "{run-worktree}/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      ".local-product-test/flows.config.ts",
+      "flows.spec.ts"
+    ],
+    "configFile": "{run-worktree}/.local-product-test/flows.config.ts",
+    "rootDir": "{run-worktree}/.local-product-test",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M8C3RX8GDXCKHGQR7V6FSM02/browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/.local-product-test",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M8C3RX8GDXCKHGQR7V6FSM02/browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "{run-worktree}/.local-product-test",
+        "snapshotDir": "{run-worktree}/.local-product-test",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5274",
+          "browserName": "chromium",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "~/.no-mistakes/evidence/01M8C3RX8GDXCKHGQR7V6FSM02/flows-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "cwd": "{run-worktree}",
+      "command": "npm run build:preview && npm --prefix apps/preview run preview",
+      "url": "http://127.0.0.1:5274",
+      "timeout": 120000,
+      "reuseExistingServer": false,
+      "env": {
+        "PREVIEW_PORT": "5274",
+        "WRANGLER_SEND_METRICS": "false"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "flows.spec.ts",
+      "file": "flows.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "filters combine, export only matches, empty state recovers and archives are optional",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6621,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('searchbox', { name: 'Search orders' })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"#1044\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('searchbox', { name: 'Search orders' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('searchbox', { name: 'Search orders' })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"search\" value=\"#1044\" data-filled=\"\" data-slot=\"input\" aria-label=\"Search orders\" placeholder=\"Search orders\" class=\"ts-input ts-input--soft\"/>\u001b[22m\n\u001b[2m       - unexpected value \"#1044\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('searchbox', { name: 'Search orders' })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"#1044\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('searchbox', { name: 'Search orders' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('searchbox', { name: 'Search orders' })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"search\" value=\"#1044\" data-filled=\"\" data-slot=\"input\" aria-label=\"Search orders\" placeholder=\"Search orders\" class=\"ts-input ts-input--soft\"/>\u001b[22m\n\u001b[2m       - unexpected value \"#1044\"\u001b[22m\n\n    at {run-worktree}/.local-product-test/flows.spec.ts:24:23",
+                    "location": {
+                      "file": "{run-worktree}/.local-product-test/flows.spec.ts",
+                      "column": 23,
+                      "line": 24
+                    },
+                    "snippet": "  22 |  await page.screenshot({path:evidence+'/orders-empty-recovery.png',fullPage:true});\n  23 |  await page.getByRole('button',{name:'Clear filters',exact:true}).click();\n> 24 |  await expect(search).toHaveValue('');\n     |                       ^\n  25 |  await expect(page.getByText('Showing 6 of 128',{exact:true})).toBeVisible();\n  26 |  await page.getByRole('button',{name:'Status: All',exact:true}).click();\n  27 |  await page.getByRole('menuitemcheckbox',{name:'Hide archived orders',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/.local-product-test/flows.spec.ts",
+                        "column": 23,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('searchbox', { name: 'Search orders' })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"#1044\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('searchbox', { name: 'Search orders' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('searchbox', { name: 'Search orders' })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"search\" value=\"#1044\" data-filled=\"\" data-slot=\"input\" aria-label=\"Search orders\" placeholder=\"Search orders\" class=\"ts-input ts-input--soft\"/>\u001b[22m\n\u001b[2m       - unexpected value \"#1044\"\u001b[22m\n\n\n  22 |  await page.screenshot({path:evidence+'/orders-empty-recovery.png',fullPage:true});\n  23 |  await page.getByRole('button',{name:'Clear filters',exact:true}).click();\n> 24 |  await expect(search).toHaveValue('');\n     |                       ^\n  25 |  await expect(page.getByText('Showing 6 of 128',{exact:true})).toBeVisible();\n  26 |  await page.getByRole('button',{name:'Status: All',exact:true}).click();\n  27 |  await page.getByRole('menuitemcheckbox',{name:'Hide archived orders',exact:true}).click();\n    at {run-worktree}/.local-product-test/flows.spec.ts:24:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T14:29:20.520Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M8C3RX8GDXCKHGQR7V6FSM02/browser-results/flows-filters-combine-expo-9fd64-s-and-archives-are-optional/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/.local-product-test/flows.spec.ts",
+                    "column": 23,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86d6a544053f1eb9f224-83fd3ca54ef8dcb46a6f",
+          "file": "flows.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "1023px sheet becomes 1024px side panel and closes back to its row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1762,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T14:29:28.026Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86d6a544053f1eb9f224-33b9c3a3073af9f2ea5d",
+          "file": "flows.spec.ts",
+          "line": 45,
+          "column": 1
+        },
+        {
+          "title": "demo contact and refund callbacks show sample notices and nonpaid refund stays disabled",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T14:29:30.019Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86d6a544053f1eb9f224-9e4b99d94fd08bcd7922",
+          "file": "flows.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "Markdown twin is downloadable and migrated admin detail rows retain their layout",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5453,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('html')\nExpected: \u001b[32m\"ar\"\u001b[39m\nReceived: \u001b[31m\"en\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('html') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('html')\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"en\" dir=\"rtl\" data-theme=\"dark\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"en\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('html')\nExpected: \u001b[32m\"ar\"\u001b[39m\nReceived: \u001b[31m\"en\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('html') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('html')\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"en\" dir=\"rtl\" data-theme=\"dark\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"en\"\u001b[22m\n\n    at openPreview ({run-worktree}/.local-product-test/preview.ts:19:37)\n    at {run-worktree}/.local-product-test/flows.spec.ts:76:2",
+                    "location": {
+                      "file": "{run-worktree}/.local-product-test/preview.ts",
+                      "column": 37,
+                      "line": 19
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mpreview.ts:19\n\n  17 | \tawait page.goto(`${route}?${query.toString()}`);\n  18 | \tawait page.evaluate(() => document.fonts.ready);\n> 19 | \tawait expect(page.locator(\"html\")).toHaveAttribute(\"lang\", state.locale);\n     | \t                                   ^\n  20 | \tawait expect(page.locator(\"html\")).toHaveAttribute(\"dir\", state.direction);\n  21 | \tawait expect(page.locator(\"html\")).toHaveAttribute(\"data-theme\", state.theme);\n  22 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "{run-worktree}/.local-product-test/preview.ts",
+                        "column": 37,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('html')\nExpected: \u001b[32m\"ar\"\u001b[39m\nReceived: \u001b[31m\"en\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('html') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('html')\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"en\" dir=\"rtl\" data-theme=\"dark\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"en\"\u001b[22m\n\n\n   at preview.ts:19\n\n  17 | \tawait page.goto(`${route}?${query.toString()}`);\n  18 | \tawait page.evaluate(() => document.fonts.ready);\n> 19 | \tawait expect(page.locator(\"html\")).toHaveAttribute(\"lang\", state.locale);\n     | \t                                   ^\n  20 | \tawait expect(page.locator(\"html\")).toHaveAttribute(\"dir\", state.direction);\n  21 | \tawait expect(page.locator(\"html\")).toHaveAttribute(\"data-theme\", state.theme);\n  22 | }\n    at openPreview ({run-worktree}/.local-product-test/preview.ts:19:37)\n    at {run-worktree}/.local-product-test/flows.spec.ts:76:2"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T14:29:31.570Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "~/.no-mistakes/evidence/01M8C3RX8GDXCKHGQR7V6FSM02/browser-results/flows-Markdown-twin-is-dow-f39bd-il-rows-retain-their-layout/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "{run-worktree}/.local-product-test/preview.ts",
+                    "column": 37,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86d6a544053f1eb9f224-400260b2242f2f042217",
+          "file": "flows.spec.ts",
+          "line": 73,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-26T14:29:09.951Z",
+    "duration": 27192.539,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

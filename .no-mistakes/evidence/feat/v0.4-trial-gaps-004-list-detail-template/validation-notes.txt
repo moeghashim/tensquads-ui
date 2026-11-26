@@ -1,0 +1,5 @@
+Local production preview: http://127.0.0.1:5274; built with npm run build:preview and served through Wrangler. Synthetic demo orders only.
+Existing template browser checks: exit 0, 11 passed. Additional user flows: final exit 0, 4 passed.
+Initial driver attempts were corrected: webServer cwd, dismiss status menu before outside action, Apply date preset, and match admin button including its count. No product changes were needed.
+Visual review: English light desktop, Arabic dark mobile sheet, 1024px side panel, and Arabic dark admin detail rows.
+Baseline supplied by outer executor: npm ci --no-audit --no-fund && npm run verify passed. No broad suite rerun or static checks in this phase.

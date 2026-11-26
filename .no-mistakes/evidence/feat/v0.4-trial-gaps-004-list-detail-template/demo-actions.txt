@@ -1,0 +1,3 @@
+Preview #1044 Refund → This is a sample order.
+Preview #1044 Contact customer → This is a sample customer.
+Preview #1047 Pending → Refund disabled.
