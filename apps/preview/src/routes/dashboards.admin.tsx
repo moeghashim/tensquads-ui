@@ -25,6 +25,8 @@ import enImages from "../fixtures/dashboard-images.fixture.en.json";
 import { getPreviewState } from "../state";
 import { DashboardFrame, DemoPill, dashboardData, dashboardNumberLocale, demoCopy, Icon } from "./-dashboards.shared";
 
+import "../../../../templates/list-detail/list-detail.css";
+
 export const Route = createFileRoute("/dashboards/admin")({ component: AdminDashboard });
 
 type Company = {
@@ -514,7 +516,7 @@ function ImageView({ locale }: { locale: "en" | "ar" }) {
 							<p>{locale === "ar" ? selectedImage.roleAr : selectedImage.role}</p>
 							{selectedImage.attention && <Badge tone="danger">{copy.needsAttention}</Badge>}
 						</div>
-						<dl className="dashboard-details">
+						<dl className="template-detail-rows">
 							<dt>{copy.imageName}</dt>
 							<dd dir="ltr">{selectedImage.path}</dd>
 							<dt>{copy.imageVersion}</dt>

@@ -5,6 +5,7 @@ import {
 	PageHeader,
 	Sidebar,
 	SidebarAgent,
+	type SidebarAgentProps,
 	SidebarBrand,
 	SidebarItem,
 	SidebarSection,
@@ -15,6 +16,7 @@ import type { Locale } from "@tensquads/ui/schemas";
 
 const icons = {
 	overview: "M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z",
+	orders: "M5 7h14l-1.5 11h-11zM9 7a3 3 0 0 1 6 0",
 	accounts: "M4 20V5l8-2v17M4 8h8m-5 3h1m-1 3h1m-1 3h1m5-7v10h5V10z",
 	rules: "M5 6h14M5 12h14M5 18h14M8 4v4m8 2v4m-5 2v4",
 	chat: "M4 5h16v11H9l-5 4z",
@@ -24,7 +26,7 @@ type Destination = keyof typeof icons;
 
 const agents = ["pisa", "kyoto", "rio", "zurich", "giza"] as const;
 
-const defaults = {
+export const appShellCopy = {
 	en: {
 		nav: "Workspace navigation",
 		open: "Open workspace navigation",
@@ -37,7 +39,7 @@ const defaults = {
 		squad: "Your squad",
 		lead: "Squad lead",
 		roles: ["Orders", "Support", "Marketing", "Finance", "Inventory"],
-		links: { overview: "Overview", accounts: "Accounts", rules: "Rules", chat: "Chat" },
+		links: { overview: "Overview", orders: "Orders", accounts: "Accounts", rules: "Rules", chat: "Chat" },
 		title: "Workspace overview",
 		subtitle: "Manage your store and see what your squad is working on.",
 		section: "Store operations",
@@ -55,7 +57,7 @@ const defaults = {
 		squad: "فريقك",
 		lead: "قيادة الفريق",
 		roles: ["الطلبات", "الدعم", "التسويق", "المالية", "المخزون"],
-		links: { overview: "نظرة عامة", accounts: "الحسابات", rules: "القواعد", chat: "المحادثة" },
+		links: { overview: "نظرة عامة", orders: "الطلبات", accounts: "الحسابات", rules: "القواعد", chat: "المحادثة" },
 		title: "نظرة عامة على مساحة العمل",
 		subtitle: "أدر متجرك وتابع عمل فريقك.",
 		section: "عمليات المتجر",
@@ -65,17 +67,23 @@ const defaults = {
 
 export type AppShellProps = {
 	locale?: Locale;
-	copy?: typeof defaults.en;
+	copy?: Omit<typeof appShellCopy.en, "links"> & {
+		links: Omit<typeof appShellCopy.en.links, "orders"> & { orders?: string };
+	};
 	links?: Partial<Record<Destination, string>>;
 	current?: Destination;
+	squad?: readonly Omit<SidebarAgentProps, "locale">[];
+	showLauncher?: boolean;
 	children?: CardProps["children"];
 };
 
 export function AppShell({
 	locale = "en",
-	copy = defaults[locale],
+	copy = appShellCopy[locale],
 	links = {},
 	current = "overview",
+	squad,
+	showLauncher = true,
 	children,
 }: AppShellProps) {
 	return (
@@ -84,52 +92,60 @@ export function AppShell({
 				<Sidebar className="template-shell__navigation" label={copy.nav} mobileLabel={copy.open}>
 					<SidebarBrand icon={copy.brandMark} title={copy.brand} subtitle={copy.workspace} />
 					<SidebarSection label={copy.workspace}>
-						{(Object.keys(icons) as Destination[]).map((id) => (
-							<SidebarItem
-								key={id}
-								icon={
-									<svg
-										aria-hidden="true"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="1.6"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path d={icons[id]} />
-									</svg>
-								}
-								active={id === current}
-								disabled={!links[id]}
-								render={<a href={links[id]} />}
-							>
-								{copy.links[id]}
-							</SidebarItem>
-						))}
+						{(Object.keys(icons) as Destination[])
+							.filter((id) => id !== "orders" || current === id || links.orders)
+							.map((id) => (
+								<SidebarItem
+									key={id}
+									icon={
+										<svg
+											aria-hidden="true"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="1.6"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path d={icons[id]} />
+										</svg>
+									}
+									active={id === current}
+									disabled={!links[id]}
+									render={<a href={links[id]} />}
+								>
+									{copy.links[id] ?? appShellCopy[locale].links[id]}
+								</SidebarItem>
+							))}
 					</SidebarSection>
 					<SidebarSection label={copy.squad}>
-						<SidebarAgent
-							agent="petra"
-							name={squadmateCharacterName("petra", locale)}
-							roleLabel={copy.lead}
-							meta={copy.lead}
-							state="idle"
-							status="online"
-							locale={locale}
-							featured
-						/>
-						{agents.map((agent, index) => (
-							<SidebarAgent
-								key={agent}
-								agent={agent}
-								name={squadmateCharacterName(agent, locale)}
-								roleLabel={copy.roles[index] ?? ""}
-								state="idle"
-								status="online"
-								locale={locale}
-							/>
-						))}
+						{squad ? (
+							squad.map((mate) => <SidebarAgent key={mate.agent} {...mate} locale={locale} />)
+						) : (
+							<>
+								<SidebarAgent
+									agent="petra"
+									name={squadmateCharacterName("petra", locale)}
+									roleLabel={copy.lead}
+									meta={copy.lead}
+									state="idle"
+									status="online"
+									locale={locale}
+									featured
+								/>
+								{agents.map((agent, index) => (
+									<SidebarAgent
+										key={agent}
+										agent={agent}
+										name={squadmateCharacterName(agent, locale)}
+										roleLabel={copy.roles[index] ?? ""}
+										state="idle"
+										status="online"
+										locale={locale}
+									/>
+								))}
+							</>
+						)}
 					</SidebarSection>
 					<SidebarUser initials={copy.initials} name={copy.owner} userRole={copy.ownerRole} />
 				</Sidebar>
@@ -141,7 +157,7 @@ export function AppShell({
 						<Card title={copy.section}>{copy.description}</Card>
 					</>
 				)}
-				{current !== "chat" && links.chat && (
+				{showLauncher && current !== "chat" && links.chat && (
 					<div className="template-shell__launcher">
 						<ChatLauncher locale={locale} onClick={() => window.location.assign(links.chat ?? "")} />
 					</div>

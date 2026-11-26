@@ -50,5 +50,6 @@
 - [App shell](templates/app-shell/README.md): Lay out a signed-in workspace with side navigation, a page heading and one content panel.
 - [Chat](templates/chat/README.md): Show a conversation with Petra, an inline form action and squad hand-offs.
 - [Dashboard](templates/dashboard/README.md): Show store metrics, a revenue trend, work by squad and recent activity.
+- [List and detail](templates/list-detail/README.md): Filter an orders table and show the selected order. At 1024 px and above, the detail stays beside the list. At smaller widths, selecting an order opens a bottom sheet.
 - [List and table](templates/list/README.md): Show a company table with search, a status filter and an empty state.
 - [Settings](templates/settings/README.md): Show existing workspace rules, an edit form and operating limits.

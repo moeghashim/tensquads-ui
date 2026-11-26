@@ -17,6 +17,11 @@ export const templates = {
 		},
 		ar: { title: "القائمة والجدول", description: "أتح البحث في السجلات واعرض حالة فارغة عند الحاجة." },
 	},
+	"list-detail": {
+		file: "ListDetail.tsx",
+		en: { title: "List and detail", description: "Filter a table and show the selected order’s details." },
+		ar: { title: "القائمة والتفاصيل", description: "صفِّ الطلبات واعرض تفاصيل الطلب المحدد." },
+	},
 	settings: {
 		file: "Settings.tsx",
 		en: { title: "Settings", description: "Show existing rules, a form to add a rule and workspace limits." },

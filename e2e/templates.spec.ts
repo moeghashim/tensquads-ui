@@ -6,6 +6,7 @@ const templates = [
 	["app-shell", "AppShell.tsx", "Workspace overview", "نظرة عامة على مساحة العمل"],
 	["dashboard", "Dashboard.tsx", "Store overview", "نظرة عامة على المتجر"],
 	["list", "List.tsx", "Accounts", "الحسابات"],
+	["list-detail", "ListDetail.tsx", "Orders", "الطلبات"],
 	["settings", "Settings.tsx", "Rules", "القواعد"],
 	["chat", "ChatPage.tsx", "Petra", "بترا"],
 ] as const;
@@ -61,7 +62,7 @@ test("templates are discoverable from the site navigation and the agent index", 
 	await page.getByRole("navigation").getByRole("link", { name: "القوالب", exact: true }).click();
 	const index = page.getByRole("main");
 	await expect(index.getByRole("heading", { name: "القوالب" })).toBeVisible();
-	await expect(index.locator(".foundation-grid").getByRole("link")).toHaveCount(5);
+	await expect(index.locator(".foundation-grid").getByRole("link")).toHaveCount(templates.length);
 	await index.getByRole("link", { name: /لوحة المؤشرات/ }).click();
 	await expect(page.getByRole("heading", { name: "نظرة عامة على المتجر", level: 1 })).toBeVisible();
 	await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
@@ -128,3 +129,62 @@ test("the app shell supplies its text styles without the preview baseline", asyn
 	const sheet = page.getByRole("dialog").getByRole("navigation", { name: "Workspace navigation" });
 	await expect(sheet.getByText("Accounts")).toHaveCSS("font-family", /Inter.*IBM Plex Sans Arabic/);
 });
+
+test("orders select with the keyboard, move between rows and restore focus", async ({ page }) => {
+	await page.setViewportSize({ width: 1024, height: 900 });
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/templates/list-detail");
+	const orders = page.getByRole("table", { name: "Orders" });
+	const row = (id: string) => orders.getByRole("row").filter({ hasText: id });
+	const panel = page.locator(".template-order__panel");
+	await expect(row("#1044")).toHaveAttribute("aria-selected", "true");
+	await expect(panel).toHaveCSS("position", "sticky");
+	await expect(panel).toContainText("SAR 779.70");
+	await expect(panel.getByRole("button", { name: "Refund" })).toHaveAttribute(
+		"data-agent-confirm",
+		/^Refund SAR\s779\.70 for order #1044\.$/,
+	);
+	await row("#1044").press("Enter");
+	await row("#1044").press("ArrowUp");
+	await expect(row("#1045")).toBeFocused();
+	await expect(row("#1045")).toHaveAttribute("aria-selected", "true");
+	await expect(panel.getByRole("heading", { name: "#1045" })).toBeVisible();
+	await panel.getByRole("button", { name: "Close order details" }).press("Escape");
+	await expect(panel).toHaveCount(0);
+	await expect(row("#1045")).toBeFocused();
+	await row("#1045").press("Space");
+	await expect(panel.getByRole("heading", { name: "#1045" })).toBeVisible();
+	await page.getByRole("button", { name: "Next page" }).click();
+	await expect(orders).toContainText("#1041");
+	await expect(page.getByText("Showing 12 of 128")).toBeVisible();
+	await page.getByRole("button", { name: "Previous page" }).click();
+	await expect(row("#1044")).toBeVisible();
+	await page.getByRole("button", { name: "Status: All" }).click();
+	await page.getByRole("menuitemradio", { name: "Processing" }).click();
+	await expect(orders).toContainText("#1046");
+	await expect(row("#1044")).toHaveCount(0);
+});
+
+for (const [locale, direction, orderNumber, title] of [
+	["en", "ltr", "#1044", "Orders"],
+	["ar", "rtl", "#١٠٤٤", "الطلبات"],
+] as const) {
+	for (const theme of ["light", "dark"] as const) {
+		test(`orders open a bottom sheet in ${locale} / ${theme}`, async ({ page }, testInfo) => {
+			await page.setViewportSize({ width: 390, height: 900 });
+			await openPreview(page, { locale, direction, theme }, "/templates/list-detail");
+			const row = page.getByRole("table", { name: title }).getByRole("row").filter({ hasText: orderNumber });
+			const sheet = page.getByRole("dialog", { name: orderNumber });
+			await expect(sheet).toHaveCount(0);
+			await row.press("Enter");
+			await expect(sheet).toBeVisible();
+			await expect(sheet.getByRole("heading", { level: 2 }).locator("bdi")).toHaveAttribute("dir", "ltr");
+			await expect(sheet).toHaveCSS("inset-block-end", "0px");
+			await capturePreviewScreenshots(page, testInfo, `template-list-detail-sheet-${locale}-${theme}`, [390]);
+			await expectNoHorizontalScroll(page);
+			await expectAccessible(page);
+			await page.keyboard.press("Escape");
+			await expect(sheet).toHaveCount(0);
+			await expect(row).toBeFocused();
+		});
+	}
+}

@@ -172,7 +172,9 @@ DataTable rules (`design/agent-ui/components/DataTable/README.md`): newest first
 ### 4.3 Detail
 
 Reference: [AgentDetail.dc.html](/design/screens/AgentDetail.dc.html), [AgentImages.dc.html](/design/screens/AgentImages.dc.html). Live: [/dashboards/admin?view=images](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/admin?view=images) (list with a selected item).
-Template: [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/app-shell#detail-pages)
+Templates: [List and detail](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/list-detail) and [App shell for detail pages](https://tensquads-ui-preview.mohanadgh.workers.dev/templates/app-shell#detail-pages)
+
+Use List and detail when selecting a table row should keep the list in view. At 1024 px and above, put the detail beside the table and make it sticky. Below 1024 px, open it as a bottom sheet.
 
 ```
 | Sidebar | back link                                         |
