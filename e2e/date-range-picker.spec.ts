@@ -70,7 +70,7 @@ for (const locale of ["en", "ar"] as const) {
 		const apply = dialog.getByRole("button", { name: locale === "ar" ? "تطبيق" : "Apply" });
 		await trigger.click();
 		await expect(dialog.getByRole("grid")).toHaveCount(1);
-		await day("2026-10-14").click();
+		await day("2026-10-14").press("Enter");
 		await page.keyboard.press("PageDown");
 		await expect(day("2026-11-14")).toBeFocused();
 		await expect(day("2026-10-14")).toHaveCount(0);
@@ -96,7 +96,7 @@ for (const locale of ["en", "ar"] as const) {
 		const committed = locale === "ar" ? /١٤.*١٤/ : "Oct 14, 2026 – Nov 14, 2026";
 		await expect(trigger).toHaveAccessibleDescription(committed);
 		await trigger.click();
-		await day("2026-10-14").click();
+		await day("2026-10-14").press("Enter");
 		await page.keyboard.press("PageDown");
 		await expect(footer).toContainText(locale === "ar" ? "٣٢ يومًا" : "32 days");
 		await page.keyboard.press("Escape");
