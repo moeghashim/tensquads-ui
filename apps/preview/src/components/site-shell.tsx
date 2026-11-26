@@ -36,6 +36,11 @@ export function SiteShell() {
 	const nextLocale = locale === "en" ? "ar" : "en";
 	const [paletteOpen, setPaletteOpen] = useState(false);
 	const change = (key: "locale" | "theme", value: string) => {
+		if (key === "theme" && value === "system") {
+			try {
+				window.localStorage.removeItem("tensquads.theme");
+			} catch {}
+		}
 		const nextSearch = { ...search, [key]: value };
 		if (key === "locale") nextSearch.dir = value === "ar" ? "rtl" : "ltr";
 		void navigate({ to: ".", search: nextSearch as never });
