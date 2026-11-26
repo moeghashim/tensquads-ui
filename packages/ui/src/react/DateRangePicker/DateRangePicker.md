@@ -15,6 +15,8 @@ Pick a start and an end date in one control. Enter dates in the two fields or us
 
 Pick a start and then an end. Hover or move focus to preview the end. Apply is disabled while choosing the end date. Presets choose both dates at once. Clear stages an empty range and keeps the popup open. Apply commits popup changes and closes the popup unless the callback cancels the change. Typed ranges commit directly when the popup is closed. Escape, the close button, and an outside press discard popup changes.
 
+The popup footer counts both the start and end dates. Its day count follows the preview, draft, or committed range. Arabic counts use plural forms such as `يوم واحد`, `يومان`, `٧ أيام`, `١٤ يومًا`, and `١٠٠ يوم`.
+
 Arrows move by a day or a week. Page Up and Page Down move by month. Home and End go to the week’s edges. Enter picks the focused date. Focus returns to the trigger when Escape closes the popup. The range is announced and included in the trigger description.
 
 ```tsx
