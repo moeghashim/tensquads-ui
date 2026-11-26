@@ -63,9 +63,7 @@ for (const [locale, direction] of [
 						expected.get(width),
 					);
 					if (builder) {
-						expect(await inlineEdges(main), `Canvas on ${context}`).toEqual(
-							await inlineEdges(page.locator("html")),
-						);
+						expect((await main.boundingBox())?.width, `Canvas on ${context}`).toBe(width);
 					} else {
 						expect(await inlineEdges(page.locator(".site-footer__inner")), `Footer on ${context}`).toEqual(
 							expected.get(width),

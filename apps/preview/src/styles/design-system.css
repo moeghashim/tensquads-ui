@@ -5,9 +5,6 @@
 		--site-rule: thin solid var(--ts-border-subtle);
 	}
 
-	/* Reserve the scrollbar on every page, so short pages keep the header in the same place. */
-	html { scrollbar-gutter: stable; }
-
 	.design-wrap {
 		box-sizing: border-box;
 		inline-size: min(var(--site-max), calc(100% - 2 * var(--site-gutter)));

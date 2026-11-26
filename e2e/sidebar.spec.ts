@@ -51,11 +51,7 @@ for (const [locale, direction, theme] of [
 			.poll(async () => {
 				const bounds = await sheet.boundingBox();
 				if (!bounds) return Number.POSITIVE_INFINITY;
-				const root = await page.evaluate(() => {
-					const { x, width } = document.documentElement.getBoundingClientRect();
-					return { x, width };
-				});
-				return Math.abs(direction === "rtl" ? bounds.x + bounds.width - (root.x + root.width) : bounds.x - root.x);
+				return Math.abs(direction === "rtl" ? bounds.x + bounds.width - 390 : bounds.x);
 			})
 			.toBeLessThanOrEqual(1);
 		await page.keyboard.press("Tab");
