@@ -51,7 +51,8 @@ test("Menu opens with Enter, Space, and ArrowDown, navigates, and returns focus 
 			if (triggerBounds && contentBounds) {
 				const triggerEdge = direction === "ltr" ? triggerBounds.x : triggerBounds.x + triggerBounds.width;
 				const contentEdge = direction === "ltr" ? contentBounds.x : contentBounds.x + contentBounds.width;
-				expect(contentEdge).toBeCloseTo(triggerEdge, 0);
+				// Popup positioning can round a fractional trigger edge to the nearest pixel.
+				expect(Math.abs(contentEdge - triggerEdge)).toBeLessThanOrEqual(0.5);
 			}
 			await page.keyboard.press("ArrowDown");
 			await expect(
