@@ -4,6 +4,7 @@ import { AppShell } from "../../../../templates/app-shell/AppShell";
 import { ChatPage } from "../../../../templates/chat/ChatPage";
 import { Dashboard } from "../../../../templates/dashboard/Dashboard";
 import { List, type ListProps } from "../../../../templates/list/List";
+import { ListDetail, type ListDetailProps, type Order } from "../../../../templates/list-detail/ListDetail";
 import { Settings, type SettingsProps, settingsCopy } from "../../../../templates/settings/Settings";
 import { CopyCodeButton } from "../components/copy-code-button";
 import { siteCopy } from "../copy";
@@ -13,6 +14,7 @@ import "../../../../templates/app-shell/app-shell.css";
 import "../../../../templates/chat/chat.css";
 import "../../../../templates/dashboard/dashboard.css";
 import "../../../../templates/list/list.css";
+import "../../../../templates/list-detail/list-detail.css";
 import "../../../../templates/settings/settings.css";
 import "../styles/templates.css";
 
@@ -33,6 +35,31 @@ export const Route = createFileRoute("/templates/$name")({
 function ListPreview({ locale }: { locale: Locale }) {
 	const [filters, setFilters] = useState<NonNullable<ListProps["filters"]>>({ query: "", activeOnly: false });
 	return <List locale={locale} filters={filters} onFiltersChange={setFilters} />;
+}
+
+function exportOrders(orders: readonly Order[], locale: Locale) {
+	const rows = orders.map((order) => [order.id, order.customer[locale], order.date, order.status]);
+	const csv = [["Order", "Customer", "Date", "Status"], ...rows]
+		.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(","))
+		.join("\r\n");
+	const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+	const link = document.createElement("a");
+	link.href = url;
+	link.download = "orders.csv";
+	link.click();
+	URL.revokeObjectURL(url);
+}
+
+function ListDetailPreview({ locale, links }: { locale: Locale; links: ListDetailProps["links"] }) {
+	return (
+		<ListDetail
+			locale={locale}
+			links={links}
+			onExport={(orders) => exportOrders(orders, locale)}
+			onRefundRequest={() => window.alert(locale === "ar" ? "هذا الطلب للعرض فقط." : "This is a sample order.")}
+			onContact={() => window.alert(locale === "ar" ? "هذا العميل للعرض فقط." : "This is a sample customer.")}
+		/>
+	);
 }
 
 function SettingsPreview({ locale }: { locale: Locale }) {
@@ -92,11 +119,17 @@ function TemplatePage() {
 		rules: href("settings"),
 		chat: href("chat"),
 	};
-	const Page = name === "app-shell" ? null : pages[name];
+	const Page = name === "app-shell" || name === "list-detail" ? null : pages[name];
 	const clipboard = siteCopy[locale].getStartedPage;
 
 	return (
-		<div className="design-wrap template-preview">
+		<div
+			className={
+				name === "list-detail"
+					? "design-wrap template-preview template-preview--list-detail"
+					: "design-wrap template-preview"
+			}
+		>
 			<div className="template-preview__toolbar">
 				<nav aria-label={copy.title}>
 					<Link to="/templates" search={search}>
@@ -120,9 +153,13 @@ function TemplatePage() {
 					<a href={`https://github.com/moeghashim/tensquads-ui/blob/main/${file}`}>{copy.github}</a>
 				</section>
 			</div>
-			<AppShell current={destinations[name]} locale={locale} links={links}>
-				{Page && <Page key={`${name}-${locale}`} locale={locale} />}
-			</AppShell>
+			{name === "list-detail" ? (
+				<ListDetailPreview key={locale} locale={locale} links={{ ...links, orders: href(name) }} />
+			) : (
+				<AppShell current={destinations[name]} locale={locale} links={links}>
+					{Page && <Page key={`${name}-${locale}`} locale={locale} />}
+				</AppShell>
+			)}
 			{name === "app-shell" && (
 				<section id="detail-pages" className="template-preview__detail" aria-labelledby="detail-heading">
 					<h2 id="detail-heading">{copy.detail}</h2>

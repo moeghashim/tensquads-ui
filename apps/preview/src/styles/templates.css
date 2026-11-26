@@ -29,3 +29,8 @@
 .template-preview__detail h2 {
 	font-size: var(--ts-heading-xs-font-size);
 }
+
+.template-preview--list-detail > .template-shell {
+	border: thin solid var(--ts-border-subtle);
+	border-radius: var(--ts-radius-2xl);
+}

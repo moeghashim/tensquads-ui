@@ -28,13 +28,13 @@ test("admin dashboard filters companies and selects image details", async ({ pag
 	await expect(page.getByRole("row")).toHaveCount(5);
 	await page.getByRole("button", { name: "All", exact: true }).click();
 	await page.getByRole("row", { name: /registry\.agents\.example\/orders:1\.8\.2/ }).click();
-	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/orders:1.8.2");
+	await expect(page.locator(".template-detail-rows")).toContainText("registry.agents.example/orders:1.8.2");
 	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator(".dashboard-inset-row")).toHaveCount(2);
 	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(2);
 	await page.getByRole("button", { name: "With requests" }).click();
 	await expect(page.getByRole("row")).toHaveCount(6);
 	await page.getByRole("row", { name: /registry\.agents\.example\/analytics:1\.1\.2/ }).click();
-	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/analytics:1.1.2");
+	await expect(page.locator(".template-detail-rows")).toContainText("registry.agents.example/analytics:1.1.2");
 	await expect(page.locator(".dashboard-stack .ts-card").nth(1)).toContainText("No open bugs");
 	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(4);
 	await expectAccessible(page);
@@ -183,8 +183,8 @@ for (const locale of ["en", "ar"] as const) {
 			const cards = page.locator(".dashboard-stack .ts-card");
 			await expect(cards.first().getByRole("heading")).toHaveText(locale === "ar" ? nameAr : name);
 			await expect(cards.first().locator("p")).toHaveText(locale === "ar" ? roleAr : role);
-			await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? ageAr : age);
-			await expect(page.locator(".dashboard-details")).toContainText(locale === "ar" ? latestAr : latest);
+			await expect(page.locator(".template-detail-rows")).toContainText(locale === "ar" ? ageAr : age);
+			await expect(page.locator(".template-detail-rows")).toContainText(locale === "ar" ? latestAr : latest);
 			await expect(cards.nth(1).locator(".dashboard-inset-row")).toHaveCount(bugs);
 			await expect(cards.nth(2).locator(".dashboard-inset-row")).toHaveCount(requests);
 			if (!bugs) await expect(cards.nth(1).locator(".dashboard-empty-line")).toBeVisible();
@@ -254,7 +254,7 @@ for (const [locale, direction] of [
 						await page.getByRole("button", { name: locale === "ar" ? "صور الفرق" : "Squad images" }).click();
 						await expect(page).toHaveURL(/view=images/);
 						await expect(page.getByRole("dialog")).toHaveCount(0);
-						await expect(page.locator(".dashboard-details")).toContainText(
+						await expect(page.locator(".template-detail-rows")).toContainText(
 							locale === "ar" ? "منذ ٦ ساعات" : "6 hours ago",
 						);
 					}
