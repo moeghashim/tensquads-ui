@@ -119,7 +119,9 @@ test.each([
 	[{ start: "2026-10-10", end: "2026-10-10" }, "يوم واحد"],
 	[{ start: "2026-10-10", end: "2026-10-11" }, "يومان"],
 	[{ start: "2026-10-10", end: "2026-10-16" }, "٧ أيام"],
+	[{ start: "2026-10-10", end: "2026-10-20" }, "١١ يومًا"],
 	[{ start: "2026-10-10", end: "2026-10-23" }, "١٤ يومًا"],
+	[{ start: "2026-01-01", end: "2026-04-10" }, "١٠٠ يوم"],
 ])("counts %o in Arabic as %s", (value, expected) => {
 	render(<DateRangePicker locale="ar" aria-label="التواريخ" defaultValue={value} />);
 	fireEvent.click(screen.getByRole("button", { name: "التواريخ" }));

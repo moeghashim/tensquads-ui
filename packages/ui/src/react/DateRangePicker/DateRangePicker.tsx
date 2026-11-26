@@ -97,11 +97,11 @@ const copy = {
 		empty: "لم يُحدَّد نطاق تاريخ",
 		pickingEnd: "اختر تاريخ النهاية",
 		days: (count: string, n: number) => {
-			// Arabic counts: 1 يوم واحد, 2 يومان, 3–10 أيام, 11 and up يومًا.
 			const rule = arabicPlural.select(n);
 			if (rule === "one") return "يوم واحد";
 			if (rule === "two") return "يومان";
-			return `${count} ${rule === "few" ? "أيام" : "يومًا"}`;
+			if (rule === "few") return `${count} أيام`;
+			return `${count} ${rule === "many" ? "يومًا" : "يوم"}`;
 		},
 	},
 };
