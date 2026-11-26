@@ -37,10 +37,13 @@ test("Menu settings show checked, focused and disabled states in both locales an
 	for (const state of states) {
 		await openPreview(page, state, "/components/Menu");
 		const ar = state.locale === "ar";
+		await expect(page.locator('[data-slot="menu-content"][data-open]:popover-open')).toBeVisible();
+		const softTrigger = page.locator('[data-slot="menu-trigger"].ts-button--soft');
+		await softTrigger.click();
+		await expect(softTrigger).toHaveAttribute("aria-expanded", "false");
 		const trigger = page.getByRole("button", { name: ar ? "خيارات العرض" : "View options" });
 		await expect(trigger).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-		await trigger.focus();
-		await page.keyboard.press("ArrowDown");
+		await trigger.press("ArrowDown");
 
 		const guides = page.getByRole("menuitemcheckbox", { name: ar ? "إظهار الأدلة" : "Show guides" });
 		const grid = page.getByRole("menuitemcheckbox", { name: ar ? "إظهار الشبكة" : "Show grid" });
