@@ -98,6 +98,8 @@ export function GeneratedPanel({ stream }: { stream: string | null }) {
 
 The entry also exports `defineComponent`, `getRegisteredComponents`, and `createTensquadsLibrary(locale)`. Definitions use Zod props schemas and React components. The renderer's locale selects the cached library; localize the stream text yourself. OpenUI props must be serializable. Use React when a composition needs callbacks, arbitrary nodes, or client-side actions.
 
+In development, `@openuidev/react-lang` mounts an OpenUI "Inspect" button on its own. It is a dev tool, not part of your screen. To hide it, add `[data-openui-devtools-root] { display: none; }` to the app's global stylesheet. See [TensquadsRenderer](../../../packages/ui/src/openui/TensquadsRenderer.md#hide-the-openui-inspect-button).
+
 ## OpenUI on the server
 
 Import backend helpers from `@tensquads/ui/openui/server`. Validate the request, build a prompt for the same locale as the client, then stream the provider response:
