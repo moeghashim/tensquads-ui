@@ -65,6 +65,8 @@ function getViewport() {
 	return "medium";
 }
 
+const arabicPlural = new Intl.PluralRules("ar");
+
 const copy = {
 	en: {
 		start: "Start date",
@@ -79,7 +81,7 @@ const copy = {
 		reversed: "The end date is before the start date.",
 		empty: "No date range selected",
 		pickingEnd: "Choose an end date",
-		days: (count: string, singular: boolean) => `${count} ${singular ? "day" : "days"}`,
+		days: (count: string, n: number) => `${count} ${n === 1 ? "day" : "days"}`,
 	},
 	ar: {
 		start: "تاريخ البداية",
@@ -94,7 +96,13 @@ const copy = {
 		reversed: "تاريخ النهاية قبل تاريخ البداية.",
 		empty: "لم يُحدَّد نطاق تاريخ",
 		pickingEnd: "اختر تاريخ النهاية",
-		days: (count: string) => `${count} يومًا`,
+		days: (count: string, n: number) => {
+			// Arabic counts: 1 يوم واحد, 2 يومان, 3–10 أيام, 11 and up يومًا.
+			const rule = arabicPlural.select(n);
+			if (rule === "one") return "يوم واحد";
+			if (rule === "two") return "يومان";
+			return `${count} ${rule === "few" ? "أيام" : "يومًا"}`;
+		},
 	},
 };
 
@@ -534,7 +542,7 @@ export function DateRangePicker({
 															{" · "}
 															{words.days(
 																new Intl.NumberFormat(language).format(dayCount),
-																dayCount === 1,
+																dayCount,
 															)}
 														</span>
 													</>

@@ -114,3 +114,14 @@ test("Clear stays in the popup and Apply can be canceled", async () => {
 	expect(screen.getByRole("dialog")).toBeVisible();
 	expect(screen.getByRole("textbox", { name: "Start date" })).toHaveValue("10/10/2026");
 });
+
+test.each([
+	[{ start: "2026-10-10", end: "2026-10-10" }, "يوم واحد"],
+	[{ start: "2026-10-10", end: "2026-10-11" }, "يومان"],
+	[{ start: "2026-10-10", end: "2026-10-16" }, "٧ أيام"],
+	[{ start: "2026-10-10", end: "2026-10-23" }, "١٤ يومًا"],
+])("counts %o in Arabic as %s", (value, expected) => {
+	render(<DateRangePicker locale="ar" aria-label="التواريخ" defaultValue={value} />);
+	fireEvent.click(screen.getByRole("button", { name: "التواريخ" }));
+	expect(document.querySelector(".ts-date-range-picker__days")).toHaveTextContent(expected);
+});
