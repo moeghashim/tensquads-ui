@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:68406) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/dashboard-demos.spec.ts:4:1 › admin dashboard filters companies and selects image details (2.2s)
+  ✓  2 e2e/dashboard-demos.spec.ts:45:2 › admin image records and reference totals agree in en (2.2s)
+  ✓  3 e2e/dashboard-demos.spec.ts:45:2 › admin image records and reference totals agree in ar (2.0s)
+
+  3 passed (6.8s)

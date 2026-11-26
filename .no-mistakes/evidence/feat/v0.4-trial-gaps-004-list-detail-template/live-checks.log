@@ -1,0 +1,24 @@
+PASS Desktop keyboard selects adjacent order at 1024px and Escape restores row focus
+PASS Orders render at 1440px and mobile sheet opens and dismisses at 390px: en/light
+PASS Orders render at 1440px and mobile sheet opens and dismisses at 390px: en/dark
+PASS Orders render at 1440px and mobile sheet opens and dismisses at 390px: ar/light
+PASS Orders render at 1440px and mobile sheet opens and dismisses at 390px: ar/dark
+FAIL Search, status, archived and date filters reset paging and clear an empty result Error: expect(locator).toHaveValue(expected) failed
+
+Locator:  getByRole('searchbox', { name: 'Search orders' })
+Expected: ""
+Received: "no such order"
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveValue" getByRole('searchbox', { name: 'Search orders' }) with timeout 5000ms
+  - waiting for getByRole('searchbox', { name: 'Search orders' })
+    14 × locator resolved to <input type="search" data-filled="" data-slot="input" value="no such order" aria-label="Search orders" placeholder="Search orders" class="ts-input ts-input--soft"/>
+       - unexpected value "no such order"
+
+PASS Paid order refund opens demo notice; unpaid refund is disabled; export contains filtered rows
+PASS Template catalog discovery, copy source/styles, GitHub and Markdown delivery
+FAIL Existing AppShell navigation and extracted admin image detail styles still render TimeoutError: locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: 'Squad images', exact: true })[22m
+

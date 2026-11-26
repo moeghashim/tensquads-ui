@@ -1,0 +1,35 @@
+
+Running 1 test using 1 worker
+
+(node:68094) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/dashboard-demos.spec.ts:4:1 › admin dashboard filters companies and selects image details (6.3s)
+
+
+  1) e2e/dashboard-demos.spec.ts:4:1 › admin dashboard filters companies and selects image details ─
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.dashboard-details')
+    Expected substring: "registry.agents.example/orders:1.8.2"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" locator('.dashboard-details') with timeout 5000ms
+      - waiting for locator('.dashboard-details')
+
+
+      29 | 	await page.getByRole("button", { name: "All", exact: true }).click();
+      30 | 	await page.getByRole("row", { name: /registry\.agents\.example\/orders:1\.8\.2/ }).click();
+    > 31 | 	await expect(page.locator(".dashboard-details")).toContainText("registry.agents.example/orders:1.8.2");
+         | 	                                                 ^
+      32 | 	await expect(page.locator(".dashboard-stack .ts-card").nth(1).locator(".dashboard-inset-row")).toHaveCount(2);
+      33 | 	await expect(page.locator(".dashboard-stack .ts-card").nth(2).locator(".dashboard-inset-row")).toHaveCount(2);
+      34 | 	await page.getByRole("button", { name: "With requests" }).click();
+        at {run-worktree}/e2e/dashboard-demos.spec.ts:31:51
+
+    Error Context: ../../../evidence/01M8C2DHGWGBKZ1GSHY3KDMVVH/playwright/dashboard-demos-admin-dash-b626f-s-and-selects-image-details/error-context.md
+
+  1 failed
+    e2e/dashboard-demos.spec.ts:4:1 › admin dashboard filters companies and selects image details ──

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Desktop keyboard selects adjacent order at 1024px and Escape restores row focus",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Orders render at 1440px and mobile sheet opens and dismisses at 390px: en/light",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Orders render at 1440px and mobile sheet opens and dismisses at 390px: en/dark",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Orders render at 1440px and mobile sheet opens and dismisses at 390px: ar/light",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Orders render at 1440px and mobile sheet opens and dismisses at 390px: ar/dark",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Paid order refund opens demo notice; unpaid refund is disabled; export contains filtered rows",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Template catalog discovery, copy source/styles, GitHub and Markdown delivery",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-checks.log"
+  },
+  {
+    "name": "Search, status, archived and date filters reset paging and clear an empty result",
+    "result": "pass",
+    "live": true,
+    "evidence": "filters-recheck.log"
+  },
+  {
+    "name": "Existing AppShell navigation and extracted admin image detail styles still render",
+    "result": "pass",
+    "live": true,
+    "evidence": "shell-admin-recheck.log"
+  }
+]

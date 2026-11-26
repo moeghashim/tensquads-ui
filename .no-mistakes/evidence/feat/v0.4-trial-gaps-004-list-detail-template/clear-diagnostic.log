@@ -1,0 +1,52 @@
+click nonexistent Orders
+0
+Status: Processing
+All
+Paid
+Pending
+Processing
+Refunded
+Failed
+Hide archived orders
+No orders match
+
+Change the search or clear the filters.
+
+Clear filters
+enter  Orders
+128
+Status: All
+All
+Paid
+Pending
+Processing
+Refunded
+Failed
+Hide archived orders
+Orders
+Order	Customer	Date	Status	Total
+#1047	
+SA
+Sara Al-Qahtani
+	Nov 25, 2026	Pending	SAR 412.00
+#1046	
+OH
+Omar Haddad
+	Nov 25, 2026	Processing	SAR 1,290.00
+#1045	
+LF
+Lina Farouk
+	Nov 24, 2026	Paid	SAR 86.50
+#1044	
+YN
+Yousef Nasser
+	Nov 23, 2026	Paid	SAR 779.70
+#1043	
+HS
+Huda Salem
+	Nov 22, 2026	Refunded	SAR 240.00
+#1042	
+KM
+Khalid Mansour
+	Nov 21, 2026	Failed	SAR 155.00
+Showing 6 of 128

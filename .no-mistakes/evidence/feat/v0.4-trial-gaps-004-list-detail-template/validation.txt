@@ -1,0 +1,20 @@
+Task 004 live validation at target 5c2dc71511dfad7e329d0cde5d5e2ffc9aea9a1a
+Surface: production-built preview Worker at http://127.0.0.1:5187, Chromium, fictional bundled orders. No tenant or financial service contacted.
+
+Supplied baseline: MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- sh -c "npm ci --no-audit --no-fund && npm run verify" succeeded before this test turn; not rerun.
+
+Executed: PREVIEW_PORT=5187 MISE_TRUSTED_CONFIG_PATHS="$PWD/mise.toml" mise exec -- npx playwright test e2e/templates.spec.ts --grep 'list-detail|orders select|orders open' --workers=2 [evidence output/report options]
+Exit 0. Production preview build and all selected browser checks completed.
+Observed: English/Arabic in light/dark; 1440px list and desktop details, 390px bottom sheets; axe and document overflow checks; Enter/Space selection, ArrowUp, Escape and focus return; paging; status filtering; clipboard matches delivered source and CSS; Markdown twin and GitHub link.
+
+Disposable supplemental driver: local-list-detail.spec.ts (retained here; removed from e2e).
+Executed via npx playwright test e2e/local-list-detail.spec.ts --workers=1 --trace=on.
+Final-results retains successful Arabic responsive and gallery/admin runs.
+Final affected-case rerun: npx playwright test e2e/local-list-detail.spec.ts --grep 'filters reject|shared edges.*en' --workers=1 --trace=on. Exit 0.
+Observed: Searching padded #1044 resets pagination to one matching order. Its displayed subtotal is SAR 678.00, VAT SAR 101.70, total SAR 779.70; refund displays only the sample-order alert. A nonexistent order shows an empty state and removes the detail. Clear filters restores 128 nonarchived orders; showing archived gives 134. Last 7 days plus Processing yields orders 1046 (Nov 25) and 1040 (Nov 20); downloaded CSV contains only those processing orders. Refund is disabled for a processing order.
+Observed: LTR/RTL frame edges match the component catalog at 1440, 1024, 1023 and 390px. Details sit beside the table from 1024px; pointer selection opens a bottom sheet below, focuses it, contains Tab and returns focus with Escape. Phone tables retain native horizontal scrolling without document overflow.
+Observed: Arabic template catalog link opens Orders; /llms.txt lists its Markdown twin. Admin image selection renders registry.agents.example/orders:1.8.2 in a styled grid using the moved detail-row styles.
+
+Driver corrections: dismiss native alerts during click; await initial catalog layout; allow the badge in the Squad images accessible name; assert exported record eligibility instead of an incorrect guessed count; dismiss persistent status radio menu; wait for the prior sheet exit before reopening after resize. Earlier failing driver attempts do not establish product failures. No product files changed.
+Visual inspection: desktop English light, Arabic light, Arabic dark mobile sheet, and filtered processing-order screenshots. Screenshots also retained for all locale/theme combinations.
+Cleanup: disposable spec removed. Preview/browser children exited. lsof -nP -iTCP:5187 -sTCP:LISTEN returned 1 with no listener.

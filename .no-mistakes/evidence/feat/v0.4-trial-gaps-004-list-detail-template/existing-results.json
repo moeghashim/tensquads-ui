@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Existing AppShell navigation and extracted admin image detail styles still render",
+    "result": "pass",
+    "live": true
+  }
+]
