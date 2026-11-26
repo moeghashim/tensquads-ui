@@ -17,6 +17,7 @@ import { getPreviewState } from "../state";
 import { templateCopy } from "../template-catalog";
 import { foundationNames, llmsUrl } from "./design-reference";
 import { SitePageCommands, siteSearchEvent } from "./site-page-commands";
+import { BuilderTheme, useSiteTheme } from "./site-theme";
 import { useMarkdownHref } from "./use-markdown-href";
 
 function SiteCommandPalette(props: React.ComponentProps<typeof CommandPalette>) {
@@ -29,18 +30,14 @@ export function SiteShell() {
 	const path = useRouterState({ select: (state) => state.location.pathname });
 	const builder = path === "/nodes" || path.startsWith("/nodes/");
 	const navigate = useNavigate();
-	const { locale, theme } = getPreviewState(search);
+	const { locale } = getPreviewState(search);
+	const { theme, resolvedTheme } = useSiteTheme(search, builder);
 	const copy = siteCopy[locale];
 	const markdownHref = useMarkdownHref(locale);
 	const design = copy.designSystem;
 	const nextLocale = locale === "en" ? "ar" : "en";
 	const [paletteOpen, setPaletteOpen] = useState(false);
 	const change = (key: "locale" | "theme", value: string) => {
-		if (key === "theme" && value === "system") {
-			try {
-				window.localStorage.removeItem("tensquads.theme");
-			} catch {}
-		}
 		const nextSearch = { ...search, [key]: value };
 		if (key === "locale") nextSearch.dir = value === "ar" ? "rtl" : "ltr";
 		void navigate({ to: ".", search: nextSearch as never });
@@ -250,7 +247,9 @@ export function SiteShell() {
 				/>
 			)}
 			<SitePageCommands.Provider value={groups[0]}>
-				<Outlet />
+				<BuilderTheme.Provider value={resolvedTheme}>
+					<Outlet />
+				</BuilderTheme.Provider>
 			</SitePageCommands.Provider>
 			{!builder && (
 				<footer className="site-footer">

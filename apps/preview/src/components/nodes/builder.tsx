@@ -27,6 +27,7 @@ import { createLocalStorage } from "@ui-sdk/core";
 import { useContext, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
 import { type Direction, getPreviewState, type Locale } from "../../state";
 import { SitePageCommands, siteSearchEvent } from "../site-page-commands";
+import { BuilderTheme } from "../site-theme";
 import { builderCopy } from "./copy";
 import {
 	type DemoWorkflow,
@@ -70,27 +71,10 @@ function paletteSections(locale: Locale): PaletteSection[] {
 
 export function BuilderRoute({ id }: { id: WorkflowId }) {
 	const search = useRouterState({ select: (state) => state.location.search });
-	const { locale, direction, theme } = getPreviewState(search);
+	const { locale, direction } = getPreviewState(search);
+	const theme = useContext(BuilderTheme);
 	const navigate = useNavigate();
 	const workflow = useMemo(() => demoWorkflow(id, locale), [id, locale]);
-	const [preferredTheme, setPreferredTheme] = useState<"light" | "dark">("light");
-	useEffect(() => {
-		const media = window.matchMedia("(prefers-color-scheme: dark)");
-		const apply = () => {
-			const stored = themeStorage.get();
-			const next = stored === "light" || stored === "dark" ? stored : media.matches ? "dark" : "light";
-			setPreferredTheme(next);
-			if (theme === "system") document.documentElement.dataset.theme = next;
-		};
-		apply();
-		media.addEventListener("change", apply);
-		return () => {
-			media.removeEventListener("change", apply);
-			if (theme === "system" && !new URLSearchParams(window.location.search).has("theme")) {
-				delete document.documentElement.dataset.theme;
-			}
-		};
-	}, [theme]);
 	const setTheme = (next: "light" | "dark") => {
 		// A URL override can differ from the stored default. Persist an explicit choice even when it equals that default.
 		if (!themePreference.set(next)) themeStorage.set(next);
@@ -102,7 +86,7 @@ export function BuilderRoute({ id }: { id: WorkflowId }) {
 			workflow={workflow}
 			locale={locale}
 			dir={direction}
-			theme={theme === "system" ? preferredTheme : theme}
+			theme={theme}
 			onTheme={setTheme}
 		/>
 	);
