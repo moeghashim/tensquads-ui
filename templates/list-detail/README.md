@@ -25,8 +25,14 @@ Set `lang` and `dir` on `<html>`. For Arabic, pass `locale="ar"` and set `lang="
 
 ## Use your order data
 
-Pass `orders` newest first, with Gregorian ISO dates, prices in SAR and localized text. Pass the VAT amount from the order when available. The template otherwise calculates VAT at 15%. Set `links` to your app routes. Set `defaultRange` to the initial dates or `null` for all dates. Set `defaultSelectedId` to an order on the first filtered page to show its detail on desktop. Replace the example date presets and payment copy with values for your page.
+Pass `orders` newest first, with Gregorian ISO dates, prices in SAR and localized text. Pass the VAT amount from the order when available. The template otherwise calculates VAT at 15%. Set `links` to your app routes. The template includes AppShell; do not wrap it in another shell.
+
+Set `defaultRange` to the initial dates or `null` for all dates. If omitted, it filters to 1–26 November 2026. Set `defaultSelectedId` to an order on the first filtered page to show its detail on desktop. Replace the example date presets and payment copy with values for your page.
+
+Search matches the customer name or order number. Archived orders are hidden by default. Pages contain six orders. Changing a filter returns to the first page and closes the detail. Changing pages also closes the detail. Clear filters removes the search, status and date restrictions and keeps archived orders hidden.
 
 Bind `onExport` to export the filtered orders. Bind `onContact` to start a customer conversation and `onRefundRequest` to open your refund confirmation flow. The Refund button marks the amount and order number with `data-agent-confirm` so the agent bridge requires a person. The callback should request confirmation before moving money.
+
+Each action is disabled without its callback. Refund also requires a paid order. In the preview, Export downloads a CSV. Refund and Contact customer show sample-data alerts.
 
 Press Enter or Space on a row to select it. While the desktop detail is open, Up and Down move between rows and update it. Escape closes the detail and returns focus to the selected row.
