@@ -114,6 +114,17 @@
         "006-page-templates",
         "007-page-width"
       ]
+    },
+    {
+      "id": "v0.4-trial-gaps",
+      "status": "planned",
+      "tasks": [
+        "001-design-comps",
+        "002-component-fixes",
+        "003-date-range-picker",
+        "004-list-detail-template",
+        "005-agent-docs"
+      ]
     }
   ]
 }
