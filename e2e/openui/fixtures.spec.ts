@@ -86,6 +86,14 @@ test("every component fixture parses and renders", async ({ page }) => {
 				await page.keyboard.press("Enter");
 				await expect(dialog).toHaveCount(0);
 				await expect(fixtureRegion.getByRole("button", { name: trigger })).toBeFocused();
+			} else if (component.name === "DateRangePicker") {
+				const ar = locale === "ar";
+				const picker = fixtureRegion.getByRole("button", { name: ar ? "نطاق تاريخ الطلبات" : "Orders date range" });
+				await expect(picker).toHaveAccessibleDescription(ar ? /١٠.*٢٣/ : "Oct 10, 2026 – Oct 23, 2026");
+				await expect(
+					fixtureRegion.getByRole("textbox", { name: ar ? "تاريخ البداية" : "Start date" }),
+				).toBeVisible();
+				await expect(fixtureRegion.getByRole("textbox", { name: ar ? "تاريخ النهاية" : "End date" })).toBeVisible();
 			} else if (component.name === "Switch") {
 				await expect(
 					fixtureRegion.getByRole("switch", { name: locale === "en" ? "Product updates" : "تحديثات المنتج" }),

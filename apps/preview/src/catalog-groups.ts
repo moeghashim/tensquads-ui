@@ -1,6 +1,6 @@
 export const catalogGroups = {
 	actions: ["Button", "Menu", "Tooltip", "Chip", "SegmentedControl"],
-	forms: ["Input", "Field", "Switch", "Form"],
+	forms: ["Input", "Field", "DateRangePicker", "Switch", "Form"],
 	feedback: ["Badge", "Dialog", "EmptyState"],
 	data: ["StatTile", "BarChart", "Bars", "Distribution", "DataTable", "Card"],
 	chat: ["Chat", "ChatReply", "ChatLauncher", "ApprovalCard", "OwnerMessageView", "Squadmate"],
