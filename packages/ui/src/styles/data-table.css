@@ -17,6 +17,18 @@
 /* primary-soft is also the selected-row fill, so the tile switches to the surface to stay visible. */
 .ts-data-table tbody tr.is-selected .ts-data-table__tile--primary { background: var(--ts-surface); box-shadow: var(--ts-shadow-hairline); }
 .ts-data-table tbody tr.is-selected .ts-badge--default { background: var(--ts-surface); box-shadow: var(--ts-shadow-hairline); }
+/* Translucent badge fills blend with the selection, so these labels need stronger text colors. */
+.ts-data-table tbody tr.is-selected .ts-badge--info { color: var(--ts-info-surface-text); }
+[data-theme="dark"] .ts-data-table tbody tr.is-selected .ts-badge--success { color: var(--ts-green-300); }
+[data-theme="dark"] .ts-data-table tbody tr.is-selected .ts-badge--warning { color: var(--ts-orange-200); }
+[data-theme="dark"] .ts-data-table tbody tr.is-selected .ts-badge--danger { color: var(--ts-red-200); }
+[data-theme="dark"] .ts-data-table tbody tr.is-selected .ts-badge--info { color: var(--ts-info-text); }
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) .ts-data-table tbody tr.is-selected .ts-badge--success { color: var(--ts-green-300); }
+	:root:not([data-theme="light"]) .ts-data-table tbody tr.is-selected .ts-badge--warning { color: var(--ts-orange-200); }
+	:root:not([data-theme="light"]) .ts-data-table tbody tr.is-selected .ts-badge--danger { color: var(--ts-red-200); }
+	:root:not([data-theme="light"]) .ts-data-table tbody tr.is-selected .ts-badge--info { color: var(--ts-info-text); }
+}
 .ts-data-table tbody tr[tabindex]:focus-visible { outline: 2px solid var(--ts-ring); outline-offset: 2px; }
 .ts-data-table__toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--ts-space-2); }
 .ts-data-table__toolbar [data-slot="input"].ts-input { box-sizing: border-box; inline-size: 12rem; block-size: 32px; font-size: 14px; }

@@ -19,7 +19,7 @@ test("Menu shows open and closed states in both locales and themes", async ({ pa
 	for (const state of states) {
 		await openPreview(page, state, "/components/Menu");
 		await expect(page.getByRole("heading", { name: "Menu", level: 1, exact: true })).toBeVisible();
-		await expect(page.locator('[data-slot="menu-trigger"]')).toHaveCount(3);
+		await expect(page.locator('[data-slot="menu-trigger"]')).toHaveCount(4);
 		await expect(page.locator('[data-slot="menu-content"][data-open]')).toHaveCount(1);
 		await expect(page.locator('[data-slot="menu-item"][data-destructive]')).toHaveCount(1);
 		await expect(page.locator('[data-slot="menu-item"][data-disabled]')).toHaveCount(1);
@@ -28,6 +28,56 @@ test("Menu shows open and closed states in both locales and themes", async ({ pa
 		await expectAccessible(page);
 		await page.locator('[data-slot="menu-trigger"]').first().focus();
 		await expectThemeFocusRing(page, state.theme);
+	}
+});
+
+test("Menu settings show checked, focused and disabled states in both locales and themes", async ({
+	page,
+}, testInfo) => {
+	for (const state of states) {
+		await openPreview(page, state, "/components/Menu");
+		const ar = state.locale === "ar";
+		await expect(page.locator('[data-slot="menu-content"][data-open]:popover-open')).toBeVisible();
+		const softTrigger = page.locator('[data-slot="menu-trigger"].ts-button--soft');
+		await softTrigger.click();
+		await expect(softTrigger).toHaveAttribute("aria-expanded", "false");
+		const trigger = page.getByRole("button", { name: ar ? "خيارات العرض" : "View options" });
+		await expect(trigger).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+		await trigger.press("ArrowDown");
+
+		const guides = page.getByRole("menuitemcheckbox", { name: ar ? "إظهار الأدلة" : "Show guides" });
+		const grid = page.getByRole("menuitemcheckbox", { name: ar ? "إظهار الشبكة" : "Show grid" });
+		const compact = page.getByRole("menuitemradio", { name: ar ? "مضغوط" : "Compact" });
+		const comfortable = page.getByRole("menuitemradio", { name: ar ? "مريح" : "Comfortable" });
+		const indicator = (item: typeof guides) => item.locator('[data-slot="menu-item-indicator"]');
+		await expect(guides).toBeFocused();
+		await expect(guides).toHaveCSS("outline-width", "2px");
+		await expect(indicator(guides)).toHaveAttribute("data-checked", "");
+		await expect(indicator(compact)).toHaveAttribute("data-checked", "");
+		await expect(indicator(comfortable)).toHaveAttribute("data-unchecked", "");
+		await expect(indicator(compact)).toHaveCSS("border-radius", "9999px");
+		await expect(indicator(guides)).toHaveCSS("border-top-style", "solid");
+		await capturePreviewScreenshots(page, testInfo, `menu-settings-${state.locale}-${state.theme}`);
+		await expectAccessible(page);
+
+		await page.keyboard.press("Space");
+		await expect(guides).toHaveAttribute("aria-checked", "false");
+		await expect(indicator(guides)).toHaveAttribute("data-unchecked", "");
+		await page.keyboard.press("ArrowDown");
+		await expect(grid).toBeFocused();
+		await expect(grid).toHaveAttribute("aria-disabled", "true");
+		await expect(grid).toHaveCSS("cursor", "not-allowed");
+		await page.keyboard.press("Space");
+		await expect(grid).toHaveAttribute("aria-checked", "false");
+		await page.keyboard.press("ArrowDown");
+		await expect(compact).toBeFocused();
+		await page.keyboard.press("ArrowDown");
+		await expect(comfortable).toBeFocused();
+		await page.keyboard.press("Space");
+		await expect(comfortable).toHaveAttribute("aria-checked", "true");
+		await expect(compact).toHaveAttribute("aria-checked", "false");
+		await page.keyboard.press("Escape");
+		await expect(trigger).toBeFocused();
 	}
 });
 

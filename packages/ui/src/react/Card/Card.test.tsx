@@ -37,6 +37,20 @@ describe("Card", () => {
 		expect(getByTestId("card")).toHaveClass("ts-card--flush");
 	});
 
+	it("renders a React title and subtitle", () => {
+		const { getByRole, getByText } = render(<Card title={<span>Report</span>} subtitle={<em>This week</em>} />);
+		expect(getByRole("heading", { name: "Report", level: 2 })).toContainElement(
+			getByText("Report", { selector: "span" }),
+		);
+		expect(getByText("This week", { selector: "em" }).parentElement?.tagName).toBe("P");
+	});
+
+	it.each([0, 0n])("keeps %s in the heading and subtitle", (zero) => {
+		const { getByRole, getByText } = render(<Card title={zero} subtitle={zero} />);
+		expect(getByRole("heading", { name: "0", level: 2 })).toBeInTheDocument();
+		expect(getByText("0", { selector: "p" })).toBeInTheDocument();
+	});
+
 	it("keeps an ordinary OpenUI body without a tile grid", () => {
 		const onError = vi.fn();
 		const { getByText, container } = render(
