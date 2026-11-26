@@ -540,10 +540,7 @@ export function DateRangePicker({
 														<b>{rangeText}</b>
 														<span className="ts-date-range-picker__days">
 															{" · "}
-															{words.days(
-																new Intl.NumberFormat(language).format(dayCount),
-																dayCount,
-															)}
+															{words.days(new Intl.NumberFormat(language).format(dayCount), dayCount)}
 														</span>
 													</>
 												) : preview ? (
