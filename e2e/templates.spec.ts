@@ -97,6 +97,24 @@ test("list search and status filters can be cleared from the empty state", async
 	await expect(table.getByText("Coast Supply")).toBeVisible();
 });
 
+test("orders clear combined filters with one pointer click", async ({ page }) => {
+	await openPreview(page, { locale: "en", direction: "ltr", theme: "light" }, "/templates/list-detail");
+	const search = page.getByRole("searchbox", { name: "Search orders" });
+	await search.fill("#1044");
+	await page.getByRole("button", { name: "Status: All" }).click();
+	await page.getByRole("menuitemradio", { name: "Processing", exact: true }).click();
+	await expect(page.getByText("No orders match", { exact: true })).toBeVisible();
+	await expect(page.locator("[data-starting-style], [data-ending-style]")).toHaveCount(0);
+	await page.getByRole("button", { name: "Clear filters", exact: true }).click();
+	await expect(search).toHaveValue("");
+	await expect(page.getByRole("button", { name: "Status: All" })).toBeVisible();
+	const orders = page.getByRole("table", { name: "Orders" });
+	await expect(orders.getByRole("row").filter({ hasText: "#1044" })).toBeVisible();
+	await expect(page.getByText("Showing 6 of 128", { exact: true })).toBeVisible();
+	await expect(page.getByRole("button", { name: "Previous page" })).toBeDisabled();
+	await expect(page.locator(".template-order__panel")).toHaveCount(0);
+});
+
 test("settings save the chosen approval mode and switch state", async ({ page }) => {
 	await page.goto("/templates/settings");
 	const form = page.getByRole("form", { name: "New rule" });
