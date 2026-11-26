@@ -54,6 +54,8 @@ export type {
 export { CommandPalette, useCommandPaletteShortcut } from "./CommandPalette/CommandPalette.js";
 export type { DataTableColumn, DataTableProps, DataTableRow } from "./DataTable/DataTable.js";
 export { DataTable, EntityCell, PersonCell, StackCell, StatusCell } from "./DataTable/DataTable.js";
+export type { DateRange, DateRangePickerProps, DateRangePreset } from "./DateRangePicker/DateRangePicker.js";
+export { DateRangePicker } from "./DateRangePicker/DateRangePicker.js";
 export type {
 	DialogBackdropProps,
 	DialogCloseProps,

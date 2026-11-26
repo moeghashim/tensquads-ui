@@ -175,6 +175,7 @@ const en = {
 			Tooltip: "Give a short hint on hover or focus.",
 			Chip: "Open an attached tool or schema.",
 			SegmentedControl: "Choose one of several options.",
+			DateRangePicker: "Choose a start and end date.",
 			Input: "Enter one line of text.",
 			Field: "Label an input and show guidance.",
 			Switch: "Turn a setting on or off.",

@@ -88,6 +88,7 @@ import type { WorkflowGraph } from "../../../../packages/ui/src/schemas/workflow
 import { AGENT_LOOP_STATES, SQUADMATES } from "../../../../packages/ui/src/squadmates";
 import { componentDocumentName } from "../catalog-groups";
 import { CopyCodeButton } from "../components/copy-code-button";
+import { DateRangePreview } from "../components/date-range-preview";
 import { MarkdownDocument } from "../components/docs/markdown-document";
 import { MiniMapExample, WorkflowCardExample } from "../components/workflow-examples";
 import { siteCopy } from "../copy";
@@ -484,6 +485,7 @@ function ComponentExample() {
 	const { locale, direction } = getPreviewState(search);
 	const stream = fixtures[`../../../../packages/ui/src/react/${name}/${name}.fixture.${locale}.txt`];
 	if (name === "Node") return <NodePreview locale={locale} />;
+	if (name === "DateRangePicker") return <DateRangePreview locale={locale} stream={stream ?? null} />;
 	if (name === "Canvas") return <CanvasPreview locale={locale} direction={direction} />;
 	if (name === "Palette") return <PalettePreview locale={locale} direction={direction} />;
 	if (name === "MiniMap") return <MiniMapExample locale={locale} direction={direction} />;

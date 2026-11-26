@@ -157,6 +157,7 @@
 		border-end-end-radius: var(--ts-radius-lg);
 		background: var(--ts-surface);
 	}
+	.date-range-preview__examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--ts-space-6); }
 	.section-heading { display: flex; align-items: center; gap: var(--ts-space-2-5); }
 	.section-heading h2 {
 		margin-block: 0;
