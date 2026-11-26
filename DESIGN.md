@@ -114,7 +114,7 @@ The site header and footer share the page frame. The Nodes canvas fills the view
 
 ### Chat launcher
 
-When present, the workspace ChatLauncher sits at the bottom inline-end corner: a `--ts-primary-solid` pill with a squadmate and a count badge. It opens the chat with the lead agent. See the [AppShell setup](templates/app-shell/README.md#replace-the-sample-content) for launcher visibility. Reference: [Main.dc.html](/design/screens/Main.dc.html) ("CHAT DOCK"). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home). Leave room for it: the home panel adds `--ts-control-md` + `--ts-space-6` of padding at the bottom (`styles.css` `.dashboard-panel--home`).
+When present, the workspace ChatLauncher sits at the bottom inline-end corner: a `--ts-primary-solid` pill with a squadmate and a count badge. It opens the chat with the lead agent. Pass `showLauncher={false}` to `AppShell` to hide the launcher. Reference: [Main.dc.html](/design/screens/Main.dc.html) ("CHAT DOCK"). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home). Leave room for it: the home panel adds `--ts-control-md` + `--ts-space-6` of padding at the bottom (`styles.css` `.dashboard-panel--home`).
 
 ---
 
