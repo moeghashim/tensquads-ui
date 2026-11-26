@@ -99,6 +99,8 @@ npm install github:moeghashim/tensquads-ui#<commit-sha>
 
 The root package builds `packages/ui/dist` during installation. React and React DOM 19 are peer dependencies.
 
+The npm 11 warning about unreviewed install scripts and `allowScripts` is expected. The warning itself is informational.
+
 ## Styles, locale, and theme
 
 In the consumer's global stylesheet, declare the cascade order and import the library styles in this order:
@@ -171,6 +173,10 @@ export function GeneratedPanel({ stream }: { stream: string | null }) {
 The entry also exports `defineComponent`, `getRegisteredComponents`, and `createTensquadsLibrary(locale)`. Components register typed, serializable props. The renderer creates its library lazily and reports parse and render errors through `onError`.
 
 For chat replies, use `ChatReply` from `@tensquads/ui/react`. See the [ChatReply contract](packages/ui/src/react/ChatReply/ChatReply.md) for usage and the supported reply format.
+
+### Hide the OpenUI Inspect button
+
+To hide Inspect in development, add `[data-openui-devtools-root] { display: none; }` to your global stylesheet after the imports. See the [TensquadsRenderer reference](packages/ui/src/openui/TensquadsRenderer.md#hide-the-openui-inspect-button).
 
 ## OpenUI server
 

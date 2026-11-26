@@ -455,6 +455,32 @@ The accessible name is the character name and the state, for example `Petra, Pla
 - Put units in the display string: `1.08 s`, `42.5 h`, `$19.22`.
 - Show the comparison with a delta: `+12% vs last week`. Colour the delta (`--ts-success-text` or `--ts-danger-text`), not the value.
 
+#### Arabic currency
+
+Format SAR with `Intl.NumberFormat`. On the repository's Node version, `Intl.NumberFormat("ar", { style: "currency", currency: "SAR" })` uses Latin digits. Use the site's `ar-EG-u-nu-arab` locale to display 1250.5 as `١٬٢٥٠٫٥٠ ر.س.`. Pass the entire formatted string to the table cell and the StatTile value to preserve the currency spacing and direction marks.
+
+```tsx
+import { DataTable, StatTile } from "@tensquads/ui/react";
+
+const sar = new Intl.NumberFormat("ar-EG-u-nu-arab", {
+  style: "currency",
+  currency: "SAR",
+});
+
+export function OrderAmounts({ amount, total }: { amount: number; total: number }) {
+  return (
+    <>
+      <StatTile label="إجمالي الطلبات" value={sar.format(total)} />
+      <DataTable
+        caption="الطلبات"
+        columns={[{ key: "amount", label: "المبلغ", align: "end" }]}
+        rows={[{ id: "order-1", cells: { amount: sar.format(amount) } }]}
+      />
+    </>
+  );
+}
+```
+
 ---
 
 ## 8. Right to left
