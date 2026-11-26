@@ -27,12 +27,34 @@
 
 @media (min-width: 1024px) {
 	.template-order__layout:has(.template-order__panel) {
-		grid-template-columns: minmax(0, 1fr) clamp(16rem, 28vw, 23rem);
+		grid-template-columns: minmax(0, 1fr) clamp(16rem, calc(50% - 8rem), 23rem);
 	}
+}
+
+.template-order__list {
+	container-type: inline-size;
 }
 
 .template-order__list .ts-card__header {
 	flex-wrap: wrap;
+}
+
+@container (max-width: 42rem) {
+	.template-order__list .ts-data-table__entity {
+		min-inline-size: 0;
+	}
+
+	.template-order__list .ts-data-table :is(th, td) {
+		padding-inline: var(--ts-space-2);
+	}
+
+	.template-order__list .ts-data-table :is(th, td):first-child {
+		padding-inline-start: var(--ts-space-4);
+	}
+
+	.template-order__list .ts-data-table :is(th, td):last-child {
+		padding-inline-end: var(--ts-space-4);
+	}
 }
 
 .template-order__list .ts-data-table__entity-copy > span:empty {

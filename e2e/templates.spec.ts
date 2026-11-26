@@ -24,6 +24,13 @@ for (const [name, file, english, arabic] of templates) {
 					"href",
 					`https://github.com/moeghashim/tensquads-ui/blob/main/templates/${name}/${file}`,
 				);
+				if (name === "list-detail") {
+					await page.setViewportSize({ width: 1440, height: 900 });
+					const scroll = page.locator(".template-order__list .ts-data-table__scroll");
+					await expect
+						.poll(() => scroll.evaluate(({ scrollWidth, clientWidth }) => scrollWidth - clientWidth))
+						.toBe(0);
+				}
 				await capturePreviewScreenshots(page, testInfo, `template-${name}-${locale}-${theme}`);
 				await expectAccessible(page);
 				await expectNoHorizontalScroll(page);
