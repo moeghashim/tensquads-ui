@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { DataTable, EntityCell, PersonCell, StackCell } from "./DataTable.js";
+import { DataTable, EntityCell, PersonCell, StackCell, StatusCell } from "./DataTable.js";
 
 afterEach(cleanup);
 
@@ -32,6 +32,12 @@ describe("DataTable", () => {
 	it("derives entity initials from the first two words", () => {
 		const { getByText } = render(<EntityCell initials="No" name="Northstar Goods" detail="Store" />);
 		expect(getByText("NG")).toBeInTheDocument();
+	});
+
+	it("renders an informational status as an info Badge", () => {
+		render(<StatusCell label="Processing" tone="info" />);
+		expect(screen.getByText("Processing")).toHaveAttribute("data-slot", "badge");
+		expect(screen.getByText("Processing")).toHaveClass("ts-badge--info");
 	});
 	it.each(["ltr", "rtl"] as const)("preserves cell keyboard defaults and row selection in %s", (dir) => {
 		const onRowSelect = vi.fn();

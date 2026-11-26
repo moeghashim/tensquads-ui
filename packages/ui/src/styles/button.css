@@ -22,17 +22,17 @@
 	[data-slot="button"].ts-button--pill { border-radius: var(--ts-radius-full); }
 	[data-slot="button"].ts-button--icon-only { aspect-ratio: 1; padding-inline: 0; }
 
-	[data-slot="button"].ts-button--solid { color: var(--ts-text-inverse); background: var(--ts-primary-solid); }
-	[data-slot="button"].ts-button--solid:hover:not([data-disabled]) { background: var(--ts-primary-solid-hover); }
-	[data-slot="button"].ts-button--solid:active:not([data-disabled]) { background: var(--ts-primary-solid-active); }
-	[data-slot="button"].ts-button--soft { color: var(--ts-text-emphasis); background: var(--ts-primary-soft); }
-	[data-slot="button"].ts-button--soft:hover:not([data-disabled]) { background: var(--ts-primary-soft-hover); }
-	[data-slot="button"].ts-button--soft:active:not([data-disabled]) { background: var(--ts-primary-soft-active); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--solid { color: var(--ts-text-inverse); background: var(--ts-primary-solid); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--solid:hover:not([data-disabled]) { background: var(--ts-primary-solid-hover); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--solid:active:not([data-disabled]) { background: var(--ts-primary-solid-active); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--soft { color: var(--ts-text-emphasis); background: var(--ts-primary-soft); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--soft:hover:not([data-disabled]) { background: var(--ts-primary-soft-hover); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--soft:active:not([data-disabled]) { background: var(--ts-primary-soft-active); }
 	[data-slot="button"].ts-button--outline { color: var(--ts-text-emphasis); border-color: var(--ts-primary-outline-border); background: transparent; }
 	[data-slot="button"].ts-button--outline:hover:not([data-disabled]) { background: var(--ts-primary-outline-hover); }
-	[data-slot="button"].ts-button--ghost { color: var(--ts-text-secondary); background: transparent; }
-	[data-slot="button"].ts-button--ghost:hover:not([data-disabled]) { background: var(--ts-ghost-hover); }
-	[data-slot="button"].ts-button--ghost:active:not([data-disabled]) { background: var(--ts-ghost-active); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--ghost { color: var(--ts-text-secondary); background: transparent; }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--ghost:hover:not([data-disabled]) { background: var(--ts-ghost-hover); }
+	:is([data-slot="button"], [data-slot="menu-trigger"]:where(.ts-menu-trigger)).ts-button--ghost:active:not([data-disabled]) { background: var(--ts-ghost-active); }
 	[data-slot="button"].ts-button--danger {
 		--ts-button-danger-text: var(--ts-gray-0);
 		color: var(--ts-button-danger-text);

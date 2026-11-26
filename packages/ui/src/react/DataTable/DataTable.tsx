@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Badge } from "../Badge/Badge.js";
+import { Badge, type BadgeTone } from "../Badge/Badge.js";
 
 export type DataTableColumn = { key: string; label: string; align?: "start" | "end"; width?: string; mono?: boolean };
 export type DataTableRow = { id: string; cells: Record<string, string | ReactNode> };
@@ -58,13 +58,7 @@ export function StackCell({ primary, secondary }: { primary: string; secondary: 
 	);
 }
 
-export function StatusCell({
-	label,
-	tone = "default",
-}: {
-	label: string;
-	tone?: "default" | "success" | "warning" | "danger";
-}) {
+export function StatusCell({ label, tone }: { label: string; tone?: BadgeTone }) {
 	return <Badge tone={tone}>{label}</Badge>;
 }
 

@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound, redirect, useNavigate, useRouterState 
 import { getRegisteredComponents, TensquadsRenderer } from "@tensquads/ui/openui";
 import { useEffect, useRef, useState } from "react";
 import { ApprovalCard } from "../../../../packages/ui/src/react/ApprovalCard/ApprovalCard";
-import { Badge } from "../../../../packages/ui/src/react/Badge/Badge";
+import { Badge, type BadgeTone } from "../../../../packages/ui/src/react/Badge/Badge";
 import { Button } from "../../../../packages/ui/src/react/Button/Button";
 import { Canvas, type CanvasHandle } from "../../../../packages/ui/src/react/Canvas/Canvas";
 import { Card } from "../../../../packages/ui/src/react/Card/Card";
@@ -40,9 +40,13 @@ import { Input } from "../../../../packages/ui/src/react/Input/Input";
 import { Inspector } from "../../../../packages/ui/src/react/Inspector/Inspector";
 import {
 	Menu,
+	MenuCheckboxItem,
 	MenuContent,
 	MenuItem,
 	MenuItemIcon,
+	MenuItemIndicator,
+	MenuRadioGroup,
+	MenuRadioItem,
 	MenuSeparator,
 	MenuTrigger,
 } from "../../../../packages/ui/src/react/Menu/Menu";
@@ -309,6 +313,33 @@ function FormExample({ locale, stream }: { locale: "en" | "ar"; stream: string }
 	);
 }
 
+function SelectedStatusPreview({ locale }: { locale: "en" | "ar" }) {
+	const [selectedId, setSelectedId] = useState("default");
+	const ar = locale === "ar";
+	const statuses: { tone: BadgeTone; label: string }[] = [
+		{ tone: "default", label: ar ? "جديد" : "New" },
+		{ tone: "success", label: ar ? "مكتمل" : "Complete" },
+		{ tone: "warning", label: ar ? "بانتظار المراجعة" : "Awaiting review" },
+		{ tone: "danger", label: ar ? "فشل" : "Failed" },
+		{ tone: "info", label: ar ? "قيد المعالجة" : "Processing" },
+	];
+	const title = ar ? "حالات الطلبات" : "Order statuses";
+	return (
+		<Card title={title} flush>
+			<DataTable
+				caption={title}
+				columns={[{ key: "status", label: ar ? "الحالة" : "Status" }]}
+				rows={statuses.map(({ tone, label }) => ({
+					id: tone,
+					cells: { status: <StatusCell tone={tone} label={label} /> },
+				}))}
+				selectedId={selectedId}
+				onRowSelect={setSelectedId}
+			/>
+		</Card>
+	);
+}
+
 function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stream: string | null; empty: boolean }) {
 	const [selectedId, setSelectedId] = useState("acme");
 	const [query, setQuery] = useState(empty ? (locale === "ar" ? "شركة غير موجودة" : "Unmatched company") : "");
@@ -438,6 +469,11 @@ function CompaniesPreview({ locale, stream, empty }: { locale: "en" | "ar"; stre
 			<section className="component-list" aria-label={ar ? "عينة OpenUI" : "OpenUI fixture"}>
 				<TensquadsRenderer stream={stream} locale={locale} />
 			</section>
+			{!empty && (
+				<div>
+					<SelectedStatusPreview locale={locale} />
+				</div>
+			)}
 		</div>
 	);
 }
@@ -1319,19 +1355,46 @@ ${menuContentsCode}
 					<div>
 						<h2>{locale === "ar" ? "مفتوح" : "Open"}</h2>
 						<Menu defaultOpen onAction={() => undefined}>
-							<MenuTrigger>{labels.trigger}</MenuTrigger>
+							<MenuTrigger variant="soft">{labels.trigger}</MenuTrigger>
 							<MenuContent side="bottom" align="start">
 								{menuContents}
 							</MenuContent>
 						</Menu>
 						<ExampleCodeBlock
 							code={`<Menu defaultOpen onAction={() => undefined}>
-  <MenuTrigger>${labels.trigger}</MenuTrigger>
+  <MenuTrigger variant="soft">${labels.trigger}</MenuTrigger>
   <MenuContent side="bottom" align="start">
 ${menuContentsCode}
   </MenuContent>
 </Menu>`}
 						/>
+					</div>
+					<div>
+						<h2>{locale === "ar" ? "تفضيلات العرض" : "View preferences"}</h2>
+						<Menu>
+							<MenuTrigger variant="ghost">{locale === "ar" ? "خيارات العرض" : "View options"}</MenuTrigger>
+							<MenuContent side="bottom" align="start">
+								<MenuCheckboxItem value="guides" defaultChecked>
+									<MenuItemIndicator keepMounted />
+									{locale === "ar" ? "إظهار الأدلة" : "Show guides"}
+								</MenuCheckboxItem>
+								<MenuCheckboxItem value="grid" disabled>
+									<MenuItemIndicator keepMounted />
+									{locale === "ar" ? "إظهار الشبكة" : "Show grid"}
+								</MenuCheckboxItem>
+								<MenuSeparator />
+								<MenuRadioGroup defaultValue="compact" aria-label={locale === "ar" ? "كثافة العرض" : "Density"}>
+									<MenuRadioItem value="compact">
+										<MenuItemIndicator keepMounted />
+										{locale === "ar" ? "مضغوط" : "Compact"}
+									</MenuRadioItem>
+									<MenuRadioItem value="comfortable">
+										<MenuItemIndicator keepMounted />
+										{locale === "ar" ? "مريح" : "Comfortable"}
+									</MenuRadioItem>
+								</MenuRadioGroup>
+							</MenuContent>
+						</Menu>
 					</div>
 				</section>
 				<section className="component-list" aria-label={locale === "ar" ? "عينة OpenUI" : "OpenUI fixture"}>

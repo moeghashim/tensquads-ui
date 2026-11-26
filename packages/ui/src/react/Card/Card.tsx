@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 
-type DivProps = ComponentProps<"div">;
+type DivProps = Omit<ComponentProps<"div">, "title">;
 
 export type CardLegendItem = { label: string; value?: string };
 export type CardProps = DivProps & {
@@ -27,6 +27,8 @@ export function Card({
 	className,
 	...props
 }: CardProps) {
+	const hasTitle = Boolean(title) || title === 0 || title === 0n;
+	const hasSubtitle = Boolean(subtitle) || subtitle === 0 || subtitle === 0n;
 	return (
 		<section
 			{...props}
@@ -34,14 +36,14 @@ export function Card({
 			data-variant={variant}
 			className={["ts-card", flush && "ts-card--flush", className].filter(Boolean).join(" ")}
 		>
-			{(title || subtitle || count || actions || legend) && (
+			{hasTitle || hasSubtitle || count || actions || legend ? (
 				<header className="ts-card__header" data-slot="card-header">
 					<div className="ts-card__heading">
 						<div className="ts-card__title-row">
-							{title && <h2 className="ts-card__title">{title}</h2>}
+							{hasTitle && <h2 className="ts-card__title">{title}</h2>}
 							{count != null && <span className="ts-card__count">{count}</span>}
 						</div>
-						{subtitle && <p className="ts-card__subtitle">{subtitle}</p>}
+						{hasSubtitle && <p className="ts-card__subtitle">{subtitle}</p>}
 					</div>
 					{(actions || legend) && (
 						<div className="ts-card__head-end">
@@ -64,7 +66,7 @@ export function Card({
 						</div>
 					)}
 				</header>
-			)}
+			) : null}
 			<div className="ts-card__body" data-slot="card-body">
 				{children}
 			</div>
