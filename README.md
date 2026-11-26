@@ -176,7 +176,7 @@ For chat replies, use `ChatReply` from `@tensquads/ui/react`. See the [ChatReply
 
 ### Hide the OpenUI Inspect button
 
-To hide the development Inspect widget, use the [CSS workaround in the TensquadsRenderer reference](packages/ui/src/openui/TensquadsRenderer.md#hide-the-openui-inspect-button).
+To hide Inspect in development, add `[data-openui-devtools-root] { display: none; }` to your global stylesheet after the imports. See the [TensquadsRenderer reference](packages/ui/src/openui/TensquadsRenderer.md#hide-the-openui-inspect-button).
 
 ## OpenUI server
 
