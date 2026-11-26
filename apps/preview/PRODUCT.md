@@ -16,7 +16,7 @@ See the [README introduction](../../README.md#tensquads-ui) for the product and 
 One component set that both a coding agent (React) and a live server agent (OpenUI streams) can use, bilingual English and Arabic with real right-to-left, on top of UI SDK instead of a fork.
 
 ## Operating Context
-Live at https://tensquads-ui-preview.mohanadgh.workers.dev (address kept; no custom domain). Deployed by hand from `main`. Agents follow the [README reading order](../../README.md#for-coding-agents). Locale, direction and theme live in the URL.
+Live at https://tensquads-ui-preview.mohanadgh.workers.dev (address kept; no custom domain). Deployed by hand from `main`. Agents follow the [README reading order](../../README.md#for-coding-agents). See the [Site guide](../../README.md#site) for language, direction and theme controls.
 
 ## Capabilities and Constraints
 - See [llms.txt](../../llms.txt) for the generated component documentation index.

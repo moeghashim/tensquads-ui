@@ -42,6 +42,56 @@ async function drag(page: Page, source: Locator, destination: { x: number; y: nu
 }
 
 for (const locale of ["en", "ar"] as const) {
+	for (const route of ["/nodes", "/nodes/support"]) {
+		for (const systemTheme of ["light", "dark"] as const) {
+			test(`Header System follows the OS on ${route} in ${locale} with ${systemTheme} OS`, async ({ page }) => {
+				const ar = locale === "ar";
+				const themeLabels = ar ? { light: "فاتحة", dark: "داكنة" } : { light: "Light", dark: "Dark" };
+				const opposite = systemTheme === "dark" ? "light" : "dark";
+				await page.setViewportSize({ width: 1440, height: 900 });
+				await page.emulateMedia({ colorScheme: systemTheme });
+				await openPreview(page, { locale, direction: ar ? "rtl" : "ltr", theme: systemTheme }, route);
+				await page.waitForLoadState("networkidle");
+				for (const trigger of ["shortcut", "palette"]) {
+					await page.locator('[data-slot="workflow-canvas"]').focus();
+					if (trigger === "shortcut") await page.keyboard.press("ControlOrMeta+Shift+T");
+					else
+						await command(
+							page,
+							ar ? "تبديل المظهر" : "Toggle theme",
+							ar ? "البحث في مسار العمل" : "Search workflow",
+						);
+					await expect(page.locator("html")).toHaveAttribute("data-theme", opposite);
+					await expect.poll(() => page.evaluate(() => localStorage.getItem("tensquads.theme"))).toBe(opposite);
+					await page.goto(`${route}?locale=${locale}&theme=${systemTheme}`);
+					await expect(page.locator("html")).toHaveAttribute("data-theme", systemTheme);
+					await expect(page.getByRole("radio", { name: themeLabels[systemTheme], exact: true })).toBeChecked();
+					await page.goto(ar ? `${route}?locale=ar&dir=rtl` : route);
+					await expect(page.locator("html")).toHaveAttribute("data-theme", opposite);
+					await expect(page.getByRole("radio", { name: themeLabels[opposite], exact: true })).toBeChecked();
+					const system = page.getByRole("radio", { name: ar ? "النظام" : "System", exact: true });
+					await system.click();
+					await expect(system).toBeChecked();
+					await expect(page.locator("html")).toHaveAttribute("data-theme", systemTheme);
+					await expect.poll(() => page.evaluate(() => localStorage.getItem("tensquads.theme"))).toBeNull();
+					await page.locator('[data-slot="workflow-canvas"]').focus();
+					await page.keyboard.press("ControlOrMeta+Shift+T");
+					await expect.poll(() => page.evaluate(() => localStorage.getItem("tensquads.theme"))).toBe(opposite);
+					await page.goto(`${route}?locale=${locale}&theme=system`);
+					await expect(system).toBeChecked();
+					await expect(page.locator("html")).toHaveAttribute("data-theme", systemTheme);
+					await expect.poll(() => page.evaluate(() => localStorage.getItem("tensquads.theme"))).toBeNull();
+					await page.emulateMedia({ colorScheme: opposite });
+					await expect(page.locator("html")).toHaveAttribute("data-theme", opposite);
+					await page.reload();
+					await expect(system).toBeChecked();
+					await expect(page.locator("html")).toHaveAttribute("data-theme", opposite);
+					await page.emulateMedia({ colorScheme: systemTheme });
+					await expect(page.locator("html")).toHaveAttribute("data-theme", systemTheme);
+				}
+			});
+		}
+	}
 	test(`Distant command destinations retain focus and visibility in ${locale}`, async ({ page }) => {
 		await page.setViewportSize({ width: 1440, height: 900 });
 		const ar = locale === "ar";
@@ -290,7 +340,8 @@ test("workflow cards open the localized demos and edits end when leaving the pag
 	await page.getByRole("button", { name: "Undo (⌘Z)" }).click();
 	await expect(step(page, "step-1")).toHaveCount(1);
 	await page.emulateMedia({ colorScheme: "dark" });
-	await page.getByRole("button", { name: "Switch to light theme" }).click();
+	await page.locator('[data-slot="workflow-canvas"]').focus();
+	await page.keyboard.press("ControlOrMeta+Shift+T");
 	await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 	await page.goto("/nodes");
 	await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
