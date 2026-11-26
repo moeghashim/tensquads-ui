@@ -7,7 +7,7 @@ priority: medium
 files: ["templates/**", "apps/preview/**", "e2e/**", "DESIGN.md", "llms.txt"]
 ---
 
-Starts after Moe approves the comp in task 001, and after tasks 002 and 003 merge (it uses DateRangePicker and the Menu trigger variants).
+Moe approved the comp in task 001 on 2026-11-26 (`apps/preview/.impeccable/mocks/list-detail/`). Starts after tasks 002 and 003 merge (it uses DateRangePicker and the Menu trigger variants).
 
 ## Acceptance criteria
 - [ ] `templates/list-detail/`: the approved Orders list with filters, a DataTable with a selectable row, and a detail panel beside it at 1024 px and above, a sheet below. Built only from the library.
