@@ -114,7 +114,7 @@ The site header and footer share the page frame. The Nodes canvas fills the view
 
 ### Chat launcher
 
-Every workspace page has a ChatLauncher at the bottom inline-end corner: a `--ts-primary-solid` pill with a squadmate and a count badge. It opens the chat with the lead agent. Reference: [Main.dc.html](/design/screens/Main.dc.html) ("CHAT DOCK"). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home). Leave room for it: the home panel adds `--ts-control-md` + `--ts-space-6` of padding at the bottom (`styles.css` `.dashboard-panel--home`).
+When present, the workspace ChatLauncher sits at the bottom inline-end corner: a `--ts-primary-solid` pill with a squadmate and a count badge. It opens the chat with the lead agent. See the [App shell guide](templates/app-shell/README.md#replace-the-sample-content) for launcher visibility. Reference: [Main.dc.html](/design/screens/Main.dc.html) ("CHAT DOCK"). Live: [/dashboards/home](https://tensquads-ui-preview.mohanadgh.workers.dev/dashboards/home). Leave room for it: the home panel adds `--ts-control-md` + `--ts-space-6` of padding at the bottom (`styles.css` `.dashboard-panel--home`).
 
 ---
 
@@ -191,7 +191,7 @@ Use List and detail when selecting a table row should keep the list in view. At 
 | Summary | One full-width `Card` | `--ts-space-4` (built) |
 | Key numbers | `StatTile` row in `ts-stat-grid` | `--ts-space-4` |
 | Main and side | Two Cards, 3:2 (`dashboard-grid--3-2`). The side column is a stack of Cards with gap `--ts-space-4` (`styles.css` `.dashboard-stack`). | `--ts-space-4` |
-| Facts | A `dl` grid: labels `--ts-text-secondary`, values `--ts-text-emphasis`, identifiers in `--ts-font-mono` (`styles.css` `.dashboard-details`) | — |
+| Facts | A `dl` grid: labels `--ts-text-secondary`, values `--ts-text-emphasis`, identifiers in `--ts-font-mono` ([list-detail.css](templates/list-detail/list-detail.css) `.template-detail-rows`) | — |
 | Actions | One solid `Button` and one `soft` Button, gap `--ts-space-2`, `--ts-space-4` above (`styles.css` `.dashboard-actions`) | — |
 
 ### 4.4 Settings and forms
