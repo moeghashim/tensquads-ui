@@ -59,6 +59,54 @@ for (const locale of ["en", "ar"] as const) {
 		});
 	}
 
+	test(`DateRangePicker ${locale} one-month pending endpoints survive navigation`, async ({ page }) => {
+		await page.setViewportSize({ width: 1023, height: 900 });
+		await openPreview(page, { locale, direction, theme: "light" }, route);
+		const trigger = page.getByRole("button", { name: triggerName, exact: true });
+		const dialog = page.getByRole("dialog", { name: triggerName });
+		const day = (iso: string) => dialog.locator(`[data-slot="calendar-day"][data-value="${iso}"]`);
+		const footer = dialog.locator(".ts-date-range-picker__footer");
+		const start = page.locator(".ts-date-range-picker__input[data-preview] > span").first();
+		const apply = dialog.getByRole("button", { name: locale === "ar" ? "تطبيق" : "Apply" });
+		await trigger.click();
+		await expect(dialog.getByRole("grid")).toHaveCount(1);
+		await day("2026-10-14").click();
+		await page.keyboard.press("PageDown");
+		await expect(day("2026-11-14")).toBeFocused();
+		await expect(day("2026-10-14")).toHaveCount(0);
+		await expect(start).toContainText(locale === "ar" ? "١٤" : "Oct 14, 2026");
+		await expect(footer).toContainText(locale === "ar" ? "٣٢ يومًا" : "32 days");
+		await expect(apply).toBeDisabled();
+		await expect(dialog.getByRole("button", { name: locale === "ar" ? "مخصص" : "Custom" })).toHaveAttribute(
+			"aria-pressed",
+			"true",
+		);
+		await page.keyboard.press("PageUp");
+		await page.keyboard.press("PageUp");
+		await expect(day("2026-09-14")).toBeFocused();
+		await expect(start).toContainText(locale === "ar" ? "١٤" : "Sep 14, 2026");
+		await expect(footer).toContainText(locale === "ar" ? "٣١ يومًا" : "31 days");
+		await expect(apply).toBeDisabled();
+		await page.keyboard.press("PageDown");
+		await page.keyboard.press("PageDown");
+		await page.keyboard.press("Enter");
+		await expect(apply).toBeEnabled();
+		await apply.click();
+		await expect(dialog).toHaveCount(0);
+		const committed = locale === "ar" ? /١٤.*١٤/ : "Oct 14, 2026 – Nov 14, 2026";
+		await expect(trigger).toHaveAccessibleDescription(committed);
+		await trigger.click();
+		await day("2026-10-14").click();
+		await page.keyboard.press("PageDown");
+		await expect(footer).toContainText(locale === "ar" ? "٣٢ يومًا" : "32 days");
+		await page.keyboard.press("Escape");
+		await expect(dialog).toHaveCount(0);
+		await expect(trigger).toBeFocused();
+		await expect(trigger).toHaveAccessibleDescription(committed);
+		await trigger.click();
+		await expect(dialog.locator("[data-preview]")).toHaveCount(0);
+	});
+
 	test(`DateRangePicker ${locale} keyboard navigation, cancellation and Apply`, async ({ page }) => {
 		await openPreview(page, { locale, direction, theme: "light" }, route);
 		const trigger = page.getByRole("button", { name: triggerName, exact: true });

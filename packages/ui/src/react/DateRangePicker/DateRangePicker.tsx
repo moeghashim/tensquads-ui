@@ -185,8 +185,10 @@ type RangePreview = { start: string | null; end: string | null };
 function useCalendarPreview() {
 	const [calendar, setCalendar] = useState<HTMLDivElement | null>(null);
 	const [preview, setPreview] = useState<RangePreview | null>(null);
+	const anchor = useRef<string | null>(null);
 	useEffect(() => {
 		if (!calendar) {
+			anchor.current = null;
 			setPreview(null);
 			return;
 		}
@@ -194,10 +196,16 @@ function useCalendarPreview() {
 		const update = () => {
 			const first = calendar.querySelector("[data-preview][data-range-start]");
 			const last = calendar.querySelector("[data-preview][data-range-end]");
-			const start = first?.getAttribute("data-value") ?? null;
-			const end = last?.getAttribute("data-value") ?? null;
+			const firstDate = first?.getAttribute("data-value") ?? null;
+			const lastDate = last?.getAttribute("data-value") ?? null;
+			const pending = calendar.querySelector("[data-preview]");
+			if (!pending) anchor.current = null;
+			else anchor.current ??= firstDate ?? lastDate;
+			const start = firstDate ?? anchor.current;
+			const end = lastDate ?? anchor.current;
 			setPreview((current) => {
-				if (!first && !last) return null;
+				if (!pending) return null;
+				if (!firstDate && !lastDate) return current;
 				if (current?.start === start && current.end === end) return current;
 				return { start, end };
 			});
@@ -215,7 +223,7 @@ function useCalendarPreview() {
 	function cancelPreview() {
 		// The SDK cancels an unfinished range on a calendar day's Escape key.
 		calendar
-			?.querySelector("[data-preview]")
+			?.querySelector('[data-slot="calendar-day"]')
 			?.dispatchEvent(
 				new KeyboardEvent("keydown", { key: "Escape", code: "Escape", bubbles: true, cancelable: true }),
 			);
