@@ -70,7 +70,7 @@ The Design reference row on the home and foundations pages opens Principles at `
 
 Every page, including Nodes, uses the same site header with navigation, Search, language and Light, Dark or System controls. Browse the grouped catalog at `/components`. Filter by component name, description or OpenUI support, then select a card to open `/components/$name`. Navigation preserves the URL settings (`locale=en|ar`, `dir=ltr|rtl`, `theme=light|dark|system`). Changing the site language also sets its direction. Use `/get-started` for the English and Arabic setup guide with copyable examples.
 
-Browse `/templates` for the app shell, dashboard, list, settings and chat examples. Each `/templates/<name>` page offers Copy source, Copy styles and a GitHub source link. These are copyable examples, not package exports. Follow the template's README, also included in its Markdown twin, for setup and replacement guidance.
+Browse `/templates` for copyable page examples. See the [template index](llms.txt#templates) for the available layouts. Each `/templates/<name>` page offers Copy source, Copy styles and a GitHub source link. These are copyable examples, not package exports. Follow the template's README, also included in its Markdown twin, for setup and replacement guidance.
 
 Open Nodes at `/nodes` or `/nodes/support` to edit Support triage. The builder's Workflows link opens `/workflows`, with cards for Support triage, Order review and Store onboarding. Each card opens `/nodes/<id>`. Activity figures are sample data. The builder supports English and Arabic and mirrors the graph in RTL. Edits and history reset when you leave the builder or change its workflow, language or direction.
 
