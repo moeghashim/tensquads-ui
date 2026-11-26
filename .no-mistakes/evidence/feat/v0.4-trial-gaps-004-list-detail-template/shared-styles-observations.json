@@ -1,0 +1,13 @@
+{
+  "selectedImage": "Image\nregistry.agents.example/orders:1.8.2\nVersion\n1.8.2\nLast updated\n6 hours ago\nDeployed to\n34\nOn latest\n22 of 34 (65%)",
+  "styles": {
+    "display": "grid",
+    "columns": "98.7969px 197.594px",
+    "gap": "8px 16px",
+    "valueFont": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+  },
+  "markdown": {
+    "status": 200,
+    "type": "text/markdown; charset=utf-8"
+  }
+}

@@ -1,16 +1,16 @@
 {
   "config": {
     "argv": [
-      "/opt/homebrew/Cellar/node/26.13.1_2/bin/node",
+      "~/.local/share/mise/installs/node/26.13.1/bin/node",
       "{run-worktree}/node_modules/.bin/playwright",
       "test",
       "--config",
-      ".test-phase.config.ts",
-      "e2e/dashboard-demos.spec.ts",
+      ".local-validation/playwright.config.ts",
+      "templates.spec.ts",
       "--grep",
-      "admin dashboard filters companies and selects image details|admin image records and reference totals"
+      "list-detail copies|orders clear|orders select|app shell supplies|templates are discoverable"
     ],
-    "configFile": "{run-worktree}/.test-phase.config.ts",
+    "configFile": "{run-worktree}/.local-validation/playwright.config.ts",
     "rootDir": "{run-worktree}/e2e",
     "failOnFlakyTests": false,
     "forbidOnly": false,
@@ -27,7 +27,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "~/.no-mistakes/evidence/01M8C2DHGWGBKZ1GSHY3KDMVVH/playwright",
+        "outputDir": "~/.no-mistakes/evidence/01M8C6E2WKXYMMG8EH23GQHD1H/playwright",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -47,7 +47,7 @@
       {
         "grep": {},
         "grepInvert": null,
-        "outputDir": "~/.no-mistakes/evidence/01M8C2DHGWGBKZ1GSHY3KDMVVH/playwright",
+        "outputDir": "~/.no-mistakes/evidence/01M8C6E2WKXYMMG8EH23GQHD1H/playwright",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -61,7 +61,8 @@
         "timeout": 30000,
         "use": {
           "baseURL": "http://127.0.0.1:5187",
-          "browserName": "chromium"
+          "browserName": "chromium",
+          "headless": true
         },
         "dependencies": [],
         "ignoreSnapshots": false,
@@ -77,7 +78,7 @@
       [
         "json",
         {
-          "outputFile": "~/.no-mistakes/evidence/01M8C2DHGWGBKZ1GSHY3KDMVVH/targeted-results.json"
+          "outputFile": "~/.no-mistakes/evidence/01M8C6E2WKXYMMG8EH23GQHD1H/targeted-results.json"
         }
       ]
     ],
@@ -90,18 +91,18 @@
     "updateSnapshots": "default",
     "updateSourceMethod": "patch",
     "version": "1.64.1",
-    "workers": 1,
+    "workers": 2,
     "webServer": null
   },
   "suites": [
     {
-      "title": "dashboard-demos.spec.ts",
-      "file": "dashboard-demos.spec.ts",
+      "title": "templates.spec.ts",
+      "file": "templates.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "admin dashboard filters companies and selects image details",
+          "title": "list-detail copies both source files and has a Markdown twin",
           "ok": true,
           "tags": [],
           "tests": [
@@ -116,12 +117,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2176,
+                  "duration": 663,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-26T14:03:20.420Z",
+                  "startTime": "2026-11-26T15:14:04.362Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -129,13 +130,47 @@
               "status": "expected"
             }
           ],
-          "id": "2aaed08445ae53a46d04-6e15ee756d777a50d4ad",
-          "file": "dashboard-demos.spec.ts",
-          "line": 4,
+          "id": "1772d640e91cdbbb6eb8-ef1fec6f1d3d701ebe03",
+          "file": "templates.spec.ts",
+          "line": 42,
+          "column": 2
+        },
+        {
+          "title": "templates are discoverable from the site navigation and the agent index",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 695,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:14:05.090Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1772d640e91cdbbb6eb8-339ae4c344c97a4a34b9",
+          "file": "templates.spec.ts",
+          "line": 67,
           "column": 1
         },
         {
-          "title": "admin image records and reference totals agree in en",
+          "title": "orders clear combined filters with one pointer click",
           "ok": true,
           "tags": [],
           "tests": [
@@ -150,12 +185,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2213,
+                  "duration": 701,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-26T14:03:22.653Z",
+                  "startTime": "2026-11-26T15:14:05.791Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -163,13 +198,13 @@
               "status": "expected"
             }
           ],
-          "id": "2aaed08445ae53a46d04-c2e60b7d6170f866986b",
-          "file": "dashboard-demos.spec.ts",
-          "line": 45,
-          "column": 2
+          "id": "1772d640e91cdbbb6eb8-b9da5b25c2805e4e2033",
+          "file": "templates.spec.ts",
+          "line": 100,
+          "column": 1
         },
         {
-          "title": "admin image records and reference totals agree in ar",
+          "title": "the app shell supplies its text styles without the preview baseline",
           "ok": true,
           "tags": [],
           "tests": [
@@ -184,12 +219,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2030,
+                  "duration": 196,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-26T14:03:24.873Z",
+                  "startTime": "2026-11-26T15:14:06.497Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -197,19 +232,53 @@
               "status": "expected"
             }
           ],
-          "id": "2aaed08445ae53a46d04-024da305cb3d879f0893",
-          "file": "dashboard-demos.spec.ts",
-          "line": 45,
-          "column": 2
+          "id": "1772d640e91cdbbb6eb8-59d1a93b7b40780dd03c",
+          "file": "templates.spec.ts",
+          "line": 144,
+          "column": 1
+        },
+        {
+          "title": "orders select with the keyboard, move between rows and restore focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 631,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:14:06.698Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1772d640e91cdbbb6eb8-3e024d5cb7d0a5788d8e",
+          "file": "templates.spec.ts",
+          "line": 158,
+          "column": 1
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-26T14:03:20.152Z",
-    "duration": 6791.352,
-    "expected": 3,
+    "startTime": "2026-11-26T15:14:04.157Z",
+    "duration": 3204.6730000000002,
+    "expected": 5,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

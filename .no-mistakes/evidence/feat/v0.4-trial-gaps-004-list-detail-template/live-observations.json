@@ -1,0 +1,53 @@
+[
+  {
+    "name": "localized responsive layout and sheet",
+    "locale": "en",
+    "theme": "light",
+    "desktop": "aligned beside table without table overflow",
+    "mobile": "390px no document overflow; focus trapped and restored",
+    "axe": "no violations"
+  },
+  {
+    "name": "localized responsive layout and sheet",
+    "locale": "en",
+    "theme": "dark",
+    "desktop": "aligned beside table without table overflow",
+    "mobile": "390px no document overflow; focus trapped and restored",
+    "axe": "no violations"
+  },
+  {
+    "name": "localized responsive layout and sheet",
+    "locale": "ar",
+    "theme": "light",
+    "desktop": "aligned beside table without table overflow",
+    "mobile": "390px no document overflow; focus trapped and restored",
+    "axe": "no violations"
+  },
+  {
+    "name": "localized responsive layout and sheet",
+    "locale": "ar",
+    "theme": "dark",
+    "desktop": "aligned beside table without table overflow",
+    "mobile": "390px no document overflow; focus trapped and restored",
+    "axe": "no violations"
+  },
+  {
+    "name": "breakpoint",
+    "width1024": "side panel",
+    "width1023": "sheet opens by Space and Escape restores row focus"
+  },
+  {
+    "name": "date,archive,pagination filters",
+    "last7days": 13,
+    "allWithArchived": 134,
+    "archivedOrder919": "hidden by archive filter; Clear restores 128 unarchived orders and first page"
+  },
+  {
+    "name": "preview actions",
+    "total": "678.00 + 101.70 = SAR 779.70",
+    "paidRefund": "confirmation effect attribute and sample alert",
+    "pendingRefund": "disabled",
+    "contact": "sample alert",
+    "export": "filtered-orders.csv contains only matching order 1044"
+  }
+]
