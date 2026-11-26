@@ -56,7 +56,11 @@ for (const locale of ["en", "ar"] as const) {
 					await page.locator('[data-slot="workflow-canvas"]').focus();
 					if (trigger === "shortcut") await page.keyboard.press("ControlOrMeta+Shift+T");
 					else
-						await command(page, ar ? "تبديل المظهر" : "Toggle theme", ar ? "البحث في مسار العمل" : "Search workflow");
+						await command(
+							page,
+							ar ? "تبديل المظهر" : "Toggle theme",
+							ar ? "البحث في مسار العمل" : "Search workflow",
+						);
 					await expect(page.locator("html")).toHaveAttribute("data-theme", opposite);
 					await expect.poll(() => page.evaluate(() => localStorage.getItem("tensquads.theme"))).toBe(opposite);
 					await page.goto(`${route}?locale=${locale}&theme=${systemTheme}`);

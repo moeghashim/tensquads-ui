@@ -23,7 +23,7 @@ export function useSiteTheme(search: PreviewSearch, builder: boolean) {
 			return;
 		}
 		const media = window.matchMedia("(prefers-color-scheme: dark)");
-		const selected = override === undefined ? stored ?? "system" : urlTheme;
+		const selected = override === undefined ? (stored ?? "system") : urlTheme;
 		const apply = () => {
 			const next = media.matches ? "dark" : "light";
 			setSystem(next);
@@ -33,6 +33,6 @@ export function useSiteTheme(search: PreviewSearch, builder: boolean) {
 		media.addEventListener("change", apply);
 		return () => media.removeEventListener("change", apply);
 	}, [builder, override, urlTheme]);
-	const theme: Theme = builder && override === undefined ? saved ?? "system" : urlTheme;
+	const theme: Theme = builder && override === undefined ? (saved ?? "system") : urlTheme;
 	return { theme, resolvedTheme: theme === "system" ? system : theme };
 }
