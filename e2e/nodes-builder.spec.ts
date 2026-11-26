@@ -290,7 +290,8 @@ test("workflow cards open the localized demos and edits end when leaving the pag
 	await page.getByRole("button", { name: "Undo (⌘Z)" }).click();
 	await expect(step(page, "step-1")).toHaveCount(1);
 	await page.emulateMedia({ colorScheme: "dark" });
-	await page.getByRole("button", { name: "Switch to light theme" }).click();
+	await page.locator('[data-slot="workflow-canvas"]').focus();
+	await page.keyboard.press("ControlOrMeta+Shift+T");
 	await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 	await page.goto("/nodes");
 	await expect(page.locator("html")).toHaveAttribute("data-theme", "light");

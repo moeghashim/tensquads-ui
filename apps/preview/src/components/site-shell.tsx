@@ -16,7 +16,7 @@ import { designGuidePath, pageDesigns, productScreens, productScreenTitle, refer
 import { getPreviewState } from "../state";
 import { templateCopy } from "../template-catalog";
 import { foundationNames, llmsUrl } from "./design-reference";
-import { SitePageCommands } from "./site-page-commands";
+import { SitePageCommands, siteSearchEvent } from "./site-page-commands";
 import { useMarkdownHref } from "./use-markdown-href";
 
 function SiteCommandPalette(props: React.ComponentProps<typeof CommandPalette>) {
@@ -170,11 +170,6 @@ export function SiteShell() {
 						{design.brand}
 					</Link>
 					<nav className="site-nav" aria-label={design.primaryNav}>
-						{builder && (
-							<Link to="/" search={search}>
-								{copy.nav.home}
-							</Link>
-						)}
 						<Link to="/foundations" search={search}>
 							{design.foundations}
 						</Link>
@@ -190,52 +185,53 @@ export function SiteShell() {
 						<Link to="/chat" search={search}>
 							{copy.nav.chatNav}
 						</Link>
-						{!builder && (
-							<Link to="/get-started" search={search}>
-								{copy.nav.getStarted}
-							</Link>
-						)}
+						<Link to="/get-started" search={search}>
+							{copy.nav.getStarted}
+						</Link>
 					</nav>
 					<div className="site-controls">
-						{!builder && (
-							<Button className="site-search-button" variant="ghost" onClick={() => setPaletteOpen(true)}>
-								<svg aria-hidden="true" viewBox="0 0 24 24">
-									<circle cx="10.8" cy="10.8" r="6.8" />
-									<path d="m16 16 5 5" />
-								</svg>
-								<span>{locale === "ar" ? "بحث" : "Search"}</span>
-								<kbd>⌘K</kbd>
-							</Button>
-						)}
+						<Button
+							className="site-search-button"
+							variant="ghost"
+							onClick={() =>
+								// The Nodes builder owns ⌘K. Its palette holds the site pages and its own commands.
+								builder ? window.dispatchEvent(new Event(siteSearchEvent)) : setPaletteOpen(true)
+							}
+						>
+							<svg aria-hidden="true" viewBox="0 0 24 24">
+								<circle cx="10.8" cy="10.8" r="6.8" />
+								<path d="m16 16 5 5" />
+							</svg>
+							<span>{locale === "ar" ? "بحث" : "Search"}</span>
+							<kbd>⌘K</kbd>
+						</Button>
 						<Button variant="ghost" size="sm" onClick={() => change("locale", nextLocale)} lang={nextLocale}>
 							{copy.locale[nextLocale]}
 						</Button>
-						{!builder && (
-							<SegmentedControl
-								className="site-theme"
-								aria-label={copy.themeLabel}
-								value={theme}
-								onValueChange={(value) => value && change("theme", value)}
-							>
-								<SegmentedControlIndicator />
-								{(["light", "dark", "system"] as const).map((mode) => (
-									<SegmentedControlItem
-										key={mode}
-										value={mode}
-										aria-label={copy.theme[mode]}
-										title={copy.theme[mode]}
-									>
-										<svg aria-hidden="true" viewBox="0 0 24 24">
-											{mode === "light" && (
-												<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19m11-7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
-											)}
-											{mode === "dark" && <path d="M21 13a9 9 0 1 1-10-10 7.5 7.5 0 0 0 10 10Z" />}
-											{mode === "system" && <path d="M3 4h18v13H3zM8 21h8m-4-4v4" />}
-										</svg>
-									</SegmentedControlItem>
-								))}
-							</SegmentedControl>
-						)}
+						<SegmentedControl
+							className="site-theme"
+							aria-label={copy.themeLabel}
+							value={theme}
+							onValueChange={(value) => value && change("theme", value)}
+						>
+							<SegmentedControlIndicator />
+							{(["light", "dark", "system"] as const).map((mode) => (
+								<SegmentedControlItem
+									key={mode}
+									value={mode}
+									aria-label={copy.theme[mode]}
+									title={copy.theme[mode]}
+								>
+									<svg aria-hidden="true" viewBox="0 0 24 24">
+										{mode === "light" && (
+											<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19m11-7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+										)}
+										{mode === "dark" && <path d="M21 13a9 9 0 1 1-10-10 7.5 7.5 0 0 0 10 10Z" />}
+										{mode === "system" && <path d="M3 4h18v13H3zM8 21h8m-4-4v4" />}
+									</svg>
+								</SegmentedControlItem>
+							))}
+						</SegmentedControl>
 					</div>
 				</div>
 			</header>

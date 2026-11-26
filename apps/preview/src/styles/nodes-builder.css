@@ -5,12 +5,7 @@
 		block-size: 100dvh;
 		min-block-size: 38rem;
 	}
-	.site-shell--builder .site-header,
 	.builder-header { background: var(--ts-surface); }
-	.site-shell--builder .site-header__inner {
-		min-block-size: var(--ts-header-height);
-	}
-	.site-shell--builder .site-nav a { border-radius: var(--ts-radius-full); }
 	.builder {
 		display: flex;
 		flex: 1;

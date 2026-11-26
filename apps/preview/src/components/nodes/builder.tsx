@@ -15,7 +15,6 @@ import {
 	Palette,
 	type PaletteSection,
 	squadmateCharacterName,
-	ThemeToggle,
 	Toolbar,
 	type ToolbarItem,
 	themePreference,
@@ -27,7 +26,7 @@ import { WORKFLOW_KIND_ICON, type WorkflowNode, type WorkflowNodeKind } from "@t
 import { createLocalStorage } from "@ui-sdk/core";
 import { useContext, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
 import { type Direction, getPreviewState, type Locale } from "../../state";
-import { SitePageCommands } from "../site-page-commands";
+import { SitePageCommands, siteSearchEvent } from "../site-page-commands";
 import { builderCopy } from "./copy";
 import {
 	type DemoWorkflow,
@@ -433,7 +432,11 @@ function Builder({
 			}
 		};
 		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
+		window.addEventListener(siteSearchEvent, openCommands);
+		return () => {
+			window.removeEventListener("keydown", onKey);
+			window.removeEventListener(siteSearchEvent, openCommands);
+		};
 	});
 
 	const sections = paletteSections(locale);
@@ -568,7 +571,6 @@ function Builder({
 					<Button size="sm" variant="soft" onClick={tidy}>
 						{copy.tidy} <kbd>⌘⇧L</kbd>
 					</Button>
-					<ThemeToggle value={theme} onValueChange={onTheme} locale={locale} />
 				</div>
 			</header>
 			<div className="builder-stage" ref={stage} data-tidying={tidying || undefined}>
