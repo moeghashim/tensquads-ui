@@ -76,6 +76,12 @@ test("Markdown twins preserve source content and the HTML locale", async ({ page
 	expect(await setup.text()).toContain('@import "@tensquads/ui/tokens.css"');
 	const chat = await request.get("/chat.md");
 	expect(await chat.text()).toContain("Set up a store for me");
+	const states = await request.get("/reference/mascot-states.md");
+	expect(await states.text()).toContain(
+		"# Meet the squad\n\nThirteen squadmates, each named after a place and each shaped by it. Below, every squadmate in all ten Agent loop states.\n\n- 13 squadmates\n- 10 states\n- 130 drawings",
+	);
+	const statesAr = await request.get("/reference/mascot-states.md?locale=ar");
+	expect(await statesAr.text()).toContain("- ١٣ زميلًا\n- ١٠ حالات\n- ١٣٠ رسمًا");
 
 	await page.goto("/?locale=ar");
 	const expectedHref = "/index.md?locale=ar";
