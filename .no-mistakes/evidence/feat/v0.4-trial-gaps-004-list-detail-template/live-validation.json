@@ -1,0 +1,27 @@
+{
+  "surface": "Built preview running locally with synthetic demo orders",
+  "results": [
+    {
+      "name": "Search/status/date/archive filters reset pagination, clear stale details and recover from no matches",
+      "result": "fail",
+      "error": "Error: Clear filters pointer click did not clear the search/status after selecting Processing. Enter recovered the view. Error: expect(locator).toHaveValue(expected) failed\n\nLocator:  getByRole('searchbox', { name: 'Search orders' })\nExpected: \"\"\nReceived: \"#1044\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveValue\" getByRole('searchbox', { name: 'Search orders' }) with timeout 5000ms\n  - waiting for getByRole('searchbox', { name: 'Search orders' })\n    14 × locator resolved to <input type=\"search\" value=\"#1044\" data-filled=\"\" data-slot=\"input\" aria-label=\"Search orders\" placeholder=\"Search orders\" class=\"ts-input ts-input--soft\"/>\n       - unexpected value \"#1044\"\n"
+    },
+    {
+      "name": "Arabic search accepts Arabic-Indic and ASCII order identifiers and Arabic customer names",
+      "result": "pass"
+    },
+    {
+      "name": "At 1023px selection opens a modal sheet; at 1024px the same selection is a side panel",
+      "result": "pass"
+    },
+    {
+      "name": "Export contains only matching orders; paid refund and contact trigger sample notices; unpaid refund is disabled",
+      "result": "pass"
+    },
+    {
+      "name": "Admin image details retain their two-column layout after styles move into the template",
+      "result": "pass"
+    }
+  ],
+  "pageErrors": []
+}

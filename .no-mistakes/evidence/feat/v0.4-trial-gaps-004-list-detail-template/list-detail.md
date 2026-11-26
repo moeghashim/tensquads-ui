@@ -591,7 +591,7 @@ export function ListDetail({
 										resetPage();
 									}}
 								/>
-								<Menu>
+								<Menu modal={false}>
 									<MenuTrigger variant="soft" className="template-order__status">
 										{`${t.status}: ${status === "all" ? t.all : t.statuses[status]}`} <Icon name="chevron" />
 									</MenuTrigger>

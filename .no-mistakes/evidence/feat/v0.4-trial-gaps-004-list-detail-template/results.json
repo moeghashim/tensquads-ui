@@ -1,0 +1,617 @@
+{
+  "config": {
+    "argv": [
+      "~/.local/share/mise/installs/node/26.13.1/bin/node",
+      "{run-worktree}/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "local-phase.config.ts",
+      "--grep",
+      "list-detail|orders"
+    ],
+    "configFile": "{run-worktree}/local-phase.config.ts",
+    "rootDir": "{run-worktree}/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "",
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "local-phase.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "",
+        "testDir": "{run-worktree}/e2e",
+        "snapshotDir": "{run-worktree}/e2e",
+        "testIgnore": [],
+        "testMatch": "local-phase.spec.ts",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5173",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "browserName": "chromium",
+          "locale": "en-US",
+          "colorScheme": "light",
+          "launchOptions": {
+            "args": [
+              "--disable-lcd-text",
+              "--font-render-hinting=none"
+            ]
+          },
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "command": "npm run build:preview && npm --prefix apps/preview run preview",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "local-phase.spec.ts",
+      "file": "local-phase.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "list-detail renders in en / light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:41.860Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-en-light",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-en-light/attachments/template-list-detail-en-light-736a11715eadefe36e790f9fe746b7c1db1c88ca.png"
+                    },
+                    {
+                      "name": "template-list-detail-en-light",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-en-light/attachments/template-list-detail-en-light-a56854777b5d0453f90b008745c09b507a6c838b.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-037dc550a0fcd01f8fdf",
+          "file": "local-phase.spec.ts",
+          "line": 32,
+          "column": 4
+        },
+        {
+          "title": "list-detail renders in en / dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:41.860Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-en-dark",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-en-dark/attachments/template-list-detail-en-dark-29943f2cf4c681c19c41b37ddaca43995c44e1e2.png"
+                    },
+                    {
+                      "name": "template-list-detail-en-dark",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-en-dark/attachments/template-list-detail-en-dark-ed1041ba511ca57027382cf2ec66bd0fd7d6283a.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-c57354967d92874c35ab",
+          "file": "local-phase.spec.ts",
+          "line": 32,
+          "column": 4
+        },
+        {
+          "title": "list-detail renders in ar / light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:43.104Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-ar-light",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-ar-light/attachments/template-list-detail-ar-light-8278aa822bbe0a5d44e071df979542fbf98f98dd.png"
+                    },
+                    {
+                      "name": "template-list-detail-ar-light",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-ar-light/attachments/template-list-detail-ar-light-a05cb410336bfc620971a25af59b09298515b27a.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-a78394ccbf8ccf448515",
+          "file": "local-phase.spec.ts",
+          "line": 32,
+          "column": 4
+        },
+        {
+          "title": "list-detail renders in ar / dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1108,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:43.130Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-ar-dark",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-ar-dark/attachments/template-list-detail-ar-dark-977cc2a2976a1bbe577fed85d6c59b1b6cb23030.png"
+                    },
+                    {
+                      "name": "template-list-detail-ar-dark",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-list-detail-renders-in-ar-dark/attachments/template-list-detail-ar-dark-45054e1595f773d46df5162a73da6e0e0a329b85.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-ed5106dd78211ebecf8a",
+          "file": "local-phase.spec.ts",
+          "line": 32,
+          "column": 4
+        },
+        {
+          "title": "list-detail copies both source files and has a Markdown twin",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 592,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:44.242Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-3e5f61482e79e9fae2c9",
+          "file": "local-phase.spec.ts",
+          "line": 54,
+          "column": 2
+        },
+        {
+          "title": "orders clear combined filters with one pointer click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 940,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:44.317Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-5d542f9444fd8ff349d8",
+          "file": "local-phase.spec.ts",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "orders select with the keyboard, move between rows and restore focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 789,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:44.839Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-975266134d3f1c0bae0c",
+          "file": "local-phase.spec.ts",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "title": "orders open a bottom sheet in en / light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:45.263Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-sheet-en-light",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-orders-open-a-bottom-sheet-in-en-light/attachments/template-list-detail-sheet-en-light-17fd2a630e265435e3f3acf735ff2c47784a03ae.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-001a72865cc9e865bbd6",
+          "file": "local-phase.spec.ts",
+          "line": 210,
+          "column": 3
+        },
+        {
+          "title": "orders open a bottom sheet in en / dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:45.631Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-sheet-en-dark",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-orders-open-a-bottom-sheet-in-en-dark/attachments/template-list-detail-sheet-en-dark-02c2476845b83c5bb721ddda0faf08fee257117a.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-1b323de3591dd6065d4a",
+          "file": "local-phase.spec.ts",
+          "line": 210,
+          "column": 3
+        },
+        {
+          "title": "orders open a bottom sheet in ar / light",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 982,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:45.791Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-sheet-ar-light",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-orders-open-a-bottom-sheet-in-ar-light/attachments/template-list-detail-sheet-ar-light-94febbb953000f411e3049b59c4bf07cfb58a963.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-88a88cc94168f15945b4",
+          "file": "local-phase.spec.ts",
+          "line": 210,
+          "column": 3
+        },
+        {
+          "title": "orders open a bottom sheet in ar / dark",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 626,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:46.295Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "template-list-detail-sheet-ar-dark",
+                      "contentType": "image/png",
+                      "path": "~/.no-mistakes/evidence/01M8C57T2HRFNW0FEJS4G95XZG/results/local-phase-orders-open-a-bottom-sheet-in-ar-dark/attachments/template-list-detail-sheet-ar-dark-45d6d64f031eedfd701f8f93144cf1aa07364f33.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-67dbcce7e5f6ad13ea56",
+          "file": "local-phase.spec.ts",
+          "line": 210,
+          "column": 3
+        },
+        {
+          "title": "orders date and archive filters constrain exported data and demo actions stay local",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3534,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T15:04:46.776Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34d62a5034bd25b9bad5-291ebf7fe927e59df65c",
+          "file": "local-phase.spec.ts",
+          "line": 230,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-26T15:04:38.649Z",
+    "duration": 11700.098,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,6 @@
+Live Chromium against the local built preview, using bundled demo orders.
+Next page clears stale detail. Last 7 days resets pagination.
+Export contains 13 orders; every date is in 2026-11-20 through 2026-11-26.
+#1044: Yousef Nasser, SAR 779.70. Refund and Contact show sample-only alerts.
+1023px: modal sheet, Escape returns focus. 1024px: side panel, no modal.
+#917: hidden while archive filter is on; visible when unchecked. Refunded order cannot be refunded again.
