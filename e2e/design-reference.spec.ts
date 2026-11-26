@@ -31,6 +31,45 @@ for (const state of states) {
 					await expect.poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
 				}
 			}
+			if (name === "mascot-states") {
+				const ar = state.locale === "ar";
+				const hero = page.getByRole("region", { name: ar ? "تعرّف على الفريق" : "Meet the squad" });
+				const back = hero.locator(".mascot-hero__row--back").getByRole("figure");
+				const front = hero.locator(".mascot-hero__row--front").getByRole("figure");
+				await expect(back).toHaveCount(6);
+				await expect(front).toHaveCount(7);
+				await expect(hero.locator(".ts-squadmate[data-animated] svg .sm-all")).toHaveCount(13);
+				await expect(hero.locator(".mascot-hero__counts > span")).toHaveText(
+					ar ? ["١٣ زميلًا", "١٠ حالات", "١٣٠ رسمًا"] : ["13 squadmates", "10 states", "130 drawings"],
+				);
+				const firstX = (await back.first().boundingBox())?.x ?? 0;
+				const lastX = (await back.last().boundingBox())?.x ?? 0;
+				expect(ar ? firstX - lastX : lastX - firstX).toBeGreaterThan(0);
+
+				const giza = back.first();
+				const tag = giza.locator("figcaption");
+				const petra = front.nth(3);
+				await expect(petra).toHaveAccessibleName(ar ? "بترا، قائد الفريق" : "Petra, Master");
+				await giza.locator(".sm-face").hover();
+				await expect(tag).toHaveCSS("opacity", "1");
+				await hero.getByRole("heading").hover();
+				await expect(tag).toHaveCSS("opacity", "0");
+				await page.keyboard.press("Tab");
+				await giza.focus();
+				await expect(giza).toBeFocused();
+				await expect(tag).toHaveCSS("opacity", "1");
+				await page.keyboard.press("Tab");
+				await expect(back.nth(1)).toBeFocused();
+
+				const jump = hero.getByRole("link", { name: ar ? "انتقل إلى الحالات" : "Jump to the states" });
+				await jump.focus();
+				await page.keyboard.press("Enter");
+				await expect(page.locator("#states")).toBeFocused();
+				await page.evaluate(() => {
+					(document.activeElement as HTMLElement | null)?.blur();
+					window.scrollTo(0, 0);
+				});
+			}
 			await capturePreviewScreenshots(page, testInfo, `${name}-${state.locale}-${state.direction}-${state.theme}`);
 			await expectNoHorizontalScroll(page);
 			await expectAccessible(page);
@@ -67,6 +106,57 @@ for (const state of states) {
 		});
 	}
 }
+
+test("the mascot hero hops every 420 ms and pauses when hidden or motion is reduced", async ({ page }) => {
+	await page.emulateMedia({ reducedMotion: "reduce" });
+	await page.addInitScript(() => {
+		Object.defineProperty(document, "hidden", { configurable: true, value: false });
+	});
+	await page.clock.install();
+	await openPreview(page, states[0], "/reference/mascot-states");
+	const hero = page.getByRole("region", { name: "Meet the squad" });
+	const hopping = hero.locator("[data-hopping]");
+	await page.clock.runFor(840);
+	await expect(hopping).toHaveCount(0);
+	expect(await hero.evaluate((element) => element.getAnimations({ subtree: true }))).toEqual([]);
+
+	await page.clock.pauseAt(new Date(Date.now() + 1_000));
+	await hero.evaluate((element: HTMLElement) => {
+		let starts = 0;
+		element.dataset.hopStarts = "0";
+		const observer = new MutationObserver((changes) => {
+			starts += changes.filter(({ oldValue }) => oldValue === null).length;
+			element.dataset.hopStarts = String(starts);
+		});
+		observer.observe(element, { subtree: true, attributeFilter: ["data-hopping"], attributeOldValue: true });
+		const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		motion.addEventListener(
+			"change",
+			() => {
+				element.dataset.motionChanged = "";
+			},
+			{ once: true },
+		);
+	});
+	await page.emulateMedia({ reducedMotion: "no-preference" });
+	await expect(hero).toHaveAttribute("data-motion-changed", "");
+	await page.clock.runFor(419);
+	await expect(hero).toHaveAttribute("data-hop-starts", "0");
+	await page.clock.runFor(1);
+	await expect(hero).toHaveAttribute("data-hop-starts", "1");
+	await expect(hopping).toHaveCSS("animation-name", "mascot-hero-hop");
+	await page.clock.runFor(420);
+	await expect(hero).toHaveAttribute("data-hop-starts", "2");
+
+	await page.evaluate(() => {
+		Object.defineProperty(document, "hidden", { configurable: true, value: true });
+		document.dispatchEvent(new Event("visibilitychange"));
+	});
+	await page.clock.runFor(840);
+	await expect(hero).toHaveAttribute("data-hop-starts", "2");
+	await expect(hopping).toHaveCount(0);
+	expect(await hero.evaluate((element) => element.getAnimations({ subtree: true }))).toEqual([]);
+});
 
 test("home and foundations links reach local references with the current locale and theme", async ({ page }) => {
 	const state = states[3];

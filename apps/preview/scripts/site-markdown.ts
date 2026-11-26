@@ -17,6 +17,7 @@ import {
 	workerExample,
 } from "../src/get-started-examples";
 import { markdownPath } from "../src/markdown-path";
+import { getMascotHeroCopy } from "../src/mascot-hero-copy";
 import { mascotMotionCopy, mascotMotionPath } from "../src/mascot-motion-copy";
 import {
 	designGuidePath,
@@ -75,6 +76,7 @@ function routePages(locale: Locale): RoutePages {
 	const design = copy.designSystem;
 	const gettingStarted = copy.getStartedPage;
 	const reference = copy.reference;
+	const mascotHero = getMascotHeroCopy(locale);
 	const guide = design.foundationsIndex.guide;
 	const componentItem = (name: keyof typeof design.componentLeads) =>
 		item(name, markdownPath(`/components/${name}`, locale), design.componentLeads[name]);
@@ -316,9 +318,12 @@ function routePages(locale: Locale): RoutePages {
 		"/reference/mascot-states": [
 			page(
 				"/reference/mascot-states",
-				design.states,
-				reference.states,
+				mascotHero.title,
+				mascotHero.lead,
 				blocks(
+					mascotHero.counts.map(({ value, label }) => `- ${value} ${label}`).join("\n"),
+					heading(2, design.states),
+					reference.states,
 					mascotStates(locale),
 					item(design.foundationsIndex.mascots.title, markdownPath("/foundations/mascots", locale)),
 					AgentSlugSchema.options.map((agent) => `- ${squadmateCharacterName(agent, locale)}`).join("\n"),

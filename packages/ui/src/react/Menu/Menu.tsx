@@ -19,7 +19,7 @@ import {
 	MenuTrigger as UiMenuTrigger,
 } from "@ui-sdk/react/menu";
 import type { ComponentProps, ComponentType } from "react";
-import { Button } from "../Button/Button.js";
+import { Button, type ButtonVariant } from "../Button/Button.js";
 
 export type MenuCheckboxItemProps = ComponentProps<typeof UiMenuCheckboxItem>;
 export type MenuContextTriggerProps = ComponentProps<typeof UiMenuContextTrigger>;
@@ -31,7 +31,9 @@ export type MenuSubProps = ComponentProps<typeof UiMenuSub>;
 export type MenuSubContentProps = ComponentProps<typeof UiMenuSubContent>;
 export type MenuSubTriggerProps = ComponentProps<typeof UiMenuSubTrigger>;
 export type MenuProps = ComponentProps<typeof UiMenu>;
-export type MenuTriggerProps = ComponentProps<typeof UiMenuTrigger>;
+export type MenuTriggerProps = ComponentProps<typeof UiMenuTrigger> & {
+	variant?: Extract<ButtonVariant, "solid" | "soft" | "ghost">;
+};
 export type MenuContentProps = ComponentProps<typeof UiMenuContent>;
 export type MenuItemProps = ComponentProps<typeof UiMenuItem>;
 export type MenuGroupProps = ComponentProps<typeof UiMenuGroup>;
@@ -58,7 +60,7 @@ export const MenuSeparator: ComponentType<MenuSeparatorProps> = UiMenuSeparator;
 export const MenuItemIcon = UiMenuItemIcon;
 export const MenuShortcut: ComponentType<MenuShortcutProps> = UiMenuShortcut;
 
-export function MenuTrigger({ children, className, render, ...props }: MenuTriggerProps) {
+export function MenuTrigger({ children, className, render, variant, ...props }: MenuTriggerProps) {
 	if (render) {
 		return (
 			<UiMenuTrigger {...props} className={className} render={render}>
@@ -70,6 +72,7 @@ export function MenuTrigger({ children, className, render, ...props }: MenuTrigg
 	return (
 		<Button
 			className={classes}
+			variant={variant}
 			render={(buttonProps) => {
 				const baseClassName = typeof buttonProps.className === "string" ? buttonProps.className : "";
 				const triggerClassName =

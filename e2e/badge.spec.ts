@@ -73,3 +73,57 @@ test("Badge labels stay outside keyboard and click interactions", async ({ page 
 		});
 	}
 });
+
+for (const state of states) {
+	test(`Selected DataTable rows keep every Badge tone readable in ${state.locale} ${state.theme}`, async ({
+		page,
+	}, testInfo) => {
+		await openPreview(page, state, "/components/DataTable");
+		const table = page.getByRole("table", { name: state.locale === "ar" ? "حالات الطلبات" : "Order statuses" });
+		const results: Record<string, number> = {};
+		for (const tone of ["default", "success", "warning", "danger", "info"]) {
+			const badgeSelector = `[data-slot="badge"].ts-badge--${tone}`;
+			const row = table.getByRole("row").filter({ has: page.locator(badgeSelector) });
+			await row.focus();
+			await page.keyboard.press("Space");
+			await expect(row).toHaveAttribute("aria-selected", "true");
+			results[tone] = await row.locator(badgeSelector).evaluate((element) => {
+				const canvas = document.createElement("canvas");
+				canvas.width = 1;
+				canvas.height = 1;
+				const context = canvas.getContext("2d");
+				if (!context) throw new Error("A 2D canvas is required to composite Badge colors");
+
+				const paint = (color: string) => {
+					context.fillStyle = color;
+					context.fillRect(0, 0, 1, 1);
+				};
+				const luminance = () => {
+					const rgb = Array.from(context.getImageData(0, 0, 1, 1).data.slice(0, 3), (value) => {
+						const channel = value / 255;
+						return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+					});
+					const [red = 0, green = 0, blue = 0] = rgb;
+					return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+				};
+				const backgrounds = [];
+				for (let ancestor: Element | null = element; ancestor; ancestor = ancestor.parentElement) {
+					backgrounds.push(getComputedStyle(ancestor).backgroundColor);
+				}
+				paint("white");
+				for (const background of backgrounds.reverse()) paint(background);
+				const background = luminance();
+				paint(getComputedStyle(element).color);
+				const text = luminance();
+				return (Math.max(background, text) + 0.05) / (Math.min(background, text) + 0.05);
+			});
+		}
+		await testInfo.attach("selected-badge-contrast", {
+			body: JSON.stringify(results),
+			contentType: "application/json",
+		});
+		for (const [tone, ratio] of Object.entries(results)) {
+			expect.soft(ratio, `${tone} Badge text contrast`).toBeGreaterThanOrEqual(4.5);
+		}
+	});
+}
